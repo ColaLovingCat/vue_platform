@@ -1,0 +1,287 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft Yahei';
+}
+
+body {
+    background-image: url(./assets/imgs/bg.jpg);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.list-f1 {
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+
+.f1-item {
+    position: relative;
+    width: 975px;
+}
+
+.item-roundinfo {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.item-date {
+    padding: 10px 20px;
+    width: 160px;
+    color: #fff;
+    background: #000;
+}
+
+.item-month {
+    width: max-content;
+    padding: 0 5px;
+    background: red;
+}
+
+.item-range {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.item-time {
+    font-weight: 700;
+}
+
+.item-flag {
+    position: absolute;
+    left: 125px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 8px solid #000;
+}
+
+.item-flag img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-circuit {
+    position: relative;
+    padding: 10px 20px;
+    padding-left: 50px;
+    background: #f4c531;
+    display: flex;
+    column-gap: 10px;
+}
+
+.item-rounds {
+    padding: 10px 0;
+    width: 440px;
+}
+
+.item-sprint {
+    padding: 0 3px;
+    font-size: 16px;
+    color: #fff;
+    background: red;
+}
+
+.item-round {
+    color: red;
+    font-weight: 700;
+}
+
+.item-name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.item-carbon {
+    width: 135px;
+}
+
+.item-carbon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-infos {
+    width: 150px;
+    padding: 0 10px;
+}
+
+.item-title {
+    font-size: 12px;
+}
+
+.item-laps,
+.item-length {
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.item-races {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    transition: all 0.6s;
+}
+
+.item-race {
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.item-step {
+    position: absolute;
+    z-index: 2;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.item-time {
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.item-team {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    transition: all 0.6s 1s;
+    z-index: 1;
+}
+
+.item-team::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 20px;
+    background: var(--team-color, #c4cecf);
+}
+
+.item-team .img-no {
+    position: absolute;
+    right: -100px;
+    z-index: 2;
+    width: 60px;
+    height: 35px;
+}
+
+.item-team .img-car {
+    position: absolute;
+    right: -110px;
+    z-index: 1;
+    width: 200px;
+}
+
+.f1-item.active .item-races {
+    height: var(--race-height, #c4cecf);
+}
+
+.f1-item.active .item-team {
+    width: 90%;
+}
+
+.list-drivers {
+    position: absolute;
+    bottom: 0;
+    right: 6px;
+    padding-top: 50px;
+    width: 300px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    .driver-item {
+        position: relative;
+        width: 300px;
+        height: 100px;
+        background: #1f202d;
+
+        .item-infos {
+            margin-bottom: 10px;
+            color: #fff;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+
+            .item-info {
+                flex: 1;
+                text-align: center;
+
+                &.item-score {
+                    .item-value {
+                        font-size: 27px;
+                    }
+                }
+
+                .item-value {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+
+                .item-title {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .item-driver {
+            position: absolute;
+            bottom: 0;
+            right: -12px;
+            width: 150px;
+            height: 150px;
+
+            .img-driver {
+                width: 100%;
+                height: 100%;
+            }
+
+            .item-nos {
+                position: absolute;
+                bottom: 0;
+                z-index: 1;
+                width: 100%;
+                background: linear-gradient(to top, #1f202d 35%, #0000 100%);
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 50px;
+                }
+
+                .item-code {
+                    padding: 0 10px;
+                    color: #fff;
+                    font-size: 21px;
+                    line-height: 50px;
+                    font-weight: 700;
+                }
+
+                .img-flag {
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
