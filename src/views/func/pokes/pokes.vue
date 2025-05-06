@@ -20,7 +20,6 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    console.log('Testing: ', props.data);
 })
 
 watch(
@@ -35,6 +34,7 @@ const changeShape = (shape: any) => {
     Object.assign(poke, shape)
 }
 
+const totalStat = 180
 const enum types {
     '虫' = 'Bug',
     '恶' = 'Dark',
@@ -67,10 +67,38 @@ const enum types {
                 </div>
                 <img class="item-img" v-bind:src="`/docs/pokemons/pokes/${poke.img}`"
                     v-bind:class="'item-' + poke.shape" alt="" srcset="">
-                <!-- <img class="item-gif" v-bind:src="`/docs/pokemons/pokes/${poke.img}.gif`" alt="" srcset=""> -->
             </div>
             <div class="item-no">
                 <h3>{{ poke.no }}</h3>
+            </div>
+            <div class="item-stats">
+                <div class="item-total">
+                    <span>{{ poke.stats }}</span>
+                </div>
+                <div class="item-stat item-hp">
+                    <div class="item-rate" :style="`width: ${poke.HP * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.HP }}</span>
+                </div>
+                <div class="item-stat item-atk">
+                    <div class="item-rate" :style="`width: ${poke.atk * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.atk }}</span>
+                </div>
+                <div class="item-stat item-def">
+                    <div class="item-rate" :style="`width: ${poke.def * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.def }}</span>
+                </div>
+                <div class="item-stat item-spa">
+                    <div class="item-rate" :style="`width: ${poke.spa * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.spa }}</span>
+                </div>
+                <div class="item-stat item-spd">
+                    <div class="item-rate" :style="`width: ${poke.spd * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.spd }}</span>
+                </div>
+                <div class="item-stat item-spe">
+                    <div class="item-rate" :style="`width: ${poke.spe * 100 / totalStat}%;`"></div>
+                    <span>{{ poke.spe }}</span>
+                </div>
             </div>
             <div class="item-types">
                 <img class="item-type" v-bind:src="`/docs/pokemons/types/${types[poke.type1]}.png`">
@@ -79,7 +107,7 @@ const enum types {
         </div>
         <div class="item-shapes">
             <img class="item-shape" v-for="shape in poke.shapes"
-                v-bind:src="'/docs/pokemons/shapes/' + shape.shape + '.png'" v-on:click="changeShape(shape)" alt=""
+                v-bind:src="'/docs/pokemons/shapes/' + shape.shapeCode + '.png'" v-on:click="changeShape(shape)" alt=""
                 srcset="">
         </div>
     </div>
@@ -121,7 +149,54 @@ const enum types {
         left: 12px;
         top: 45px;
         color: #fff;
-        font-size: 19px;
+        font-size: 17px;
+    }
+
+    .item-stats {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .item-stat {
+            position: relative;
+            width: 60px;
+            height: 13px;
+            font-size: 10px;
+            text-align: right;
+            background: #c4cecf7d;
+
+            .item-rate {
+                height: 100%;
+            }
+
+            span {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            &.item-hp .item-rate {
+                background: #89c654;
+            }
+            &.item-atk .item-rate {
+                background: #f9cb3d;
+            }
+            &.item-def .item-rate {
+                background: #da8837;
+            }
+            &.item-spa .item-rate {
+                background: #59c3cf;
+            }
+            &.item-spd .item-rate {
+                background: #5890cc;
+            }
+            &.item-spe .item-rate {
+                background: #a456d1;
+            }
+        }
     }
 
     .item-infos {

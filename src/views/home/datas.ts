@@ -1,5 +1,5 @@
 export const list = [
-    { title: "游戏库", path: 'stores', img: 'switch.jpg' },
+    { title: "游戏库", path: 'games', img: 'switch.jpg' },
     { title: "动漫", path: 'cartoons', img: 'cartoon.png' },
     { title: "书架", path: 'books', img: 'books.jpg' },
     { title: "宝可梦", path: 'pokes', img: 'pokemon.png' },

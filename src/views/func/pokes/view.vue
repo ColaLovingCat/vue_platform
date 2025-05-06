@@ -7,17 +7,26 @@ import pokes from './pokes.vue'
 
 onMounted(async () => {
     let temps: any = await readExcel()
-    console.log('Testing: ', temps);
-    datas.value = [...temps.pokes]
-    // types.value = [...db.types]
-    // natures.value = [...db.natures]
-    // timelines.value = [...db.timelines]
+    const { pokes, shapes } = temps
+    shapes.map((item: any) => {
+        let temp = pokes.find((a: any) => a.no == item.no)
+        console.log('Testing: ', temp)
+        if (temp) {
+            if (temp.shapes) {
+                temp.shapes.push(item)
+            } else {
+                temp.shapes = [item]
+            }
+        }
+    })
+    //
+    datas.value = [...pokes]
 })
 
 const readExcel = async () => {
     try {
         // 动态导入Excel文件
-        const response = await fetch(new URL('./datas.xlsx', import.meta.url).href)
+        const response = await fetch(new URL('/docs/datas/pokes.xlsx', import.meta.url).href)
         const arrayBuffer = await response.arrayBuffer()
 
         // 解析Excel数据
@@ -25,11 +34,10 @@ const readExcel = async () => {
         const workbook = XLSX.read(data, { type: 'array' })
 
         // 获取第一个工作表的数据
-        const firstSheetName = workbook.SheetNames[0]
-        const worksheet = workbook.Sheets[firstSheetName]
-        const pokes = XLSX.utils.sheet_to_json(worksheet)
+        const pokes = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
+        const shapes = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]])
 
-        return { pokes }
+        return { pokes, shapes }
     } catch (error) {
         console.error('读取Excel文件失败:', error)
     }
@@ -114,7 +122,7 @@ const showModal = (action: string, values: any) => {
 </script>
 
 <template>
-    <div class="contents">
+    <div class="sections">
         <div class="box-search">
             <div class="logo">
                 <img src="/docs/pokemons/systems/logo.png" alt="" srcset="">
@@ -205,7 +213,7 @@ const showModal = (action: string, values: any) => {
 </template>
 
 <style scoped lang="scss">
-.contents {
+.sections {
     background: url(/docs/pokemons/systems/bg.jpg);
     background-size: 100% 100%;
 }
