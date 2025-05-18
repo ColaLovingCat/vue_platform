@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive, onMounted, computed, watch } from 'vue'
-import type { Ref } from 'vue'
+import { onMounted, reactive } from 'vue'
 
 // name
 defineOptions({
@@ -21,12 +20,6 @@ const props = defineProps({
 
 onMounted(() => {
 })
-
-watch(
-    () => props.changeMark,
-    (newValue, oldValue) => {
-    }
-)
 
 let poke: any = reactive(props.data || {})
 
@@ -181,18 +174,23 @@ const enum types {
             &.item-hp .item-rate {
                 background: #89c654;
             }
+
             &.item-atk .item-rate {
                 background: #f9cb3d;
             }
+
             &.item-def .item-rate {
                 background: #da8837;
             }
+
             &.item-spa .item-rate {
                 background: #59c3cf;
             }
+
             &.item-spd .item-rate {
                 background: #5890cc;
             }
+
             &.item-spe .item-rate {
                 background: #a456d1;
             }

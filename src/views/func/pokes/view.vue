@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, reactive } from 'vue'
 
-import * as XLSX from 'xlsx'
-
 import pokes from './pokes.vue'
+import * as XLSX from 'xlsx'
 
 onMounted(async () => {
     let temps: any = await readExcel()
