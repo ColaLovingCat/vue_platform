@@ -1,42 +1,38 @@
-<script lang="ts">
-import { ref, defineComponent, computed, watch } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref, computed, watch } from 'vue'
 
 import menuItem from './menu-item.vue'
-import type { MenuInfos } from '@/commons/datas/datas.types'
+import type { MenuInfos } from '@/commons/types/datas.types'
 
-export default defineComponent({
-  props: {
-    datas: {
-      type: Array as () => Array<MenuInfos>,
-      default: () => []
-    },
-    status: {
-      type: Boolean,
-      default: true
-    }
+// name
+defineOptions({
+  name: 'custom-name'
+})
+
+// props
+const props = defineProps({
+  datas: {
+    type: Array as () => Array<MenuInfos>,
+    default: () => ([])
   },
-  components: { menuItem },
-  emits: [],
-  setup(props, { emit }) {
-    const current = ref<string[]>(['mail'])
-
-    const headerStatus = computed(() => props.status)
-
-    const menus = ref(props.datas)
-    watch(
-      () => props.datas,
-      (newValue, oldValue) => {
-        menus.value = newValue
-      }
-    )
-
-    return {
-      menus,
-      headerStatus,
-      current
-    }
+  status: {
+    type: Boolean,
+    default: true
   }
 })
+
+onMounted(() => { })
+
+const current = ref<string[]>(['mail'])
+const headerStatus = computed(() => props.status)
+
+const menus = ref(props.datas)
+watch(
+  () => props.datas,
+  (newValue, oldValue) => {
+    menus.value = newValue
+  }
+)
 </script>
 
 <template>
@@ -49,7 +45,8 @@ export default defineComponent({
         <div class="menus menus-inline">
           <a-menu v-model:selectedKeys="current" mode="horizontal">
             <template v-for="item in menus" :key="item.id">
-              <menuItem :item="item"> </menuItem>
+              <menuItem :item="item">
+              </menuItem>
             </template>
           </a-menu>
         </div>
@@ -64,4 +61,9 @@ export default defineComponent({
   </a-layout>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.menus {
+  height: 60px;
+  line-height: 60px;
+}
+</style>

@@ -153,7 +153,7 @@ const chatInfos: {
   isThinking: boolean,
 } = reactive({
   // wb状态
-  host: 'wss://szhlinvma75.apac.bosch.com:59108/',
+  host: `wss://${new URL(import.meta.env.VITE_APP_COMMON_URL).host}/ws`,
   isActive: false,
   //
   thread_id: '', // 聊天的唯一ID，可以连接上下文
@@ -1040,20 +1040,55 @@ defineExpose({
         </div>
         <div class="btns">
           <div class="btns-left">
+            <!-- File -->
             <a-tooltip>
               <template #title>Upload files</template>
               <a-button shape="circle" class="btn btn-tools btn-upload" @click="upload">
                 <i class="fa-solid fa-paperclip"></i>
               </a-button>
             </a-tooltip>
+            <!-- Images -->
             <a-tooltip>
               <template #title>Upload images</template>
               <a-button shape="circle" class="btn btn-tools btn-upload" @click="upload">
                 <i class="fa-solid fa-images"></i>
               </a-button>
             </a-tooltip>
+            <!-- Tools -->
+            <a-dropdown placement="topLeft">
+              <a-button><i class="fa-solid fa-sliders"></i> Tools</a-button>
+              <template #overlay>
+                <a-menu>
+                  <a-menu-item>
+                    <div class="btn-switch">
+                      <i class="fa-solid fa-lightbulb"></i>
+                      Think for longer
+                    </div>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <div class="btn-switch">
+                      <i class="fa-solid fa-globe"></i>
+                      Search the web
+                    </div>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <div class="btn-switch">
+                      <i class="fa-solid fa-images"></i>
+                      Create an image
+                    </div>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <div class="btn-switch">
+                      <i class="fa-solid fa-code"></i>
+                      Write or code
+                    </div>
+                  </a-menu-item>
+                </a-menu>
+              </template>
+            </a-dropdown>
           </div>
           <div class="btns-right">
+            <!-- Voice -->
             <a-popover v-model:open="voiceInfos.show" :title="`Recording: ${voiceInfos.count}s`" placement="leftBottom"
               trigger="click">
               <template #content>
@@ -1071,10 +1106,10 @@ defineExpose({
                 </a-button>
               </a-tooltip>
             </a-popover>
+            <!-- Send -->
             <a-tooltip>
               <template #title>Send Message</template>
-              <a-button shape="circle" class="btn btn-send" @click="sendMessage()"
-                :disabled="chatInfos.message == ''">
+              <a-button shape="circle" class="btn btn-send" @click="sendMessage()" :disabled="chatInfos.message == ''">
                 <i class="fa-solid fa-arrow-up"></i>
               </a-button>
             </a-tooltip>

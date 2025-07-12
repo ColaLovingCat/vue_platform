@@ -7,10 +7,43 @@ const routes = [
     redirect: "/home",
   },
 
+  // 业务页面
+  {
+    path: "/",
+    name: "/",
+    component: () => import("@/components/layouts/contents.vue"),
+    children: [
+      {
+        path: "/configs-users",
+        name: "configs-users",
+        component: () => import("@/views/func/manages/users/users.vue"),
+      },
+    ],
+  },
+
+  // 登录页面
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/login/view.vue"),
+  },
+  {
+    path: "/sso-auth",
+    name: "ssoAuth",
+    component: () => import("@/views/login/sso-auth.vue"),
+  },
+
   {
     path: "/home",
     name: "home",
     component: () => import("@/views/home/view.vue"),
+  },
+
+  //
+  {
+    path: '/f1',
+    name: 'f1',
+    component: () => import('@/views/func/f1/view.vue')
   },
 
   // Games
@@ -35,66 +68,21 @@ const routes = [
     component: () => import('@/views/func/animals/view.vue')
   },
 
-  {
-    path: '/f1',
-    name: 'f1',
-    component: () => import('@/views/func/f1/view.vue')
-  },
-
+  //
   {
     path: '/books',
     name: 'books',
     component: () => import('@/views/func/books/view.vue')
   },
+
+  //
   {
     path: '/icons',
     name: 'icons',
     component: () => import('@/views/func/icons/view.vue')
   },
 
-  // 业务页面
-  {
-    path: "/",
-    name: "/",
-    component: () => import("@/components/layouts/contents.vue"),
-    children: [
 
-    ],
-  },
-
-  // 登录页面
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("@/views/login/view.vue"),
-  },
-  {
-    path: "/sso-auth",
-    name: "ssoAuth",
-    component: () => import("@/views/login/sso-auth.vue"),
-  },
-
-  // 组件测试页面
-  {
-    path: "/forms",
-    name: "forms",
-    component: () => import("@/components/forms/using.vue"),
-  },
-  {
-    path: "/echarts",
-    name: "echarts",
-    component: () => import("@/components/echarts/using.vue"),
-  },
-  {
-    path: "/chats",
-    name: "chats",
-    component: () => import("@/components/chats/using.vue"),
-  },
-  {
-    path: "/editors",
-    name: "editors",
-    component: () => import("@/components/editors/using.vue"),
-  },
 ];
 
 const router = createRouter({

@@ -1,19 +1,28 @@
 <script lang="ts" setup>
 import { reactive, ref, type Ref } from 'vue';
-import formView from './view.vue'
-import type { FormItem } from '@/commons/datas/datas.types';
+
+import formView from '@/components/forms/view.vue'
+import type { FormItem } from '@/components/forms/form.types';
+
+import * as messages from '@/commons/utils/messages'
 
 // name
 defineOptions({
     name: 'custom-name'
 })
 
+const formRef = ref();
 const formConfig = reactive({
     class: {
         forms: '',
         items: 'inline',
-        labelCol: 2
+        label: 'col-2',
     },
+    format: {
+        date: 'YYYY-MM-DD',
+        time: 'HH:mm:ss'
+    },
+    showError: true
 })
 const formList: Ref<FormItem[]> = ref([
     {
@@ -28,6 +37,18 @@ const formList: Ref<FormItem[]> = ref([
         label: 'Password',
         isPassword: true,
         required: true,
+    },
+    {
+        type: 'input',
+        key: 'number',
+        label: 'Number',
+        isNumber: true,
+    },
+    {
+        type: 'input',
+        key: 'email',
+        label: 'Email',
+        isEmail: true,
     },
     {
         type: 'textarea',
@@ -49,14 +70,33 @@ const formList: Ref<FormItem[]> = ref([
         ],
     },
     {
+        type: 'select',
+        key: 'week',
+        label: 'Week',
+        hidden: (formValues: any) => formValues.location !== 'Asia',
+        isMulti: true,
+        activeClear: true,
+        list: [
+            { value: "Mon", label: "Monday" },
+            { value: "Tue", label: "Tuesday" },
+            { value: "Wed", label: "Wednesday" },
+            { value: "Thu", label: "Thursday" },
+            { value: "Fri", label: "Friday" },
+            { value: "Sat", label: "Saturday" },
+            { value: "Sun", label: "Sunday" },
+        ],
+    },
+    {
         type: 'switch',
         key: 'status',
         label: 'Status',
+        required: true,
     },
     {
         type: 'radios',
         key: 'sex',
         label: 'Sex',
+        required: true,
         list: [
             { value: '男', label: '男' },
             { value: '女', label: '女' },
@@ -80,37 +120,56 @@ const formList: Ref<FormItem[]> = ref([
         required: true,
     },
     {
+        type: 'datetime',
+        key: 'datetime',
+        label: 'Datetime',
+        required: false,
+    },
+    {
         type: 'date-range',
         key: 'fromto',
         label: 'From to',
         required: true,
     },
+    {
+        type: 'datetime-range',
+        key: 'fromtotime',
+        label: 'From to',
+        required: false,
+    },
+    {
+        type: 'custom',
+        key: 'customSlot',
+        label: 'Custom Slot',
+        required: false
+    }
 ])
-type FormValue = {
-    [key: string]: any;  // 可以是任何类型
-};
-const formValue: FormValue = ref({
+const formValue: any = ref({
     username: '',
     password: '',
+    number: '',
+    emial: '',
     desc: '',
     location: null,
-    status: true,
-    sex: '女',
+    week: [],
+    status: false,
+    sex: null,
     hobby: [],
     birthday: null,
+    datetime: null,
     fromto: [],
+    fromtotime: [],
+    customSlot: 12
 })
-
+//
 const onChange = (key: string) => {
     console.log('[Form] changed: ', key)
 }
-
-const formRef = ref();
 const onSubmit = () => {
     if (formRef.value?.validate()) {
-        console.log('校验通过！可以提交')
+        messages.showSuccess('校验通过！可以提交')
     } else {
-        console.log('校验失败！请修正错误')
+        messages.showError('校验失败！请修正错误')
     }
 }
 </script>
@@ -119,11 +178,15 @@ const onSubmit = () => {
     <div class="box-forms">
         <div class="box-form">
             <formView ref="formRef" :config="formConfig" :forms="formList" v-model:values="formValue"
-                @changed="onChange"></formView>
+                @changed="onChange">
+                <template #customSlot="{ value, onChange }">
+                    <a-slider style="flex:1" :value="value" @change="onChange" :min="0" :max="100" />
+                </template>
+            </formView>
             <a-button type="primary" @click="onSubmit">Submit</a-button>
         </div>
         <div class="box-result">
-            <template v-for="item in formList">
+            <template v-for="item in formList" :key="item.key">
                 <p>{{ item.label }}: {{ formValue[item.key] }}</p>
             </template>
         </div>

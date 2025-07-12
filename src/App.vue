@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import type { Ref } from 'vue'
-
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import eventBus from '@/commons/utils/eventBus'
 
 import { useLoadingStore } from '@/commons/stores/index'
 const loadingStore = useLoadingStore()
@@ -14,9 +11,9 @@ import { useUserInfosStore } from '@/commons/stores/index'
 const userInfosStore = useUserInfosStore()
 
 import { useSystemInfosStore } from '@/commons/stores/index'
-const systemStore = useSystemInfosStore()
-const headerStatus = computed(() => systemStore.systemStatus.headerShow)
-const theme = computed(() => systemStore.systemStatus.theme)
+const systemInfosStore = useSystemInfosStore()
+const headerStatus = computed(() => systemInfosStore.systemStatus.headerShow)
+const theme = computed(() => systemInfosStore.systemStatus.theme)
 
 import * as systemDB from '@/commons/datas/datas.system'
 import layoutView from '@/components/layouts/layout.vue'
@@ -25,36 +22,61 @@ import * as extend from '@/commons/utils/extends'
 import * as messageBox from '@/commons/utils/messages'
 import * as current from './views/login/login.service'
 
-onMounted(() => {
+onMounted(async () => {
+  // 清除所有的loading状态
+  loadingStore.clear()
+
   // 设置语言，默认en
-  let lang = extend.LocalStore.get('lang')
+  let lang = extend.ExLocalStore.get('lang')
   locale.value = lang ? lang : 'en'
 
-  //
-  let theme = extend.LocalStore.get('theme')
+  // 设置主题
+  let theme = extend.ExLocalStore.get('theme')
   theme = theme ? theme : 'default'
   //
   themesStatus.value = theme == 'default'
   setTheme(theme)
 
+  // SSO配置
+  if (systemInfosStore.systemInfos.azure == 'request') {
+    // 从后台获取获取
+    await getinfosAzure()
+  }
+
   // 检测token
-  let token = extend.LocalStore.get('token')
+  let token = extend.ExLocalStore.get('token')
+  // console.log('[App] token: ', token)
   if (token && token != '') {
     // 如果有token则加载用户信息和菜单
     getinfosUser()
-    jumpHome()
+    // jumpHome()
   }
+
+  // 注册全局方法
+  eventBus.on('getinfosUser', getinfosUser)
+  eventBus.on('jumpHome', jumpHome)
+  eventBus.on('clearSystem', clearSystem)
+  eventBus.on('logout', logout)
+})
+
+onUnmounted(() => {
+  // 注销全局方法
+  eventBus.off('getinfosUser', getinfosUser)
+  eventBus.off('jumpHome', jumpHome)
+  eventBus.off('clearSystem', clearSystem)
+  eventBus.off('logout', logout)
 })
 
 // 语言
+import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
 const changeLanguage = (lang: string) => {
   locale.value = lang
   //
-  extend.LocalStore.set('lang', lang)
+  extend.ExLocalStore.set('lang', lang)
 }
 
-//
+// 主题
 const themesStatus = ref(true)
 const toggleThemes = () => {
   const theme = themesStatus.value ? 'default' : 'dark'
@@ -64,8 +86,51 @@ const setTheme = (theme: string) => {
   // css样式
   document.documentElement.setAttribute('data-theme', theme)
   // 全局状态
-  extend.LocalStore.set('theme', theme)
-  systemStore.setTheme(theme)
+  extend.ExLocalStore.set('theme', theme)
+  systemInfosStore.setTheme(theme)
+}
+
+const getinfosAzure = async () => {
+  let resp: any = await current.getinfosAzure()
+  const { status, data } = resp;
+  if (status) {
+    console.log('[App] azure: ', data)
+    systemInfosStore.setAzure({
+      host: data.host,
+      client_id: data.clientID,
+      scope: data.scope,
+      response_type: data.responseType,
+    })
+  }
+}
+
+// 菜单数据
+let menus: Ref<any[]> = ref([])
+// 获取用户和菜单
+const getinfosUser = async () => {
+  loadingStore.loading()
+  try {
+    // 先获取用户信息
+    const resp: any = await current.getinfosUser()
+    const { status, data, message } = resp
+    if (status) {
+      userInfosStore.refresh({ ...data })
+      console.log('[App] user: ', userInfosStore.userInfos)
+    } else {
+      messageBox.showError(message)
+    }
+  } catch (error) {
+    console.error('[App] error:', error)
+    logout()
+  } finally {
+    loadingStore.end()
+    // 后刷新菜单
+    getlistMenus()
+  }
+}
+// 获取菜单
+const getlistMenus = () => {
+  menus.value = [...systemDB.menus]
 }
 
 // 用于后续统一跳转主页
@@ -73,75 +138,30 @@ const jumpHome = () => {
   pageGo('/home')
 }
 
-// 菜单数据
-let menus: Ref<any[]> = ref([])
-// 获取用户
-const getinfosUser = () => {
-  // 先获取用户信息
-  loadingStore.loading()
-  current.getinfosUser().then(
-    (resp: any) => {
-      loadingStore.end()
-      //
-      let { isSuccess, data, message } = resp
-      if (isSuccess) {
-        // 存储用户单例
-        userInfosStore.refresh({
-          num: data.sapPNR,
-          ntAccount: data.ntAccount,
-          name: data.lastName + ' ' + data.firstName,
-          email: data.email,
-          deptName: data.department,
-          roles: data.roles
-        })
-        // 刷新菜单
-        getlistMenus()
-      } else {
-        messageBox.showError(message)
-      }
-    },
-    (error: any) => {
-      loadingStore.end()
-      //
-      console.log('Testing: ', error)
-      logout()
-    }
-  )
-}
-// 获取菜单
-const getlistMenus = () => {
-  menus.value = [...systemDB.menus]
-}
-
 // 注销
 const logout = () => {
   clearSystem()
+  console.log('[App] user: ', 'log out')
   pageGo('/login', {
     type: 'logout'
   })
 }
-const pageGo = (path: string, query: any = {}) => {
-  router.push({
-    path,
-    query
-  })
-}
 const clearSystem = () => {
   // 清除用户信息
-  extend.LocalStore.delete('token')
+  extend.ExLocalStore.delete('token')
   userInfosStore.clear()
   // 清除菜单
   menus.value = []
 }
 
-// 在其他页面也可以调用
-;(window as any).eventBus = {
-  getinfosUser,
-  //
-  jumpHome,
-  //
-  clearSystem,
-  logout
+// 跳转
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const pageGo = (path: string, query: any = {}) => {
+  router.push({
+    path,
+    query
+  })
 }
 </script>
 
@@ -149,47 +169,28 @@ const clearSystem = () => {
   <layoutView :datas="menus" :status="headerStatus">
     <!-- Logo -->
     <template #logos>
-      <img
-        class="logo"
-        :src="`/systems/logos/bosch_logo${theme == 'default' ? '' : '-white'}.png`"
-        alt=""
-        srcset=""
-        @click="pageGo('/home')"
-      />
+      <img class="logo" :src="`/systems/logos/logo-name${theme == 'default' ? '' : '-white'}.png`" alt="" srcset=""
+        @click="pageGo('/home')" />
     </template>
     <template #logos-mini>
-      <img
-        class="logo-mini"
-        src="/systems/logos/bosch.png"
-        alt=""
-        srcset=""
-        @click="pageGo('/home')"
-      />
+      <img class="logo-mini" src="/systems/logos/logo.png" alt="" srcset="" @click="pageGo('/home')" />
     </template>
     <!-- Right -->
     <template #infos>
       <!-- 主题 -->
       <div class="themes">
-        <a-switch
-          v-model:checked="themesStatus"
-          checked-children="亮"
-          un-checked-children="暗"
-          @change="toggleThemes"
-        />
+        <a-switch v-model:checked="themesStatus" checked-children="亮" un-checked-children="暗" @change="toggleThemes" />
       </div>
       <!-- 语言 -->
       <div class="langs">
-        <img
-          class="img-lan"
-          :src="`/systems/lan/lan-${locale}.png`"
-          @click="changeLanguage(locale == 'zh' ? 'en' : 'zh')"
-        />
+        <img class="img-lan" :src="`/systems/lan/lan-${locale}.png`"
+          @click="changeLanguage(locale == 'zh' ? 'en' : 'zh')" />
       </div>
       <!-- 用户 -->
       <a-dropdown class="users">
         <a class="ant-dropdown-link" @click.prevent>
           <i class="fa-solid fa-user"></i>
-          <span>{{ userInfosStore.userInfos.name }}</span>
+          <span>{{ userInfosStore.userInfos.username }}</span>
         </a>
         <template #overlay>
           <a-menu>

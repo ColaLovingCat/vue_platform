@@ -16,14 +16,12 @@ const months = [
 ];
 onMounted(async () => {
   let temps: any = await readExcel()
-  console.log('Testing: ', temps);
   const { rounds, races, result, drivers, teams } = temps
-
+  console.log('Testing: ', rounds);
   pageInfos.drivers = [...drivers]
   pageInfos.drivers.map((driver: any) => {
     driver.score = 0
     let scoreInfos = result.filter((a: any) => a.driverName == driver.name && a.score)
-    console.log('Testing: ', scoreInfos);
     if (scoreInfos.length > 0) {
       scoreInfos.map((a: any) => { driver.score += a.score })
     }
@@ -35,7 +33,7 @@ onMounted(async () => {
     }
 
     driver.award = 0
-    let awardInfos = result.filter((a: any) => a.driverName == driver.name && a.year == pageInfos.year && a.step == 'Qualifying' && a.position < 4)
+    let awardInfos = result.filter((a: any) => a.driverName == driver.name && a.year == pageInfos.year && a.step == 'Race' && a.position < 4)
     if (awardInfos.length > 0) {
       awardInfos.map((a: any) => { driver.award += 1 })
     }
@@ -75,7 +73,7 @@ onMounted(async () => {
           if (resultInfos.length > 0) {
             let winner = resultInfos[0]
             race.no = winner.driverNo
-            let teamInfos = teams.find((a: any) => a.name == winner.teamName)
+            let teamInfos = teams.find((a: any) => (a.name == winner.teamName || a.newName == winner.teamName))
             race.team = teamInfos.code
             race.color = teamInfos.color
           }
@@ -136,7 +134,6 @@ const pageInfos = reactive({
 
 <template>
   <div class="sections">
-    {{ pageInfos.currentRound }}
     <div class="list-f1">
       <template v-for="round in pageInfos.rounds" v-bind:id="round.key">
         <div class="f1-item" :class="round.round == pageInfos.currentRound ? 'active' : ''"

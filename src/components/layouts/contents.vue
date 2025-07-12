@@ -4,6 +4,7 @@ import { onMounted } from 'vue'
 import { useSystemInfosStore } from '@/commons/stores/index'
 const systemStore = useSystemInfosStore()
 
+import eventBus from '@/commons/utils/eventBus'
 import * as extend from '@/commons/utils/extends'
 
 // name
@@ -13,12 +14,13 @@ defineOptions({
 
 onMounted(() => {
   // 每当有路由切换时，都会触发
-  let token = extend.LocalStore.get('token')
+  let token = extend.ExLocalStore.get('token')
   if (token && token != '') {
     // 有token
   } else {
     systemStore.showLogout(() => {
-      ;(window as any).eventBus.logout()
+      eventBus.emit('logout')
+      // ;(window as any).eventBus.logout()
     })
   }
 })

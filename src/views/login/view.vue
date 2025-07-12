@@ -1,45 +1,50 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 
+import appConfigs from '@/configs/app.config'
+const mode = appConfigs.loginMode
+
 import { useSystemInfosStore } from '@/commons/stores/index'
 const systemInfosStore = useSystemInfosStore()
 import { useLoadingStore } from '@/commons/stores/index'
 const loadingStore = useLoadingStore()
 
+import eventBus from '@/commons/utils/eventBus'
 import * as extend from '@/commons/utils/extends'
 import * as messageBox from '@/commons/utils/messages'
 import * as current from './login.service'
 
-const activeDynamic = false
-const canvas: any = ref(null)
-let ctx: any = null
-let circles: any[] = []
-const colors = ['#836fff', '#15f5ba', '#692ff']
-
-onMounted(() => {
+onMounted(async () => {
   // systemInfosStore.setHeader(false)
   // 背景
-  if (activeDynamic) {
-    ctx = canvas.value.getContext('2d')
-    console.log('Testing: ', ctx)
-    resizeCanvas()
-    initialCircle()
-    animate()
+  if (canvas.value) {
+    ctx = canvas.value.getContext('2d');
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    if (activeDynamic) {
+      animate();
+    }
   }
   // 回车触发登录
   window.addEventListener('keydown', onKeyDown)
   // 记住用户名
-  let remember = JSON.parse(extend.LocalStore.get('remember'))
+  let remember = JSON.parse(extend.ExLocalStore.get('remember'))
   if (remember && remember.remember) {
     loginForm.account = remember.account
     loginForm.remember = remember.remember
   }
   // 跳转
   let params = extend.ExWeb.params()
+  pageInfos.type = params.type
   if (params.type) {
     switch (params.type) {
       case 'logout': {
-        ;(window as any).eventBus.clearSystem()
+        eventBus.emit('clearSystem')
+        break
+      }
+      case 'jump': {
+        pageInfos.path = params.path
+        loginSSO()
         break
       }
       default: {
@@ -60,11 +65,18 @@ const onKeyDown = (event: any) => {
   }
 }
 
-// Back
+const activeDynamic = false
+//#region Background
+const canvas: any = ref(null)
+let ctx: any = null
+//
+let circles: any[] = []
+const colors = ['#836fff', '#15f5ba', '#692ff']
+//
 const initialCircle = () => {
   circles = []
   //
-  let circleCount = window.innerWidth / 100
+  const circleCount = Math.floor(window.innerWidth / 100);
   for (let loop = 0; loop < circleCount; loop++) {
     let radius = window.innerWidth / 4
     let x = extend.ExNumber.createRand(radius, canvas.value.width - radius)
@@ -73,17 +85,12 @@ const initialCircle = () => {
     let dy = extend.ExNumber.createRand(window.innerWidth / -2000, window.innerWidth / 2000)
     //
     let color = colors[Math.floor(Math.random() * colors.length)]
-    circles.push({
-      x,
-      y,
-      dx,
-      dy,
-      radius,
-      color
-    })
+    circles.push({ x, y, dx, dy, radius, color })
   }
 }
 const drawCircle = (circle: any) => {
+  if (!ctx) return;
+  //
   ctx.beginPath()
   ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false)
   ctx.fillStyle = circle.color
@@ -91,7 +98,8 @@ const drawCircle = (circle: any) => {
   ctx.closePath()
 }
 const animate = () => {
-  requestAnimationFrame(animate)
+  if (!ctx) return;
+  //
   ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
   //
   circles.map((circle: any) => {
@@ -107,15 +115,23 @@ const animate = () => {
     //
     drawCircle(circle)
   })
+  requestAnimationFrame(animate)
 }
 const resizeCanvas = () => {
+  if (!canvas.value) return;
+  //
   canvas.value.width = window.innerWidth * 1.5
   canvas.value.height = window.innerHeight * 1.5
   //
   initialCircle()
 }
+//#endregion
 
 // Login
+const pageInfos = reactive({
+  type: '',
+  path: ''
+})
 const loginForm = reactive({
   account: '',
   password: '',
@@ -124,7 +140,7 @@ const loginForm = reactive({
 const login = () => {
   loadingStore.loading()
   //
-  extend.LocalStore.set(
+  extend.ExLocalStore.set(
     'remember',
     JSON.stringify({
       remember: loginForm.remember,
@@ -132,47 +148,85 @@ const login = () => {
     })
   )
   //
-  let params = {
-    userName: loginForm.account,
-    password: loginForm.password
-  }
-  current.login(params).then(
-    (resp: any) => {
-      loadingStore.end()
-      //
-      const { isSuccess, message } = resp
-      if (isSuccess) {
-        ;(window as any).eventBus.getinfosUser()
-        //
-        ;(window as any).eventBus.jumpHome()
-      } else {
-        messageBox.showError(message)
+  switch (systemInfosStore.systemInfos.loginMode) {
+    case 'sso-local': {
+      const params = {
+        userno: loginForm.account,
+        password: loginForm.password
       }
-    },
-    (err: any) => {
-      loadingStore.end()
-      //
-      messageBox.showError(err)
+      current.login(params).then(
+        (resp: any) => {
+          loadingStore.end()
+          //
+          const { status, message } = resp
+          if (status) {
+            eventBus.emit('getinfosUser')
+            //
+            eventBus.emit('jumpHome')
+          } else {
+            messageBox.showError(message)
+          }
+        },
+        (err: any) => {
+          loadingStore.end()
+          //
+          messageBox.showError(err)
+        }
+      )
+      break
     }
-  )
-}
-const loginSSO = () => {
-  const redirectUrl = extend.ExWeb.url().server + '/sso-auth'
-  const { clientID, tenant } = systemInfosStore.systemInfos
-  let params = {
-    client_id: clientID,
-    scope: 'api://' + clientID + '/sso',
-    response_type: 'code',
-    redirect_uri: redirectUrl
+    case 'sso-iuser': {
+      let params = {
+        ntAccount: loginForm.account,
+        password: loginForm.password
+      }
+      current.loginiUser(params).then(
+        (resp: any) => {
+          loadingStore.end()
+          //
+          const { status, message } = resp
+          if (status) {
+            eventBus.emit('getinfosUser')
+            //
+            eventBus.emit('jumpHome')
+          } else {
+            messageBox.showError(message)
+          }
+        },
+        (err: any) => {
+          loadingStore.end()
+          //
+          messageBox.showError(err)
+        }
+      )
+      break
+    }
+    default: {
+      break
+    }
   }
-  let url = `${tenant}?` + extend.ExObject.stringfyParams(params)
+}
+//
+const loginSSO = () => {
+  const redirect_uri = extend.ExWeb.url().server + '/sso-auth'
+  const { host, client_id, scope, response_type } = systemInfosStore.systemInfos.azureConfigs
+  let params = {
+    client_id,
+    scope,
+    response_type,
+    redirect_uri,
+    state: ''
+  }
+  if (pageInfos.type == 'jump') {
+    params.state = encodeURIComponent(btoa(pageInfos.path))
+  }
+  let url = `${host}?` + extend.ExObject.stringifyParams(params)
   window.open(url, '_self')
 }
 </script>
 
 <template>
   <div class="contents">
-    <canvas ref="canvas" width="500" height="500"></canvas>
     <div class="box-contents">
       <div class="col-left">
         <div class="box-img">
@@ -183,61 +237,62 @@ const loginSSO = () => {
             </p>
           </div>
         </div>
+        <div class="bg-img">
+          <img src="/public/docs/imgs/earth.jpg" alt="" srcset="">
+        </div>
       </div>
       <div class="col-right">
         <div class="box-login">
           <div class="titles">{{ systemInfosStore.systemInfos.name }}</div>
-          <a-form
-            :model="loginForm"
-            layout="vertical"
-            name="basic"
-            :label-col="{ span: 5 }"
-            autocomplete="off"
-            @finish="login"
-          >
-            <a-form-item
-              :label="$t('system.account')"
-              name="account"
-              :rules="[{ required: true, message: 'Please input your account!' }]"
-            >
-              <a-input v-model:value="loginForm.account" />
-            </a-form-item>
+          <div class="box-sso" v-if="mode == 'sso-only'">
+            <p class="title-second">- Login only works from Bosch network -</p>
+            <a-button type="primary" class="btn btn-sso" @click="loginSSO">
+              <i class="fa-solid fa-cloud"></i>
+              <span>{{ $t('system.login.sso') }}</span>
+            </a-button>
+          </div>
+          <div class="box-iuser" v-else>
+            <a-form :model="loginForm" layout="vertical" name="basic" :label-col="{ span: 5 }" autocomplete="off"
+              @finish="login">
+              <a-form-item :label="$t('system.account')" name="account"
+                :rules="[{ required: true, message: 'Please input your account!' }]">
+                <a-input v-model:value="loginForm.account" />
+              </a-form-item>
 
-            <a-form-item
-              :label="$t('system.password')"
-              name="password"
-              :rules="[{ required: true, message: 'Please input your password!' }]"
-            >
-              <a-input-password v-model:value="loginForm.password" />
-            </a-form-item>
+              <a-form-item :label="$t('system.password')" name="password"
+                :rules="[{ required: true, message: 'Please input your password!' }]">
+                <a-input-password v-model:value="loginForm.password" />
+              </a-form-item>
 
-            <a-form-item name="remember">
-              <a-checkbox v-model:checked="loginForm.remember" class="btn-check">
-                {{ $t('system.remember') }}
-              </a-checkbox>
-            </a-form-item>
+              <a-form-item name="remember">
+                <a-checkbox v-model:checked="loginForm.remember" class="btn-check">
+                  {{ $t('system.remember') }}
+                </a-checkbox>
+              </a-form-item>
 
-            <a-form-item>
-              <a-button type="primary" class="btn btn-login" html-type="submit">
-                {{ $t('system.login') }}
-              </a-button>
-            </a-form-item>
-          </a-form>
-          <div class="others">
-            <div class="line-divider">
-              <div class="line"></div>
-              <span>{{ $t('system.login.other') }}</span>
-              <div class="line"></div>
-            </div>
-            <div>
-              <a-button type="primary" class="btn btn-sso" @click="loginSSO">
-                <i class="fa-solid fa-cloud"></i>
-                <span>{{ $t('system.login.sso') }}</span>
-              </a-button>
+              <a-form-item>
+                <a-button type="primary" class="btn btn-login" html-type="submit">
+                  {{ $t('system.login') }}
+                </a-button>
+              </a-form-item>
+            </a-form>
+            <div class="others">
+              <div class="line-divider">
+                <div class="line"></div>
+                <span>{{ $t('system.login.other') }}</span>
+                <div class="line"></div>
+              </div>
+              <div class="btns">
+                <a-button type="primary" class="btn btn-sso" @click="loginSSO">
+                  <i class="fa-solid fa-cloud"></i>
+                  <span>{{ $t('system.login.sso') }}</span>
+                </a-button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <canvas ref="canvas" width="500" height="500"></canvas>
     </div>
   </div>
 </template>
@@ -248,6 +303,37 @@ const loginSSO = () => {
   overflow: hidden;
   background: var(--color-content-bg);
 
+  .box-contents {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  canvas {
+    // display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .col-left,
+  .col-right {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .bg-img {
     display: none;
     position: absolute;
@@ -256,33 +342,6 @@ const loginSSO = () => {
     width: 100%;
     height: 100%;
   }
-
-  canvas {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-  }
-
-  .box-contents {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .col-left,
-  .col-right {
-    z-index: 0;
-    height: 100%;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
 .box-img {
@@ -290,7 +349,8 @@ const loginSSO = () => {
     position: relative;
     padding: 70px 0;
 
-    &::before {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       top: 15%;
@@ -300,6 +360,17 @@ const loginSSO = () => {
       background: linear-gradient(to right, #4460f1, #c471ed, #f64f59);
       z-index: -1;
       filter: blur(70px);
+      animation: float 8s ease-in-out infinite alternate;
+    }
+
+    &::after {
+      top: 50%;
+      left: 30%;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(to right, #72ca92, #e552da);
+      filter: blur(100px);
+      animation-delay: 4s;
     }
 
     p {
@@ -307,26 +378,19 @@ const loginSSO = () => {
       font-weight: 700;
     }
   }
-
-  img {
-    width: 500px;
-    object-fit: contain;
-    border-radius: 15px;
-    animation: jump 4s infinite ease-in-out;
-  }
 }
 
-@keyframes jump {
+@keyframes float {
   0% {
-    margin-top: 0;
+    transform: translate(0, 0) scale(1);
   }
 
   50% {
-    margin-top: -30px;
+    transform: translate(80px, 60px) scale(1.1);
   }
 
   100% {
-    margin-top: 0;
+    transform: translate(-60px, -50px) scale(1);
   }
 }
 
@@ -388,6 +452,32 @@ const loginSSO = () => {
       font-size: 14px;
       font-weight: 500;
     }
+  }
+}
+
+.box-sso {
+  p {
+    text-align: center;
+  }
+
+  .title-second {
+    margin: 36px 0 24px;
+    color: #9da1a8;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .title-desc {
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  .btn-sso {
+    width: 100%;
+    border-radius: 30px;
   }
 }
 </style>

@@ -1,24 +1,42 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed, watch } from 'vue'
-import * as db from './datas'
+import { onMounted, ref, reactive, computed, watch } from 'vue'
 
 import { useRouter } from "vue-router";
 const router = useRouter();
 const pageGo = (name: string) => {
-    router.push({
-        name: name,
-    });
+  router.push({
+    name: name,
+  });
 };
 
-onMounted(() => {
-    datas.value = [...db.list]
+// name
+defineOptions({
+  name: 'app-home'
 })
 
-const datas: any = ref([])
+onMounted(() => {
+})
+
+const datas: any = ref([
+  { title: "F1", path: 'f1', img: 'f1.jpg' },
+  { title: "游戏库", path: 'games', img: 'switch.jpg' },
+  { title: "Pokémon", path: 'pokes', img: 'pokemon.png' },
+  { title: "怪猎物语2", path: 'mhs2', img: 'mhs2.png' },
+  { title: "动物森友会", path: 'animals', img: 'animal.png' },
+  { title: "书架", path: 'books', img: 'books.jpg' },
+  { title: "动漫", path: 'cartoons', img: 'cartoon.png' },
+  { title: "龙珠", path: 'dragon', img: 'dragonball.jpeg' },
+  { title: "假面骑士", path: 'icons', img: 'riders.jpg' },
+  { title: "英雄联盟", path: 'list/lol', img: 'lol.jpg' },
+  { title: "Dota2", path: 'list/dota2', img: 'dota2.jpg' },
+  { title: "CS GO", path: 'list/csgo', img: 'csgo.jpg' },
+  { title: "M-League", path: 'list/majiang', img: 'majiang.jpg' },
+  { title: "公司", path: 'list/company', img: 'company.jpg' },
+])
 </script>
 
 <template>
-  <div class="contents">
+  <div class="sections">
     <div class="list">
       <div class="wiki-item" v-for="item in datas" @click="pageGo(item.path)">
         <img :src="`/docs/covers/${item.img}`" alt="" srcset="">

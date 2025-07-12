@@ -12,7 +12,7 @@ onMounted(async() => {
 const readExcel = async () => {
   try {
     // 动态导入Excel文件
-    const response = await fetch(new URL('/docs/datas/games.xlsx', import.meta.url).href)
+    const response = await fetch(new URL('/docs/datas/datas.xlsx', import.meta.url).href)
     const arrayBuffer = await response.arrayBuffer()
 
     // 解析Excel数据
