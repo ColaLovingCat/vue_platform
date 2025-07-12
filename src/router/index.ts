@@ -70,6 +70,18 @@ const routes = [
 
   //
   {
+    path: "/cartoons",
+    name: "cartoons",
+    component: () => import("@/views/func/cartoons/view.vue"),
+  },
+  {
+    path: '/dragon',
+    name: 'dragon',
+    component: () => import('@/views/func/dragon/view.vue')
+  },
+
+  //
+  {
     path: '/books',
     name: 'books',
     component: () => import('@/views/func/books/view.vue')
@@ -81,7 +93,6 @@ const routes = [
     name: 'icons',
     component: () => import('@/views/func/icons/view.vue')
   },
-
 
 ];
 
