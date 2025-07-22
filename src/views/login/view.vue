@@ -238,7 +238,6 @@ const loginSSO = () => {
           </div>
         </div>
         <div class="bg-img">
-          <img src="/public/docs/imgs/earth.jpg" alt="" srcset="">
         </div>
       </div>
       <div class="col-right">
