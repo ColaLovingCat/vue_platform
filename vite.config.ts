@@ -7,16 +7,12 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
 import { viteMockServe } from "vite-plugin-mock";
 
-import { templateCompilerOptions } from "@tresjs/core";
-
 import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
-      ...templateCompilerOptions,
-    }),
+    vue(),
     // 解决 `import { ref , reactive ..... } from 'vue'` 大量引入的问题
     AutoImport({
       imports: ["vue", "vue-router", "pinia"],

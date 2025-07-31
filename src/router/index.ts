@@ -41,9 +41,9 @@ const routes = [
 
   //
   {
-    path: '/f1',
-    name: 'f1',
-    component: () => import('@/views/func/f1/view.vue')
+    path: "/f1",
+    name: "f1",
+    component: () => import("@/views/func/f1/view.vue"),
   },
 
   // Games
@@ -58,14 +58,14 @@ const routes = [
     component: () => import("@/views/func/pokes/view.vue"),
   },
   {
-    path: '/mhs2',
-    name: 'mhs2',
-    component: () => import('@/views/func/mhs2/view.vue')
+    path: "/mhs2",
+    name: "mhs2",
+    component: () => import("@/views/func/mhs2/view.vue"),
   },
   {
-    path: '/animals',
-    name: 'animals',
-    component: () => import('@/views/func/animals/view.vue')
+    path: "/animals",
+    name: "animals",
+    component: () => import("@/views/func/animals/view.vue"),
   },
 
   //
@@ -75,25 +75,31 @@ const routes = [
     component: () => import("@/views/func/cartoons/view.vue"),
   },
   {
-    path: '/dragon',
-    name: 'dragon',
-    component: () => import('@/views/func/dragon/view.vue')
+    path: "/dragon",
+    name: "dragon",
+    component: () => import("@/views/func/dragon/view.vue"),
   },
 
   //
   {
-    path: '/books',
-    name: 'books',
-    component: () => import('@/views/func/books/view.vue')
+    path: "/books",
+    name: "books",
+    component: () => import("@/views/func/books/view.vue"),
   },
 
   //
   {
-    path: '/icons',
-    name: 'icons',
-    component: () => import('@/views/func/icons/view.vue')
+    path: "/icons",
+    name: "icons",
+    component: () => import("@/views/func/icons/view.vue"),
   },
 
+  //
+  {
+    path: "/sort",
+    name: "sort",
+    component: () => import("@/views/func/sort/view.vue"),
+  },
 ];
 
 const router = createRouter({
