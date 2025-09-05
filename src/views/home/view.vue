@@ -32,6 +32,7 @@ const datas: any = ref([
   { title: "CS GO", path: 'list/csgo', img: 'csgo.jpg' },
   { title: "M-League", path: 'list/majiang', img: 'majiang.jpg' },
   { title: "公司", path: 'list/company', img: 'company.jpg' },
+  { title: "排序", path: 'sort', img: 'company.jpg' },
 ])
 </script>
 

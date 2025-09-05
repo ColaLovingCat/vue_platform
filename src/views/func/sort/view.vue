@@ -18,6 +18,8 @@ const pageInfos = reactive({
     size: 10,
     barWidth: 40,
     gap: 2,
+    //
+    desc: '',
 })
 const datas: any = ref([])
 
@@ -40,6 +42,7 @@ const getStyle = (bar: any, index: number) => {
     `
 }
 
+// 生成数组
 const generateBars = () => {
     datas.value = Array.from(
         { length: pageInfos.size },
@@ -49,6 +52,7 @@ const generateBars = () => {
             status: ['default']
         })
     );
+    console.log('[data]: ', datas.value)
 }
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 500));
@@ -96,7 +100,7 @@ const insertionSort = async () => {
 // 希尔排序
 const shellsSort = async () => {
     for (let gap = datas.value.length; gap > 0; gap = Math.floor(gap / 2)) {
-        console.log('当前gap: ', gap)
+        console.log('[shells] gap:', gap)
         for (let i = gap; i < datas.value.length; i++) {
             // 激活当前位置的元素
             datas.value[i].status = Status.active
@@ -208,7 +212,7 @@ const quickSortWrapper = async () => {
     await quickSort(0, datas.value.length - 1);
 }
 const quickSort = async (left: number, right: number) => {
-    console.log('排序范围: ', left, right)
+    console.log('[quick] 排序范围: ', left, right)
     if (left >= right) {
         if (left = right) datas.value[left].status = Status.done;
         return;
@@ -247,6 +251,7 @@ const mergeSortWrapper = async () => {
     await split(0, datas.value.length - 1);
 }
 const split = async (left: number, right: number) => {
+    console.log('[merge] 分割: ', left, right)
     if (left >= right) return;
 
     const mid = Math.floor((left + right) / 2);
@@ -254,10 +259,10 @@ const split = async (left: number, right: number) => {
     await split(left, mid);
     await split(mid + 1, right);
 
-    console.log('合并: ', left, mid, right)
     await merge(left, mid, right);
 }
 const merge = async (left: number, mid: number, right: number) => {
+    console.log('[merge] 合并: ', left, mid, right)
     let temp = [];
     let i = left,
         j = mid + 1;
@@ -278,6 +283,49 @@ const merge = async (left: number, mid: number, right: number) => {
         await sleep()
     }
 }
+
+const sort = (action: string) => {
+    switch (action) {
+        case 'insertion': {
+            insertionSort()
+            pageInfos.desc = `依次将待排序的元素，移动到已排序的序列中的适当位置，使得插入后仍然有序`
+            break
+        }
+        case 'shells': {
+            shellsSort()
+            pageInfos.desc = `是插入排序的改进，通过将序列分组，每次对分组进行插入排序，然后逐步缩小分组的规模，最终完成排序`
+            break
+        }
+        case 'selection': {
+            selectionSort()
+            pageInfos.desc = `每次从待排序的元素中选取最小元素，放置在已排序的末尾`
+            break
+        }
+        case 'heap': {
+            heapSort()
+            pageInfos.desc = `将待排序的序列构建成一个大顶堆，然后将堆顶元素与最后一个元素交换，再对剩余的n-1个元素进行调整，循环执行以上步骤，最终完成排序`
+            break
+        }
+        case 'bubble': {
+            bubbleSort()
+            pageInfos.desc = `依次比较相邻的两个元素，将较大的元素交换到后面，每一轮比较都将最大的元素放到最后`
+            break
+        }
+        case 'quick': {
+            quickSortWrapper()
+            pageInfos.desc = `通过一趟排序将序列分成独立的两部分，其中一部分所有元素都比另一部分小，然后再对这两部分递归地进行快速排序`
+            break
+        }
+        case 'merge': {
+            mergeSortWrapper()
+            pageInfos.desc = `将序列不断地分割成两半，对每一半进行排序，然后合并两个已排序的子序列，最终完成排序`
+            break
+        }
+        default: {
+            break
+        }
+    }
+}
 </script>
 
 <template>
@@ -295,13 +343,16 @@ const merge = async (left: number, mid: number, right: number) => {
             <a-input v-model:value="pageInfos.size" style="width: 50px" min="5" max="50" />
             <a-button @click="generateBars()">随机数组</a-button>
 
-            <a-button type="primary" @click="insertionSort()">插入排序</a-button>
-            <a-button type="primary" @click="shellsSort()">希尔排序</a-button>
-            <a-button type="primary" @click="selectionSort()">选择排序</a-button>
-            <a-button type="primary" @click="heapSort()">堆排序</a-button>
-            <a-button type="primary" @click="bubbleSort()">冒泡排序</a-button>
-            <a-button type="primary" @click="quickSortWrapper()">快速排序</a-button>
-            <a-button type="primary" @click="mergeSortWrapper()">归并排序</a-button>
+            <a-button type="primary" @click="sort('insertion')">插入排序</a-button>
+            <a-button type="primary" @click="sort('shells')">希尔排序</a-button>
+            <a-button type="primary" @click="sort('selection')">选择排序</a-button>
+            <a-button type="primary" @click="sort('heap')">堆排序</a-button>
+            <a-button type="primary" @click="sort('bubble')">冒泡排序</a-button>
+            <a-button type="primary" @click="sort('quick')">快速排序</a-button>
+            <a-button type="primary" @click="sort('merge')">归并排序</a-button>
+        </div>
+        <div class="desc">
+            <p>{{ pageInfos.desc }}</p>
         </div>
     </div>
 </template>
