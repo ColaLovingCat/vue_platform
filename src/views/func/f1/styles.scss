@@ -21,7 +21,7 @@ body {
 
 .f1-item {
     position: relative;
-    width: 975px;
+    width: 900px;
 }
 
 .item-roundinfo {
@@ -33,7 +33,7 @@ body {
 
 .item-date {
     padding: 10px 20px;
-    width: 160px;
+    width: 145px;
     color: #fff;
     background: #000;
 }
@@ -55,7 +55,7 @@ body {
 
 .item-flag {
     position: absolute;
-    left: 125px;
+    left: 105px;
     top: 50%;
     transform: translateY(-50%);
     width: 70px;
@@ -74,7 +74,7 @@ body {
 .item-circuit {
     position: relative;
     padding: 10px 20px;
-    padding-left: 50px;
+    padding-left: 40px;
     background: #f4c531;
     display: flex;
     column-gap: 10px;
@@ -82,7 +82,7 @@ body {
 
 .item-rounds {
     padding: 10px 0;
-    width: 440px;
+    width: 370px;
 }
 
 .item-sprint {
