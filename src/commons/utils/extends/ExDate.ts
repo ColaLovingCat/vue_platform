@@ -3,6 +3,7 @@
  * @param format     时间格式化
  * @param formatUTC  UTC时间
  * @param formatShow 时间展示
+ * @param getCW      获取周数
  * @param add        增加相应时间
  * @param gap        时间差值
  * @param period     周期时间段
@@ -15,9 +16,15 @@ export interface ExDate {
    */
   format(date: any, format?: string): string;
   /**
-   * @summary 获取UTC时间戳
+   * @summary 获取UTC时间
    */
-  formatUTC(date: any): number;
+  formatUTC(date: any): string;
+  /**
+   * @summary 获取周数
+   * @param type A 周一开始 |B 周日开始
+   * @returns 3
+   */
+  getCW(d: Date | String, type: string): number;
   /**
    * @summary 格式化显示日期的不同阶段
    * @returns 3 days ago
@@ -50,6 +57,58 @@ export interface ExDate {
       | "last_year"
   ): string[];
 }
+
+export const months_short = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+export const months_long = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const weeks_short = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const weeks_long = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+export const dates = [
+  "Year",
+  "Month",
+  "Quarter",
+  "Week",
+  "Day",
+  "Hour",
+  "Minute",
+  "Second",
+];
+
 type IntervalType = "y" | "M" | "q" | "w" | "d" | "h" | "m" | "s";
 export const ExDate: ExDate = {
   format(date: any, format: string | undefined = undefined) {
@@ -59,97 +118,117 @@ export const ExDate: ExDate = {
     //无参数
     if ((date == undefined && format === undefined) || date === "now") {
       date = new Date();
+    } else {
+      if (typeof date === "string") {
+        date = date.replace("T", " ");
+      }
+      date = new Date(date);
     }
+
     if (format === undefined) {
       format = "yyyy-MM-dd HH:mm:ss";
     }
-    if (typeof date === "string") {
-      date = date.replace("T", " ");
-    }
-    date = new Date(date);
-    //
-    const map: any = {
-      y: date.getFullYear() + "", //年份
-      M: date.getMonth() + 1 + "", //月份
-      d: date.getDate() + "", //日
-      H: date.getHours(), //小时 24
-      m: date.getMinutes() + "", //分
-      s: date.getSeconds() + "", //秒
-      q: Math.floor((date.getMonth() + 3) / 3) + "", //季度
-      f: date.getMilliseconds() + "", //毫秒
-    };
-    //小时 12
-    if (map["H"] > 12) {
-      map["h"] = map["H"] - 12 + "";
-    } else {
-      map["h"] = map["H"] + "";
-    }
-    map["H"] += "";
 
-    const reg = "yMdHhmsqf";
-    let all = "",
-      str = "";
-    for (let i = 0, n = 0; i < reg.length; i++) {
-      n = format.indexOf(reg[i]);
-      if (n < 0) {
-        continue;
-      }
-      all = "";
-      for (; n < format.length; n++) {
-        if (format[n] != reg[i]) {
-          break;
-        }
-        all += reg[i];
-      }
-      if (all.length > 0) {
-        if (all.length == map[reg[i]].length) {
-          str = map[reg[i]];
-        } else if (all.length > map[reg[i]].length) {
-          if (reg[i] == "f") {
-            str =
-              map[reg[i]] +
-              new Array(all.length - map[reg[i]].length).fill("0").join("");
-          } else {
-            str =
-              new Array(all.length - map[reg[i]].length).fill("0").join("") +
-              map[reg[i]];
-          }
-        } else {
-          switch (reg[i]) {
-            case "y":
-              str = map[reg[i]].substr(map[reg[i]].length - all.length);
-              break;
-            case "f":
-              str = map[reg[i]].substr(0, all.length);
-              break;
-            default:
-              str = map[reg[i]];
-              break;
-          }
-        }
-        format = format.replace(all, str);
-      }
-    }
-    return format;
+    // 匹配规则
+    const map: Record<string, string> = {
+      // 年份
+      YYYY: date.getFullYear().toString(),
+      YY: date.getFullYear().toString().slice(-2),
+      yyyy: date.getFullYear().toString(),
+      yy: date.getFullYear().toString().slice(-2),
+
+      // 季度
+      QQ: String(Math.floor((date.getMonth() + 3) / 3)).padStart(2, "0"),
+      Q: String(Math.floor((date.getMonth() + 3) / 3)),
+      qq: String(Math.floor((date.getMonth() + 3) / 3)).padStart(2, "0"),
+      q: String(Math.floor((date.getMonth() + 3) / 3)),
+
+      // 月份
+      MMMM: months_long[date.getMonth()],
+      MMM: months_short[date.getMonth()],
+      MM: String(date.getMonth() + 1).padStart(2, "0"),
+      M: String(date.getMonth() + 1),
+
+      // 星期 & 周数
+      WWWW: weeks_long[date.getDay()],
+      WWW: weeks_short[date.getDay()],
+      WBB: this.getCW(date, "B").toString().padStart(2, "0"),
+      WW: this.getCW(date, "A").toString().padStart(2, "0"),
+      WB: this.getCW(date, "B").toString(),
+      W: this.getCW(date, "A").toString(),
+      ww: this.getCW(date, "A").toString().padStart(2, "0"),
+      w: this.getCW(date, "A").toString(),
+
+      // 日期
+      DD: String(date.getDate()).padStart(2, "0"),
+      D: String(date.getDate()),
+      dd: String(date.getDate()).padStart(2, "0"),
+      d: String(date.getDate()),
+
+      // 小时
+      HH: String(date.getHours()).padStart(2, "0"),
+      H: String(date.getHours()),
+      hh: String(date.getHours() % 12 || 12).padStart(2, "0"),
+      h: String(date.getHours() % 12 || 12),
+
+      // 分钟
+      mm: String(date.getMinutes()).padStart(2, "0"),
+      m: String(date.getMinutes()),
+
+      // 秒
+      SS: String(date.getSeconds()).padStart(2, "0"),
+      S: String(date.getSeconds()),
+      ss: String(date.getSeconds()).padStart(2, "0"),
+      s: String(date.getSeconds()),
+
+      // 毫秒
+      f: String(date.getMilliseconds()),
+    };
+
+    const tokens = Object.keys(map)
+      .sort((a, b) => b.length - a.length)
+      .join("|");
+    const regex = new RegExp(tokens, "g");
+    return format.replace(regex, (match) => map[match] ?? match);
   },
-  formatUTC(date: any): number {
+  formatUTC(date: any): string {
     const dt = new Date(date);
-    return Date.UTC(
-      dt.getUTCFullYear(),
-      dt.getUTCMonth(),
-      dt.getUTCDate(),
-      dt.getUTCHours(),
-      dt.getUTCMinutes(),
-      dt.getUTCSeconds(),
-      dt.getUTCMilliseconds()
-    );
+    const YYYY = dt.getUTCFullYear();
+    const MM = String(dt.getUTCMonth() + 1).padStart(2, "0");
+    const DD = String(dt.getUTCDate()).padStart(2, "0");
+    const HH = String(dt.getUTCHours()).padStart(2, "0");
+    const mm = String(dt.getUTCMinutes()).padStart(2, "0");
+    const ss = String(dt.getUTCSeconds()).padStart(2, "0");
+
+    return `${YYYY}-${MM}-${DD} ${HH}:${mm}:${ss}`;
+  },
+  getCW(date: Date | string, type: string): number {
+    const d: Date = typeof date === "string" ? new Date(date) : date;
+
+    if (type == "A") {
+      const target = new Date(d.valueOf());
+      const dayNr = (d.getDay() + 6) % 7; // 周一 = 0
+      target.setDate(target.getDate() - dayNr + 3);
+      const firstThursday = target.valueOf();
+      target.setMonth(0, 1);
+      if (target.getDay() !== 4) {
+        target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
+      }
+      return 1 + Math.ceil((firstThursday - target.valueOf()) / 604800000);
+    } else {
+      const start = new Date(d.getFullYear(), 0, 1); // 当年第一天
+      const diff = (d.getTime() - start.getTime()) / 86400000; // 距离年初的天数
+
+      // 计算周数（以周日为第一天）
+      return Math.ceil((diff + start.getDay() + 1) / 7);
+    }
   },
   formatShow: function (date: any, format = "yyyy/MM/dd") {
     const now = new Date().getTime();
     const dt = new Date(date).getTime();
     const diffSec = Math.floor((now - dt) / 1000);
 
-    if (diffSec < 60) return "just submitted";
+    if (diffSec < 60) return "just now";
     if (diffSec < 3600) return `${Math.floor(diffSec / 60)} minutes ago`;
     if (diffSec < 86400) return `${Math.floor(diffSec / 3600)} hours ago`;
     if (diffSec < 15 * 86400) return `${Math.floor(diffSec / 86400)} days ago`;
@@ -238,7 +317,7 @@ export const ExDate: ExDate = {
       }
       case "3d": {
         result[0] = this.format(
-          this.add(dateNow, "d", -3),
+          this.add(dateNow, "d", -2),
           "yyyy-MM-dd HH:mm:ss"
         );
         result[1] = this.format(dateNow, "yyyy-MM-dd HH:mm:ss");
@@ -246,7 +325,7 @@ export const ExDate: ExDate = {
       }
       case "7d": {
         result[0] = this.format(
-          this.add(dateNow, "d", -7),
+          this.add(dateNow, "d", -6),
           "yyyy-MM-dd HH:mm:ss"
         );
         result[1] = this.format(dateNow, "yyyy-MM-dd HH:mm:ss");

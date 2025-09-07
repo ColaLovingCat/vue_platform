@@ -64,49 +64,63 @@ export const fetchRequest = (
     fetch(checkAPI(url), opts)
       .then(async (res) => {
         remarks != "" ? console.log(remarks + " Status: ", res.status) : void 0;
-        if (res.status == 401) {
-          extend.ExLocalStore.delete("token");
-          reject(res);
-        }
-        // response.status 表示响应的http状态码
-        if (res.status !== 200) {
-          reject(res);
-        }
+
         // 刷新token
         const token = res.headers.get("Authorization");
         if (token) {
           console.log("[Fetch] token: ", token);
           extend.ExLocalStore.set("token", token);
         }
+
         // 处理返回的数据
-        let data = null;
-        switch (dataType) {
-          case "text": {
-            data = await res.text();
-            break;
+        let data: any = null;
+        try {
+          switch (dataType) {
+            case "text": {
+              data = await res.text();
+              break;
+            }
+            case "blob": {
+              data = await res.blob();
+              break;
+            }
+            default: {
+              data = await res.json();
+              break;
+            }
           }
-          case "blob": {
-            data = await res.blob();
-            break;
-          }
-          default: {
-            data = await res.json();
-            break;
-          }
+        } catch (e) {
+          data = null;
         }
         remarks != "" ? console.log(remarks + ": ", data) : void 0;
+
         // 需要获取头部信息
-        if (options.activeBody) {
-          const headers: { [key: string]: any } = {};
-          res.headers.forEach((value, name) => {
-            headers[name] = value;
-          });
-          resolve({
-            headers: headers,
-            body: data,
-          });
+        const headers: { [key: string]: any } = {};
+        res.headers.forEach((value, name) => {
+          headers[name] = value;
+        });
+        const result = {
+          code: {
+            status: res.status,
+            ok: res.ok,
+            text: res.statusText,
+          },
+          headers,
+          body: data,
+        };
+
+        // 错误处理
+        if (!res.ok) {
+          if (res.status == 401) {
+            extend.ExLocalStore.delete("token");
+          }
+          return reject(result);
         }
+
         //
+        if (options.activeBody) {
+          resolve(result);
+        }
         resolve(data);
       })
       .catch(function (err) {

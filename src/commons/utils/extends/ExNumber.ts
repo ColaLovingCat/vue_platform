@@ -6,8 +6,8 @@
  * @param transRadix            进制转换
  * @param split                 获取整数和小数部分
  * @param limit                 限制数值在范围内
- * @param fixFloatingPointError 修正浮点数运算小数溢出
  * @param gap                   数值间差值
+ * @param fixFloatingPointError 修正浮点数运算小数溢出
  */
 export interface ExNumber {
   /**
@@ -48,6 +48,11 @@ export interface ExNumber {
    */
   limit(num: number, min: number, max: number): number;
   /**
+   * @summary 数值间差值，包含符号 +/-
+   * @returns string dataA - dataB
+   */
+  gap(dataA: number, dataB: number): string;
+  /**
    * @summary 修正浮点数运算小数溢出的问题， 0.1+0.2 0.3-0.2 0.1*0.2 0.3/0.1
    * @param operator (a,b) => a + b
    */
@@ -57,11 +62,6 @@ export interface ExNumber {
     operator: (a: number, b: number) => number
   ): number;
   _getDecimalPlaces(num: number): number;
-  /**
-   * @summary 数值间差值，包含符号 +/-
-   * @returns string dataA - dataB
-   */
-  gap(dataA: number, dataB: number): string;
 }
 export const ExNumber: ExNumber = {
   createRand: function (
@@ -69,12 +69,33 @@ export const ExNumber: ExNumber = {
     max: number,
     point: number | undefined = undefined
   ): number {
+    // point = point || 0;
+    // if (point === 0) {
+    //   return Math.round(min + Math.random() * (max - min));
+    // } else {
+    //   const up = Math.pow(10, point);
+    //   return min + Math.round(Math.random() * (max - min) * up) / up;
+    // }
     point = point || 0;
     if (point === 0) {
+      // 整数情况直接四舍五入
       return Math.round(min + Math.random() * (max - min));
     } else {
       const up = Math.pow(10, point);
-      return min + Math.round(Math.random() * (max - min) * up) / up;
+
+      // 用 fixFloatingPointError 来避免精度丢失
+      const rand = Math.random();
+
+      // (max - min) * up
+      const range = this.fixFloatingPointError(max - min, up, (a, b) => a * b);
+      // rand * range
+      const scaled = this.fixFloatingPointError(rand, range, (a, b) => a * b);
+      // min + scaled / up
+      const div = this.fixFloatingPointError(scaled, up, (a, b) => a / b);
+      const res = this.fixFloatingPointError(min, div, (a, b) => a + b);
+
+      // 保证小数点位数
+      return Number(res.toFixed(point));
     }
   },
   toFixed: function (num: number, point: number | null | undefined) {
@@ -102,10 +123,15 @@ export const ExNumber: ExNumber = {
     num: number,
     thousandsSep = ",",
     decPoint = ".",
-    decCount = 0
+    decCount = 2
   ) {
     const sign = num < 0 ? "-" : "";
-    const absNumber = Math.abs(num).toFixed(decCount);
+
+    const temp = Math.abs(num);
+    let absNumber: string = String(temp);
+    if (decCount > -1) {
+      absNumber = temp.toFixed(decCount);
+    }
 
     const parts = absNumber.split(".");
     let integerPart = parts[0];
@@ -132,6 +158,23 @@ export const ExNumber: ExNumber = {
   },
   limit: function (num: number, min: number, max: number) {
     return Math.max(min, Math.min(num, max));
+  },
+  gap(dataA: number, dataB: number): string {
+    let result: number = this.fixFloatingPointError(
+      dataA,
+      dataB,
+      (a, b) => a - b
+    );
+
+    // 保留合适的小数位
+    const decimalPlaces = Math.max(
+      this._getDecimalPlaces(dataA),
+      this._getDecimalPlaces(dataB)
+    );
+
+    return result > 0
+      ? "+" + result.toFixed(decimalPlaces)
+      : result.toFixed(decimalPlaces);
   },
   fixFloatingPointError: function (
     num1: any,
@@ -174,9 +217,5 @@ export const ExNumber: ExNumber = {
     // 科学计数法的指数
     const exponent = match[2] ? Number(match[2]) : 0;
     return Math.max(0, fraction - exponent);
-  },
-  gap(dataA: number, dataB: number): string {
-    const result = dataA - dataB;
-    return result > 0 ? "+" + result : result.toString();
   },
 };

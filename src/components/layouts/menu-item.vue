@@ -29,7 +29,9 @@ export default defineComponent({
     <a-sub-menu :key="item.key">
       <template #title>
         <template v-if="item.icon">
-          <i class="fa-solid" :class="item.icon"></i>
+          <span role="img" aria-label="user" class="anticon">
+            <i class="fa-solid" :class="item.icon"></i>
+          </span>
         </template>
         <template v-if="item.lang">
           <span>{{ $t(item.lang) }}</span>
@@ -47,7 +49,9 @@ export default defineComponent({
           <a-menu-item :key="sub.key" :title="sub.title">
             <RouterLink :to="item.path">
               <template v-if="item.icon">
-                <i class="fa-solid" :class="item.icon"></i>
+                <span role="img" aria-label="user" class="anticon">
+                  <i class="fa-solid" :class="item.icon"></i>
+                </span>
               </template>
               <template v-if="item.lang">
                 <span>{{ $t(item.lang) }}</span>
@@ -66,7 +70,9 @@ export default defineComponent({
     <a-menu-item :key="item.key" :title="item.title">
       <RouterLink :to="item.path">
         <template v-if="item.icon">
-          <i class="fa-solid" :class="item.icon"></i>
+          <span role="img" aria-label="user" class="anticon">
+            <i class="fa-solid" :class="item.icon"></i>
+          </span>
         </template>
         <template v-if="item.lang">
           <span>{{ $t(item.lang) }}</span>

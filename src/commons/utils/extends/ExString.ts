@@ -1,3 +1,5 @@
+import { calcStr, captureStr } from "./calc";
+
 /**
  * @summary String 拓展
  * @param isNotEmpty 判断值是否为非空字符串
@@ -10,6 +12,8 @@
  * @param toCase     大小写转换
  * @param replaceAll 替换全部
  * @param uuid       生成uuid
+ * @param calcStr    计算模板内的字符拼接和处理函数
+ * @param captureStr 截取指定字符间的字符串
  */
 export interface ExString {
   /**
@@ -45,9 +49,9 @@ export interface ExString {
   trim(str: string, type?: 1 | 2 | 3 | 4): string;
   /**
    * @summary 大小写转换
-   * @param type 1-首字母大写| 2-首字母小写| 3-大小写转换| 4-全部大写| 5-全部小写
+   * @param type first-首字母大写| unfirst-首字母小写| reverse-大小写转换| upper-全部大写| lower-全部小写
    */
-  toCase(str: string, type?: 1 | 2 | 3 | 4 | 5): string;
+  toCase(str: string, type: CaseType): string;
   /**
    * @summary 替换全部
    * @param ignoreCase 是否忽略大小写，默认不忽略
@@ -68,7 +72,20 @@ export interface ExString {
    * @summary 生成标准uuid
    */
   _uuid_36(): string;
+  /**
+   * @summary 计算模板内的字符拼接和处理函数
+   * @param template 计算公式，默认可使用 LEFT |RIGHT |SUBSTR |DATENOW |DATEFORMAT
+   * @param values 处理值
+   */
+  calcStr(template: string, values: any): Promise<string>;
+  /**
+   * @summary 截取指定字符间的字符串
+   */
+  captureStr(str: string, from: string, to: string): string;
 }
+
+type CaseType = "upper" | "lower" | "first" | "unfirst" | "reverse";
+
 export const ExString: ExString = {
   isNotEmpty: function (str: any, force: boolean = false): boolean {
     if (typeof str === "string") {
@@ -80,20 +97,22 @@ export const ExString: ExString = {
     return false;
   },
   isNumber: function (str: string) {
-    return /^[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?$/.test(str);
+    const numberRegex = /^[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?$/;
+    return numberRegex.test(str);
   },
   isEmail: function (str: string) {
-    return /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(
-      str
-    );
+    const multiEmailRegex = /^([\w.-]+@[\w.-]+\.\w+)(;[\w.-]+@[\w.-]+\.\w+)*$/;
+    return multiEmailRegex.test(str);
   },
   isFilePath: function (str: any) {
-    return /^(?:[a-zA-Z]:)?[\\/](?:(?:(?:\.\.?(?:[\\/]))|(?:[\w-_.]+(?:[\\/])))*(?:[\w-_.]+[^\.])?)?$/.test(
-      str
-    );
+    const fileRegex =
+      /^(?:[a-zA-Z]:)?[\\/](?:(?:(?:\.\.?(?:[\\/]))|(?:[\w-_.]+(?:[\\/])))*(?:[\w-_.]+[^\.])?)?$/;
+    return fileRegex.test(str);
   },
   fileType: function (fileName: any) {
-    return fileName.toLowerCase().split(".").pop(); // .match(/.[^.]+$/)[0]
+    if (typeof fileName !== "string") return null;
+    const idx = fileName.lastIndexOf(".");
+    return idx > 0 ? fileName.slice(idx + 1).toLowerCase() : null;
   },
   fileIcon: function (fileType: string) {
     let result = "fa-file";
@@ -153,21 +172,21 @@ export const ExString: ExString = {
         return str;
     }
   },
-  toCase: function (str: string, type: number = 1): string {
+  toCase: function (str: string, type: CaseType): string {
     switch (type) {
-      case 1:
+      case "first":
         return str.replace(/\b\w+\b/g, function (word) {
           return (
             word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()
           );
         });
-      case 2:
+      case "unfirst":
         return str.replace(/\b\w+\b/g, function (word) {
           return (
             word.substring(0, 1).toLowerCase() + word.substring(1).toUpperCase()
           );
         });
-      case 3:
+      case "reverse":
         return str
           .split("")
           .map(function (word) {
@@ -178,9 +197,9 @@ export const ExString: ExString = {
             }
           })
           .join("");
-      case 4:
+      case "upper":
         return str.toUpperCase();
-      case 5:
+      case "lower":
         return str.toLowerCase();
       default:
         return str;
@@ -233,5 +252,11 @@ export const ExString: ExString = {
         return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
       }
     );
+  },
+  calcStr: async function (template: string, values: any): Promise<string> {
+    return calcStr(template, values);
+  },
+  captureStr: function (str: string, start: string, end: string): string {
+    return captureStr(str, start, end);
   },
 };

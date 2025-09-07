@@ -27,34 +27,6 @@ export class ExPaginator<T> {
   };
 
   /**
-   * 页面索引
-   * @private
-   */
-  _getIndex() {
-    let result = { start: 0, end: 0 };
-    // 不需要分页
-    // if (this.pageInfo.total == 0) {}
-    // 仅一页
-    if (this.pagination.size < 2) {
-      result.end = this.pagination.total;
-    }
-    // 完全分页
-    else {
-      const startIndex = this.pagination.index * this.pagination.size;
-      let endIndex = startIndex + this.pagination.size;
-      //
-      if (endIndex > this.pagination.total - 1) {
-        endIndex = this.pagination.total;
-      }
-      //
-      result = {
-        start: startIndex,
-        end: endIndex,
-      };
-    }
-    return result;
-  }
-  /**
    * 刷新数据
    * @private
    */
@@ -67,10 +39,13 @@ export class ExPaginator<T> {
       this.dataSource.length / this.pagination.size
     );
     // 刷新展示数据
-    const index = this._getIndex();
-    this.rows = this.dataSource.slice(index.start, index.end);
+    this.rows = getCurrentPageData(
+      this.dataSource,
+      this.pagination.size,
+      this.pagination.index
+    );
   }
-  
+
   /**
    * 翻页及跳转
    * @private
@@ -123,10 +98,30 @@ export class ExPaginator<T> {
     this._refreshData();
   }
 }
-interface Pagination {
+
+export interface Pagination {
   index: number; // 页面索引
   total: number; // 总条数
   length: number; // 总页数
   size: number; // 单页数量
   options?: number[]; // 可选的单页数量
 }
+
+/**
+ * @summary 分页方法
+ * @member {Array} arr
+ * @member {Number} size 单页数量
+ * @member {Number} index 页面索引，从0开始
+ */
+export const getCurrentPageData = (arr: any[], size: number, index: number) => {
+  if (!Array.isArray(arr) || arr.length === 0 || size <= 0 || index < 0)
+    return [];
+
+  const start = index * size;
+  const end = start + size;
+
+  return arr.slice(start, end).map((item, idx) => ({
+    ...item,
+    _rowNo: start + idx + 1,
+  }));
+};

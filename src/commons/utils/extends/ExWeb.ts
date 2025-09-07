@@ -144,6 +144,25 @@ export const ExWeb = {
     }
     return result;
   },
+  encode: function (query: any) {
+    const encoded: Record<string, string> = {};
+    Object.keys(query).forEach((k) => {
+      if (query[k] != null) {
+        encoded[k] = encodeURIComponent(query[k]);
+      }
+    });
+    return encoded;
+  },
+  decode: function (query: any) {
+    const decoded: Record<string, string> = {};
+    Object.keys(query).forEach((k) => {
+      const v = query[k];
+      if (typeof v === "string") {
+        decoded[k] = decodeURIComponent(decodeURIComponent(v));
+      }
+    });
+    return decoded;
+  },
   /**
    * @summary 视口尺寸
    */

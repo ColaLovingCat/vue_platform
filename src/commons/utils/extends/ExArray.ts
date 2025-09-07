@@ -3,6 +3,7 @@ import { deepCopyArr } from "./pub";
 /**
  * @summary Array 拓展
  * @param initial         初始化简单数组
+ * @param new             初始化简单数组
  * @param insert          指定位置添加元素
  * @param delete          删除指定位置元素
  * @param checkIndex      检查索引是否可用
