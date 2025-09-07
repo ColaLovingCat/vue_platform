@@ -4,12 +4,32 @@ import { ref, computed, onMounted, reactive } from 'vue'
 import pokes from './pokes.vue'
 import * as XLSX from 'xlsx'
 
+const datas: any = ref([])
+const changeMark: any = ref(false)
+
+const searchInfos = reactive({
+    text: '',
+})
+const dataShow = computed(() => {
+    let result: any = []
+    if (searchInfos.text != '') {
+        // result = datas.value.filter((a: any) => a.name.indexOf(searchInfos.text) > -1)
+        datas.value.map((item: any) => {
+            if (item.name.indexOf(searchInfos.text) > -1) {
+                result.push({ ...item })
+            }
+        })
+    } else {
+        result = [...datas.value]
+    }
+    return result
+})
+
 onMounted(async () => {
     let temps: any = await readExcel()
     const { pokes, shapes } = temps
     shapes.map((item: any) => {
         let temp = pokes.find((a: any) => a.no == item.no)
-        console.log('Testing: ', temp)
         if (temp) {
             if (temp.shapes) {
                 temp.shapes.push(item)
@@ -42,26 +62,6 @@ const readExcel = async () => {
     }
     return {}
 }
-
-const searchInfos = reactive({
-    text: '',
-})
-
-const datas: any = ref([])
-const changeMark: any = ref(false)
-const dataShow = computed(() => {
-    let result: any = []
-    if (searchInfos.text != '') {
-        datas.value.map((item: any) => {
-            if (item.name.indexOf(searchInfos.text) > -1) {
-                result.push({ ...item })
-            }
-        })
-    } else {
-        result = [...datas.value]
-    }
-    return result
-})
 
 const typeModal = ref(false)
 const types: any = ref([])
@@ -123,11 +123,11 @@ const showModal = (action: string, values: any) => {
 <template>
     <div class="sections">
         <div class="box-search">
-            <div class="logo">
-                <img src="/docs/pokemons/systems/logo.png" alt="" srcset="">
-            </div>
             <div class="left">
-                Total: {{ datas.length }}
+                <div class="logo">
+                    <img src="/docs/pokemons/comps/logo.png" alt="" srcset="">
+                </div>
+                <span>Total: {{ datas.length }}</span>
             </div>
             <div class="right">
                 <a-button type="primary" @click="showModal('timeline', {})">游戏</a-button>
@@ -212,34 +212,15 @@ const showModal = (action: string, values: any) => {
 </template>
 
 <style scoped lang="scss">
+@import url(../com/search.scss);
+
 .sections {
-    background: url(/docs/pokemons/systems/bg.jpg);
+    background: url(/docs/pokemons/comps/bg.jpg);
     background-size: 100% 100%;
-}
 
-.logo {
-    width: 215px;
-    height: 70px;
-}
-
-.box-search {
-    margin-bottom: 20px;
-    padding: 0 20px;
-    height: 40px;
-    color: #fff;
-    background: #000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .left {
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .right {
-        display: flex;
-        column-gap: 15px;
+    .logo {
+        width: 215px;
+        height: 70px;
     }
 }
 

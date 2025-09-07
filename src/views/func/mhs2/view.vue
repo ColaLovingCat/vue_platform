@@ -1,27 +1,42 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed, watch } from 'vue'
-import type { Ref } from 'vue'
-import * as db from './datas'
+import { ref, reactive, onMounted, computed } from 'vue'
 
+import * as db from './datas'
 import monsters from './monster.vue'
+
+const datas: any = ref([])
+const changeMark = ref(false)
+
+const searchInfos = reactive({
+    text: '',
+})
+const dataShow = computed(() => {
+    let result: any = []
+    if (searchInfos.text != '') {
+        result = datas.value.filter((a: any) => a.name.indexOf(searchInfos.text) > -1)
+    } else {
+        result = [...datas.value]
+    }
+    return result
+})
 
 onMounted(() => {
     datas.value = [...db.monsters]
 })
-
-const datas: any = ref([])
-const dataShow = computed(() => {
-    return datas.value
-})
 </script>
 
 <template>
-    <div class="contents">
+    <div class="sections">
         <div class="box-search">
             <div class="left">
-                Total: {{ datas.length }}
+                <div class="logo">
+                    <img src="/docs/mhs2/comps/logo.jpg" alt="" srcset="">
+                </div>
+                <span>Total: {{ datas.length }}</span>
             </div>
-            <div class="right"></div>
+            <div class="right">
+                <a-input v-model:value="searchInfos.text" placeholder="search" @change="changeMark = !changeMark" />
+            </div>
         </div>
         <div class="list-monster">
             <div v-for="(monster) in dataShow">
@@ -34,23 +49,16 @@ const dataShow = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.contents {
-    background: url(/docs/games/posters/mhs2.png);
+@import url(../com/search.scss);
+
+.sections {
+    display: block;
+    background: url(/docs/games/covers/Monster_Hunter_Stories_2.jpg);
     background-size: 100% 100%;
-}
 
-.box-search {
-    margin-bottom: 20px;
-    padding: 0 20px;
-    height: 40px;
-    background: #ffffff7d;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .left {
-        font-size: 18px;
-        font-weight: 700;
+    .logo {
+        width: 215px;
+        height: 85px;
     }
 }
 

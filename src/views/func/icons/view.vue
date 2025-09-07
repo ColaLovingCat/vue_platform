@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 
 import * as db from './datas'
+import * as extend from '@/commons/utils/extends'
 
 onMounted(() => {
-    datas.value = [...db.datas.riders]
+    pageInfos.type = extend.ExWeb.query('type') || "riders"
+    pageInfos.folder = (pageInfos.type === 'lol' || pageInfos.type === 'dota2' || pageInfos.type === 'csgo') ? 'teams' : pageInfos.type
+    datas.value = [...db.datas[pageInfos.type]]
 })
 
+const pageInfos = reactive({
+    type: '',
+    folder: '',
+})
 const datas: any = ref([])
 </script>
 
@@ -23,7 +30,7 @@ const datas: any = ref([])
         </div>
         <div class="list">
             <div class="item" v-for="item in datas">
-                <img class="item-logo" :src="`/docs/logos/riders/${item.code}.png`" alt="" srcset="">
+                <img class="item-logo" :src="`/docs/logos/${pageInfos.folder}/${item.code}.png`" alt="" srcset="">
                 <div class="item-name">{{ item.name }}</div>
             </div>
         </div>
@@ -32,6 +39,7 @@ const datas: any = ref([])
 
 <style scoped lang="scss">
 .contents {
+    display: block;
     color: #fff;
     background: #000;
 }

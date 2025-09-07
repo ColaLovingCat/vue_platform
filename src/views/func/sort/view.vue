@@ -15,11 +15,19 @@ const enum Status {
 }
 
 const pageInfos = reactive({
-    size: 10,
+    size: 15,
     barWidth: 40,
     gap: 2,
     //
-    desc: '',
+    datas: [
+        { code: 'insertion', name: '插入排序', desc: '将待排序列的元素 [依次向前移动]，直至位于已排序列中的适当位置' },
+        { code: 'shells', name: '希尔排序', desc: '是插入排序的改进。通过将序列 [分组]，每次对分组进行 [插入排序]，然后逐步缩小分组的规模，最终完成排序' },
+        { code: 'selection', name: '选择排序', desc: '选取待排序列的 [最小元素]，放置在已排序列的末尾' },
+        { code: 'heap', name: '堆排序', desc: '将待排序列构建成一个 [大顶堆]，然后将堆顶元素与最后一个元素交换，再对剩余的元素循环执行以上步骤，每一轮比较都将 [最大元素] 放到最后' },
+        { code: 'bubble', name: '冒泡排序', desc: '依次将 [相邻元素的大值] 交换至后位，再对剩余的元素循环执行以上步骤，每一轮比较都将 [最大元素] 放到最后' },
+        { code: 'quick', name: '快速排序', desc: '选定一个 [枢值] 将待排序列分成独立的左小右大的两部分，然后再对这两部分递归地进行快速排序' },
+        { code: 'merge', name: '归并排序', desc: '将序列不断地 [分割] 成两半，对每一半进行排序，然后 [合并] 两个已排序的子序列，最终完成排序' },
+    ],
 })
 const datas: any = ref([])
 
@@ -288,37 +296,30 @@ const sort = (action: string) => {
     switch (action) {
         case 'insertion': {
             insertionSort()
-            pageInfos.desc = `依次将待排序的元素，移动到已排序的序列中的适当位置，使得插入后仍然有序`
             break
         }
         case 'shells': {
             shellsSort()
-            pageInfos.desc = `是插入排序的改进，通过将序列分组，每次对分组进行插入排序，然后逐步缩小分组的规模，最终完成排序`
             break
         }
         case 'selection': {
             selectionSort()
-            pageInfos.desc = `每次从待排序的元素中选取最小元素，放置在已排序的末尾`
             break
         }
         case 'heap': {
             heapSort()
-            pageInfos.desc = `将待排序的序列构建成一个大顶堆，然后将堆顶元素与最后一个元素交换，再对剩余的n-1个元素进行调整，循环执行以上步骤，最终完成排序`
             break
         }
         case 'bubble': {
             bubbleSort()
-            pageInfos.desc = `依次比较相邻的两个元素，将较大的元素交换到后面，每一轮比较都将最大的元素放到最后`
             break
         }
         case 'quick': {
             quickSortWrapper()
-            pageInfos.desc = `通过一趟排序将序列分成独立的两部分，其中一部分所有元素都比另一部分小，然后再对这两部分递归地进行快速排序`
             break
         }
         case 'merge': {
             mergeSortWrapper()
-            pageInfos.desc = `将序列不断地分割成两半，对每一半进行排序，然后合并两个已排序的子序列，最终完成排序`
             break
         }
         default: {
@@ -330,29 +331,33 @@ const sort = (action: string) => {
 
 <template>
     <div class="sections">
-        <div class="container" ref="container"
-            :style="`width:${datas.length * (pageInfos.barWidth + pageInfos.gap * 2)}px`">
-            <template v-for="(bar, index) in datas" :key="bar.id">
-                <div class="bar" :class="bar.status" :style="getStyle(bar, index)">
-                    <span>{{ bar.value }}</span>
-                </div>
-            </template>
+        <div class="box-contents">
+            <div class="container" ref="container"
+                :style="`width:${datas.length * (pageInfos.barWidth + pageInfos.gap * 2)}px`">
+                <template v-for="(bar, index) in datas" :key="bar.id">
+                    <div class="bar" :class="bar.status" :style="getStyle(bar, index)">
+                        <span>{{ bar.value }}</span>
+                    </div>
+                </template>
 
+            </div>
+            <div class="btns">
+                <a-input-number v-model:value="pageInfos.size" style="width: 100px" min="5" max="50" />
+                <a-button @click="generateBars()">随机数组</a-button>
+            </div>
         </div>
-        <div class="btns">
-            <a-input v-model:value="pageInfos.size" style="width: 50px" min="5" max="50" />
-            <a-button @click="generateBars()">随机数组</a-button>
-
-            <a-button type="primary" @click="sort('insertion')">插入排序</a-button>
-            <a-button type="primary" @click="sort('shells')">希尔排序</a-button>
-            <a-button type="primary" @click="sort('selection')">选择排序</a-button>
-            <a-button type="primary" @click="sort('heap')">堆排序</a-button>
-            <a-button type="primary" @click="sort('bubble')">冒泡排序</a-button>
-            <a-button type="primary" @click="sort('quick')">快速排序</a-button>
-            <a-button type="primary" @click="sort('merge')">归并排序</a-button>
+        <div class="box-table">
+            <table>
+                <tr v-for="row in pageInfos.datas">
+                    <td>
+                        <a-button type="primary" @click="sort(row.code)"><i class="fa-solid fa-terminal"></i></a-button>
+                    </td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.desc }}</td>
+                </tr>
+            </table>
         </div>
-        <div class="desc">
-            <p>{{ pageInfos.desc }}</p>
+        <div class="list-logs">
         </div>
     </div>
 </template>
@@ -364,6 +369,23 @@ const sort = (action: string) => {
     justify-content: center;
     align-items: center;
     gap: 50px;
+
+    .box-contents {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .box-table {
+        table {
+
+            td {
+                padding: 5px;
+                border: 1px solid #c4cecf;
+            }
+        }
+    }
 }
 
 .container {

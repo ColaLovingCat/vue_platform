@@ -67,6 +67,11 @@ const routes = [
     name: "animals",
     component: () => import("@/views/func/animals/view.vue"),
   },
+  {
+    path: "/amiibo",
+    name: "amiibo",
+    component: () => import("@/views/func/amiibo/view.vue"),
+  },
 
   //
   {
