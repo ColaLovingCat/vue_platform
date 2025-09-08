@@ -9,11 +9,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AInput: typeof import('ant-design-vue/es')['Input']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
     ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    APopover: typeof import('ant-design-vue/es')['Popover']
+    ARadioButton: typeof import('ant-design-vue/es')['RadioButton']
+    ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
+    ARate: typeof import('ant-design-vue/es')['Rate']
+    ASelect: typeof import('ant-design-vue/es')['Select']
+    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     Contents: typeof import('./components/layouts/contents.vue')['default']
@@ -30,5 +37,6 @@ declare module 'vue' {
     Using: typeof import('./components/annotations/using.vue')['default']
     View: typeof import('./components/annotations/view.vue')['default']
     ViewTresjs: typeof import('./components/threejs/view-tresjs.vue')['default']
+    WordTip: typeof import('./components/articles/wordTip.vue')['default']
   }
 }

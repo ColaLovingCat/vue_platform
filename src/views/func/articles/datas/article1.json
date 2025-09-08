@@ -1,0 +1,20 @@
+{
+    "title": {
+        "en": "How Artificial Intelligence Can Revolitionise Science",
+        "zh": "人工智能如何能够给科学带来革命性的改变"
+    },
+    "contents": [
+        {
+            "sentences": [
+                {
+                    "en": "Debate about artificial itelligence tends to focus on its potential dangers:",
+                    "zh": "有关人工智能的辩论通常倾向于聚焦在它的潜在危害上："
+                },
+                {
+                    "en": "algorithmic bias and discrimination, the mass destruction of jobs and even, some say, the extinction of humanity.",
+                    "zh": "算法偏见与歧视、大规模摧毁结业岗位，甚至还有一些人提到的人类灭亡。"
+                }
+            ]
+        }
+    ]
+}

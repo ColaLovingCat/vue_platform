@@ -32,6 +32,7 @@ const datas: any = ref([
     { title: "M-League", path: 'icons', query: { type: "majiang" }, img: 'majiang.jpg' },
     { title: "公司", path: 'icons', query: { type: "company" }, img: 'company.jpeg' },
     { title: "排序", path: 'sort', img: 'calc.png' },
+    { title: "文章", path: 'articles', img: 'article.png' },
 ])
 
 onMounted(() => { })

@@ -105,6 +105,11 @@ const routes = [
     name: "sort",
     component: () => import("@/views/func/sort/view.vue"),
   },
+  {
+    path: "/articles",
+    name: "articles",
+    component: () => import("@/views/func/articles/view.vue"),
+  },
 ];
 
 const router = createRouter({
