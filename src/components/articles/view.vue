@@ -1,157 +1,150 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 import wordTip from "./wordTip.vue";
+import wordCard from "./wordCard.vue";
+
+import type { Article } from "./types";
 
 // name
 defineOptions({
     name: 'custom-name'
 })
 
-/** ======================== 类型定义 ======================== */
-type Sentence = { en: string; zh: string };
-type Paragraph = { sentences: Sentence[] };
-type Article = {
-    title: Sentence;
-    contents: Paragraph[];
-};
-
 // props
 const props = defineProps<{
     article: Article;
 }>();
 
-/** ======================== 状态 ======================== */
 // 控制是否显示所有中文
 const showAllChinese = ref(false);
 function toggleZH() {
     showAllChinese.value = !showAllChinese.value;
 }
-
 // 当前激活句子
 const activeKey = ref<string | null>(null);
-const TITLE_KEY = "title";
-const keyOf = (p: number, s: number) => `p${p}_s${s}`;
-const setActive = (key: string) => (activeKey.value = key);
-const clearActive = () => (activeKey.value = null);
-const isActive = (key: string) => activeKey.value === key;
 
-defineExpose({ toggleZH })
+// 展示词卡
+const words: any = ref([])
+function selectWord(word: any) {
+    if (!words.value.find((w: any) => w.word === word.word)) {
+        words.value.unshift(word);
+    }
+}
 </script>
 
 <template>
-    <div class="article-study">
-        <div class="article-body">
-            <!-- 左边英文 -->
-            <div class="left">
-                <!-- 标题 -->
-                <h3 class="titles" :class="{ active: isActive(TITLE_KEY) }" @mouseenter="setActive(TITLE_KEY)"
-                    @mouseleave="clearActive">
-                    <word-tip :text="article.title.en" />
-                </h3>
+    <div class="box-articles">
+        <div class="box-article">
+            <!-- 标题 -->
+            <h2 class="title">
+                <div>
+                    <wordTip :text="article.title.en" :words="article.title.words" @select="selectWord" />
+                </div>
+                <div style="cursor: pointer;" @click="toggleZH">{{ article.title.zh }}</div>
+            </h2>
 
-                <!-- 正文 -->
-                <div v-for="(para, pIdx) in article.contents" :key="'p-en-' + pIdx" class="paragraph">
-                    <template v-for="(sent, sIdx) in para.sentences" :key="'s-en-' + pIdx + '-' + sIdx">
-                        <span class="sentence" :class="{ active: isActive(keyOf(pIdx, sIdx)) }"
-                            @mouseenter="setActive(keyOf(pIdx, sIdx))" @mouseleave="clearActive">
-                            <word-tip :text="sent.en" />
+            <template v-for="(para, pIdx) in article.contents" :key="pIdx">
+                <!-- 英文行 -->
+                <div class="paragraph-item paragraph-en">
+                    <template v-for="(sent, sIdx) in para.sentences" :key="'en-' + sIdx">
+                        <span class="sentence-item en" :class="{ active: activeKey === `${pIdx}-${sIdx}` }"
+                            @mouseenter="activeKey = `${pIdx}-${sIdx}`" @mouseleave="activeKey = null">
+                            <wordTip :text="sent.en" :words="sent.words" @select="selectWord" />
                         </span>
-                        <span>&nbsp;</span>
+                        <span v-if="sIdx < para.sentences.length - 1">&nbsp;</span>
                     </template>
                 </div>
-            </div>
 
-            <!-- 右边中文 -->
-            <div class="right">
-                <!-- 标题 -->
-                <h3 class="titles zh" :class="{ visible: showAllChinese || isActive(TITLE_KEY) }">
-                    {{ article.title.zh }}
-                </h3>
-
-                <!-- 正文 -->
-                <div v-for="(para, pIdx) in article.contents" :key="'p-zh-' + pIdx" class="paragraph">
-                    <template v-for="(sent, sIdx) in para.sentences" :key="'s-zh-' + pIdx + '-' + sIdx">
-                        <span class="sentence zh" :class="{ visible: showAllChinese || isActive(keyOf(pIdx, sIdx)) }">
+                <!-- 中文行 -->
+                <div class="paragraph-item paragraph-zh">
+                    <template v-for="(sent, sIdx) in para.sentences" :key="'en-' + sIdx">
+                        <span class="sentence-item zh"
+                            :class="{ active: activeKey === `${pIdx}-${sIdx}`, visible: showAllChinese, }">
                             {{ sent.zh }}
                         </span>
-                        <span>&nbsp;</span>
                     </template>
                 </div>
-            </div>
+            </template>
+        </div>
+        <div class="list-words">
+            <template v-for="word in words">
+                <wordCard :word="word"></wordCard>
+            </template>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.article-study {
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-.article-body {
+.box-articles {
     display: flex;
-    gap: 40px;
+    gap: 10px;
 
-    .left,
-    .right {
+    .box-article {
         flex: 1;
     }
-}
 
-.titles {
-    text-align: center;
-    font-size: 16px;
-
-    span {
-        font-weight: 700;
+    .list-words {
+        width: 350px;
     }
 }
 
-.paragraph {
-    margin-bottom: 16px;
-    text-align: justify;
-}
+.box-article {
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.8;
 
-.sentence {
-    cursor: pointer;
-}
-
-.sentence.active {
-    background: #f0f5ff;
-}
-
-.zh {
-    opacity: 0.05;
-    transition: opacity 0.2s;
-}
-
-.zh.visible {
-    opacity: 1;
-}
-
-/* 短语高亮 */
-.highlight {
-    color: #1890ff;
-    border-bottom: 1px dashed #1890ff;
-    cursor: help;
-}
-
-.toolbar {
-    margin-top: 20px;
-    text-align: center;
-
-    button {
-        padding: 6px 12px;
-        background: #1890ff;
-        color: white;
-        border: none;
-        border-radius: 4px;
+    .en {
         cursor: pointer;
+        transition: all 0.6s ease-in-out;
 
         &:hover {
-            background: #40a9ff;
+            background-color: #ffcf005d;
         }
     }
+
+    .zh {
+        color: var(--color-page-text);
+        letter-spacing: 2px;
+        opacity: 0.05;
+        transition: all 0.6s ease-in-out;
+
+        &.visible {
+            opacity: 1;
+        }
+
+        &.active {
+            opacity: 1;
+            background-color: #ffcf005d;
+        }
+    }
+
+    .title {
+        margin-bottom: 20px;
+        text-align: center;
+
+        & * {
+            font-size: 18px;
+            font-weight: 700;
+        }
+    }
+
+    .paragraph-item {
+        text-indent: 18px;
+
+        &.paragraph-zh {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.list-words {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px;
+    border-left: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
 }
 </style>
