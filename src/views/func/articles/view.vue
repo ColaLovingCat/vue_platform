@@ -43,7 +43,7 @@ onMounted(async () => {
                 article.title.words = titleWords.map((a: any) => ({
                     word: a.word,
                     isPhrase: a.isPhrase == 1,
-                    matchs: a.matchs.split(";")
+                    matchs: a.matchs.split("//")
                 }))
             }
             //

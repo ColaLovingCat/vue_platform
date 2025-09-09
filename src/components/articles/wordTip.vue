@@ -26,8 +26,8 @@ onMounted(async () => {
             wordMap[word] = {
                 word,
                 root: row.root || "",
-                tense: row.tense ? row.tense.split("/").map((t: string) => t.trim()) : [],
-                related: row.related ? row.related.split("/").map((r: string) => r.trim()) : [],
+                tense: row.tense ? row.tense.split("//").map((t: string) => t.trim()) : [],
+                related: row.related ? row.related.split("//").map((r: string) => r.trim()) : [],
                 means: []
             };
         }
@@ -35,12 +35,12 @@ onMounted(async () => {
         const mean: any = {
             class: row.class,
             mean: row.mean,
-            range: row.range,
-            examples: row.examples ? row.examples.split("/").map((a: string) => ({
+            ranges: row.ranges.split("//"),
+            examples: row.examples ? row.examples.split("//").map((a: string) => ({
                 content: a.split("→")[0],
                 mean: a.split("→")[1],
             })) : [],
-            phrases: row.phrases ? row.phrases.split("/").map((a: string) => ({
+            phrases: row.phrases ? row.phrases.split("//").map((a: string) => ({
                 content: a.split("→")[0],
                 mean: a.split("→")[1],
             })) : []
@@ -116,7 +116,7 @@ function tokenize(text: string): Token[] {
             } else {
                 // ❌ 没找到词典里的单词，仍然高亮
                 tip.word = wordInfo.word;
-                tip.means = [{ mean: '', range: "未收录" }];
+                tip.means = [{ mean: '', ranges: ["未收录"] }];
                 tip.notFound = true;
             }
 
@@ -142,7 +142,7 @@ function renderTip(tip: WordTip | undefined): string {
         lines.push(tip.means[0].mean);
     } else {
         tip.means?.forEach((m: any) => {
-            lines.push(`${m.class || ""}${m.mean} [${m.range || ""}]`);
+            lines.push(`${m.class || ""}${m.mean} [${m.ranges || ""}]`);
         });
     }
     return lines.join("\n");

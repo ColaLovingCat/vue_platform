@@ -18,7 +18,12 @@ const props = defineProps({
         <h3 class="item-word">{{ word.word }}</h3>
         <div class="item-root">{{ word.root }}</div>
         <div class="item-means" v-for="(m, idx) in word.means" :key="idx">
-            <div><b>{{ m.class }}</b> {{ m.mean }} [{{ m.range }}]</div>
+            <div>
+                <sapn style="font-weight: 700;">{{ m.class }}</sapn>
+                <sapn style="font-weight: 800;">{{ m.mean }}</sapn>
+                <sapn class="range-item" v-for="range in m.ranges">{{ range }}</sapn>
+            </div>
+
             <div v-for="(ex, i) in m.examples" :key="i" class="item-root">
                 [例句] {{ ex.content }}
                 <div v-if="ex.mean">- {{ ex.mean }}</div>
@@ -52,6 +57,15 @@ const props = defineProps({
         margin-top: 5px;
         padding: 5px 0;
         border-top: 2px dashed #c4cecf8d;
+    }
+
+
+    .range-item {
+        margin: 0 2px;
+        padding: 2px 5px;
+        font-size: 11px;
+        border-radius: 3px;
+        background: #c4cecf6d;
     }
 }
 </style>

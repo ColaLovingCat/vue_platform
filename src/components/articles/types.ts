@@ -28,7 +28,7 @@ export type Word = {
 type WordMean = {
   class?: string;
   mean: string;
-  range?: string;
+  ranges?: string[];
   examples?: WordSample[];
   phrases?: WordSample[];
 };
