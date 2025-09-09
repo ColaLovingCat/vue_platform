@@ -38,19 +38,21 @@ const props = defineProps({
 <style scoped lang="scss">
 .word-view {
     padding: 10px;
-    border-radius: 5px;
     background: #fff;
+    background: var(--color-page-bg);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .item-word {
         margin-bottom: 5px;
+        color: var(--color-page-text);
         font-size: 18px;
         font-weight: 700;
     }
 
     .item-root {
-        color: #0000007d;
+        color: var(--color-page-text);
         font-size: 12px;
+        opacity: 0.5;
     }
 
     .item-means {
@@ -63,6 +65,7 @@ const props = defineProps({
     .range-item {
         margin: 0 2px;
         padding: 2px 5px;
+        color: #000;
         font-size: 11px;
         border-radius: 3px;
         background: #c4cecf6d;

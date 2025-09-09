@@ -77,6 +77,8 @@ function selectWord(word: any) {
 
 <style scoped lang="scss">
 .box-articles {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
     display: flex;
     gap: 10px;
 
@@ -139,10 +141,8 @@ function selectWord(word: any) {
 }
 
 .list-words {
-    max-height: 80vh;
-    overflow-y: auto;
+    height: 100%;
     padding: 10px;
-    border-left: 1px solid #eee;
     display: flex;
     flex-direction: column;
     gap: 10px
