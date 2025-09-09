@@ -15,7 +15,7 @@ const articles: any = ref([])
 const pageInfos = reactive({
     status: 'initial',
     currentArticle: {
-        title: { en: '', zh: '', words: [] },
+        title: { no: 1, en: '', zh: '', words: [] },
         contents: []
     } as any,
 })
