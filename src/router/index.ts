@@ -110,6 +110,11 @@ const routes = [
     name: "articles",
     component: () => import("@/views/func/articles/view.vue"),
   },
+  {
+    path: "/wallpapers",
+    name: "wallpapers",
+    component: () => import("@/views/func/wallpapers/view.vue"),
+  },
 ];
 
 const router = createRouter({
