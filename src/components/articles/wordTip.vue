@@ -139,7 +139,7 @@ function tokenize(text: string): Token[] {
 function renderTip(tip: WordTip | undefined): string {
     if (!tip) return "";
 
-    const lines: string[] = [tip.word];
+    const lines: string[] = [`<b>${tip.word}</b>`];
     if (tip.isPhrase) {
         lines.push(tip.means[0].mean);
     } else {
@@ -147,7 +147,7 @@ function renderTip(tip: WordTip | undefined): string {
             lines.push(`${m.class || ""}${m.mean} [${m.ranges || ""}]`);
         });
     }
-    return lines.join("\n");
+    return lines.join("<br>");
 }
 
 const clickItem = (tk: any) => {
@@ -160,7 +160,8 @@ const clickItem = (tk: any) => {
         <template v-for="(tk, i) in tokenize(props.text)" :key="i">
             <a-popover v-if="tk.type === 'match'" placement="top" trigger="hover">
                 <template #content>
-                    <pre style="margin: 0; white-space: pre-wrap">{{ renderTip(tk.tip) }}</pre>
+                    <!-- <pre style="margin: 0; white-space: pre-wrap">{{ renderTip(tk.tip) }}</pre> -->
+                    <pre style="margin: 0; white-space: pre-wrap" v-html="renderTip(tk.tip)"></pre>
                 </template>
                 <!-- 点击时触发 select -->
                 <span :class="tk.tip?.notFound ? 'txt-none' : 'txt-highlight'" @click="clickItem(tk)">

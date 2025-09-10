@@ -74,6 +74,11 @@ td {
     border: unset;
 }
 
+b,
+strong {
+    font-weight: 700;
+}
+
 h1,
 h2,
 h3,
