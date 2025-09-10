@@ -15,6 +15,7 @@ export type WordMatch = {
   word: string;
   isPhrase: boolean;
   matchs: string[];
+  phrase: string;
 };
 
 export type Word = {
@@ -23,7 +24,7 @@ export type Word = {
   tense: string[];
   related: string[];
   means: WordMean[];
-  status: string;
+  status?: string;
 };
 type WordMean = {
   class?: string;

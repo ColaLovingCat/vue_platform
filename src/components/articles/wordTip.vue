@@ -89,6 +89,7 @@ function tokenize(text: string): Token[] {
         const match = part.match(/@@WORD_(\d+)@@/);
         if (match) {
             const wordInfo = props.words[parseInt(match[1], 10)]
+
             const matchs: any[] = wordInfo.matchs
                 .map((m) => wordDic.value.find((a: any) => a.word.toLowerCase() === m.toLowerCase()))
                 .filter((a) => a)
@@ -103,7 +104,8 @@ function tokenize(text: string): Token[] {
                 matchs.forEach((item) => {
                     item.means.forEach((m: any) => {
                         m.phrases.forEach((p: any) => {
-                            if (p.content.toLowerCase() === wordInfo.word.toLowerCase()) {
+                            const matchWord = wordInfo.phrase ?? wordInfo.word
+                            if (p.content.toLowerCase() === matchWord.toLowerCase()) {
                                 tip.word = p.content;
                                 tip.means.push({ mean: p.mean });
                             }

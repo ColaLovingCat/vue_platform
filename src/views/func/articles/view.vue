@@ -43,7 +43,8 @@ onMounted(async () => {
                 article.title.words = titleWords.map((a: any) => ({
                     word: a.word,
                     isPhrase: a.isPhrase == 1,
-                    matchs: a.matchs.split("//")
+                    matchs: a.matchs.split("//"),
+                    phrase: a.phrase,
                 }))
             }
             //
@@ -61,7 +62,8 @@ onMounted(async () => {
                     sentence.words = sentWords.map((a: any) => ({
                         word: a.word,
                         isPhrase: a.isPhrase == 1,
-                        matchs: a.matchs.split(";")
+                        matchs: a.matchs.split("//"),
+                        phrase: a.phrase,
                     }))
                 }
 
@@ -77,6 +79,8 @@ onMounted(async () => {
             articles.value.push(article)
         }
     })
+    //
+    showArticle(articles.value[0])
 })
 
 const readExcel = async () => {

@@ -31,6 +31,10 @@ function selectWord(word: any) {
         words.value.unshift(word);
     }
 }
+
+const closeCard = (index: number) => {
+    words.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -67,18 +71,18 @@ function selectWord(word: any) {
                 </div>
             </template>
         </div>
-        <div class="list-words">
-            <template v-for="word in words">
-                <wordCard :word="word"></wordCard>
-            </template>
+        <div class="box-words">
+            <div class="list-words">
+                <template v-for="(word, index) in words">
+                    <wordCard :word="word" @close="closeCard(index)"></wordCard>
+                </template>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 .box-articles {
-    height: calc(100vh - 100px);
-    overflow-y: auto;
     display: flex;
     gap: 10px;
 
@@ -86,12 +90,14 @@ function selectWord(word: any) {
         flex: 1;
     }
 
-    .list-words {
+    .box-words {
         width: 350px;
     }
 }
 
 .box-article {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
     padding: 10px;
     font-size: 16px;
     line-height: 1.8;
@@ -141,7 +147,8 @@ function selectWord(word: any) {
 }
 
 .list-words {
-    height: 100%;
+    height: calc(100vh - 100px);
+    overflow-y: hidden;
     padding: 10px;
     display: flex;
     flex-direction: column;

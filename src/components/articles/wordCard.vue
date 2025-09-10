@@ -4,6 +4,10 @@ defineOptions({
     name: 'custom-name'
 })
 
+const emits = defineEmits<{
+    (event: 'close', word: any): void
+}>()
+
 // props
 const props = defineProps({
     word: {
@@ -32,13 +36,19 @@ const props = defineProps({
                 [短语] {{ ph.content }} - {{ ph.mean }}
             </div>
         </div>
+        <div class="item-btn">
+            <a-button type="default" class="btn btn-close" @click="emits('close', word)">
+                <i class="fa-solid fa-close"></i>
+            </a-button>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 .word-view {
+    position: relative;
     padding: 10px;
-    background: #fff;
+    border-radius: 8px;
     background: var(--color-page-bg);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
@@ -69,6 +79,12 @@ const props = defineProps({
         font-size: 11px;
         border-radius: 3px;
         background: #c4cecf6d;
+    }
+
+    .item-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
     }
 }
 </style>
