@@ -175,12 +175,13 @@ const clickItem = (tk: any) => {
 
 <style scoped lang="scss">
 .txt-highlight {
+    cursor: pointer;
     color: #1890ff;
     border-bottom: 1px solid #1890ff;
-    cursor: help;
 }
 
 .txt-none {
+    cursor: help;
     color: var(--color-page-text);
     border-bottom: 1px dashed var(--color-page-text);
 }

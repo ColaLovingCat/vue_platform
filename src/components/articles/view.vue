@@ -103,7 +103,7 @@ const closeCard = (index: number) => {
     line-height: 1.8;
 
     .en {
-        cursor: pointer;
+        cursor: zoom-in;
         transition: all 0.6s ease-in-out;
 
         &:hover {

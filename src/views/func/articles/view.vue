@@ -14,6 +14,7 @@ const articles: any = ref([])
 
 const pageInfos = reactive({
     status: 'initial',
+    currentIndex: -1,
     currentArticle: {
         title: { no: 1, en: '', zh: '', words: [] },
         contents: []
@@ -80,7 +81,7 @@ onMounted(async () => {
         }
     })
     //
-    showArticle(articles.value[0])
+    showArticle(articles.value[0], 0)
 })
 
 const readExcel = async () => {
@@ -106,8 +107,9 @@ const readExcel = async () => {
     return {}
 }
 
-const showArticle = (article: any) => {
+const showArticle = (article: any, index: number) => {
     pageInfos.status = "open"
+    pageInfos.currentIndex = index
     pageInfos.currentArticle = article
 }
 </script>
@@ -116,7 +118,8 @@ const showArticle = (article: any) => {
     <div class="sections" :class="pageInfos.status">
         <div class="list-menus">
             <template v-for="(menu, index) in articles">
-                <div class="menu-item" @click="showArticle(menu)">
+                <div class="menu-item" :class="{ active: pageInfos.currentIndex == index }"
+                    @click="showArticle(menu, index)">
                     <div class="txts-nowrap">{{ (index + 1) }}. {{ menu.title.en }}</div>
                 </div>
             </template>
@@ -163,6 +166,11 @@ const showArticle = (article: any) => {
         font-size: 18px;
         border-radius: 5px;
         background: var(--color-page-bg);
+
+        &.active {
+            color: #fff;
+            background: #007bc0;
+        }
     }
 }
 </style>
