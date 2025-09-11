@@ -21,8 +21,8 @@ const props = defineProps({
 <template>
     <div class="word-view">
         <h3 class="item-word">{{ word.word }}</h3>
-        <div class="item-root">{{ word.root }}</div>
-        <div class="item-related">
+        <div class="item-root" v-if="word.root"><span>[词根]</span> {{ word.root }}</div>
+        <div class="item-related" v-if="word.related.length > 0">
             <span>[近义]</span>
             <span class="related-item" v-for="item in word.related" :class="{ active: item.inDic }"
                 @click="emits('related', item.word)">
@@ -30,18 +30,17 @@ const props = defineProps({
             </span>
         </div>
         <div class="item-means" v-for="(m, idx) in word.means" :key="idx">
-            <div>
+            <div class="item-mean">
                 <sapn style="font-weight: 700;">{{ m.class }}</sapn>
                 <sapn style="font-weight: 800;">{{ m.mean }}</sapn>
                 <sapn class="range-item" v-for="range in m.ranges">{{ range }}</sapn>
             </div>
-
             <div v-for="(ex, i) in m.examples" :key="i" class="item-root">
-                [例句] {{ ex.content }}
+                <span>[例句]</span> {{ ex.content }}
                 <div v-if="ex.mean">- {{ ex.mean }}</div>
             </div>
             <div v-for="(ph, i) in m.phrases" :key="i" class="item-root">
-                [短语] {{ ph.content }} - {{ ph.mean }}
+                <span>[短语]</span> {{ ph.content }} - {{ ph.mean }}
             </div>
         </div>
         <div class="item-btn">
@@ -61,13 +60,13 @@ const props = defineProps({
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .item-word {
-        margin-bottom: 5px;
         color: var(--color-page-text);
         font-size: 18px;
         font-weight: 700;
     }
 
     .item-root {
+        padding: 3px 0;
         color: var(--color-page-text);
         font-size: 12px;
         opacity: 0.5;
