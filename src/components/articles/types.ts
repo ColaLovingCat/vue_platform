@@ -22,7 +22,7 @@ export type Word = {
   word: string;
   root: string;
   tense: string[];
-  related: string[];
+  related: { word: string; inDic: boolean }[];
   means: WordMean[];
   status?: string;
 };

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, onMounted, ref, type Ref } from "vue";
+import { defineProps, inject, onMounted, ref, type Ref } from "vue";
 
 // import { wordDic } from "./words";
 import type { Token, Word, WordMatch, WordTip } from "./types";
@@ -15,64 +15,11 @@ const emit = defineEmits<{
     (e: "select", payload: any): void;
 }>();
 
-const wordDic: Ref<Word[]> = ref([])
-
-onMounted(async () => {
-    let temps: any = await readExcel()
-    const wordMap: Record<string, Word> = {};
-    temps.words.forEach((row: any) => {
-        const word = row.word.trim();
-        if (!wordMap[word]) {
-            wordMap[word] = {
-                word,
-                root: row.root || "",
-                tense: row.tense ? row.tense.split("//").map((t: string) => t.trim()) : [],
-                related: row.related ? row.related.split("//").map((r: string) => r.trim()) : [],
-                means: []
-            };
-        }
-
-        const mean: any = {
-            class: row.class,
-            mean: row.mean,
-            ranges: row.ranges.split("//"),
-            examples: row.examples ? row.examples.split("//").map((a: string) => ({
-                content: a.split("→")[0],
-                mean: a.split("→")[1],
-            })) : [],
-            phrases: row.phrases ? row.phrases.split("//").map((a: string) => ({
-                content: a.split("→")[0],
-                mean: a.split("→")[1],
-            })) : []
-        };
-
-        wordMap[word].means.push(mean);
-    });
-    wordDic.value = Object.values(wordMap)
-})
-const readExcel = async () => {
-    try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL('/docs/datas/words.xlsx', import.meta.url).href)
-        const arrayBuffer = await response.arrayBuffer()
-
-        // 解析Excel数据
-        const data = new Uint8Array(arrayBuffer)
-        const workbook = XLSX.read(data, { type: 'array' })
-
-        // 获取第一个工作表的数据
-        const words = XLSX.utils.sheet_to_json(workbook.Sheets['words'])
-
-        return { words }
-    } catch (error) {
-        console.error('读取Excel文件失败:', error)
-    }
-    return {}
-}
+const wordDic = inject<Ref<Word[]>>('wordDic')
 
 // tokenize，支持普通短语/单词和占位符短语 
 function tokenize(text: string): Token[] {
-    if (!wordDic.value.length || !props.words?.length) return [{ type: "text", text }];
+    if (!wordDic?.value || !wordDic.value.length || !props.words?.length) return [{ type: "text", text }];
 
     let remaining = text;
 
@@ -91,7 +38,7 @@ function tokenize(text: string): Token[] {
             const wordInfo = props.words[parseInt(match[1], 10)]
 
             const matchs: any[] = wordInfo.matchs
-                .map((m) => wordDic.value.find((a: any) => a.word.toLowerCase() === m.toLowerCase()))
+                .map((m) => wordDic?.value.find((a: any) => a.word.toLowerCase() === m.toLowerCase()))
                 .filter((a) => a)
 
             const tip: WordTip = {
@@ -151,7 +98,7 @@ function renderTip(tip: WordTip | undefined): string {
 }
 
 const clickItem = (tk: any) => {
-    tk.matchs.forEach((word: Word) => emit('select', word));
+    tk.matchs.forEach((word: Word) => emit('select', word.word));
 }
 </script>
 

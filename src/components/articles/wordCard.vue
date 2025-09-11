@@ -5,6 +5,7 @@ defineOptions({
 })
 
 const emits = defineEmits<{
+    (event: 'related', word: any): void
     (event: 'close', word: any): void
 }>()
 
@@ -21,6 +22,13 @@ const props = defineProps({
     <div class="word-view">
         <h3 class="item-word">{{ word.word }}</h3>
         <div class="item-root">{{ word.root }}</div>
+        <div class="item-related">
+            <span>[近义]</span>
+            <span class="related-item" v-for="item in word.related" :class="{ active: item.inDic }"
+                @click="emits('related', item.word)">
+                {{ item.word }}
+            </span>
+        </div>
         <div class="item-means" v-for="(m, idx) in word.means" :key="idx">
             <div>
                 <sapn style="font-weight: 700;">{{ m.class }}</sapn>
@@ -63,6 +71,20 @@ const props = defineProps({
         color: var(--color-page-text);
         font-size: 12px;
         opacity: 0.5;
+    }
+
+    .item-related {
+        font-size: 12px;
+        display: flex;
+        gap: 8px;
+
+        .related-item {
+            &.active {
+                cursor: pointer;
+                color: #1890ff;
+                border-bottom: 1px solid #1890ff;
+            }
+        }
     }
 
     .item-means {
