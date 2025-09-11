@@ -34,6 +34,14 @@ const datas: any = ref([
     { title: "排序", path: 'sort', img: 'calc.png' },
     { title: "文章", path: 'articles', img: 'article.png' },
     { title: "壁纸", path: 'wallpapers', img: 'wallpaper.jpg' },
+    { title: "单机-扫雷", path: 'games-mine', img: 'mine.jpg' },
+    { title: "单机-九宫格", path: 'games-puzzle', img: 'puzzle.jpg' },
+    { title: "单机-贪吃蛇", path: 'games-snake', img: 'snake.png' },
+    { title: "单机-21点", path: 'games-blackjack', img: 'blackjack.png' },
+    { title: "单机-俄罗斯方块", path: 'games-tetris', img: 'tetris.png' },
+    { title: "单机-恐龙快跑", path: 'games-t-rex', img: 't-rex.jpeg' },
+    { title: "单机-消消乐", path: 'games-xiaoxiaole', img: 'xiaoxiaole.jpg' },
+    { title: "五子棋", path: 'games-wuzi', img: 'wuzi.jpg' },
 ])
 
 onMounted(() => { })

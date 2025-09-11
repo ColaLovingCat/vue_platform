@@ -115,6 +115,52 @@ const routes = [
     name: "wallpapers",
     component: () => import("@/views/func/wallpapers/view.vue"),
   },
+
+  {
+    path: "/games-platform",
+    name: "games-platform",
+    component: () => import("@/views/games/view.vue"),
+  },
+  {
+    path: "/games-puzzle",
+    name: "games-puzzle",
+    component: () => import("@/views/games/puzzle/view.vue"),
+  },
+  {
+    path: "/games-mine",
+    name: "games-mine",
+    component: () => import("@/views/games/mine/view.vue"),
+  },
+  {
+    path: "/games-snake",
+    name: "games-snake",
+    component: () => import("@/views/games/snake/view.vue"),
+  },
+  {
+    path: "/games-blackjack",
+    name: "games-blackjack",
+    component: () => import("@/views/games/blackjack/view.vue"),
+  },
+  {
+    path: "/games-tetris",
+    name: "games-tetris",
+    component: () => import("@/views/games/tetris/view.vue"),
+  },
+  {
+    path: "/games-t-rex",
+    name: "games-t-rex",
+    component: () => import("@/views/games/t-rex/view.vue"),
+  },
+  {
+    path: "/games-wuzi",
+    name: "games-wuzi",
+    component: () => import("@/views/games/wuzi/view.vue"),
+  },
+  {
+    path: "/games-xiaoxiaole",
+    name: "games-xiaoxiaole",
+    component: () => import("@/views/games/xiaoxiaole/view.vue"),
+  },
 ];
 
 const router = createRouter({
