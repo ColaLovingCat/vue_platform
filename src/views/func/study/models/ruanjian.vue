@@ -134,7 +134,7 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                     <div id="section-010102">
-                        <h4>1.2 运算器单元(ALU) <i class="txt-en"></i></h4>
+                        <h4>1.2 运算器单元(ALU) <i class="txt-en">Arithmetic and Logic Unit</i></h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">功能</span>执行具体的算术运算、逻辑运算和逻辑测试，并返回结果</p>
                             <p><b>算术逻辑单元(ALU)</b> ：执行算术运算、逻辑运算</p>
@@ -169,9 +169,57 @@ function scrollTo(id: string) {
                             <p>KB/MB/GB/TB 1024</p>
                             <p>10进制<span class="txt-symbol">⇒</span>D (0-9)</p>
                             <p>2进制<span class="txt-symbol">⇒</span>B (0,1)</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>A</td>
+                                        <td>B</td>
+                                        <td>C</td>
+                                        <td>D</td>
+                                        <td>E</td>
+                                        <td>F</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>11</td>
+                                        <td>12</td>
+                                        <td>13</td>
+                                        <td>14</td>
+                                        <td>15</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <p>8进制<span class="txt-symbol">⇒</span>O (0-7)</p>
                             <p><b>16进制</b><span class="txt-symbol">⇒</span>H (0-F)</p>
                             <p><span class="txt-define">转换</span>按权展开求和/整除取余 小数：相乘取整</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>9</td>
+                                        <td>8</td>
+                                        <td>7</td>
+                                        <td>6</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1024</td>
+                                        <td>512</td>
+                                        <td>256</td>
+                                        <td>128</td>
+                                        <td>64</td>
+                                        <td>32</td>
+                                        <td>16</td>
+                                        <td>8</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <img class="img-02" src="/docs/study/imgs/02-jinzhi.png" alt="" srcset="">
                         </div>
                     </div>
@@ -252,7 +300,8 @@ function scrollTo(id: string) {
                         <h4>3.1 校验码</h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">定义</span>验证数据完整性的技术</p>
-                            <p><b>码距</b>:两个编码之间至少有多少个二进制位不同</p>
+                            <p><b>码距</b>：两个编码之间至少有多少个二进制位不同</p>
+                            <p>码距为2可检错，大于等于3可纠错</p>
                         </div>
                     </div>
                     <div id="section-010302">
@@ -264,14 +313,14 @@ function scrollTo(id: string) {
                     <div id="section-010303">
                         <h4>3.3 海明码</h4>
                         <div class="sub-contents">
-                            <p><span class="txt-define">定义</span>数据位之间的特定位置插入k个校验位</p>
+                            <p><span class="txt-define">定义</span>数据位n之间的特定位置插入k个校验位。利用多组数位的奇偶性来检错和纠错</p>
                             <p>必须满足 <span class="txt-func">2<span class="txt-sup">K</span>-1 ≥ n+k</span></p>
                         </div>
                     </div>
                     <div id="section-010304">
                         <h4>3.4 循环冗余校验码(CRC) <i class="txt-en">Cyclic Redundancy Check</i></h4>
                         <div class="sub-contents">
-                            <p><b>模2运算</b></p>
+                            <p>采用<b>模2运算</b></p>
                             <p>k位+r检验码，码距为2，不能纠错</p>
                         </div>
                     </div>
@@ -291,7 +340,6 @@ function scrollTo(id: string) {
                                         <td>Cache</td>
                                         <td>
                                             <p>SRAM 静态随机存储器</p>
-                                            <p>相联存储器，按内容存取</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -307,10 +355,14 @@ function scrollTo(id: string) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <p>Cache与主存之间的地址映射右硬件自动完成</p>
+                            <p>Cache与主存之间的地址映射由<b>硬件自动</b>完成</p>
+                            <p>辅存与主存之间的地址映射由<b>硬件和软件</b>结合完成</p>
+                            <p>SAM：顺序</p>
+                            <p>DAM：直接</p>
                             <p>RAM：随机，断电丢失</p>
                             <p>ROM：只读，断电不丢失</p>
-                            <p>闪存FLASH：EEPROM，按块为单位，可代替辅存</p>
+                            <p>相联存储器：按<b>内容</b>存取</p>
+                            <p>闪存FLASH：EEPROM，按<b>块</b>为单位，可代替辅存</p>
                             <p>虚拟存储器：主存+辅存</p>
                         </div>
                     </div>
@@ -318,9 +370,21 @@ function scrollTo(id: string) {
                         <h4>4.2 高速缓存 Cache</h4>
                         <div class="sub-contents">
                             <p>容量与命中率：在合理成本下提高命中率</p>
-                            <p>地址映像：主存地址和Cache地址的转换，是由硬件自动完成</p>
+                            <p>地址映像：主存地址和Cache地址的转换，是由<b>硬件自动</b>完成</p>
                             <p>替换算法：目的是提高命中率</p>
-                            <p>冲突次数：全相联映像 < 组相联映像 < 直接相连映像 </p>
+                            <p><b>冲突次数</b>：全相联映像 < 组相联映像 < 直接相连映像 </p>
+                        </div>
+                    </div>
+                    <div id="section-010403">
+                        <h4>4.3 操作数寻址</h4>
+                        <div class="sub-contents">
+                            <p>立即寻址：指令中 1</p>
+                            <p>直接寻址：内存地址 3</p>
+                            <p>寄存器寻址：寄存器名 2</p>
+                            <p>寄存器间接寻址：内存地址在寄存器中 4</p>
+                            <p>间接寻址：地址的地址 5</p>
+                            <p>相对寻址</p>
+                            <p>变址寻址</p>
                         </div>
                     </div>
                 </div>
@@ -343,7 +407,7 @@ function scrollTo(id: string) {
                                         <td>中断驱动方式</td>
                                         <td>
                                             <p>I/O设备通过中断信号主动报告操作已完成</p>
-                                            <p>CPU和I/O设备可<b>并行</b>工作，提升CPU利用率</p>
+                                            <p>CPU和I/O设备可并行工作，提升CPU利用率</p>
                                             <p>一次只能读写一个字</p>
                                             <p>由CPU将数据放入内存</p>
                                         </td>
@@ -352,9 +416,9 @@ function scrollTo(id: string) {
                                         <td>直接存储器方式(DMA)</td>
                                         <td>
                                             <p>CPU和I/O设备可并行工作</p>
-                                            <p>仅在传送数据块的开始和结束时需CPU干预</p>
+                                            <p>连接主存和外设，仅在传送开始和结束时需<b>CPU干预</b></p>
                                             <p>一次读写一个<b>块</b></p>
-                                            <p>由<b>外设直接</b>将数据放入内存</p>
+                                            <p>由<b>外设</b>直接将数据放入内存</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -365,18 +429,26 @@ function scrollTo(id: string) {
                         <h4>5.2 中断</h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">定义</span>暂停当前程序，执行中断服务程序，完成后返回源程序</p>
-                            <p>中断向量：中断服务程序的入口地址</p>
-                            <p>中断响应时间：从发出中断请求到开始进入中断处理程序</p>
-                            <p>保护断点和现场：堆栈</p>
+                            <p><b>中断向量</b>：提供中断服务程序的入口地址</p>
+                            <p><b>中断响应时间</b>：从发出中断请求到开始进入中断处理程序</p>
+                            <p><b>保存现场</b>：返回执行源程序</p>
+                            <p>保存断点和现场：堆栈</p>
                         </div>
                     </div>
                 </div>
                 <div id="part-0106">
-                    <h3>6. 计算机体系结构</h3>
+                    <h3>6. 计算机体系结构 <i class="txt-en">Computer Architecture</i></h3>
                     <div class="part-contents">
+                        <p>计算机体系结构：指计算机的概念性结构和功能属性</p>
+                        <p>计算机体系结构的逻辑实现，包括机器内的数据流和控制流的组成以及逻辑设计等</p>
+                        <p>计算机实现：计算机组织的物理实现</p>
                         <div id="section-010601">
                             <h4>6.1 Flynn分类法</h4>
                             <div class="sub-contents">
+                                <p>单指令流、单数据流</p>
+                                <p>单指令流、多数据流</p>
+                                <p>多指令流、单数据流</p>
+                                <p>多指令流、多数据流</p>
                             </div>
                         </div>
                         <div id="section-010602">
@@ -386,8 +458,8 @@ function scrollTo(id: string) {
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>RISC 精简指令集计算机</th>
-                                            <th>CISC 复杂指令集计算机</th>
+                                            <th>RISC 精简指令集计算机 <i class="txt-en">Reduced</i></th>
+                                            <th>CISC 复杂指令集计算机 <i class="txt-en">Complex</i></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -413,7 +485,7 @@ function scrollTo(id: string) {
                                         </tr>
                                         <tr>
                                             <td>实现译码方式</td>
-                                            <td>硬布线控制逻辑、组合逻辑控制器</td>
+                                            <td>硬布线控制逻辑(组合逻辑控制器)</td>
                                             <td>微程序控制技术</td>
                                         </tr>
                                         <tr>
@@ -437,24 +509,12 @@ function scrollTo(id: string) {
                                 <p>加速比：不采用和采用的时间比</p>
                                 <p>操作周期：最长操作时间</p>
                                 <p>吞吐率：1/最长操作时间</p>
-                                <p>n条指令的吞吐率：n/执行时间</p>
+                                <p><b>n条指令的吞吐率：n/单条指令的执行时间+(n-1)*最长的时间段</b></p>
                                 <img class="img-04" src="/docs/study/imgs/04-liushui.png" alt="" srcset="">
                             </div>
                         </div>
                         <div id="section-010604">
-                            <h4>6.4 操作数寻址</h4>
-                            <div class="sub-contents">
-                                <p>立即寻址：指令中 1</p>
-                                <p>直接寻址：内存地址 3</p>
-                                <p>寄存器寻址：寄存器名 2</p>
-                                <p>寄存器间接寻址：内存地址在寄存器中 4</p>
-                                <p>间接寻址：地址的地址 5</p>
-                                <p>相对寻址</p>
-                                <p>变址寻址</p>
-                            </div>
-                        </div>
-                        <div id="section-010605">
-                            <h4>6.5 冯诺依曼结构和哈弗结构</h4>
+                            <h4>6.4 冯诺依曼结构和哈弗结构</h4>
                             <div class="sub-contents">
                             </div>
                         </div>
@@ -467,6 +527,7 @@ function scrollTo(id: string) {
                         <div class="sub-contents">
                             <p><span class="txt-define">定义</span>负责传输数据地址和控制信号，减少信号线的数量</p>
                             <p>系统总线：数据总线(双向)、地址总线(单向)、控制总线</p>
+                            <p>数据总线的宽度为字长，地址总线的宽带为内存容量的指数</p>
                             <p>PCI-并行内总线 SCSI-并行外总线 RS232-串行外总线</p>
                             <p>带宽：总线的最大数据传输率</p>
                             <p>带宽=时钟频率*总线宽度/时钟周期</p>
@@ -478,12 +539,18 @@ function scrollTo(id: string) {
                     <div id="section-010801">
                         <h4>8.1 加密技术和认证技术</h4>
                         <div class="sub-contents">
-                            <p><b>对称加密</b>：相同的密钥加解密。速度快</p>
-                            <p><b>非对称加密</b>：不同的私钥公钥加解密。高安全性</p>
-                            <p><b>信息摘要</b>：将明文进行Hash算法发送并对比</p>
+                            <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
+                            <p><b>对称加密</b>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
+                            <img class="img-06" src="/docs/study/imgs/06-jiami.png" alt="" srcset="">
+                            <p><b>非对称加密</b>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
+                            <img class="img-07" src="/docs/study/imgs/07-jiami.png" alt="" srcset="">
+                            <p><b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要</p>
+                            <img class="img-08" src="/docs/study/imgs/08-jiami.png" alt="" srcset="">
                             <p>数据完整性、一致性，不可逆，唯一性</p>
-                            <p><b>数字签名</b>：结合非对称和散列函数，私钥加密公钥解密</p>
-                            <p><b>数字证书</b>：CA机构颁布</p>
+                            <p><b>数字签名</b>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密</p>
+                            <img class="img-09" src="/docs/study/imgs/09-jiami.png" alt="" srcset="">
+                            <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
+                            <p>用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性</p>
                             <table>
                                 <tbody>
                                     <tr>
@@ -492,11 +559,11 @@ function scrollTo(id: string) {
                                     </tr>
                                     <tr>
                                         <td>非对称加密</td>
-                                        <td>RSA ECC DSA</td>
+                                        <td>DSA RSA ECC</td>
                                     </tr>
                                     <tr>
                                         <td>信息摘要</td>
-                                        <td>Hash函数 MD5 SHA</td>
+                                        <td>Hash函数 MD5-128 SHA</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -547,6 +614,9 @@ function scrollTo(id: string) {
                     <p v-if="note.type === 'text'">{{ note.content }}</p>
                     <div v-if="note.type === 'topic'">
                         <p class="question">{{ note.question }}</p>
+                        <template v-if="note.imgs.length > 0">
+                            <img src="/public/docs/study/imgs/10-jiami.png" alt="" srcset="">
+                        </template>
                         <div class="list-opts" v-for="opts in note.options">
                             <div class="opt-item" v-for="(opt, index) in opts">
                                 {{ nos[index] }}. {{ opt }}
@@ -610,5 +680,12 @@ function scrollTo(id: string) {
     right: 20px;
     width: 200px;
     height: unset;
+}
+
+.img-06,
+.img-07,
+.img-08,
+.img-09 {
+    width: 400px;
 }
 </style>
