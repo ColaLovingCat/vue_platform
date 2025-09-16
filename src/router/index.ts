@@ -161,6 +161,19 @@ const routes = [
     name: "games-xiaoxiaole",
     component: () => import("@/views/games/xiaoxiaole/view.vue"),
   },
+
+  {
+    path: "/study-list",
+    name: "study-list",
+    component: () => import("@/views/func/study/list.vue"),
+    children: [
+      {
+        path: "/study-list/ruanjian",
+        name: "study-ruanjian",
+        component: () => import("@/views/func/study/models/ruanjian.vue"),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

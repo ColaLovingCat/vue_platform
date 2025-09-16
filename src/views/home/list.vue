@@ -17,6 +17,7 @@ defineOptions({
 
 const datas: any = ref([
     { title: "文章", path: 'articles', img: 'article.png' },
+    { title: "学习卡片", path: 'study-list', img: 'study.png' },
     { title: "F1", path: 'f1', img: 'f1.jpg' },
     { title: "Pokémon", path: 'pokes', img: 'pokemon.png' },
     { title: "怪猎物语2", path: 'mhs2', img: 'mhs2.png' },
