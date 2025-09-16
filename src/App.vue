@@ -22,9 +22,20 @@ import * as extend from '@/commons/utils/extends'
 import * as messageBox from '@/commons/utils/messages'
 import * as current from './views/login/login.service'
 
+// 设备类型
+const deviceType = ref("");
+// 当前宽高
+const width = ref(0);
+const height = ref(0);
+
 onMounted(async () => {
   // 清除所有的loading状态
   loadingStore.clear()
+
+  updateSize();
+  window.addEventListener("resize", updateSize);
+
+  deviceType.value = extend.ExWeb.device()
 
   // 设置语言，默认en
   let lang = extend.ExLocalStore.get('lang')
@@ -60,12 +71,20 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
+  window.removeEventListener("resize", updateSize);
   // 注销全局方法
   eventBus.off('getinfosUser', getinfosUser)
   eventBus.off('jumpHome', jumpHome)
   eventBus.off('clearSystem', clearSystem)
   eventBus.off('logout', logout)
 })
+
+// 更新窗口大小
+const updateSize = () => {
+  const size = extend.ExWeb.viewSize()
+  width.value = size.w;
+  height.value = size.h;
+};
 
 // 语言
 import { useI18n } from 'vue-i18n'
@@ -173,10 +192,28 @@ const pageGo = (path: string, query: any = {}) => {
         @click="pageGo('/home')" />
     </template>
     <template #logos-mini>
-      <img class="logo-mini" src="/systems/logos/logo.png" alt="" srcset="" @click="pageGo('/home')" />
+      <img class="logo-mini" :src="`/systems/logos/logo${theme == 'default' ? '' : '-white'}.png`" alt="" srcset=""
+        @click="pageGo('/home')" />
     </template>
     <!-- Right -->
     <template #infos>
+      <a-dropdown class="top-infos">
+        <a class="ant-dropdown-link" @click.prevent>
+          <i class="fa-solid fa-circle-info"></i>
+        </a>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item key="0">
+              <i class="fa-solid fa-globe"></i>
+              <span>{{ deviceType }}</span>
+            </a-menu-item>
+            <a-menu-item key="1">
+              <i class="fa-solid fa-display"></i>
+              <span>{{ width }} × {{ height }}</span>
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
       <!-- 主题 -->
       <div class="themes">
         <a-switch v-model:checked="themesStatus" checked-children="亮" un-checked-children="暗" @change="toggleThemes" />
@@ -187,7 +224,7 @@ const pageGo = (path: string, query: any = {}) => {
           @click="changeLanguage(locale == 'zh' ? 'en' : 'zh')" />
       </div>
       <!-- 用户 -->
-      <a-dropdown class="users">
+      <a-dropdown class="top-users">
         <a class="ant-dropdown-link" @click.prevent>
           <i class="fa-solid fa-user"></i>
           <span>{{ userInfosStore.userInfos.username }}</span>
