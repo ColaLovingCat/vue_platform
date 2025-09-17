@@ -580,30 +580,1127 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-02">程序设计语言</h2>
-                <p>内容...</p>
+                <h2 id="chapter-02">二、程序设计语言</h2>
+                <h3 id="part-0201">1. 概述</h3>
+                <div class="part-contents">
+                    <div id="section-020101">
+                        <h4>1.1 低级语言和高级语言</h4>
+                        <div class="sub-contents">
+                            <p>
+                                机器语言<span class="txt-symbol">⇒</span>汇编语言：符号化<span class="txt-symbol">⇒</span>高级语言：编译解释
+                            </p>
+                            <p>解释程序：和源程序一起参与到运行过程中</p>
+                            <p>脚本语言=动态语言==弱类型语言=解释型语言：PHP/Javascript/Python</p>
+                            <p>编译程序：不参与运行，生成源程序的目标程序，进行优化</p>
+                        </div>
+                    </div>
+                    <div id="section-020102">
+                        <h4>1.2 基本成分</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>语法</td>
+                                        <td>关键字/运算符/标识符/分隔符等</td>
+                                    </tr>
+                                    <tr>
+                                        <td>语义</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>变量</td>
+                                        <td>全局变量/局部变量 指针变量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据类型</td>
+                                        <td>字符串/整型/浮点值/布尔值/数组等，合理分配存储单元；表达式计算的合法性检查；规定取值范围</td>
+                                    </tr>
+                                    <tr>
+                                        <td>运算符</td>
+                                        <td>算术、逻辑、比较、赋值</td>
+                                    </tr>
+                                    <tr>
+                                        <td>控制结构</td>
+                                        <td>顺序、选择 if-else/switch-case、循环 for/do-while、跳转 continue/break</td>
+                                    </tr>
+                                    <tr>
+                                        <td>函数</td>
+                                        <td>可重复使用，函数名/参数(传值、传地址)/返回值/函数体</td>
+                                    </tr>
+                                    <tr>
+                                        <td>输入输出</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>异常处理</td>
+                                        <td>捕获和处理错误 try-catch-finally/throw</td>
+                                    </tr>
+                                    <tr>
+                                        <td>注释</td>
+                                        <td>提高代码的可读性和可理解性</td>
+                                    </tr>
+                                    <tr>
+                                        <td>调用</td>
+                                        <td>传值调用和传址调用</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0202">2. 语言处理程序基础</h3>
+                <div class="part-contents">
+                    <div id="section-020201">
+                        <h4>2.1 汇编语言基本原理</h4>
+                        <div class="sub-contents">
+                            <p>编写源代码</p>
+                            <p>汇编器翻译</p>
+                            <p>目标代码生成</p>
+                            <p>连接器链接</p>
+                            <p>加载执行</p>
+                        </div>
+                    </div>
+                    <div id="section-020202">
+                        <h4>2.2 编译程序基本原理</h4>
+                        <div class="sub-contents">
+                            <p><b>词法分析</b> <i class="txt-en">Lexical Analysis</i>：线性分解源程序为词法单元 <i
+                                    class="txt-en">Token</i> 序列(关键字/标识符/常数/运算符/分隔符)，以及字符符号是否符合规定</p>
+                            <p><b>语法分析</b> <i class="txt-en">Parsing</i>：构建语法树，检查所有语法错误，进行结构分析。如缺少右括号，没有分号等</p>
+                            <p>自上而下 递归向下/预测分析 自下而上 移进-归约/算符优先</p>
+                            <p><b>语义分析</b> <i class="txt-en">Semantic
+                                    Analysis</i>：只能检查静态语义错误，进行类型分析和检查。如变量未声明、重复声明，函数参数类型不对等</p>
+                            <p><b>中间代码生成</b> <i class="txt-en">Intermediate Code
+                                    Generation</i>：有后缀式、三元式、四元式、三地址码、树图等。有利于进行与具体机器无关的优化处理和可移植性</p>
+                            <p>代码优化 <i class="txt-en">Optimization</i></p>
+                            <p><b>目标代码生成</b> <i class="txt-en">Code Generation</i>：与目标机器的体系结构相关，包含分配寄存器，指令选择、代码布局等</p>
+                            <p><b>符号表管理</b>：不断收集记录和使用的相关符号类型和特征等必要信息，辅助语义的正确性检查和代码生成</p>
+                            <p>出错处理</p>
+                            <img class="img-11" src="/docs/study/imgs/11-bianyi.png" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div id="section-020203">
+                        <h4>2.3 正规式</h4>
+                        <div class="sub-contents">
+                            <p>例：由a、b构造且仅包含偶数个a的串的集合
+                                <span class="txt-func">(b<span class="txt-sup">*</span>(ab<span
+                                        class="txt-sup">*</span>a))<span class="txt-sup">*</span></span>
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>正规式</th>
+                                        <th>正规集</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="txt-func">ab</span></td>
+                                        <td>单一元素：{ab}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">a|b</span></td>
+                                        <td>可选元素：{a,b}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">a<span class="txt-sup">*</span></span></td>
+                                        <td>闭包，任意个元素，包含空集：{Φ,a,aa,aaa,...}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">(a|b)<span class="txt-sup">*</span></span></td>
+                                        <td>任意个可选元素：{Φ,a,b,aa,ab,bb,aaa,...}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">a(a|b)<span class="txt-sup">*</span></span></td>
+                                        <td>以a为开头：{a,aa,ab,aaa,...}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">(a|b)<span class="txt-sup">*</span>abb</span></td>
+                                        <td>以abb为结尾：{aabb,babb,aaabb,ababb,...}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-020204">
+                        <h4>2.4 有限自动机</h4>
+                        <div class="sub-contents">
+                            <p>词法分析的工具，正确识别正规集</p>
+                            <p>确定的有限自动机 (DFA)</p>
+                            <p>不确定的有限自动机 (NFA)：状态转移不确定</p>
+                            <p>下图可表示以1为结尾的正规集</p>
+                            <img class="img-12" src="/docs/study/imgs/12-youxian.png" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div id="section-020205">
+                        <h4>2.5 上下文无关文法 CFG</h4>
+                        <div class="sub-contents">
+                            <p>广泛用于程序设计语言的语法规则</p>
+                            <p>S是起始符号，表示句子的起始位置</p>
+                            <p>V是非终结符集合，用于构造句子的符号</p>
+                            <p>P是产生式规则集合，表示A可被替换为B</p>
+                            <p>T是终结符集合，一般为小写字母，基本符号或词汇</p>
+                        </div>
+                    </div>
+                    <div id="section-020206">
+                        <h4>2.6 表达式</h4>
+                        <div class="sub-contents">
+                            <p>中缀式：a?b</p>
+                            <p>后缀式：ab? 逆波兰式</p>
+                            <p>转换方式：先看优先级转换，相同时从右向左</p>
+                            <p>例：a+(b-c)*d 的后缀式为 abc-d*</p>
+                            <p>逆运算：从左向右，遇到数字入栈，遇到运算符取两个数字进行运算</p>
+                        </div>
+                    </div>
+                    <div id="section-020207">
+                        <h4>2.7 语法树中、后序遍历</h4>
+                        <div class="sub-contents">
+                            <p>中序遍历>左根右>中缀式</p>
+                            <p>后续遍历>左右根>后缀式</p>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="chapter-03">数据结构</h2>
-                <p>内容...</p>
-                <h2 id="chapter-04">知识产权</h2>
-                <p>内容...</p>
+                <h2 id="chapter-04">四、知识产权</h2>
+                <h3 id="part-0401">1. 知识产权</h3>
+                <div class="part-contents">
+                    <div id="section-040101">
+                        <h4>1.1 概念</h4>
+                        <div class="sub-contents">
+                            <p><span class="txt-define">特征</span>无形性、专有性、<b>地域性</b>、时间性、可复制性</p>
+                            <p>地域性：仅在授权国家或地区管辖范围内有效，需在不同国家或地区分别申请</p>
+                            <p>许可使用：独占(自己也不能用)、独家(排他)、普通、强制、法定</p>
+                            <p>翻译权：重构</p>
+                            <p>烟草必须使用注册商标</p>
+                            <p>工业产权：专利权、商标权、地理标志、工业品外观设计、集成电路布图设计</p>
+                        </div>
+                    </div>
+                    <div id="section-040102">
+                        <h4>1.2 著作权</h4>
+                        <div class="sub-contents">
+                            <p><b>人身权</b>包括：发表权(终生+死亡后50年)、署名权、修改权和作品完整权；其余为财产权(受时间限制)</p>
+                        </div>
+                    </div>
+                    <div id="section-040103">
+                        <h4>1.3 专利权</h4>
+                        <div class="sub-contents">
+                            <p>专利申请：采用书面形式办理手续，先申请先得，同时申请需协商</p>
+                            <p>专利时间性：保护期为20年，实用和设计为10年</p>
+                        </div>
+                    </div>
+                    <div id="section-040104">
+                        <h4>1.4 商标权</h4>
+                        <div class="sub-contents">
+                            <p>商标注册：先注册先得，同时注册先使用先得，同时注册使用需协商</p>
+                            <p>商标时间性：保护期10年，到期6个月申请延续10年，可无限延续</p>
+                        </div>
+                    </div>
+                    <div id="section-040105">
+                        <h4>1.5 商业秘密权</h4>
+                        <div class="sub-contents">
+                            <p>《反不正当竞争法》</p>
+                            <p>指不为公众所知悉，未公开的、能为权利人带来经济利益、具有实用性并经权利人采取保密措施的技术信息和经营信息</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0402">2. 计算机软件著作权</h3>
+                <div class="part-contents">
+                    <div id="section-040201">
+                        <h4>2.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>主体：享有著作权的人 (公民、法人、其他组织)</p>
+                            <p>《中华人民共和国著作权法》 (人大) 和《计算机软件保护条例》(国务院) 规定</p>
+                            <p>客体：计算机程序 (源程序+目标程序) 及其 有关软件文档 (程序设计说明书、流程图和用户手册等)</p>
+                            <p>侵权：甲擅自复制乙发表的OA软件售卖，丙公司未知情下购买使用</p>
+                        </div>
+                    </div>
+                    <div id="section-040202">
+                        <h4>2.2 权利</h4>
+                        <div class="sub-contents">
+                            <p>人身权 = 发表权 + 开发者身份权(署名权，无时间限制)</p>
+                            <p>财产权 = 使用、复制、修改、发行、翻译、注释、传播、出租、使用获利等</p>
+                            <p>保护期：软件开发完成之日 +50年，除<b>开发者身份权</b>外其余权力全部终止</p>
+                        </div>
+                    </div>
+                    <div id="section-040203">
+                        <h4>2.3 职务开发</h4>
+                        <div class="sub-contents">
+                            <p>职务软件：只享有署名权</p>
+                            <p>-是在单位任职期间执行其工作任务的结果</p>
+                            <p>-与在单位从事的工作内容直接联系</p>
+                            <p>-使用单位的物质技术条件</p>
+                        </div>
+                    </div>
+                    <div id="section-040204">
+                        <h4>2.4 委托开发</h4>
+                        <div class="sub-contents">
+                            <p>由签订书面合同成立，无合同由受托人享有</p>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="chapter-05">数据库</h2>
-                <p>内容...</p>
                 <h2 id="chapter-06">面向对象</h2>
-                <p>内容...</p>
                 <h2 id="chapter-07">UML</h2>
-                <p>内容...</p>
                 <h2 id="chapter-08">设计模式</h2>
-                <p>内容...</p>
-                <h2 id="chapter-09">结构化开发</h2>
-                <p>内容...</p>
-                <h2 id="chapter-10">软件工程</h2>
-                <p>内容...</p>
-                <h2 id="chapter-11">信息安全</h2>
-                <p>内容...</p>
-                <h2 id="chapter-12">计算机网络</h2>
-                <p>内容...</p>
-                <h2 id="chapter-13">算法</h2>
-                <p>内容...</p>
+                <h2 id="chapter-09">九、操作系统 <i class="txt-en">Operating System</i></h2>
+                <h3 id="part-0901">1. 概述</h3>
+                <div class="part-contents">
+                    <div id="section-090101">
+                        <h4>1.1 概述</h4>
+                        <div class="sub-contents">
+                            <p><span class="txt-define">地位</span>应用软件、系统软件、操作系统、计算机硬件</p>
+                            <p><span class="txt-define">特征</span>并发性、共享性、虚拟性、不确定性</p>
+                            <p><span class="txt-define">分类</span>批处理、分时、实时、网络、分布式、微机、嵌入式</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0902">2. 进程管理</h3>
+                <div class="part-contents">
+                    <div id="section-090201">
+                        <h4>2.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>线程 <i class="txt-en">Thread</i>：CPU可独立调度和分配的最小单位</p>
+                            <p>可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的</p>
+                            <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) 组成</p>
+                            <p>三态模型：就绪
+                                <i class="txt-en">Ready</i>、运行
+                                <i class="txt-en">Running</i>、阻塞
+                                <i class="txt-en">Waiting/Blocked</i>
+                            </p>
+                            <img class="img-14" src="/docs/study/imgs/14-santai.png" alt="" srcset="">
+                            <p>五态模型：创建
+                                <i class="txt-en">New</i>、终止
+                                <i class="txt-en">Terminated</i>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="section-090202">
+                        <h4>2.2 前驱图 <i class="txt-en">Precedence Graph</i></h4>
+                        <div class="sub-contents">
+                            <p>表示和描述进程之间的先后顺序和执行的依赖关系</p>
+                            <p>顺序执行：顺序性/封闭性/可再现性</p>
+                            <p>并发执行：无封闭性，相互制约</p>
+                        </div>
+                    </div>
+                    <div id="section-090203">
+                        <h4>2.3 同步与互斥</h4>
+                        <div class="sub-contents">
+                            <p>同步：合作进程间的直接制约</p>
+                            <p>互斥：申请临界资源间的间接制约</p>
+                        </div>
+                    </div>
+                    <div id="section-090204">
+                        <h4>2.4 信号量PV操作与前驱图</h4>
+                        <div class="sub-contents">
+                            <p>临界资源：各进程间需要以互斥方式对其进行访问的资源</p>
+                            <p>临界区 <i class="txt-en">Critical Section</i>：共享资源访问代码区段</p>
+                            <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
+                            <p>信号量S <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数</p>
+                            <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png" alt="" srcset="">
+                            <p>执行前等待资源P(S)减，S≤0则等待</p>
+                            <p>执行后释放资源V(S)加，S≤0则唤醒</p>
+                            <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png" alt="" srcset="">
+                            <p>信号量S的编号，由(12,13,23,34)排序决定</p>
+                            <p>实现互斥：在临界区中执行PV，确保同一时间内仅有一个进程在临界区中</p>
+                            <p>实现同步：<b>生产者消费者问题</b></p>
+                        </div>
+                    </div>
+                    <div id="section-090205">
+                        <h4>2.5 生产者消费者模式 <i class="txt-en">Producer-Consumer Pattern</i></h4>
+                        <div class="sub-contents">
+                            <p>通过<b>共享缓冲区</b> <i class="txt-en">Bounded Buffer</i> 实现生产线程与消费线程的解耦</p>
+                            <p>容量为1的缓冲区</p>
+                            <img class="img-18" style="width: 300px;" src="/docs/study/imgs/18-pv.png" alt="" srcset="">
+                            <p>容量为n的缓冲区</p>
+                            <p>缓冲区+互斥信号量S+同步信号量(S1可放产品数n+S2产品数0)</p>
+                            <p>生产者：P(S1)>P(S)>V(S)>V(S2)</p>
+                            <p>消费者：P(S2)>P(S)>V(S)>V(S1)</p>
+                        </div>
+                    </div>
+                    <div id="section-090206">
+                        <h4>2.6 死锁</h4>
+                        <div class="sub-contents">
+                            <p><span class="txt-define">条件</span>互斥、保持和等待、不剥夺、环路等待</p>
+                            <p>同类资源分配不当引起死锁，所需资源数 <span class="txt-func">m≥n*(k-1)+1</span></p>
+                            <p>系统采用轮流分配资源，资源数m小于进程所需资源总数n*k</p>
+                            <p>死锁处理：避免策略-<b>银行家算法</b></p>
+                            <p>按顺序调用进程：P4->P2</p>
+                            <p>总资源数：R1-8/R2-7/R3-4，计算 总可用资源数：R1-1/R2-1/R3-0</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2"></th>
+                                        <th colspan="3">最大需求资源数</th>
+                                        <th colspan="3">已分配资源数</th>
+                                        <th colspan="3">仍需要资源数</th>
+                                    </tr>
+                                    <tr>
+                                        <th>R1</th>
+                                        <th>R2</th>
+                                        <th>R3</th>
+                                        <th>R1</th>
+                                        <th>R2</th>
+                                        <th>R3</th>
+                                        <th>R1</th>
+                                        <th>R2</th>
+                                        <th>R3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>P1</td>
+                                        <td>6</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>5</td>
+                                        <td>3</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P2</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P3</td>
+                                        <td>8</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>6</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P4</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P5</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-090207">
+                        <h4>2.7 进程资源图</h4>
+                        <div class="sub-contents">
+                            <p>描述进程所需资源和资源分配情况</p>
+                            <p>P进程，R资源：R->P 代表资源R已分配给进程P，P->R 代表进程P还需要请求资源R</p>
+                            <img class="img-15" src="/docs/study/imgs/15-ziyuan.png" alt="" srcset="">
+                            <p>阻塞节点：该节点所请求的资源已分配完</p>
+                            <p>非阻塞节点：可化简</p>
+                            <p>死锁状态：所有进程都是阻塞节点</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0903">3. 存储管理</h3>
+                <div class="part-contents">
+                    <p><span class="txt-define">分类</span>分区管理、页式管理</p>
+                    <div id="section-090301">
+                        <h4>3.1 页式存储</h4>
+                        <div class="sub-contents">
+                            <p>地址结构：页号+页内地址(4K)</p>
+                            <p>页面变换表：页号+物理块号(页帧号)</p>
+                            <p>逻辑地址转换物理地址</p>
+                            <p>十六进制 1C20H => 页号1+页内地址C20(12位) => 物理块号3+C20</p>
+                        </div>
+                    </div>
+                    <div id="section-090302">
+                        <h4>3.2 页面置换算法</h4>
+                        <div class="sub-contents">
+                            <p>时间局限性：循环操作</p>
+                            <p>空间局限性：顺序存储</p>
+                            <p>最近最少使用算法：局部性原理</p>
+                            <p>状态位/访问位/修改位</p>
+                            <p>只淘汰在内存中(1)，先淘汰未访问过的(0)，再淘汰未修改过的(0)</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>页号</th>
+                                        <th>页帧号</th>
+                                        <th>状态位</th>
+                                        <th>访问位</th>
+                                        <th>修改位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>6</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-090303">
+                        <h4>3.3 段式存储</h4>
+                        <div class="sub-contents">
+                            <p>逻辑地址：段号+段内偏移量</p>
+                            <p>段表：段号+基地址+段长</p>
+                        </div>
+                    </div>
+                    <div id="section-090304">
+                        <h4>3.4 段页式存储</h4>
+                        <div class="sub-contents">
+                            <p>地址结构：段号s+段内页号p+页内地址w</p>
+                            <img class="img-20" style="width: 400px;" src="/docs/study/imgs/20-cunchu.png" alt=""
+                                srcset="">
+                            <p>最多有2^𝑠段，每个段最大允许有2^𝑝页，页的大小为4K(=2^2* 2^10)</p>
+                            <p>段表+页表来实现地址映射</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0904">4. 设备管理</h3>
+                <div class="part-contents">
+                    <div id="section-090401">
+                        <h4>4.1 设备分类</h4>
+                        <div class="sub-contents">
+                        </div>
+                    </div>
+                    <div id="section-090402">
+                        <h4>4.2 输入输出</h4>
+                        <div class="sub-contents">
+                            <img class="img-21" style="width: 450px;" src="/docs/study/imgs/21-shebei.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-090403">
+                        <h4>4.3 虚设备与Spooling技术</h4>
+                        <div class="sub-contents">
+                            <p>输入T>传送M>处理C</p>
+                            <p>单缓冲区：(T+M)*(n-1)+(T+M+C)</p>
+                            <img class="img-24" style="width: 450px;" src="/docs/study/imgs/24-shebei.png" alt=""
+                                srcset="">
+                            <p>双缓冲区：T*(n-1)+(T+M+C)</p>
+                            <img class="img-25" style="width: 450px;" src="/docs/study/imgs/25-shebei.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-090404">
+                        <h4>4.4 磁盘结构</h4>
+                        <div class="sub-contents">
+                            <p>磁盘有正反两个盘面，每个盘面有多个同心圆，每个同心圆是一个磁道，每个同心圆又被划分为多个扇区</p>
+                            <p>先寻找对应磁道，再等待周期旋转至指定扇区，产生寻道时间和等待时间</p>
+                        </div>
+                    </div>
+                    <div id="section-090405">
+                        <h4>4.5 磁盘调度算法</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>算法</th>
+                                        <th>描述</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>先来先服务 (FCFS)</td>
+                                        <td>按先后次序访问</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最短寻道时间优先 (SSTF)</td>
+                                        <td>先访问最近的</td>
+                                    </tr>
+                                    <tr>
+                                        <td>扫描算法 (SCAN)</td>
+                                        <td>先访问同一方向的</td>
+                                    </tr>
+                                    <tr>
+                                        <td>单向扫描调度算法 (CSCAN)</td>
+                                        <td>转向时访问极值</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-090406">
+                        <h4>4.6 旋转调度算法</h4>
+                        <div class="sub-contents">
+                            <p>旋转速度20ms/圈，处理时间4ms，扇区数10 =(2+4)*10+(10-4/2)*2*(10-1)</p>
+                            <p>旋转一个扇区所需时间为 20ms/10=2ms，处理一个扇区的同时磁头移动了 4ms/2ms=2个扇区</p>
+                            <img class="img-22" style="width: 200px;" src="/docs/study/imgs/22-shebei.png" alt=""
+                                srcset="">
+                            <p>修改顺序来优化 =(2+4)*10</p>
+                            <img class="img-23" style="width: 200px;" src="/docs/study/imgs/23-shebei.png" alt=""
+                                srcset="">
+                            <p>磁道距离*移动速度+延迟+传输</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0905">5. 文件管理</h3>
+                <div class="part-contents">
+                    <div id="section-090501">
+                        <h4>5.1 索引文件</h4>
+                        <div class="sub-contents">
+                            <p>索引表<地址项><span class="txt-symbol">⇔</span>磁盘<磁盘数据块>
+                            </p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>直接地址索引</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>一级间接地址索引</td>
+                                        <td>索引地址项指向磁盘索引块</td>
+                                    </tr>
+                                    <tr>
+                                        <td>二级间接地址索引</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>(磁盘索引块大小1KB / 地址项大小4B) * 磁盘数据块大小1KB</p>
+                        </div>
+                    </div>
+                    <div id="section-090502">
+                        <h4>5.2 树形文件</h4>
+                        <div class="sub-contents">
+                            <p>文件控制块：基本信息类、存取控制信息类、使用信息类</p>
+                            <p>文件属性：R只读文件、A存档属性、S系统文件、H隐藏文件</p>
+                            <p>文件目录：文件控制块的有序集合</p>
+                            <p>目录文件对系统的影响较大</p>
+                            <p>目录结构：一级/二级/多级目录结构</p>
+                            <p>文件名：驱动器号、路径、主文件名、扩展名</p>
+                            <p>树型文件结构：全文件名/绝对路径/相对路径</p>
+                            <p>绝对路径：从盘符开始</p>
+                            <p>相对路径：从当前路径开始</p>
+                        </div>
+                    </div>
+                    <div id="section-090503">
+                        <h4>5.3 空间存储</h4>
+                        <div class="sub-contents">
+                            <p>位示图 <i class="txt-cn">bitmap</i>：对每个物理空间用一位标识，1则使用，0则空闲</p>
+                            <p>逻辑编号 0/1字 代表物理块 0~31位 32*(n+1)-1</p>
+                            <p>求所需位示图的字大小</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0906">6. 作业管理</h3>
+                <div class="part-contents">
+                    <div id="section-090601">
+                        <h4>6.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>系统为完成一个用户的计算任务(或事务处理)所做的工作总和</p>
+                            <p>状态：提交、后备、执行、完成</p>
+                        </div>
+                    </div>
+                    <div id="section-090602">
+                        <h4>6.2 作业调度算法</h4>
+                        <div class="sub-contents">
+                        </div>
+                    </div>
+                    <div id="section-090603">
+                        <h4>6.3 用户界面</h4>
+                        <div class="sub-contents">
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-10">结构化开发</h2>
+                <h2 id="chapter-11">软件工程</h2>
+                <h2 id="chapter-12">信息安全</h2>
+                <h3 id="part-1201">1. 安全保障</h3>
+                <div class="part-contents">
+                    <div id="section-120101">
+                        <h4>1.1 各网络层次</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-120102">
+                        <h4>1.2 网络安全</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-120103">
+                        <h4>1.3 防火墙</h4>
+                        <div class="sub-contents">
+                            <p>内网、DMZ/隔离区/非军事化区-放置公用服务器、外网</p>
+                            <p>发展阶段：包过滤、应用代理网关、状态检测技术</p>
+                            <p>包过滤：处于网络层和数据链路层 TCP-IP</p>
+                            <p>优点：对用户完全透明，低水平控制</p>
+                            <p>缺点：无法防范黑客攻击，不支持应用层协议</p>
+                            <p>应用代理网关：经过应用代理软件转发</p>
+                            <p>优点：可以检测应用层、网络层和传输层，检测能力强</p>
+                            <p>缺点：处理速度慢</p>
+                            <p>防火墙工作层次越高，工作效率越低，安全性越高</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1202">2. 网络威胁与攻击</h3>
+                <div class="part-contents">
+                    <div id="section-120201">
+                        <h4>2.1 病毒</h4>
+                        <div class="sub-contents">
+                            <p><span class="txt-define">特征</span>传播性、隐蔽性、感染性、潜伏性、触发性、破坏性</p>
+                            <p><span class="txt-define">类型</span>蠕虫病毒、特洛伊木马、后门病毒、宏病毒</p>
+                            <p>宏病毒：文本文档、电子表格等</p>
+                        </div>
+                    </div>
+                    <div id="section-120202">
+                        <h4>2.2 网络攻击</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>拒绝服务Dos攻击</td>
+                                        <td>不断向计算机发送请求使得计算机或网络无法正常服务</td>
+                                    </tr>
+                                    <tr>
+                                        <td>重放攻击</td>
+                                        <td>发送目的主机已接收过的报文，从而破坏认证的正确性</td>
+                                    </tr>
+                                    <tr>
+                                        <td>口令入侵攻击</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>特洛伊木马</td>
+                                        <td>内部发起连接，外部主机控制并盗取用户信息</td>
+                                    </tr>
+                                    <tr>
+                                        <td>端口欺骗攻击</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>网络监听</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>IP欺骗攻击</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>SQL注入攻击</td>
+                                        <td>因程序未对用户输入数据的合法性进行判断，获取权限</td>
+                                    </tr>
+                                    <tr>
+                                        <td>入侵检测攻击</td>
+                                        <td>专家系统、模型检测、简单匹配</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ARP攻击</td>
+                                        <td>通过伪造IP地址和MAC地址，使网络阻塞</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-13">计算机网络</h2>
+                <h3 id="part-1301">1. OSI/RM 七层模型</h3>
+                <div class="part-contents">
+                    <div id="section-130101">
+                        <h4>1.1 七层模型</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>层次</th>
+                                        <th>名称</th>
+                                        <th>主要功能</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>应用层</td>
+                                        <td>实现具体的应用功能</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>表示层</td>
+                                        <td>数据的格式与表达、加密、压缩</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>会话层</td>
+                                        <td>建立、管理和终止会话 <i class="txt-en">Session</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>传输层</td>
+                                        <td>端到端的连接，流量控制、拥塞控制</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>网络层</td>
+                                        <td>分组传输，路由选择，逻辑寻址(IP地址)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>数据链路层</td>
+                                        <td>将比特流封装为帧 <i class="txt-en">Frame</i>，进行物理寻址(MAC地址)，CRC校验</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>物理层</td>
+                                        <td>二进制传输比特流</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-130102">
+                        <h4>1.2 网络设备</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>层次</th>
+                                        <th>名称</th>
+                                        <th>主要功能</th>
+                                        <th>冲突域</th>
+                                        <th>广播域</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>应用层</td>
+                                        <td>网关 <i class="txt-en">Gateway</i></td>
+                                        <td>不同协议间的转换（如邮件网关、协议网关）</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>应用层防火墙/代理服务器</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>传输层</td>
+                                        <td>四层交换机 (负载均衡器)</td>
+                                        <td>基于 TCP/UDP 端口号做转发</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>网络层</td>
+                                        <td>路由器 <i class="txt-en">Router</i></td>
+                                        <td>基于 IP 地址转发，实现不同网络之间互联</td>
+                                        <td>独立</td>
+                                        <td>独立</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>三层交换机</td>
+                                        <td>结合二层交换和三层路由，适合大型局域网内部高效互联</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据链路层</td>
+                                        <td>网桥 <i class="txt-en">Bridge</i></td>
+                                        <td>根据 MAC 地址转发，分割冲突域</td>
+                                        <td>独立</td>
+                                        <td>一个</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>交换机 <i class="txt-en">Switch</i></td>
+                                        <td>基于 MAC 地址表的快速转发，支持全双工通信</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>物理层</td>
+                                        <td>中继器 <i class="txt-en">Repeater</i></td>
+                                        <td>信号放大、整形、转发</td>
+                                        <td>一个</td>
+                                        <td>一个</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>集线器 <i class="txt-en">Hub</i></td>
+                                        <td>多端口中继器，广播转发</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1302">2. TCP/IP 协议簇</h3>
+                <div class="part-contents">
+                    <div id="section-130201">
+                        <h4>2.1 展示图</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>OSI 模型</th>
+                                        <th colspan="3">TCP/IP 协议</th>
+                                        <th>TCP/IP 模型</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>应用层</td>
+                                        <td rowspan="3">
+                                            <div class="list-prots" style="width: 400px;">
+                                                <div class="prot-item">
+                                                    <div class="item-name">POP3 <span class="item-port">110</span></div>
+                                                    <div class="item-desc">邮件收取</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">SMTP <span class="item-port">25</span></div>
+                                                    <div class="item-desc">邮件传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">IMAP <span class="item-port">143</span></div>
+                                                    <div class="item-desc">邮件传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">HTTP <span class="item-port">80</span></div>
+                                                    <div class="item-desc">网页传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">HTTPS <span class="item-port">443</span>
+                                                    </div>
+                                                    <div class="item-desc">网页安全传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">FTP <span class="item-port">数据 20/控制
+                                                            21</span>
+                                                    </div>
+                                                    <div class="item-desc">文件传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">SSH <span class="item-port">22</span>
+                                                    </div>
+                                                    <div class="item-desc">远程登录</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">Telnet <span class="item-port">23</span>
+                                                    </div>
+                                                    <div class="item-desc">远程登录</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td rowspan="3">
+                                            <div class="list-prots">
+                                                <div class="prot-item">
+                                                    <div class="item-name">NFS</div>
+                                                    <div class="item-desc">网络文件服务</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td rowspan="3">
+                                            <div class="list-prots" style="width: 400px;">
+                                                <div class="prot-item">
+                                                    <div class="item-name">DNS <span class="item-port">53</span></div>
+                                                    <div class="item-desc">域名解析过程</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">DHCP <span class="item-port">67</span>
+                                                    </div>
+                                                    <div class="item-desc">动态IP分配</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">TFTP <span class="item-port">69</span></div>
+                                                    <div class="item-desc">简单文件传输</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">SNMP <span class="item-port">161</span></div>
+                                                    <div class="item-desc">简单网络管理</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td rowspan="3">应用层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>表示层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>会话层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>传输层</td>
+                                        <td>
+                                            <div class="list-prots">
+                                                <div class="prot-item">
+                                                    <div class="item-name">TCP</div>
+                                                    <div class="item-desc">可靠 面向连接</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <div class="list-prots">
+                                                <div class="prot-item">
+                                                    <div class="item-name">UDP</div>
+                                                    <div class="item-desc">不可靠 无连接 快速</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>传输层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>网络层</td>
+                                        <td colspan="3">
+                                            <div class="list-prots">
+                                                <div class="prot-item">
+                                                    <div class="item-name">IP</div>
+                                                    <div class="item-desc">IPv4 / IPv6</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">ICMP</div>
+                                                    <div class="item-desc">差错报告与控制</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">IGMP</div>
+                                                    <div class="item-desc">组播管理</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">IPSec</div>
+                                                    <div class="item-desc">加密IP数据报文</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">ARP</div>
+                                                    <div class="item-desc">地址解析 IP->MAC</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">RARP</div>
+                                                    <div class="item-desc">反地址解析 MAC->IP</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>网际层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据链路层</td>
+                                        <td colspan="3" rowspan="2">
+                                            <div class="list-prots">
+                                                <div class="prot-item">
+                                                    <div class="item-name">Ethernet</div>
+                                                    <div class="item-desc">以太网</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">Token-Ring</div>
+                                                    <div class="item-desc">令牌环</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">帧中继</div>
+                                                </div>
+                                                <div class="prot-item">
+                                                    <div class="item-name">PPP</div>
+                                                </div>
+                                                  <div class="prot-item">
+                                                    <div class="item-name">CSMA/CD</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td rowspan="2">网络接口层</td>
+                                    </tr>
+                                    <tr>
+                                        <td>物理层</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1303">3. 计算机网络分类</h3>
+                <div class="part-contents">
+                    <div id="section-130301">
+                        <h4>3.1 按分布范围分</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1304">4. 网络规划与设计</h3>
+                <div class="part-contents">
+                    <div id="section-130401">
+                        <h4>4.1 逻辑网络设计</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1305">5. IP地址</h3>
+                <div class="part-contents">
+                    <div id="section-130501">
+                        <h4>5.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-130502">
+                        <h4>5.2 子网划分</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1306">6. Web</h3>
+                <div class="part-contents">
+                    <div id="section-130601">
+                        <h4>6.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-14">算法</h2>
             </div>
         </div>
         <div class="right">
@@ -615,7 +1712,7 @@ function scrollTo(id: string) {
                     <div v-if="note.type === 'topic'">
                         <p class="question">{{ note.question }}</p>
                         <template v-if="note.imgs.length > 0">
-                            <img src="/public/docs/study/imgs/10-jiami.png" alt="" srcset="">
+                            <img v-for="img in note.imgs" :src="`/docs/study/imgs/${img}`" alt="" srcset="">
                         </template>
                         <div class="list-opts" v-for="opts in note.options">
                             <div class="opt-item" v-for="(opt, index) in opts">
@@ -645,12 +1742,15 @@ function scrollTo(id: string) {
 <style scoped lang="scss">
 @import url('./style.scss');
 
+img {
+    height: unset;
+}
+
 .img-01 {
     position: absolute;
     top: 0;
     right: 20px;
     width: 320px;
-    height: unset;
 }
 
 .img-02 {
@@ -658,12 +1758,10 @@ function scrollTo(id: string) {
     top: 0;
     right: 20px;
     width: 150px;
-    height: unset;
 }
 
 .img-03 {
     width: 350px;
-    height: unset;
 }
 
 .img-04 {
@@ -671,7 +1769,6 @@ function scrollTo(id: string) {
     top: 0;
     right: 20px;
     width: 450px;
-    height: unset;
 }
 
 .img-05 {
@@ -679,7 +1776,6 @@ function scrollTo(id: string) {
     top: 0;
     right: 20px;
     width: 200px;
-    height: unset;
 }
 
 .img-06,
@@ -687,5 +1783,31 @@ function scrollTo(id: string) {
 .img-08,
 .img-09 {
     width: 400px;
+}
+
+.img-11 {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 380px;
+}
+
+.img-12 {
+    width: 300px;
+}
+
+.img-13 {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 250px;
+}
+
+.img-14 {
+    width: 250px;
+}
+
+.img-15 {
+    width: 320px;
 }
 </style>

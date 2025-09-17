@@ -163,3 +163,32 @@
     position: relative;
   }
 }
+
+.list-prots {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+
+  .prot-item {
+    padding: 3px;
+    border-radius: 5px;
+    background: #c4cecf5d;
+
+    &:hover {
+      .item-desc {
+        display: block;
+      }
+    }
+
+    .item-port {
+      color: #f00;
+      font-size: 12px;
+    }
+
+    .item-desc {
+      font-size: 12px;
+    }
+  }
+}

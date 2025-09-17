@@ -1,58 +1,113 @@
 <script lang="ts" setup>
-import { ref, reactive, onMounted, computed } from "vue";
-import { useRoute } from "vue-router"
+import { onMounted, ref, reactive, computed, watch } from 'vue'
 
-import "./style.scss"
+import * as db from './ruanjian'
 
-const articleHtml = ref<string>("")
-const menus = ref<any[]>([])
-const notes = ref<any[]>([])
+// name
+defineOptions({
+    name: 'custom-name'
+})
 
-const activeId = ref<string>("")
+const pageInfos = reactive({
+    menus: [] as any[],
+    notes: [] as any[],
+})
+
+const nos = ['A', 'B', 'C', 'D']
+
 const contentRef = ref<HTMLElement>()
 
-const currentNotes = computed(() =>
-    notes.value.filter((n: any) => n.id === activeId.value)
-)
+const activeId = ref<string>("")
+const visibleNotes = ref<any[]>([])
 
-const route = useRoute()
-const category = route.query.category as string
-// 动态导入
-const contentModules = import.meta.glob("./*/contents.html", { as: "raw" })
-const menuModules = import.meta.glob("./*/menus.ts", { eager: true })
-const noteModules = import.meta.glob("./*/notes.ts", { eager: true })
-async function loadData() {
-    if (contentModules[`./${category}/contents.html`]) {
-        articleHtml.value = await contentModules[`./${category}/contents.html`]()
-    }
-    if (menuModules[`./${category}/menus.ts`]) {
-        menus.value = (menuModules[`./${category}/menus.ts`] as any).menus
-    }
-    if (noteModules[`./${category}/notes.ts`]) {
-        notes.value = (noteModules[`./${category}/notes.ts`] as any).notes
-    }
-}
+onMounted(() => {
+    pageInfos.notes = [...db.notes]
+    refreshMenus()
+    observeNotes()
+})
 
-// 滚动监听
-onMounted(async () => {
-    await loadData()
-
+const refreshMenus = () => {
     if (!contentRef.value) return
-    const headers = contentRef.value.querySelectorAll("h1, h2, h3")
 
+    const headers = contentRef.value.querySelectorAll('h1, h2, h3, h4')
+    const menus: typeof pageInfos.menus = []
+
+    headers.forEach(header => {
+        // 先取自身的 id，没有的话取父级的 id
+        let id = header.id || header.parentElement?.id || ""
+        const text = header.textContent?.trim() || ""
+
+        let level = 1
+        switch (header.tagName.toLowerCase()) {
+            case 'h1': level = 1; break
+            case 'h2': level = 2; break
+            case 'h3': level = 3; break
+            case 'h4': level = 4; break
+        }
+
+        if (id) menus.push({ id, text, level })
+    })
+
+    pageInfos.menus = menus
+
+    // 更新滚动监听（目录高亮）
     const observer = new IntersectionObserver(
         entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    activeId.value = entry.target.id
+                    const id = entry.target.id
+                    activeId.value = id
+
+                    // 让对应的菜单项始终可见
+                    const el = document.querySelector(`.menus li[data-id="${id}"]`)
+                    if (el) {
+                        el.scrollIntoView({
+                            block: "nearest", // 保证只滚动到刚好可见，不会整个容器跳动
+                            behavior: "smooth"
+                        })
+                    }
                 }
             })
         },
         { rootMargin: "0px 0px -80% 0px", threshold: 0 }
     )
 
-    headers.forEach(h => observer.observe(h))
-})
+    // 监听 div[id]（不监听 h1/h2/h3/h4）
+    contentRef.value.querySelectorAll("div[id]").forEach(el => observer.observe(el))
+}
+
+// 监听 notes 是否在视口
+const observeNotes = () => {
+    if (!contentRef.value) return
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                const id = entry.target.id
+                if (!id) return
+                if (entry.isIntersecting) {
+                    // 进入视口，加入
+                    const notes = pageInfos.notes.filter(n => n.id === id)
+                    if (notes) {
+                        notes.map((note: any) => {
+                            if (!visibleNotes.value.includes(note))
+                                visibleNotes.value.push(note)
+                        })
+                    }
+                } else {
+                    // 离开视口，移除
+                    visibleNotes.value = visibleNotes.value.filter(n => n.id !== id)
+                }
+            })
+        },
+        { threshold: 0.2 } // 至少 20% 出现在视口才算可见
+    )
+
+    pageInfos.notes.forEach(note => {
+        const el = document.getElementById(note.id)
+        if (el) observer.observe(el)
+    })
+}
 
 function scrollTo(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
@@ -60,80 +115,72 @@ function scrollTo(id: string) {
 </script>
 
 <template>
-    <div class="sections">
-        <!-- 左侧主体 -->
-        <div class="content" ref="contentRef" v-html="articleHtml"></div>
-
+    <div class="study-contents">
+        <div class="left">
+            <div class="content" ref="contentRef">
+                <div class="header">
+                    <h1 id="main-title">xxx</h1>
+                    <p class="desc">desc</p>
+                </div>
+                <h2 id="chapter-01">一、xxx</h2>
+                <h3 id="part-0101">1. xxx</h3>
+                <div class="part-contents">
+                    <div id="section-010101">
+                        <h4>1.1 xxx</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="right">
             <!-- 补充信息 -->
-            <aside class="notes" v-if="currentNotes.length">
-                <div v-for="note in currentNotes" :key="note.id" class="note-card">
-                    <h4>{{ note.title }}</h4>
+            <div class="notes">
+                <div v-for="note in visibleNotes" :key="note.id" class="note-card">
+                    <h4>[{{ note.title }}]</h4>
                     <p v-if="note.type === 'text'">{{ note.content }}</p>
-                    <div v-if="note.type === 'example'">
+                    <div v-if="note.type === 'topic'">
                         <p class="question">{{ note.question }}</p>
+                        <template v-if="note.imgs.length > 0">
+                            <img src="/public/docs/study/imgs/10-jiami.png" alt="" srcset="">
+                        </template>
+                        <div class="list-opts" v-for="opts in note.options">
+                            <div class="opt-item" v-for="(opt, index) in opts">
+                                {{ nos[index] }}. {{ opt }}
+                            </div>
+                        </div>
                         <details>
                             <summary>查看答案</summary>
                             <p class="answer">{{ note.answer }}</p>
                         </details>
                     </div>
                 </div>
-            </aside>
+            </div>
             <!-- 目录 -->
-            <aside class="menus">
+            <div class="menus">
                 <ul>
-                    <li v-for="item in menus" :key="item.id" :class="{ active: activeId === item.id }">
-                        <a @click="scrollTo(item.id)">{{ item.text }}</a>
+                    <li v-for="item in pageInfos.menus" :key="item.id" :data-id="item.id"
+                        :class="{ active: activeId === item.id }">
+                        <a @click="scrollTo(item.id)" :class="`level-${item.level}`">{{ item.text }}</a>
                     </li>
                 </ul>
-            </aside>
+            </div>
         </div>
-
     </div>
 </template>
 
-<style scoped>
-.sections {
-    display: flex;
-    gap: 15px;
+<style scoped lang="scss">
+@import url('./style.scss');
 
-    .content {
-        flex: 1;
-    }
-
-    .right {
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
+img {
+    height: unset;
 }
 
-.content {
-    line-height: 1.6;
-}
-
-.notes {
-    flex: 1;
-}
-
-.note-card {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fff;
-}
-
-.menus {
-    padding: 10px;
-    height: 300px;
-    background: #fafafa;
-    border: 1px solid #ddd;
-}
-
-.menus .active a {
-    font-weight: bold;
-    color: #1890ff;
+.img-01 {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 320px;
 }
 </style>
