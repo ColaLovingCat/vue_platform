@@ -172,6 +172,39 @@ function scrollTo(id: string) {
                             <table>
                                 <tbody>
                                     <tr>
+                                        <td>10</td>
+                                        <td>9</td>
+                                        <td>8</td>
+                                        <td>7</td>
+                                        <td>6</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1024</td>
+                                        <td>512</td>
+                                        <td>256</td>
+                                        <td>128</td>
+                                        <td>64</td>
+                                        <td>32</td>
+                                        <td>16</td>
+                                        <td>8</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>8进制<span class="txt-symbol">⇒</span>O (0-7)</p>
+                            <p><b>16进制</b><span class="txt-symbol">⇒</span>H (0-F)</p>
+                            <p><span class="txt-define">转换</span>按权展开求和/整除取余 小数：相乘取整</p>
+                            <table>
+                                <tbody>
+                                    <tr>
                                         <td>A</td>
                                         <td>B</td>
                                         <td>C</td>
@@ -189,37 +222,6 @@ function scrollTo(id: string) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <p>8进制<span class="txt-symbol">⇒</span>O (0-7)</p>
-                            <p><b>16进制</b><span class="txt-symbol">⇒</span>H (0-F)</p>
-                            <p><span class="txt-define">转换</span>按权展开求和/整除取余 小数：相乘取整</p>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>9</td>
-                                        <td>8</td>
-                                        <td>7</td>
-                                        <td>6</td>
-                                        <td>5</td>
-                                        <td>4</td>
-                                        <td>3</td>
-                                        <td>2</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1024</td>
-                                        <td>512</td>
-                                        <td>256</td>
-                                        <td>128</td>
-                                        <td>64</td>
-                                        <td>32</td>
-                                        <td>16</td>
-                                        <td>8</td>
-                                        <td>4</td>
-                                        <td>2</td>
-                                    </tr>
-                                </tbody>
-                            </table>
                             <img class="img-02" src="/docs/study/imgs/02-jinzhi.png" alt="" srcset="">
                         </div>
                     </div>
@@ -234,6 +236,7 @@ function scrollTo(id: string) {
                                 <thead>
                                     <tr>
                                         <th>码制</th>
+                                        <th>-45</th>
                                         <th>定点整数</th>
                                         <th>定点小数</th>
                                     </tr>
@@ -241,39 +244,59 @@ function scrollTo(id: string) {
                                 <tbody>
                                     <tr>
                                         <td>原码</td>
+                                        <td>1 010 1101</td>
                                         <td>
                                             <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
                                             ~
                                             <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <span class="txt-func">-(1-2<span class="txt-sup">-(n-1)</span>)</span>
+                                            ~
+                                            <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>反码</td>
+                                        <td>1 101 0010</td>
                                         <td>
                                             <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
                                             ~
                                             <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <span class="txt-func">-(1-2<span class="txt-sup">-(n-1)</span>)</span>
+                                            ~
+                                            <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>补码</td>
+                                        <td>1 101 0011</td>
                                         <td>
                                             <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
                                             ~
                                             <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <span class="txt-func">-1</span>
+                                            ~
+                                            <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>移码</td>
+                                        <td>0 101 0011</td>
                                         <td>
                                             <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
                                             ~
                                             <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <span class="txt-func">-1</span>
+                                            ~
+                                            <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -325,7 +348,7 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-0104">4. 存储系统</h3>
+                <h3 id="part-0104">4. 层次化存储结构</h3>
                 <div class="part-contents">
                     <div id="section-010401">
                         <h4>4.1 存储器</h4>
@@ -340,6 +363,7 @@ function scrollTo(id: string) {
                                         <td>Cache</td>
                                         <td>
                                             <p>SRAM 静态随机存储器</p>
+                                            <p>按内容存取</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -357,12 +381,8 @@ function scrollTo(id: string) {
                             </table>
                             <p>Cache与主存之间的地址映射由<b>硬件自动</b>完成</p>
                             <p>辅存与主存之间的地址映射由<b>硬件和软件</b>结合完成</p>
-                            <p>SAM：顺序</p>
-                            <p>DAM：直接</p>
-                            <p>RAM：随机，断电丢失</p>
-                            <p>ROM：只读，断电不丢失</p>
                             <p>相联存储器：按<b>内容</b>存取</p>
-                            <p>闪存FLASH：EEPROM，按<b>块</b>为单位，可代替辅存</p>
+                            <p>闪存FLASH：按<b>块</b>为单位，可代替辅存</p>
                             <p>虚拟存储器：主存+辅存</p>
                         </div>
                     </div>
@@ -372,7 +392,7 @@ function scrollTo(id: string) {
                             <p>容量与命中率：在合理成本下提高命中率</p>
                             <p>地址映像：主存地址和Cache地址的转换，是由<b>硬件自动</b>完成</p>
                             <p>替换算法：目的是提高命中率</p>
-                            <p><b>冲突次数</b>：全相联映像 < 组相联映像 < 直接相连映像 </p>
+                            <p>地址映像方法<b>冲突次数</b>：全相联映像 < 组相联映像 < 直接相连映像 </p>
                         </div>
                     </div>
                     <div id="section-010403">
@@ -387,6 +407,23 @@ function scrollTo(id: string) {
                             <p>变址寻址</p>
                         </div>
                     </div>
+                    <div id="section-010404">
+                        <h4>4.4 分类</h4>
+                        <div class="sub-contents">
+                            <p>按工作方式分类：</p>
+                            <p>读写存储器 RAM：随机，断电丢失</p>
+                            <p>只读存储器</p>
+                            <p>固定只读存储器 ROM：只读，断电不丢失</p>
+                            <p>可编程的只读存储器 PROM：一次性写入，写入后不能再修改</p>
+                            <p>可擦除可编程的只读存储器 EPROM</p>
+                            <p>电擦除可编程的只读存储器 EEPROM</p>
+                            <p>闪速存储器 FM：其特性介于EPROM和EEPROM之间，类似于EEPROM</p>
+                            <p>按寻址方式分类</p>
+                            <p>随机存储器 RAM</p>
+                            <p>顺序存储器 SAM</p>
+                            <p>直接存储器 DAM</p>
+                        </div>
+                    </div>
                 </div>
                 <h3 id="part-0105">5. 输入输出技术</h3>
                 <div class="part-contents">
@@ -396,7 +433,7 @@ function scrollTo(id: string) {
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>程序查询方式</td>
+                                        <td>直接程序查询方式</td>
                                         <td>
                                             <p>CPU和I/O设备只能<b>串行</b>工作，轮询检查</p>
                                             <p>一次只能读写一个字</p>
@@ -413,7 +450,7 @@ function scrollTo(id: string) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>直接存储器方式(DMA)</td>
+                                        <td>直接存储器存取方式(DMA)</td>
                                         <td>
                                             <p>CPU和I/O设备可并行工作</p>
                                             <p>连接主存和外设，仅在传送开始和结束时需<b>CPU干预</b></p>
@@ -445,10 +482,10 @@ function scrollTo(id: string) {
                         <div id="section-010601">
                             <h4>6.1 Flynn分类法</h4>
                             <div class="sub-contents">
-                                <p>单指令流、单数据流</p>
-                                <p>单指令流、多数据流</p>
-                                <p>多指令流、单数据流</p>
-                                <p>多指令流、多数据流</p>
+                                <p>单指令流、单数据流 SISD</p>
+                                <p>单指令流、多数据流 SIMD</p>
+                                <p>多指令流、单数据流 MISD</p>
+                                <p>多指令流、多数据流 MIMD</p>
                             </div>
                         </div>
                         <div id="section-010602">
@@ -506,10 +543,10 @@ function scrollTo(id: string) {
                             <h4>6.3 流水线技术</h4>
                             <div class="sub-contents">
                                 <p>执行时间：首条总时间+(n-1)*最长操作时间</p>
-                                <p>加速比：不采用和采用的时间比</p>
+                                <p><b>加速比</b>：不采用和采用的时间比</p>
                                 <p>操作周期：最长操作时间</p>
                                 <p>吞吐率：1/最长操作时间</p>
-                                <p><b>n条指令的吞吐率：n/单条指令的执行时间+(n-1)*最长的时间段</b></p>
+                                <p><b>n条指令的吞吐率 TP <i class="txt-en">Though Put rate</i>：n/单条指令的执行时间+(n-1)*最长的时间段</b></p>
                                 <img class="img-04" src="/docs/study/imgs/04-liushui.png" alt="" srcset="">
                             </div>
                         </div>
@@ -1037,8 +1074,8 @@ function scrollTo(id: string) {
                     <div id="section-090302">
                         <h4>3.2 页面置换算法</h4>
                         <div class="sub-contents">
-                            <p>时间局限性：循环操作</p>
-                            <p>空间局限性：顺序存储</p>
+                            <p>时间局限性：循环操作。如果程序中的某条指令一旦被执行，则不久的将来该指令可能再次被执行</p>
+                            <p>空间局限性：顺序存储。指一旦程序访问了某个存储单元，则在不久的将来，其附近的存储单元也最有可能被访问</p>
                             <p>最近最少使用算法：局部性原理</p>
                             <p>状态位/访问位/修改位</p>
                             <p>只淘汰在内存中(1)，先淘汰未访问过的(0)，再淘汰未修改过的(0)</p>
@@ -1250,9 +1287,273 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-10">结构化开发</h2>
-                <h2 id="chapter-11">软件工程</h2>
-                <h2 id="chapter-12">信息安全</h2>
+                <h2 id="chapter-10">十、结构化开发</h2>
+
+                <h2 id="chapter-11">十一、软件工程</h2>
+                <h3 id="part-1101">1. 软件开发模型</h3>
+                <div class="part-contents">
+                    <div id="section-110101">
+                        <h4>1.1 瀑布模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110102">
+                        <h4>1.2 V模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110103">
+                        <h4>1.3 增量模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110104">
+                        <h4>1.4 演化模型-原型模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110105">
+                        <h4>1.5 演化模型-螺旋模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110106">
+                        <h4>1.6 喷泉模型</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-110107">
+                        <h4>1.7 统一过程模型 (UP/RUP)</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1102">2. 软件开发方法</h3>
+                <div class="part-contents">
+                    <div id="section-110201">
+                        <h4>2.1 方法</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1103">3. 软件需求分析</h3>
+                <div class="part-contents">
+                    <div id="section-110301">
+                        <h4>3.1 需求分析</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1104">4. 软件设计</h3>
+                <div class="part-contents">
+                    <div id="section-110401">
+                        <h4>4.1 需求分析</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1105">5. 软件测试</h3>
+                <div class="part-contents">
+                    <div id="section-110501">
+                        <h4>5.1 需求分析</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1106">6. 软件维护</h3>
+                <div class="part-contents">
+                    <div id="section-110601">
+                        <h4>6.1 需求分析</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1107">7. 软件过程改进</h3>
+                <div class="part-contents">
+                    <div id="section-110701">
+                        <h4>7.1 能力成熟度模型 CMM</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>初始级</td>
+                                        <td>软件过程的特点是杂乱无章，有时甚至很混，几乎没有明确定义的步骤，项目的成功完全依赖个人努力和英雄式核心任务的作用</td>
+                                    </tr>
+                                    <tr>
+                                        <td>可重复级</td>
+                                        <td>建立了基本的项目管理过程和实践来跟踪项目费用、进度和功能特性，有必要的过程准则来重复以前在同类项目中的成功</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已定义级</td>
+                                        <td>管理和工程两方面的软件过程已文档化、标准化，并综合成整个软件开发组织的标准软件过程。所有项目都采用根据实际情况修改后得到的标准软件过程来开发和维护软件
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>已管理级</td>
+                                        <td>指定了软件过程和产品质量的详细度量标准。软件过程的产品质量都被开发组织的成员所理解和控制</td>
+                                    </tr>
+                                    <tr>
+                                        <td>优化级</td>
+                                        <td>加强了定量分析，通过来自过程质量反馈和来自新观念、新技术的反馈使过程能不断持续地改进</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-110702">
+                        <h4>7.2 能力成熟度模型集成 CMMI</h4>
+                        <div class="sub-contents">
+                            <p>阶段式模型</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>初始级</td>
+                                        <td>过程不可预测且缺乏控制</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已管理级</td>
+                                        <td>过程为项目服务</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已定义级</td>
+                                        <td>过程为组织服务</td>
+                                    </tr>
+                                    <tr>
+                                        <td>定量管理级</td>
+                                        <td>过程已度量和控制</td>
+                                    </tr>
+                                    <tr>
+                                        <td>优化级</td>
+                                        <td>集中于过程改进</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>连续式模型：过程域能力等级CL</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>未完成级</td>
+                                        <td>CL0</td>
+                                        <td>过程域未执行或未得到CL1中定义的目标</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已执行级</td>
+                                        <td>CL1</td>
+                                        <td>其共性目标是过程将可标识的输入工作产品转换成可标识的输出工作产品，已实现支持过程域的特定目标</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已管理级</td>
+                                        <td>CL2</td>
+                                        <td>其共性目标集中于已管理的过程的制度化，针对单个过程实例的额能力</td>
+                                    </tr>
+                                    <tr>
+                                        <td>已定义级</td>
+                                        <td>CL3</td>
+                                        <td>其共性目标集中于已定义的过程的制度化，关注过程的组织标准化和部署</td>
+                                    </tr>
+                                    <tr>
+                                        <td>定量管理级</td>
+                                        <td>CL4</td>
+                                        <td>其共性目标集中于可定量管理的过程的制度化</td>
+                                    </tr>
+                                    <tr>
+                                        <td>优化级</td>
+                                        <td>CL5</td>
+                                        <td>使用量化手段改变和优化过程域，以满足客户要求的改变和持续改进计划中的过程域的功效</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1108">8. 软件项目管理</h3>
+                <div class="part-contents">
+                    <p>整合管理、范围管理、时间管理、成本管理、质量管理、人力资源管理、通信管理、风险管理、采购管理、相关方管理</p>
+                    <div id="section-110801">
+                        <h4>8.1 时间管理</h4>
+                        <div class="sub-contents">
+                            <p>甘特图/<b>Gantt图</b></p>
+                            <img class="img-28" style="width: 250px;" src="/docs/study/imgs/28-gantt.png" alt=""
+                                srcset="">
+                            <p>能够清晰地描述每个任务从何时开始、到何时结束，任务的进展情况以及各个任务之间的并行性。但是它不能清晰地反映出各任务之间的依赖关系，难以确定整个项目的关键所在，也不能反映计划中有潜力的部分
+                            </p>
+                            <p>项目计划评审技术图/<b>PERT图</b>：不能反映任务之间的并行关系</p>
+                            <img class="img-27" style="width: 150px;" src="/docs/study/imgs/27-pert.png" alt=""
+                                srcset="">
+                            <p>正推取大值，反推取小值</p>
+                            <p>松弛时间：最迟-最早</p>
+                            <p>关键路径：项目的最短工期</p>
+                            <p><b>项目活动图</b>：里程碑、活动、活动时间</p>
+                            <img class="img-26" style="width: 380px;" src="/docs/study/imgs/26-pert.png" alt=""
+                                srcset="">
+                            <p>画项目活动图</p>
+                        </div>
+                    </div>
+                    <div id="section-110801">
+                        <h4>8.1 风险管理</h4>
+                        <div class="sub-contents">
+                            <p><span class="txt-define">特性</span>不确定性、损失</p>
+                            <p><span class="txt-define">分类</span>项目风险、技术风险、商业风险</p>
+                            <p>风险识别：建立风险条目检查表</p>
+                            <p>风险预测：风险暴露=发生概率*影响后果(本质、范围、时间)</p>
+                            <p>风险评估：定义风险参照水准，成本、进度、性能</p>
+                            <p>风险控制：风险避免(主动)、风险监控、RMMM计划/风险管理策略</p>
+                            <p>风险曝光度 <i class="txt-en">Risk Exposure</i>：计算方法是风险出现的概率乘以风险可能造成的损失</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1109">9. 软件质量保证</h3>
+                <div class="part-contents">
+                    <div id="section-110901">
+                        <h4>9.1 功能性</h4>
+                        <div class="sub-contents">
+                            <p>适合性、准确性、互用性、依从性、安全性</p>
+                        </div>
+                    </div>
+                    <div id="section-110902">
+                        <h4>9.2 可靠性</h4>
+                        <div class="sub-contents">
+                            <p>成熟性、容错性、易恢复性</p>
+                        </div>
+                    </div>
+                    <div id="section-110903">
+                        <h4>9.3 易使用性</h4>
+                        <div class="sub-contents">
+                            <p>易理解性、易学性、易操作性</p>
+                        </div>
+                    </div>
+                    <div id="section-110904">
+                        <h4>9.4 效率</h4>
+                        <div class="sub-contents">
+                            <p>时间特性、资源特性</p>
+                        </div>
+                    </div>
+                    <div id="section-110905">
+                        <h4>9.5 可维护性</h4>
+                        <div class="sub-contents">
+                            <p>易分析性、易改变性、易测试性、稳定性</p>
+                        </div>
+                    </div>
+                    <div id="section-110906">
+                        <h4>9.6 可移植性</h4>
+                        <div class="sub-contents">
+                            <p>适应性、一致性、易安装性、易替换性</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-12">十二、信息安全</h2>
                 <h3 id="part-1201">1. 安全保障</h3>
                 <div class="part-contents">
                     <div id="section-120101">
@@ -1264,7 +1565,22 @@ function scrollTo(id: string) {
                     <div id="section-120102">
                         <h4>1.2 网络安全</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>SSL(安全套接层)：传输层安全协议。端口号443</p>
+                            <p>TLS(传输层安全协议)：是SSL3.0的后续版本</p>
+                            <p>HTTPS：使用SSL加密算法的HTTP</p>
+                            <p>PGP(优良保密协议)：基于RSA公钥加密体系的邮件加密软件</p>
+                            <p>IPSec：加密IP数据报文</p>
+                            <p>PP2P：加密链路层</p>
+                            <p>IGMP：管理多播组成员关系的核心协议，因特网主管理协议</p>
+                            <p>SSH：终端设备与远程站点建立安全连接的协议</p>
+                            <p>Telnet：应用层网络协议，用于远程登录，不安全</p>
+                            <p>RFB：远程登录图形化用户界面</p>
+                            <p>WEP：有线等效保密协议</p>
+                            <p>内部网关协议：RIP/OSPF/IS-IS/IGRP/EIGRP</p>
+                            <p>外部网关协议：BGP</p>
+                            <p>数据库容灾：异地备用数据接管无法正常工作的数据库，确保服务正常运行和信息安全转移。属于系统安全和应用安全</p>
+                            <p>信息安全：机密性(读)、完整性(改)、可用性、可控性、可审查性</p>
+                            <p>公共端口号：0-1023</p>
                         </div>
                     </div>
                     <div id="section-120103">
@@ -1342,7 +1658,7 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-13">计算机网络</h2>
+                <h2 id="chapter-13">十三、计算机网络</h2>
                 <h3 id="part-1301">1. OSI/RM 七层模型</h3>
                 <div class="part-contents">
                     <div id="section-130101">
@@ -1472,6 +1788,40 @@ function scrollTo(id: string) {
                                         <td>多端口中继器，广播转发</td>
                                         <td></td>
                                         <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-130103">
+                        <h4>1.3 路由</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>直连网络ID</td>
+                                        <td>2</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>远程网络ID</td>
+                                        <td>2</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>主机路由</td>
+                                        <td>1</td>
+                                        <td>子网掩码255.255.255.255</td>
+                                    </tr>
+                                    <tr>
+                                        <td>默认路由</td>
+                                        <td>3</td>
+                                        <td>目标网络和网络掩码都是0.0.0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>持久路由</td>
+                                        <td></td>
+                                        <td>route add -p</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1643,7 +1993,7 @@ function scrollTo(id: string) {
                                                 <div class="prot-item">
                                                     <div class="item-name">PPP</div>
                                                 </div>
-                                                  <div class="prot-item">
+                                                <div class="prot-item">
                                                     <div class="item-name">CSMA/CD</div>
                                                 </div>
                                             </div>
@@ -1657,13 +2007,57 @@ function scrollTo(id: string) {
                             </table>
                         </div>
                     </div>
+                    <div id="section-130202">
+                        <h4>2.2 传输层协议</h4>
+                        <div class="sub-contents">
+                            <p>都基于IP协议的传输层协议，可以端口寻址</p>
+                            <p>TCP：提供了一个可靠的、面向连接的、全双工的数据传输服务</p>
+                            <p>可靠传输，连接管理，差错检验和重传，流量控制(可变大小的滑动窗口协议)，拥塞控制</p>
+                            <p>三次握手：SYN>SYN-ACK>ACK</p>
+                            <p>UDP：无连接，不可靠，高效，开销小，适用于实时应用。</p>
+                            <p>包头简单，无流量控制，有助于提高传输的高速率性</p>
+                            <p>VoIP：视频通话，允许某种程度上的数据丢失</p>
+                        </div>
+                    </div>
+                    <div id="section-130204">
+                        <h4>2.4 网际层协议</h4>
+                        <div class="sub-contents">
+                            <p>IP：逻辑寻址，路由选择，数据包分片于重组，IPv4/IPv6</p>
+                            <p>ICMP：网络诊断与错误报错</p>
+                            <p>ARP：地址解析协议，IP转MAC，局域网通信，广播发送请求，单播应答响应</p>
+                            <p>RARP：反地址解析协议，MAC转IP，被DHCP取代</p>
+                        </div>
+                    </div>
+                    <div id="section-130203">
+                        <h4>2.3 应用层协议</h4>
+                        <div class="sub-contents">
+                            <p>DHCP：动态主机配置协议，集中管理/分配IP地址</p>
+                            <p>客户机/服务器模型</p>
+                            <p>客户端可从服务器获取本机IP地址、DNS服务器地址、DHCP服务器地址和默认网关地址</p>
+                            <p>DHCP无效地址：169.254.x.x(Win)/0.0.0.0(Linux)</p>
+                            <p>DNS：域名解析</p>
+                            <p>主机向本地域名服务器的查询采用递归查询：服务器必须回答目标IP与域名的映射关系</p>
+                            <p>本地域名服务器向根域名服务器的查询采用迭代查询：服务器收到一次迭代查询回复一次结果。结果可能为其他DNS服务器的地址</p>
+                        </div>
+                    </div>
                 </div>
                 <h3 id="part-1303">3. 计算机网络分类</h3>
                 <div class="part-contents">
                     <div id="section-130301">
                         <h4>3.1 按分布范围分</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>局域网 LAN</p>
+                            <p>域域网 MAN</p>
+                            <p>广域网 WAN</p>
+                            <p>因特网</p>
+                        </div>
+                    </div>
+                    <div id="section-130302">
+                        <h4>3.2 按拓扑结构分</h4>
+                        <div class="sub-contents">
+                            <p>总线型</p>
+                            <p>星型</p>
+                            <p>环型</p>
                         </div>
                     </div>
                 </div>
@@ -1681,22 +2075,102 @@ function scrollTo(id: string) {
                     <div id="section-130501">
                         <h4>5.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>IP地址中，全0代表的是网络，全1代表的是广播</p>
+                            <p>分为 网络地址+主机地址</p>
+                            <p>子网掩码：A类占8位，B类占16位，C类占24位</p>
                         </div>
                     </div>
                     <div id="section-130502">
                         <h4>5.2 子网划分</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>例：将B类IP地址168.195.0.0划分为27个子网，子网掩码为多少</p>
+                            <p>B类地址则前16位是网络号，后16位会主机号。需要取5个主机位(32>27)。</p>
+                            <p>则子网掩码为 1111 1111 1111 1111 1111 1000 0000 0000 即 255.255.248.0</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>128</td>
+                                        <td>64</td>
+                                        <td>32</td>
+                                        <td>16</td>
+                                        <td>8</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-130503">
+                        <h4>5.3 IPv6</h4>
+                        <div class="sub-contents">
+                            <p>地址长度为128位，IPv4只有32位，地址增大了2^96倍</p>
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1306">6. Web</h3>
+                <h3 id="part-1306">6. 其他服务</h3>
                 <div class="part-contents">
                     <div id="section-130601">
-                        <h4>6.1 概念</h4>
+                        <h4>6.1 电子邮件服务</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>E-mail系统基于客户端/服务器(C/S)模式</p>
+                            <p>SMTP：简单邮件传输协议，只能传输ASCII码文本和文字附件</p>
+                            <p>+MIME：多用途Internet邮件扩展类型，扩展电子邮件类型</p>
+                            <p>+PEM：增强私密邮件保护协议</p>
+                            <p>POP3：邮件收取协议</p>
+                            <p>Outlook Express：免费电子邮件客户端</p>
+                        </div>
+                    </div>
+                    <div id="section-130602">
+                        <h4>6.2 Web</h4>
+                        <div class="sub-contents">
+                            <p>HTTP状态码：200/404/500</p>
+                            <p>URL：协议名://主机名.域名.域名后缀.域名分类/目录/网页</p>
+                            <p>组织模式：com/edu/net</p>
+                            <p>顶级域：cn/tw/uk/jp</p>
+                            <p>浏览器输入地址：本地hosts文件>本地DNS缓存>本地DNS服务器>根域名服务器>顶级域名服务器>权限域名服务器</p>
+                            <p>主域名服务器：本地DNS缓存>本地hosts文件>本地数据库>转发域服务器</p>
+                            <p>输入网址>URL解析>检查缓存>DNS查询，获取目标IP></p>
+                            <p>建立TCP连接三次握手>TLS/SSL握手>浏览器发送请求报文>服务器处理请求，返回响应报文>浏览器解析响应并渲染页面>断开连接</p>
+                        </div>
+                    </div>
+                    <div id="section-130603">
+                        <h4>6.3 网络接入技术</h4>
+                        <div class="sub-contents">
+                            <p>Wifi</p>
+                            <p>蓝牙 <i class="txt-en">Bluetooth</i> 覆盖范围最小，通信距离最短</p>
+                            <p>红外</p>
+                            <p>WAPI</p>
+                        </div>
+                    </div>
+                    <div id="section-130604">
+                        <h4>6.4 Windows命令</h4>
+                        <div class="sub-contents">
+                            <p>ipconfig/release：释放</p>
+                            <p>ipconfig/flushdns：清除/刷新本地DNS缓存</p>
+                            <p>ipconfig/displaydns：显示本地DNS</p>
+                            <p>ipconfig/registerdns：注册</p>
+                            <p>ipconfig：显示网络适配器</p>
+                            <p>ipconfig/all：显示TCP/IP配置信息，包括DHCP</p>
+                            <p>ipconfig/renew：重新申请IP地址</p>
+                            <p>ping：127.0.0.1>本机IP>默认网关>远程主机</p>
+                            <p>msconfig：Win配置的应用程序</p>
+                            <p>cmd：命令提示符</p>
+                            <p>tracert：路由跟踪实用程序</p>
+                            <p>traceroute：追踪数据包从源到目的地在IP网络上的路径</p>
+                            <p>netstat：显示网络连接、路由表和网络接口信息</p>
+                            <p>nslookup：域名查询</p>
+                        </div>
+                    </div>
+                    <div id="section-130605">
+                        <h4>6.5 补充</h4>
+                        <div class="sub-contents">
+                            <p>Linux根目录：/</p>
+                            <p>chmod：更新文件权限</p>
+                            <p>帧中继：高速分组交换技术</p>
+                            <p>VLAN</p>
+                            <p>层次化局域网模型：核心层、汇聚层、接入层</p>
                         </div>
                     </div>
                 </div>
