@@ -22,6 +22,14 @@ const contentRef = ref<HTMLElement>()
 const activeId = ref<string>("")
 const visibleNotes = ref<any[]>([])
 
+const codeConfig = (language: string) => {
+    return {
+        language,
+        theme: 'vs-dark',
+        readOnly: true,
+    }
+}
+
 onMounted(() => {
     pageInfos.notes = [...db.notes]
     refreshMenus()
@@ -143,7 +151,7 @@ function scrollTo(id: string) {
                             <p><b>累加寄存器(AC)</b> <i class="txt-en">Accumulator Register</i>：为ALU提供数据和暂存运算结果</p>
                             <p><b>数据缓冲寄存器(DR)</b> ：内存<span class="txt-symbol">⇔</span>CPU之间进行数据中转</p>
                             <p><b>状态条件寄存器(PSW)</b> ：更新指令执行的状态标志和控制标志，保存和记录特定的状态信息和条件</p>
-                            <img class="img-01" src="/docs/study/imgs/01-cpu.png" alt="" srcset="">
+                            <img class="img-01" src="/docs/study/imgs/01-cpu.png">
                         </div>
                     </div>
                     <div id="section-010103">
@@ -224,7 +232,7 @@ function scrollTo(id: string) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img class="img-02" src="/docs/study/imgs/02-jinzhi.png" alt="" srcset="">
+                            <img class="img-02" src="/docs/study/imgs/02-jinzhi.png">
                         </div>
                     </div>
                     <div id="section-010202">
@@ -315,7 +323,7 @@ function scrollTo(id: string) {
                             <p>阶码决定数值范围，尾数决定精度</p>
                             <p>运算时先<b>对阶</b>：将小阶向大阶对齐，尾数右移、尾数计算、格式化</p>
                             <p>R位阶码移码+M位尾数补码 可表示范围:</p>
-                            <img class="img-03" src="/docs/study/imgs/03-fanwei.png" alt="" srcset="">
+                            <img class="img-03" src="/docs/study/imgs/03-fanwei.png">
                         </div>
                     </div>
                 </div>
@@ -563,7 +571,7 @@ function scrollTo(id: string) {
                                 <p>操作周期：最长操作时间</p>
                                 <p>吞吐率：1/最长操作时间</p>
                                 <p><b>n条指令的吞吐率 TP <i class="txt-en">Though Put rate</i>：n/单条指令的执行时间+(n-1)*最长的时间段</b></p>
-                                <img class="img-04" src="/docs/study/imgs/04-liushui.png" alt="" srcset="">
+                                <img class="img-04" src="/docs/study/imgs/04-liushui.png">
                             </div>
                         </div>
                         <div id="section-010604">
@@ -606,14 +614,14 @@ function scrollTo(id: string) {
                         <div class="sub-contents">
                             <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
                             <p><b>对称加密</b>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
-                            <img class="img-06" src="/docs/study/imgs/06-jiami.png" alt="" srcset="">
+                            <img class="img-06" src="/docs/study/imgs/06-jiami.png">
                             <p><b>非对称加密</b>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
-                            <img class="img-07" src="/docs/study/imgs/07-jiami.png" alt="" srcset="">
+                            <img class="img-07" src="/docs/study/imgs/07-jiami.png">
                             <p><b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要</p>
-                            <img class="img-08" src="/docs/study/imgs/08-jiami.png" alt="" srcset="">
+                            <img class="img-08" src="/docs/study/imgs/08-jiami.png">
                             <p>数据完整性、一致性，不可逆，唯一性</p>
                             <p><b>数字签名</b>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密</p>
-                            <img class="img-09" src="/docs/study/imgs/09-jiami.png" alt="" srcset="">
+                            <img class="img-09" src="/docs/study/imgs/09-jiami.png">
                             <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
                             <p>用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性</p>
                             <table>
@@ -632,7 +640,7 @@ function scrollTo(id: string) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img class="img-05" src="/docs/study/imgs/05-sign.png" alt="" srcset="">
+                            <img class="img-05" src="/docs/study/imgs/05-sign.png">
                         </div>
                     </div>
                     <div id="section-010802">
@@ -762,7 +770,7 @@ function scrollTo(id: string) {
                             <p><b>目标代码生成</b> <i class="txt-en">Code Generation</i>：与目标机器的体系结构相关，包含分配寄存器，指令选择、代码布局等</p>
                             <p><b>符号表管理</b>：不断收集记录和使用的相关符号类型和特征等必要信息，辅助语义的正确性检查和代码生成</p>
                             <p>出错处理</p>
-                            <img class="img-11" src="/docs/study/imgs/11-bianyi.png" alt="" srcset="">
+                            <img class="img-11" src="/docs/study/imgs/11-bianyi.png">
                         </div>
                     </div>
                     <div id="section-020203">
@@ -815,7 +823,7 @@ function scrollTo(id: string) {
                             <p>确定的有限自动机 (DFA)</p>
                             <p>不确定的有限自动机 (NFA)：状态转移不确定</p>
                             <p>下图可表示以1为结尾的正规集</p>
-                            <img class="img-12" src="/docs/study/imgs/12-youxian.png" alt="" srcset="">
+                            <img class="img-12" src="/docs/study/imgs/12-youxian.png">
                         </div>
                     </div>
                     <div id="section-020205">
@@ -1128,9 +1136,9 @@ function scrollTo(id: string) {
                         <h4>4.1 图 <i class="txt-en">Graph</i></h4>
                         <div class="sub-contents">
                             <p>由顶点V和连接这些节点的边E组成的集合</p>
-                            <img class="img-53" style="width: 450px;" src="/docs/study/imgs/53-tu.png" alt="" srcset="">
+                            <img class="img-53" style="width: 450px;" src="/docs/study/imgs/53-tu.png">
                             <p>顶点数n、边数e、各顶点的度D(v)之间的关系</p>
-                            <img class="img-54" style="width: 150px;" src="/docs/study/imgs/54-tu.png" alt="" srcset="">
+                            <img class="img-54" style="width: 150px;" src="/docs/study/imgs/54-tu.png">
                             <table>
                                 <tbody>
                                     <tr>
@@ -1156,14 +1164,14 @@ function scrollTo(id: string) {
                     <div id="section-030402">
                         <h4>4.2 存储结构</h4>
                         <div class="sub-contents">
-                            <img class="img-55" style="width: 450px;" src="/docs/study/imgs/55-tu.png" alt="" srcset="">
+                            <img class="img-55" style="width: 450px;" src="/docs/study/imgs/55-tu.png">
                         </div>
                     </div>
                     <div id="section-030403">
                         <h4>4.3 遍历</h4>
                         <div class="sub-contents">
                             <p>从图的任意结点出发，沿着某条搜索路径，对图中所有结点进行访问且只访问一次</p>
-                            <img class="img-56" style="width: 250px;" src="/docs/study/imgs/56-tu.png" alt="" srcset="">
+                            <img class="img-56" style="width: 250px;" src="/docs/study/imgs/56-tu.png">
                             <p>深度优先遍历 DFS</p>
                             <p>1.首先访问出发顶点V</p>
                             <p>2.依次从V出发搜索V的任意一个邻接点W</p>
@@ -1193,7 +1201,7 @@ function scrollTo(id: string) {
                             <p>活动最晚开始时间ite：保证弧尾事件的最晚发生时间不拖后</p>
                             <p>关键路径：如果弧的最早开始时间等于最晚开始时间，那么称这条弧所代表的活动为关键活动，由关键活动所构成的路径称为关键路径</p>
                             <p>最短路径：从连接图中的某个顶点出发到达到达另外一个顶点所经过的边的权重和最小的那一条路径</p>
-                            <img class="img-57" style="width: 250px;" src="/docs/study/imgs/57-tu.png" alt="" srcset="">
+                            <img class="img-57" style="width: 250px;" src="/docs/study/imgs/57-tu.png">
                         </div>
                     </div>
                     <div id="section-030405">
@@ -1664,19 +1672,38 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-07">七、UML</h2>
+                <h2 id="chapter-07">七、统一建模语言 UML</h2>
                 <h3 id="part-0701">1. 概念</h3>
                 <div class="part-contents">
                     <div id="section-070101">
                         <h4>1.1 事物</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>结构事物</p>
+                            <img class="img-60" style="width: 350px;" src="/docs/study/imgs/60-uml.png">
+                            <p>行为事物</p>
+                            <img class="img-61" style="width: 250px;" src="/docs/study/imgs/61-uml.png">
+                            <p>分组事物</p>
+                            <p>注释事物</p>
+                            <img class="img-62" style="width: 250px;" src="/docs/study/imgs/62-uml.png">
                         </div>
                     </div>
                     <div id="section-070102">
                         <h4>1.2 关系</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>依赖关系：一个事物的语义依赖另一个事物，临时引用</p>
+                            <img class="img-63" style="width: 250px;" src="/docs/study/imgs/63-uml.png">
+                            <p>关联关系：长期引用，可标注重复度(多重度)/角色</p>
+                            <p>单向关联</p>
+                            <p>关联类：多对多</p>
+                            <img class="img-64" style="width: 250px;" src="/docs/study/imgs/64-uml.png">
+                            <p>聚集：整体和部分间的结构关系</p>
+                            <p>聚合：松散绑定，整体消失部分仍存在</p>
+                            <p>组合：生命周期绑定，整体消失部分也消失</p>
+                            <img class="img-65" style="width: 250px;" src="/docs/study/imgs/65-uml.png">
+                            <p>泛化关系(继承)：一般/特殊的关系，子类/父类之间的关系</p>
+                            <img class="img-66" style="width: 250px;" src="/docs/study/imgs/66-uml.png">
+                            <p>实现关系：一个类元指定了另一个类元保证执行的契约</p>
+                            <img class="img-67" style="width: 250px;" src="/docs/study/imgs/67-uml.png">
                         </div>
                     </div>
                 </div>
@@ -1685,55 +1712,96 @@ function scrollTo(id: string) {
                     <div id="section-070201">
                         <h4>2.1 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>静态设计视图</p>
+                            <p>展现了一组对象、接口、协作和它们之间的关系</p>
+                            <p>权限修饰符：+public/-private/#protected/~包</p>
+                            <p>非直接对象/直接对象</p>
+                            <p>斜体：抽象类/方法</p>
+                            <img class="img-68" style="width: 450px;" src="/docs/study/imgs/68-uml.png">
                         </div>
                     </div>
                     <div id="section-070202">
                         <h4>2.2 对象图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>静态视图或静态进程视图</p>
+                            <p>某一时刻一组对象(对象名:类名/下划线/属性值)以及之间的关系(链)</p>
+                            <img class="img-69" style="width: 450px;" src="/docs/study/imgs/69-uml.png">
                         </div>
                     </div>
                     <div id="section-070203">
                         <h4>2.3 用例图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>静态用例视图</p>
+                            <p>对系统的语境/需求建模</p>
+                            <p>一组用例(椭圆)、参与者(人员)以及之间的关系(箭头)</p>
+                            <p>包含关系< < include>>：虚线箭头</p>
+                            <img class="img-70" style="width: 250px;" src="/docs/study/imgs/70-uml.png">
+                            <p>扩展关系< < extend>>：虚线箭头</p>
+                            <img class="img-71" style="width: 250px;" src="/docs/study/imgs/71-uml.png">
+                            <p>泛化关系：实线空心箭头</p>
+                            <img class="img-72" style="width: 250px;" src="/docs/study/imgs/72-uml.png">
+                            <p>用例图</p>
+                            <img class="img-73" style="width: 450px;" src="/docs/study/imgs/69-uml.png">
                         </div>
                     </div>
                     <div id="section-070204">
-                        <h4>2.4 序列图</h4>
+                        <h4>2.4 序列图(顺序图/时序图)</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>动态/交互</p>
+                            <p>强调消息时间顺序的交互图，是场景的图形化表示，有对象生命线和控制焦点。水平为对象，垂直为按时间顺序的消息</p>
+                            <p>同步/调用消息、异步消息(半箭头)、返回消息(虚线)</p>
+                            <p>对象需实现的方法</p>
+                            <img class="img-74" style="width: 450px;" src="/docs/study/imgs/74-uml.png">
                         </div>
                     </div>
                     <div id="section-070205">
-                        <h4>2.5 通信图</h4>
+                        <h4>2.5 通信图(协作图)</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>动态/交互</p>
+                            <p>强调参加交互的接收和发送消息的对象的结构组织，有路径和顺序号，可嵌套</p>
+                            <img class="img-75" style="width: 450px;" src="/docs/study/imgs/75-uml.png">
                         </div>
                     </div>
                     <div id="section-070206">
                         <h4>2.6 状态图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>动态视图</p>
+                            <p>展现一个状态机，由状态、活动、转换/迁移、事件组成，强调对象行为的时间顺序</p>
+                            <p>状态：初态-中间态-终态，圆角矩形：状态名+活动</p>
+                            <p>活动可以在状态内执行，也可以在转换时执行</p>
+                            <p>组合状态(超状态)+嵌套状态(子状态)/并发状态</p>
+                            <p>标准事件：entry/exit/do</p>
+                            <p>时间时间：when/after</p>
+                            <p>当事件触发/监护条件为真/状态内部活动执行完时，状态变迁</p>
+                            <p>描述一个对象在多个用例中的行为，对反应型对象建模</p>
+                            <img class="img-76" style="width: 450px;" src="/docs/study/imgs/76-uml.png">
                         </div>
                     </div>
                     <div id="section-070207">
                         <h4>2.7 活动图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>动态视图</p>
+                            <p>是一种特殊的状态图，展现了在系统内从一个活动到另一个活动的流程，强调对象间的控制流程，对工作流/操作建模</p>
+                            <p>包含：初态/活动/流/合并分岔/合并汇合/分支/监护表达式</p>
+                            <img class="img-77" style="width: 450px;" src="/docs/study/imgs/77-uml.png">
                         </div>
                     </div>
                     <div id="section-070208">
-                        <h4>2.8 构件图</h4>
+                        <h4>2.8 构件图(组件图)</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>静态实现视图/物理</p>
+                            <p>一组构件/组件之间的组织和依赖</p>
+                            <p>供接口：整圆</p>
+                            <p>需接口：半圆</p>
+                            <img class="img-78" style="width: 450px;" src="/docs/study/imgs/78-uml.png">
                         </div>
                     </div>
                     <div id="section-070209">
                         <h4>2.9 部署图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>静态部署视图/物理</p>
+                            <p>对面向对象系统的物理方面建模的方法</p>
+                            <p>展现系统的软件和硬件之间的物理关系，在实施阶段使用</p>
                         </div>
                     </div>
                 </div>
@@ -1743,6 +1811,7 @@ function scrollTo(id: string) {
                     <div id="section-080101">
                         <h4>1.1 概念</h4>
                         <div class="sub-contents">
+                            <p>主要关注软件系统的设计，与具体的实现语言无关</p>
                             <p>在特定问题领域中被使用，涉及多种设计元素，以面向对象方式进行设计，遵循设计原则，复用成功的设计和体系结构</p>
                             <p>基本要素：模式名称、问题(应该在何时使用模式)、解决方案(设计的内容)、效果(模式应用的效果)</p>
                         </div>
@@ -1818,19 +1887,24 @@ function scrollTo(id: string) {
                     <div id="section-080201">
                         <h4>2.1 概念</h4>
                         <div class="sub-contents">
+                            <p>抽象产品是所有产品的父类，定义产品的主要特性和功能</p>
+                            <p>具体产品则实现抽象产品中声明的抽象方法</p>
+                            <p>具体工厂负责实现创建产品的静态方法，从而获取产品</p>
+                            <p>缺点是当增加新产品时需要修改工厂类的代码</p>
 
                         </div>
                     </div>
                     <div id="section-080202">
                         <h4>2.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
                         </div>
                     </div>
                     <div id="section-080203">
                         <h4>2.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jiandan_01"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1839,19 +1913,24 @@ function scrollTo(id: string) {
                     <div id="section-080301">
                         <h4>3.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>定义一个用于创建对象的接口，由子类决定实例化哪个类</p>
+                            <p>抽象工厂提供创建一类产品的接口，用以调用创建对应产品</p>
+                            <p>用于当一个类不知道它所必须创建的对象的类时</p>
+                            <p>用于当一个类希望由它的子类来指定它所传概念的对象时</p>
+                            <p>缺点是每增加一个产品需增加一个具体产品类和具体工厂类</p>
                         </div>
                     </div>
                     <div id="section-080302">
                         <h4>3.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
                         </div>
                     </div>
                     <div id="section-080303">
                         <h4>3.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jiandan_01"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1860,19 +1939,27 @@ function scrollTo(id: string) {
                     <div id="section-080401">
                         <h4>4.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>提供创建一系列相关或相互依赖对象的接口, 无需指定具体类</p>
+                            <p>抽象工厂提供了多个创建接口，创建多个不同等级的产品</p>
+                            <p>具体产品与具体工厂间是多对一的关系</p>
+                            <p>用于一个系统要独立于产品的创建、组合和表示时</p>
+                            <p>用于一个系统要由多个产品系列中的一个来配置时</p>
+                            <p>用于强调一系列相关的产品对象的设计以便进行联合使用时</p>
+                            <p>用于提供一个产品类库只想显示接口而不是实现时</p>
+                            <p>缺点是当产品族中需增加新产品时，需修改所有的工厂类</p>
                         </div>
                     </div>
                     <div id="section-080402">
                         <h4>4.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
                         </div>
                     </div>
                     <div id="section-080403">
                         <h4>4.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_01"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1881,19 +1968,39 @@ function scrollTo(id: string) {
                     <div id="section-080501">
                         <h4>5.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将一个复杂对象的构建步骤与表示分离，使得同样的构建过程可以创建不同表示</p>
+                            <p>用于复杂对象的创建独立于该对象的组成部分及装配方式时</p>
                         </div>
                     </div>
                     <div id="section-080502">
                         <h4>5.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-79" style="width: 450px;" src="/docs/study/imgs/79-sheji.png">
                         </div>
                     </div>
                     <div id="section-080503">
                         <h4>5.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>产品类(Product)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_01"></codeView>
+                            </div>
+                            <p>抽象生成器类(Builder)：指定部件接口</p>
+                            <div class="box-code" style="width: 700px; height: 200px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_02"></codeView>
+                            </div>
+                            <p>指挥者类(Director)：调用具体生成器来创建各部分的对象</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_03"></codeView>
+                            </div>
+                            <p>具体生成器类(ConcreteBuilder)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_05"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1902,19 +2009,23 @@ function scrollTo(id: string) {
                     <div id="section-080601">
                         <h4>6.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>用一个已创建的原型实例指定创建对象的种类，并且通过复制这个原型创建新的对象</p>
                         </div>
                     </div>
                     <div id="section-080602">
                         <h4>6.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-80" style="width: 450px;" src="/docs/study/imgs/80-sheji.png">
                         </div>
                     </div>
                     <div id="section-080603">
                         <h4>6.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象原型类：Cloneable/具体原型类/访问类</p>
+                            <p>用于一个系统要独立于产品的创建、构成和表示时</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_yuanxing_01"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1923,19 +2034,20 @@ function scrollTo(id: string) {
                     <div id="section-080701">
                         <h4>7.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>保证一个类仅有一个实例，并提供一个访问它的全局访问点</p>
                         </div>
                     </div>
                     <div id="section-080702">
                         <h4>7.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
                         </div>
                     </div>
                     <div id="section-080703">
                         <h4>7.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_danli_01"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1944,19 +2056,38 @@ function scrollTo(id: string) {
                     <div id="section-080801">
                         <h4>8.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将类的接口转换成客户希望的另一个接口，处理接口不兼容。使可读取SD卡的电脑，适配成也可以读取TF卡的内容</p>
                         </div>
                     </div>
                     <div id="section-080802">
                         <h4>8.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-81" style="width: 450px;" src="/docs/study/imgs/81-sheji.png">
                         </div>
                     </div>
                     <div id="section-080803">
                         <h4>8.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>客户端</p>
+                            <div class="box-code" style="width: 700px; height: 200px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shipei_01"></codeView>
+                            </div>
+                            <p>目标接口(Target)：业务所需的抽象类或接口</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shipei_02"></codeView>
+                            </div>
+                            <p>适配者类(Adaptee)：被访问的接口</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shipei_03"></codeView>
+                            </div>
+                            <p>适配器类(Adapter)：通过继承或引用Adaptee，转成Target</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shipei_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 250px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shipei_05"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1965,19 +2096,35 @@ function scrollTo(id: string) {
                     <div id="section-080901">
                         <h4>9.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将抽象部分与其实现部分分离，可以独立变化。实现在不同操作系统上可打开多种格式视频文件的播放器</p>
+                            <p>当一个类存在两个独立变化的维度，且这两个维度都需要进行扩展时</p>
+                            <p>当一个系统不希望使用继承或因为多层次继承导致系统类的个数急剧增加时</p>
+                            <p>当一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性时。避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系</p>
                         </div>
                     </div>
                     <div id="section-080902">
                         <h4>9.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-82" style="width: 450px;" src="/docs/study/imgs/82-sheji.png">
                         </div>
                     </div>
                     <div id="section-080903">
                         <h4>9.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>实现化角色(Implementor)</p>
+                            <p>具体实现化角色(ConcreteImplementor)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_qiao_01"></codeView>
+                            </div>
+                            <p>抽象化角色(Abstraction)</p>
+                            <p>扩展抽象化角色(RefinedAbstraction)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_qiao_02"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 200px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_qiao_03"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1986,19 +2133,34 @@ function scrollTo(id: string) {
                     <div id="section-081001">
                         <h4>10.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将对象组合成树型结构以表示“部分-整体”的层次结构。一个菜单可包含菜单条目，也可以包含有子菜单的菜单</p>
                         </div>
                     </div>
                     <div id="section-081002">
                         <h4>10.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-83" style="width: 450px;" src="/docs/study/imgs/83-sheji.png">
                         </div>
                     </div>
                     <div id="section-081003">
                         <h4>10.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象根节点(Component)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_01"></codeView>
+                            </div>
+                            <p>叶子节点(Leaf)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_02"></codeView>
+                            </div>
+                            <p>树枝节点(Composite)：定义子组件的行为</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_03"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 200px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2007,19 +2169,38 @@ function scrollTo(id: string) {
                     <div id="section-081101">
                         <h4>11.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>在不影响其他对象下，以动态、透明的方式给单个对象添加一些额外的职责。快餐和配料的随意搭配</p>
                         </div>
                     </div>
                     <div id="section-081102">
                         <h4>11.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-84" style="width: 450px;" src="/docs/study/imgs/84-sheji.png">
                         </div>
                     </div>
                     <div id="section-081103">
                         <h4>11.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象构件角色(Component)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_01"></codeView>
+                            </div>
+                            <p>具体构件角色(ConcreteComponent)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_02"></codeView>
+                            </div>
+                            <p>抽象装饰角色(Decorator)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_03"></codeView>
+                            </div>
+                            <p>具体装饰角色(ConcreteDecorator)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_05"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2028,19 +2209,34 @@ function scrollTo(id: string) {
                     <div id="section-081201">
                         <h4>12.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>为多个复杂子系统中的接口提供对外的一个统一的接口或界面。智能控制平台统一控制灯光，电视和空调</p>
+                            <p>缺点是不符合开闭原则，当增加一个子系统时需修改外观类的代码</p>
+                            <p>当一个复杂系统的子系统很多时，外观模式可以为系统设计一个简单的接口供外界访问。</p>
+                            <p>当客户端与多个子系统之间存在很大的联系或依赖性，引入外观模式可将它们分离，从而提高子系统的独立性和可移植性。</p>
+                            <p>对分层结构系统构建时，使用外观模式定义子系统中每层的入口点可以简化子系统之间的依赖关系。</p>
                         </div>
                     </div>
                     <div id="section-081202">
                         <h4>12.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-85" style="width: 450px;" src="/docs/study/imgs/85-sheji.png">
                         </div>
                     </div>
                     <div id="section-081203">
                         <h4>12.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>外观角色(Facade)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_wai_01"></codeView>
+                            </div>
+                            <p>子系统角色(SubSystem)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_wai_02"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_wai_03"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2049,19 +2245,39 @@ function scrollTo(id: string) {
                     <div id="section-081301">
                         <h4>13.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>运用共享技术有效地支持大量细粒度的对象。俄罗斯方块中的不同形状的方块重复使用</p>
+                            <p>为了使对象可以共享，需要将享元对象的部分状态外部化，分离内部状态和外部状态，使程序逻辑复杂</p>
+                            <p>一个系统有大量相同或者相似的对象，造成内存的大量耗费。</p>
+                            <p>对象的大部分状态都可以外部化，可以将这些外部状态传入对象中。</p>
+                            <p>在使用享元模式时需要维护一个存储享元对象的享元池，而这需要耗费一定的系统资源，因此，应当在需要多次重复使用享元对象时才值得使用享元模式。</p>
                         </div>
                     </div>
                     <div id="section-081302">
                         <h4>13.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-86" style="width: 450px;" src="/docs/study/imgs/86-sheji.png">
                         </div>
                     </div>
                     <div id="section-081303">
                         <h4>13.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象享元角色(Flyweight)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_xiang_01"></codeView>
+                            </div>
+                            <p>享元工厂角色(FlyweightFactory)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_xiang_02"></codeView>
+                            </div>
+                            <p>具体享元角色(ConcreteFlyweight)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_xiang_03"></codeView>
+                            </div>
+                            <p>非享元角色(UnsharableFlyweight)</p>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_xiang_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2070,19 +2286,41 @@ function scrollTo(id: string) {
                     <div id="section-081401">
                         <h4>14.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>为其他对象提供一个代理以控制对这个对象的访问。可以买火车票的代理站点</p>
+                            <p>在需要比较通用和复杂的对象指针代替简单指针时</p>
+                            <p>远程代理(Remote)</p>
+                            <p>虚代理(Virtual)</p>
+                            <p>保护代理(Protection)</p>
+                            <p>与装饰器模式的不同点：</p>
+                            <p>目的不同：装饰器是为了增强目标对象，静态代理是为了保护和隐藏目标对象</p>
+                            <p>获取目标对象构建的地方不同：装饰器是由外界传递进来，可以通过构造方法传递，静态代理是在代理类内部创建，以此来隐藏目标对象</p>
                         </div>
                     </div>
                     <div id="section-081402">
                         <h4>14.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-87" style="width: 450px;" src="/docs/study/imgs/87-sheji.png">
                         </div>
                     </div>
                     <div id="section-081403">
                         <h4>14.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象主题类(Subject)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dai_01"></codeView>
+                            </div>
+                            <p>真实主题类(RealSubject)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dai_02"></codeView>
+                            </div>
+                            <p>代理类(Proxy): 提供了与真实主题相同的接口，其内部含有对真实主题的引用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dai_03"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dai_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2091,19 +2329,34 @@ function scrollTo(id: string) {
                     <div id="section-081501">
                         <h4>15.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>使多个对象都有机会处理请求，避免请求的发送者和接收者之间的耦合关系。请假1天小组长批/3天内部门经理批/7天内总经理批</p>
                         </div>
                     </div>
                     <div id="section-081502">
                         <h4>15.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-88" style="width: 450px;" src="/docs/study/imgs/88-sheji.png">
                         </div>
                     </div>
                     <div id="section-081503">
                         <h4>15.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象处理者角色(Handler)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ze_01"></codeView>
+                            </div>
+                            <p>具体处理者角色(ConcreteHandler)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ze_02"></codeView>
+                            </div>
+                            <p>客户类角色(Client)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ze_03"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ze_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2112,19 +2365,42 @@ function scrollTo(id: string) {
                     <div id="section-081601">
                         <h4>16.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将一个请求封装为一个对象，可以用不用的请求对客户进行参数化：对请求排队或记录日志以及支持可撤销的操作</p>
                         </div>
                     </div>
                     <div id="section-081602">
                         <h4>16.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-89" style="width: 450px;" src="/docs/study/imgs/89-sheji.png">
                         </div>
                     </div>
                     <div id="section-081603">
                         <h4>16.3 实现</h4>
                         <div class="sub-contents">
+                            <p>抽象命令类角色(Command)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_01"></codeView>
+                            </div>
+                            <p>具体命令角色(ConcreteCommand)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_02"></codeView>
+                            </div>
+                            <p>实现者/接收者角色(Receiver)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_03"></codeView>
+                            </div>
+                            <p>调用者/请求者角色(Invoker)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_04"></codeView>
+                            </div>
                             <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_05"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_mingling_06"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2133,19 +2409,41 @@ function scrollTo(id: string) {
                     <div id="section-081701">
                         <h4>17.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>给定一个语言，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子</p>
                         </div>
                     </div>
                     <div id="section-081702">
                         <h4>17.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-90" style="width: 450px;" src="/docs/study/imgs/90-sheji.png">
                         </div>
                     </div>
                     <div id="section-081703">
                         <h4>17.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_05"></codeView>
+                            </div>
+                            <p>抽象表达式角色(AbstractExpression)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_01"></codeView>
+                            </div>
+                            <p>非终结符表达式角色(NonterminalExpression)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_02"></codeView>
+                            </div>
+                            <p>环境角色(Context)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_03"></codeView>
+                            </div>
+                            <p>终结符表达式角色(TerminalExpression)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_06"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2154,20 +2452,42 @@ function scrollTo(id: string) {
                     <div id="section-081801">
                         <h4>18.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>提供一种方法顺序访问一个聚合对象的各个元素，且不需要暴露该对象的内部表示</p>
                         </div>
                     </div>
-                </div>
-                <div id="section-081802">
-                    <h4>18.2 类图</h4>
-                    <div class="sub-contents">
-                        <p>xxx</p>
+                    <div id="section-081802">
+                        <h4>18.2 类图</h4>
+                        <div class="sub-contents">
+                            <img class="img-91" style="width: 450px;" src="/docs/study/imgs/91-sheji.png">
+                        </div>
                     </div>
-                </div>
-                <div id="section-081803">
-                    <h4>18.3 实现</h4>
-                    <div class="sub-contents">
-                        <p>xxx</p>
+                    <div id="section-081803">
+                        <h4>18.3 实现</h4>
+                        <div class="sub-contents">
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_05"></codeView>
+                            </div>
+                            <p>抽象聚合角色(Aggregate)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_01"></codeView>
+                            </div>
+                            <p>具体聚合角色(ConcreteAggregate)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_02"></codeView>
+                            </div>
+                            <p>抽象迭代器角色(Iterator)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_03"></codeView>
+                            </div>
+                            <p>具体迭代器角色(ConcreteIterator)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_dei_06"></codeView>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <h3 id="part-0819">19. 中介者模式</h3>
@@ -2175,20 +2495,39 @@ function scrollTo(id: string) {
                     <div id="section-081901">
                         <h4>19.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>调停模式。用一个中介对象来封装一系列的对象交互。使各对象不需要显式地相互引用，耦合松散，且可独立改变之间的交互</p>
                         </div>
                     </div>
                 </div>
                 <div id="section-081902">
                     <h4>19.2 类图</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <img class="img-92" style="width: 450px;" src="/docs/study/imgs/92-sheji.png">
                     </div>
                 </div>
                 <div id="section-081903">
                     <h4>19.3 实现</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <p>抽象中介者角色(Mediator)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_zhong_01"></codeView>
+                        </div>
+                        <p>具体中介者角色(ConcreteMediator)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_zhong_02"></codeView>
+                        </div>
+                        <p>抽象同事类角色(Colleague)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_zhong_03"></codeView>
+                        </div>
+                        <p>具体同事类角色(ConcreteColleague)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_zhong_04"></codeView>
+                        </div>
+                        <p>调用</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_zhong_05"></codeView>
+                        </div>
                     </div>
                 </div>
                 <h3 id="part-0820">20. 备忘录模式</h3>
@@ -2196,20 +2535,35 @@ function scrollTo(id: string) {
                     <div id="section-082001">
                         <h4>20.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>快照模式。在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，以便以后当需要时能将该对象恢复到原先保存的状态。游戏存档，悔棋，数据备份</p>
                         </div>
                     </div>
                 </div>
                 <div id="section-082002">
                     <h4>20.2 类图</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <img class="img-93" style="width: 450px;" src="/docs/study/imgs/93-sheji.png">
                     </div>
                 </div>
                 <div id="section-082003">
                     <h4>20.3 实现</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <p>发起人角色(Originator)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_bei_01"></codeView>
+                        </div>
+                        <p>备忘录角色(Memento)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_bei_02"></codeView>
+                        </div>
+                        <p>管理者角色(Caretaker)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_bei_03"></codeView>
+                        </div>
+                        <p>调用</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_bei_04"></codeView>
+                        </div>
                     </div>
                 </div>
                 <h3 id="part-0821">21. 观察者模式</h3>
@@ -2217,20 +2571,39 @@ function scrollTo(id: string) {
                     <div id="section-082101">
                         <h4>21.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>发布-订阅模式。定义一对多的依赖关系，让多个观察者对象同时监听某一个主题对象，其在状态变化时会通知所有的观察者对象。</p>
                         </div>
                     </div>
                 </div>
                 <div id="section-082102">
                     <h4>21.2 类图</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <img class="img-94" style="width: 450px;" src="/docs/study/imgs/94-sheji.png">
                     </div>
                 </div>
                 <div id="section-082103">
                     <h4>21.3 实现</h4>
                     <div class="sub-contents">
-                        <p>xxx</p>
+                        <p>抽象主题(Subject)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_guan_01"></codeView>
+                        </div>
+                        <p>具体主题(ConcreteSubject)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_guan_02"></codeView>
+                        </div>
+                        <p>抽象观察者 (Observer)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_guan_03"></codeView>
+                        </div>
+                        <p>具体观察者 (ConcreteObserver)</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_guan_04"></codeView>
+                        </div>
+                        <p>调用</p>
+                        <div class="box-code" style="width: 700px; height: 300px;">
+                            <codeView :configs="codeConfig('java')" :value="db.code_guan_05"></codeView>
+                        </div>
                     </div>
                 </div>
                 <h3 id="part-0822">22. 状态模式</h3>
@@ -2238,19 +2611,34 @@ function scrollTo(id: string) {
                     <div id="section-082201">
                         <h4>22.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>对有状态的对象，把复杂的“判断逻辑”提取到不同的状态对象中，允许状态对象在其内部状态发生改变时改变其行为</p>
                         </div>
                     </div>
                     <div id="section-082202">
                         <h4>22.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-95" style="width: 450px;" src="/docs/study/imgs/95-sheji.png">
                         </div>
                     </div>
                     <div id="section-082203">
                         <h4>22.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象状态角色(State)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_01"></codeView>
+                            </div>
+                            <p>具体状态角色(ConcreteState)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_02"></codeView>
+                            </div>
+                            <p>环境角色(Context)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_03"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2259,19 +2647,34 @@ function scrollTo(id: string) {
                     <div id="section-082301">
                         <h4>23.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的变化不会影响使用算法的客户。选择交通/开发工具</p>
                         </div>
                     </div>
                     <div id="section-082302">
                         <h4>23.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-96" style="width: 450px;" src="/docs/study/imgs/96-sheji.png">
                         </div>
                     </div>
                     <div id="section-082303">
                         <h4>23.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象策略类角色(Strategy)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ce_01"></codeView>
+                            </div>
+                            <p>具体策略类角色(ConcreteCommand)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ce_02"></codeView>
+                            </div>
+                            <p>环境类角色(Context)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ce_03"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_ce_04"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2280,19 +2683,31 @@ function scrollTo(id: string) {
                     <div id="section-082401">
                         <h4>24.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。倒油、热油、倒蔬菜、倒调料品、翻炒固定步骤的炒菜过程
+                            </p>
                         </div>
                     </div>
                     <div id="section-082402">
                         <h4>24.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-97" style="width: 450px;" src="/docs/study/imgs/97-sheji.png">
                         </div>
                     </div>
                     <div id="section-082403">
                         <h4>24.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象类角色(AbstractClass)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_moban_01"></codeView>
+                            </div>
+                            <p>具体子类角色(ConcreteClass)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_moban_02"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_moban_03"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2301,23 +2716,45 @@ function scrollTo(id: string) {
                     <div id="section-082501">
                         <h4>25.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>封装一些作用于某种数据结构中的各元素的操作，它可以在不改变这个数据结构的前提下定义作用于这些元素的新的操作</p>
                         </div>
                     </div>
                     <div id="section-082502">
                         <h4>25.2 类图</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <img class="img-98" style="width: 450px;" src="/docs/study/imgs/98-sheji.png">
                         </div>
                     </div>
                     <div id="section-082503">
                         <h4>25.3 实现</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>抽象访问者角色(Visitor)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_01"></codeView>
+                            </div>
+                            <p>具体访问者角色(ConcreteVisitor)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_02"></codeView>
+                            </div>
+                            <p>抽象元素角色(Element)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_03"></codeView>
+                            </div>
+                            <p>具体元素角色(ConcreteElement)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_04"></codeView>
+                            </div>
+                            <p>对象结构角色(ObjectStructure)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_05"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_fang_06"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <h2 id="chapter-09">九、操作系统 <i class="txt-en">Operating System</i></h2>
                 <h3 id="part-0901">1. 概述</h3>
                 <div class="part-contents">
@@ -2345,7 +2782,7 @@ function scrollTo(id: string) {
                                 <i class="txt-en">Running</i>、阻塞
                                 <i class="txt-en">Waiting/Blocked</i>
                             </p>
-                            <img class="img-14" src="/docs/study/imgs/14-santai.png" alt="" srcset="">
+                            <img class="img-14" src="/docs/study/imgs/14-santai.png">
                             <p>五态模型：创建
                                 <i class="txt-en">New</i>、终止
                                 <i class="txt-en">Terminated</i>
@@ -2374,10 +2811,10 @@ function scrollTo(id: string) {
                             <p>临界区 <i class="txt-en">Critical Section</i>：共享资源访问代码区段</p>
                             <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
                             <p>信号量S <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数</p>
-                            <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png" alt="" srcset="">
+                            <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png">
                             <p>执行前等待资源P(S)减，S≤0则等待</p>
                             <p>执行后释放资源V(S)加，S≤0则唤醒</p>
-                            <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png" alt="" srcset="">
+                            <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png">
                             <p>信号量S的编号，由(12,13,23,34)排序决定</p>
                             <p>实现互斥：在临界区中执行PV，确保同一时间内仅有一个进程在临界区中</p>
                             <p>实现同步：<b>生产者消费者问题</b></p>
@@ -2388,7 +2825,7 @@ function scrollTo(id: string) {
                         <div class="sub-contents">
                             <p>通过<b>共享缓冲区</b> <i class="txt-en">Bounded Buffer</i> 实现生产线程与消费线程的解耦</p>
                             <p>容量为1的缓冲区</p>
-                            <img class="img-18" style="width: 300px;" src="/docs/study/imgs/18-pv.png" alt="" srcset="">
+                            <img class="img-18" style="width: 300px;" src="/docs/study/imgs/18-pv.png">
                             <p>容量为n的缓冲区</p>
                             <p>缓冲区+互斥信号量S+同步信号量(S1可放产品数n+S2产品数0)</p>
                             <p>生产者：P(S1)>P(S)>V(S)>V(S2)</p>
@@ -2494,7 +2931,7 @@ function scrollTo(id: string) {
                         <div class="sub-contents">
                             <p>描述进程所需资源和资源分配情况</p>
                             <p>P进程，R资源：R->P 代表资源R已分配给进程P，P->R 代表进程P还需要请求资源R</p>
-                            <img class="img-15" src="/docs/study/imgs/15-ziyuan.png" alt="" srcset="">
+                            <img class="img-15" src="/docs/study/imgs/15-ziyuan.png">
                             <p>阻塞节点：该节点所请求的资源已分配完</p>
                             <p>非阻塞节点：可化简</p>
                             <p>死锁状态：所有进程都是阻塞节点</p>
@@ -2902,7 +3339,7 @@ function scrollTo(id: string) {
                         <div class="sub-contents">
                             <p>条目：数据流、数据项、数据存储、基本加工</p>
                             <p>加工逻辑(小说明)：结构化语言(顺序/选择/重复)、判定表、判定树</p>
-                            <img class="img-29" style="width: 600px;" src="/docs/study/imgs/29-dd.png" alt="" srcset="">
+                            <img class="img-29" style="width: 600px;" src="/docs/study/imgs/29-dd.png">
                         </div>
                     </div>
                     <div id="section-100404">
@@ -4291,20 +4728,12 @@ function scrollTo(id: string) {
                             <p>3.回溯：如果本行摆放失败，回溯上一行从新摆放 </p>
                             <p>4.终止：成功放置n行</p>
                             <p>递归求解</p>
-                            <div class="box-code" style="height: 300px;">
-                                <codeView :configs="{
-                                    language: 'cpp',
-                                    theme: 'vs-dark',
-                                    readOnly: true,
-                                }" :value="db.code_huisu_01"></codeView>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_huisu_01"></codeView>
                             </div>
                             <p>循环求解</p>
-                            <div class="box-code" style="height: 300px;">
-                                <codeView :configs="{
-                                    language: 'cpp',
-                                    theme: 'vs-dark',
-                                    readOnly: true,
-                                }" :value="db.code_huisu_02"></codeView>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_huisu_02"></codeView>
                             </div>
                         </div>
                     </div>
@@ -4312,27 +4741,163 @@ function scrollTo(id: string) {
                 <h3 id="part-1405">5. 分治法</h3>
                 <div class="part-contents">
                     <div id="section-140501">
-                        <h4>5.1 xxx</h4>
+                        <h4>5.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将问题分解成互不重叠的子问题，对子问题进行求解再合并成原问题的解</p>
+                            <p>递归：边界条件、递归模式</p>
+                            <p>阶乘</p>
+                            <div class="box-code" style="width: 700px; height: 150px;">
+                                <codeView :configs="codeConfig('typescript')" :value="db.code_fenzhi_01"></codeView>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-140502">
+                        <h4>5.2 归并排序</h4>
+                        <div class="sub-contents">
+                            <p>分解：将n个元素分成n/2个子序列</p>
+                            <p>求解：对两个子序列递归排序</p>
+                            <p>合并：合并两个子序列并排序</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_fenzhi_02"></codeView>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-140503">
+                        <h4>5.3 最大子段和问题</h4>
+                        <div class="sub-contents">
+                            <p>分成子段后三种情况</p>
+                            <p>1.和左子段的最大子段和相同</p>
+                            <p>2.和右子段的最大子段和相同</p>
+                            <p>3.跨区时为 左子段的右边界最大值+右子段的左边界最大值</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_fenzhi_03"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <h3 id="part-1406">6. 动态规划</h3>
                 <div class="part-contents">
                     <div id="section-140601">
-                        <h4>6.1 xxx</h4>
+                        <h4>6.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>通过解决并不相互独立的不全都相同的子问题找到问题的最优解，然后将子问题的解合并起来得到原问题的最优解。通常用于求解具有重叠子问题和最优子结构性质的问题</p>
+                            <p>1.找出最优解的性质</p>
+                            <p>2.递归地定义最优解的值</p>
+                            <p>3.自底向上计算出最优值</p>
+                            <p>4.构造最优解</p>
+                        </div>
+                    </div>
+                    <div id="section-140602">
+                        <h4>6.2 0-1背包问题</h4>
+                        <div class="sub-contents">
+                            <p>给定N个物品，第i个物品的重量w_𝑖，价值𝑣_𝑖 ，放入容量为W的背包，怎么保证装入物品的总价值最大</p>
+                            <p>二维步骤：</p>
+                            <p>1.确定dp数组和下标含义</p>
+                            <p>dp[i][j] 表示从下标 [1,i] 中任意选取物品放入容量为 j 的背包时的最大价值</p>
+                            <p>2.确定递推公式</p>
+                            <p>case1：确定不放物品 i 时，公式可推此时最大价值为 <span class="txt-func">dp[i-1][j]</span></p>
+                            <p>case2：确定放入物品 i 时，前提条件是背包容量W大于
+                                <span class="txt-func">w<span class="txt-sub">𝑖</span></span>，剩余背包容量为
+                                <span class="txt-func">j-w<span class="txt-sub">𝑖</span></span>，则问题转换为求 从下标
+                                [1,i-1] 中任意选取物品放入容量为
+                                <span class="txt-func">j-w<span class="txt-sub">𝑖</span></span> 的背包时的最大价值，即
+                                <span class="txt-func">dp[i-1][j-w<span class="txt-sub">𝑖</span>]</span>，则此时最大价值为
+                                <span class="txt-func">dp[i-1][j-w<span class="txt-sub">𝑖</span>]+𝑣<span
+                                        class="txt-sub">𝑖</span></span>
+                                ，所以状态转移方程为
+                                <span class="txt-func">dp[i][j] = max(dp[i-1][j], dp[i-1][j-w<span
+                                        class="txt-sub">𝑖</span>]+𝑣<span class="txt-sub">𝑖</span>)</span>
+                            </p>
+                            <p>3.dp数组初始化</p>
+                            <p>dp[0][j] 使用各个容量的背包放入编号0物品的最大价值</p>
+                            <p>dp[i][0] 背包容量为0是存放各个物品的最大价值</p>
+                            <p>4.确定遍历顺序</p>
+                            <p>物品和背包重量</p>
+                            <p>时间复杂度：O(NW)</p>
+                            <p>空间复杂度：O(NW)</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>W=5</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">𝑣<span class="txt-sub">𝑖</span></span></td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>5</td>
+                                        <td>6</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-func">w<span class="txt-sub">𝑖</span></span></td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <img class="img-59" style="width: 250px;" src="/docs/study/imgs/59-dongtai.png" />
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_dongtai_01"></codeView>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-140603">
+                        <h4>6.3 矩阵连乘</h4>
+                        <div class="sub-contents">
+                            <p>M1(m*n) M2(n*p)</p>
+                            <p>计算m*n*p次 新矩阵m*p</p>
+                            <p>时间复杂度：O(n^3)</p>
+                            <p>空间复杂度：O(n^2)</p>
+                            <p>最优计算次数</p>
+                        </div>
+                    </div>
+                    <div id="section-140604">
+                        <h4>6.4 最长公共子串</h4>
+                        <div class="sub-contents">
+                            <p>字串个数2^n</p>
+                        </div>
+                    </div>
+                    <div id="section-140605">
+                        <h4>6.5 路线选择</h4>
+                        <div class="sub-contents">
                         </div>
                     </div>
                 </div>
                 <h3 id="part-1407">7. 贪心法</h3>
                 <div class="part-contents">
                     <div id="section-140701">
-                        <h4>7.1 xxx</h4>
+                        <h4>7.1 概念</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>通常适用于具有贪心选择性质的问题，即每一步都选择局部最优解能够得到全局近似最优解。解决具有最优子结构和贪心选择性质的问题</p>
+                        </div>
+                    </div>
+                    <div id="section-140702">
+                        <h4>7.2 部分背包问题</h4>
+                        <div class="sub-contents">
+                            <p>物品可以部分放入背包</p>
+                            <p>按最大 单位重量价值 先归并排序O(nlgn)，再依次放入</p>
+                            <p>时间复杂度：O(nlgn)</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_tanxin_01"></codeView>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-140703">
+                        <h4>7.3 活动选择</h4>
+                        <div class="sub-contents">
+                            <p>场地P的个数m，活动a的个数n，活动之间不可同时在同一场地举行，求所需最少场地数</p>
+                            <p>1.按活动的开始时间对a进行快速排序</p>
+                            <p>2.将活动 <span class="txt-func">𝑎<span class="txt-sub">i</span></span> 的开始时间与场地 <span
+                                    class="txt-func">𝑃<span class="txt-sub">𝑗</span></span>
+                                的最后一个活动的结束时间比较，如果不冲突则放入，如果冲突则考虑下一场地或新场地</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('cpp')" :value="db.code_tanxin_02"></codeView>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4347,7 +4912,7 @@ function scrollTo(id: string) {
                     <div v-if="note.type === 'topic'">
                         <p class="question">{{ note.question }}</p>
                         <template v-if="note.imgs.length > 0">
-                            <img v-for="img in note.imgs" :src="`/docs/study/imgs/${img}`" alt="" srcset="">
+                            <img v-for="img in note.imgs" :src="`/docs/study/imgs/${img}`">
                         </template>
                         <div class="list-opts" v-for="opts in note.options">
                             <div class="opt-item" v-for="(opt, index) in opts">
