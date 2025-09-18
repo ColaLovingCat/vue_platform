@@ -3,6 +3,8 @@ import { onMounted, ref, reactive, computed, watch } from 'vue'
 
 import * as db from './ruanjian'
 
+import codeView from '@/components/editor-code/view.vue'
+
 // name
 defineOptions({
     name: 'custom-name'
@@ -311,7 +313,7 @@ function scrollTo(id: string) {
                                         class="txt-sup">𝐸</span>∗𝐹</span>
                             </p>
                             <p>阶码决定数值范围，尾数决定精度</p>
-                            <p>运算时先<b>对阶</b>：将小阶向大阶对齐，尾数右移</p>
+                            <p>运算时先<b>对阶</b>：将小阶向大阶对齐，尾数右移、尾数计算、格式化</p>
                             <p>R位阶码移码+M位尾数补码 可表示范围:</p>
                             <img class="img-03" src="/docs/study/imgs/03-fanwei.png" alt="" srcset="">
                         </div>
@@ -392,23 +394,37 @@ function scrollTo(id: string) {
                             <p>容量与命中率：在合理成本下提高命中率</p>
                             <p>地址映像：主存地址和Cache地址的转换，是由<b>硬件自动</b>完成</p>
                             <p>替换算法：目的是提高命中率</p>
-                            <p>地址映像方法<b>冲突次数</b>：全相联映像 < 组相联映像 < 直接相连映像 </p>
+                            <p>地址映像方法</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>冲突率</th>
+                                        <th>电路</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>直接相连映像</td>
+                                        <td>高</td>
+                                        <td>简单</td>
+                                    </tr>
+                                    <tr>
+                                        <td>组相联映像</td>
+                                        <td>中</td>
+                                        <td>中</td>
+                                    </tr>
+                                    <tr>
+                                        <td>全相联映像</td>
+                                        <td>低</td>
+                                        <td>复杂</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div id="section-010403">
-                        <h4>4.3 操作数寻址</h4>
-                        <div class="sub-contents">
-                            <p>立即寻址：指令中 1</p>
-                            <p>直接寻址：内存地址 3</p>
-                            <p>寄存器寻址：寄存器名 2</p>
-                            <p>寄存器间接寻址：内存地址在寄存器中 4</p>
-                            <p>间接寻址：地址的地址 5</p>
-                            <p>相对寻址</p>
-                            <p>变址寻址</p>
-                        </div>
-                    </div>
-                    <div id="section-010404">
-                        <h4>4.4 分类</h4>
+                        <h4>4.3 分类</h4>
                         <div class="sub-contents">
                             <p>按工作方式分类：</p>
                             <p>读写存储器 RAM：随机，断电丢失</p>
@@ -555,6 +571,18 @@ function scrollTo(id: string) {
                             <div class="sub-contents">
                             </div>
                         </div>
+                        <div id="section-010605">
+                            <h4>6.5 操作数寻址</h4>
+                            <div class="sub-contents">
+                                <p>立即寻址：指令中 1</p>
+                                <p>直接寻址：内存地址 3</p>
+                                <p>寄存器寻址：寄存器名 2</p>
+                                <p>寄存器间接寻址：内存地址在寄存器中 4</p>
+                                <p>间接寻址：地址的地址 5</p>
+                                <p>相对寻址</p>
+                                <p>变址寻址</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <h3 id="part-0107">7. 总线</h3>
@@ -617,6 +645,25 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
+                <h3 id="part-0109">9. 计算机性能指标</h3>
+                <div class="part-contents">
+                    <div id="section-010901">
+                        <h4>9.1 指标</h4>
+                        <div class="sub-contents">
+                            <p>主频=倍频*外频，时钟周期=1/主频</p>
+                            <p>平均每条指令的平均时钟周期个数CPI <i class="txt-en">Clock per Instuction</i>= 时钟周期总数/指令总条数</p>
+                            <p>每时钟周期运行指令条数IPC <i class="txt-en">Instuction per Clock</i>= 指令总条数/时钟周期数</p>
+                            <p>百万条指令每秒 MIPS <i class="txt-en">Million Instructions per Second</i> = (IPC*时钟周期)/106</p>
+                            <p>每秒百万个浮点操作 MFLOPS <i class="txt-en">Million Floating-point Operations per Second</i>
+                                与MIPS相似，针对浮点操作</p>
+                            <p>字长</p>
+                            <p>总线宽度：每次脉冲通过的数据量</p>
+                            <p>带宽：单位时间通过的数据量 = 数据总量/总时间</p>
+                            <p>吞吐量：某个时间段内完成的任务总数</p>
+                            <p>吞吐率：单位时间内完成的任务总数 = 任务总数/总时间</p>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="chapter-02">二、程序设计语言</h2>
                 <h3 id="part-0201">1. 概述</h3>
                 <div class="part-contents">
@@ -626,9 +673,12 @@ function scrollTo(id: string) {
                             <p>
                                 机器语言<span class="txt-symbol">⇒</span>汇编语言：符号化<span class="txt-symbol">⇒</span>高级语言：编译解释
                             </p>
+                            <p>解释型语言：解释器，不会生成目标代码，边解释边执行，解释器参与执行，执行效率低，灵活性好，可移植性强</p>
                             <p>解释程序：和源程序一起参与到运行过程中</p>
                             <p>脚本语言=动态语言==弱类型语言=解释型语言：PHP/Javascript/Python</p>
+                            <p>编译型语言：编译器，生成目标代码，目标程序直接执行，编译器不参与执行，执行效率高，灵活性差，可移植性差</p>
                             <p>编译程序：不参与运行，生成源程序的目标程序，进行优化</p>
+                            <p>常用语言：C/C++/Java/C#</p>
                         </div>
                     </div>
                     <div id="section-020102">
@@ -678,7 +728,7 @@ function scrollTo(id: string) {
                                     </tr>
                                     <tr>
                                         <td>调用</td>
-                                        <td>传值调用和传址调用</td>
+                                        <td><b>传值调用</b>和<b>传址调用</b></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -769,8 +819,9 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                     <div id="section-020205">
-                        <h4>2.5 上下文无关文法 CFG</h4>
+                        <h4>2.5 文法</h4>
                         <div class="sub-contents">
+                            <p>上下文无关文法 CFG</p>
                             <p>广泛用于程序设计语言的语法规则</p>
                             <p>S是起始符号，表示句子的起始位置</p>
                             <p>V是非终结符集合，用于构造句子的符号</p>
@@ -796,7 +847,453 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-03">数据结构</h2>
+                <h2 id="chapter-03">三、数据结构</h2>
+                <h3 id="part-0301">1. 线性结构</h3>
+                <div class="part-contents">
+                    <div id="section-030101">
+                        <h4>1.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>每个元素（除第一个和最后一个）都有且仅有一个直接前驱和一个直接后继，固定顺序，个数有限</p>
+                        </div>
+                    </div>
+                    <div id="section-030102">
+                        <h4>1.2 线性表 <i class="txt-en">Linear List</i></h4>
+                        <div class="sub-contents">
+                            <p>顺序表: 用一组地址连续的存储单元存储元素。 可以随机存取元素，但插入和删除时需要移动元素。</p>
+                            <p>单链表: 每个节点包含数据域和指针域，指针域指向下一节点</p>
+                            <p>循环链表: 尾节点的指针指向头节点，形成一个环</p>
+                            <p>双向链表: 每个节点有两个指针，指向前驱节点和后继节点</p>
+                            <img class="img-33" style="width: 450px;" src="/docs/study/imgs/33-liner.png" alt=""
+                                srcset="">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>不同点</th>
+                                        <th>顺序表</th>
+                                        <th>链表</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>存储空间</td>
+                                        <td>物理上一定连续</td>
+                                        <td>逻辑上连续</td>
+                                    </tr>
+                                    <tr>
+                                        <td>随机访问</td>
+                                        <td>支持下标访问 O(1)</td>
+                                        <td>不支持 O(N)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>任意位置增删</td>
+                                        <td>需要搬移元素 O(N)</td>
+                                        <td>只需要修改指针指向</td>
+                                    </tr>
+                                    <tr>
+                                        <td>插入</td>
+                                        <td>空间不够时需扩容</td>
+                                        <td>没有容量概念</td>
+                                    </tr>
+                                    <tr>
+                                        <td>应用场景</td>
+                                        <td>元素高效存储和频繁访问，不改变结构操作(读取/查找)</td>
+                                        <td>任意位置增删元素频繁，破坏性操作(插入/删除)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>缓存利用率</td>
+                                        <td>高</td>
+                                        <td>低</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-030103">
+                        <h4>1.3 栈和队列 <i class="txt-en">Stack & Queue</i></h4>
+                        <div class="sub-contents">
+                            <p>栈: 只允许固定一端插入和删除元素，遵循先进后出 LIFO</p>
+                            <p>队列: 只允许队尾插入，队头删除元素，遵循先进先出 FIFO</p>
+                            <img class="img-34" style="width: 450px;" src="/docs/study/imgs/34-stack.png" alt=""
+                                srcset="">
+                            <p>均可使用顺序存储和链式存储</p>
+                            <p>循环队列：将队列存储空间的最后一个位置绕到第一个位置，形成逻辑上的环状空间，避免假溢出</p>
+                            <p>栈的应用：递归 表达式计算等</p>
+                        </div>
+                    </div>
+                    <div id="section-030104">
+                        <h4>1.4 串 <i class="txt-en">String</i></h4>
+                        <div class="sub-contents">
+                            <p>由n(n>0)个字符组成的有序序列，特殊线性表</p>
+                            <p>子串：由串中任意长度的连续字符构成的序列</p>
+                        </div>
+                    </div>
+                    <div id="section-030105">
+                        <h4>1.5 模式匹配 <i class="txt-en">Pattern Matching</i></h4>
+                        <div class="sub-contents">
+                            <p>给定两个字符串S和T，在主串S中寻找模式串T的过程</p>
+                            <p>Brute-Force算法: 暴力依次比较</p>
+                            <p><b>KMP算法</b>: 当主串与模式串部分匹配后出现不匹配字符时，通过next数组确定模式串应回溯的位置，而非从头开始匹配</p>
+                            <p>核心：通过最长公共前后缀求next[j]数组</p>
+                            <img class="img-35" style="width: 250px;" src="/docs/study/imgs/35-kmp.png" alt=""
+                                srcset="">
+                            <p>初始状态：遍历至j的位置，next[j]也就是i表示的是p[0,…,j-1]的最长公共前后缀的长度，前后缀区域相等①=②</p>
+                            <img class="img-36" style="width: 450px;" src="/docs/study/imgs/36-kmp.png" alt=""
+                                srcset="">
+                            <p>令i++,j++，如果 p[i]=p[j-1]，继续下一个</p>
+                            <img class="img-37" style="width: 450px;" src="/docs/study/imgs/37-kmp.png" alt=""
+                                srcset="">
+                            <p>如果 p[i]!=p[j-1]，则需要找新的最长公共前后缀，使得 ③+p[i'] = ④+p[j-1]</p>
+                            <img class="img-38" style="width: 450px;" src="/docs/study/imgs/38-kmp.png" alt=""
+                                srcset="">
+                            <p>等同于，在①(或②)中找最长公共前后缀，也就是当长度为i时的 next[i]，令i=next[i]，继续找寻p[i]=p[j-1]</p>
+                            <img class="img-39" style="width: 450px;" src="/docs/study/imgs/39-kmp.png" alt=""
+                                srcset="">
+                            <p>回到KMP算法，当匹配到主串s[i]和字串p[j]不相同时，不同于暴力方式下偏移一个位置后再依次比对，可以转换为求①②区域的最长公共前后缀，将字串偏移相应位置后再依次匹配后续字符
+                            </p>
+                            <img class="img-40" style="width: 350px;" src="/docs/study/imgs/40-kmp.png" alt=""
+                                srcset="">
+                            <img class="img-41" style="width: 350px;" src="/docs/study/imgs/41-kmp.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0302">2. 数组与矩阵</h3>
+                <div class="part-contents">
+                    <div id="section-030201">
+                        <h4>2.1 数组 <i class="txt-en">Array</i></h4>
+                        <div class="sub-contents">
+                            <p>存储于一个连续空间且具有相同数据类型的元素集合，可通过索引(下标)来访问元素</p>
+                            <img class="img-42" style="width: 250px;" src="/docs/study/imgs/42-shuzu.png" alt=""
+                                srcset="">
+                        </div>
+                        <h4>2.2 矩阵 <i class="txt-en">Matrices</i></h4>
+                        <div class="sub-contents">
+                            <p>具有m行n列的二维数组</p>
+                            <img class="img-43" style="width: 200px;" src="/docs/study/imgs/43-juzhen.png" alt=""
+                                srcset="">
+                            <p>存储方式：按行优先，按列优先</p>
+                            <p>压缩存储，以按行存储为例</p>
+                            <img class="img-44" style="width: 500px;" src="/docs/study/imgs/44-juzhen.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0303">3. 树</h3>
+                <div class="part-contents">
+                    <div id="section-030301">
+                        <h4>3.1 树 <i class="txt-en">Tree</i></h4>
+                        <div class="sub-contents">
+                            <p>一种 非线性 的数据结构，由一个根节点 <i class="txt-en">Root</i> 以及若干个子节点 <i class="txt-en">Children</i>
+                                构成，节点之间存在一种层级 <i class="txt-en">Hierarchical</i> 关系</p>
+                            <img class="img-45" style="width: 300px;" src="/docs/study/imgs/45-tree.png" alt=""
+                                srcset="">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>叶子节点</td>
+                                        <td>度为0的节点</td>
+                                    </tr>
+                                    <tr>
+                                        <td>节点的度</td>
+                                        <td>子节点的数量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>树的度</td>
+                                        <td>所有节点的最大度数</td>
+                                    </tr>
+                                    <tr>
+                                        <td>树的深/高度</td>
+                                        <td>根节点到最远叶节点的最长路径长度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>性质1：树中的节点总数等于树中所有节点的度数之和+1</p>
+                            <p>性质2：度为m的树中第 i 层 (i≥1)上至多有 mi-1 个节点</p>
+                            <p>性质3：高度为h的m次树至多有 mh-1 / m -1 个节点</p>
+                            <p>性质4：具有n个节点度为m的树的最小高度为[logm(n(m-1)+1)]</p>
+                        </div>
+                    </div>
+                    <div id="section-030302">
+                        <h4>3.2 二叉树</h4>
+                        <div class="sub-contents">
+                            <p>每个节点最多只能有两个子节点 (度最大为2)，称为左右子树</p>
+                            <img class="img-46" style="width: 400px;" src="/docs/study/imgs/46-tree.png" alt=""
+                                srcset="">
+                            <p>性质1：二叉树第 I 层 (i≥1)上最多有 2i-1 个节点</p>
+                            <p>性质2：高度为h的二叉树至多有 2h-1 个节点</p>
+                            <p>性质3：二叉树中度为0的节点数等于度为2的节点数+1</p>
+                            <p>性质4：有n个节点的完全二叉树高度为⌊log2n⌋+1或⌈log2(n+1)⌉</p>
+                            <p>存储结构</p>
+                            <img class="img-47" style="width: 500px;" src="/docs/study/imgs/47-tree.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030303">
+                        <h4>3.3 二叉树遍历</h4>
+                        <div class="sub-contents">
+                            <p>先序遍历：根>左>右 A B DG CEF</p>
+                            <p>中序遍历：左>根>右 B DG A ECF</p>
+                            <p>后序遍历：左>右>根 GD B EFC A</p>
+                            <p>层次遍历：每层依次从左往右访问 A BC DEF G</p>
+                            <p>先序+中序构造</p>
+                            <p>后序+中序构造</p>
+                            <p>层次+中序构造</p>
+                            <img class="img-48" style="width: 150px;" src="/docs/study/imgs/48-tree.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030304">
+                        <h4>3.4 二叉排序树</h4>
+                        <div class="sub-contents">
+                            <p>根节点的值大于左子树所有节点值，小于右子树所有节点值。</p>
+                            <p>中序遍历的结果是有序序列。</p>
+                            <p>可用过关键字序列反向构造。</p>
+                            <img class="img-49" style="width: 150px;" src="/docs/study/imgs/49-tree.png" alt=""
+                                srcset="">
+                            <p>平衡二叉树 (AVL树)</p>
+                            <p>二叉树中的任意节点的左右子树的高度之差绝对值不超过1，且为二叉排序树</p>
+                        </div>
+                    </div>
+                    <div id="section-030305">
+                        <h4>3.5 最优二叉树 (哈夫曼树)</h4>
+                        <div class="sub-contents">
+                            <p>路径：从一个节点到另一个节点的通路</p>
+                            <p>路径长度：路径上的分支数目</p>
+                            <p>树的路径长度：根节点到每个叶子节点的路径长度之和</p>
+                            <p>带权路径长度：路径长度与权值的乘积</p>
+                            <p>树的带权路径长度：所有叶子节点的带权路径长度之和</p>
+                            <p>哈夫曼树：带权路径长度最小 (WPL) 的二叉树</p>
+                            <p>构造</p>
+                            <p>步骤1：将n个权值w节点构成n棵二叉树的集合F</p>
+                            <p>步骤2：选取权值最小的树构成左右子树，根节点为权值之和</p>
+                            <p>步骤3：将新树替换原两棵树 (重复步骤2和3)</p>
+                            <p>性质</p>
+                            <p>性质1：权值大小的分布</p>
+                            <p>性质2：只有度为0和2的节点</p>
+                            <p>性质3：节点总数为2n-1</p>
+                            <p>规则</p>
+                            <p>规则1：从前往后找权值最小</p>
+                            <p>规则2：小值放左，大值放右</p>
+                            <p>规则3：新节点放入末尾</p>
+                            <p>规则4：权值相同，同从前往后</p>
+                            <p>规则5：用到子树时再调用</p>
+                            <img class="img-50" style="width: 150px;" src="/docs/study/imgs/50-tree.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030306">
+                        <h4>3.6 哈夫曼编码</h4>
+                        <div class="sub-contents">
+                            <p>等长编码：对每个字符编制相同长度的二进制码</p>
+                            <p>过程及其压缩比：先构造哈夫曼树，再根据左0右1构建编码</p>
+                            <img class="img-51" style="width: 450px;" src="/docs/study/imgs/51-tree.png" alt=""
+                                srcset="">
+                            <p>等长编码长度为3 (22< 5< 23)，压缩比为 1-(40*1+60*3)/100*3=0.27</p>
+                        </div>
+                    </div>
+                    <div id="section-030307">
+                        <h4>3.7 线索二叉树</h4>
+                        <div class="sub-contents">
+                            <p>对于n个结点的二叉树，在存储结构中有n+1个空链域，利用这些空链域存放在某种遍历次序下该结点的前驱结点和后继结点的指针，称为线索。加上线索的二叉树称为线索二叉树</p>
+                            <img class="img-52" style="width: 450px;" src="/docs/study/imgs/52-tree.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030308">
+                        <h4>3.8 森林</h4>
+                        <div class="sub-contents">
+                            <p>m(m>=0)棵互不相交的树集合</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>双亲表示法</td>
+                                        <td>存储结点及其父结点位置信息</td>
+                                    </tr>
+                                    <tr>
+                                        <td>孩子表示法</td>
+                                        <td>存储结点的孩子结点位置信息的链表</td>
+                                    </tr>
+                                    <tr>
+                                        <td>孩子兄弟表示法</td>
+                                        <td>结点中设置两个指针域指向该结点的第一个孩子和下一个兄弟</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0304">4. 图</h3>
+                <div class="part-contents">
+                    <div id="section-030401">
+                        <h4>4.1 图 <i class="txt-en">Graph</i></h4>
+                        <div class="sub-contents">
+                            <p>由顶点V和连接这些节点的边E组成的集合</p>
+                            <img class="img-53" style="width: 450px;" src="/docs/study/imgs/53-tu.png" alt="" srcset="">
+                            <p>顶点数n、边数e、各顶点的度D(v)之间的关系</p>
+                            <img class="img-54" style="width: 150px;" src="/docs/study/imgs/54-tu.png" alt="" srcset="">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>度</td>
+                                        <td>关联该顶点的边的数目D(v)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>出度/入度</td>
+                                        <td>以该顶点为起点或终点的有向边</td>
+                                    </tr>
+                                    <tr>
+                                        <td>连通图/强连通图</td>
+                                        <td>稠密图/稀疏图</td>
+                                    </tr>
+                                    <tr>
+                                        <td>网</td>
+                                        <td>带权值</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-030402">
+                        <h4>4.2 存储结构</h4>
+                        <div class="sub-contents">
+                            <img class="img-55" style="width: 450px;" src="/docs/study/imgs/55-tu.png" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030403">
+                        <h4>4.3 遍历</h4>
+                        <div class="sub-contents">
+                            <p>从图的任意结点出发，沿着某条搜索路径，对图中所有结点进行访问且只访问一次</p>
+                            <img class="img-56" style="width: 250px;" src="/docs/study/imgs/56-tu.png" alt="" srcset="">
+                            <p>深度优先遍历 DFS</p>
+                            <p>1.首先访问出发顶点V</p>
+                            <p>2.依次从V出发搜索V的任意一个邻接点W</p>
+                            <p>3.若W未访问过则从该点出发继续深度优先遍历</p>
+                            <p>v1>v2>v4>v5>v3</p>
+                            <p>理念：递归/回溯/栈 时间复杂度：邻接矩阵O(n2) 邻接表O(n+e)</p>
+                            <p>广度优先遍历 BFS</p>
+                            <p>1.首先访问出发顶点V</p>
+                            <p>2.然后访问与顶点V邻接的全部未访问顶点W、X、Y…</p>
+                            <p>3.然后在依次访问W等的邻接的未访问的顶点</p>
+                            <p>v1>v2>v3>v4>v5</p>
+                            <p>理念：队列 时间复杂度：邻接矩阵O(n2) 邻接表O(n+e)</p>
+                        </div>
+                    </div>
+                    <div id="section-030404">
+                        <h4>4.4 拓扑排序</h4>
+                        <div class="sub-contents">
+                            <p>顶点活动网(AOV网)：形象地反映出整个工程中各个活动之间的先后关系的有向图</p>
+                            <p>有向无环图(DAG图)：不存在回路的有向图</p>
+                            <p>算法：依次输出没有入度的顶点，并删除该</p>
+                            <p>点和以该点为弧尾的弧</p>
+                            <p>边活动网(AOE网)：以边表示活动，且边有权值</p>
+                            <p>入度为0的为源点，出度为0的为汇点</p>
+                            <p>事件最早发生时间etv：从源点到该顶点的最长路径</p>
+                            <p>事件最晚发生时间itv</p>
+                            <p>活动最早开始时间ete：弧头的事件的最早发生时间</p>
+                            <p>活动最晚开始时间ite：保证弧尾事件的最晚发生时间不拖后</p>
+                            <p>关键路径：如果弧的最早开始时间等于最晚开始时间，那么称这条弧所代表的活动为关键活动，由关键活动所构成的路径称为关键路径</p>
+                            <p>最短路径：从连接图中的某个顶点出发到达到达另外一个顶点所经过的边的权重和最小的那一条路径</p>
+                            <img class="img-57" style="width: 250px;" src="/docs/study/imgs/57-tu.png" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div id="section-030405">
+                        <h4>4.5 最小生成树</h4>
+                        <div class="sub-contents">
+                            <p>在一给定的无向图G = (V, E) 中，(u, v) 代表连接顶点 u 与顶点 v 的边，而 w(u, v) 代表此边的权重，若存在 T 为 E
+                                的子集且为无循环图，使得联通所有结点的的 w(T) 最小，则此 T 为 G 的最小生成树 </p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>普里姆算法</td>
+                                        <td>从任一顶点出发，依次寻找权值最小边的邻接点计入集合</td>
+                                    </tr>
+                                    <tr>
+                                        <td>克鲁斯卡尔算法</td>
+                                        <td>依次选取权值最小的边直至囊括所有结点，注意检查不能形成环路</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0305">5. 哈希表</h3>
+                <div class="part-contents">
+                    <div id="section-030501">
+                        <h4>5.1 哈希表(散列表) <i class="txt-en">Hash</i></h4>
+                        <div class="sub-contents">
+                            <p>定义：通过计算哈希值，打破元素之间原有的关系，使集合中的元素按照散列函数的分类进行排列</p>
+                            <p>哈希：通过一次计算大幅度缩小查找范围</p>
+                            <p>哈希函数：考虑关键字的长度和分布情况、哈希值的范围</p>
+                            <p>冲突与同义词</p>
+                        </div>
+                    </div>
+                    <div id="section-030502">
+                        <h4>5.2 构造哈希函数</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>直接定址法</td>
+                                        <td>取某个线性函数值</td>
+                                    </tr>
+                                    <tr>
+                                        <td>除留余数法</td>
+                                        <td>取接近长度 m 的最大质数 p 求余数</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数字分析法</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>平方取中法</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>折叠法</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>随机数法</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-030503">
+                        <h4>5.3 解决冲突</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>开放定址法</td>
+                                        <td>
+                                            <p>使用探查技术在散列表中寻找下一个空地址</p>
+                                            <p>线性探查法/二次探查法/随机探查法/双重探查法</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>链地址法</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>影响因素：分布均匀，减少冲突和装填因子</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0306">6. 堆</h3>
+                <div class="part-contents">
+                    <div id="section-030601">
+                        <h4>6.1 堆 <i class="txt-en">Heap</i></h4>
+                        <div class="sub-contents">
+                            <p>从完全二叉树的角度出发，符合以下规则：</p>
+                            <img class="img-58" style="width: 250px;" src="/docs/study/imgs/58-dui.png" alt=""
+                                srcset="">
+                            <p>构建过程：根据大小调整子树中根节点和左右节点的位置</p>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="chapter-04">四、知识产权</h2>
                 <h3 id="part-0401">1. 知识产权</h3>
                 <div class="part-contents">
@@ -874,10 +1371,953 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-05">数据库</h2>
-                <h2 id="chapter-06">面向对象</h2>
-                <h2 id="chapter-07">UML</h2>
-                <h2 id="chapter-08">设计模式</h2>
+                <h3 id="part-0403">3. 标准化</h3>
+                <div class="part-contents">
+                    <div id="section-040301">
+                        <h4>3.1 标准分类</h4>
+                        <div class="sub-contents">
+                        </div>
+                    </div>
+                    <div id="section-040302">
+                        <h4>3.2 标准编号</h4>
+                        <div class="sub-contents">
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-05">五、数据库</h2>
+                <h3 id="part-0501">1. 基本概念</h3>
+                <div class="part-contents">
+                    <div id="section-050101">
+                        <h4>1.1 专有名词</h4>
+                        <div class="sub-contents">
+                            <p>数据 <i class="txt-en">Data</i></p>
+                            <p>数据库 DB <i class="txt-en">DataBase</i></p>
+                            <p>数据库系统 DBS <i class="txt-en">DataBase System</i>：由数据库、硬件、软件和人员组成</p>
+                            <p>数据库管理员 DBA <i class="txt-en">DataBase Administrator</i></p>
+                            <p>数据库管理系统 DBMS <i class="txt-en">DataBase Management System</i></p>
+                            <p><span class="txt-define">功能</span>数据定义，数据库操作，数据库运行管理，数据的组织、存储和管理，数据库的建立和维护</p>
+                            <p><span class="txt-define">特征</span>数据结构化且统一管理，有较高的数据独立性，数据控制功能（数据库的安全性、完整性、并发控制、故障恢复）</p>
+                        </div>
+                    </div>
+                    <div id="section-050102">
+                        <h4>1.2 概念</h4>
+                        <div class="sub-contents">
+                            <p>信息=数据+数据处理</p>
+                            <p>数据模型包含</p>
+                            <p>概念数据模型：实体/属性/码/域/联系 (1:1/1:*/*:*)/E-R图</p>
+                            <p>结构数据模型(DBMS)：层次(树)、网状(网)、关系和面向对象</p>
+                            <p>关系模型：二维表格结构。关系>关系模式>关系文件</p>
+                            <p>五元组R[U,D,dom.F] R关系名/U属性组/F数据依赖 学号>姓名</p>
+                            <p>体系结构：集中式数据库、C/S结构、分布式数据库、并行数据库</p>
+                            <p>术语：关系/元组(行)/属性(列)/域(取值范围)/关系模式</p>
+                            <p>候选码(键)/主码/主属性/外码/全码/超码</p>
+                        </div>
+                    </div>
+                    <div id="section-050103">
+                        <h4>1.3 三级模式-两级映像</h4>
+                        <div class="sub-contents">
+                            <p>三级模式：外模式/用户模式-视图、概念模式-基本表、内模式/物理模式-存储文件</p>
+                            <p>两级映像：外-概念(逻辑独立性)、概念-内(物理独立性)</p>
+                        </div>
+                    </div>
+                    <div id="section-050104">
+                        <h4>1.4 数据仓库</h4>
+                        <div class="sub-contents">
+                            <p>面向主题、集成的、相对稳定的、反映历史变化</p>
+                            <p>OLAP联机分析处理服务器</p>
+                            <p>数据挖掘</p>
+                        </div>
+                    </div>
+                    <div id="section-050105">
+                        <h4>1.5 完整性约束</h4>
+                        <div class="sub-contents">
+                            <p>实体完整性：主码不为空</p>
+                            <p>参照完整性：外码必须可找到或空</p>
+                            <p>用户自定义完整性</p>
+                        </div>
+                    </div>
+                    <div id="section-050106">
+                        <h4>1.6 分布式数据库</h4>
+                        <div class="sub-contents">
+                            <p>分片透明：无需要知道逻辑访问表的分块储存</p>
+                            <p>复制透明：无需知道复制到哪，如何复制</p>
+                            <p>位置透明：无需知道数据存放的物理位置</p>
+                            <p>逻辑透明：无需知道局部场地使用的是哪种数据模型</p>
+                            <p>共享性：数据存储再不同的节点数据共享</p>
+                            <p>自治性：每个节点对本地数据独立管理</p>
+                            <p>可用性：当某一场地故障时可使用其他场地的副本</p>
+                            <p>分布性：数据在不同场地上存储</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0502">2. 设计过程</h3>
+                <div class="part-contents">
+                    <div id="section-050201">
+                        <h4>2.1 概述</h4>
+                        <div class="sub-contents">
+                            <p>用户需求分析：确定系统边界</p>
+                            <p><span class="txt-define">输出</span>需求说明文档/功能模块图/数据字典/数据流程图DFD</p>
+                            <p>概念模型设计：局部合并取消冲突(属性/命名/结构)</p>
+                            <p><span class="txt-define">输出</span>基本ER图</p>
+                            <p>逻辑设计：转关系模式+规范化+确定完整性约束+视图</p>
+                            <p><span class="txt-define">输出</span>关系模式</p>
+                            <p>物理设计：DBMS特性、硬件、OS特性</p>
+                        </div>
+                    </div>
+                    <div id="section-050202">
+                        <h4>2.2 E-R模型</h4>
+                        <div class="sub-contents">
+                            <p>数据模型三要素：数据结构、数据操作、数据约束条件</p>
+                            <p>图形：实体-矩形/属性-椭圆/联系-菱形 弱实体</p>
+                            <p>属性：复合属性/多值属性/派生属性</p>
+                            <p>联系：1:1/1:n/m:n</p>
+                        </div>
+                    </div>
+                    <div id="section-050203">
+                        <h4>2.3 关系代数</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>集合运算符</td>
+                                        <td>∩交集 ∪并集 −差集 X笛卡儿积</td>
+                                    </tr>
+                                    <tr>
+                                        <td>比较运算符</td>
+                                        <td>> ≥ < ≤=≠</td>
+                                    </tr>
+                                    <tr>
+                                        <td>逻辑运算符</td>
+                                        <td>∧与 ∨或 ¬非</td>
+                                    </tr>
+                                    <tr>
+                                        <td>专门运算符</td>
+                                        <td>𝜎选择 𝜋投影 ⨝连接 ÷除</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>笛卡尔积：无条件连接。join</p>
+                            <p>投影：垂直，若干属性列的组合。select</p>
+                            <p>选择：水平，若干元组行的组合。where</p>
+                            <p>连接：从笛卡尔积选取满足条件的元组</p>
+                            <p>𝜃连接：比较运算 / 等值连接：等值运算</p>
+                            <p>自然连接：去除重复值的等值连接，类比外键</p>
+                            <p>外连接：左外/右外/全外</p>
+                            <p>查询效率：先判断条件后连接</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0503">3. 规范化理论</h3>
+                <div class="part-contents">
+                    <div id="section-050301">
+                        <h4>3.1 函数依赖</h4>
+                        <div class="sub-contents">
+                            <p>函数依赖：F={(Sno,Cno)->G}</p>
+                            <p>完全函数依赖：并不是依赖于候选码的子集，类比联合主键</p>
+                            <p>A3传递律 合并规则 分解规则</p>
+                            <p>闭包：求候选码，可反向求/传递依赖/冗余</p>
+                            <p>求主属性/非主属性</p>
+                        </div>
+                    </div>
+                    <div id="section-050302">
+                        <h4>3.2 候选关键字</h4>
+                        <div class="sub-contents">
+                            <p>候选码</p>
+                            <p>主码</p>
+                            <p>超码</p>
+                            <p>外码</p>
+                            <p>全码</p>
+                            <p>主属性/非主属性</p>
+                        </div>
+                    </div>
+                    <div id="section-050303">
+                        <h4>3.3 范式</h4>
+                        <div class="sub-contents">
+                            <p>存在问题：数据冗余/更新异常/插入删除异常</p>
+                            <p>第一范式：R的每个属性A的值域只包含原子项</p>
+                            <p>第二范式：且每个非主属性都完全函数依赖于候选码</p>
+                            <p>第三范式：且不存在非主属性对候选码的传递函数依赖</p>
+                            <p>BC范式：且F中的每个依赖的决定因素必定包含R的某个候选码，进一步消除主属性对码的部分和传递函数依赖</p>
+                            <p>第四范式：消除非平凡且非函数依赖的多值依赖</p>
+                            <p>判断部分函数依赖：看候选码的子集能否单独确定非主属性</p>
+                            <p>判断传递函数依赖： (X,Y)->Z (X,Z)->W => (X,Y)->W</p>
+                            <p>伪传递：若X->Y，WY->Z，则XW->Z</p>
+                        </div>
+                    </div>
+                    <div id="section-050304">
+                        <h4>3.4 模式分解</h4>
+                        <div class="sub-contents">
+                            <p>无损连接-可自然连接恢复/保持函数依赖</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0504">4. SQL语言</h3>
+                <div class="part-contents">
+                    <div id="section-050401">
+                        <h4>4.1 语言</h4>
+                        <div class="sub-contents">
+                            <p>数据定义语言：create/alter/drop</p>
+                            <p>完整性约束：not null/unique/default/primary/foreign/check</p>
+                            <p>数据操作语言：insert/update/delete</p>
+                            <p>数据查询语言：select..from..where..group by..having..order by</p>
+                            <p>比较/between/逻辑/in/not in/exists/like/all/some/unique/聚合函数/is null/is not
+                                null/union/intersect/except/distinct/as</p>
+                            <p>聚合函数：AVG均值 COUNT计数 MIN/MAX极值 SUM求和</p>
+                            <p>权限：GRANT/REVOKE < Insert>
+                                    < ALL PRIVILEGES> on .. to .. PUBLIC/WITH GRANT OPTION 可分发</p>
+                            <p>视图：create view … as select… WITH CHECK OPTION 约束</p>
+                            <p>索引：改变内模式 create UNIQUE唯一/CLUSTER聚簇 index .. on ..</p>
+                            <p>存储过程</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0505">5. 并发控制</h3>
+                <div class="part-contents">
+                    <div id="section-050501">
+                        <h4>5.1 事务</h4>
+                        <div class="sub-contents">
+                            <p>事务：原子性/一致性/隔离性(读未提交、读已提交、可重复读、串行)/持久性</p>
+                            <p>处理：故障/备份(转储/增量/更新日志文件)/恢复/镜像</p>
+                        </div>
+                    </div>
+                    <div id="section-050502">
+                        <h4>5.2 并发控制</h4>
+                        <div class="sub-contents">
+                            <p>并发操作：丢失更新/不可重复读/读脏数据</p>
+                            <p>并发控制：封锁协议</p>
+                            <p>排它锁(写锁)</p>
+                            <p>共享锁(读锁)</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-06">六、面向对象</h2>
+                <h3 id="part-0601">1. 面向对象 OOP</h3>
+                <div class="part-contents">
+                    <div id="section-060101">
+                        <h4>1.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>对象object：对象名，属性，方法</p>
+                            <p>类class：属性/数据/状态/变量和方法/函数/操作/行为/实现</p>
+                            <p>分类：实体类/接口类(边界类)/控制类</p>
+                            <p>抽象：抽取共同特征和行为</p>
+                            <p>类是对象的抽象，对象是类的实例(instance)</p>
+                            <p>消息message：调用方法传值给形参，相互之间通讯</p>
+                            <p>封装：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化</p>
+                            <p>this：隐式引用变量，指向当前实例</p>
+                            <p>-区分成员变量与局部变量</p>
+                            <p>-在方法中调用其他构造方法，构造器链</p>
+                            <p>-作为参数传递当前对象</p>
+                            <p>-返回当前对象，实现方法链</p>
+                            <p>public/private/protected：权限修饰符 公有</p>
+                            <p>static：静态成员变量，变量方法可类名调用，可修饰内部类</p>
+                            <p>final：使变量的值不可变，使方法不能被重写，使类不能继承</p>
+                            <p>继承extends：子类/派生类共享父类/超类/基类的属性和方法</p>
+                            <p>多重继承：多个父类，二义性</p>
+                            <p>abstract：抽象类。可包含抽象方法，不能直接实例化，不能使用private/final/static,，可有构造方法</p>
+                            <p>super：调用父类的构造方法，访问父类实例的变量，调用父类的方法</p>
+                            <p>隐藏：子类中具有 同名不同参 的方法，阻止父类函数行为</p>
+                            <p>多态：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展</p>
+                            <p>参数多态/包含多态(引用子类)/过载多态(上下文)/强制多态</p>
+                            <p>覆盖/重写@Override ：子类中具有 同名同参数 的方法，改变父类的函数行为。</p>
+                            <p>动态绑定：继承后当代码运行时，通过父类引用调用父类和子类的重写方法，结果实际调用子类的方法</p>
+                            <p>函数重载overload：同一个类中具有 同名不同参 的方法，提供多种方式来执行相同行为</p>
+                            <p>绑定binding：把一个方法与其所在的类/对象关联起来</p>
+                            <p>静态绑定：编译时，动态绑定：运行时</p>
+                            <p>接口interface/实现implements：实现接口中的所有方法</p>
+                        </div>
+                    </div>
+                    <div id="section-060102">
+                        <h4>1.2 面向对象分析 OOA</h4>
+                        <div class="sub-contents">
+                            <p>为了确定问题域，理解问题</p>
+                            <p>认定(实质性)对象、组织对象、描述对象间的相互作用、确定对象的操作、定义对象的内部信息</p>
+                        </div>
+                    </div>
+                    <div id="section-060103">
+                        <h4>1.3 面向对象设计 OOD</h4>
+                        <div class="sub-contents">
+                            <p>定义：将OOA所创建的分析模型转化为设计模型和实现代码</p>
+                            <p>识别类及对象、定义属性、定义服务、识别关系、识别包</p>
+                            <p>单一责任原则：仅有一个引起变化的原因</p>
+                            <p>开放封闭原则：开发是可拓展的，封闭是不可修改的</p>
+                            <p>里氏替换原则：任何父类可以出现子类都可以出现替换</p>
+                            <p>依赖倒置原则：细节依赖于抽象，抽象不依赖于细节。高层模块不应该依赖于底层模块，都依赖于抽象</p>
+                            <p>接口分离原则：接口属于客户。依赖于抽象，不依赖于具体</p>
+                            <p>共同封闭原则：变化对包产生影响则对包中所有类产生影响</p>
+                            <p>共同重用原则：重用包中的一个类，需要重用所有类</p>
+                        </div>
+                    </div>
+                    <div id="section-060104">
+                        <h4>1.4 面向对象程序设计 OOP</h4>
+                        <div class="sub-contents">
+                            <p>程序设计规范</p>
+                            <p>选用 面向对象程序设计语言 OOPL 实现</p>
+                        </div>
+                    </div>
+                    <div id="section-060105">
+                        <h4>1.5 面向对象测试</h4>
+                        <div class="sub-contents">
+                            <p>算法层</p>
+                            <p>类层</p>
+                            <p>模板层</p>
+                            <p>系统层</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-07">七、UML</h2>
+                <h3 id="part-0701">1. 概念</h3>
+                <div class="part-contents">
+                    <div id="section-070101">
+                        <h4>1.1 事物</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070102">
+                        <h4>1.2 关系</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0702">2. 图</h3>
+                <div class="part-contents">
+                    <div id="section-070201">
+                        <h4>2.1 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070202">
+                        <h4>2.2 对象图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070203">
+                        <h4>2.3 用例图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070204">
+                        <h4>2.4 序列图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070205">
+                        <h4>2.5 通信图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070206">
+                        <h4>2.6 状态图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070207">
+                        <h4>2.7 活动图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070208">
+                        <h4>2.8 构件图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-070209">
+                        <h4>2.9 部署图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="chapter-08">八、设计模式</h2>
+                <h3 id="part-0801">1. 概念</h3>
+                <div class="part-contents">
+                    <div id="section-080101">
+                        <h4>1.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>在特定问题领域中被使用，涉及多种设计元素，以面向对象方式进行设计，遵循设计原则，复用成功的设计和体系结构</p>
+                            <p>基本要素：模式名称、问题(应该在何时使用模式)、解决方案(设计的内容)、效果(模式应用的效果)</p>
+                        </div>
+                    </div>
+                    <div id="section-080102">
+                        <h4>1.2 分类</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>创建型 5</th>
+                                        <th>结构型 7</th>
+                                        <th>行为型 11</th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>处理创建对象</th>
+                                        <th>处理类和对象的组合</th>
+                                        <th>描述类或对象的交互</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>类</td>
+                                        <td>
+                                            <p>工厂方法模式 <i class="txt-en">Factory Method</i></p>
+                                        </td>
+                                        <td>
+                                            <p>适配器模式 <i class="txt-en">Adapter</i></p>
+                                        </td>
+                                        <td>
+                                            <p>解释器模式 <i class="txt-en">Interpreter</i></p>
+                                            <p>模板方法模式 <i class="txt-en">Template Method</i></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>对象</td>
+                                        <td>
+                                            <p>抽象工厂模式 <i class="txt-en">Abstract Factory</i></p>
+                                            <p>生成器模式 <i class="txt-en">Builder</i></p>
+                                            <p>原型模式 <i class="txt-en">Prototype</i></p>
+                                            <p>单例模式 <i class="txt-en">Singleton</i></p>
+                                        </td>
+                                        <td>
+                                            <p>适配器模式 <i class="txt-en">Adapter</i></p>
+                                            <p>桥接模式 <i class="txt-en">Bridge</i></p>
+                                            <p>组合模式 <i class="txt-en">Composite</i></p>
+                                            <p>装饰模式 <i class="txt-en">Decorator</i></p>
+                                            <p>外观模式 <i class="txt-en">Facade</i></p>
+                                            <p>享元模式 <i class="txt-en">Flyweight</i></p>
+                                            <p>代理模式 <i class="txt-en">Proxy</i></p>
+                                        </td>
+                                        <td>
+                                            <p>责任链模式 <i class="txt-en">Chain of Responsibility</i></p>
+                                            <p>命令模式 <i class="txt-en">Command</i></p>
+                                            <p>迭代器模式 <i class="txt-en">Iterator</i></p>
+                                            <p>中介者模式 <i class="txt-en">Mediator</i></p>
+                                            <p>备忘录模式 <i class="txt-en">Memento</i></p>
+                                            <p>观察者模式 <i class="txt-en">Observer</i></p>
+                                            <p>状态模式 <i class="txt-en">State</i></p>
+                                            <p>策略模式 <i class="txt-en">Strategy</i></p>
+                                            <p>访问者模式 <i class="txt-en">Visitor</i></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0802">2. 简单工厂模式</h3>
+                <div class="part-contents">
+                    <div id="section-080201">
+                        <h4>2.1 概念</h4>
+                        <div class="sub-contents">
+
+                        </div>
+                    </div>
+                    <div id="section-080202">
+                        <h4>2.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080203">
+                        <h4>2.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0803">3. 工厂方法模式</h3>
+                <div class="part-contents">
+                    <div id="section-080301">
+                        <h4>3.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080302">
+                        <h4>3.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080303">
+                        <h4>3.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0804">4. 抽象工厂模式</h3>
+                <div class="part-contents">
+                    <div id="section-080401">
+                        <h4>4.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080402">
+                        <h4>4.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080403">
+                        <h4>4.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0805">5. 生成器模式</h3>
+                <div class="part-contents">
+                    <div id="section-080501">
+                        <h4>5.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080502">
+                        <h4>5.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080503">
+                        <h4>5.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0806">6. 原型模式</h3>
+                <div class="part-contents">
+                    <div id="section-080601">
+                        <h4>6.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080602">
+                        <h4>6.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080603">
+                        <h4>6.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0807">7. 单例模式</h3>
+                <div class="part-contents">
+                    <div id="section-080701">
+                        <h4>7.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080702">
+                        <h4>7.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080703">
+                        <h4>7.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0808">8. 适配器模式</h3>
+                <div class="part-contents">
+                    <div id="section-080801">
+                        <h4>8.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080802">
+                        <h4>8.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080803">
+                        <h4>8.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0809">9. 桥接模式</h3>
+                <div class="part-contents">
+                    <div id="section-080901">
+                        <h4>9.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080902">
+                        <h4>9.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-080903">
+                        <h4>9.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0810">10. 组合模式</h3>
+                <div class="part-contents">
+                    <div id="section-081001">
+                        <h4>10.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081002">
+                        <h4>10.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081003">
+                        <h4>10.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0811">11. 装饰器模式</h3>
+                <div class="part-contents">
+                    <div id="section-081101">
+                        <h4>11.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081102">
+                        <h4>11.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081103">
+                        <h4>11.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0812">12. 外观模式</h3>
+                <div class="part-contents">
+                    <div id="section-081201">
+                        <h4>12.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081202">
+                        <h4>12.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081203">
+                        <h4>12.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0813">13. 享元模式</h3>
+                <div class="part-contents">
+                    <div id="section-081301">
+                        <h4>13.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081302">
+                        <h4>13.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081303">
+                        <h4>13.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0814">14. 代理模式</h3>
+                <div class="part-contents">
+                    <div id="section-081401">
+                        <h4>14.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081402">
+                        <h4>14.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081403">
+                        <h4>14.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0815">15. 责任链模式</h3>
+                <div class="part-contents">
+                    <div id="section-081501">
+                        <h4>15.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081502">
+                        <h4>15.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081503">
+                        <h4>15.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0816">16. 命令模式</h3>
+                <div class="part-contents">
+                    <div id="section-081601">
+                        <h4>16.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081602">
+                        <h4>16.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081603">
+                        <h4>16.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0817">17. 解释器模式</h3>
+                <div class="part-contents">
+                    <div id="section-081701">
+                        <h4>17.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081702">
+                        <h4>17.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-081703">
+                        <h4>17.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0818">18. 迭代器模式</h3>
+                <div class="part-contents">
+                    <div id="section-081801">
+                        <h4>18.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="section-081802">
+                    <h4>18.2 类图</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <div id="section-081803">
+                    <h4>18.3 实现</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <h3 id="part-0819">19. 中介者模式</h3>
+                <div class="part-contents">
+                    <div id="section-081901">
+                        <h4>19.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="section-081902">
+                    <h4>19.2 类图</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <div id="section-081903">
+                    <h4>19.3 实现</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <h3 id="part-0820">20. 备忘录模式</h3>
+                <div class="part-contents">
+                    <div id="section-082001">
+                        <h4>20.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="section-082002">
+                    <h4>20.2 类图</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <div id="section-082003">
+                    <h4>20.3 实现</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <h3 id="part-0821">21. 观察者模式</h3>
+                <div class="part-contents">
+                    <div id="section-082101">
+                        <h4>21.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="section-082102">
+                    <h4>21.2 类图</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <div id="section-082103">
+                    <h4>21.3 实现</h4>
+                    <div class="sub-contents">
+                        <p>xxx</p>
+                    </div>
+                </div>
+                <h3 id="part-0822">22. 状态模式</h3>
+                <div class="part-contents">
+                    <div id="section-082201">
+                        <h4>22.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082202">
+                        <h4>22.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082203">
+                        <h4>22.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0823">23. 策略模式</h3>
+                <div class="part-contents">
+                    <div id="section-082301">
+                        <h4>23.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082302">
+                        <h4>23.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082303">
+                        <h4>23.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0824">24. 模板方法模式</h3>
+                <div class="part-contents">
+                    <div id="section-082401">
+                        <h4>24.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082402">
+                        <h4>24.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082403">
+                        <h4>24.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-0825">25. 访问者模式</h3>
+                <div class="part-contents">
+                    <div id="section-082501">
+                        <h4>25.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082502">
+                        <h4>25.2 类图</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                    <div id="section-082503">
+                        <h4>25.3 实现</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+
                 <h2 id="chapter-09">九、操作系统 <i class="txt-en">Operating System</i></h2>
                 <h3 id="part-0901">1. 概述</h3>
                 <div class="part-contents">
@@ -885,6 +2325,7 @@ function scrollTo(id: string) {
                         <h4>1.1 概述</h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">地位</span>应用软件、系统软件、操作系统、计算机硬件</p>
+                            <p><span class="txt-define">功能</span>管理系统的硬件、软件、数据资源，控制程序运行，人机之间的接口，应用软件与硬件之间的接口</p>
                             <p><span class="txt-define">特征</span>并发性、共享性、虚拟性、不确定性</p>
                             <p><span class="txt-define">分类</span>批处理、分时、实时、网络、分布式、微机、嵌入式</p>
                         </div>
@@ -896,7 +2337,8 @@ function scrollTo(id: string) {
                         <h4>2.1 概念</h4>
                         <div class="sub-contents">
                             <p>线程 <i class="txt-en">Thread</i>：CPU可独立调度和分配的最小单位</p>
-                            <p>可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的</p>
+                            <p>包含在进程中，可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的</p>
+                            <p>共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、栈</p>
                             <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) 组成</p>
                             <p>三态模型：就绪
                                 <i class="txt-en">Ready</i>、运行
@@ -1288,50 +2730,324 @@ function scrollTo(id: string) {
                     </div>
                 </div>
                 <h2 id="chapter-10">十、结构化开发</h2>
-
+                <h3 id="part-1001">1. 系统设计</h3>
+                <div class="part-contents">
+                    <div id="section-100101">
+                        <h4>1.1 概述</h4>
+                        <div class="sub-contents">
+                            <p>抽象、模块化、自顶向下、逐步求精、信息隐蔽、模块独立(低耦合/高内聚)</p>
+                        </div>
+                    </div>
+                    <div id="section-100102">
+                        <h4>1.2 任务</h4>
+                        <div class="sub-contents">
+                            <p>体系结构设计、数据设计、接口设计、过程设计</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1002">2. 模块设计</h3>
+                <div class="part-contents">
+                    <div id="section-100201">
+                        <h4>2.1 内聚性</h4>
+                        <div class="sub-contents">
+                            <p>内聚由低到高，模块独立性由低到高</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>偶然内聚</td>
+                                        <td>模块内无联系</td>
+                                    </tr>
+                                    <tr>
+                                        <td>逻辑内聚</td>
+                                        <td>执行若干<b>逻辑相似</b>功能，通过参数确定具体功能</td>
+                                    </tr>
+                                    <tr>
+                                        <td>时间内聚</td>
+                                        <td>将<b>同时执行</b>的动作组合</td>
+                                    </tr>
+                                    <tr>
+                                        <td>过程内聚</td>
+                                        <td>完成<b>多个按指定过程</b>执行的组合</td>
+                                    </tr>
+                                    <tr>
+                                        <td>通信内聚</td>
+                                        <td>处理元素在用一个<b>数据结构</b>上操作，或使用相同输入/产生相同输出数据</td>
+                                    </tr>
+                                    <tr>
+                                        <td>顺序内聚</td>
+                                        <td>处理元素紧密相关且<b>顺序执行</b>，前一功能输出是下一功能输入</td>
+                                    </tr>
+                                    <tr>
+                                        <td>功能内聚</td>
+                                        <td>最强内聚，所有元素<b>共同完成</b>一个功能，缺一不可</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-100202">
+                        <h4>2.2 耦合性</h4>
+                        <div class="sub-contents">
+                            <p>耦合由低到高，模块独立性由高到低</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>无直接耦合</td>
+                                        <td>模块间无直接关系</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据耦合</td>
+                                        <td>有调用关系，传递<b>简单数据</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>标记耦合</td>
+                                        <td>传递<b>数据结构</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>控制耦合</td>
+                                        <td>传递<b>控制变量</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>外部耦合</td>
+                                        <td>通过软件之<b>外的环境</b>联结</td>
+                                    </tr>
+                                    <tr>
+                                        <td>公共耦合</td>
+                                        <td>通过<b>公共数据环境</b>相互作用</td>
+                                    </tr>
+                                    <tr>
+                                        <td>内容耦合</td>
+                                        <td>直接使用另一模块<b>内部数据</b>或转入内部</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1003">3. 界面设计</h3>
+                <div class="part-contents">
+                    <div id="section-100301">
+                        <h4>3.1 原则</h4>
+                        <div class="sub-contents">
+                            <p>置界面与用户控制之下</p>
+                            <p>减少用户的记忆负担</p>
+                            <p>保持界面的一致性</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1004">4. 总结</h3>
+                <div class="part-contents">
+                    <div id="section-100401">
+                        <h4>4.1 系统结构设计原则</h4>
+                        <div class="sub-contents">
+                            <p>分解-协调原则</p>
+                            <p>自顶向下原则：先确定上层模块，逐层确定下层模块</p>
+                            <p>信息隐蔽、抽象原则：只规定做什么，不规定怎么做</p>
+                            <p>一致性原则：保证设计过程规范、标准和文件模式统一</p>
+                            <p>明确性原则：功能明确，接口明确</p>
+                            <p>低耦合、高内聚原则</p>
+                            <p>扇入扇出系数合理原则：适当为3或4，不超7</p>
+                            <p>规模适当原则：避免过大过小</p>
+                            <p>作用范围原则：模块作用范围应在其控制范围内</p>
+                        </div>
+                    </div>
+                    <div id="section-100402">
+                        <h4>4.2 系统文档</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>人员</th>
+                                        <th>阶段</th>
+                                        <th>文档</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>系统分析与用户</td>
+                                        <td>系统规划和系统分析</td>
+                                        <td>可行性研究报告、总体规划报告、系统开发合同、系统方案说明书</td>
+                                    </tr>
+                                    <tr>
+                                        <td>系统开发与项目管理</td>
+                                        <td>项目期</td>
+                                        <td>系统开发计划、系统开发月报、系统开发总结报告</td>
+                                    </tr>
+                                    <tr>
+                                        <td>系统开发与系统测试</td>
+                                        <td></td>
+                                        <td>系统方案说明书、系统开发合同、系统设计说明书、测试计划</td>
+                                    </tr>
+                                    <tr>
+                                        <td>系统开发与用户</td>
+                                        <td>系统运行</td>
+                                        <td>用户手册、操作指南</td>
+                                    </tr>
+                                    <tr>
+                                        <td>系统开发与系统维护</td>
+                                        <td></td>
+                                        <td>系统设计说明书、系统开发总结报告</td>
+                                    </tr>
+                                    <tr>
+                                        <td>系统维护与用户</td>
+                                        <td>运行维护</td>
+                                        <td>系统运行报告、维护修改建议</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-100403">
+                        <h4>4.3 数据字典 DD</h4>
+                        <div class="sub-contents">
+                            <p>条目：数据流、数据项、数据存储、基本加工</p>
+                            <p>加工逻辑(小说明)：结构化语言(顺序/选择/重复)、判定表、判定树</p>
+                            <img class="img-29" style="width: 600px;" src="/docs/study/imgs/29-dd.png" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div id="section-100404">
+                        <h4>4.4 数据流图 DFD</h4>
+                        <div class="sub-contents">
+                            <p>基本图形元素：数据流、加工、数据存储、外部实体</p>
+                            <img class="img-30" style="width: 600px;" src="/docs/study/imgs/30-dfd.png" alt=""
+                                srcset="">
+                            <p>数据流：加工>加工、加工>数据存储(写)、数据存储>加工(读)、外部实体>加工(输入)、加工>外部实体(输出)</p>
+                            <p>加工：有输出无输入为奇迹，有输入无输出为黑洞，输入不足以产生输出为灰洞</p>
+                            <p>数据存储：存储数据和提供数据</p>
+                            <p>外部实体：当前系统之外的人员组织，数据发源地和归宿地</p>
+                            <p>加工既有输入也要有输出</p>
+                            <p>父图子图平衡：输入输出要保持一致</p>
+                            <p>顶层数据流图(父图)是整个系统的高度抽象，描述系统的输入输出、外部实体以及之间的数据流</p>
+                            <p>底层数据流图(子图)对父图的逐步细化</p>
+                            <p>数据守恒：数据总量相同</p>
+                        </div>
+                    </div>
+                </div>
                 <h2 id="chapter-11">十一、软件工程</h2>
                 <h3 id="part-1101">1. 软件开发模型</h3>
                 <div class="part-contents">
                     <div id="section-110101">
                         <h4>1.1 瀑布模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>需求分析>设计>编码>测试>运行与维护</p>
+                            <p><span class="txt-define">特点</span>结构化方法，以项目的阶段评审和文档控制来指导，<b>需求明确</b>，管理成本低</p>
+                            <p><span
+                                    class="txt-define">缺点</span>由于各个阶段的依赖关系，需求变更较大时，会导致整个项目的延迟；测试阶段在开发结束后才进行，可能导致问题的发现和修复较晚；客户参与程度较低，可能导致最终产品与客户需求有较大差距，风险控制弱
+                            </p>
                         </div>
                     </div>
                     <div id="section-110102">
                         <h4>1.2 V模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>变体，质量保证活动，开发与测试结合，测试贯彻始终，有V选瀑</p>
                         </div>
                     </div>
                     <div id="section-110103">
                         <h4>1.3 增量模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>将软件系统划分成多个增量，每个增量分别开发、测试和部署，然后按顺序进行整合。<b>首个增量是核心</b></p>
+                            <p><span class="txt-define">特点</span>增量划分、迭代开发、重复循环、增量交付</p>
+                            <p><span class="txt-define">缺点</span>管理成本高，效率低</p>
                         </div>
                     </div>
                     <div id="section-110104">
                         <h4>1.4 演化模型-原型模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>演化模型：迭代的过程模型，适用于需求缺乏准确认识的情况</p>
+                            <p>创建快速原型，了解需求和反馈。需求不明确，经常变化，规模小</p>
+                            <p><span class="txt-define">特点</span>实际可行、具有基本特征、构造方便快速，动态需求</p>
                         </div>
                     </div>
                     <div id="section-110105">
                         <h4>1.5 演化模型-螺旋模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>瀑布模型+演化模型，加入风险分析，适用于复杂、大型、高风险的项目</p>
+                            <p>螺旋周期：制定计划、风险分析、实施工程、客户评估</p>
+                            <p><span class="txt-define">缺点</span>需要较高的技术和管理能力，且增加成本</p>
                         </div>
                     </div>
                     <div id="section-110106">
                         <h4>1.6 喷泉模型</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>以用户需求为动力，以对象作为驱动，<b>面向对象</b>，迭代无间隙</p>
+                            <p><span class="txt-define">特点</span>迭代性，无间隙性，无边界可同步进行，开发效率高，复用好</p>
+                            <p>过程：分析、设计、实现、维护、演化</p>
+                            <p><span class="txt-define">缺点</span>团队成员多，需严格管理文档</p>
                         </div>
                     </div>
                     <div id="section-110107">
                         <h4>1.7 统一过程模型 (UP/RUP)</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>用例和风险驱动、以架构为中心、迭代且增量</p>
+                            <p><span class="txt-define">阶段</span>起始阶段：生命周期目标、精化阶段：生命周期架构、构建阶段：初始运行功能、移交阶段：产品发布</p>
+                        </div>
+                    </div>
+                    <div id="section-110108">
+                        <h4>1.8 敏捷过程 <i class="txt-en">Agile</i></h4>
+                        <div class="sub-contents">
+                            <p>通过迭代、协作和快速响应变化来提高团队的效率和灵活性</p>
+                            <p>极限编程(XP)：4个价值观、5个原则、12个最佳实践、行为</p>
+                            <p>4个价值观：沟通、简单性假设、反馈、勇气</p>
+                            <p>12个最佳实践</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>计划游戏</td>
+                                        <td>快速制定计划、随着细节的不断变化而完善</td>
+                                    </tr>
+                                    <tr>
+                                        <td>小型发布</td>
+                                        <td>系统的设计要能够尽可能早地交付</td>
+                                    </tr>
+                                    <tr>
+                                        <td>隐喻</td>
+                                        <td>找到合适的比喻传达信息</td>
+                                    </tr>
+                                    <tr>
+                                        <td>简单设计</td>
+                                        <td>只处理当前的需求，使设计保持简单</td>
+                                    </tr>
+                                    <tr>
+                                        <td>测试先行</td>
+                                        <td>先写测试代码，然后再编写程序</td>
+                                    </tr>
+                                    <tr>
+                                        <td>重构</td>
+                                        <td>重新审视需求和设计，重新明确地描述它们以符合新的和现有的需求</td>
+                                    </tr>
+                                    <tr>
+                                        <td>结对编程</td>
+                                        <td>一个开发，另一个观察审查代码，提高代码质量 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>集体代码所有制</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>持续集成</td>
+                                        <td>可以按日甚至按小时为客户提供可运行的版本</td>
+                                    </tr>
+                                    <tr>
+                                        <td>每周工作40h</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>现场客户</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>编码标准</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>水晶法 <i class="txt-en">Crystal</i>：以人为本，不同项目需要不同策略、约定和方法论</p>
+                            <p>开发式源码：程序开发人员再地域上分布很广</p>
+                            <p>并列争求法 <i class="txt-en">Scrum</i>：迭代的增量化工程方法，按需求的优先级别实现产品。30天为一个<b>冲刺</b></p>
+                            <p>功能驱动开发 FDD：首席程序员和类程序员</p>
+                            <p>自适应软件开发 ASD：三个非线性开发阶段：猜测、合作、学习。强调开发方法的适应性，为软件的重要性提供基础，适应组织和管理层次</p>
+                            <p>敏捷统一过程(AUP)：在大型上连续，在小型上迭代</p>
+                            <p>建模、实现、测试、部署、配置及项目管理、环境管理</p>
                         </div>
                     </div>
                 </div>
@@ -1340,7 +3056,11 @@ function scrollTo(id: string) {
                     <div id="section-110201">
                         <h4>2.1 方法</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>结构化开发方法：结构化分析、设计、程序设计。需求明确、自顶向下、逐步分解</p>
+                            <p>Jackson方法：面向数据结构，适合于小规模项目</p>
+                            <p>原型法：需求不明确，业务理论不确定，需求经常变化</p>
+                            <p>面向对象开发方法：更好的复用性，适合于系统项目大，采用统一建模语言 UML</p>
+                            <p>面向服务方法：操作、服务、业务流程</p>
                         </div>
                     </div>
                 </div>
@@ -1349,34 +3069,173 @@ function scrollTo(id: string) {
                     <div id="section-110301">
                         <h4>3.1 需求分析</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>软件需求：指用户解决问题或达到目标所需要的条件或能力，是系统或系统部件要满足合同、标准、规范或其他正式规定文档所需具有的条件或能力，以及反映这些条件或能力的文档说明，涵盖了系统的功能、行为、性能、设计约束等方面
+                            </p>
+                            <p>结构化分析结果：一套分层的数据流图、一本数据词典、一组小说明、补充材料</p>
+                            <p><span class="txt-define">分类</span>包括业务需求、用户需求、系统需求</p>
+                            <p><span
+                                    class="txt-define">包含</span>功能需求、性能需求、用户或人的因素、环境需求、界面需求、文档需求、数据需求、资源使用需求、安全保密需求、可靠性需求、软件成本消耗与开发进度需求、其他非功能性需求
+                            </p>
+                            <p><span class="txt-define">工具</span>数据流图与数据字典、决策表与决策树</p>
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1104">4. 软件设计</h3>
+                <h3 id="part-1104">4. 系统设计</h3>
                 <div class="part-contents">
                     <div id="section-110401">
-                        <h4>4.1 需求分析</h4>
+                        <h4>4.1 概述</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>系统设计：指在需求分析的基础上，对软件系统进行整体架构和各个模块的设计。</p>
+                            <p>目标：将需求转化为具体的实现方案，明确软件的结构和功能，并考虑系统的可维护性、可扩展性、可重用性等方面的要求</p>
+                            <p>设计方法：面向数据流(SD)、面向对象(OOD)</p>
+                            <p>基本原理：抽象化、自顶而下，逐步求精、信息隐蔽、模块独立，高内聚低耦合</p>
+                            <p>原则：保持模块的大小适中、尽可能减少调用的深度、多扇入少扇出、单入口单出口、模块的作用域应在模块之内、功能应该是可预测的</p>
+                        </div>
+                    </div>
+                    <div id="section-110402">
+                        <h4>4.2 设计</h4>
+                        <div class="sub-contents">
+                            <p>概要设计</p>
+                            <p>设计软件系统总体结构：是概要设计的基本任务，分配模块并确定功能和调用关系，形成系统结构图</p>
+                            <p>数据结构及数据库设计：概念设计、逻辑设计、物理设计</p>
+                            <p>编写概要设计文档：概要设计说明书、数据库设计说明书、用户手册、修订测试计划</p>
+                            <p>评审</p>
+                            <p>详细设计：算法设计，数据结构设计，数据库物理设计</p>
                         </div>
                     </div>
                 </div>
                 <h3 id="part-1105">5. 软件测试</h3>
                 <div class="part-contents">
                     <div id="section-110501">
-                        <h4>5.1 需求分析</h4>
+                        <h4>5.1 系统测试</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>意义：验证系统是否符合预期的功能需求和性能要求，以及发现系统中的缺陷和风险</p>
+                            <p>目的：希望能以最少的人力和时间发现潜在的错误和缺陷</p>
+                            <p>包含软件测试、硬件测试、网络测试</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>尽早进行测试</td>
+                                        <td>测试应贯穿在开发的各个阶段，应尽早纠正错误，消除隐患</td>
+                                    </tr>
+                                    <tr>
+                                        <td>委托专门人员进行测试 </td>
+                                        <td>测试工作应由专门人员来进行，避免由原开发软件的人或小组承担</td>
+                                    </tr>
+                                    <tr>
+                                        <td>设计测试方案时要确定预期输出结果</td>
+                                        <td>在设计测试方案时，不仅要确定输入数据，还要根据系统功能确定预期输出结果</td>
+                                    </tr>
+                                    <tr>
+                                        <td>设计包含不合理、失效的输入条件的测试用例</td>
+                                        <td>在设计测试用例时，不仅要设计有效、合理的输入条件，也要包含不合理、失效的输入条件</td>
+                                    </tr>
+                                    <tr>
+                                        <td>检验程序做了该做的事和不该做的事</td>
+                                        <td>在测试程序时，不仅要检验程序是否做了该做的事，还要检验程序是否做了不该做的事</td>
+                                    </tr>
+                                    <tr>
+                                        <td>严格按照测试计划进行测试</td>
+                                        <td>严格按照测试计划来进行测试，避免测试的随意性</td>
+                                    </tr>
+                                    <tr>
+                                        <td>妥善保存测试计划和测试用例</td>
+                                        <td>妥善保存测试计划、测试用例，作为软件文档的组成部分，为维护提供方便</td>
+                                    </tr>
+                                    <tr>
+                                        <td>设计可重复使用的测试用例</td>
+                                        <td>测试例子都是精心设计出来的，可以为重新测试或追加测试提供方便</td>
+                                    </tr>
+                                    <tr>
+                                        <td>目标来自需求分析</td>
+                                        <td>系统测试阶段的测试目标来自于需求分析阶段</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>测试方法</p>
+                            <p>静态测试：人工检测、计算机辅助静态分析。桌前检查、代码走查、代码审查</p>
+                            <p>动态测试：通过运行程序，发现并纠正错误。黑盒、白盒、灰盒</p>
+                        </div>
+                    </div>
+                    <div id="section-110502">
+                        <h4>5.2 黑盒测试</h4>
+                        <div class="sub-contents">
+                            <p>只关注测试对象的输入和输出，而不考虑内部的代码和结构</p>
+                            <p>等价类划分：将识别的输入域划分为若干个等价类，每个等价类包含具有相同特征和行为的输入。例如数字参可划分正数、零、负数，然后选择代表性数据，不可两个都不合理</p>
+                            <p>边界值分析：在输入范围中确认边界，选择上点/离点/内点</p>
+                            <p>错误推测：凭经验而言，来推测有可能产生问题的地方</p>
+                            <p>因果图：通过一个结果来反推出导致该结果的原因</p>
+                        </div>
+                    </div>
+                    <div id="section-110503">
+                        <h4>5.3 白盒测试</h4>
+                        <div class="sub-contents">
+                            <p>验证软件的内部逻辑是否正确，并且最大限度地覆盖测试对象的代码路径</p>
+                            <p>技术：逻辑覆盖、循环覆盖、基本路径测试</p>
+                            <p>逻辑覆盖</p>
+                            <p>语句覆盖：覆盖每个语句，分支不执行语句时可以不覆盖</p>
+                            <p>判定(分支)覆盖：每个判定表达式的结果都要真假覆盖</p>
+                            <p>条件覆盖：逻辑条件的可能值都要真假覆盖 A>0 B>0/A < 0 B < 0 </p>
+                                    <p>判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
+                                    <p>条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
+                                    <p>路径覆盖：覆盖被测试程序中的所有可能路径</p>
+                                    <img class="img-31" style="width: 600px;" src="/docs/study/imgs/31-ceshi.png" alt=""
+                                        srcset="">
+                        </div>
+                    </div>
+                    <div id="section-110504">
+                        <h4>5.4 McCabe度量法</h4>
+                        <div class="sub-contents">
+                            <p>V(G)=m-n+2 m为有向弧数，n为节点数</p>
+                            <img class="img-32" style="width: 400px;" src="/docs/study/imgs/32-mccabe.png" alt=""
+                                srcset="">
+                        </div>
+                    </div>
+                    <div id="section-110505">
+                        <h4>5.5 测试阶段</h4>
+                        <div class="sub-contents">
+                            <p>单元测试：是软件开发过程中的测试活动，用于验证软件系统的最小可测试单元（即单元）是否按照预期功能进行工作，依据软件详细设计说明书</p>
+                            <p>特征：模块接口(数据流)、局部数据结构(变量)、重要的执行路径、出错处理、边界条件</p>
+                            <p>过程：编写驱动模块，测试桩模块</p>
+                            <p>集成测试：依据软件概要设计文档</p>
+                            <p>方法：自顶向下、自底向上、回归测试(变更)、冒烟测试</p>
+                            <p>确认测试：确认先前发现的缺陷是否已经修复或解决</p>
+                            <p>系统测试</p>
                         </div>
                     </div>
                 </div>
                 <h3 id="part-1106">6. 软件维护</h3>
                 <div class="part-contents">
                     <div id="section-110601">
-                        <h4>6.1 需求分析</h4>
+                        <h4>6.1 运行和维护</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>对软件进行修复和改进，以纠正已经发现的错误或缺陷，并进行功能扩展或性能优化</p>
+                            <p>系统可维护性<b>评价指标</b>：可理解性、可测试性、可修改性</p>
+                            <p>维护期很长，更复杂，在每个阶段都需要考虑提高可维护性</p>
+                            <p>软件文档是软件可维护性的决定因素：用户文档、系统文档</p>
+                            <p>高质量文档可以提高开发质量，工作量大，只好不坏</p>
+                            <p>内容：硬件维护、软件维护、数据维护</p>
+                            <p>软件可维护性类型：</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>正确性维护</td>
+                                        <td>指改正在系统开发阶段已发生但在系统测试阶段尚未发现的<b>错误</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>适应性维护</td>
+                                        <td>指使应用软件适应信息技术<b>变化</b>和管理需求变化的被动修改</td>
+                                    </tr>
+                                    <tr>
+                                        <td>完/改善性维护</td>
+                                        <td>对已有的软件系统增加一些在系统分析和设计阶段中没有规定的功能与性能特征</td>
+                                    </tr>
+                                    <tr>
+                                        <td>预防性维护</td>
+                                        <td>为了改进应用软件的可靠性和可维护性，主动增加预防性的新功能，使应用系统适应各类变化而不被淘汰</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -1482,14 +3341,15 @@ function scrollTo(id: string) {
                 <div class="part-contents">
                     <p>整合管理、范围管理、时间管理、成本管理、质量管理、人力资源管理、通信管理、风险管理、采购管理、相关方管理</p>
                     <div id="section-110801">
-                        <h4>8.1 时间管理</h4>
+                        <h4>8.1 进度管理</h4>
                         <div class="sub-contents">
                             <p>甘特图/<b>Gantt图</b></p>
+                            <p><span class="txt-define">优点</span>能够清晰地描述每个任务从何时开始、到何时结束，任务的进展情况以及各个任务之间的并行性</p>
+                            <p><span class="txt-define">缺点</span>不能清晰地反映出各任务之间的依赖关系，难以确定整个项目的关键所在，也不能反映计划中有潜力的部分</p>
                             <img class="img-28" style="width: 250px;" src="/docs/study/imgs/28-gantt.png" alt=""
                                 srcset="">
-                            <p>能够清晰地描述每个任务从何时开始、到何时结束，任务的进展情况以及各个任务之间的并行性。但是它不能清晰地反映出各任务之间的依赖关系，难以确定整个项目的关键所在，也不能反映计划中有潜力的部分
-                            </p>
-                            <p>项目计划评审技术图/<b>PERT图</b>：不能反映任务之间的并行关系</p>
+                            <p>项目计划评审技术图/<b>PERT图</b></p>
+                            <p><span class="txt-define">缺点</span>不能反映任务之间的并行关系</p>
                             <img class="img-27" style="width: 150px;" src="/docs/study/imgs/27-pert.png" alt=""
                                 srcset="">
                             <p>正推取大值，反推取小值</p>
@@ -1501,8 +3361,8 @@ function scrollTo(id: string) {
                             <p>画项目活动图</p>
                         </div>
                     </div>
-                    <div id="section-110801">
-                        <h4>8.1 风险管理</h4>
+                    <div id="section-110802">
+                        <h4>8.2 风险管理</h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">特性</span>不确定性、损失</p>
                             <p><span class="txt-define">分类</span>项目风险、技术风险、商业风险</p>
@@ -1513,43 +3373,96 @@ function scrollTo(id: string) {
                             <p>风险曝光度 <i class="txt-en">Risk Exposure</i>：计算方法是风险出现的概率乘以风险可能造成的损失</p>
                         </div>
                     </div>
+                    <div id="section-110803">
+                        <h4>8.3 软件质量</h4>
+                        <div class="sub-contents">
+                            <p>可靠性：MTTF/(1+MTTF) 平均无故障时间 ToFailure</p>
+                            <p>可用性：MTBF/(1+MTBF) 平均失效间隔时间 BetweenFailure</p>
+                            <p>可维护性：1/(1+MTTR) 平均修复时间 ToRepair</p>
+                        </div>
+                    </div>
+                    <div id="section-110804">
+                        <h4>8.4 软件配置管理</h4>
+                        <div class="sub-contents">
+                            <p>目标：变更标识、变更控制、版本控制、确保变更正确的实现、变更报告</p>
+                            <p>内容：版本管理、配置支持、变更支持、过程支持、团队支持、变化报告、审计支持。</p>
+                            <p>变更管理、版本控制、系统建立、配置审核、配置状态报告</p>
+                            <p>配置项/配置基线</p>
+                            <p>配置数据库：开发库、受控库、产品库</p>
+                        </div>
+                    </div>
+                    <div id="section-110805">
+                        <h4>8.5 沟通管理</h4>
+                        <div class="sub-contents">
+                            <p>无主程序员：n*(n-1)/2</p>
+                            <p>有主程序员：n-1</p>
+                        </div>
+                    </div>
+                    <div id="section-110806">
+                        <h4>8.6 成本管理</h4>
+                        <div class="sub-contents">
+                            <p>软件项目估算</p>
+                            <p>COCOMO估算模型：用于估计软件开发项目的成本、进度和资源需求的模型。包含基本(静态单变量)、中级(静态多变量)、详细(系统/子系统/模块)</p>
+                            <p>COCOMOII模型：应用组装模型(对象点)、早期设计阶段模型(功能点)、体系结构阶段模型(代码行)</p>
+                        </div>
+                    </div>
                 </div>
                 <h3 id="part-1109">9. 软件质量保证</h3>
                 <div class="part-contents">
                     <div id="section-110901">
-                        <h4>9.1 功能性</h4>
+                        <h4>9.1 ISO/IEC 9126 软件质量模型</h4>
                         <div class="sub-contents">
-                            <p>适合性、准确性、互用性、依从性、安全性</p>
+                            <p>功能性：适合性、准确性、互用性、依从性、安全性</p>
+                            <p>可靠性：成熟性、容错性、易恢复性</p>
+                            <p>易使用性：易理解性、易学性、易操作性</p>
+                            <p>效率：时间特性(响应和处理时间、执行吞吐量)、资源特性</p>
+                            <p>可维护性：易分析性、易改变性、易测试性、稳定性</p>
+                            <p>可移植性：适应性、一致性、易安装性、易替换性</p>
                         </div>
                     </div>
                     <div id="section-110902">
-                        <h4>9.2 可靠性</h4>
+                        <h4>9.2 Mc Call 软件质量模型</h4>
                         <div class="sub-contents">
-                            <p>成熟性、容错性、易恢复性</p>
+                            <p>产品运行：正确性、可靠性、易使用性、效率、完整性</p>
+                            <p>产品修正：可维护性、灵活性、可测试性</p>
+                            <p>产品转移：可移植性、复用性、互用性</p>
                         </div>
                     </div>
-                    <div id="section-110903">
-                        <h4>9.3 易使用性</h4>
+                </div>
+                <h3 id="part-1110">10. 其他</h3>
+                <div class="part-contents">
+                    <div id="section-111001">
+                        <h4>10.1 软件评审</h4>
                         <div class="sub-contents">
-                            <p>易理解性、易学性、易操作性</p>
+                            <p>必要条件：设计质量、程序质量</p>
+                            <p>模块结构：控制流结构、数据流结构、模块结构与功能结构之间的对应关系</p>
+                            <p>技术评审：揭露质量问题</p>
                         </div>
                     </div>
-                    <div id="section-110904">
-                        <h4>9.4 效率</h4>
+                    <div id="section-111002">
+                        <h4>10.2 软件容错技术</h4>
                         <div class="sub-contents">
-                            <p>时间特性、资源特性</p>
+                            <p>可屏蔽错误，可自动恢复，出错仍可运行，可容错</p>
+                            <p>结构冗余：静态/动态/混合</p>
+                            <p>信息冗余：多加信息。校验码</p>
+                            <p>时间冗余：重复执行，程序回滚</p>
+                            <p>冗余附加技术：屏蔽软件错误</p>
+                            <p>冗余备份程序的存储及调用</p>
+                            <p>实现错误检测和错误恢复的程序</p>
+                            <p>实现容错软件所需的固化程序</p>
                         </div>
                     </div>
-                    <div id="section-110905">
-                        <h4>9.5 可维护性</h4>
+                    <div id="section-111003">
+                        <h4>10.3 软件工具</h4>
                         <div class="sub-contents">
-                            <p>易分析性、易改变性、易测试性、稳定性</p>
+                            <p>软件开发工具：需求分析工具、设计工具、编码与排错工具、测试工具</p>
+                            <p>软件维护工具：版本控制工具、文档分析工具、开发信息库工具、逆向工程工具、再工程工具</p>
                         </div>
                     </div>
-                    <div id="section-110906">
-                        <h4>9.6 可移植性</h4>
+                    <div id="section-111004">
+                        <h4>10.4 软件调试</h4>
                         <div class="sub-contents">
-                            <p>适应性、一致性、易安装性、易替换性</p>
+                            <p>试探法、回溯法、对分查找法、归纳法、演绎法</p>
                         </div>
                     </div>
                 </div>
@@ -1559,7 +3472,11 @@ function scrollTo(id: string) {
                     <div id="section-120101">
                         <h4>1.1 各网络层次</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>上三层：PGP、HTTPS、SSL</p>
+                            <p>传输层：TLS、SET</p>
+                            <p>网络层：防火墙、IPSec</p>
+                            <p>数据链路层：链路加密、PPTP、L2TP</p>
+                            <p>物理层：隔离、屏蔽</p>
                         </div>
                     </div>
                     <div id="section-120102">
@@ -2010,7 +3927,7 @@ function scrollTo(id: string) {
                     <div id="section-130202">
                         <h4>2.2 传输层协议</h4>
                         <div class="sub-contents">
-                            <p>都基于IP协议的传输层协议，可以端口寻址</p>
+                            <p>都基于IP协议的传输层协议，可以<b>端口寻址</b></p>
                             <p>TCP：提供了一个可靠的、面向连接的、全双工的数据传输服务</p>
                             <p>可靠传输，连接管理，差错检验和重传，流量控制(可变大小的滑动窗口协议)，拥塞控制</p>
                             <p>三次握手：SYN>SYN-ACK>ACK</p>
@@ -2041,23 +3958,30 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1303">3. 计算机网络分类</h3>
+                <h3 id="part-1303">3. 网络接入技术</h3>
                 <div class="part-contents">
                     <div id="section-130301">
-                        <h4>3.1 按分布范围分</h4>
+                        <h4>3.1 分类</h4>
                         <div class="sub-contents">
-                            <p>局域网 LAN</p>
-                            <p>域域网 MAN</p>
-                            <p>广域网 WAN</p>
-                            <p>因特网</p>
+                            <p>按分布范围分：局域网 LAN、域域网 MAN、广域网 WAN、因特网</p>
+                            <p>按拓扑结构分：总线型、星型、环型</p>
                         </div>
                     </div>
                     <div id="section-130302">
-                        <h4>3.2 按拓扑结构分</h4>
+                        <h4>3.2 网络接入技术</h4>
                         <div class="sub-contents">
-                            <p>总线型</p>
-                            <p>星型</p>
-                            <p>环型</p>
+                            <p>Wifi</p>
+                            <p>蓝牙 <i class="txt-en">Bluetooth</i> 覆盖范围最小，通信距离最短</p>
+                            <p>红外</p>
+                            <p>WAPI</p>
+                        </div>
+                    </div>
+                    <div id="section-130303">
+                        <h4>3.3 3G/4G/5G</h4>
+                        <div class="sub-contents">
+                            <p>3G：WCDMA、CDMA2000、TD-SCDMA、WIMAX</p>
+                            <p>4G：TD-LTE、FDD-LTE</p>
+                            <p>5G：理论峰值1Gb/s</p>
                         </div>
                     </div>
                 </div>
@@ -2066,7 +3990,11 @@ function scrollTo(id: string) {
                     <div id="section-130401">
                         <h4>4.1 逻辑网络设计</h4>
                         <div class="sub-contents">
-                            <p>xxx</p>
+                            <p>通过合理的逻辑架构，定义网络中不同设备之间的交互，建立数据传输和信息交换的路径，以实现网络的连接和数据传输的重要工作</p>
+                            <p>收集需求和要求，分析和理解业务需求</p>
+                            <p>确定逻辑节点和连接的标准和约束条件</p>
+                            <p>通过实验验证和分析不同方案，选择最优逻辑拓扑结构</p>
+                            <p>完成逻辑拓扑的规划，并输出实施方案</p>
                         </div>
                     </div>
                 </div>
@@ -2076,8 +4004,10 @@ function scrollTo(id: string) {
                         <h4>5.1 概念</h4>
                         <div class="sub-contents">
                             <p>IP地址中，全0代表的是网络，全1代表的是广播</p>
+                            <p>回播地址：127网段</p>
+                            <p>DHCP失效地址：Linux 0.0.0.0 Windows 169.254.x.x</p>
                             <p>分为 网络地址+主机地址</p>
-                            <p>子网掩码：A类占8位，B类占16位，C类占24位</p>
+                            <p>子网掩码：A类占8位，B类占16位，C类占24位，D类组播地址，E类保留</p>
                         </div>
                     </div>
                     <div id="section-130502">
@@ -2106,6 +4036,7 @@ function scrollTo(id: string) {
                         <h4>5.3 IPv6</h4>
                         <div class="sub-contents">
                             <p>地址长度为128位，IPv4只有32位，地址增大了2^96倍</p>
+                            <p>合法地址缩写</p>
                         </div>
                     </div>
                 </div>
@@ -2123,7 +4054,7 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                     <div id="section-130602">
-                        <h4>6.2 Web</h4>
+                        <h4>6.2 WWW服务</h4>
                         <div class="sub-contents">
                             <p>HTTP状态码：200/404/500</p>
                             <p>URL：协议名://主机名.域名.域名后缀.域名分类/目录/网页</p>
@@ -2136,35 +4067,26 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                     <div id="section-130603">
-                        <h4>6.3 网络接入技术</h4>
+                        <h4>6.3 Windows命令</h4>
                         <div class="sub-contents">
-                            <p>Wifi</p>
-                            <p>蓝牙 <i class="txt-en">Bluetooth</i> 覆盖范围最小，通信距离最短</p>
-                            <p>红外</p>
-                            <p>WAPI</p>
-                        </div>
-                    </div>
-                    <div id="section-130604">
-                        <h4>6.4 Windows命令</h4>
-                        <div class="sub-contents">
+                            <p><b>ipconfig</b>：显示网络适配器</p>
                             <p>ipconfig/release：释放</p>
                             <p>ipconfig/flushdns：清除/刷新本地DNS缓存</p>
                             <p>ipconfig/displaydns：显示本地DNS</p>
                             <p>ipconfig/registerdns：注册</p>
-                            <p>ipconfig：显示网络适配器</p>
                             <p>ipconfig/all：显示TCP/IP配置信息，包括DHCP</p>
                             <p>ipconfig/renew：重新申请IP地址</p>
-                            <p>ping：127.0.0.1>本机IP>默认网关>远程主机</p>
+                            <p><b>ping</b>：127.0.0.1>本机IP>默认网关>远程主机</p>
                             <p>msconfig：Win配置的应用程序</p>
                             <p>cmd：命令提示符</p>
-                            <p>tracert：路由跟踪实用程序</p>
+                            <p><b>tracert</b>：路由跟踪实用程序</p>
                             <p>traceroute：追踪数据包从源到目的地在IP网络上的路径</p>
-                            <p>netstat：显示网络连接、路由表和网络接口信息</p>
-                            <p>nslookup：域名查询</p>
+                            <p><b>netstat</b>：显示网络连接、路由表和网络接口信息</p>
+                            <p><b>nslookup</b>：域名查询</p>
                         </div>
                     </div>
-                    <div id="section-130605">
-                        <h4>6.5 补充</h4>
+                    <div id="section-130604">
+                        <h4>6.4 补充</h4>
                         <div class="sub-contents">
                             <p>Linux根目录：/</p>
                             <p>chmod：更新文件权限</p>
@@ -2174,7 +4096,246 @@ function scrollTo(id: string) {
                         </div>
                     </div>
                 </div>
-                <h2 id="chapter-14">算法</h2>
+                <h2 id="chapter-14">十四、算法</h2>
+                <h3 id="part-1401">1. 基本概念</h3>
+                <div class="part-contents">
+                    <div id="section-140101">
+                        <h4>1.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>有穷性：执行有穷步之后结束，且每一步都在有穷时间内完成</p>
+                            <p>确定性：算法中每一条指令都必须有确切的含义</p>
+                            <p>输入和输出</p>
+                            <p>有效性</p>
+                        </div>
+                    </div>
+                    <div id="section-140102">
+                        <h4>1.2 效率</h4>
+                        <div class="sub-contents">
+                            <p>时间复杂度</p>
+                            <p>空间复杂度</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1402">2. 查找算法</h3>
+                <div class="part-contents">
+                    <div id="section-140201">
+                        <h4>2.1 顺序查找</h4>
+                        <div class="sub-contents">
+                            <p>将待查找元素从头到尾与表中元素比较直至找到</p>
+                            <p>平均查找长度ASL = (n+1)⁄2</p>
+                        </div>
+                    </div>
+                    <div id="section-140202">
+                        <h4>2.2 二分查找</h4>
+                        <div class="sub-contents">
+                            <p>在有序排列的序列中折半范围查找元素。中间值的位置若是小数向下取整</p>
+                            <p>最多比较次数：⌊log2n⌋+1</p>
+                            <p>平均查找长度ASL ≈ log2(n+1)-1</p>
+                        </div>
+                    </div>
+                    <div id="section-140203">
+                        <h4>2.3 哈希表查找</h4>
+                        <div class="sub-contents">
+                            <p>关键码序列相同的元素，如果该控件已经被占用，则自动转换到该关键码序列的下一个地址空间</p>
+                        </div>
+                    </div>
+                    <div id="section-140203">
+                        <h4>2.3 动态查找</h4>
+                        <div class="sub-contents">
+                            <p>查找时没有找到对应元素，则向查找表中插入未找到的元素，或者从查找表中删除某个指定的元素</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1403">3. 排序算法</h3>
+                <div class="part-contents">
+                    <div id="section-140301">
+                        <h4>3.1 复杂度</h4>
+                        <div class="sub-contents">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>算法</th>
+                                        <th>平均时间复杂度</th>
+                                        <th>最坏时间复杂度</th>
+                                        <th>最好时间复杂度</th>
+                                        <th>空间复杂度</th>
+                                        <th>稳定性</th>
+                                        <th>归位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>直接插入排序</td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n)</span></td>
+                                        <td><span class="txt-func">O(1)</span></td>
+                                        <td>✅</td>
+                                        <td>❌</td>
+                                    </tr>
+                                    <tr>
+                                        <td>希尔排序</td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">1.3</span>)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n)</span></td>
+                                        <td><span class="txt-func">O(1)</span></td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                    </tr>
+                                    <tr>
+                                        <td>简单选择排序</td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(1)</span></td>
+                                        <td>❌</td>
+                                        <td>✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td>堆排序</td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(1)</span></td>
+                                        <td>❌</td>
+                                        <td>✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td>冒泡排序</td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(n)</span></td>
+                                        <td><span class="txt-func">O(1)</span></td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td>快速排序</td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(n<span class="txt-sup">2</span>)</span></td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(log<span class="txt-sub">2</span>n)</span></td>
+                                        <td>❌</td>
+                                        <td>✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td>归并排序</td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(nlog<span class="txt-sub">2</span>n)</span></td>
+                                        <td><span class="txt-func">O(n)</span></td>
+                                        <td>✅</td>
+                                        <td>❌</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="section-140302">
+                        <h4>3.2 直接插入排序 <i class="txt-en">straight insertion sort</i></h4>
+                        <div class="sub-contents">
+                            <p>逐一将元素与之前位置的元素比较，若小于则交换位置，直至不小于</p>
+                        </div>
+                    </div>
+                    <div id="section-140303">
+                        <h4>3.3 希尔排序 <i class="txt-en">shells sort</i></h4>
+                        <div class="sub-contents">
+                            <p>又称 缩小增量法。先取一个小于n的增量d，将距离为d的值放入同一组，进行插入排序；然后取第二个增量，直至增量为1，进行直接插入排序</p>
+                        </div>
+                    </div>
+                    <div id="section-140304">
+                        <h4>3.4 简单选择排序 <i class="txt-en">selection sort</i></h4>
+                        <div class="sub-contents">
+                            <p>在指针范围内，将最小值与开头位置进行交换，缩小指针区域并重复</p>
+                        </div>
+                    </div>
+                    <div id="section-140305">
+                        <h4>3.5 堆排序 <i class="txt-en">heap sort</i></h4>
+                        <div class="sub-contents">
+                            <p>将序列建立为大顶堆，然后将首位(最大值)和末尾进行交换，然后重复进行大顶堆和交换操作</p>
+                        </div>
+                    </div>
+                    <div id="section-140306">
+                        <h4>3.6 冒泡排序 <i class="txt-en">bubble sort</i></h4>
+                        <div class="sub-contents">
+                            <p>依次对比两两元素，如果逆序则交换位置，最终最大值会排至最后，重复操作</p>
+                        </div>
+                    </div>
+                    <div id="section-140307">
+                        <h4>3.7 快速排序 <i class="txt-en">quick sort</i></h4>
+                        <div class="sub-contents">
+                            <p>基于枢轴值依次排序，将序列分为左序列均小于枢轴，右区域均大于枢轴，枢轴归位，重复</p>
+                        </div>
+                    </div>
+                    <div id="section-140308">
+                        <h4>3.8 归并排序 <i class="txt-en">merging sort</i></h4>
+                        <div class="sub-contents">
+                            <p>先将序列递归平均分组，之后进行合并，依次加两个序列的值进行，将较小值计入次序</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1404">4. 回溯法</h3>
+                <div class="part-contents">
+                    <div id="section-140401">
+                        <h4>4.1 概念</h4>
+                        <div class="sub-contents">
+                            <p>从问题的一个初始解出发，逐步构造问题的解，当不能继续构造时，就进行回溯，返回上一层继续构造</p>
+                        </div>
+                    </div>
+                    <div id="section-140402">
+                        <h4>4.2 N皇后问题</h4>
+                        <div class="sub-contents">
+                            <p>给定一个N*N(N=4)棋盘上摆放N个皇后，满足任意两个皇后不处于同一行、同一列、同一斜线上</p>
+                            <p>1.逐行放置 </p>
+                            <p>2.合法性检查：是否同列或同斜线(插值的绝对值相等) </p>
+                            <p>3.回溯：如果本行摆放失败，回溯上一行从新摆放 </p>
+                            <p>4.终止：成功放置n行</p>
+                            <p>递归求解</p>
+                            <div class="box-code" style="height: 300px;">
+                                <codeView :configs="{
+                                    language: 'cpp',
+                                    theme: 'vs-dark',
+                                    readOnly: true,
+                                }" :value="db.code_huisu_01"></codeView>
+                            </div>
+                            <p>循环求解</p>
+                            <div class="box-code" style="height: 300px;">
+                                <codeView :configs="{
+                                    language: 'cpp',
+                                    theme: 'vs-dark',
+                                    readOnly: true,
+                                }" :value="db.code_huisu_02"></codeView>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1405">5. 分治法</h3>
+                <div class="part-contents">
+                    <div id="section-140501">
+                        <h4>5.1 xxx</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1406">6. 动态规划</h3>
+                <div class="part-contents">
+                    <div id="section-140601">
+                        <h4>6.1 xxx</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="part-1407">7. 贪心法</h3>
+                <div class="part-contents">
+                    <div id="section-140701">
+                        <h4>7.1 xxx</h4>
+                        <div class="sub-contents">
+                            <p>xxx</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="right">

@@ -8,7 +8,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AButton: typeof import('ant-design-vue/es')['Button']
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AInputNumber: typeof import('ant-design-vue/es')['InputNumber']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
     ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
@@ -23,6 +25,7 @@ declare module 'vue' {
     LayoutPlatform: typeof import('./components/layouts/layout-platform.vue')['default']
     LayoutThree: typeof import('./components/layouts/layout-three.vue')['default']
     MenuItem: typeof import('./components/layouts/menu-item.vue')['default']
+    Post: typeof import('./components/editor-code/post.vue')['default']
     Roller: typeof import('./components/flips/roller.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
