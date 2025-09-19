@@ -6,8 +6,13 @@ export const notes = [
     question:
       "在CPU中，常用来为ALU执行算术逻辑运算提供数据并暂存运算结果的寄存器是___。",
     imgs: [],
-    options: [["程序计数器", "状态寄存器", "通用寄存器", "累加寄存器"]],
-    answer: "D",
+    options: [
+      {
+        answer: "D",
+        list: ["程序计数器", "状态寄存器", "通用寄存器", "累加寄存器"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010103",
@@ -15,8 +20,13 @@ export const notes = [
     title: "例题-CPU",
     question: "在CPU中，___不仅要保证指令的正确执行，还要能够处理异常事件。",
     imgs: [],
-    options: [["运算器", "控制器", "寄存器组", "内部总线"]],
-    answer: "B",
+    options: [
+      {
+        answer: "B",
+        list: ["运算器", "控制器", "寄存器组", "内部总线"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010103",
@@ -25,9 +35,17 @@ export const notes = [
     question: "在CPU中，用于跟踪指令地址的寄存器是___。",
     imgs: [],
     options: [
-      ["地址寄存器 AR", "数据寄存器 DR", "程序计数器 PC", "指令寄存器 IR"],
+      {
+        answer: "C",
+        list: [
+          "地址寄存器 AR",
+          "数据寄存器 DR",
+          "程序计数器 PC",
+          "指令寄存器 IR",
+        ],
+        note: "",
+      },
     ],
-    answer: "C",
   },
   {
     id: "section-010201",
@@ -35,9 +53,13 @@ export const notes = [
     title: "例题-进制",
     question: "内存按字节编址从B3000H到DABFFH的区域，其存储容量为___。",
     imgs: [],
-    options: [["123KB", "159KB", "163KB", "194KB"]],
-    answer:
-      "B。H表示16进制，(DABFF+1)-B3000=27C00/1024=159KB，注意单位是B还是b。",
+    options: [
+      {
+        answer: "B",
+        list: ["123KB", "159KB", "163KB", "194KB"],
+        note: "H表示16进制，(DABFF+1)-B3000=27C00/1024=159KB，注意单位是B还是b",
+      },
+    ],
   },
   {
     id: "section-010201",
@@ -47,10 +69,9 @@ export const notes = [
       "地址编号从80000H到BFFFFH且按字节编址的内存容量为___。若用16K*4bit的存储器芯片构成该内存，共需___片。",
     imgs: [],
     options: [
-      ["128", "256", "512", "1024"],
-      ["8", "16", "32", "64"],
+      { answer: "B", list: ["128", "256", "512", "1024"], note: "" },
+      { answer: "C", list: ["8", "16", "32", "64"], note: "注意16K*4bit=8KB" },
     ],
-    answer: "B; C。注意16K*4bit=8KB。",
   },
   {
     id: "section-010202",
@@ -58,8 +79,13 @@ export const notes = [
     title: "例题-数据表示",
     question: "若某整数的16位补码为FFFFH，则该数的十进制为___。",
     imgs: [],
-    options: [["0", "-1", "2^16-1", "-2^16+1"]],
-    answer: "B。首先是16转2为 F=>1111，然后根据负数则先求发码再求原码。",
+    options: [
+      {
+        answer: "B",
+        list: ["0", "-1", "2^16-1", "-2^16+1"],
+        note: "首先是16转2为 F=>1111，然后根据负数则先求反码 1 111 1111 1111 1110 再求原码 1 000 0000 0000 0001",
+      },
+    ],
   },
   {
     id: "section-010202",
@@ -67,8 +93,13 @@ export const notes = [
     title: "例题-数据表示",
     question: "采用n位补码（包含一个符号位）表示数据，则___。",
     imgs: [],
-    options: [["表示2^n", "表示-2^n", "表示2^(n-1)", "表示-2^(n-1)"]],
-    answer: "D",
+    options: [
+      {
+        answer: "D",
+        list: ["表示 2^n", "表示 -2^n", "表示 2^(n-1)", "表示 -2^(n-1)"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010203",
@@ -78,9 +109,17 @@ export const notes = [
       "某机器的浮点数中，阶码以补码表示，尾数以原码表示。则1 0001 0 0000000001表示的浮点数是___。",
     imgs: [],
     options: [
-      ["2^-16*2^-10", "2^-15*2^-10", "2^-16*(1-2^-10)", "2^-15*(1-2^-10)"],
+      {
+        answer: "B",
+        list: [
+          "2^-16*2^-10",
+          "2^-15*2^-10",
+          "2^-16*(1-2^-10)",
+          "2^-15*(1-2^-10)",
+        ],
+        note: "",
+      },
     ],
-    answer: "B",
   },
   {
     id: "section-010605",
@@ -90,14 +129,17 @@ export const notes = [
       "若CPU要执行指令为：MOV R1，#45（即将数值45传送到寄存器R1中），则该指令中采用的寻址方式为___。",
     imgs: [],
     options: [
-      [
-        "直接寻址和立即寻址",
-        "寄存器寻址和立即寻址",
-        "相对寻址和直接寻址",
-        "寄存器间接寻址和直接寻址",
-      ],
+      {
+        answer: "B",
+        list: [
+          "直接寻址和立即寻址",
+          "寄存器寻址和立即寻址",
+          "相对寻址和直接寻址",
+          "寄存器间接寻址和直接寻址",
+        ],
+        note: "关键词：寄存器存数值",
+      },
     ],
-    answer: "B。关键词：寄存器存数值",
   },
   {
     id: "section-010303",
@@ -106,8 +148,7 @@ export const notes = [
     question:
       "海明码利用奇偶性检错和纠错，通过在n个数据位之间插入k个校验位，扩大数据编码的码距。若n=48，则k应至少为___。",
     imgs: [],
-    options: [["4", "5", "6", "7"]],
-    answer: "C",
+    options: [{ answer: "C", list: ["4", "5", "6", "7"], note: "" }],
   },
   {
     id: "section-010304",
@@ -115,8 +156,13 @@ export const notes = [
     title: "例题-CRC",
     question: "在___校验方法中，采用模2运算来构造校验位。",
     imgs: [],
-    options: [["水平奇偶", "垂直奇偶", "海明码", "循环冗余"]],
-    answer: "D",
+    options: [
+      {
+        answer: "D",
+        list: ["水平奇偶", "垂直奇偶", "海明码", "循环冗余"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010602",
@@ -125,9 +171,17 @@ export const notes = [
     question: "___不是RISC的特点。",
     imgs: [],
     options: [
-      ["指令种类丰富", "高效的流水线操作", "寻址方式较少", "硬布线控制"],
+      {
+        answer: "A",
+        list: [
+          "指令种类丰富",
+          "高效的流水线操作",
+          "寻址方式较少",
+          "硬布线控制",
+        ],
+        note: "",
+      },
     ],
-    answer: "A",
   },
   {
     id: "section-010602",
@@ -136,14 +190,17 @@ export const notes = [
     question: "以下关于RISC和CISC计算机的叙述中，正确的是___。",
     imgs: [],
     options: [
-      [
-        "RISC不采用流水线技术，CISC采用流水线技术",
-        "RISC使用复杂的指令，CISC使用简单的指令",
-        "RISC采用很少的通用寄存器，CISC采用很多的通用寄存器",
-        "RISC采用组合逻辑控制器，CISC普遍采用微程序控制器",
-      ],
+      {
+        answer: "D",
+        list: [
+          "RISC不采用流水线技术，CISC采用流水线技术",
+          "RISC使用复杂的指令，CISC使用简单的指令",
+          "RISC采用很少的通用寄存器，CISC采用很多的通用寄存器",
+          "RISC采用组合逻辑控制器，CISC普遍采用微程序控制器",
+        ],
+        note: "",
+      },
     ],
-    answer: "D",
   },
   {
     id: "section-010603",
@@ -153,10 +210,9 @@ export const notes = [
       "一条指令的执行过程可分解为取值时间=3Δt、分析时间=2Δt、执行时间=4Δt。若按串行方式执行，则10条指令全部执行完需要___Δt。若按照流水线方式执行，则执行完10条指令需要___Δt。",
     imgs: [],
     options: [
-      ["40", "70", "90", "100"],
-      ["20", "30", "40", "45"],
+      { answer: "C", list: ["40", "70", "90", "100"], note: "" },
+      { answer: "D", list: ["20", "30", "40", "45"], note: "" },
     ],
-    answer: "C；D",
   },
   {
     id: "section-010401",
@@ -164,8 +220,9 @@ export const notes = [
     title: "例题-存储器",
     question: "计算机系统的主存主要是由___构成的。",
     imgs: [],
-    options: [["DRAM", "SRAM", "Cache", "EEPROM"]],
-    answer: "A",
+    options: [
+      { answer: "A", list: ["DRAM", "SRAM", "Cache", "EEPROM"], note: "" },
+    ],
   },
   {
     id: "section-010402",
@@ -173,8 +230,13 @@ export const notes = [
     title: "例题-Cache",
     question: "Cache的地址映像方式中，发生冲突次数最小的是___。",
     imgs: [],
-    options: [["全相联映像", "组相联映像", "直接映像", "无法确定"]],
-    answer: "A",
+    options: [
+      {
+        answer: "A",
+        list: ["全相联映像", "组相联映像", "直接映像", "无法确定"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010402",
@@ -183,14 +245,17 @@ export const notes = [
     question: "在程序的执行过程中，Cache与主存的地址映像由___。",
     imgs: [],
     options: [
-      [
-        "专门的硬件自动完成",
-        "程序员进行调度",
-        "操作系统进行管理",
-        "程序员和操作系统共同协调完成",
-      ],
+      {
+        answer: "A",
+        list: [
+          "专门的硬件自动完成",
+          "程序员进行调度",
+          "操作系统进行管理",
+          "程序员和操作系统共同协调完成",
+        ],
+        note: "",
+      },
     ],
-    answer: "A",
   },
   {
     id: "section-010501",
@@ -199,14 +264,17 @@ export const notes = [
     question: "以下关于中断方式与DMA方式的叙述中，正确的是___。",
     imgs: [],
     options: [
-      [
-        "中断方式与DMA方式都可以实现外设与CPU之间的并行工作",
-        "程序中断方式和DMA方式在数据传输过程中都不需要CPU的干预",
-        "采用DMA方式传输数据的速度比程序中断方式的速度慢",
-        "程序中断方式和DMA方式都不需要CPU保护现场",
-      ],
+      {
+        answer: "A",
+        list: [
+          "中断方式与DMA方式都可以实现外设与CPU之间的并行工作",
+          "程序中断方式和DMA方式在数据传输过程中都不需要CPU的干预",
+          "采用DMA方式传输数据的速度比程序中断方式的速度慢",
+          "程序中断方式和DMA方式都不需要CPU保护现场",
+        ],
+        note: "",
+      },
     ],
-    answer: "A",
   },
   {
     id: "section-010701",
@@ -215,14 +283,17 @@ export const notes = [
     question: "总线复用方式可以___。",
     imgs: [],
     options: [
-      [
-        "提高总线的传输带宽",
-        "增加总线的功能",
-        "减少总线中信号线的总量",
-        "提高CPU利用率",
-      ],
+      {
+        answer: "C",
+        list: [
+          "提高总线的传输带宽",
+          "增加总线的功能",
+          "减少总线中信号线的总量",
+          "提高CPU利用率",
+        ],
+        note: "",
+      },
     ],
-    answer: "C",
   },
   {
     id: "section-010701",
@@ -231,8 +302,7 @@ export const notes = [
     question:
       "总线带宽为32bit，时钟频率为2000MHz，若总线上每5个时钟周期传送一个32bit的字，则该总线的带宽为___MB/s。",
     imgs: [],
-    options: [["40", "80", "160", "200"]],
-    answer: "",
+    options: [{ answer: "C", list: ["40", "80", "160", "200"], note: "" }],
   },
   {
     id: "section-010801",
@@ -241,10 +311,17 @@ export const notes = [
     question: "公钥体系中，私钥用于___，公钥用于___。",
     imgs: [],
     options: [
-      ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
-      ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
+      {
+        answer: "A",
+        list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
+        note: "",
+      },
+      {
+        answer: "D",
+        list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
+        note: "",
+      },
     ],
-    answer: "A；D",
   },
   {
     id: "section-010801",
@@ -252,8 +329,7 @@ export const notes = [
     title: "例题-加密算法",
     question: "下列算法中，不属于公开密钥加密算法的是___。",
     imgs: [],
-    options: [["ECC", "DSA", "RSA", "DES"]],
-    answer: "D",
+    options: [{ answer: "D", list: ["ECC", "DSA", "RSA", "DES"], note: "" }],
   },
   {
     id: "section-010801",
@@ -261,8 +337,13 @@ export const notes = [
     title: "例题-加密算法",
     question: "AES是一种___算法。",
     imgs: [],
-    options: [["公钥加密", "流密码", "分组加密", "信息摘要"]],
-    answer: "C",
+    options: [
+      {
+        answer: "C",
+        list: ["公钥加密", "流密码", "分组加密", "信息摘要"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-010802",
@@ -272,9 +353,162 @@ export const notes = [
       "某系统由下图所示的部件构成，每个部件的千小时可靠度都为R，则该系统的千小时可靠度为___。",
     imgs: ["10-jiami.png"],
     options: [
-      ["3R/2+2R/3", "R/3+R/2", "(1-(1-R)^3)(1-(1-R)^2)", "(1-(1-R)^3-(1-R)^2)"],
+      {
+        answer: "C",
+        list: [
+          "3R/2+2R/3",
+          "R/3+R/2",
+          "(1-(1-R)^3)(1-(1-R)^2)",
+          "(1-(1-R)^3-(1-R)^2)",
+        ],
+        note: "",
+      },
     ],
-    answer: "C",
+  },
+  {
+    id: "section-090204",
+    type: "topic",
+    title: "例题-前驱图",
+    question:
+      "进程P1、P2、P3、P4、P5的前驱图如下。若用PV操作控制进程并发执行，则需要设置6个信号量S1~S6，且信号量初始值均为0。下图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
+    imgs: ["/docs/study/imgs/100-ti.png"],
+    options: [
+      {
+        answer: "C",
+        list: [
+          "P(S1) P(S2)和P(S3) P(S4)",
+          "P(S1) P(S2)和P(S2) P(S1)",
+          "V(S1) V(S2)和V(S3) V(S4)",
+          "P(S1) P(S2)和V(S1) V(S2)",
+        ],
+        note: "",
+      },
+      {
+        answer: "B",
+        list: [
+          "P(S1) P(S2)和V(S3) V(S4)",
+          "P(S1) P(S3)和V(S5) V(S6)",
+          "V(S1) V(S2)和P(S3) P(S4)",
+          "P(S1) V(S3)和P(S2) V(S4)",
+        ],
+        note: "",
+      },
+      {
+        answer: "C",
+        list: [
+          "P(S3) P(S4)和V(S5) V(S6)",
+          "V(S5) V(S6)和P(S5) P(S6)",
+          "P(S2) P(S5)和P(S4) P(S6)",
+          "P(S4) V(S5)和P(S5) V(S6)",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-090204",
+    type: "topic",
+    title: "例题-信号量",
+    question:
+      "某系统有3个相同资源，信号量S=3,有5个进程并发执行。某一时刻S=-2，则___。",
+    imgs: [],
+    options: [
+      {
+        answer: "B",
+        list: [
+          "系统有2个资源正在被占用",
+          "系统有2个进程正在等待资源",
+          "系统有 2 个进程在使用资源",
+          "系统所有资源空闲",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-090204",
+    type: "topic",
+    title: "例题-信号量",
+    question:
+      "假设系统采用PV操作实现进程同步与互斥，若n个进程共享两台打印机，那么信号量S的取值范围为___。",
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        list: ["-2~n", "-(n-1)~1", "-(n-1)~2", "-(n-2)~2"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-090205",
+    type: "topic",
+    title: "例题-生产者消费者",
+    question:
+      "某企业生产流水线M共有两个生产者，生产者甲不断地将其工序上加工的半成品放入半成品箱，生产者乙从半成品箱取出继续加工。假设半成品箱可存放n件半成品，采用PV操作实现生产者甲和生产者乙的同步可设置三个信号量S、S1、S2，其同步模型如下图。信号量S是一个互斥信号量，初始值为___；S1、S2的初始值分别为___。",
+    imgs: ["/docs/study/imgs/101-ti.png"],
+    options: [
+      { answer: "B", list: ["0", "1", "n", "任意正整数"], note: "" },
+      { answer: "A", list: ["n、0", "0、n", "1、n", "n、1"], note: "" },
+    ],
+  },
+  {
+    id: "section-090207",
+    type: "topic",
+    title: "例题-进程资源图",
+    question: "进程资源图如图所示，其中图a中___，图b中___。",
+    imgs: ["/docs/study/imgs/102-ti.png"],
+    options: [
+      {
+        answer: "B",
+        list: [
+          "P1是非阻塞节点，P2是阻塞节点，所以该图不可以化简，是死锁的",
+          "P1、P2都是阻塞节点，所以该图不可以化简，是死锁的",
+          "P1、P2都是非阻塞节点，所以该图可以化简，是非死锁的",
+          "P1是阻塞节点，P2是非阻塞节点，所以该图不可以化简，是死锁的",
+        ],
+        note: "先分配，后申请",
+      },
+      {
+        answer: "C",
+        list: [
+          "P1、P2、P3都是非阻塞节点，所以该图可以化简，是非死锁的",
+          "P1、P2、P3都是阻塞节点，所以该图不可以化简，是死锁的",
+          "P2是阻塞节点，P1、P3是非阻塞节点，所以该图可以化简，是非死锁的",
+          "P1、P2是非阻塞节点，P3是阻塞节点，所以该图不可以化简，是死锁的",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-090204",
+    type: "topic",
+    title: "例题-PV操作",
+    question: "进程的前驱图如下图所示。若用PV操作控制进程的并发执行过程，需要5个信号量S1~S5，且信号量的初始值都等于0.如下的进程执行图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
+    imgs: ['/docs/study/imgs/103-ti.png','/docs/study/imgs/104-ti.png'],
+    options: [
+      {
+        answer: "B",
+        list: [
+          "V(S1)和P(S2) V(S3)", 
+          "P(S1)和V(S2) V(S3)", 
+          "V(S1)和V(S2) V(S3)", 
+          "P(S1)和P(S2) V(S3)"
+        ],
+        note: "",
+      },
+      {
+        answer: "C",
+        list: ["P(S2)和P(S4)", "V(S2)和P(S4)", "P(S2)和V(S4)", "V(S2)和V(S4)"],
+        note: "",
+      },
+      {
+        answer: "A",
+        list: ["P(S4)和V(S5)", "V(S5)和P(S4)", "V(S4)和P(S5)", "V(S4)和V(S5)"],
+        note: "",
+      },
+    ],
   },
   {
     id: "section-01",
@@ -282,13 +516,17 @@ export const notes = [
     title: "例题-sample",
     question: "___。",
     imgs: [],
-    options: [["", "", "", ""]],
-    answer: "",
+    options: [
+      {
+        answer: "",
+        list: ["", "", "", ""],
+        note: "",
+      },
+    ],
   },
 ];
 
-export const code_huisu_01 =
-  `#define N 4
+export const code_huisu_01 = `#define N 4
 
 int q[N + 1];
 
@@ -328,8 +566,7 @@ int main()
     return 0;
 }`;
 
-export const code_huisu_02 =
-  `#define N 4
+export const code_huisu_02 = `#define N 4
 
 int answer = 0;
 int q[N + 1];
@@ -370,14 +607,12 @@ void queen(int j)
     }
 }`;
 
-export const code_fenzhi_01 =
-  `const solve = (num: number): number => {
+export const code_fenzhi_01 = `const solve = (num: number): number => {
   if (num > 0) return num * solve(num - 1)
   return 1
 }`;
 
-export const code_fenzhi_02 =
-  `#include <climits>
+export const code_fenzhi_02 = `#include <climits>
 
 void MergeSort(int A[], int p, int r)
 {
@@ -415,10 +650,9 @@ void Merge(int A[], int p, int q, int r)
         }
     }
 }
-`
+`;
 
-export const code_fenzhi_03 =
-  `int MaxSubSum(int *Array, int left, int right)
+export const code_fenzhi_03 = `int MaxSubSum(int *Array, int left, int right)
 {
     int sum = 0;
     int i;
@@ -455,10 +689,9 @@ export const code_fenzhi_03 =
     }
     return sum;
 }
-`
+`;
 
-export const code_dongtai_01 =
-  `#define N 4
+export const code_dongtai_01 = `#define N 4
 #define W 5
 
 int main()
@@ -491,10 +724,9 @@ int max(int a, int b)
 {
     return a > b ? a : b;
 }
-`
+`;
 
-export const code_tanxin_01 =
-  `#define N 5
+export const code_tanxin_01 = `#define N 5
 #define W 100
 
 double merge(double arr[], int left, int right)
@@ -518,10 +750,9 @@ int main(int a, int b)
     maxValue(v_temp, w_temp, vw_temp);
     return 0;
 }
-`
+`;
 
-export const code_tanxin_02 =
-  `double v_temp[N + 1];
+export const code_tanxin_02 = `double v_temp[N + 1];
 double w_temp[N + 1];
 double vw_temp[N + 1];
 
@@ -556,10 +787,9 @@ double maxValue(int v[], int w[], double vw[])
 
     return result;
 }
-`
+`;
 
-export const code_jiandan_01 =
-  `abstract class Coffee {
+export const code_jiandan_01 = `abstract class Coffee {
     public abstract void info();
 }
 
@@ -602,10 +832,9 @@ class Coffee_SimpleFactory {
         latteCoffee.info();
     }
 }
-`
+`;
 
-export const code_gongchang_01 =
-  `interface Coffee {
+export const code_gongchang_01 = `interface Coffee {
     public void info();
 }
 
@@ -652,10 +881,9 @@ class Coffe_FactoryMethod {
         latteCoffee.info();
     }
 }
-`
+`;
 
-export const code_chouxiang_01 =
-  `interface Dessert {
+export const code_chouxiang_01 = `interface Dessert {
     public void info();
 }
 
@@ -731,10 +959,9 @@ class Coffe_FactoryMethod {
         Dessert italyDessert = italyFactory.createDessert();
         italyDessert.info();
     }
-}`
+}`;
 
-export const code_shengchengqi_01 =
-  `// 自行车类
+export const code_shengchengqi_01 = `// 自行车类
 public class Bike {
     private String frame;
     private String seat;
@@ -754,19 +981,17 @@ public class Bike {
     public void setSeat(String seat) {
         this.seat = seat;
     }
-}`
+}`;
 
-export const code_shengchengqi_02 =
-  `// 抽象 builder 类
+export const code_shengchengqi_02 = `// 抽象 builder 类
 public abstract class Builder {
     protected Bike mBike = new Bike();
     public abstract void buildFrame();
     public abstract void buildSeat();
     public abstract Bike createBike();
-}`
+}`;
 
-export const code_shengchengqi_03 =
-  `// 指挥者类
+export const code_shengchengqi_03 = `// 指挥者类
 public class Director {
     private Builder mBuilder;
     public Director(Builder builder) {
@@ -778,10 +1003,9 @@ public class Director {
         mBuilder.buildSeat();
         return mBuilder.createBike();
     }
-}`
+}`;
 
-export const code_shengchengqi_04 =
-  `// 摩拜单车Builder类
+export const code_shengchengqi_04 = `// 摩拜单车Builder类
 public class MobikeBuilder extends Builder {
     @Override
     public void buildFrame() {
@@ -815,10 +1039,9 @@ public class OfoBuilder extends Builder {
         return mBike;
     }
 }
-`
+`;
 
-export const code_shengchengqi_05 =
-  `// 测试类
+export const code_shengchengqi_05 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         showBike(new OfoBuilder());
@@ -832,10 +1055,9 @@ public class Client {
         System.out.println(bike.getSeat());
     }
 }
-`
+`;
 
-export const code_yuanxing_01 =
-  `// 奖状类
+export const code_yuanxing_01 = `// 奖状类
 public class Citation implements Cloneable {
     private String name;
 
@@ -869,10 +1091,9 @@ public class CitationTest {
         c2.show();
     }
 }
-`
+`;
 
-export const code_danli_01 =
-  `/**
+export const code_danli_01 = `/**
  * 饿汉式-静态变量创建类的对象
  */
 public class Singleton {
@@ -887,10 +1108,9 @@ public class Singleton {
         return instance;
     }
 }
-`
+`;
 
-export const code_shipei_01 =
-  `// 电脑类
+export const code_shipei_01 = `// 电脑类
 public class Computer {
     public String readSD(SDCard sdCard) {
         if (sdCard == null) {
@@ -899,10 +1119,9 @@ public class Computer {
         return sdCard.readSD();
     }
 }
-`
+`;
 
-export const code_shipei_02 =
-  `// SD卡的接口
+export const code_shipei_02 = `// SD卡的接口
 public interface SDCard {
     // 读取SD卡方法
     String readSD();
@@ -921,10 +1140,9 @@ public class SDCardImpl implements SDCard {
         System.out.println("sd card write msg : " + msg);
     }
 }
-`
+`;
 
-export const code_shipei_03 =
-  `// TF卡接口
+export const code_shipei_03 = `// TF卡接口
 public interface TFCard {
     // 读取TF卡方法
     String readTF();
@@ -943,10 +1161,9 @@ public class TFCardImpl implements TFCard {
         System.out.println("tf card write a msg : " + msg);
     }
 }
-`
+`;
 
-export const code_shipei_04 =
-  `// 定义适配器类（SD兼容TF）
+export const code_shipei_04 = `// 定义适配器类（SD兼容TF）
 public class SDAdapterTF extends TFCardImpl implements SDCard {
     public String readSD() {
         System.out.println("adapter read tf card ");
@@ -958,10 +1175,9 @@ public class SDAdapterTF extends TFCardImpl implements SDCard {
         writeTF(msg);
     }
 }
-`
+`;
 
-export const code_shipei_05 =
-  `// 测试类
+export const code_shipei_05 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         Computer computer = new Computer();
@@ -972,10 +1188,9 @@ public class Client {
         System.out.println(computer.readSD(adapter));
     }
 }
-`
+`;
 
-export const code_qiao_01 =
-  `// 视频文件（实现化角色）
+export const code_qiao_01 = `// 视频文件（实现化角色）
 public interface VideoFile {
     void decode(String fileName);
 }
@@ -993,10 +1208,9 @@ public class RMVBBFile implements VideoFile {
         System.out.println("rmvb文件：" + fileName);
     }
 }
-`
+`;
 
-export const code_qiao_02 =
-  `// 操作系统版本（抽象化角色）
+export const code_qiao_02 = `// 操作系统版本（抽象化角色）
 public abstract class OperatingSystemVersion {
     protected VideoFile videoFile;   
     
@@ -1027,20 +1241,18 @@ public class Mac extends OperatingSystemVersion {
         videoFile.decode(fileName);
     }
 }
-`
+`;
 
-export const code_qiao_03 =
-  `// 测试类
+export const code_qiao_03 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         OperatingSystem os = new Windows(new AVIFile());
         os.play(“战狼3.avi");
     }
 }
-`
+`;
 
-export const code_zuhe_01 =
-  `// 菜单组件，菜单/菜单项都继承该类（抽象根节点）
+export const code_zuhe_01 = `// 菜单组件，菜单/菜单项都继承该类（抽象根节点）
 public abstract class MenuComponent {
     protected String name;
     protected int level;
@@ -1068,10 +1280,9 @@ public abstract class MenuComponent {
         throw new UnsupportedOperationException();
     }
 }
-`
+`;
 
-export const code_zuhe_02 =
-  `// 子菜单（叶子节点）
+export const code_zuhe_02 = `// 子菜单（叶子节点）
 public class MenuItem extends MenuComponent {
     public MenuItem(String name, int level) {
         this.name = name;
@@ -1087,10 +1298,9 @@ public class MenuItem extends MenuComponent {
         System.out.println(name);
     }
 }
-`
+`;
 
-export const code_zuhe_03 =
-  `// 子菜单项（树枝节点）
+export const code_zuhe_03 = `// 子菜单项（树枝节点）
 public class Menu extends MenuComponent {
     private List<MenuComponent> menuComponentList;    
     
@@ -1126,10 +1336,9 @@ public class Menu extends MenuComponent {
         }
     }
 }
-`
+`;
 
-export const code_zuhe_04 =
-  `// 测试类
+export const code_zuhe_04 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         // 创建菜单树
@@ -1147,10 +1356,9 @@ public class Client {
         root.print();
     }
 }
-`
+`;
 
-export const code_zhuang_01 =
-  `// 快餐接口
+export const code_zhuang_01 = `// 快餐接口
 public abstract class FastFood {
     private float price;
     private String desc;
@@ -1177,10 +1385,9 @@ public abstract class FastFood {
 
     public abstract float cost(); // 获取价格
 }
-`
+`;
 
-export const code_zhuang_02 =
-  `// 炒饭
+export const code_zhuang_02 = `// 炒饭
 public class FriedRice extends FastFood {
     public FriedRice() {
         super(10, "炒饭");
@@ -1199,10 +1406,9 @@ public class FriedNoodles extends FastFood {
         return getPrice();
     }
 }
-`
+`;
 
-export const code_zhuang_03 =
-  `// 配料类
+export const code_zhuang_03 = `// 配料类
 public abstract class Garnish extends FastFood {
     public Garnish(FastFood fastFood, float price, String desc) {
         super(price, desc);
@@ -1217,10 +1423,9 @@ public abstract class Garnish extends FastFood {
         this.fastFood = fastFood;
     }
 }
-`
+`;
 
-export const code_zhuang_04 =
-  `// 鸡蛋配料
+export const code_zhuang_04 = `// 鸡蛋配料
 public class Egg extends Garnish {
     public Egg(FastFood fastFood) {
         super(fastFood, 1, "鸡蛋");
@@ -1253,10 +1458,9 @@ public class Bacon extends Garnish {
         return super.getDesc() + getFastFood().getDesc();
     }
 }
-`
+`;
 
-export const code_zhuang_05 =
-  `// 测试类
+export const code_zhuang_05 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         // 点一份炒饭和价格
@@ -1269,10 +1473,9 @@ public class Client {
         food1 = new Egg(food1);
         System.out.println(food1.getDesc() + " " + food1.cost() + "元");
 }
-`
+`;
 
-export const code_wai_01 =
-  `// 智能音箱
+export const code_wai_01 = `// 智能音箱
 public class SmartAppliancesFacade {
     private Light light;
     private TV tv;
@@ -1310,10 +1513,9 @@ public class SmartAppliancesFacade {
         airCondition.off();
     }
 }
-`
+`;
 
-export const code_wai_02 =
-  `// 灯类
+export const code_wai_02 = `// 灯类
 public class Light {
     public void on() {
         System.out.println("打开了灯....");
@@ -1342,10 +1544,9 @@ public class AirCondition {
         System.out.println("关闭了空调....");
     }
 }
-`
+`;
 
-export const code_wai_03 =
-  `// 测试类
+export const code_wai_03 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         // 创建外观对象
@@ -1356,10 +1557,9 @@ public class Client {
         facade.say("关闭家电");
     }
 }
-`
+`;
 
-export const code_xiang_01 =
-  `// 抽象享元角色
+export const code_xiang_01 = `// 抽象享元角色
 public abstract class AbstractBox {
     // 获取图形的方法
     public abstract String getShape();
@@ -1368,10 +1568,9 @@ public abstract class AbstractBox {
         System.out.println("方块形状：" + this.getShape() + " 颜色：" + color);
     }
 }
-`
+`;
 
-export const code_xiang_02 =
-  `// 享元工厂角色，这里采用的是饿汉式单例
+export const code_xiang_02 = `// 享元工厂角色，这里采用的是饿汉式单例
 public class BoxFactory {
     // 享元池
     private static HashMap<String, AbstractBox> map;
@@ -1400,10 +1599,9 @@ public class BoxFactory {
         return map.get(key);
     }
 }
-`
+`;
 
-export const code_xiang_03 =
-  `// 这3个都是具体享元角色
+export const code_xiang_03 = `// 这3个都是具体享元角色
 public class IBox extends AbstractBox {
     @Override
     public String getShape() {
@@ -1424,10 +1622,9 @@ public class OBox extends AbstractBox {
         return "O";
     }
 }
-`
+`;
 
-export const code_xiang_04 =
-  `public class Client {
+export const code_xiang_04 = `public class Client {
     public static void main(String[] args) {
         // 获取I图形对象
         AbstractBox box1 = BoxFactory.getInstance().getShape("I");
@@ -1438,26 +1635,23 @@ export const code_xiang_04 =
         box2.display("绿色");
     }
 }
-`
+`;
 
-export const code_dai_01 =
-  `// 卖票接口
+export const code_dai_01 = `// 卖票接口
 public interface SellTickets {
     void sell();
 }
-`
+`;
 
-export const code_dai_02 =
-  `// 火车站  火车站具有卖票功能，所以需要实现SellTickets接口
+export const code_dai_02 = `// 火车站  火车站具有卖票功能，所以需要实现SellTickets接口
 public class TrainStation implements SellTickets {
     public void sell() {
         System.out.println("火车站卖票");
     }
 }
-`
+`;
 
-export const code_dai_03 =
-  `//代售点
+export const code_dai_03 = `//代售点
 public class ProxyPoint implements SellTickets {
     private TrainStation station = new TrainStation();
     public void sell() {
@@ -1465,20 +1659,18 @@ public class ProxyPoint implements SellTickets {
         station.sell();
     }
 }
-`
+`;
 
-export const code_dai_04 =
-  `// 测试类
+export const code_dai_04 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         ProxyPoint pp = new ProxyPoint();
         pp.sell();
     }
 }
-`
+`;
 
-export const code_ze_01 =
-  `// 处理者抽象类
+export const code_ze_01 = `// 处理者抽象类
 public abstract class Handler {
     protected final static int NUM_ONE = 1;
     protected final static int NUM_THREE = 3;
@@ -1518,10 +1710,9 @@ public abstract class Handler {
         }
     }
 }
-`
+`;
 
-export const code_ze_02 =
-  `// 小组长类
+export const code_ze_02 = `// 小组长类
 public class GroupLeader extends Handler {
     public GroupLeader() {
         super(0, Handler.NUM_ONE);
@@ -1553,10 +1744,9 @@ public class GeneralManager extends Handler {
         System.out.println("总经理审批：同意");
     }
 }
-`
+`;
 
-export const code_ze_03 =
-  `// 请假条
+export const code_ze_03 = `// 请假条
 public class LeaveRequest {
     private String name;// 姓名
     private int num;// 请假天数
@@ -1584,10 +1774,9 @@ public class LeaveRequest {
         return this.name+ "请假" + this.name + "天，" + this.content + "。"
     }
 }
-`
+`;
 
-export const code_ze_04 =
-  `public class Client {
+export const code_ze_04 = `public class Client {
     public static void main(String[] args) {
         // 创建一个请假条对象
         LeaveRequest leave = new LeaveRequest("小明", 2, "身体不适");
@@ -1605,18 +1794,16 @@ export const code_ze_04 =
         groupLeader.submit(leave);
     }
 }
-`
+`;
 
-export const code_mingling_01 =
-  `// 抽象命令类
+export const code_mingling_01 = `// 抽象命令类
 public interface Command {
     // 命令执行方法
     void execute();
 }
-`
+`;
 
-export const code_mingling_02 =
-  `// 订单命令类，属于具体的命令类，需要聚合对象接收者和接收者依赖的操作数据
+export const code_mingling_02 = `// 订单命令类，属于具体的命令类，需要聚合对象接收者和接收者依赖的操作数据
 public class OrderCommand implements Command {
     // 持有接收者对象
     private SeniorChef receiver;
@@ -1640,20 +1827,18 @@ public class OrderCommand implements Command {
         System.out.println(order.getDiningTable() + "桌的饭准备完毕！！！");
     }
 }
-`
+`;
 
-export const code_mingling_03 =
-  `// 资深大厨类，是命令的Receiver（接收者角色）
+export const code_mingling_03 = `// 资深大厨类，是命令的Receiver（接收者角色）
 public class SeniorChef {
     // 根据餐品及分数制作食物
     public void makeFood(String name,int num) {
         System.out.println(num + "份" + name);
     }
 }
-`
+`;
 
-export const code_mingling_04 =
-  `// 服务员类，调用者（请求者）角色
+export const code_mingling_04 = `// 服务员类，调用者（请求者）角色
 public class Waitor {
     // 持有多个命令对象
     private List<Command> commands = new ArrayList<Command>();
@@ -1674,10 +1859,9 @@ public class Waitor {
         }
     }
 }
-`
+`;
 
-export const code_mingling_05 =
-  `// 订单类
+export const code_mingling_05 = `// 订单类
 public class Order {
     // 餐桌号码
     private int diningTable;
@@ -1700,10 +1884,9 @@ public class Order {
         foodDir.put(name, num);
     }
 }
-`
+`;
 
-export const code_mingling_06 =
-  `public class Client {
+export const code_mingling_06 = `public class Client {
     public static void main(String[] args) {
         // 创建第一个订单对象
         Order order1 = new Order();
@@ -1733,17 +1916,15 @@ export const code_mingling_06 =
         invoke.orderUp();
     }
 }
-`
+`;
 
-export const code_jieshi_01 =
-  `// 抽象表达式类
+export const code_jieshi_01 = `// 抽象表达式类
 public abstract class AbstractExpression {
     public abstract int interpret(Context context);
 }
-`
+`;
 
-export const code_jieshi_02 =
-  `// 非终结符表达式角色 减法表达式
+export const code_jieshi_02 = `// 非终结符表达式角色 减法表达式
 public class Minus extends AbstractExpression {
     // -号左边的表达式
     private AbstractExpression left;
@@ -1781,10 +1962,9 @@ public class Plus extends AbstractExpression {
         return "(" + left.toString() + " + " + right.toString() + ")";
     }
 }
-`
+`;
 
-export const code_jieshi_03 =
-  `// 环境角色类
+export const code_jieshi_03 = `// 环境角色类
 public class Context {
     private Map<Variable, Integer> map = new HashMap<Variable, Integer>();
     public void assign(Variable var, Integer value) {
@@ -1795,10 +1975,9 @@ public class Context {
         return value;
     }
 }
-`
+`;
 
-export const code_jieshi_04 =
-  `// 终结符表达式角色
+export const code_jieshi_04 = `// 终结符表达式角色
 public class Value extends AbstractExpression {
     private int value;
     public Value(int value) {
@@ -1813,10 +1992,9 @@ public class Value extends AbstractExpression {
         return new Integer(value).toString();
     }
 }
-`
+`;
 
-export const code_jieshi_05 =
-  `// 封装变量的类
+export const code_jieshi_05 = `// 封装变量的类
 public class Variable extends AbstractExpression {
     // 声明存储变量名的成员变量
     private String name;
@@ -1832,10 +2010,9 @@ public class Variable extends AbstractExpression {
         return name;
     }
 }
-`
+`;
 
-export const code_jieshi_06 =
-  `public class Client {
+export const code_jieshi_06 = `public class Client {
     public static void main(String[] args) {
         // 创建环境对象
         Context context = new Context();
@@ -1857,10 +2034,9 @@ export const code_jieshi_06 =
         System.out.println(expression + " = " + result);
     }
 }
-`
+`;
 
-export const code_dei_01 =
-  `// 抽象聚合角色接口
+export const code_dei_01 = `// 抽象聚合角色接口
 public interface StudentAggregate {
     // 添加学生功能
     void addStudent(Student stu);
@@ -1869,10 +2045,9 @@ public interface StudentAggregate {
     // 获取迭代器对象功能
     StudentIterator getStudentIterator();
 }
-`
+`;
 
-export const code_dei_02 =
-  `// 具体聚合角色
+export const code_dei_02 = `// 具体聚合角色
 public class StudentAggregateImpl implements StudentAggregate {
     private List<Student> list = new ArrayList<Student>();
     public void addStudent(Student stu) {
@@ -1886,20 +2061,18 @@ public class StudentAggregateImpl implements StudentAggregate {
         return new StudentIteratorImpl(list);
     }
 }
-`
+`;
 
-export const code_dei_03 =
-  `// 抽象迭代器角色接口
+export const code_dei_03 = `// 抽象迭代器角色接口
 public interface StudentIterator {
     // 判断是否还有元素
     boolean hasNext();
     // 获取下一个元素
     Student next();
 }
-`
+`;
 
-export const code_dei_04 =
-  `// 具体迭代器角色类
+export const code_dei_04 = `// 具体迭代器角色类
 public class StudentIteratorImpl implements StudentIterator {
     private List<Student> list;
     private int position = 0;// 用来记录遍历时的位置
@@ -1916,10 +2089,9 @@ public class StudentIteratorImpl implements StudentIterator {
         return currentStudent;
     }
 }
-`
+`;
 
-export const code_dei_05 =
-  `public class Student {
+export const code_dei_05 = `public class Student {
     private String name;
     private String number;    
     
@@ -1954,10 +2126,9 @@ export const code_dei_05 =
         
     public Student() { }
 }
-`
+`;
 
-export const code_dei_06 =
-  `public class Client {
+export const code_dei_06 = `public class Client {
     public static void main(String[] args) {
         // 创建聚合对象
         StudentAggregateImpl aggregate = new StudentAggregateImpl();
@@ -1977,18 +2148,16 @@ export const code_dei_06 =
         }
     }
 }
-`
+`;
 
-export const code_zhong_01 =
-  `// 抽象中介者
+export const code_zhong_01 = `// 抽象中介者
 public abstract class Mediator {
     // 申明一个联络方法
     public abstract void constact(String message, Person person);
 }
-`
+`;
 
-export const code_zhong_02 =
-  `// 中介机构
+export const code_zhong_02 = `// 中介机构
 public class MediatorStructure extends Mediator {
     // 首先中介结构必须知道所有房主和租房者的信息
     private HouseOwner houseOwner;
@@ -2019,10 +2188,9 @@ public class MediatorStructure extends Mediator {
         }
     }
 }
-`
+`;
 
-export const code_zhong_03 =
-  `// 抽象同事类
+export const code_zhong_03 = `// 抽象同事类
 public abstract class Person {
     protected String name;
     protected Mediator mediator;
@@ -2031,10 +2199,9 @@ public abstract class Person {
         this.mediator = mediator;
     }
 }
-`
+`;
 
-export const code_zhong_04 =
-  `// 具体同事类 房屋拥有者
+export const code_zhong_04 = `// 具体同事类 房屋拥有者
 public class HouseOwner extends Person {
     public HouseOwner(String name, Mediator mediator) {
         super(name, mediator);
@@ -2067,10 +2234,9 @@ public class Tenant extends Person {
         System.out.println("租房者" + name + "获取到的信息：" + message);
     }
 }
-`
+`;
 
-export const code_zhong_05 =
-  `// 测试类
+export const code_zhong_05 = `// 测试类
 public class Client {
     public static void main(String[] args) {
         // 一个房主、一个租房者、一个中介机构
@@ -2085,10 +2251,9 @@ public class Client {
         houseOwner.constact("我这里有三室的房子，你要租吗？");
     }
 }
-`
+`;
 
-export const code_bei_01 =
-  `public class GameRole {
+export const code_bei_01 = `public class GameRole {
     private int vit; // 生命力
     private int atk; // 攻击力
     private int def; // 防御力
@@ -2147,10 +2312,9 @@ export const code_bei_01 =
         this.def = 0;
     }
 }
-`
+`;
 
-export const code_bei_02 =
-  `public class RoleStateMemento {
+export const code_bei_02 = `public class RoleStateMemento {
     private int vit; // 生命力
     private int atk; // 攻击力
     private int def; // 防御力
@@ -2184,10 +2348,9 @@ export const code_bei_02 =
         this.def = def;
     }
 }
-`
+`;
 
-export const code_bei_03 =
-  `public class RoleStateCaretaker {
+export const code_bei_03 = `public class RoleStateCaretaker {
     // 声明RoleStateMemento类型的变量
     private RoleStateMemento roleStateMemento;
     public RoleStateMemento getRoleStateMemento() {
@@ -2197,10 +2360,9 @@ export const code_bei_03 =
         this.roleStateMemento = roleStateMemento;
     }
 }
-`
+`;
 
-export const code_bei_04 =
-  `public class Client {
+export const code_bei_04 = `public class Client {
     public static void main(String[] args) {
         System.out.println("---------------大战boss前-----------------");
         // 创建游戏角色对象
@@ -2220,10 +2382,9 @@ export const code_bei_04 =
         gameRole.stateDisplay();
     }
 }
-`
+`;
 
-export const code_guan_01 =
-  `// 定义抽象主题类，提供三个方法
+export const code_guan_01 = `// 定义抽象主题类，提供三个方法
 public interface Subject {
     // 增加订阅者
     public void attach(Observer observer);
@@ -2234,10 +2395,9 @@ public interface Subject {
     // 通知订阅者更新消息
     public void notify(String message);
 }
-`
+`;
 
-export const code_guan_02 =
-  `// 微信公众号是具体主题（具体被观察者），存储订阅该公众号的微信用户，并实现了抽象主题中的方法
+export const code_guan_02 = `// 微信公众号是具体主题（具体被观察者），存储订阅该公众号的微信用户，并实现了抽象主题中的方法
 public class SubscriptionSubject implements Subject {
     // 储存订阅公众号的微信用户
     private List<Observer> weixinUserlist = new ArrayList<Observer>();
@@ -2256,17 +2416,15 @@ public class SubscriptionSubject implements Subject {
         }
     }
 }
-`
+`;
 
-export const code_guan_03 =
-  `// 定义抽象观察者类，定义一个更新的方法
+export const code_guan_03 = `// 定义抽象观察者类，定义一个更新的方法
 public interface Observer {
     void update(String message);
 }
-`
+`;
 
-export const code_guan_04 =
-  `// 定义具体观察者类，微信用户是观察者，实现更新的方法
+export const code_guan_04 = `// 定义具体观察者类，微信用户是观察者，实现更新的方法
 public class WeixinUser implements Observer {
     // 微信用户名
     private String name;
@@ -2278,10 +2436,9 @@ public class WeixinUser implements Observer {
         System.out.println(name + "-" + message);
     }
 }
-`
+`;
 
-export const code_guan_05 =
-  `public class Client {
+export const code_guan_05 = `public class Client {
     public static void main(String[] args) {
         SubscriptionSubject mSubscriptionSubject = new SubscriptionSubject();
         // 创建微信用户
@@ -2296,10 +2453,9 @@ export const code_guan_05 =
         mSubscriptionSubject.notify("Java博客更新了");
     }
 }
-`
+`;
 
-export const code_zhuangtai_01 =
-  `// 抽象状态类
+export const code_zhuangtai_01 = `// 抽象状态类
 public abstract class LiftState {
     // 定义一个环境角色，也就是封装状态的变化引起的功能变化
     protected Context context;
@@ -2315,10 +2471,9 @@ public abstract class LiftState {
     // 电梯停止动作
     public abstract void stop();
 }
-`
+`;
 
-export const code_zhuangtai_02 =
-  `// 开启状态
+export const code_zhuangtai_02 = `// 开启状态
 public class OpenningState extends LiftState {
     // 开启当然可以关闭了，我就想测试一下电梯门开关功能
     @Override
@@ -2439,10 +2594,9 @@ public class StoppingState extends LiftState {
         System.out.println("电梯停止了...");
     }
 }
-`
+`;
 
-export const code_zhuangtai_03 =
-  `// 环境角色
+export const code_zhuangtai_03 = `// 环境角色
 public class Context {
     // 定义出所有的电梯状态
     public final static OpenningState OPENNING_STATE = new OpenningState();// 开门状态，这时候电梯只能关闭
@@ -2479,17 +2633,15 @@ public class Context {
         this.liftState.stop();
     }
 }
-`
+`;
 
-export const code_ce_01 =
-  `// 抽象策略类
+export const code_ce_01 = `// 抽象策略类
 public interface Strategy {
     void show();
 }
-`
+`;
 
-export const code_ce_02 =
-  `// 定义具体策略角色：每个节日具体的促销活动
+export const code_ce_02 = `// 定义具体策略角色：每个节日具体的促销活动
 // 为春节准备的促销活动A
 public class StrategyA implements Strategy {
     public void show() {
@@ -2510,10 +2662,9 @@ public class StrategyC implements Strategy {
         System.out.println("满1000元加一元换购任意200元以下商品");
     }
 }
-`
+`;
 
-export const code_ce_03 =
-  `// 定义环境角色（Context）：用于连接上下文，即把促销活动推销给客户
+export const code_ce_03 = `// 定义环境角色（Context）：用于连接上下文，即把促销活动推销给客户
 public class SalesMan {
     // 持有抽象策略角色的引用
     private Strategy strategy;
@@ -2525,10 +2676,9 @@ public class SalesMan {
         strategy.show();
     }
 }
-`
+`;
 
-export const code_ce_04 =
-  `public class Client {
+export const code_ce_04 = `public class Client {
     public static void main(String[] args) {
         // 春节来了，使用春节促销活动
         SalesMan salesMan = new SalesMan(new StrategyA());
@@ -2546,10 +2696,9 @@ export const code_ce_04 =
         salesMan.salesManShow();
     }
 }
-`
+`;
 
-export const code_zhuangtai_04 =
-  `public class Client {
+export const code_zhuangtai_04 = `public class Client {
     public static void main(String[] args) {
         // 创建环境角色对象
         Context context = new Context();
@@ -2561,10 +2710,9 @@ export const code_zhuangtai_04 =
         context.stop();
     }
 }
-`
+`;
 
-export const code_moban_01 =
-  `// 抽象类
+export const code_moban_01 = `// 抽象类
 public abstract class AbstractClass {
     // 定义模板方法，定义为final固定流程，禁止被重写
     public final void cookProcess() {
@@ -2596,10 +2744,9 @@ public abstract class AbstractClass {
         System.out.println("炒啊炒啊炒到熟啊");
     }
 }
-`
+`;
 
-export const code_moban_02 =
-  `// 具体子类
+export const code_moban_02 = `// 具体子类
 // 炒手撕包菜类
 public class ConcreteClass_BaoCai extends AbstractClass {
     @Override
@@ -2622,10 +2769,9 @@ public class ConcreteClass_CaiXin extends AbstractClass {
         System.out.println("下锅的酱料是蒜蓉");
     }
 }
-`
+`;
 
-export const code_moban_03 =
-  `public class Client {
+export const code_moban_03 = `public class Client {
     public static void main(String[] args) {
         // 炒手撕包菜
         ConcreteClass_BaoCai baoCai = new ConcreteClass_BaoCai();
@@ -2635,20 +2781,18 @@ export const code_moban_03 =
         caiXin.cookProcess();
     }
 }
-`
+`;
 
-export const code_fang_01 =
-  `// 抽象访问者角色类（这里的方法名称可以更抽象一点，扩展性会更好）
+export const code_fang_01 = `// 抽象访问者角色类（这里的方法名称可以更抽象一点，扩展性会更好）
 public interface Person {
     // 喂食宠物狗
     void feed(Cat cat);
     // 喂食宠物猫
     void feed(Dog dog);
 }
-`
+`;
 
-export const code_fang_02 =
-  `// 具体访问者角色类(主人)
+export const code_fang_02 = `// 具体访问者角色类(主人)
 public class Owner implements Person {
     public void feed(Cat cat) {
         System.out.println("主人喂食猫");
@@ -2668,18 +2812,16 @@ public class Someone implements Person {
         System.out.println("其他人喂食狗");
     }
 }
-`
+`;
 
-export const code_fang_03 =
-  `// 抽象元素角色类
+export const code_fang_03 = `// 抽象元素角色类
 public interface Animal {
     // 接受访问者访问的功能
     void accept(Person person);
 }
-`
+`;
 
-export const code_fang_04 =
-  `// 具体元素角色类（宠物狗）
+export const code_fang_04 = `// 具体元素角色类（宠物狗）
 public class Dog implements Animal {
     public void accept(Person person) {
         person.feed(this); // 访问者给宠物猫喂食
@@ -2694,10 +2836,9 @@ public class Cat implements Animal {
         System.out.println("好好吃，喵喵喵。。。");
     }
 }
-`
+`;
 
-export const code_fang_05 =
-  `// 对象结构类
+export const code_fang_05 = `// 对象结构类
 public class Home {
     // 声明一个集合对象，用来存储元素对象
     private List<Animal> nodeList = new ArrayList<Animal>();    
@@ -2714,10 +2855,9 @@ public class Home {
         }
     }
 }
-`
+`;
 
-export const code_fang_06 =
-  `public class Client {
+export const code_fang_06 = `public class Client {
     public static void main(String[] args) {
         // 创建Home对象
         Home home = new Home();
@@ -2730,4 +2870,4 @@ export const code_fang_06 =
         home.action(owner);
     }
 }
-`
+`;

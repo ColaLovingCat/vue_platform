@@ -9,6 +9,8 @@ import { viteMockServe } from "vite-plugin-mock";
 
 import path from "path";
 
+import * as MonacoEditorPlugin from "vite-plugin-monaco-editor-esm";
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -31,6 +33,17 @@ export default defineConfig({
     viteMockServe({
       mockPath: "src/commons/mocks", // 你的 mock 文件夹
       enable: true,
+    }),
+    //
+    MonacoEditorPlugin.default({
+      languageWorkers: [
+        "editorWorkerService",
+        "json",
+        "html",
+        "css",
+        "typescript",
+      ],
+      publicPath: "systems/monaco",
     }),
   ],
   // excel

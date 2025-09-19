@@ -2,20 +2,24 @@
 import { onMounted, ref, onUnmounted, watch } from 'vue'
 
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+
+// ===== JSON & Data =====
 import 'monaco-editor/esm/vs/language/json/monaco.contribution.js';
 import "monaco-editor/esm/vs/basic-languages/xml/xml.contribution";
 import "monaco-editor/esm/vs/basic-languages/sql/sql.contribution";
-
+// ===== Web =====
 import "monaco-editor/esm/vs/basic-languages/html/html.contribution";
 import "monaco-editor/esm/vs/basic-languages/css/css.contribution";
 import "monaco-editor/esm/vs/basic-languages/scss/scss.contribution";
 import "monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution";
 import "monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution";
-
+// ===== Scripting =====
 import "monaco-editor/esm/vs/basic-languages/python/python.contribution";
-
+// ===== System / Compiled Languages =====
 import "monaco-editor/esm/vs/basic-languages/cpp/cpp.contribution";
+import "monaco-editor/esm/vs/basic-languages/csharp/csharp.contribution";
 import "monaco-editor/esm/vs/basic-languages/java/java.contribution";
+import "monaco-editor/esm/vs/basic-languages/go/go.contribution";
 
 import vkbeautify from "vkbeautify";
 
@@ -49,7 +53,7 @@ const emits = defineEmits<{
 const containerRef = ref<HTMLDivElement | null>(null)
 let editor: monaco.editor.IStandaloneCodeEditor
 
-onMounted(async () => {
+onMounted(() => {
     editor = monaco.editor.create(containerRef.value!, {
         value: props.value,
         //

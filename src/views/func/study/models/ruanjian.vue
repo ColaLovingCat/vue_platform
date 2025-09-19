@@ -4,6 +4,9 @@ import { onMounted, ref, reactive, computed, watch } from 'vue'
 import * as db from './ruanjian'
 
 import codeView from '@/components/editor-code/view.vue'
+import noteView from './note-card.vue'
+
+import * as extend from '@/commons/utils/extends'
 
 // name
 defineOptions({
@@ -33,7 +36,6 @@ const codeConfig = (language: string) => {
 onMounted(() => {
     pageInfos.notes = [...db.notes]
     refreshMenus()
-    observeNotes()
 })
 
 const refreshMenus = () => {
@@ -84,6 +86,23 @@ const refreshMenus = () => {
 
     // 监听 div[id]（不监听 h1/h2/h3/h4）
     contentRef.value.querySelectorAll("div[id]").forEach(el => observer.observe(el))
+
+    const divs = contentRef.value.querySelectorAll<HTMLElement>('div[id]')
+    divs.forEach(div => {
+        // 绑定点击事件
+        div.addEventListener('click', () => {
+            const id = div.id
+            visibleNotes.value = db.notes.filter(note => note.id === id)
+        })
+
+        // 自动在标题后加题目数
+        const h4 = div.querySelector('h4')
+        if (h4 && notesCountMap.value[div.id]) {
+            const span = document.createElement('span')
+            span.textContent = ` [${notesCountMap.value[div.id]}]`
+            h4.appendChild(span)
+        }
+    })
 }
 
 // 监听 notes 是否在视口
@@ -119,8 +138,59 @@ const observeNotes = () => {
     })
 }
 
+const notesCountMap = computed(() => {
+    const map: Record<string, number> = {}
+    pageInfos.notes.forEach(note => {
+        if (note.id) {
+            map[note.id] = (map[note.id] || 0) + 1
+        }
+    })
+    return map
+})
+function fetchNotesByEvent(event: MouseEvent) {
+    // 获取触发点击的 div 元素
+    const target = event.currentTarget as HTMLElement
+    const id = target.id
+
+    if (!id) return
+
+
+    // 从题库筛选
+    const notesForId = db.notes.filter(note => note.id === id)
+    visibleNotes.value = notesForId
+}
+
 function scrollTo(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+}
+
+const noteModal = ref(false)
+const noteInfos = reactive({
+    id: "section-01",
+    type: "topic",
+    title: "例题-sample",
+    question: "___。",
+    imgs: [],
+    options: [["", "", "", ""]],
+    answer: "",
+    notes: "",
+})
+const nextNote = () => {
+    const index = extend.ExNumber.createRand(0, db.notes.length - 1)
+    Object.assign(noteInfos, db.notes[index])
+}
+
+const showModal = (action: string, values: any) => {
+    switch (action) {
+        case 'note': {
+            Object.assign(noteInfos, values)
+            noteModal.value = true
+            break
+        }
+        default: {
+            break
+        }
+    }
 }
 </script>
 
@@ -2762,6 +2832,7 @@ function scrollTo(id: string) {
                         <h4>1.1 概述</h4>
                         <div class="sub-contents">
                             <p><span class="txt-define">地位</span>应用软件、系统软件、操作系统、计算机硬件</p>
+                            <img src="/docs/study/imgs/99-op.png" style="width: 300px;">
                             <p><span class="txt-define">功能</span>管理系统的硬件、软件、数据资源，控制程序运行，人机之间的接口，应用软件与硬件之间的接口</p>
                             <p><span class="txt-define">特征</span>并发性、共享性、虚拟性、不确定性</p>
                             <p><span class="txt-define">分类</span>批处理、分时、实时、网络、分布式、微机、嵌入式</p>
@@ -2811,11 +2882,12 @@ function scrollTo(id: string) {
                             <p>临界区 <i class="txt-en">Critical Section</i>：共享资源访问代码区段</p>
                             <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
                             <p>信号量S <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数</p>
-                            <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png">
+                            <p>信号量S的编号，由(12,13,23,34)排序决定</p>
+                            <p>先做的进程 V(S)，后做的进程 P(S)</p>
+                            <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png">
                             <p>执行前等待资源P(S)减，S≤0则等待</p>
                             <p>执行后释放资源V(S)加，S≤0则唤醒</p>
-                            <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png">
-                            <p>信号量S的编号，由(12,13,23,34)排序决定</p>
+                            <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png">
                             <p>实现互斥：在临界区中执行PV，确保同一时间内仅有一个进程在临界区中</p>
                             <p>实现同步：<b>生产者消费者问题</b></p>
                         </div>
@@ -4907,22 +4979,10 @@ function scrollTo(id: string) {
             <!-- 补充信息 -->
             <div class="notes">
                 <div v-for="note in visibleNotes" :key="note.id" class="note-card">
-                    <h4>[{{ note.title }}]</h4>
+                    <h4>[{{ note.title }}] <i class="fa-solid fa-eye" @click="showModal('note', note)"></i></h4>
                     <p v-if="note.type === 'text'">{{ note.content }}</p>
                     <div v-if="note.type === 'topic'">
-                        <p class="question">{{ note.question }}</p>
-                        <template v-if="note.imgs.length > 0">
-                            <img v-for="img in note.imgs" :src="`/docs/study/imgs/${img}`">
-                        </template>
-                        <div class="list-opts" v-for="opts in note.options">
-                            <div class="opt-item" v-for="(opt, index) in opts">
-                                {{ nos[index] }}. {{ opt }}
-                            </div>
-                        </div>
-                        <details>
-                            <summary>查看答案</summary>
-                            <p class="answer">{{ note.answer }}</p>
-                        </details>
+                        <noteView :data="note"></noteView>
                     </div>
                 </div>
             </div>
@@ -4937,6 +4997,14 @@ function scrollTo(id: string) {
             </div>
         </div>
     </div>
+
+    <a-modal v-model:open="noteModal" centered width="60vw" :title="`[${noteInfos.title}]`" :footer="[]">
+        <noteView :data="noteInfos"></noteView>
+        <div class="btns" style="margin-top: 10px">
+            <a-button @click="scrollTo(noteInfos.id)">索引知识点</a-button>
+            <a-button @click="nextNote()">随机下一题</a-button>
+        </div>
+    </a-modal>
 </template>
 
 <style scoped lang="scss">
