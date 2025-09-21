@@ -1,529 +1,780 @@
 export const notes = [
-  {
-    id: "section-010102",
-    type: "topic",
-    title: "例题-CPU",
-    question:
-      "在CPU中，常用来为ALU执行算术逻辑运算提供数据并暂存运算结果的寄存器是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "D",
-        list: ["程序计数器", "状态寄存器", "通用寄存器", "累加寄存器"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010103",
-    type: "topic",
-    title: "例题-CPU",
-    question: "在CPU中，___不仅要保证指令的正确执行，还要能够处理异常事件。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: ["运算器", "控制器", "寄存器组", "内部总线"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010103",
-    type: "topic",
-    title: "例题-CPU",
-    question: "在CPU中，用于跟踪指令地址的寄存器是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "C",
-        list: [
-          "地址寄存器 AR",
-          "数据寄存器 DR",
-          "程序计数器 PC",
-          "指令寄存器 IR",
+    {
+        id: "section-010102",
+        type: "topic",
+        title: "例题-CPU",
+        question:
+            "在CPU中，常用来为ALU执行算术逻辑运算提供数据并暂存运算结果的寄存器是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "D",
+                list: ["程序计数器", "状态寄存器", "通用寄存器", "累加寄存器"],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010201",
-    type: "topic",
-    title: "例题-进制",
-    question: "内存按字节编址从B3000H到DABFFH的区域，其存储容量为___。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: ["123KB", "159KB", "163KB", "194KB"],
-        note: "H表示16进制，(DABFF+1)-B3000=27C00/1024=159KB，注意单位是B还是b",
-      },
-    ],
-  },
-  {
-    id: "section-010201",
-    type: "topic",
-    title: "例题-进制",
-    question:
-      "地址编号从80000H到BFFFFH且按字节编址的内存容量为___。若用16K*4bit的存储器芯片构成该内存，共需___片。",
-    imgs: [],
-    options: [
-      { answer: "B", list: ["128", "256", "512", "1024"], note: "" },
-      { answer: "C", list: ["8", "16", "32", "64"], note: "注意16K*4bit=8KB" },
-    ],
-  },
-  {
-    id: "section-010202",
-    type: "topic",
-    title: "例题-数据表示",
-    question: "若某整数的16位补码为FFFFH，则该数的十进制为___。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: ["0", "-1", "2^16-1", "-2^16+1"],
-        note: "首先是16转2为 F=>1111，然后根据负数则先求反码 1 111 1111 1111 1110 再求原码 1 000 0000 0000 0001",
-      },
-    ],
-  },
-  {
-    id: "section-010202",
-    type: "topic",
-    title: "例题-数据表示",
-    question: "采用n位补码（包含一个符号位）表示数据，则___。",
-    imgs: [],
-    options: [
-      {
-        answer: "D",
-        list: ["表示 2^n", "表示 -2^n", "表示 2^(n-1)", "表示 -2^(n-1)"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010203",
-    type: "topic",
-    title: "例题-浮点数",
-    question:
-      "某机器的浮点数中，阶码以补码表示，尾数以原码表示。则1 0001 0 0000000001表示的浮点数是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: [
-          "2^-16*2^-10",
-          "2^-15*2^-10",
-          "2^-16*(1-2^-10)",
-          "2^-15*(1-2^-10)",
+    },
+    {
+        id: "section-010103",
+        type: "topic",
+        title: "例题-CPU",
+        question: "在CPU中，___不仅要保证指令的正确执行，还要能够处理异常事件。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: ["运算器", "控制器", "寄存器组", "内部总线"],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010605",
-    type: "topic",
-    title: "例题-寻址",
-    question:
-      "若CPU要执行指令为：MOV R1，#45（即将数值45传送到寄存器R1中），则该指令中采用的寻址方式为___。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: [
-          "直接寻址和立即寻址",
-          "寄存器寻址和立即寻址",
-          "相对寻址和直接寻址",
-          "寄存器间接寻址和直接寻址",
+    },
+    {
+        id: "section-010103",
+        type: "topic",
+        title: "例题-CPU",
+        question: "在CPU中，用于跟踪指令地址的寄存器是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "C",
+                list: [
+                    "地址寄存器 AR",
+                    "数据寄存器 DR",
+                    "程序计数器 PC",
+                    "指令寄存器 IR",
+                ],
+                note: "",
+            },
         ],
-        note: "关键词：寄存器存数值",
-      },
-    ],
-  },
-  {
-    id: "section-010303",
-    type: "topic",
-    title: "例题-海明码",
-    question:
-      "海明码利用奇偶性检错和纠错，通过在n个数据位之间插入k个校验位，扩大数据编码的码距。若n=48，则k应至少为___。",
-    imgs: [],
-    options: [{ answer: "C", list: ["4", "5", "6", "7"], note: "" }],
-  },
-  {
-    id: "section-010304",
-    type: "topic",
-    title: "例题-CRC",
-    question: "在___校验方法中，采用模2运算来构造校验位。",
-    imgs: [],
-    options: [
-      {
-        answer: "D",
-        list: ["水平奇偶", "垂直奇偶", "海明码", "循环冗余"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010602",
-    type: "topic",
-    title: "例题-指令集架构",
-    question: "___不是RISC的特点。",
-    imgs: [],
-    options: [
-      {
-        answer: "A",
-        list: [
-          "指令种类丰富",
-          "高效的流水线操作",
-          "寻址方式较少",
-          "硬布线控制",
+    },
+    {
+        id: "section-010201",
+        type: "topic",
+        title: "例题-进制",
+        question: "内存按字节编址从B3000H到DABFFH的区域，其存储容量为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: ["123KB", "159KB", "163KB", "194KB"],
+                note: "H表示16进制，(DABFF+1)-B3000=27C00/1024=159KB，注意单位是B还是b",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010602",
-    type: "topic",
-    title: "例题-指令集架构",
-    question: "以下关于RISC和CISC计算机的叙述中，正确的是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "D",
-        list: [
-          "RISC不采用流水线技术，CISC采用流水线技术",
-          "RISC使用复杂的指令，CISC使用简单的指令",
-          "RISC采用很少的通用寄存器，CISC采用很多的通用寄存器",
-          "RISC采用组合逻辑控制器，CISC普遍采用微程序控制器",
+    },
+    {
+        id: "section-010201",
+        type: "topic",
+        title: "例题-进制",
+        question:
+            "地址编号从80000H到BFFFFH且按字节编址的内存容量为___。若用16K*4bit的存储器芯片构成该内存，共需___片。",
+        imgs: [],
+        options: [
+            { answer: "B", list: ["128", "256", "512", "1024"], note: "" },
+            { answer: "C", list: ["8", "16", "32", "64"], note: "注意16K*4bit=8KB" },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010603",
-    type: "topic",
-    title: "例题-流水线",
-    question:
-      "一条指令的执行过程可分解为取值时间=3Δt、分析时间=2Δt、执行时间=4Δt。若按串行方式执行，则10条指令全部执行完需要___Δt。若按照流水线方式执行，则执行完10条指令需要___Δt。",
-    imgs: [],
-    options: [
-      { answer: "C", list: ["40", "70", "90", "100"], note: "" },
-      { answer: "D", list: ["20", "30", "40", "45"], note: "" },
-    ],
-  },
-  {
-    id: "section-010401",
-    type: "topic",
-    title: "例题-存储器",
-    question: "计算机系统的主存主要是由___构成的。",
-    imgs: [],
-    options: [
-      { answer: "A", list: ["DRAM", "SRAM", "Cache", "EEPROM"], note: "" },
-    ],
-  },
-  {
-    id: "section-010402",
-    type: "topic",
-    title: "例题-Cache",
-    question: "Cache的地址映像方式中，发生冲突次数最小的是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "A",
-        list: ["全相联映像", "组相联映像", "直接映像", "无法确定"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010402",
-    type: "topic",
-    title: "例题-Cache",
-    question: "在程序的执行过程中，Cache与主存的地址映像由___。",
-    imgs: [],
-    options: [
-      {
-        answer: "A",
-        list: [
-          "专门的硬件自动完成",
-          "程序员进行调度",
-          "操作系统进行管理",
-          "程序员和操作系统共同协调完成",
+    },
+    {
+        id: "section-010202",
+        type: "topic",
+        title: "例题-数据表示",
+        question: "若某整数的16位补码为FFFFH，则该数的十进制为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: ["0", "-1", "2^16-1", "-2^16+1"],
+                note: "首先是16转2为 F=>1111，然后根据负数则先求反码 1 111 1111 1111 1110 再求原码 1 000 0000 0000 0001",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010501",
-    type: "topic",
-    title: "例题-I/O",
-    question: "以下关于中断方式与DMA方式的叙述中，正确的是___。",
-    imgs: [],
-    options: [
-      {
-        answer: "A",
-        list: [
-          "中断方式与DMA方式都可以实现外设与CPU之间的并行工作",
-          "程序中断方式和DMA方式在数据传输过程中都不需要CPU的干预",
-          "采用DMA方式传输数据的速度比程序中断方式的速度慢",
-          "程序中断方式和DMA方式都不需要CPU保护现场",
+    },
+    {
+        id: "section-010202",
+        type: "topic",
+        title: "例题-数据表示",
+        question: "采用n位补码（包含一个符号位）表示数据，则___。",
+        imgs: [],
+        options: [
+            {
+                answer: "D",
+                list: ["表示 2^n", "表示 -2^n", "表示 2^(n-1)", "表示 -2^(n-1)"],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010701",
-    type: "topic",
-    title: "例题-总线",
-    question: "总线复用方式可以___。",
-    imgs: [],
-    options: [
-      {
-        answer: "C",
-        list: [
-          "提高总线的传输带宽",
-          "增加总线的功能",
-          "减少总线中信号线的总量",
-          "提高CPU利用率",
+    },
+    {
+        id: "section-010203",
+        type: "topic",
+        title: "例题-浮点数",
+        question:
+            "某机器的浮点数中，阶码以补码表示，尾数以原码表示。则1 0001 0 0000000001表示的浮点数是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "2^-16*2^-10",
+                    "2^-15*2^-10",
+                    "2^-16*(1-2^-10)",
+                    "2^-15*(1-2^-10)",
+                ],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010701",
-    type: "topic",
-    title: "例题-总线",
-    question:
-      "总线带宽为32bit，时钟频率为2000MHz，若总线上每5个时钟周期传送一个32bit的字，则该总线的带宽为___MB/s。",
-    imgs: [],
-    options: [{ answer: "C", list: ["40", "80", "160", "200"], note: "" }],
-  },
-  {
-    id: "section-010801",
-    type: "topic",
-    title: "例题-加密和认证",
-    question: "公钥体系中，私钥用于___，公钥用于___。",
-    imgs: [],
-    options: [
-      {
-        answer: "A",
-        list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
-        note: "",
-      },
-      {
-        answer: "D",
-        list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010801",
-    type: "topic",
-    title: "例题-加密算法",
-    question: "下列算法中，不属于公开密钥加密算法的是___。",
-    imgs: [],
-    options: [{ answer: "D", list: ["ECC", "DSA", "RSA", "DES"], note: "" }],
-  },
-  {
-    id: "section-010801",
-    type: "topic",
-    title: "例题-加密算法",
-    question: "AES是一种___算法。",
-    imgs: [],
-    options: [
-      {
-        answer: "C",
-        list: ["公钥加密", "流密码", "分组加密", "信息摘要"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-010802",
-    type: "topic",
-    title: "例题-可靠性",
-    question:
-      "某系统由下图所示的部件构成，每个部件的千小时可靠度都为R，则该系统的千小时可靠度为___。",
-    imgs: ["10-jiami.png"],
-    options: [
-      {
-        answer: "C",
-        list: [
-          "3R/2+2R/3",
-          "R/3+R/2",
-          "(1-(1-R)^3)(1-(1-R)^2)",
-          "(1-(1-R)^3-(1-R)^2)",
+    },
+    {
+        id: "section-010605",
+        type: "topic",
+        title: "例题-寻址",
+        question:
+            "若CPU要执行指令为：MOV R1，#45（即将数值45传送到寄存器R1中），则该指令中采用的寻址方式为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "直接寻址和立即寻址",
+                    "寄存器寻址和立即寻址",
+                    "相对寻址和直接寻址",
+                    "寄存器间接寻址和直接寻址",
+                ],
+                note: "关键词：寄存器存数值",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-090204",
-    type: "topic",
-    title: "例题-前驱图",
-    question:
-      "进程P1、P2、P3、P4、P5的前驱图如下。若用PV操作控制进程并发执行，则需要设置6个信号量S1~S6，且信号量初始值均为0。下图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
-    imgs: ["/docs/study/imgs/100-ti.png"],
-    options: [
-      {
-        answer: "C",
-        list: [
-          "P(S1) P(S2)和P(S3) P(S4)",
-          "P(S1) P(S2)和P(S2) P(S1)",
-          "V(S1) V(S2)和V(S3) V(S4)",
-          "P(S1) P(S2)和V(S1) V(S2)",
+    },
+    {
+        id: "section-010303",
+        type: "topic",
+        title: "例题-海明码",
+        question:
+            "海明码利用奇偶性检错和纠错，通过在n个数据位之间插入k个校验位，扩大数据编码的码距。若n=48，则k应至少为___。",
+        imgs: [],
+        options: [{ answer: "C", list: ["4", "5", "6", "7"], note: "" }],
+    },
+    {
+        id: "section-010304",
+        type: "topic",
+        title: "例题-CRC",
+        question: "在___校验方法中，采用模2运算来构造校验位。",
+        imgs: [],
+        options: [
+            {
+                answer: "D",
+                list: ["水平奇偶", "垂直奇偶", "海明码", "循环冗余"],
+                note: "",
+            },
         ],
-        note: "",
-      },
-      {
-        answer: "B",
-        list: [
-          "P(S1) P(S2)和V(S3) V(S4)",
-          "P(S1) P(S3)和V(S5) V(S6)",
-          "V(S1) V(S2)和P(S3) P(S4)",
-          "P(S1) V(S3)和P(S2) V(S4)",
+    },
+    {
+        id: "section-010602",
+        type: "topic",
+        title: "例题-指令集架构",
+        question: "___不是RISC的特点。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: [
+                    "指令种类丰富",
+                    "高效的流水线操作",
+                    "寻址方式较少",
+                    "硬布线控制",
+                ],
+                note: "",
+            },
         ],
-        note: "",
-      },
-      {
-        answer: "C",
-        list: [
-          "P(S3) P(S4)和V(S5) V(S6)",
-          "V(S5) V(S6)和P(S5) P(S6)",
-          "P(S2) P(S5)和P(S4) P(S6)",
-          "P(S4) V(S5)和P(S5) V(S6)",
+    },
+    {
+        id: "section-010602",
+        type: "topic",
+        title: "例题-指令集架构",
+        question: "以下关于RISC和CISC计算机的叙述中，正确的是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "D",
+                list: [
+                    "RISC不采用流水线技术，CISC采用流水线技术",
+                    "RISC使用复杂的指令，CISC使用简单的指令",
+                    "RISC采用很少的通用寄存器，CISC采用很多的通用寄存器",
+                    "RISC采用组合逻辑控制器，CISC普遍采用微程序控制器",
+                ],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-090204",
-    type: "topic",
-    title: "例题-信号量",
-    question:
-      "某系统有3个相同资源，信号量S=3,有5个进程并发执行。某一时刻S=-2，则___。",
-    imgs: [],
-    options: [
-      {
-        answer: "B",
-        list: [
-          "系统有2个资源正在被占用",
-          "系统有2个进程正在等待资源",
-          "系统有 2 个进程在使用资源",
-          "系统所有资源空闲",
+    },
+    {
+        id: "section-010603",
+        type: "topic",
+        title: "例题-流水线",
+        question:
+            "一条指令的执行过程可分解为取值时间=3Δt、分析时间=2Δt、执行时间=4Δt。若按串行方式执行，则10条指令全部执行完需要___Δt。若按照流水线方式执行，则执行完10条指令需要___Δt。",
+        imgs: [],
+        options: [
+            { answer: "C", list: ["40", "70", "90", "100"], note: "" },
+            { answer: "D", list: ["20", "30", "40", "45"], note: "" },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-090204",
-    type: "topic",
-    title: "例题-信号量",
-    question:
-      "假设系统采用PV操作实现进程同步与互斥，若n个进程共享两台打印机，那么信号量S的取值范围为___。",
-    imgs: [],
-    options: [
-      {
-        answer: "D",
-        list: ["-2~n", "-(n-1)~1", "-(n-1)~2", "-(n-2)~2"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-090205",
-    type: "topic",
-    title: "例题-生产者消费者",
-    question:
-      "某企业生产流水线M共有两个生产者，生产者甲不断地将其工序上加工的半成品放入半成品箱，生产者乙从半成品箱取出继续加工。假设半成品箱可存放n件半成品，采用PV操作实现生产者甲和生产者乙的同步可设置三个信号量S、S1、S2，其同步模型如下图。信号量S是一个互斥信号量，初始值为___；S1、S2的初始值分别为___。",
-    imgs: ["/docs/study/imgs/101-ti.png"],
-    options: [
-      { answer: "B", list: ["0", "1", "n", "任意正整数"], note: "" },
-      { answer: "A", list: ["n、0", "0、n", "1、n", "n、1"], note: "" },
-    ],
-  },
-  {
-    id: "section-090207",
-    type: "topic",
-    title: "例题-进程资源图",
-    question: "进程资源图如图所示，其中图a中___，图b中___。",
-    imgs: ["/docs/study/imgs/102-ti.png"],
-    options: [
-      {
-        answer: "B",
-        list: [
-          "P1是非阻塞节点，P2是阻塞节点，所以该图不可以化简，是死锁的",
-          "P1、P2都是阻塞节点，所以该图不可以化简，是死锁的",
-          "P1、P2都是非阻塞节点，所以该图可以化简，是非死锁的",
-          "P1是阻塞节点，P2是非阻塞节点，所以该图不可以化简，是死锁的",
+    },
+    {
+        id: "section-010401",
+        type: "topic",
+        title: "例题-存储器",
+        question: "计算机系统的主存主要是由___构成的。",
+        imgs: [],
+        options: [
+            { answer: "A", list: ["DRAM", "SRAM", "Cache", "EEPROM"], note: "" },
         ],
-        note: "先分配，后申请",
-      },
-      {
-        answer: "C",
-        list: [
-          "P1、P2、P3都是非阻塞节点，所以该图可以化简，是非死锁的",
-          "P1、P2、P3都是阻塞节点，所以该图不可以化简，是死锁的",
-          "P2是阻塞节点，P1、P3是非阻塞节点，所以该图可以化简，是非死锁的",
-          "P1、P2是非阻塞节点，P3是阻塞节点，所以该图不可以化简，是死锁的",
+    },
+    {
+        id: "section-010402",
+        type: "topic",
+        title: "例题-Cache",
+        question: "Cache的地址映像方式中，发生冲突次数最小的是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: ["全相联映像", "组相联映像", "直接映像", "无法确定"],
+                note: "",
+            },
         ],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-090204",
-    type: "topic",
-    title: "例题-PV操作",
-    question: "进程的前驱图如下图所示。若用PV操作控制进程的并发执行过程，需要5个信号量S1~S5，且信号量的初始值都等于0.如下的进程执行图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
-    imgs: ['/docs/study/imgs/103-ti.png','/docs/study/imgs/104-ti.png'],
-    options: [
-      {
-        answer: "B",
-        list: [
-          "V(S1)和P(S2) V(S3)", 
-          "P(S1)和V(S2) V(S3)", 
-          "V(S1)和V(S2) V(S3)", 
-          "P(S1)和P(S2) V(S3)"
+    },
+    {
+        id: "section-010402",
+        type: "topic",
+        title: "例题-Cache",
+        question: "在程序的执行过程中，Cache与主存的地址映像由___。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: [
+                    "专门的硬件自动完成",
+                    "程序员进行调度",
+                    "操作系统进行管理",
+                    "程序员和操作系统共同协调完成",
+                ],
+                note: "",
+            },
         ],
-        note: "",
-      },
-      {
-        answer: "C",
-        list: ["P(S2)和P(S4)", "V(S2)和P(S4)", "P(S2)和V(S4)", "V(S2)和V(S4)"],
-        note: "",
-      },
-      {
-        answer: "A",
-        list: ["P(S4)和V(S5)", "V(S5)和P(S4)", "V(S4)和P(S5)", "V(S4)和V(S5)"],
-        note: "",
-      },
-    ],
-  },
-  {
-    id: "section-01",
-    type: "topic",
-    title: "例题-sample",
-    question: "___。",
-    imgs: [],
-    options: [
-      {
-        answer: "",
-        list: ["", "", "", ""],
-        note: "",
-      },
-    ],
-  },
+    },
+    {
+        id: "section-010501",
+        type: "topic",
+        title: "例题-I/O",
+        question: "以下关于中断方式与DMA方式的叙述中，正确的是___。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: [
+                    "中断方式与DMA方式都可以实现外设与CPU之间的并行工作",
+                    "程序中断方式和DMA方式在数据传输过程中都不需要CPU的干预",
+                    "采用DMA方式传输数据的速度比程序中断方式的速度慢",
+                    "程序中断方式和DMA方式都不需要CPU保护现场",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-010701",
+        type: "topic",
+        title: "例题-总线",
+        question: "总线复用方式可以___。",
+        imgs: [],
+        options: [
+            {
+                answer: "C",
+                list: [
+                    "提高总线的传输带宽",
+                    "增加总线的功能",
+                    "减少总线中信号线的总量",
+                    "提高CPU利用率",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-010701",
+        type: "topic",
+        title: "例题-总线",
+        question:
+            "总线带宽为32bit，时钟频率为2000MHz，若总线上每5个时钟周期传送一个32bit的字，则该总线的带宽为___MB/s。",
+        imgs: [],
+        options: [{ answer: "C", list: ["40", "80", "160", "200"], note: "" }],
+    },
+    {
+        id: "section-010801",
+        type: "topic",
+        title: "例题-加密和认证",
+        question: "公钥体系中，私钥用于___，公钥用于___。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
+                note: "",
+            },
+            {
+                answer: "D",
+                list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-010801",
+        type: "topic",
+        title: "例题-加密算法",
+        question: "下列算法中，不属于公开密钥加密算法的是___。",
+        imgs: [],
+        options: [{ answer: "D", list: ["ECC", "DSA", "RSA", "DES"], note: "" }],
+    },
+    {
+        id: "section-010801",
+        type: "topic",
+        title: "例题-加密算法",
+        question: "AES是一种___算法。",
+        imgs: [],
+        options: [
+            {
+                answer: "C",
+                list: ["公钥加密", "流密码", "分组加密", "信息摘要"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-010802",
+        type: "topic",
+        title: "例题-可靠性",
+        question:
+            "某系统由下图所示的部件构成，每个部件的千小时可靠度都为R，则该系统的千小时可靠度为___。",
+        imgs: ["/docs/study/imgs/10-jiami.png"],
+        options: [
+            {
+                answer: "C",
+                list: [
+                    "3R/2+2R/3",
+                    "R/3+R/2",
+                    "(1-(1-R)^3)(1-(1-R)^2)",
+                    "(1-(1-R)^3-(1-R)^2)",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090204",
+        type: "topic",
+        title: "例题-前驱图",
+        question:
+            "进程P1、P2、P3、P4、P5的前驱图如下。若用PV操作控制进程并发执行，则需要设置6个信号量S1~S6，且信号量初始值均为0。下图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
+        imgs: ["/docs/study/imgs/100-ti.png"],
+        options: [
+            {
+                answer: "C",
+                list: [
+                    "P(S1) P(S2)和P(S3) P(S4)",
+                    "P(S1) P(S2)和P(S2) P(S1)",
+                    "V(S1) V(S2)和V(S3) V(S4)",
+                    "P(S1) P(S2)和V(S1) V(S2)",
+                ],
+                note: "",
+            },
+            {
+                answer: "B",
+                list: [
+                    "P(S1) P(S2)和V(S3) V(S4)",
+                    "P(S1) P(S3)和V(S5) V(S6)",
+                    "V(S1) V(S2)和P(S3) P(S4)",
+                    "P(S1) V(S3)和P(S2) V(S4)",
+                ],
+                note: "",
+            },
+            {
+                answer: "C",
+                list: [
+                    "P(S3) P(S4)和V(S5) V(S6)",
+                    "V(S5) V(S6)和P(S5) P(S6)",
+                    "P(S2) P(S5)和P(S4) P(S6)",
+                    "P(S4) V(S5)和P(S5) V(S6)",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090204",
+        type: "topic",
+        title: "例题-信号量",
+        question:
+            "某系统有3个相同资源，信号量S=3,有5个进程并发执行。某一时刻S=-2，则___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "系统有2个资源正在被占用",
+                    "系统有2个进程正在等待资源",
+                    "系统有 2 个进程在使用资源",
+                    "系统所有资源空闲",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090204",
+        type: "topic",
+        title: "例题-信号量",
+        question:
+            "假设系统采用PV操作实现进程同步与互斥，若n个进程共享两台打印机，那么信号量S的取值范围为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "D",
+                list: ["-2~n", "-(n-1)~1", "-(n-1)~2", "-(n-2)~2"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090205",
+        type: "topic",
+        title: "例题-生产者消费者",
+        question:
+            "某企业生产流水线M共有两个生产者，生产者甲不断地将其工序上加工的半成品放入半成品箱，生产者乙从半成品箱取出继续加工。假设半成品箱可存放n件半成品，采用PV操作实现生产者甲和生产者乙的同步可设置三个信号量S、S1、S2，其同步模型如下图。信号量S是一个互斥信号量，初始值为___；S1、S2的初始值分别为___。",
+        imgs: ["/docs/study/imgs/101-ti.png"],
+        options: [
+            { answer: "B", list: ["0", "1", "n", "任意正整数"], note: "" },
+            { answer: "A", list: ["n、0", "0、n", "1、n", "n、1"], note: "" },
+        ],
+    },
+    {
+        id: "section-090207",
+        type: "topic",
+        title: "例题-进程资源图",
+        question: "进程资源图如图所示，其中图a中___，图b中___。",
+        imgs: ["/docs/study/imgs/102-ti.png"],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "P1是非阻塞节点，P2是阻塞节点，所以该图不可以化简，是死锁的",
+                    "P1、P2都是阻塞节点，所以该图不可以化简，是死锁的",
+                    "P1、P2都是非阻塞节点，所以该图可以化简，是非死锁的",
+                    "P1是阻塞节点，P2是非阻塞节点，所以该图不可以化简，是死锁的",
+                ],
+                note: "先分配，后申请",
+            },
+            {
+                answer: "C",
+                list: [
+                    "P1、P2、P3都是非阻塞节点，所以该图可以化简，是非死锁的",
+                    "P1、P2、P3都是阻塞节点，所以该图不可以化简，是死锁的",
+                    "P2是阻塞节点，P1、P3是非阻塞节点，所以该图可以化简，是非死锁的",
+                    "P1、P2是非阻塞节点，P3是阻塞节点，所以该图不可以化简，是死锁的",
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090204",
+        type: "topic",
+        title: "例题-PV操作",
+        question: "进程的前驱图如下图所示。若用PV操作控制进程的并发执行过程，需要5个信号量S1~S5，且信号量的初始值都等于0.如下的进程执行图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
+        imgs: ['/docs/study/imgs/103-ti.png', '/docs/study/imgs/104-ti.png'],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "V(S1)和P(S2) V(S3)",
+                    "P(S1)和V(S2) V(S3)",
+                    "V(S1)和V(S2) V(S3)",
+                    "P(S1)和P(S2) V(S3)"
+                ],
+                note: "",
+            },
+            {
+                answer: "C",
+                list: ["P(S2)和P(S4)", "V(S2)和P(S4)", "P(S2)和V(S4)", "V(S2)和V(S4)"],
+                note: "",
+            },
+            {
+                answer: "A",
+                list: ["P(S4)和V(S5)", "V(S5)和P(S4)", "V(S4)和P(S5)", "V(S4)和V(S5)"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090201",
+        type: "topic",
+        title: "例题-三态模型",
+        question: "在单处理机系统中，采用先来先服务调度算法。系统中由4个进程P1、P2、P3、P4(假设进程按此顺序到达)，其中P1为运行状态，P2为就绪状态，P3和P4为等待状态，且P3等待打印机，P4等待扫描仪。若P1___，则P1、P2、P3、P4的状态应分别为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "A",
+                list: ["时间片到", "释放了扫描仪", "释放了打印机", "已完成"],
+                note: "",
+            },
+            {
+                answer: "C",
+                list: ["等待、就绪、等待和等待", "运行、就绪、运行和等待", "就绪、运行、等待和等待", "就绪、就绪、等待和运行"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090201",
+        type: "topic",
+        title: "例题-三态模型",
+        question: "在单处理机系统中有一台打印机、一台扫描仪，采用先来先服务调度算法。系统中由4个进程P1、P2、P3、P4，其中P1为运行状态，P2为就绪状态，P3和P4为等待状态，且P3等待打印机，P4等待扫描仪。若P1释放了扫描仪，则P1、P2、P3、P4的状态应分别为___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: ["等待、运行、等待和就绪", "运行、就绪、等待和就绪", "就绪、就绪、等待和运行", "就绪、运行、等待和就绪"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090206",
+        type: "topic",
+        title: "例题-死锁",
+        question: "系统中有R类资源m个，现有n个进程互斥使用。若每个进程对R资源的最大需求为w，那么m、n、w分别去下表中的值时，对于表中的情况，___可能会发生死锁。若将这些情况的m分别加上___，则系统不会发生死锁。",
+        imgs: ["/docs/study/imgs/105-ti.png"],
+        options: [
+            {
+                answer: "C",
+                list: ["①②⑤", "③④⑤", "②④⑤", "②④⑥"],
+                note: "m≥n*(w-1)+1",
+            },
+            {
+                answer: "D",
+                list: ["1、1和1", "1、1和2", "1、1和3", "1、2和1"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090207",
+        type: "topic",
+        title: "例题-进程资源图",
+        question: "假设系统中有三个进程P1、P2和P3，两种资源R1、R2.如果进程资源图如下图所示，那么___。",
+        imgs: ["/docs/study/imgs/106-ti.png"],
+        options: [
+            {
+                answer: "C",
+                list: ["图1和图2都可化简", "图1和图2都不可化简", "图1可化简，图2不可化简", "图1不可化简，图2可化简"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090206",
+        type: "topic",
+        title: "例题-死锁",
+        question: "假设系统中有三类互斥资源R1、R2、R3，可用资源数分别为10、5、3。在T0时刻系统中有P1、P2、P3、P4和P5五个进程，这些进程对资源的最大需求量和已分配资源数如下表所示，此时系统剩余的可用资源数分别为___。如果进程按___序列执行，那么系统状态是安全的。",
+        imgs: ["/docs/study/imgs/107-ti.png"],
+        options: [
+            {
+                answer: "D",
+                list: ["1、1和0", "1、1和1", "2、1和0", "2、0和1"],
+                note: "",
+            },
+            {
+                answer: "B",
+                list: ["P1>P2>P4>P5>P3", "P5>P2>P4>P3>P1", "P4>P2>P1>P5>P3", "P5>P1>P4>P2>P3"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090201",
+        type: "topic",
+        title: "例题-线程",
+        question: "在支持多线程的操作系统中，假设进程P创建了若干个线程，那么___是不能被这些线程共享的。",
+        imgs: [],
+        options: [
+            {
+                answer: "C",
+                list: ["该进程中打开的文件", "该进程的代码段", "该进程中某线程的栈指针", "该进程的全局变量"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090302",
+        type: "topic",
+        title: "例题-局部性原理",
+        question: "某进程有4个页面，页号为0-3，页面变换表及状态位、访问位和修改位的含义如下图所示。若系统给该进程分配了3个存储块，当访问的页面1不在内存时，淘汰表中页号为___的页面代价最小。",
+        imgs: ["/docs/study/imgs/108-ti.png"],
+        options: [
+            {
+                answer: "D",
+                list: ["0", "1", "2", "3"],
+                note: "在内存 > 未访问 > 未修改",
+            },
+        ],
+    },
+    {
+        id: "section-090301",
+        type: "topic",
+        title: "例题-页式存储",
+        question: "某进程有5个页面，页号为0-4，页面变换表如下图所示。如系统给该进程分配了3个存储块，当访问的页面3不在内存时，应该淘汰表中页号为___的页面。假定页面大小为4KB，逻辑地址为十六进制2C25H，该地址经过变换后，其物理地址应为十六进制___。",
+        imgs: ["/docs/study/imgs/109-ti.png"],
+        options: [
+            {
+                answer: "A",
+                list: ["0", "1", "2", "4"],
+                note: "",
+            },
+            {
+                answer: "C",
+                list: ["2C25H", "4096H", "4C25H", "8C25H"],
+                note: "2 C25 H 为页号2，对应页帧号4，所以答案为 4 C25 H",
+            },
+        ],
+    },
+    {
+        id: "section-090301",
+        type: "topic",
+        title: "例题-页式存储",
+        question: "某操作系统采用分页存储管理方式，下图给出了进程A和进程B的页表结构。如果物理页的大小为1KB，那么进程A中逻辑地址为1024（十进制）用变量存放在___号物理内存页中。假设进程A的逻辑页4与进程B的逻辑页5要共享物理页4，那么应该在进程A页表的逻辑页4和进程B页表的逻辑页5对应的物理页处分别填___。",
+        imgs: ["/docs/study/imgs/110-ti.png"],
+        options: [
+            {
+                answer: "B",
+                list: ["8", "3", "5", "2"],
+                note: "物理页大小为1KB即1024，二进制为 100 0000 0000，则页号1对应的物理页为3",
+            },
+            {
+                answer: "A",
+                list: ["4、4", "4、5", "5、4", "5、5"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090304",
+        type: "topic",
+        title: "例题-段页式存储",
+        question: "假设段页式存储管理系统中的地址结构如下图所示，则系统中___。",
+        imgs: [],
+        options: [
+            {
+                answer: "B",
+                list: [
+                    "页的大小为4K，每个段的大小均为4096个页，最多可有256个段",
+                    "页的大小为4K，每个段最大允许有4096个页，最多可有256个段",
+                    "页的大小为8K，每个段的大小均为2048个页，最多可有128个段",
+                    "页的大小为8K，每个段最大允许有2048个页，最多可有128个段"
+                ],
+                note: "页内地址12位，页号12位，段号8位",
+            },
+        ],
+    },
+    {
+        id: "section-090403",
+        type: "topic",
+        title: "例题-缓冲区",
+        question: "假设磁盘块与缓冲区大小相同，每个盘块读入缓冲区的时间为10μs，由缓冲区送至用户区的时间是5μs，系统对每个磁盘块数据的处理时间为2μs。若用户需要将大小为10个磁盘块的Doc1文件逐块从磁盘读入缓冲区，并送至用户区进行处理，那么采用单缓冲区需要花费的时间为___μs；采用双缓冲区需要花费的时间为___μs。",
+        imgs: [],
+        options: [
+            {
+                answer: "C",
+                list: ["100", "107", "152", "170"],
+                note: "(10+5)*(10-1)+(10+5+2)=152",
+            },
+            {
+                answer: "B",
+                list: ["100", "107", "152", "170"],
+                note: "10*(10-1)+(10+5+2)=107",
+            },
+        ],
+    },
+    {
+        id: "section-090405",
+        type: "topic",
+        title: "例题-磁盘调度算法",
+        question: "假设磁盘每磁道有18个扇区，系统刚完成了10号柱面的操作，当前移动臂在13号柱面上，进程的请求序列如下表所示。若系统采用SCAN（扫描）调度算法，则系统响应序列为___；若系统采用CSCAN（单向扫描）调度算法，则系统响应序列为___。",
+        imgs: ["/docs/study/imgs/112-ti.png"],
+        options: [
+            {
+                answer: "A",
+                list: [
+                    "⑦⑩①②④③⑨⑧⑤⑥", 
+                    "①⑦⑩②③④⑥⑤⑧⑨", 
+                    "⑦⑩①②④③⑥⑤⑧⑨", 
+                    "①⑦⑩②③④⑧⑨⑥⑤"
+                ],
+                note: "只看柱面号",
+            },
+            {
+                answer: "C",
+                list: [
+                    "⑦⑩①②④③⑨⑧⑤⑥", 
+                    "①⑦⑩②③④⑥⑤⑧⑨", 
+                    "⑦⑩①②④③⑥⑤⑧⑨", 
+                    "①⑦⑩②③④⑧⑨⑥⑤"
+                ],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090405",
+        type: "topic",
+        title: "例题-磁盘调度算法",
+        question: "假设磁盘臂位于15号柱面上，进程的请求序列如下表表示，如果采用最短移臂调度算法，那么系统的响应序列应为___。",
+        imgs: ["/docs/study/imgs/114-ti.png"],
+        options: [
+            {
+                answer: "B",
+                list: ["①②③④⑤⑥", "⑤①②④③⑥", "②③④⑤①⑥", "④②③⑤①⑥"],
+                note: "",
+            },
+        ],
+    },
+    {
+        id: "section-090406",
+        type: "topic",
+        title: "例题-旋转调度算法",
+        question: "假设某磁盘的每个磁道划分成9个物理块，每块存放1个逻辑记录。逻辑记录R0,R1...R8存放在同一个磁道上，记录的安排顺序如下表所示；如果磁盘的旋转速度为27ms/周，磁头当前处在R0的开始处。若系统顺序处理这些记录，使用单缓冲区，每个记录处理时间为3ms，则处理这9个记录的最长时间为___ms；若对信息存储进行优化分布后，处理9个记录的最少时间为___ms。",
+        imgs: ["/docs/study/imgs/116-ti.png"],
+        options: [
+            {
+                answer: "D",
+                list: ["54", "108", "222", "246"],
+                note: "旋转一个扇区需要3ms，所以前8个物理块的时间为 (3ms+9*3ms)*8=240ms,最后一个时间为 3ms+3ms=6ms，所以总时间为246ms",
+            },
+            {
+                answer: "B",
+                list: ["27", "54", "108", "216"],
+                note: "(读取+处理)*数量",
+            },
+        ],
+    },
+    {
+        id: "section-01",
+        type: "topic",
+        title: "例题-sample",
+        question: "___。",
+        imgs: [],
+        options: [
+            {
+                answer: "",
+                list: ["", "", "", ""],
+                note: "",
+            },
+        ],
+    },
 ];
 
 export const code_huisu_01 = `#define N 4

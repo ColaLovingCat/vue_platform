@@ -436,25 +436,25 @@ const showModal = (action: string, values: any) => {
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>寄存器</td>
+                                        <td>寄存器 <i class="txt-en">Register</i></td>
                                         <td>CPU</td>
                                     </tr>
                                     <tr>
-                                        <td>Cache</td>
+                                        <td>高速缓存 <i class="txt-en">Cache</i></td>
                                         <td>
                                             <p>SRAM 静态随机存储器</p>
                                             <p>按内容存取</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>内存(主存)</td>
+                                        <td>内存(主存) <i class="txt-en">Primary Storage</i></td>
                                         <td>
                                             <p>DRAM 动态随机存储器</p>
                                             <p>周期性刷新，断电丢失</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>外存(辅存)</td>
+                                        <td>外存(辅存) <i class="txt-en">Secondary Storage</i></td>
                                         <td>硬盘、光盘、U盘</td>
                                     </tr>
                                 </tbody>
@@ -2846,8 +2846,8 @@ const showModal = (action: string, values: any) => {
                         <div class="sub-contents">
                             <p>线程 <i class="txt-en">Thread</i>：CPU可独立调度和分配的最小单位</p>
                             <p>包含在进程中，可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的</p>
-                            <p>共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、栈</p>
-                            <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) 组成</p>
+                            <p>共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、<b>栈</b></p>
+                            <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) <i class="txt-en">Process Control Block</i> 组成</p>
                             <p>三态模型：就绪
                                 <i class="txt-en">Ready</i>、运行
                                 <i class="txt-en">Running</i>、阻塞
@@ -2858,18 +2858,21 @@ const showModal = (action: string, values: any) => {
                                 <i class="txt-en">New</i>、终止
                                 <i class="txt-en">Terminated</i>
                             </p>
+                            <img class="img-118" style="width: 300px;" src="/docs/study/imgs/118-wutai.png">
                         </div>
                     </div>
                     <div id="section-090202">
                         <h4>2.2 前驱图 <i class="txt-en">Precedence Graph</i></h4>
                         <div class="sub-contents">
+                            <p>有向无循环图</p>
                             <p>表示和描述进程之间的先后顺序和执行的依赖关系</p>
                             <p>顺序执行：顺序性/封闭性/可再现性</p>
                             <p>并发执行：无封闭性，相互制约</p>
+                            <img class="img-117" style="width: 300px;" src="/docs/study/imgs/117-bingfa.png">
                         </div>
                     </div>
                     <div id="section-090203">
-                        <h4>2.3 同步与互斥</h4>
+                        <h4>2.3 进程通信</h4>
                         <div class="sub-contents">
                             <p>同步：合作进程间的直接制约</p>
                             <p>互斥：申请临界资源间的间接制约</p>
@@ -2881,12 +2884,12 @@ const showModal = (action: string, values: any) => {
                             <p>临界资源：各进程间需要以互斥方式对其进行访问的资源</p>
                             <p>临界区 <i class="txt-en">Critical Section</i>：共享资源访问代码区段</p>
                             <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
-                            <p>信号量S <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数</p>
+                            <p><b>信号量S</b> <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数</p>
                             <p>信号量S的编号，由(12,13,23,34)排序决定</p>
                             <p>先做的进程 V(S)，后做的进程 P(S)</p>
                             <img class="img-17" style="width: 250px;" src="/docs/study/imgs/17-pv.png">
-                            <p>执行前等待资源P(S)减，S≤0则等待</p>
-                            <p>执行后释放资源V(S)加，S≤0则唤醒</p>
+                            <p>执行前等待资源<b>P(S)减</b>，S≤0则等待</p>
+                            <p>执行后释放资源<b>V(S)加</b>，S≤0则唤醒</p>
                             <img class="img-16" style="width: 250px;" src="/docs/study/imgs/16-pv.png">
                             <p>实现互斥：在临界区中执行PV，确保同一时间内仅有一个进程在临界区中</p>
                             <p>实现同步：<b>生产者消费者问题</b></p>
@@ -2899,7 +2902,7 @@ const showModal = (action: string, values: any) => {
                             <p>容量为1的缓冲区</p>
                             <img class="img-18" style="width: 300px;" src="/docs/study/imgs/18-pv.png">
                             <p>容量为n的缓冲区</p>
-                            <p>缓冲区+互斥信号量S+同步信号量(S1可放产品数n+S2产品数0)</p>
+                            <p>缓冲区+互斥信号量S+同步信号量(S1<b>可放产品数n</b>+S2<b>剩余产品数0</b>)</p>
                             <p>生产者：P(S1)>P(S)>V(S)>V(S2)</p>
                             <p>消费者：P(S2)>P(S)>V(S)>V(S1)</p>
                         </div>
@@ -2907,10 +2910,10 @@ const showModal = (action: string, values: any) => {
                     <div id="section-090206">
                         <h4>2.6 死锁</h4>
                         <div class="sub-contents">
-                            <p><span class="txt-define">条件</span>互斥、保持和等待、不剥夺、环路等待</p>
-                            <p>同类资源分配不当引起死锁，所需资源数 <span class="txt-func">m≥n*(k-1)+1</span></p>
+                            <p><span class="txt-define">必要条件</span>互斥、请求保持和等待、不可剥夺、环路等待</p>
+                            <p>同类资源分配不当引起死锁：n个进程，每个所需k个资源，至少需要资源数 <span class="txt-func">m≥n*(k-1)+1</span></p>
                             <p>系统采用轮流分配资源，资源数m小于进程所需资源总数n*k</p>
-                            <p>死锁处理：避免策略-<b>银行家算法</b></p>
+                            <p>死锁处理：鸵鸟策略、预防策略、避免策略-<b>银行家算法</b>、检测与解除死锁</p>
                             <p>按顺序调用进程：P4->P2</p>
                             <p>总资源数：R1-8/R2-7/R3-4，计算 总可用资源数：R1-1/R2-1/R3-0</p>
                             <table>
@@ -3002,7 +3005,7 @@ const showModal = (action: string, values: any) => {
                         <h4>2.7 进程资源图</h4>
                         <div class="sub-contents">
                             <p>描述进程所需资源和资源分配情况</p>
-                            <p>P进程，R资源：R->P 代表资源R已分配给进程P，P->R 代表进程P还需要请求资源R</p>
+                            <p>P进程，R资源：R->P 代表资源R已分配给进程P的资源数，P->R 代表进程P还需要请求资源R的资源数</p>
                             <img class="img-15" src="/docs/study/imgs/15-ziyuan.png">
                             <p>阻塞节点：该节点所请求的资源已分配完</p>
                             <p>非阻塞节点：可化简</p>
@@ -3017,8 +3020,19 @@ const showModal = (action: string, values: any) => {
                         <h4>3.1 页式存储</h4>
                         <div class="sub-contents">
                             <p>地址结构：页号+页内地址(4K)</p>
-                            <p>页面变换表：页号+物理块号(页帧号)</p>
-                            <p>逻辑地址转换物理地址</p>
+                            <p>页面变换表：</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>页号</td>
+                                        <td>物理块号(页帧号)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>逻辑地址</td>
+                                        <td>物理地址</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <p>十六进制 1C20H => 页号1+页内地址C20(12位) => 物理块号3+C20</p>
                         </div>
                     </div>
@@ -3027,7 +3041,7 @@ const showModal = (action: string, values: any) => {
                         <div class="sub-contents">
                             <p>时间局限性：循环操作。如果程序中的某条指令一旦被执行，则不久的将来该指令可能再次被执行</p>
                             <p>空间局限性：顺序存储。指一旦程序访问了某个存储单元，则在不久的将来，其附近的存储单元也最有可能被访问</p>
-                            <p>最近最少使用算法：局部性原理</p>
+                            <p>最近最少使用算法：<b>局部性原理</b></p>
                             <p>状态位/访问位/修改位</p>
                             <p>只淘汰在内存中(1)，先淘汰未访问过的(0)，再淘汰未修改过的(0)</p>
                             <table>
@@ -3083,10 +3097,10 @@ const showModal = (action: string, values: any) => {
                     <div id="section-090304">
                         <h4>3.4 段页式存储</h4>
                         <div class="sub-contents">
-                            <p>地址结构：段号s+段内页号p+页内地址w</p>
+                            <p>地址结构：段号s + 段内页号p + 页内地址w</p>
                             <img class="img-20" style="width: 400px;" src="/docs/study/imgs/20-cunchu.png" alt=""
                                 srcset="">
-                            <p>最多有2^𝑠段，每个段最大允许有2^𝑝页，页的大小为4K(=2^2* 2^10)</p>
+                            <p>页的大小为4K(=<span class="txt-func">2<span class="txt-sup">2</span></span>*<span class="txt-func">2<span class="txt-sup">10</span></span>)，每个段<b>最大允许</b>有 <span class="txt-func">2<span class="txt-sup">p</span></span> 页，最多有 <span class="txt-func">2<span class="txt-sup">s</span></span> 段</p>
                             <p>段表+页表来实现地址映射</p>
                         </div>
                     </div>
@@ -3106,7 +3120,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                     <div id="section-090403">
-                        <h4>4.3 虚设备与Spooling技术</h4>
+                        <h4>4.3 缓冲技术</h4>
                         <div class="sub-contents">
                             <p>输入T>传送M>处理C</p>
                             <p>单缓冲区：(T+M)*(n-1)+(T+M+C)</p>
@@ -3121,6 +3135,9 @@ const showModal = (action: string, values: any) => {
                         <h4>4.4 磁盘结构</h4>
                         <div class="sub-contents">
                             <p>磁盘有正反两个盘面，每个盘面有多个同心圆，每个同心圆是一个磁道，每个同心圆又被划分为多个扇区</p>
+                            <p>磁道：圆形的路径，沿着磁盘表面布置；由外到内，从0开始编号</p>
+                            <p>扇区：每个磁道被划分为多个扇区，扇区是存储数据的最小单位；一般扇区大小为512字节</p>
+                            <img class="img-113" style="width: 300px;" src="/docs/study/imgs/113-cipan.png">
                             <p>先寻找对应磁道，再等待周期旋转至指定扇区，产生寻道时间和等待时间</p>
                         </div>
                     </div>
@@ -3144,11 +3161,11 @@ const showModal = (action: string, values: any) => {
                                         <td>先访问最近的</td>
                                     </tr>
                                     <tr>
-                                        <td>扫描算法 (SCAN)</td>
+                                        <td>扫描算法 (SCAN) / 电梯调度</td>
                                         <td>先访问同一方向的</td>
                                     </tr>
                                     <tr>
-                                        <td>单向扫描调度算法 (CSCAN)</td>
+                                        <td>单向扫描调度算法 (C-SCAN)</td>
                                         <td>转向时访问极值</td>
                                     </tr>
                                 </tbody>
@@ -3158,13 +3175,14 @@ const showModal = (action: string, values: any) => {
                     <div id="section-090406">
                         <h4>4.6 旋转调度算法</h4>
                         <div class="sub-contents">
-                            <p>旋转速度20ms/圈，处理时间4ms，扇区数10 =(2+4)*10+(10-4/2)*2*(10-1)</p>
-                            <p>旋转一个扇区所需时间为 20ms/10=2ms，处理一个扇区的同时磁头移动了 4ms/2ms=2个扇区</p>
-                            <img class="img-22" style="width: 200px;" src="/docs/study/imgs/22-shebei.png" alt=""
-                                srcset="">
-                            <p>修改顺序来优化 =(2+4)*10</p>
-                            <img class="img-23" style="width: 200px;" src="/docs/study/imgs/23-shebei.png" alt=""
-                                srcset="">
+                            <p>每个磁道分为10个物理块，磁盘的旋转速度为20ms/圈，每个记录的处理时间4ms</p>
+                            <p>旋转一个扇区所需时间为 20ms/10=2ms，也是读取一个数据块的时间</p>
+                            <p>前9个物理块的时间为 读取时间+旋转一圈到原位置准备读取下一个物理块的时间为 (2ms+10*2ms)*9=198ms</p>
+                            <p>最后一个物理块的时间为 读取时间+处理时间=2ms+4ms=6ms</p>
+                            <p>所以总时间为 198ms+6ms=204ms</p>
+                            <img class="img-22" style="width: 400px;" src="/docs/study/imgs/22-shebei.png">
+                            <p>修改顺序来优化 =(2ms+4ms)*10=60ms</p>
+                            <img class="img-23" style="width: 200px;" src="/docs/study/imgs/23-shebei.png">
                             <p>磁道距离*移动速度+延迟+传输</p>
                         </div>
                     </div>
