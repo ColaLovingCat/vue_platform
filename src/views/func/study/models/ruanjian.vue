@@ -663,7 +663,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-0107">7. 总线</h3>
+                <h3 id="part-0107">7. 总线 <i class="txt-en">Bus</i></h3>
                 <div class="part-contents">
                     <div id="section-010701">
                         <h4>7.1 总线</h4>
@@ -683,14 +683,14 @@ const showModal = (action: string, values: any) => {
                         <h4>8.1 加密技术和认证技术</h4>
                         <div class="sub-contents">
                             <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
-                            <p><b>对称加密</b>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
+                            <p><b>对称加密</b> <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
                             <img class="img-06" src="/docs/study/imgs/06-jiami.png">
-                            <p><b>非对称加密</b>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
+                            <p><b>非对称加密</b> <i class="txt-en">Asymmetric Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
                             <img class="img-07" src="/docs/study/imgs/07-jiami.png">
                             <p><b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要</p>
                             <img class="img-08" src="/docs/study/imgs/08-jiami.png">
                             <p>数据完整性、一致性，不可逆，唯一性</p>
-                            <p><b>数字签名</b>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密</p>
+                            <p><b>数字签名</b> <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密</p>
                             <img class="img-09" src="/docs/study/imgs/09-jiami.png">
                             <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
                             <p>用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性</p>
@@ -4102,7 +4102,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                     <div id="section-120103">
-                        <h4>1.3 防火墙</h4>
+                        <h4>1.3 防火墙 <i class="txt-en">Firewall</i></h4>
                         <div class="sub-contents">
                             <p>内网、DMZ/隔离区/非军事化区-放置公用服务器、外网</p>
                             <p>发展阶段：包过滤、应用代理网关、状态检测技术</p>
@@ -4750,7 +4750,7 @@ const showModal = (action: string, values: any) => {
                 <h3 id="part-1403">3. 排序算法</h3>
                 <div class="part-contents">
                     <div id="section-140301">
-                        <h4>3.1 复杂度</h4>
+                        <h4>3.1 复杂度 <i class="txt-en">Complexity</i></h4>
                         <div class="sub-contents">
                             <table>
                                 <thead>
@@ -4875,7 +4875,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1404">4. 回溯法</h3>
+                <h3 id="part-1404">4. 回溯法 <i class="txt-en">Backtracking</i></h3>
                 <div class="part-contents">
                     <div id="section-140401">
                         <h4>4.1 概念</h4>
@@ -4902,7 +4902,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1405">5. 分治法</h3>
+                <h3 id="part-1405">5. 分治法 <i class="txt-en">Divide and Conquer</i></h3>
                 <div class="part-contents">
                     <div id="section-140501">
                         <h4>5.1 概念</h4>
@@ -4939,7 +4939,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1406">6. 动态规划</h3>
+                <h3 id="part-1406">6. 动态规划(DP) <i class="txt-en">Dynamic Programming</i></h3>
                 <div class="part-contents">
                     <div id="section-140601">
                         <h4>6.1 概念</h4>
@@ -5032,7 +5032,7 @@ const showModal = (action: string, values: any) => {
                         </div>
                     </div>
                 </div>
-                <h3 id="part-1407">7. 贪心法</h3>
+                <h3 id="part-1407">7. 贪心法 <i class="txt-en">Greedy Algorithm</i></h3>
                 <div class="part-contents">
                     <div id="section-140701">
                         <h4>7.1 概念</h4>
