@@ -1,5 +1,5 @@
-javac *.java
+javac -d dist *.java
 
-java -cp . Main
+java -cp dist Client
 
 pause

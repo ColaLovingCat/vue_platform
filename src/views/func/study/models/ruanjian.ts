@@ -1087,27 +1087,50 @@ class Coffee_SimpleFactory {
 
 export const code_gongchang_01 = `interface Coffee {
     public void info();
-}
 
-class AmericanoCoffee implements Coffee {
+    public void addCoffee();
+    public void addOther();
+}
+`;
+export const code_gongchang_02 = `class AmericanoCoffee implements Coffee {
     @Override
     public void info() {
-        System.out.println("美式咖啡");
+        System.out.println("get AmericanoCoffee");
+    }
+
+    @Override
+    public void addCoffee() {
+        System.out.println("add 60ml Coffee");
+    }
+
+    @Override
+    public void addOther() {
+        System.out.println("add 250ml Water");
     }
 }
 
 class LatteCoffee implements Coffee {
     @Override
     public void info() {
-        System.out.println("拿铁咖啡");
+        System.out.println("get LatteCoffee");
+    }
+
+    @Override
+    public void addCoffee() {
+        System.out.println("add 30ml Coffee");
+    }
+
+    @Override
+    public void addOther() {
+        System.out.println("add 175ml Milk");
     }
 }
-
-interface CoffeeFactory {
+`
+export const code_gongchang_03 = `interface CoffeeFactory {
     public Coffee createCoffee();
 }
-
-class AmericanoFactory implements CoffeeFactory {
+`
+export const code_gongchang_04 = `class AmericanoFactory implements CoffeeFactory {
     @Override
     public Coffee createCoffee() {
         return new AmericanoCoffee();
@@ -1120,107 +1143,99 @@ class LatteFactory implements CoffeeFactory {
         return new LatteCoffee();
     }
 }
-
-class Coffe_FactoryMethod {
+`
+export const code_gongchang_05 = `class Client {
     public static void main(String[] args) {
         AmericanoFactory americanoFactory = new AmericanoFactory();
         Coffee americanoCoffee = americanoFactory.createCoffee();
+        americanoCoffee.addCoffee();
+        americanoCoffee.addOther();
         americanoCoffee.info();
 
         LatteFactory latteFactory = new LatteFactory();
         Coffee latteCoffee = latteFactory.createCoffee();
+        latteCoffee.addCoffee();
+        latteCoffee.addOther();
         latteCoffee.info();
     }
 }
-`;
+`
 
 export const code_chouxiang_01 = `interface Dessert {
     public void info();
-}
-
-class MatchaMousse implements Dessert {
+}`;
+export const code_chouxiang_02 = `class MatchaMousse implements Dessert {
     @Override
     public void info() {
-        System.out.println("抹茶慕斯");
+        System.out.println("get Matcha Mousse");
     }
 }
 
 class Tiramisu implements Dessert {
     @Override
     public void info() {
-        System.out.println("提拉米苏");
+        System.out.println("get Tiramisu");
     }
-}
-
-interface Coffee {
-    public void info();
-}
-
-class AmericanoCoffee implements Coffee {
-    @Override
-    public void info() {
-        System.out.println("美式咖啡");
-    }
-}
-
-class LatteCoffee implements Coffee {
-    @Override
-    public void info() {
-        System.out.println("拿铁咖啡");
-    }
-}
-
-interface DessertFactory {
+}`;
+export const code_chouxiang_03 = `interface DessertFactory {
     public Coffee createCoffee();
-    public Dessert createDessert();
-}
 
+    public Dessert createDessert();
+}`;
+export const code_chouxiang_04 = `// 美式甜点工厂
 class AmericanDessertFactory implements DessertFactory {
     @Override
     public Coffee createCoffee() {
         return new AmericanoCoffee();
     }
+
     @Override
     public Dessert createDessert() {
         return new MatchaMousse();
     }
 }
 
+// 意大利风味甜点工厂
 class ItalyDessertFactory implements DessertFactory {
     @Override
     public Coffee createCoffee() {
         return new LatteCoffee();
     }
+
     @Override
     public Dessert createDessert() {
         return new Tiramisu();
     }
-}
-
-class Coffe_FactoryMethod {
+}`;
+export const code_chouxiang_05 = `class Client {
     public static void main(String[] args) {
         DessertFactory americanFactory = new AmericanDessertFactory();
         Coffee americanCoffee = americanFactory.createCoffee();
+        americanCoffee.addCoffee();
+        americanCoffee.addOther();
         americanCoffee.info();
         Dessert americanDessert = americanFactory.createDessert();
         americanDessert.info();
+
         DessertFactory italyFactory = new ItalyDessertFactory();
         Coffee italyCoffee = italyFactory.createCoffee();
+        italyCoffee.addCoffee();
+        italyCoffee.addOther();
         italyCoffee.info();
         Dessert italyDessert = italyFactory.createDessert();
         italyDessert.info();
     }
-}`;
+}
+`;
 
 export const code_shengchengqi_01 = `// 自行车类
-public class Bike {
+class Bike {
     private String frame;
     private String seat;
 
     public String getFrame() {
         return frame;
     }
-
     public void setFrame(String frame) {
         this.frame = frame;
     }
@@ -1228,22 +1243,20 @@ public class Bike {
     public String getSeat() {
         return seat;
     }
-
     public void setSeat(String seat) {
         this.seat = seat;
     }
 }`;
-
 export const code_shengchengqi_02 = `// 抽象 builder 类
-public abstract class Builder {
+abstract class Builder {
     protected Bike mBike = new Bike();
+
     public abstract void buildFrame();
     public abstract void buildSeat();
     public abstract Bike createBike();
 }`;
-
 export const code_shengchengqi_03 = `// 指挥者类
-public class Director {
+class Director {
     private Builder mBuilder;
     public Director(Builder builder) {
         mBuilder = builder;
@@ -1255,17 +1268,16 @@ public class Director {
         return mBuilder.createBike();
     }
 }`;
-
 export const code_shengchengqi_04 = `// 摩拜单车Builder类
-public class MobikeBuilder extends Builder {
+class MobikeBuilder extends Builder {
     @Override
     public void buildFrame() {
-        mBike.setFrame("铝合金车架");
+        mBike.setFrame("Aluminum frame");
     }
 
     @Override
     public void buildSeat() {
-        mBike.setSeat("真皮车座");
+        mBike.setSeat("Leather seat");
     }
 
     @Override
@@ -1273,16 +1285,17 @@ public class MobikeBuilder extends Builder {
         return mBike;
     }
 }
+
 // ofo单车Builder类
-public class OfoBuilder extends Builder {
+class OfoBuilder extends Builder {
     @Override
     public void buildFrame() {
-        mBike.setFrame("碳纤维车架");
+        mBike.setFrame("Carbon frame");
     }
 
     @Override
     public void buildSeat() {
-        mBike.setSeat("橡胶车座");
+        mBike.setSeat("Rubber seat");
     }
 
     @Override
@@ -1291,9 +1304,7 @@ public class OfoBuilder extends Builder {
     }
 }
 `;
-
-export const code_shengchengqi_05 = `// 测试类
-public class Client {
+export const code_shengchengqi_05 = `class Client {
     public static void main(String[] args) {
         showBike(new OfoBuilder());
         showBike(new MobikeBuilder());
@@ -1356,6 +1367,96 @@ public class Singleton {
 
     //对外提供静态方法获取该对象
     public static Singleton getInstance() {
+        return instance;
+    }
+}
+
+/**
+ * 恶汉式
+ * 在静态代码块中创建该类对象
+ */
+public class Singleton {
+
+    // 私有构造方法
+    private Singleton() {
+    }
+
+    // 在成员位置创建该类的对象
+    private static Singleton instance;
+
+    static {
+        instance = new Singleton();
+    }
+
+    // 对外提供静态方法获取该对象
+    public static Singleton getInstance() {
+        return instance;
+    }
+}
+
+/**
+ * 懒汉式
+ * 线程不安全
+ */
+public class Singleton {
+    // 私有构造方法
+    private Singleton() {
+    }
+
+    // 在成员位置创建该类的对象
+    private static Singleton instance;​
+
+    // 对外提供静态方法获取该对象
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+/**
+ * 懒汉式
+ * 线程安全
+ */
+public class Singleton {
+    // 私有构造方法
+    private Singleton() {
+    }
+
+    // 在成员位置创建该类的对象
+    private static Singleton instance;
+
+    // 对外提供静态方法获取该对象
+    public static synchronized Singleton getInstance() {
+
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+/**
+ * 双重检查方式
+ */
+public class Singleton {
+    //私有构造方法
+    private Singleton() {}
+
+    private static volatile Singleton instance;
+
+    //对外提供静态方法获取该对象
+    public static Singleton getInstance() {
+        //第一次判断，如果instance不为null，不进入抢锁阶段，直接返回实际
+        if(instance == null) {
+            synchronized (Singleton.class) {
+                //抢到锁之后再次判断是否为空
+                if(instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
         return instance;
     }
 }

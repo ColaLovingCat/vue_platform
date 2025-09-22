@@ -1716,13 +1716,21 @@ const showModal = (action: string, values: any) => {
                         <div class="sub-contents">
                             <p>定义：将OOA所创建的分析模型转化为设计模型和实现代码</p>
                             <p>识别类及对象、定义属性、定义服务、识别关系、识别包</p>
+                            <p>软件设计原则</p>
                             <p>单一责任原则：仅有一个引起变化的原因</p>
-                            <p>开放封闭原则：开发是可拓展的，封闭是不可修改的</p>
-                            <p>里氏替换原则：任何父类可以出现子类都可以出现替换</p>
-                            <p>依赖倒置原则：细节依赖于抽象，抽象不依赖于细节。高层模块不应该依赖于底层模块，都依赖于抽象</p>
-                            <p>接口分离原则：接口属于客户。依赖于抽象，不依赖于具体</p>
+                            <p>开放封闭原则：开发是可拓展的，封闭是不可修改的。接口和抽象类</p>
+                            <p>里氏替换原则：任何父类可以出现的地方，子类都可以出现替换。子类可以扩展父类的功能，但不能改变父类原有的功能</p>
+                            <p>依赖倒置原则：细节依赖于抽象，抽象不依赖于细节。高层模块不应该依赖于底层模块，都依赖于底层模块的抽象</p>
+                            <p><span class="txt-define">例</span>computer类不应该依赖于某个型号的CPU，而应该依赖于CPU的抽象类，有利于解耦</p>
+                            <p>接口分离原则：接口属于客户。依赖于抽象，不依赖于具体。一个类对另一个类的依赖应该建立在最小接口之上</p>
+                            <p>
+                                <span
+                                    class="txt-define">例</span>安全门应分别依赖于防火接口、防水接口、防盗接口，这样既可以创建防火防水防盗的安全门类，也可以创建防火防盗的安全门类
+                            </p>
                             <p>共同封闭原则：变化对包产生影响则对包中所有类产生影响</p>
                             <p>共同重用原则：重用包中的一个类，需要重用所有类</p>
+                            <p>迪米特法则(最少知识原则)：如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用</p>
+                            <p>合成复用原则：尽量先使用组合或者聚合等关联关系来实现，其次才考虑使用继承关系来实现</p>
                         </div>
                     </div>
                     <div id="section-060104">
@@ -1743,7 +1751,7 @@ const showModal = (action: string, values: any) => {
                     </div>
                 </div>
                 <h2 id="chapter-07">七、统一建模语言 UML</h2>
-                <h3 id="part-0701">1. 概念</h3>
+                <h3 id="part-0701">1. UML <i class="txt-en">Unified Modeling Language</i></h3>
                 <div class="part-contents">
                     <div id="section-070101">
                         <h4>1.1 事物</h4>
@@ -1760,19 +1768,19 @@ const showModal = (action: string, values: any) => {
                     <div id="section-070102">
                         <h4>1.2 关系</h4>
                         <div class="sub-contents">
-                            <p>依赖关系：一个事物的语义依赖另一个事物，临时引用</p>
+                            <p><b>依赖</b>关系：一个事物的语义依赖另一个事物，临时引用</p>
                             <img class="img-63" style="width: 250px;" src="/docs/study/imgs/63-uml.png">
-                            <p>关联关系：长期引用，可标注重复度(多重度)/角色</p>
+                            <p><b>关联</b>关系：长期引用，可标注重复度(多重度)/角色</p>
                             <p>单向关联</p>
                             <p>关联类：多对多</p>
                             <img class="img-64" style="width: 250px;" src="/docs/study/imgs/64-uml.png">
-                            <p>聚集：整体和部分间的结构关系</p>
-                            <p>聚合：松散绑定，整体消失部分仍存在</p>
-                            <p>组合：生命周期绑定，整体消失部分也消失</p>
+                            <p>聚集：是强关联关系，整体和部分间的结构关系</p>
+                            <p><b>聚合</b>：松散绑定，整体消失部分仍存在</p>
+                            <p><b>组合</b>：生命周期绑定，整体消失部分也消失</p>
                             <img class="img-65" style="width: 250px;" src="/docs/study/imgs/65-uml.png">
-                            <p>泛化关系(继承)：一般/特殊的关系，子类/父类之间的关系</p>
+                            <p><b>泛化</b>关系(继承)：一般/特殊的关系，子类/父类之间的关系</p>
                             <img class="img-66" style="width: 250px;" src="/docs/study/imgs/66-uml.png">
-                            <p>实现关系：一个类元指定了另一个类元保证执行的契约</p>
+                            <p><b>实现</b>关系：一个类元指定了另一个类元保证执行的契约</p>
                             <img class="img-67" style="width: 250px;" src="/docs/study/imgs/67-uml.png">
                         </div>
                     </div>
@@ -1780,13 +1788,14 @@ const showModal = (action: string, values: any) => {
                 <h3 id="part-0702">2. 图</h3>
                 <div class="part-contents">
                     <div id="section-070201">
-                        <h4>2.1 类图</h4>
+                        <h4>2.1 类图 <i class="txt-en">Class Diagram</i></h4>
                         <div class="sub-contents">
                             <p>静态设计视图</p>
-                            <p>展现了一组对象、接口、协作和它们之间的关系</p>
+                            <p>展现了一组对象、接口、协作和它们之间的关系，类包含类名、属性 <i class="txt-en">field</i> 和方法 <i
+                                    class="txt-en">method</i></p>
+                            <p>斜体：抽象类/方法</p>
                             <p>权限修饰符：+public/-private/#protected/~包</p>
                             <p>非直接对象/直接对象</p>
-                            <p>斜体：抽象类/方法</p>
                             <img class="img-68" style="width: 450px;" src="/docs/study/imgs/68-uml.png">
                         </div>
                     </div>
@@ -1804,9 +1813,9 @@ const showModal = (action: string, values: any) => {
                             <p>静态用例视图</p>
                             <p>对系统的语境/需求建模</p>
                             <p>一组用例(椭圆)、参与者(人员)以及之间的关系(箭头)</p>
-                            <p>包含关系< < include>>：虚线箭头</p>
+                            <p>包含关系&lt;&lt;include&gt;&gt;：虚线箭头</p>
                             <img class="img-70" style="width: 250px;" src="/docs/study/imgs/70-uml.png">
-                            <p>扩展关系< < extend>>：虚线箭头</p>
+                            <p>扩展关系&lt;&lt;extend&gt;&gt;：虚线箭头</p>
                             <img class="img-71" style="width: 250px;" src="/docs/study/imgs/71-uml.png">
                             <p>泛化关系：实线空心箭头</p>
                             <img class="img-72" style="width: 250px;" src="/docs/study/imgs/72-uml.png">
@@ -1879,7 +1888,7 @@ const showModal = (action: string, values: any) => {
                 <h3 id="part-0801">1. 概念</h3>
                 <div class="part-contents">
                     <div id="section-080101">
-                        <h4>1.1 概念</h4>
+                        <h4>1.1 软件设计模式 <i class="txt-en">Software Design Pattern</i></h4>
                         <div class="sub-contents">
                             <p>主要关注软件系统的设计，与具体的实现语言无关</p>
                             <p>在特定问题领域中被使用，涉及多种设计元素，以面向对象方式进行设计，遵循设计原则，复用成功的设计和体系结构</p>
@@ -1957,6 +1966,7 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080201">
                         <h4>2.1 概念</h4>
                         <div class="sub-contents">
+                            <p>并不是一种设计模式</p>
                             <p>抽象产品是所有产品的父类，定义产品的主要特性和功能</p>
                             <p>具体产品则实现抽象产品中声明的抽象方法</p>
                             <p>具体工厂负责实现创建产品的静态方法，从而获取产品</p>
@@ -1972,7 +1982,7 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080203">
                         <h4>2.3 实现</h4>
                         <div class="sub-contents">
-                            <div class="box-code" style="width: 700px; height: 300px;">
+                            <div class="box-code" style="width: 800px; height: 300px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_jiandan_01"></codeView>
                             </div>
                         </div>
@@ -1983,23 +1993,50 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080301">
                         <h4>3.1 概念</h4>
                         <div class="sub-contents">
-                            <p>定义一个用于创建对象的接口，由子类决定实例化哪个类</p>
-                            <p>抽象工厂提供创建一类产品的接口，用以调用创建对应产品</p>
+                            <p>定义一个用于创建对象的接口，由子类决定实例化哪个类。使一个产品类的是实例化延迟到其子类</p>
                             <p>用于当一个类不知道它所必须创建的对象的类时</p>
                             <p>用于当一个类希望由它的子类来指定它所传概念的对象时</p>
-                            <p>缺点是每增加一个产品需增加一个具体产品类和具体工厂类</p>
+                            <p><span class="txt-define">优点</span>无须对原工厂进行任何修改，满足开闭原则</p>
+                            <p><span class="txt-define">缺点</span>每增加一个产品需增加一个具体产品类和具体工厂类</p>
                         </div>
                     </div>
                     <div id="section-080302">
                         <h4>3.2 类图</h4>
                         <div class="sub-contents">
+                            <p>生产两种咖啡：美式和拿铁</p>
                         </div>
                     </div>
                     <div id="section-080303">
                         <h4>3.3 实现</h4>
                         <div class="sub-contents">
-                            <div class="box-code" style="width: 700px; height: 300px;">
-                                <codeView :configs="codeConfig('java')" :value="db.code_jiandan_01"></codeView>
+                            <p>抽象产品 <i class="txt-en">Product</i></p>
+                            <div class="box-code" style="width: 800px; height: 150px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_01"></codeView>
+                            </div>
+                            <p>具体产品 <i class="txt-en">Concrete Product</i></p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_02"></codeView>
+                            </div>
+                            <p>抽象工厂 <i class="txt-en">Abstract Factory</i></p>
+                            <div class="box-code" style="width: 800px; height: 100px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_03"></codeView>
+                            </div>
+                            <p>具体工厂 <i class="txt-en">Concrete Factory</i></p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_05"></codeView>
+                            </div>
+                            <p>结果</p>
+                            <div class="list-result">
+                                <p>add 60ml Coffee</p>
+                                <p>add 250ml Water</p>
+                                <p>get AmericanoCoffee</p>
+                                <p>add 30ml Coffee</p>
+                                <p>add 175ml Milk</p>
+                                <p>get LatteCoffee</p>
                             </div>
                         </div>
                     </div>
@@ -2009,26 +2046,56 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080401">
                         <h4>4.1 概念</h4>
                         <div class="sub-contents">
-                            <p>提供创建一系列相关或相互依赖对象的接口, 无需指定具体类</p>
-                            <p>抽象工厂提供了多个创建接口，创建多个不同等级的产品</p>
+                            <p><span class="txt-define">定义</span>提供创建一系列相关或相互依赖对象的接口, 无需指定具体类</p>
+                            <p>工厂模式只生产同种类产品，同类产品称为同等级产品</p>
+                            <p>抽象工厂提供了多个创建接口，创建多个不同等级的产品，是综合型的工厂</p>
                             <p>具体产品与具体工厂间是多对一的关系</p>
                             <p>用于一个系统要独立于产品的创建、组合和表示时</p>
                             <p>用于一个系统要由多个产品系列中的一个来配置时</p>
                             <p>用于强调一系列相关的产品对象的设计以便进行联合使用时</p>
                             <p>用于提供一个产品类库只想显示接口而不是实现时</p>
-                            <p>缺点是当产品族中需增加新产品时，需修改所有的工厂类</p>
+                            <p><span class="txt-define">缺点</span>当产品族中需增加新产品时，需修改所有的工厂类</p>
                         </div>
                     </div>
                     <div id="section-080402">
                         <h4>4.2 类图</h4>
                         <div class="sub-contents">
+                            <p>生产咖啡的同时，还要生产两种甜点：提拉米苏和抹茶慕斯</p>
                         </div>
                     </div>
                     <div id="section-080403">
                         <h4>4.3 实现</h4>
                         <div class="sub-contents">
-                            <div class="box-code" style="width: 700px; height: 300px;">
+                            <p>抽象产品 <i class="txt-en">Product</i></p>
+                            <div class="box-code" style="width: 800px; height: 100px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_01"></codeView>
+                            </div>
+                            <p>具体产品 <i class="txt-en">Concrete Product</i></p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_02"></codeView>
+                            </div>
+                            <p>抽象工厂 <i class="txt-en">Abstract Factory</i></p>
+                            <div class="box-code" style="width: 800px; height: 100px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_03"></codeView>
+                            </div>
+                            <p>具体工厂 <i class="txt-en">Concrete Factory</i></p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_04"></codeView>
+                            </div>
+                            <p>调用</p>
+                            <div class="box-code" style="width: 800px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_05"></codeView>
+                            </div>
+                            <p>结果</p>
+                            <div class="list-result">
+                                <p>add 60ml Coffee</p>
+                                <p>add 250ml Water</p>
+                                <p>get AmericanoCoffee</p>
+                                <p>get Matcha Mousse</p>
+                                <p>add 30ml Coffee</p>
+                                <p>add 175ml Milk</p>
+                                <p>get LatteCoffee</p>
+                                <p>get Tiramisu</p>
                             </div>
                         </div>
                     </div>
@@ -2040,6 +2107,8 @@ const showModal = (action: string, values: any) => {
                         <div class="sub-contents">
                             <p>将一个复杂对象的构建步骤与表示分离，使得同样的构建过程可以创建不同表示</p>
                             <p>用于复杂对象的创建独立于该对象的组成部分及装配方式时</p>
+                            <p><span class="txt-define">优点</span>一般产品类和生成器类是比较稳定的</p>
+                            <p><span class="txt-define">缺点</span>要求产品具有较多的共同点</p>
                         </div>
                     </div>
                     <div id="section-080502">
@@ -2051,21 +2120,21 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080503">
                         <h4>5.3 实现</h4>
                         <div class="sub-contents">
-                            <p>产品类(Product)</p>
+                            <p>产品类 <i class="txt-en">Product</i>：要创建的复杂对象</p>
                             <div class="box-code" style="width: 700px; height: 300px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_01"></codeView>
                             </div>
-                            <p>抽象生成器类(Builder)：指定部件接口</p>
+                            <p>抽象生成器类 <i class="txt-en">Builder</i>：指定部件接口</p>
                             <div class="box-code" style="width: 700px; height: 200px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_02"></codeView>
                             </div>
-                            <p>指挥者类(Director)：调用具体生成器来创建各部分的对象</p>
-                            <div class="box-code" style="width: 700px; height: 300px;">
-                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_03"></codeView>
-                            </div>
-                            <p>具体生成器类(ConcreteBuilder)</p>
+                              <p>具体生成器类 <i class="txt-en">ConcreteBuilder</i>：实现 Builder 接口，完成复杂产品的各个部件的具体创建方法，并在构造过程完成后，提供产品的实例</p>
                             <div class="box-code" style="width: 700px; height: 300px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_04"></codeView>
+                            </div>
+                            <p>指挥者类 <i class="txt-en">Director</i>：调用具体生成器来创建各部分的对象，只负责保证对象各部分的完整创建或顺序创建</p>
+                            <div class="box-code" style="width: 700px; height: 300px;">
+                                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_03"></codeView>
                             </div>
                             <p>调用</p>
                             <div class="box-code" style="width: 700px; height: 300px;">
@@ -2080,6 +2149,7 @@ const showModal = (action: string, values: any) => {
                         <h4>6.1 概念</h4>
                         <div class="sub-contents">
                             <p>用一个已创建的原型实例指定创建对象的种类，并且通过复制这个原型创建新的对象</p>
+                            <p>Java中的Object类中提供了 clone() 方法来实现浅克隆</p>
                         </div>
                     </div>
                     <div id="section-080602">
@@ -2847,7 +2917,8 @@ const showModal = (action: string, values: any) => {
                             <p>线程 <i class="txt-en">Thread</i>：CPU可独立调度和分配的最小单位</p>
                             <p>包含在进程中，可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的</p>
                             <p>共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、<b>栈</b></p>
-                            <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) <i class="txt-en">Process Control Block</i> 组成</p>
+                            <p>进程 <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB) <i
+                                    class="txt-en">Process Control Block</i> 组成</p>
                             <p>三态模型：就绪
                                 <i class="txt-en">Ready</i>、运行
                                 <i class="txt-en">Running</i>、阻塞
@@ -3100,7 +3171,10 @@ const showModal = (action: string, values: any) => {
                             <p>地址结构：段号s + 段内页号p + 页内地址w</p>
                             <img class="img-20" style="width: 400px;" src="/docs/study/imgs/20-cunchu.png" alt=""
                                 srcset="">
-                            <p>页的大小为4K(=<span class="txt-func">2<span class="txt-sup">2</span></span>*<span class="txt-func">2<span class="txt-sup">10</span></span>)，每个段<b>最大允许</b>有 <span class="txt-func">2<span class="txt-sup">p</span></span> 页，最多有 <span class="txt-func">2<span class="txt-sup">s</span></span> 段</p>
+                            <p>页的大小为4K(=<span class="txt-func">2<span class="txt-sup">2</span></span>*<span
+                                    class="txt-func">2<span class="txt-sup">10</span></span>)，每个段<b>最大允许</b>有 <span
+                                    class="txt-func">2<span class="txt-sup">p</span></span> 页，最多有 <span
+                                    class="txt-func">2<span class="txt-sup">s</span></span> 段</p>
                             <p>段表+页表来实现地址映射</p>
                         </div>
                     </div>

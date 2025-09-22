@@ -134,13 +134,35 @@ const format = (str: string, language: string = props.configs.language) => {
         return str
     }
 }
+
+const iconClass = ref("fa-copy")
+const copyCode = async () => {
+    if (!editor) return
+    try {
+        await navigator.clipboard.writeText(editor.getValue())
+        //
+        iconClass.value = "fa-check"
+        setTimeout(() => {
+            iconClass.value = "fa-copy"
+        }, 2000)
+    } catch (err) {
+        console.error('[copy] failed:', err)
+    }
+}
 </script>
 
 <template>
     <div class="editor-wrapper">
         <div class="editor-tools">
-            <button class="btn btn-tools" @click="formatTxt"><i class="fa-solid fa-align-right"></i></button>
-            <span>{{ configs.language }}</span>
+            <div class="left">
+                <button class="btn btn-tools" @click="formatTxt"><i class="fa-solid fa-align-right"></i></button>
+                <span>{{ configs.language }}</span>
+            </div>
+            <div class="right">
+                <button class="btn btn-tools" @click="copyCode" title="复制代码">
+                    <i class="fa-solid" :class="iconClass"></i>
+                </button>
+            </div>
         </div>
         <div ref="containerRef" class="editor-container"></div>
     </div>
@@ -157,8 +179,14 @@ const format = (str: string, language: string = props.configs.language) => {
     .editor-tools {
         color: #ffffff7d;
         display: flex;
-        padding: 0 10px;
-        gap: 10px;
+        justify-content: space-between;
+
+        .left,
+        .right {
+            display: flex;
+            padding: 0 10px;
+            gap: 10px;
+        }
 
         .btn {
             color: #ffffff7d;

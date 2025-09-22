@@ -163,6 +163,13 @@ const routes = [
   },
 
   {
+    path: "/query",
+    name: "query",
+    component: () => import("@/views/func/query/view.vue"),
+  },
+
+
+  {
     path: "/study-list",
     name: "study-list",
     component: () => import("@/views/func/study/list.vue"),
