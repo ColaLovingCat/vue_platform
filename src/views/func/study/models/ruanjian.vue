@@ -221,7 +221,7 @@ const showModal = (action: string, values: any) => {
                             <p><b>累加寄存器(AC)</b> <i class="txt-en">Accumulator Register</i>：为ALU提供数据和暂存运算结果</p>
                             <p><b>数据缓冲寄存器(DR)</b> ：内存<span class="txt-symbol">⇔</span>CPU之间进行数据中转</p>
                             <p><b>状态条件寄存器(PSW)</b> ：更新指令执行的状态标志和控制标志，保存和记录特定的状态信息和条件</p>
-                            <img class="img-01" src="/docs/study/imgs/01-cpu.png">
+                            <img class="img-01 img-abs" style="width: 320px" src="/docs/study/imgs/01-cpu.png">
                         </div>
                     </div>
                     <div id="section-010103">
@@ -302,7 +302,7 @@ const showModal = (action: string, values: any) => {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img class="img-02" src="/docs/study/imgs/02-jinzhi.png">
+                            <img class="img-02 img-abs" style="width: 150px" src="/docs/study/imgs/02-jinzhi.png">
                         </div>
                     </div>
                     <div id="section-010202">
@@ -393,7 +393,7 @@ const showModal = (action: string, values: any) => {
                             <p>阶码决定数值范围，尾数决定精度</p>
                             <p>运算时先<b>对阶</b>：将小阶向大阶对齐，尾数右移、尾数计算、格式化</p>
                             <p>R位阶码移码+M位尾数补码 可表示范围:</p>
-                            <img class="img-03" src="/docs/study/imgs/03-fanwei.png">
+                            <img class="img-03" style="width: 350px" src="/docs/study/imgs/03-fanwei.png">
                         </div>
                     </div>
                 </div>
@@ -641,7 +641,7 @@ const showModal = (action: string, values: any) => {
                                 <p>操作周期：最长操作时间</p>
                                 <p>吞吐率：1/最长操作时间</p>
                                 <p><b>n条指令的吞吐率 TP <i class="txt-en">Though Put rate</i>：n/单条指令的执行时间+(n-1)*最长的时间段</b></p>
-                                <img class="img-04" src="/docs/study/imgs/04-liushui.png">
+                                <img class="img-04 img-abs" style="width: 450px" src="/docs/study/imgs/04-liushui.png">
                             </div>
                         </div>
                         <div id="section-010604">
@@ -683,15 +683,17 @@ const showModal = (action: string, values: any) => {
                         <h4>8.1 加密技术和认证技术</h4>
                         <div class="sub-contents">
                             <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
-                            <p><b>对称加密</b> <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
-                            <img class="img-06" src="/docs/study/imgs/06-jiami.png">
-                            <p><b>非对称加密</b> <i class="txt-en">Asymmetric Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
-                            <img class="img-07" src="/docs/study/imgs/07-jiami.png">
+                            <p><b>对称加密</b> <i class="txt-en">Symmetric
+                                    Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密</p>
+                            <img class="img-06" style="width: 400px" src="/docs/study/imgs/06-jiami.png">
+                            <p><b>非对称加密</b> <i class="txt-en">Asymmetric
+                                    Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密</p>
+                            <img class="img-07" style="width: 400px" src="/docs/study/imgs/07-jiami.png">
                             <p><b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要</p>
-                            <img class="img-08" src="/docs/study/imgs/08-jiami.png">
+                            <img class="img-08" style="width: 400px" src="/docs/study/imgs/08-jiami.png">
                             <p>数据完整性、一致性，不可逆，唯一性</p>
                             <p><b>数字签名</b> <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密</p>
-                            <img class="img-09" src="/docs/study/imgs/09-jiami.png">
+                            <img class="img-09" style="width: 400px" src="/docs/study/imgs/09-jiami.png">
                             <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
                             <p>用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性</p>
                             <table>
@@ -710,7 +712,7 @@ const showModal = (action: string, values: any) => {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img class="img-05" src="/docs/study/imgs/05-sign.png">
+                            <img class="img-05 img-abs" style="width: 200px" src="/docs/study/imgs/05-sign.png">
                         </div>
                     </div>
                     <div id="section-010802">
@@ -840,7 +842,7 @@ const showModal = (action: string, values: any) => {
                             <p><b>目标代码生成</b> <i class="txt-en">Code Generation</i>：与目标机器的体系结构相关，包含分配寄存器，指令选择、代码布局等</p>
                             <p><b>符号表管理</b>：不断收集记录和使用的相关符号类型和特征等必要信息，辅助语义的正确性检查和代码生成</p>
                             <p>出错处理</p>
-                            <img class="img-11" src="/docs/study/imgs/11-bianyi.png">
+                            <img class="img-11 img-abs" style="width: 380px" src="/docs/study/imgs/11-bianyi.png">
                         </div>
                     </div>
                     <div id="section-020203">
@@ -893,7 +895,7 @@ const showModal = (action: string, values: any) => {
                             <p>确定的有限自动机 (DFA)</p>
                             <p>不确定的有限自动机 (NFA)：状态转移不确定</p>
                             <p>下图可表示以1为结尾的正规集</p>
-                            <img class="img-12" src="/docs/study/imgs/12-youxian.png">
+                            <img class="img-12" style="width: 300px" src="/docs/study/imgs/12-youxian.png">
                         </div>
                     </div>
                     <div id="section-020205">
@@ -2128,7 +2130,8 @@ const showModal = (action: string, values: any) => {
                             <div class="box-code" style="width: 700px; height: 200px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_02"></codeView>
                             </div>
-                              <p>具体生成器类 <i class="txt-en">ConcreteBuilder</i>：实现 Builder 接口，完成复杂产品的各个部件的具体创建方法，并在构造过程完成后，提供产品的实例</p>
+                            <p>具体生成器类 <i class="txt-en">ConcreteBuilder</i>：实现 Builder
+                                接口，完成复杂产品的各个部件的具体创建方法，并在构造过程完成后，提供产品的实例</p>
                             <div class="box-code" style="width: 700px; height: 300px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_04"></codeView>
                             </div>
@@ -2228,6 +2231,13 @@ const showModal = (action: string, values: any) => {
                             <div class="box-code" style="width: 700px; height: 250px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_shipei_05"></codeView>
                             </div>
+                            <p>结果</p>
+                            <div class="list-result">
+                                <p>sd card read a msg :hello world SD</p>
+                                <p>------------</p>
+                                <p>adapter read tf card</p>
+                                <p>tf card read msg : hello world tf card</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2245,7 +2255,7 @@ const showModal = (action: string, values: any) => {
                     <div id="section-080902">
                         <h4>9.2 类图</h4>
                         <div class="sub-contents">
-                            <img class="img-82" style="width: 450px;" src="/docs/study/imgs/82-sheji.png">
+                            <img class="img-82 img-abs" style="width: 450px;" src="/docs/study/imgs/82-sheji.png">
                         </div>
                     </div>
                     <div id="section-080903">
@@ -2265,6 +2275,7 @@ const showModal = (action: string, values: any) => {
                             <div class="box-code" style="width: 700px; height: 200px;">
                                 <codeView :configs="codeConfig('java')" :value="db.code_qiao_03"></codeView>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -2924,7 +2935,7 @@ const showModal = (action: string, values: any) => {
                                 <i class="txt-en">Running</i>、阻塞
                                 <i class="txt-en">Waiting/Blocked</i>
                             </p>
-                            <img class="img-14" src="/docs/study/imgs/14-santai.png">
+                            <img class="img-14" style="width: 250px" src="/docs/study/imgs/14-santai.png">
                             <p>五态模型：创建
                                 <i class="txt-en">New</i>、终止
                                 <i class="txt-en">Terminated</i>
@@ -3077,7 +3088,7 @@ const showModal = (action: string, values: any) => {
                         <div class="sub-contents">
                             <p>描述进程所需资源和资源分配情况</p>
                             <p>P进程，R资源：R->P 代表资源R已分配给进程P的资源数，P->R 代表进程P还需要请求资源R的资源数</p>
-                            <img class="img-15" src="/docs/study/imgs/15-ziyuan.png">
+                            <img class="img-15" style="width: 320px" src="/docs/study/imgs/15-ziyuan.png">
                             <p>阻塞节点：该节点所请求的资源已分配完</p>
                             <p>非阻塞节点：可化简</p>
                             <p>死锁状态：所有进程都是阻塞节点</p>
@@ -5104,70 +5115,11 @@ const showModal = (action: string, values: any) => {
 
 img {
     height: unset;
-}
 
-.img-01 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 320px;
-}
-
-.img-02 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 150px;
-}
-
-.img-03 {
-    width: 350px;
-}
-
-.img-04 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 450px;
-}
-
-.img-05 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 200px;
-}
-
-.img-06,
-.img-07,
-.img-08,
-.img-09 {
-    width: 400px;
-}
-
-.img-11 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 380px;
-}
-
-.img-12 {
-    width: 300px;
-}
-
-.img-13 {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    width: 250px;
-}
-
-.img-14 {
-    width: 250px;
-}
-
-.img-15 {
-    width: 320px;
+    &.img-abs {
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
 }
 </style>
