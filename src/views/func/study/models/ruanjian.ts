@@ -3,6 +3,7 @@ export const notes = [
     id: "section-010102",
     type: "topic",
     title: "上午题-CPU",
+    category: "single-select",
     question:
       "在CPU中，常用来为ALU执行算术逻辑运算提供数据并暂存运算结果的寄存器是___。",
     imgs: [],
@@ -18,6 +19,7 @@ export const notes = [
     id: "section-010103",
     type: "topic",
     title: "上午题-CPU",
+    category: "single-select",
     question: "在CPU中，___不仅要保证指令的正确执行，还要能够处理异常事件。",
     imgs: [],
     options: [
@@ -32,6 +34,7 @@ export const notes = [
     id: "section-010103",
     type: "topic",
     title: "上午题-CPU",
+    category: "single-select",
     question: "在CPU中，用于跟踪指令地址的寄存器是___。",
     imgs: [],
     options: [
@@ -51,6 +54,7 @@ export const notes = [
     id: "section-010201",
     type: "topic",
     title: "上午题-进制",
+    category: "single-select",
     question: "内存按字节编址从B3000H到DABFFH的区域，其存储容量为___。",
     imgs: [],
     options: [
@@ -65,6 +69,7 @@ export const notes = [
     id: "section-010201",
     type: "topic",
     title: "上午题-进制",
+    category: "single-select",
     question:
       "地址编号从80000H到BFFFFH且按字节编址的内存容量为___。若用16K*4bit的存储器芯片构成该内存，共需___片。",
     imgs: [],
@@ -77,6 +82,7 @@ export const notes = [
     id: "section-010202",
     type: "topic",
     title: "上午题-数据表示",
+    category: "single-select",
     question: "若某整数的16位补码为FFFFH，则该数的十进制为___。",
     imgs: [],
     options: [
@@ -91,6 +97,7 @@ export const notes = [
     id: "section-010202",
     type: "topic",
     title: "上午题-数据表示",
+    category: "single-select",
     question: "采用n位补码（包含一个符号位）表示数据，则___。",
     imgs: [],
     options: [
@@ -105,6 +112,7 @@ export const notes = [
     id: "section-010203",
     type: "topic",
     title: "上午题-浮点数",
+    category: "single-select",
     question:
       "某机器的浮点数中，阶码以补码表示，尾数以原码表示。则1 0001 0 0000000001表示的浮点数是___。",
     imgs: [],
@@ -125,6 +133,7 @@ export const notes = [
     id: "section-010605",
     type: "topic",
     title: "上午题-寻址",
+    category: "single-select",
     question:
       "若CPU要执行指令为：MOV R1，#45（即将数值45传送到寄存器R1中），则该指令中采用的寻址方式为___。",
     imgs: [],
@@ -145,6 +154,7 @@ export const notes = [
     id: "section-010303",
     type: "topic",
     title: "上午题-海明码",
+    category: "single-select",
     question:
       "海明码利用奇偶性检错和纠错，通过在n个数据位之间插入k个校验位，扩大数据编码的码距。若n=48，则k应至少为___。",
     imgs: [],
@@ -154,6 +164,7 @@ export const notes = [
     id: "section-010304",
     type: "topic",
     title: "上午题-CRC",
+    category: "single-select",
     question: "在___校验方法中，采用模2运算来构造校验位。",
     imgs: [],
     options: [
@@ -168,6 +179,7 @@ export const notes = [
     id: "section-010602",
     type: "topic",
     title: "上午题-指令集架构",
+    category: "single-select",
     question: "___不是RISC的特点。",
     imgs: [],
     options: [
@@ -187,6 +199,7 @@ export const notes = [
     id: "section-010602",
     type: "topic",
     title: "上午题-指令集架构",
+    category: "single-select",
     question: "以下关于RISC和CISC计算机的叙述中，正确的是___。",
     imgs: [],
     options: [
@@ -206,6 +219,7 @@ export const notes = [
     id: "section-010603",
     type: "topic",
     title: "上午题-流水线",
+    category: "single-select",
     question:
       "一条指令的执行过程可分解为取值时间=3Δt、分析时间=2Δt、执行时间=4Δt。若按串行方式执行，则10条指令全部执行完需要___Δt。若按照流水线方式执行，则执行完10条指令需要___Δt。",
     imgs: [],
@@ -218,6 +232,7 @@ export const notes = [
     id: "section-010401",
     type: "topic",
     title: "上午题-存储器",
+    category: "single-select",
     question: "计算机系统的主存主要是由___构成的。",
     imgs: [],
     options: [
@@ -228,6 +243,7 @@ export const notes = [
     id: "section-010402",
     type: "topic",
     title: "上午题-Cache",
+    category: "single-select",
     question: "Cache的地址映像方式中，发生冲突次数最小的是___。",
     imgs: [],
     options: [
@@ -242,6 +258,7 @@ export const notes = [
     id: "section-010402",
     type: "topic",
     title: "上午题-Cache",
+    category: "single-select",
     question: "在程序的执行过程中，Cache与主存的地址映像由___。",
     imgs: [],
     options: [
@@ -261,6 +278,7 @@ export const notes = [
     id: "section-010501",
     type: "topic",
     title: "上午题-I/O",
+    category: "single-select",
     question: "以下关于中断方式与DMA方式的叙述中，正确的是___。",
     imgs: [],
     options: [
@@ -280,6 +298,7 @@ export const notes = [
     id: "section-010701",
     type: "topic",
     title: "上午题-总线",
+    category: "single-select",
     question: "总线复用方式可以___。",
     imgs: [],
     options: [
@@ -299,6 +318,7 @@ export const notes = [
     id: "section-010701",
     type: "topic",
     title: "上午题-总线",
+    category: "single-select",
     question:
       "总线带宽为32bit，时钟频率为2000MHz，若总线上每5个时钟周期传送一个32bit的字，则该总线的带宽为___MB/s。",
     imgs: [],
@@ -308,6 +328,7 @@ export const notes = [
     id: "section-010801",
     type: "topic",
     title: "上午题-加密和认证",
+    category: "single-select",
     question: "公钥体系中，私钥用于___，公钥用于___。",
     imgs: [],
     options: [
@@ -327,6 +348,7 @@ export const notes = [
     id: "section-010801",
     type: "topic",
     title: "上午题-加密算法",
+    category: "single-select",
     question: "下列算法中，不属于公开密钥加密算法的是___。",
     imgs: [],
     options: [{ answer: "D", list: ["ECC", "DSA", "RSA", "DES"], note: "" }],
@@ -335,6 +357,7 @@ export const notes = [
     id: "section-010801",
     type: "topic",
     title: "上午题-加密算法",
+    category: "single-select",
     question: "AES是一种___算法。",
     imgs: [],
     options: [
@@ -349,6 +372,7 @@ export const notes = [
     id: "section-010802",
     type: "topic",
     title: "上午题-可靠性",
+    category: "single-select",
     question:
       "某系统由下图所示的部件构成，每个部件的千小时可靠度都为R，则该系统的千小时可靠度为___。",
     imgs: ["/docs/study/imgs/10-jiami.png"],
@@ -369,6 +393,7 @@ export const notes = [
     id: "section-090204",
     type: "topic",
     title: "上午题-前驱图",
+    category: "single-select",
     question:
       "进程P1、P2、P3、P4、P5的前驱图如下。若用PV操作控制进程并发执行，则需要设置6个信号量S1~S6，且信号量初始值均为0。下图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
     imgs: ["/docs/study/imgs/100-ti.png"],
@@ -409,6 +434,7 @@ export const notes = [
     id: "section-090204",
     type: "topic",
     title: "上午题-信号量",
+    category: "single-select",
     question:
       "某系统有3个相同资源，信号量S=3,有5个进程并发执行。某一时刻S=-2，则___。",
     imgs: [],
@@ -429,6 +455,7 @@ export const notes = [
     id: "section-090204",
     type: "topic",
     title: "上午题-信号量",
+    category: "single-select",
     question:
       "假设系统采用PV操作实现进程同步与互斥，若n个进程共享两台打印机，那么信号量S的取值范围为___。",
     imgs: [],
@@ -444,6 +471,7 @@ export const notes = [
     id: "section-090205",
     type: "topic",
     title: "上午题-生产者消费者",
+    category: "single-select",
     question:
       "某企业生产流水线M共有两个生产者，生产者甲不断地将其工序上加工的半成品放入半成品箱，生产者乙从半成品箱取出继续加工。假设半成品箱可存放n件半成品，采用PV操作实现生产者甲和生产者乙的同步可设置三个信号量S、S1、S2，其同步模型如下图。信号量S是一个互斥信号量，初始值为___；S1、S2的初始值分别为___。",
     imgs: ["/docs/study/imgs/101-ti.png"],
@@ -456,6 +484,7 @@ export const notes = [
     id: "section-090207",
     type: "topic",
     title: "上午题-进程资源图",
+    category: "single-select",
     question: "进程资源图如图所示，其中图a中___，图b中___。",
     imgs: ["/docs/study/imgs/102-ti.png"],
     options: [
@@ -485,6 +514,7 @@ export const notes = [
     id: "section-090204",
     type: "topic",
     title: "上午题-PV操作",
+    category: "single-select",
     question:
       "进程的前驱图如下图所示。若用PV操作控制进程的并发执行过程，需要5个信号量S1~S5，且信号量的初始值都等于0.如下的进程执行图中a和b分别填写___；c和d分别填写___；e和f分别填写___。",
     imgs: ["/docs/study/imgs/103-ti.png", "/docs/study/imgs/104-ti.png"],
@@ -515,6 +545,7 @@ export const notes = [
     id: "section-090201",
     type: "topic",
     title: "上午题-三态模型",
+    category: "single-select",
     question:
       "在单处理机系统中，采用先来先服务调度算法。系统中由4个进程P1、P2、P3、P4(假设进程按此顺序到达)，其中P1为运行状态，P2为就绪状态，P3和P4为等待状态，且P3等待打印机，P4等待扫描仪。若P1___，则P1、P2、P3、P4的状态应分别为___。",
     imgs: [],
@@ -540,6 +571,7 @@ export const notes = [
     id: "section-090201",
     type: "topic",
     title: "上午题-三态模型",
+    category: "single-select",
     question:
       "在单处理机系统中有一台打印机、一台扫描仪，采用先来先服务调度算法。系统中由4个进程P1、P2、P3、P4，其中P1为运行状态，P2为就绪状态，P3和P4为等待状态，且P3等待打印机，P4等待扫描仪。若P1释放了扫描仪，则P1、P2、P3、P4的状态应分别为___。",
     imgs: [],
@@ -560,6 +592,7 @@ export const notes = [
     id: "section-090206",
     type: "topic",
     title: "上午题-死锁",
+    category: "single-select",
     question:
       "系统中有R类资源m个，现有n个进程互斥使用。若每个进程对R资源的最大需求为w，那么m、n、w分别去下表中的值时，对于表中的情况，___可能会发生死锁。若将这些情况的m分别加上___，则系统不会发生死锁。",
     imgs: ["/docs/study/imgs/105-ti.png"],
@@ -580,6 +613,7 @@ export const notes = [
     id: "section-090207",
     type: "topic",
     title: "上午题-进程资源图",
+    category: "single-select",
     question:
       "假设系统中有三个进程P1、P2和P3，两种资源R1、R2.如果进程资源图如下图所示，那么___。",
     imgs: ["/docs/study/imgs/106-ti.png"],
@@ -600,6 +634,7 @@ export const notes = [
     id: "section-090206",
     type: "topic",
     title: "上午题-死锁",
+    category: "single-select",
     question:
       "假设系统中有三类互斥资源R1、R2、R3，可用资源数分别为10、5、3。在T0时刻系统中有P1、P2、P3、P4和P5五个进程，这些进程对资源的最大需求量和已分配资源数如下表所示，此时系统剩余的可用资源数分别为___。如果进程按___序列执行，那么系统状态是安全的。",
     imgs: ["/docs/study/imgs/107-ti.png"],
@@ -625,6 +660,7 @@ export const notes = [
     id: "section-090201",
     type: "topic",
     title: "上午题-线程",
+    category: "single-select",
     question:
       "在支持多线程的操作系统中，假设进程P创建了若干个线程，那么___是不能被这些线程共享的。",
     imgs: [],
@@ -645,6 +681,7 @@ export const notes = [
     id: "section-090302",
     type: "topic",
     title: "上午题-局部性原理",
+    category: "single-select",
     question:
       "某进程有4个页面，页号为0-3，页面变换表及状态位、访问位和修改位的含义如下图所示。若系统给该进程分配了3个存储块，当访问的页面1不在内存时，淘汰表中页号为___的页面代价最小。",
     imgs: ["/docs/study/imgs/108-ti.png"],
@@ -660,6 +697,7 @@ export const notes = [
     id: "section-090301",
     type: "topic",
     title: "上午题-页式存储",
+    category: "single-select",
     question:
       "某进程有5个页面，页号为0-4，页面变换表如下图所示。如系统给该进程分配了3个存储块，当访问的页面3不在内存时，应该淘汰表中页号为___的页面。假定页面大小为4KB，逻辑地址为十六进制2C25H，该地址经过变换后，其物理地址应为十六进制___。",
     imgs: ["/docs/study/imgs/109-ti.png"],
@@ -680,6 +718,7 @@ export const notes = [
     id: "section-090301",
     type: "topic",
     title: "上午题-页式存储",
+    category: "single-select",
     question:
       "某操作系统采用分页存储管理方式，下图给出了进程A和进程B的页表结构。如果物理页的大小为1KB，那么进程A中逻辑地址为1024（十进制）用变量存放在___号物理内存页中。假设进程A的逻辑页4与进程B的逻辑页5要共享物理页4，那么应该在进程A页表的逻辑页4和进程B页表的逻辑页5对应的物理页处分别填___。",
     imgs: ["/docs/study/imgs/110-ti.png"],
@@ -700,6 +739,7 @@ export const notes = [
     id: "section-090304",
     type: "topic",
     title: "上午题-段页式存储",
+    category: "single-select",
     question: "假设段页式存储管理系统中的地址结构如下图所示，则系统中___。",
     imgs: [],
     options: [
@@ -719,6 +759,7 @@ export const notes = [
     id: "section-090403",
     type: "topic",
     title: "上午题-缓冲区",
+    category: "single-select",
     question:
       "假设磁盘块与缓冲区大小相同，每个盘块读入缓冲区的时间为10μs，由缓冲区送至用户区的时间是5μs，系统对每个磁盘块数据的处理时间为2μs。若用户需要将大小为10个磁盘块的Doc1文件逐块从磁盘读入缓冲区，并送至用户区进行处理，那么采用单缓冲区需要花费的时间为___μs；采用双缓冲区需要花费的时间为___μs。",
     imgs: [],
@@ -739,6 +780,7 @@ export const notes = [
     id: "section-090405",
     type: "topic",
     title: "上午题-磁盘调度算法",
+    category: "single-select",
     question:
       "假设磁盘每磁道有18个扇区，系统刚完成了10号柱面的操作，当前移动臂在13号柱面上，进程的请求序列如下表所示。若系统采用SCAN（扫描）调度算法，则系统响应序列为___；若系统采用CSCAN（单向扫描）调度算法，则系统响应序列为___。",
     imgs: ["/docs/study/imgs/112-ti.png"],
@@ -759,6 +801,7 @@ export const notes = [
     id: "section-090405",
     type: "topic",
     title: "上午题-磁盘调度算法",
+    category: "single-select",
     question:
       "假设磁盘臂位于15号柱面上，进程的请求序列如下表表示，如果采用最短移臂调度算法，那么系统的响应序列应为___。",
     imgs: ["/docs/study/imgs/114-ti.png"],
@@ -774,6 +817,7 @@ export const notes = [
     id: "section-090406",
     type: "topic",
     title: "上午题-旋转调度算法",
+    category: "single-select",
     question:
       "假设某磁盘的每个磁道划分成9个物理块，每块存放1个逻辑记录。逻辑记录R0,R1...R8存放在同一个磁道上，记录的安排顺序如下表所示；如果磁盘的旋转速度为27ms/周，磁头当前处在R0的开始处。若系统顺序处理这些记录，使用单缓冲区，每个记录处理时间为3ms，则处理这9个记录的最长时间为___ms；若对信息存储进行优化分布后，处理9个记录的最少时间为___ms。",
     imgs: ["/docs/study/imgs/116-ti.png"],
@@ -794,6 +838,7 @@ export const notes = [
     id: "section-090501",
     type: "topic",
     title: "上午题-间接地址索引",
+    category: "single-select",
     question:
       "某文件系统采用多级索引结构，若磁盘的大小为512B，每个块号需占3B，那么根索引采用一级索引时的文件最大长度为___KB；采用二级索引时的最大长度为___KB。",
     imgs: [],
@@ -814,6 +859,7 @@ export const notes = [
     id: "section-090501",
     type: "topic",
     title: "上午题-间接地址索引",
+    category: "single-select",
     question:
       "设文件索引节点中有8个地址项，每个地址项的大小为4字节，其中5个地址项为直接地址索引，2个地址项为一级间接地址索引，1个地址项为二级间接地址索引，磁盘索引块和磁盘数据块的大小均为1KB。若要访问文件的逻辑块号分别为5和518，则系统应分别采用___；而且可表示的单个文件最大长度是___KB。",
     imgs: [],
@@ -839,6 +885,7 @@ export const notes = [
     id: "section-090502",
     type: "topic",
     title: "上午题-文件目录",
+    category: "single-select",
     question:
       "若某文件系统的目录结构如下图所示，假设用户要访问f1.java，且当前工作目录为Program，则该文件的全文件名为___，其相对路径为___。",
     imgs: ["/docs/study/imgs/119-ti.png"],
@@ -869,7 +916,9 @@ export const notes = [
     id: "section-090503",
     type: "topic",
     title: "上午题-位示图",
-    question: "某文件管理系统在磁盘上建立了位示图，记录磁盘的使用情况。若系统的字长为32位，磁盘上的物理块依次编号为0、1、2、...，那么4096块物理块的使用情况在位示图中的第___个字中描述；若磁盘的容量为200GB，物理块的大小为1MB，那么位示图的大小为___个字。",
+    category: "single-select",
+    question:
+      "某文件管理系统在磁盘上建立了位示图，记录磁盘的使用情况。若系统的字长为32位，磁盘上的物理块依次编号为0、1、2、...，那么4096块物理块的使用情况在位示图中的第___个字中描述；若磁盘的容量为200GB，物理块的大小为1MB，那么位示图的大小为___个字。",
     imgs: [],
     options: [
       {
@@ -888,36 +937,250 @@ export const notes = [
     id: "section-050103",
     type: "topic",
     title: "上午题-三级模式",
-    question: "数据库系统通常采用三级模式：外模式、模式和内模式。这三级模式分别对应数据库的___。",
+    category: "single-select",
+    question:
+      "数据库系统通常采用三级模式：外模式、模式和内模式。这三级模式分别对应数据库的___。",
     imgs: [],
     options: [
       {
         answer: "B",
         list: [
-            "基本表、存储文件和视图", 
-            "视图、基本表和存储文件", 
-            "基本表、视图和存储文件", 
-            "视图、存储文件和基本表", 
+          "基本表、存储文件和视图",
+          "视图、基本表和存储文件",
+          "基本表、视图和存储文件",
+          "视图、存储文件和基本表",
         ],
         note: "",
       },
     ],
   },
-   {
+  {
     id: "section-050103",
     type: "topic",
     title: "上午题-两级映像",
+    category: "single-select",
     question: "数据的物理独立性和逻辑独立性分别对应通过修改___来完成。",
     imgs: [],
     options: [
       {
         answer: "D",
         list: [
-            "外模式与内模式之间的映像、模式与内模式之间的映像", 
-            "外模式与内模式之间的映像、外模式与模式之间的映像", 
-            "外模式与模式之间的映像、模式与内模式之间的映像", 
-            "模式与内模式之间的映像、外模式与模式之间的映像", 
+          "外模式与内模式之间的映像、模式与内模式之间的映像",
+          "外模式与内模式之间的映像、外模式与模式之间的映像",
+          "外模式与模式之间的映像、模式与内模式之间的映像",
+          "模式与内模式之间的映像、外模式与模式之间的映像",
         ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数",
+    category: "single-select",
+    question:
+      "关系R，S如下图所示，关系代数表达式<span class='txt-func'>𝜋<span class='txt-sub'>3,4,5</span>(𝜎<span class='txt-sub'>1<6</span>(RXS))</span>=___；对关系R，S进行自然连接后的属性列数和元组个数分别为___。",
+    imgs: ["/docs/study/imgs/120-ti.png"],
+    options: [
+      {
+        answer: "B",
+        list: [
+          `
+            <table>
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            `,
+          `
+            <table>
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+            `,
+          `
+            <table>
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            `,
+          `
+            <table>
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            `,
+        ],
+        note: "首先计算笛卡尔积，R.A R.B R.C S.A S.B S.C，然后选择 R.A < S.C 再投影 R.C S.A S.B 排个序",
+      },
+      {
+        answer: "A",
+        list: ["3和0", "3和2", "6和0", "6和2"],
+        note: "都是公共属性列，没有相同元素",
+      },
+    ],
+  },
+  {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数",
+    category: "single-select",
+    question:
+      "关系R1和R2如图所示，若进行R1⨝R2运算，则结果集为___元关系，共有___个元组。",
+    imgs: ["/docs/study/imgs/121-ti.png"],
+    options: [
+      {
+        answer: "C",
+        list: ["4", "5", "6", "7"],
+        note: "",
+      },
+      {
+        answer: "A",
+        list: ["4", "5", "6", "7"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数",
+    category: "single-select",
+    question:
+      "给定关系R(A,B,C,D)和关系S(A,C,E,F)，对其进行自然连接运算R⨝S后的属性列为___个；与<span class='txt-func'>𝜎<span class='txt-sub'>R.B>S.E</span>(R⨝S)</span>等价的关系代数表达式为___。",
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        list: ["4", "5", "6", "8"],
+        note: "",
+      },
+      {
+        answer: "B",
+        list: [
+            "<span class='txt-func'>𝜎<span class='txt-sub'>2>7</span>(RXS)</span>", 
+            "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>7 ∧ 3=6</span>(RXS))</span>", 
+            "<span class='txt-func'>𝜎<span class='txt-sub'>2>'7'</span>(RXS)</span>", 
+            "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>'7' ∧ 3=6</span>(RXS))</span>", 
+        ],
+        note: "无引号是列号，有引号是具体数值",
+      },
+    ],
+  },
+    {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数",
+    category: "single-select",
+    question: "关系R，S如下表所示，R⨝S的结果集为___；R、S的左外联接、右外联接和完全外联接的元组个数分别为___。",
+    imgs: ["/docs/study/imgs/122-ti.png"],
+    options: [
+      {
+        answer: "B",
+        list: [
+            "{(2,1,4), (3,4,4)}", 
+            "{(2,1,4,8), (3,4,4,4)}", 
+            "{(2,1,4,2,1,8), (3,4,4,3,4,4)}", 
+            "{(1,2,3,1,9,1), (2,1,4,2,1,8), (3,4,4,3,4,4), (4,6,7,4,8,3)}"
+        ],
+        note: "",
+      },
+      {
+        answer: "D",
+        list: ["2,2,4", "2,2,6", "4,4,4", "4,4,6"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数与SQL",
+    category: "single-select",
+    question: "若有关系R(A,B,C,D)和S(C,D,E)，则表达式 <span class='txt-func'>𝜋<span class='txt-sub'>3,4,7</span>𝜎<span class='txt-sub'>4<5</span>(RXS)</span> 等价的SQL语句为：SELECT ___ FROM ___ WHERE ___。",
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        list: ["A,B,C,D,E", "C,D,E", "R.A,R.B,R.C,R.D,S.E", "R.C,R.D,S.E"],
+        note: "",
+      },
+      {
+        answer: "C",
+        list: ["R", "S", "R,S", "RS"],
+        note: "",
+      },
+      {
+        answer: "B",
+        list: ["D&lt;C", "R.D&lt;S.C", "R.D&lt;R.C", "S.D&lt;R.C"],
         note: "",
       },
     ],
@@ -926,6 +1189,7 @@ export const notes = [
     id: "section-01",
     type: "topic",
     title: "上午题-sample",
+    category: "single-select",
     question: "___。",
     imgs: [],
     options: [

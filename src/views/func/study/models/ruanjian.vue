@@ -6963,6 +6963,7 @@ const showModal = (action: string, values: any) => {
 
 <style scoped lang="scss">
 @import url("./style.scss");
+@import url(./txt.scss);
 
 img {
   height: unset;
