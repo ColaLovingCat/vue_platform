@@ -10,6 +10,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["程序计数器", "状态寄存器", "通用寄存器", "累加寄存器"],
         note: "",
       },
@@ -25,6 +26,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: ["运算器", "控制器", "寄存器组", "内部总线"],
         note: "",
       },
@@ -40,6 +42,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "地址寄存器 AR",
           "数据寄存器 DR",
@@ -60,6 +63,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: ["123KB", "159KB", "163KB", "194KB"],
         note: "H表示16进制，(DABFF+1)-B3000=27C00/1024=159KB，注意单位是B还是b",
       },
@@ -74,8 +78,13 @@ export const notes = [
       "地址编号从80000H到BFFFFH且按字节编址的内存容量为___。若用16K*4bit的存储器芯片构成该内存，共需___片。",
     imgs: [],
     options: [
-      { answer: "B", list: ["128", "256", "512", "1024"], note: "" },
-      { answer: "C", list: ["8", "16", "32", "64"], note: "注意16K*4bit=8KB" },
+      { answer: "B", col: 1, list: ["128", "256", "512", "1024"], note: "" },
+      {
+        answer: "C",
+        col: 1,
+        list: ["8", "16", "32", "64"],
+        note: "注意16K*4bit=8KB",
+      },
     ],
   },
   {
@@ -88,6 +97,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: ["0", "-1", "2^16-1", "-2^16+1"],
         note: "首先是16转2为 F=>1111，然后根据负数则先求反码 1 111 1111 1111 1110 再求原码 1 000 0000 0000 0001",
       },
@@ -103,6 +113,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["表示 2^n", "表示 -2^n", "表示 2^(n-1)", "表示 -2^(n-1)"],
         note: "",
       },
@@ -119,6 +130,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "2^-16*2^-10",
           "2^-15*2^-10",
@@ -140,6 +152,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "直接寻址和立即寻址",
           "寄存器寻址和立即寻址",
@@ -158,7 +171,7 @@ export const notes = [
     question:
       "海明码利用奇偶性检错和纠错，通过在n个数据位之间插入k个校验位，扩大数据编码的码距。若n=48，则k应至少为___。",
     imgs: [],
-    options: [{ answer: "C", list: ["4", "5", "6", "7"], note: "" }],
+    options: [{ answer: "C", col: 1, list: ["4", "5", "6", "7"], note: "" }],
   },
   {
     id: "section-010304",
@@ -170,6 +183,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["水平奇偶", "垂直奇偶", "海明码", "循环冗余"],
         note: "",
       },
@@ -185,6 +199,7 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: [
           "指令种类丰富",
           "高效的流水线操作",
@@ -205,6 +220,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: [
           "RISC不采用流水线技术，CISC采用流水线技术",
           "RISC使用复杂的指令，CISC使用简单的指令",
@@ -224,8 +240,8 @@ export const notes = [
       "一条指令的执行过程可分解为取值时间=3Δt、分析时间=2Δt、执行时间=4Δt。若按串行方式执行，则10条指令全部执行完需要___Δt。若按照流水线方式执行，则执行完10条指令需要___Δt。",
     imgs: [],
     options: [
-      { answer: "C", list: ["40", "70", "90", "100"], note: "" },
-      { answer: "D", list: ["20", "30", "40", "45"], note: "" },
+      { answer: "C", col: 1, list: ["40", "70", "90", "100"], note: "" },
+      { answer: "D", col: 1, list: ["20", "30", "40", "45"], note: "" },
     ],
   },
   {
@@ -236,7 +252,12 @@ export const notes = [
     question: "计算机系统的主存主要是由___构成的。",
     imgs: [],
     options: [
-      { answer: "A", list: ["DRAM", "SRAM", "Cache", "EEPROM"], note: "" },
+      {
+        answer: "A",
+        col: 1,
+        list: ["DRAM", "SRAM", "Cache", "EEPROM"],
+        note: "",
+      },
     ],
   },
   {
@@ -249,6 +270,7 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["全相联映像", "组相联映像", "直接映像", "无法确定"],
         note: "",
       },
@@ -264,6 +286,7 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: [
           "专门的硬件自动完成",
           "程序员进行调度",
@@ -284,6 +307,7 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: [
           "中断方式与DMA方式都可以实现外设与CPU之间的并行工作",
           "程序中断方式和DMA方式在数据传输过程中都不需要CPU的干预",
@@ -304,6 +328,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "提高总线的传输带宽",
           "增加总线的功能",
@@ -322,7 +347,9 @@ export const notes = [
     question:
       "总线带宽为32bit，时钟频率为2000MHz，若总线上每5个时钟周期传送一个32bit的字，则该总线的带宽为___MB/s。",
     imgs: [],
-    options: [{ answer: "C", list: ["40", "80", "160", "200"], note: "" }],
+    options: [
+      { answer: "C", col: 1, list: ["40", "80", "160", "200"], note: "" },
+    ],
   },
   {
     id: "section-010801",
@@ -334,11 +361,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
         note: "",
       },
       {
         answer: "D",
+        col: 1,
         list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
         note: "",
       },
@@ -351,7 +380,9 @@ export const notes = [
     category: "single-select",
     question: "下列算法中，不属于公开密钥加密算法的是___。",
     imgs: [],
-    options: [{ answer: "D", list: ["ECC", "DSA", "RSA", "DES"], note: "" }],
+    options: [
+      { answer: "D", col: 1, list: ["ECC", "DSA", "RSA", "DES"], note: "" },
+    ],
   },
   {
     id: "section-010801",
@@ -363,6 +394,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: ["公钥加密", "流密码", "分组加密", "信息摘要"],
         note: "",
       },
@@ -379,6 +411,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "3R/2+2R/3",
           "R/3+R/2",
@@ -400,6 +433,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "P(S1) P(S2)和P(S3) P(S4)",
           "P(S1) P(S2)和P(S2) P(S1)",
@@ -410,6 +444,7 @@ export const notes = [
       },
       {
         answer: "B",
+        col: 1,
         list: [
           "P(S1) P(S2)和V(S3) V(S4)",
           "P(S1) P(S3)和V(S5) V(S6)",
@@ -420,6 +455,7 @@ export const notes = [
       },
       {
         answer: "C",
+        col: 1,
         list: [
           "P(S3) P(S4)和V(S5) V(S6)",
           "V(S5) V(S6)和P(S5) P(S6)",
@@ -441,6 +477,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "系统有2个资源正在被占用",
           "系统有2个进程正在等待资源",
@@ -462,6 +499,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["-2~n", "-(n-1)~1", "-(n-1)~2", "-(n-2)~2"],
         note: "",
       },
@@ -476,8 +514,8 @@ export const notes = [
       "某企业生产流水线M共有两个生产者，生产者甲不断地将其工序上加工的半成品放入半成品箱，生产者乙从半成品箱取出继续加工。假设半成品箱可存放n件半成品，采用PV操作实现生产者甲和生产者乙的同步可设置三个信号量S、S1、S2，其同步模型如下图。信号量S是一个互斥信号量，初始值为___；S1、S2的初始值分别为___。",
     imgs: ["/docs/study/imgs/101-ti.png"],
     options: [
-      { answer: "B", list: ["0", "1", "n", "任意正整数"], note: "" },
-      { answer: "A", list: ["n、0", "0、n", "1、n", "n、1"], note: "" },
+      { answer: "B", col: 1, list: ["0", "1", "n", "任意正整数"], note: "" },
+      { answer: "A", col: 1, list: ["n、0", "0、n", "1、n", "n、1"], note: "" },
     ],
   },
   {
@@ -490,6 +528,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "P1是非阻塞节点，P2是阻塞节点，所以该图不可以化简，是死锁的",
           "P1、P2都是阻塞节点，所以该图不可以化简，是死锁的",
@@ -500,6 +539,7 @@ export const notes = [
       },
       {
         answer: "C",
+        col: 1,
         list: [
           "P1、P2、P3都是非阻塞节点，所以该图可以化简，是非死锁的",
           "P1、P2、P3都是阻塞节点，所以该图不可以化简，是死锁的",
@@ -521,6 +561,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "V(S1)和P(S2) V(S3)",
           "P(S1)和V(S2) V(S3)",
@@ -531,11 +572,13 @@ export const notes = [
       },
       {
         answer: "C",
+        col: 1,
         list: ["P(S2)和P(S4)", "V(S2)和P(S4)", "P(S2)和V(S4)", "V(S2)和V(S4)"],
         note: "",
       },
       {
         answer: "A",
+        col: 1,
         list: ["P(S4)和V(S5)", "V(S5)和P(S4)", "V(S4)和P(S5)", "V(S4)和V(S5)"],
         note: "",
       },
@@ -552,11 +595,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["时间片到", "释放了扫描仪", "释放了打印机", "已完成"],
         note: "",
       },
       {
         answer: "C",
+        col: 1,
         list: [
           "等待、就绪、等待和等待",
           "运行、就绪、运行和等待",
@@ -578,6 +623,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "等待、运行、等待和就绪",
           "运行、就绪、等待和就绪",
@@ -599,11 +645,13 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: ["①②⑤", "③④⑤", "②④⑤", "②④⑥"],
         note: "m≥n*(w-1)+1",
       },
       {
         answer: "D",
+        col: 1,
         list: ["1、1和1", "1、1和2", "1、1和3", "1、2和1"],
         note: "",
       },
@@ -620,6 +668,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "图1和图2都可化简",
           "图1和图2都不可化简",
@@ -641,11 +690,13 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["1、1和0", "1、1和1", "2、1和0", "2、0和1"],
         note: "",
       },
       {
         answer: "B",
+        col: 1,
         list: [
           "P1>P2>P4>P5>P3",
           "P5>P2>P4>P3>P1",
@@ -667,6 +718,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "该进程中打开的文件",
           "该进程的代码段",
@@ -688,6 +740,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["0", "1", "2", "3"],
         note: "在内存 > 未访问 > 未修改",
       },
@@ -704,11 +757,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["0", "1", "2", "4"],
         note: "",
       },
       {
         answer: "C",
+        col: 1,
         list: ["2C25H", "4096H", "4C25H", "8C25H"],
         note: "2 C25 H 为页号2，对应页帧号4，所以答案为 4 C25 H",
       },
@@ -725,11 +780,13 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: ["8", "3", "5", "2"],
         note: "物理页大小为1KB即1024，二进制为 100 0000 0000，则页号1对应的物理页为3",
       },
       {
         answer: "A",
+        col: 1,
         list: ["4、4", "4、5", "5、4", "5、5"],
         note: "",
       },
@@ -745,6 +802,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "页的大小为4K，每个段的大小均为4096个页，最多可有256个段",
           "页的大小为4K，每个段最大允许有4096个页，最多可有256个段",
@@ -766,11 +824,13 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: ["100", "107", "152", "170"],
         note: "(10+5)*(10-1)+(10+5+2)=152",
       },
       {
         answer: "B",
+        col: 1,
         list: ["100", "107", "152", "170"],
         note: "10*(10-1)+(10+5+2)=107",
       },
@@ -787,11 +847,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["⑦⑩①②④③⑨⑧⑤⑥", "①⑦⑩②③④⑥⑤⑧⑨", "⑦⑩①②④③⑥⑤⑧⑨", "①⑦⑩②③④⑧⑨⑥⑤"],
         note: "只看柱面号",
       },
       {
         answer: "C",
+        col: 1,
         list: ["⑦⑩①②④③⑨⑧⑤⑥", "①⑦⑩②③④⑥⑤⑧⑨", "⑦⑩①②④③⑥⑤⑧⑨", "①⑦⑩②③④⑧⑨⑥⑤"],
         note: "",
       },
@@ -808,6 +870,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: ["①②③④⑤⑥", "⑤①②④③⑥", "②③④⑤①⑥", "④②③⑤①⑥"],
         note: "",
       },
@@ -824,11 +887,13 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["54", "108", "222", "246"],
         note: "旋转一个扇区需要3ms，所以前8个物理块的时间为 (3ms+9*3ms)*8=240ms,最后一个时间为 3ms+3ms=6ms，所以总时间为246ms",
       },
       {
         answer: "B",
+        col: 1,
         list: ["27", "54", "108", "216"],
         note: "(读取+处理)*数量",
       },
@@ -845,11 +910,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["85", "170", "512", "1024"],
         note: "首先一共有 512B/3B=170个 磁盘索引块，每一个索引块指向512B的数据块，总共有 170*512B=85KB",
       },
       {
         answer: "C",
+        col: 1,
         list: ["512", "1024", "14450", "28900"],
         note: "首先一共有 512B/3B=170个 磁盘索引块，继续指向 170个 一级索引块，再指向512B的数据块，总共有170*170*512B=14450KB",
       },
@@ -866,6 +933,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "直接地址索引和一级间接地址索引",
           "直接地址索引和二级间接地址索引",
@@ -876,6 +944,7 @@ export const notes = [
       },
       {
         answer: "D",
+        col: 1,
         list: ["517", "1029", "16513", "66053"],
         note: "",
       },
@@ -892,6 +961,7 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: [
           "f1.java",
           "\\Document\\Java-prog\\f1.java",
@@ -902,6 +972,7 @@ export const notes = [
       },
       {
         answer: "A",
+        col: 1,
         list: [
           "Java-prog\\",
           "\\Java-prog\\",
@@ -923,11 +994,13 @@ export const notes = [
     options: [
       {
         answer: "A",
+        col: 1,
         list: ["129", "257", "513", "1025"],
         note: "没有特殊说明，则字号从1开始。则字号为n时，块号开始为 32*(n-1)，结束为 32*n-1。所以129块的开始为4096。",
       },
       {
         answer: "D",
+        col: 1,
         list: ["600", "1200", "3200", "6400"],
         note: "总共有200GB/1MB=204800个块，则最大块号为204799，恰好为 6400字 的结束，即32*6400-1=204799",
       },
@@ -944,6 +1017,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           "基本表、存储文件和视图",
           "视图、基本表和存储文件",
@@ -964,6 +1038,7 @@ export const notes = [
     options: [
       {
         answer: "D",
+        col: 1,
         list: [
           "外模式与内模式之间的映像、模式与内模式之间的映像",
           "外模式与内模式之间的映像、外模式与模式之间的映像",
@@ -985,6 +1060,7 @@ export const notes = [
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
           `
             <table>
@@ -1083,6 +1159,7 @@ export const notes = [
       },
       {
         answer: "A",
+        col: 1,
         list: ["3和0", "3和2", "6和0", "6和2"],
         note: "都是公共属性列，没有相同元素",
       },
@@ -1099,11 +1176,13 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: ["4", "5", "6", "7"],
         note: "",
       },
       {
         answer: "A",
+        col: 1,
         list: ["4", "5", "6", "7"],
         note: "",
       },
@@ -1120,41 +1199,46 @@ export const notes = [
     options: [
       {
         answer: "C",
+        col: 1,
         list: ["4", "5", "6", "8"],
         note: "",
       },
       {
         answer: "B",
+        col: 1,
         list: [
-            "<span class='txt-func'>𝜎<span class='txt-sub'>2>7</span>(RXS)</span>", 
-            "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>7 ∧ 3=6</span>(RXS))</span>", 
-            "<span class='txt-func'>𝜎<span class='txt-sub'>2>'7'</span>(RXS)</span>", 
-            "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>'7' ∧ 3=6</span>(RXS))</span>", 
+          "<span class='txt-func'>𝜎<span class='txt-sub'>2>7</span>(RXS)</span>",
+          "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>7 ∧ 3=6</span>(RXS))</span>",
+          "<span class='txt-func'>𝜎<span class='txt-sub'>2>'7'</span>(RXS)</span>",
+          "<span class='txt-func'>𝜋<span class='txt-sub'>1,2,3,4,7,8</span>(𝜎<span class='txt-sub'>1=5 ∧ 2>'7' ∧ 3=6</span>(RXS))</span>",
         ],
         note: "无引号是列号，有引号是具体数值",
       },
     ],
   },
-    {
+  {
     id: "section-050203",
     type: "topic",
     title: "上午题-关系代数",
     category: "single-select",
-    question: "关系R，S如下表所示，R⨝S的结果集为___；R、S的左外联接、右外联接和完全外联接的元组个数分别为___。",
+    question:
+      "关系R，S如下表所示，R⨝S的结果集为___；R、S的左外联接、右外联接和完全外联接的元组个数分别为___。",
     imgs: ["/docs/study/imgs/122-ti.png"],
     options: [
       {
         answer: "B",
+        col: 1,
         list: [
-            "{(2,1,4), (3,4,4)}", 
-            "{(2,1,4,8), (3,4,4,4)}", 
-            "{(2,1,4,2,1,8), (3,4,4,3,4,4)}", 
-            "{(1,2,3,1,9,1), (2,1,4,2,1,8), (3,4,4,3,4,4), (4,6,7,4,8,3)}"
+          "{(2,1,4), (3,4,4)}",
+          "{(2,1,4,8), (3,4,4,4)}",
+          "{(2,1,4,2,1,8), (3,4,4,3,4,4)}",
+          "{(1,2,3,1,9,1), (2,1,4,2,1,8), (3,4,4,3,4,4), (4,6,7,4,8,3)}",
         ],
         note: "",
       },
       {
         answer: "D",
+        col: 1,
         list: ["2,2,4", "2,2,6", "4,4,4", "4,4,6"],
         note: "",
       },
@@ -1165,22 +1249,658 @@ export const notes = [
     type: "topic",
     title: "上午题-关系代数与SQL",
     category: "single-select",
-    question: "若有关系R(A,B,C,D)和S(C,D,E)，则表达式 <span class='txt-func'>𝜋<span class='txt-sub'>3,4,7</span>𝜎<span class='txt-sub'>4<5</span>(RXS)</span> 等价的SQL语句为：SELECT ___ FROM ___ WHERE ___。",
+    question:
+      "若有关系R(A,B,C,D)和S(C,D,E)，则表达式 <span class='txt-func'>𝜋<span class='txt-sub'>3,4,7</span>𝜎<span class='txt-sub'>4<5</span>(RXS)</span> 等价的SQL语句为：SELECT ___ FROM ___ WHERE ___。",
     imgs: [],
     options: [
       {
         answer: "D",
+        col: 1,
         list: ["A,B,C,D,E", "C,D,E", "R.A,R.B,R.C,R.D,S.E", "R.C,R.D,S.E"],
         note: "",
       },
       {
         answer: "C",
+        col: 1,
         list: ["R", "S", "R,S", "RS"],
         note: "",
       },
       {
         answer: "B",
+        col: 1,
         list: ["D&lt;C", "R.D&lt;S.C", "R.D&lt;R.C", "S.D&lt;R.C"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050203",
+    type: "topic",
+    title: "上午题-关系代数与SQL",
+    category: "single-select",
+    question:
+      "若有关系R(A,B,C,D,E)和S(B,C,F,G)，则表达式 <span class='txt-func'>𝜋<span class='txt-sub'>2,4,6,7(</span>𝜎<span class='txt-sub'>2<7</span>(R⨝S))</span> 等价的SQL语句为：SELECT ___ FROM R,S WHERE ___。",
+    imgs: [],
+    options: [
+      {
+        answer: "A",
+        col: 1,
+        list: ["R.B,D,F,G", "R.B,E,S.C,F,G", "R.B,R.D,S.C,F", "R.B,R.C,S.C,F"],
+        note: "自然连接后 A,R.B,R.C,D,E,F,G",
+      },
+      {
+        answer: "C",
+        col: 1,
+        list: [
+          "R.B = S.B OR R.C=S.C OR R.B&lt;S.G",
+          "R.B = S.B OR R.C=S.C OR R.B&lt;S.C",
+          "R.B = S.B AND R.C=S.C AND R.B&lt;S.G",
+          "R.B = S.B AND R.C=S.C AND R.B&lt;S.C",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050401",
+    type: "topic",
+    title: "上午题-SQL语句",
+    category: "single-select",
+    question: `某销售公司数据库的零件P (零件号，零件名称，供应商，供应商所在地，库存量) 关系如下表所示。
+    其中同一种零件可由不同的供应商供应，一个供应商可以供应多种零件。
+    零件关系的主键为___。
+    查询各种零件的平均单价，最高单价与极低单价之间差距的SQL语句为：SELECT 零件号,___ FROM P ___;`,
+    imgs: ["/docs/study/imgs/123-ti.png"],
+    options: [
+      {
+        answer: "B",
+        col: 4,
+        list: [
+          "零件号，零件名称",
+          "零件号，供应商",
+          "零件号，供应商所在地",
+          "供应商，供应商所在地",
+        ],
+        note: "",
+      },
+      {
+        answer: "A",
+        col: 2,
+        list: [
+          "零件名称, AVG(单价), MAX(单价)- MIN(单价)",
+          "供应商, AVG(单价), MAX(单价)- MIN(单价)",
+          "零件名称, AVG 单价, MAX 单价 - MIN 单价 ",
+          "供应商, AVG 单价, MAX 单价 - MIN 单价 ",
+        ],
+        note: "",
+      },
+      {
+        answer: "D",
+        col: 4,
+        list: [
+          "ORDER BY 供应商",
+          "OREDER BY 零件号",
+          "GROUP BY 供应商",
+          "GROUP BY 零件号",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050401",
+    type: "topic",
+    title: "上午题-SQL语句",
+    category: "single-select",
+    question: `
+假设学生 Students 和教师 Teachers 的关系模式如下所示:
+Students (学号,姓名,性别,类别,身份证号)
+Teachers (教师号,姓名,性别,身份证号,工资)
+其中学生关系中的类别分为 "本科生" 和 "研究生" 两类。
+<p>a.查询在读研究生的教师的平均工资、最高与最低工资之间的差值的 SQL 语句如下:</p>
+<p>SELECT ___ FROM Students,Teachers WHERE ___;</p>
+<p>b.查询既是女教师，又是研究生且工资大于等于3500元的身份证号和姓名的SQL语句如下：</p>
+<p>(SELECT 身份证号,姓名 FROM Students WHERE ___) INTERSECT (SELECT 身份证号,姓名 FROM Teachers WHERE ___);</p>
+`,
+    imgs: [],
+    options: [
+      {
+        answer: "A",
+        col: 1,
+        list: [
+          "AVG(工资) AS 平均工资, MAX(工资) - MIN(工资) AS 差值",
+          "平均工资 AS AVG(工资), 差值 AS MAX(工资) - MIN(工资)",
+          "AVG(工资) ANY 平均工资, MAX(工资) - MIN(工资) ANY 差值",
+          "平均工资 ANY AVG(工资), 差值 ANY MAX(工资) - MIN(工资)",
+        ],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 1,
+        list: [
+          "Students.身份证号=Teachers.身份证号",
+          "Students.类别='研究生'",
+          "Students.身份证号=Teachers.身份证号 AND Students.类别='研究生'",
+          "Students.身份证号=Teachers.身份证号 OR Students.类别='研究生'",
+        ],
+        note: "",
+      },
+      {
+        answer: "D",
+        col: 2,
+        list: [
+          "工资>=3500",
+          "工资>='3500'",
+          "性别=女 AND 类别=研究生",
+          "性别='女' AND 类别='研究生'",
+        ],
+        note: "",
+      },
+      {
+        answer: "A",
+        col: 2,
+        list: [
+          "工资>=3500",
+          "工资>='3500'",
+          "性别=女 AND 类别=研究生",
+          "性别='女' AND 类别='研究生'",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050401",
+    type: "topic",
+    title: "上午题-SQL语句",
+    category: "single-select",
+    question: `将Students表的插入权限赋予用户UserA，并允许其将权限授予他人，应使用SQL语句为： GRANT ___ TABLE Students TO UserA ___;`,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 4,
+        list: ["UPDATE", "UPDATE ON", "INSERT", "INSERT ON"],
+        note: "",
+      },
+      {
+        answer: "D",
+        col: 2,
+        list: ["FOR ALL", "PUBLIC", "WITH CHECK OPTION", "WITH GRANT OPTION"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050401",
+    type: "topic",
+    title: "上午题-SQL语句",
+    category: "single-select",
+    question: `
+己知关系模式: 图书 (图书编号,图书类型,图书名称,作者,出版社,出版日期,ISBN) 图书编号唯一识别一本图书。建立 "计算机" 类图书的视图 Computer-BOOK, 并要求进行修改、插入操作时保证该视图只有计算机类的图书。实现上逑要求的 SQL 语句如下:
+<p>CREATE ___ AS SELECT 图书编号,图书类型,图书名称,作者,出版社,出版日期 FROM 图书 WHERE 图书类型 = '计算机' ___;</p>
+    `,
+    imgs: [],
+    options: [
+      {
+        answer: "B",
+        col: 2,
+        list: [
+          "TABLE Computer-BOOK",
+          "VIEW Computer-BOOK",
+          "Computer-BOOK TABLE",
+          "Computer-BOOK VIEW",
+        ],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 4,
+        list: ["FOR ALL", "PUBLIC", "WITH CHECK OPTION", "WITH GRANT OPTION"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050301",
+    type: "topic",
+    title: "上午题-函数依赖",
+    category: "single-select",
+    question: `给定关系模式R<U, F>, U={A, B, C}, F={AB➔C, C➔B}。关系R___，且分别有___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 2,
+        list: [
+          "只有一个候选关键字AC",
+          "只有一个候选关键字AB",
+          "有2个候选关键字AC和BC",
+          "有2个候选关键字AC和AB",
+        ],
+        note: "A没有出现在函数依赖的右边，则A肯定在候选关键字中。AB➔ABC AC➔ABC",
+      },
+      {
+        answer: "C",
+        col: 2,
+        list: [
+          "1个非主属性和2个主属性",
+          "2个非主属性和1个主属性",
+          "0个非主属性和3个主属性",
+          "3个非主属性和0个主属性",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050301",
+    type: "topic",
+    title: "上午题-函数依赖",
+    category: "single-select",
+    question: `给定关系模式R<U, F>, U={A, B, C, D}, F={A➔BC, AC➔D, B➔D}。则关系R___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 1,
+        list: [
+          "不存在传递依赖，候选关键字A",
+          "不存在传递依赖，候选关键字AC",
+          "存在传递依赖A➔D，候选关键字A",
+          "存在传递依赖B➔D，候选关键字C",
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050303",
+    type: "topic",
+    title: "上午题-范式",
+    category: "single-select",
+    question: `
+设有关系模式R(课程,教师,学生,成绩,时间,教室)其中函数依赖集F如下:
+<p>F={课程➔教师, (学生,课程)➔成绩, (时间,教室)➔课程, (时间,教师)➔教室, (时间,学生)➔教室}</p>
+关系模式R的一个主键是___，R规范化程度最高达到___。若将关系模式R分解为3个关系模式 R1(课程,教师) R2(学生,课程,成绩) R3(学生,时间,教室,课程)
+其中R2的规范化程度最高达到___。
+    `,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 4,
+        list: ["(学生,课程)", "(时间,教室)", "(时间,教师)", "(时间,学生)"],
+        note: "",
+      },
+      {
+        answer: "B",
+        col: 4,
+        list: ["1NF", "2NF", "3NF", "BCNF"],
+        note: "主键是 (时间,学生)，不存在时间或学生单独决定一个属性，符合2NF，但 (时间,学生)➔教室 (时间,教室)➔课程 为传递依赖，则不符合3NF",
+      },
+      {
+        answer: "C",
+        col: 4,
+        list: ["2NF", "3NF", "BCNF","4NF"],
+        note: "(学生,课程)➔成绩，符合3NF，且决定因素包含了候选码，符合BCNF，但不符合4NF",
+      },
+    ],
+  },
+  {
+    id: "section-050303",
+    type: "topic",
+    title: "上午题-范式",
+    category: "single-select",
+    question: `有关系模式R(E,N,M,L,Q)，其函数依赖集为F={E➔N, EM➔Q, M➔L}。则关系模式R达到了___，该关系模式___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "A",
+        col: 4,
+        list: ["1NF", "2NF", "3NF", "BCNF"],
+        note: "候选码为 EM，则E➔N和M➔L都是部分函数依赖，不符合2NF",
+      },
+      {
+        answer: "D",
+        col: 1,
+        list: [
+          "无需进行分解，因为达到了3NF", 
+          "无需进行分解，因为达到了BCNF", 
+          "尽管不存在部分函数依赖，但还存在传递依赖，所以需要进行分解", 
+          "需要进行分解，因为存在冗余、修改操作的不一致性、插入和删除异常"
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050304",
+    type: "topic",
+    title: "上午题-模式分解",
+    category: "single-select",
+    question: `
+假设员工关系 EMP(员工号,姓名,部门,部门电话,部门负责人,家庭住址,家庭成员,成员关系) 如下表所示。
+如果一个部门可以有多名员工，一个员工可以有多个家庭成员。
+那么关系 EMP 属于___，且___问题；为了解决这个问题，应该将员工关系EMP分解为___。`,
+    imgs: ["/docs/study/imgs/124-ti.png"],
+    options: [
+      {
+        answer: "A",
+        col: 4,
+        list: ["1NF", "2NF", "3NF", "BCNF"],
+        note: "候选码为 员工号,家庭成员",
+      },
+      {
+        answer: "D",
+        col: 2,
+        list: [
+          "无冗余、无插入异常和删除异常", 
+          "无冗余、但存在插入异常和删除异常", 
+          "存在冗余、但不存在修改操作不一致", 
+          "存在冗余、修改操作不一致，以及插入异常和删除异常", 
+          ],
+        note: "",
+      },
+      {
+        answer: "B",
+        col: 1,
+        list: [
+          "<p>EMP1(员工号,姓名,家庭住址)</p><p>EMP2(部门,部门电话,部门负责人)</p><p>EMP3(员工号,家庭成员,成员关系)</p>", 
+          "<p>EMP1(员工号,姓名,部门,家庭住址)</p><p>EMP2(部门,部门电话,部门负责人)</p><p>EMP3(员工号,家庭成员,成员关系)</p>", 
+          "<p>EMP1(员工号,姓名,家庭住址)</p><p>EMP2(部门,部门电话,部门负责人,家庭成员,成员关系)</p>", 
+          "<p>EMP1(员工号,姓名,部门,部门电话,部门负责人,家庭住址)</p><p>EMP3(员工号,家庭住址,家庭成员,成员关系)</p>", 
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050304",
+    type: "topic",
+    title: "上午题-模式分解",
+    category: "single-select",
+    question: `给定关系模式R(U,F)，其中属性集U={A,B,C,D,E,G}，函数依赖集F={A➔B,A➔C,C➔D,AE➔G}。若将R分解为如下两个子模式___，则分解后的关系模式保持函数依赖。`,
+    imgs: [],
+    options: [
+      {
+        answer: "B",
+        col: 2,
+        list: [
+          "R1(A,B,C) R2(D,E,G)", 
+          "R1(A,B,C,D) R2(A,E,G)", 
+          "R1(B,C,D) R2(A,E,G)", 
+          "R1(B,C,D,E) R2(A,E,G)", 
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050304",
+    type: "topic",
+    title: "上午题-模式分解",
+    category: "single-select",
+    question: `设关系模式R(U,F)，其中U={A,B,C,D,E}，F={A➔B,DE➔B,CB➔E,E➔A,B➔D}，则___为关系模式的候选关键字。分解___是无损连接，并保持函数依赖。`,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 4,
+        list: ["AB", "DE", "DB", "CE"],
+        note: "",
+      },
+      {
+        answer: "D",
+        col: 1,
+        list: [
+          "ρ={R1(AC), R2(ED), R3(B)}", 
+          "ρ={R1(AC), R2(E), R3(DB)}", 
+          "ρ={R1(AC), R2(ED), R3(AB)}", 
+          "ρ={R1(ABC), R2(ED), R3(ACE)}", 
+        ],
+        note: "进行自然连接为U，R1的F={A➔B,CB➔A(CB➔E➔A)}，R2的F={E➔D(E➔A➔B➔D)}，R3的F={E➔A}",
+      },
+    ],
+  },
+  {
+    id: "section-050201",
+    type: "topic",
+    title: "上午题-数据库设计",
+    category: "single-select",
+    question: `
+设有员工实体 Emp (员工号,姓名,性别,年龄,出生年月,联系方式,部门号),
+其中 "联系方式" 要求记录该员工的手机号码和办公室电话。部门号要求参照另一部门实体 Dept 的主码 "部门号"。
+实体中存在派生属性和多值属性___；对属性部门号应该进行___约束; 可以通过命令___修改表中的数据。`,
+    imgs: [],
+    options: [
+      {
+        answer: "B",
+        col: 2,
+        list: ["年龄和出生年月", "年龄和联系方式", "出生年月和联系方式", "出生年月和年龄"],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 4,
+        list: ["非空主键", "主键", "外键", "候选键"],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 4,
+        list: ["INSERT", "DELETE", "UPDATE", "MODIFY"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050201",
+    type: "topic",
+    title: "上午题-数据库设计",
+    category: "single-select",
+    question: `
+某高校信息系统设计的分E-R图中。人力部门定义的职工实体具有属性:  职工号、姓名、性别利出生日期; 
+教学部门定义的教师实体具有属性:  教师号、姓名和职称。
+这种情况属于___。在合并 E-R 图时, ___解决这一冲突。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["属性冲突", "命名冲突", "结构冲突", "实体冲突"],
+        note: "属性冲突是同一属性不同类型，命名冲突是异名同义，结构冲突是同一实体不同属性",
+      },
+      {
+        answer: "B",
+        col: 1,
+        list: [
+          "职工和教师实体保持各自属性不变", 
+          "职工实体中加入职称属性，删除教师实体", 
+          "教师也是学校的职工，故直接将教师实体删除", 
+          "将教师实体所有属性并入职工实体,删除教师实体"
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050202",
+    type: "topic",
+    title: "上午题-E-R模型",
+    category: "single-select",
+    question: `
+假设有学生S (学号,姓名,性别,入学时间,联系方式) 院系D (院系号,院系名称,电话号码,负责人)和课程C (课程号,课程名)三个实体。
+若一名学生属于一个院系,一个院系有多名学生; 一名学生可以选择多门课程,一门课程可被多名学生选择,则图中(a)和(b)分别为___联系。
+假设一对多联系不转换为一个独立的关系模式。那么生成的关系模式___。`,
+    imgs: ["/docs/study/imgs/125-ti.png"],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["1* 和 1*", "1* 和 *1", "1* 和 **", "*1 和 **"],
+        note: "",
+      },
+      {
+        answer: "A",
+        col: 2,
+        list: ["S中应加入关系模式D的主键", "S中应加入关系模式C的主键", "D中应加入关系模式S的主键", "C中应加入关系模式S的主键"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050201",
+    type: "topic",
+    title: "上午题-设计过程",
+    category: "single-select",
+    question: `在数据库逻辑结构设计阶段需要___阶段形成的___作为设计依据。`,
+    imgs: [],
+    options: [
+      {
+        answer: "A",
+        col: 4,
+        list: ["需求分析", "概念结构设计", "物理结构设计", "数据库运行和维护"],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 1,
+        list: ["程序文档、数据字典和数据流图", "需求说明文档、程序文档和数据流图", "需求说明文档、数据字典和数据流图", "需求说明文档、数据字典和程序文档"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050201",
+    type: "topic",
+    title: "上午题-设计过程",
+    category: "single-select",
+    question: `关系规范化在数据库设计的___阶段进行。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["需求分析", "概念设计", "逻辑设计", "物理设计"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050501",
+    type: "topic",
+    title: "上午题-事务",
+    category: "single-select",
+    question: `"当多个事务并发执行时,任一事务的更新操作直到其成功提交的整个过程对其他事务都是不可见的"通常被称为事务的___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["原子性", "一致性", "隔离性", "持久性"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050501",
+    type: "topic",
+    title: "上午题-事务",
+    category: "single-select",
+    question: `为了保证数据库中数据的安全可靠和正确有效，系统在进行事务处理时,对数据的插入、删除或修改的全部有关内容先写入___；
+当系统正常运行时,按一定的时间间隔,把数据库缓冲区内容写入___；
+当发生故障时，根据现场数据内容及相关文件来恢复系统的状态。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["索引文件", "数据文件", "日志文件", "数据字典"],
+        note: "",
+      },
+      {
+        answer: "B",
+        col: 4,
+        list: ["索引文件", "数据文件", "日志文件", "数据字典"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050502",
+    type: "topic",
+    title: "上午题-并发控制",
+    category: "single-select",
+    question: `
+    若事务T1对数据D1加了共享锁，事务T2、T3分别对数据D2、D3加了排它锁。
+    则事务T1对数据___; 事务T2对数据___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 1,
+        list: [
+          "D2、D3加排它锁都成功", 
+          "D2、D3加共享锁都成功", 
+          "D2加共享锁成功, D3加排它锁失败", 
+          "D2、D3加排它锁和共享锁都失败"
+        ],
+        note: "",
+      },
+      {
+        answer: "C",
+        col: 1,
+        list: [
+          "D1、D3加排它锁都成功", 
+          "D1、D3加共享锁都成功", 
+          "D1加共享锁成功, D3加排它锁失败", 
+          "D1加排它锁成功, D3加共享锁失败", 
+        ],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050106",
+    type: "topic",
+    title: "上午题-分布式数据库",
+    category: "single-select",
+    question: `
+    在分布式数据库中有分片透明、复制透明、位置透明和逻辑透明等基本概念。
+    其中:___是指局部数据模型透明，即用户或应用程序无需知道局部使用的是哪种数据模型;
+    ___是指用户或应用程序不要知道逻辑上访问的表具体是如何分块存储的。`,
+    imgs: [],
+    options: [
+      {
+        answer: "D",
+        col: 4,
+        list: ["分片透明", "复制透明", "位置透明", "逻辑透明"],
+        note: "",
+      },
+       {
+        answer: "A",
+        col: 4,
+        list: ["分片透明", "复制透明", "位置透明", "逻辑透明"],
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050106",
+    type: "topic",
+    title: "上午题-分布式数据库",
+    category: "single-select",
+    question: `
+    当某一场地故障时，系统可以使用其他场地上的副本而不至于使整个系统瘫痪。
+    这称为分布式数据库的___。`,
+    imgs: [],
+    options: [
+      {
+        answer: "C",
+        col: 4,
+        list: ["共亨性", "自治性", "可用性", "分布性"],
         note: "",
       },
     ],
@@ -1190,17 +1910,151 @@ export const notes = [
     type: "topic",
     title: "上午题-sample",
     category: "single-select",
-    question: "___。",
+    question: `___。`,
     imgs: [],
     options: [
       {
         answer: "",
+        col: 1,
         list: ["", "", "", ""],
         note: "",
       },
     ],
   },
+  // imgs: ["/docs/study/imgs/999-ti.png"],
 ];
+
+export const sql_01 = `
+-- 插入数据
+INSERT INTO students (name, age, gender, major, grade)
+VALUES ('Alice', 20, 'F', 'Computer Science', 90);
+
+-- 批量插入
+INSERT INTO students (name, age, gender, major, grade)
+VALUES 
+('Bob', 22, 'M', 'Mathematics', 85),
+('Cathy', 21, 'F', 'Physics', 88);
+
+-- 更新数据
+UPDATE students
+SET grade = 95
+WHERE name = 'Alice';
+
+-- 删除数据
+DELETE FROM students
+WHERE grade < 60;
+`;
+export const sql_02 = `
+-- 查询所有列
+SELECT * FROM students;
+
+-- 查询指定列
+SELECT name, age, grade FROM students;
+
+-- 条件查询
+SELECT * FROM students WHERE grade >= 85;
+
+-- 排序
+SELECT * FROM students ORDER BY grade DESC;
+
+-- 分组统计
+SELECT major, AVG(grade) AS avg_grade
+FROM students
+GROUP BY major
+HAVING AVG(grade) > 80;
+
+-- 子查询
+SELECT * 
+FROM students
+WHERE grade > (SELECT AVG(grade) FROM students);
+
+-- 聚合函数
+SELECT COUNT(*) AS total, MAX(grade) AS top_score FROM students;
+
+-- 联接查询
+SELECT students.name, courses.course_name
+FROM students
+INNER JOIN courses ON students.id = courses.student_id;
+`;
+export const sql_03 = `
+-- 创建表
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name NVARCHAR(50) NOT NULL,
+    age INT CHECK (age > 0),
+    gender CHAR(1),
+    major NVARCHAR(100),
+    grade INT
+);
+
+-- 修改表：增加列
+ALTER TABLE students ADD email NVARCHAR(100);
+
+-- 修改表：修改列类型
+ALTER TABLE students ALTER COLUMN age SMALLINT;
+
+-- 删除列
+ALTER TABLE students DROP COLUMN email;
+
+-- 删除表
+DROP TABLE students;
+`;
+export const sql_04 = `
+-- 创建用户
+CREATE USER user1 IDENTIFIED BY '123456';
+
+-- 删除用户
+DROP USER user1;
+
+-- 给用户授予查询权限
+GRANT SELECT ON students TO user1;
+
+-- 授予插入、更新权限
+GRANT INSERT, UPDATE ON students TO user1;
+
+-- 回收权限
+REVOKE UPDATE ON students FROM user1;
+`;
+export const sql_05 = `
+-- 创建视图：优秀学生
+CREATE VIEW v_top_students AS
+SELECT id, name, grade
+FROM students
+WHERE grade >= 85;
+
+-- 使用视图
+SELECT * FROM v_top_students;
+
+-- 删除视图
+DROP VIEW v_top_students;
+`;
+export const sql_06 = `
+-- 创建普通索引
+CREATE INDEX idx_major ON students(major);
+
+-- 创建唯一索引
+CREATE UNIQUE INDEX idx_name ON students(name);
+
+-- 删除索引
+DROP INDEX idx_major ON students;
+`;
+export const sql_07 = `
+-- 创建存储过程：按专业查询学生
+DELIMITER $$  -- MySQL 用法，SQL Server/Oracle 语法略有不同
+CREATE PROCEDURE GetStudentsByMajor(IN majorName NVARCHAR(100))
+BEGIN
+    SELECT id, name, age, grade
+    FROM students
+    WHERE major = majorName;
+END $$
+DELIMITER ;
+
+-- 调用存储过程
+CALL GetStudentsByMajor('Computer Science');
+
+-- 删除存储过程
+DROP PROCEDURE GetStudentsByMajor;
+`;
 
 export const code_huisu_01 = `#define N 4
 

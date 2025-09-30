@@ -22,6 +22,7 @@ import "monaco-editor/esm/vs/basic-languages/java/java.contribution";
 import "monaco-editor/esm/vs/basic-languages/go/go.contribution";
 
 import vkbeautify from "vkbeautify";
+import { format as sqlFormatter } from "sql-formatter";
 
 // name
 defineOptions({
@@ -126,7 +127,8 @@ const format = (str: string, language: string = props.configs.language) => {
                 return vkbeautify.css(str, 2);
             }
             case 'sql': {
-                return vkbeautify.sql(str, 2);
+                // return vkbeautify.sql(str, 2);
+                return sqlFormatter(str, { language: "sql" });
             }
         }
         return str

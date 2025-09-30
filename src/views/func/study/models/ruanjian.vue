@@ -2041,7 +2041,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                   <tr>
                     <td>比较运算符</td>
-                    <td>> ≥ < ≤=≠</td>
+                    <td>> ≥ < ≤ = ≠</td>
                   </tr>
                   <tr>
                     <td>逻辑运算符</td>
@@ -2069,7 +2069,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-050301">
             <h4>3.1 函数依赖</h4>
             <div class="sub-contents">
-              <p>函数依赖：F={(Sno,Cno)->G}</p>
+              <p>函数依赖：F={(Sno,Cno)➔G}</p>
               <p>完全函数依赖：并不是依赖于候选码的子集，类比联合主键</p>
               <p>A3传递律 合并规则 分解规则</p>
               <p>闭包：求候选码，可反向求/传递依赖/冗余</p>
@@ -2091,16 +2091,33 @@ const showModal = (action: string, values: any) => {
             <h4>3.3 范式</h4>
             <div class="sub-contents">
               <p>存在问题：数据冗余/更新异常/插入删除异常</p>
-              <p>第一范式：R的每个属性A的值域只包含原子项</p>
-              <p>第二范式：且每个非主属性都完全函数依赖于候选码</p>
-              <p>第三范式：且不存在非主属性对候选码的传递函数依赖</p>
+              <p>第一范式：R的每个属性A的值域只包含<b>原子项</b></p>
+              <p>比如 courses='Math, English'</p>
+              <p>
+                第二范式：且每个非主属性都完全函数依赖于候选码，<b>不存在部分函数依赖</b>
+              </p>
+              <p>判断部分函数依赖：看候选码的子集能否单独确定非主属性</p>
+              <p>
+                比如 score(student_id, course_id, student_name, score) 中
+                主键是 (student_id, course_id) 但 student_name 只依赖于 student_id
+              </p>
+              <p>第三范式：且非主属性对候选码<b>不存在传递函数依赖</b></p>
+              <p>判断传递函数依赖： (X,Y)→Z (X,Z)→W ⟹ (X,Y)→W</p>
+              <p>伪传递：若X→Y，WY→Z，则XW→Z</p>
+              <p>
+                比如 students(student_id, dept_id, dept_name) dept_name 依赖
+                dept_id，而 dept_id 又依赖 student_id
+              </p>
               <p>
                 BC范式：且F中的每个依赖的决定因素必定包含R的某个候选码，进一步消除主属性对码的部分和传递函数依赖
               </p>
-              <p>第四范式：消除非平凡且非函数依赖的多值依赖</p>
-              <p>判断部分函数依赖：看候选码的子集能否单独确定非主属性</p>
-              <p>判断传递函数依赖： (X,Y)->Z (X,Z)->W => (X,Y)->W</p>
-              <p>伪传递：若X->Y，WY->Z，则XW->Z</p>
+              <p>
+                比如 R=(student, teacher, course)中F={(student, teacher)→course, (student, course)→teacher, teacher→course},teacher是决定因素，不包含候选码
+              </p>
+              <p>第四范式：消除非平凡且非函数依赖的多值依赖，在R(X,Y,Z)中若X相同时交换Y的值仍可以找到相同的元组</p>
+              <p>
+                比如 students(student_id, hobby, language) 中 hobby 与 language独立
+              </p>
             </div>
           </div>
           <div id="section-050304">
@@ -2115,27 +2132,81 @@ const showModal = (action: string, values: any) => {
           <div id="section-050401">
             <h4>4.1 语言</h4>
             <div class="sub-contents">
-              <p>数据定义语言：create/alter/drop</p>
-              <p>完整性约束：not null/unique/default/primary/foreign/check</p>
-              <p>数据操作语言：insert/update/delete</p>
+              <p>students(id, name, age, gender, major, grade)</p>
               <p>
-                数据查询语言：select..from..where..group by..having..order by
+                数据定义语言 DDL <i class="txt-en">Data Definition Language</i>
               </p>
+              <p>
+                完整性约束:
+                <b>not null/unique/default/primary key/foreign key/check</b>
+              </p>
+              <div class="box-code" style="width: 700px; height: 500px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_03"
+                ></codeView>
+              </div>
+              <p>
+                数据操作语言 DML
+                <i class="txt-en">Data Manipulation Language</i>
+              </p>
+              <div class="box-code" style="width: 700px; height: 500px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_01"
+                ></codeView>
+              </div>
+              <p>数据查询语言 DQL <i class="txt-en">Data Query Language</i></p>
               <p>
                 比较/between/逻辑/in/not
                 in/exists/like/all/some/unique/聚合函数/is null/is not
                 null/union/intersect/except/distinct/as
               </p>
-              <p>聚合函数：AVG均值 COUNT计数 MIN/MAX极值 SUM求和</p>
+              <p>聚合函数: <b>COUNT/SUM/AVG/MAX/MIN</b></p>
+              <p>连接查询: <b>INNER/LEFT/RIGHT/FULL OUTER JOIN</b></p>
+              <div class="box-code" style="width: 700px; height: 500px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_02"
+                ></codeView>
+              </div>
               <p>
-                权限：GRANT/REVOKE < Insert> < ALL PRIVILEGES> on .. to ..
-                PUBLIC/WITH GRANT OPTION 可分发
+                数据控制语言 DCL <i class="txt-en">Data Control Language</i>
               </p>
-              <p>视图：create view … as select… WITH CHECK OPTION 约束</p>
               <p>
-                索引：改变内模式 create UNIQUE唯一/CLUSTER聚簇 index .. on ..
+                GRANT/REVOKE &lt;INSERT&gt; &lt;ALL PRIVILEGES&gt; ON [table] TO
+                [user] PUBLIC/WITH GRANT OPTION 可分发
               </p>
-              <p>存储过程</p>
+              <div class="box-code" style="width: 700px; height: 400px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_04"
+                ></codeView>
+              </div>
+              <p>视图 <i class="txt-en">View</i></p>
+              <p>CREATE VIEW .. AS SELECT .. FROM ... WITH CHECK OPTION</p>
+              <div class="box-code" style="width: 700px; height: 400px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_05"
+                ></codeView>
+              </div>
+              <p>索引 <i class="txt-en">Index</i></p>
+              <p>改变的是内模式</p>
+              <p>CREATE UNIQUE唯一/CLUSTER聚簇 INDEX .. ON ..</p>
+              <div class="box-code" style="width: 700px; height: 400px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_06"
+                ></codeView>
+              </div>
+              <p>存储过程 <i class="txt-en">Stored Procedure</i></p>
+              <div class="box-code" style="width: 700px; height: 400px">
+                <codeView
+                  :configs="codeConfig('sql')"
+                  :value="db.sql_07"
+                ></codeView>
+              </div>
             </div>
           </div>
         </div>
@@ -2145,7 +2216,7 @@ const showModal = (action: string, values: any) => {
             <h4>5.1 事务</h4>
             <div class="sub-contents">
               <p>
-                事务：原子性/一致性/隔离性(读未提交、读已提交、可重复读、串行)/持久性
+                事务：原子性(要么做要么都不做)/一致性/隔离性(读未提交、读已提交、可重复读、串行)/持久性
               </p>
               <p>处理：故障/备份(转储/增量/更新日志文件)/恢复/镜像</p>
             </div>
@@ -2155,8 +2226,8 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>并发操作：丢失更新/不可重复读/读脏数据</p>
               <p>并发控制：封锁协议</p>
-              <p>排它锁(写锁)</p>
-              <p>共享锁(读锁)</p>
+              <p>排它锁X</p>
+              <p>共享锁S: 只读</p>
             </div>
           </div>
         </div>
@@ -3139,7 +3210,10 @@ const showModal = (action: string, values: any) => {
               <p>
                 在不影响其他对象下，以动态、透明的方式给单个对象增加或改变功能。快餐和配料的随意搭配
               </p>
-              <p>桥接模式 注重解耦两个维度的变化，装饰器模式 注重给对象动态添加功能</p>
+              <p>
+                桥接模式 注重解耦两个维度的变化，装饰器模式
+                注重给对象动态添加功能
+              </p>
             </div>
           </div>
           <div id="section-081102">
@@ -3284,7 +3358,10 @@ const showModal = (action: string, values: any) => {
               <p>
                 在使用享元模式时需要维护一个存储享元对象的享元池，而这需要耗费一定的系统资源，因此，应当在需要多次重复使用享元对象时才值得使用享元模式。
               </p>
-              <p>单例模式 注重只需要一个全局唯一对象，享元模式 注重有大量相似对象，可以共享以减少内存</p>
+              <p>
+                单例模式 注重只需要一个全局唯一对象，享元模式
+                注重有大量相似对象，可以共享以减少内存
+              </p>
             </div>
           </div>
           <div id="section-081302">
@@ -3315,7 +3392,9 @@ const showModal = (action: string, values: any) => {
                 ></codeView>
               </div>
               <p>非享元角色 <i class="txt-en">UnsharableFlyweight</i></p>
-              <p>享元工厂角色 <i class="txt-en">FlyweightFactory</i>：单例工厂</p>
+              <p>
+                享元工厂角色 <i class="txt-en">FlyweightFactory</i>：单例工厂
+              </p>
               <div class="box-code" style="width: 700px; height: 300px">
                 <codeView
                   :configs="codeConfig('java')"
@@ -3359,7 +3438,10 @@ const showModal = (action: string, values: any) => {
               <p>
                 获取目标对象构建的地方不同：装饰器是由外界传递进来，可以通过构造方法传递，静态代理是在代理类内部创建，以此来隐藏目标对象
               </p>
-              <p>装饰器模式 注重动态地为对象添加新的功能，代理模式 注重控制对象的访问</p>
+              <p>
+                装饰器模式 注重动态地为对象添加新的功能，代理模式
+                注重控制对象的访问
+              </p>
             </div>
           </div>
           <div id="section-081402">
@@ -3588,14 +3670,18 @@ const showModal = (action: string, values: any) => {
                   :value="db.code_jieshi_04"
                 ></codeView>
               </div>
-              <p>非终结符表达式角色 <i class="txt-en">NonterminalExpression</i></p>
+              <p>
+                非终结符表达式角色 <i class="txt-en">NonterminalExpression</i>
+              </p>
               <div class="box-code" style="width: 700px; height: 300px">
                 <codeView
                   :configs="codeConfig('java')"
                   :value="db.code_jieshi_02"
                 ></codeView>
               </div>
-              <p>环境角色 <i class="txt-en">Context</i>：用于存储变量和对应的值</p>
+              <p>
+                环境角色 <i class="txt-en">Context</i>：用于存储变量和对应的值
+              </p>
               <div class="box-code" style="width: 700px; height: 300px">
                 <codeView
                   :configs="codeConfig('java')"
@@ -3780,21 +3866,33 @@ const showModal = (action: string, values: any) => {
         <div id="section-082003">
           <h4>20.3 实现</h4>
           <div class="sub-contents">
-            <p>发起人角色 <i class="txt-en">Originator</i>：记录当前时刻的内部状态信息，提供创建备忘录和恢复备忘录数据的功能，实现其他业务功能，它可以访问备忘录里的所有信息</p>
+            <p>
+              发起人角色
+              <i class="txt-en">Originator</i
+              >：记录当前时刻的内部状态信息，提供创建备忘录和恢复备忘录数据的功能，实现其他业务功能，它可以访问备忘录里的所有信息
+            </p>
             <div class="box-code" style="width: 700px; height: 300px">
               <codeView
                 :configs="codeConfig('java')"
                 :value="db.code_bei_01"
               ></codeView>
             </div>
-            <p>备忘录角色 <i class="txt-en">Memento</i>：负责存储发起人的内部状态，在需要的时候提供这些内部状态给发起人</p>
+            <p>
+              备忘录角色
+              <i class="txt-en">Memento</i
+              >：负责存储发起人的内部状态，在需要的时候提供这些内部状态给发起人
+            </p>
             <div class="box-code" style="width: 700px; height: 300px">
               <codeView
                 :configs="codeConfig('java')"
                 :value="db.code_bei_02"
               ></codeView>
             </div>
-            <p>管理者角色 <i class="txt-en">Caretaker</i>：对备忘录进行管理，提供保存与获取备忘录的功能，但其不能对备忘录的内容进行访问与修改</p>
+            <p>
+              管理者角色
+              <i class="txt-en">Caretaker</i
+              >：对备忘录进行管理，提供保存与获取备忘录的功能，但其不能对备忘录的内容进行访问与修改
+            </p>
             <div class="box-code" style="width: 700px; height: 300px">
               <codeView
                 :configs="codeConfig('java')"

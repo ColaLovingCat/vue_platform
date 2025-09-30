@@ -114,7 +114,7 @@ const fillClass = computed(() => {
       v-for="(option, optIndex) in noteInfos.options"
       :key="optIndex"
     >
-      <div class="list-opts">
+      <div class="list-opts" :class="`col-${option.col}`">
         <div
           class="opt-item"
           v-for="(opt, index) in option.list"
@@ -183,8 +183,18 @@ table {
   .list-opts {
     margin-top: 10px;
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    &.col-1 .opt-item {
+      width: 100%;
+    }
+    &.col-2 .opt-item {
+      width: 49%;
+    }
+    &.col-4 .opt-item {
+      width: 24%;
+    }
 
     .opt-item {
       cursor: pointer;
