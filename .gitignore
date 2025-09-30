@@ -27,3 +27,4 @@ dist-ssr
 package-lock.json
 pnpm-lock.yaml
 src/auto-import.d.ts
+*.yaml
