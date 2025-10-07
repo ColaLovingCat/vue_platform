@@ -2026,8 +2026,16 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>数据模型三要素：数据结构、数据操作、数据约束条件</p>
               <p>图形：实体-矩形/属性-椭圆/联系-菱形 弱实体</p>
+              <p>弱实体：双边矩形</p>
+              <p>超类⇔子类</p>
+              <img
+                class="img-126"
+                style="width: 250px"
+                src="/docs/study/imgs/126-chaolei.png"
+              />
               <p>属性：复合属性/多值属性/派生属性</p>
               <p>联系：1:1/1:n/m:n</p>
+              <p>一个实体A</p>
             </div>
           </div>
           <div id="section-050203">
@@ -2477,7 +2485,7 @@ const showModal = (action: string, values: any) => {
               <img
                 class="img-73"
                 style="width: 450px"
-                src="/docs/study/imgs/69-uml.png"
+                src="/docs/study/imgs/73-uml.png"
               />
             </div>
           </div>
@@ -2567,6 +2575,13 @@ const showModal = (action: string, values: any) => {
               <p>静态部署视图/物理</p>
               <p>对面向对象系统的物理方面建模的方法</p>
               <p>展现系统的软件和硬件之间的物理关系，在实施阶段使用</p>
+            </div>
+          </div>
+          <div id="section-070210">
+            <h4>2.10 下午题</h4>
+            <div class="sub-contents">
+              <p>类图：依赖、关联(聚合、组合)、泛化</p>
+              <p>用例图：包含、扩展、泛化</p>
             </div>
           </div>
         </div>
@@ -5028,9 +5043,9 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <div id="section-100404">
-            <h4>4.4 数据流图 DFD</h4>
+            <h4>4.4 数据流图 DFD <i class="txt-en">Data Flow Diagram</i></h4>
             <div class="sub-contents">
-              <p>基本图形元素：数据流、加工、数据存储、外部实体</p>
+              <p>基本图形元素：数据流 <i class="txt-en">Data Flow</i>、加工 <i class="txt-en">Process</i>、数据存储 <i class="txt-en">Data Store</i>、外部实体 <i class="txt-en">External Agent</i></p>
               <img
                 class="img-30"
                 style="width: 600px"
@@ -5039,14 +5054,15 @@ const showModal = (action: string, values: any) => {
                 srcset=""
               />
               <p>
-                数据流：加工>加工、加工>数据存储(写)、数据存储>加工(读)、外部实体>加工(输入)、加工>外部实体(输出)
+                数据流：加工➔加工、加工➔数据存储(写)、数据存储➔加工(读)、外部实体➔加工(输入)、加工➔外部实体(输出)
               </p>
+              <p>数据流的起点或终点必须有一个是加工</p>
               <p>
-                加工：有输出无输入为奇迹，有输入无输出为黑洞，输入不足以产生输出为灰洞
+                加工：数据流的转换和处理，必须有输入和输出
               </p>
-              <p>数据存储：存储数据和提供数据</p>
+              <p>有输出无输入为奇迹，有输入无输出为黑洞，输入不足以产生输出为灰洞</p>
+              <p>数据存储：存储数据和提供数据，存储加工的输出数据和提供加工的输入数据</p>
               <p>外部实体：当前系统之外的人员组织，数据发源地和归宿地</p>
-              <p>加工既有输入也要有输出</p>
               <p>父图子图平衡：输入输出要保持一致</p>
               <p>
                 顶层数据流图(父图)是整个系统的高度抽象，描述系统的输入输出、外部实体以及之间的数据流
@@ -7047,7 +7063,7 @@ const showModal = (action: string, values: any) => {
   <a-modal
     v-model:open="noteModal"
     centered
-    width="60vw"
+    width="80vw"
     :title="`[${noteInfos.title}]`"
     :footer="[]"
   >

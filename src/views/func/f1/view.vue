@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive, onMounted, computed, watch } from 'vue'
-import type { Ref } from 'vue'
+import { reactive, onMounted } from 'vue'
 
 import * as XLSX from 'xlsx'
 import * as extend from '@/commons/utils/extends'
@@ -17,7 +16,6 @@ const months = [
 onMounted(async () => {
   let temps: any = await readExcel()
   const { rounds, races, result, drivers, teams } = temps
-  console.log('Testing: ', rounds);
   pageInfos.drivers = [...drivers]
   pageInfos.drivers.map((driver: any) => {
     driver.score = 0

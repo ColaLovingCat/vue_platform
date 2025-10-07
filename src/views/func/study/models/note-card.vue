@@ -24,6 +24,8 @@ const noteInfos = reactive({
   options: [
     {
       answer: "A",
+      fillAnswer: "",
+      col: 1,
       list: ["选项1", "选项2", "选项3", "选项4"],
       note: "这里是解析说明",
     },
@@ -62,6 +64,17 @@ const checkAnswer = (optIndex: number, index: number) => {
     const pos = arr.indexOf(index);
     if (pos === -1) arr.push(index);
     else arr.splice(pos, 1);
+  } else if (category === "fill") {
+    // 填空题
+    if (selectedAnswers.value[optIndex] !== undefined) return; // 已答过
+    const answer = noteInfos.options[optIndex].fillAnswer;
+    if (!answer || answer.trim() === "") {
+      alert("请填写答案");
+      return;
+    }
+    selectedAnswers.value[optIndex] = answer.trim();
+  } else {
+    return;
   }
 };
 // 获取选项状态
@@ -84,18 +97,14 @@ const getOptionClass = (optIndex: number, index: number) => {
   }
   return "";
 };
-
-// 填空题确认答案
-const submitFill = () => {
-  selectedAnswers.value[0] = fillAnswer.value.trim();
-};
 // 填空题状态
-const fillClass = computed(() => {
-  if (!selectedAnswers.value[0]) return "";
-  return selectedAnswers.value[0] === noteInfos.options[0].answer
+const getInputClass = (optIndex: number) => {
+  if (!selectedAnswers.value[optIndex]) return "";
+
+  return selectedAnswers.value[optIndex] === noteInfos.options[optIndex].answer
     ? "correct"
-    : "wrong";
-});
+    : "";
+}
 </script>
 
 <template>
@@ -108,44 +117,36 @@ const fillClass = computed(() => {
     </div>
 
     <!-- 单选/多选/判断题 -->
-    <div
-      v-if="noteInfos.category !== 'fill'"
-      class="item-opts"
-      v-for="(option, optIndex) in noteInfos.options"
-      :key="optIndex"
-    >
+    <div v-if="noteInfos.category !== 'fill'" class="item-opts" v-for="(option, optIndex) in noteInfos.options"
+      :key="optIndex">
       <div class="list-opts" :class="`col-${option.col}`">
-        <div
-          class="opt-item"
-          v-for="(opt, index) in option.list"
-          :key="index"
-          :class="getOptionClass(optIndex, index)"
-          @click="checkAnswer(optIndex, index)"
-        >
+        <div class="opt-item" v-for="(opt, index) in option.list" :key="index" :class="getOptionClass(optIndex, index)"
+          @click="checkAnswer(optIndex, index)">
           <div class="item-no">{{ nos[index] }}.</div>
           <div class="item-opt" v-html="opt"></div>
         </div>
       </div>
       <!-- 显示解析 -->
-      <div
-        v-if="selectedAnswers[optIndex] !== undefined && option.note"
-        class="note-explain"
-      >
+      <div v-if="selectedAnswers[optIndex] !== undefined && option.note" class="note-explain">
         <strong>解析：</strong> {{ option.note }}
       </div>
     </div>
 
     <!-- 填空题 -->
-    <div v-if="noteInfos.category === 'fill'" class="fill-opts">
-      <input v-model="fillAnswer" placeholder="填写答案" />
-      <button @click="submitFill">提交</button>
-      <div
-        v-if="selectedAnswers[0] !== undefined"
-        :class="['fill-result', fillClass]"
-      >
-        <strong>解析：</strong> {{ noteInfos.options[0].note }}
+    <template v-if="noteInfos.category === 'fill'">
+      <div v-for="(option, optIndex) in noteInfos.options">
+        <div class="fill-opts">
+          <span>{{ (optIndex + 1) }}.</span>
+          <input v-model="option.fillAnswer" :class="getInputClass(optIndex)" placeholder="填写答案" />
+          <button @click="checkAnswer(optIndex, -1)">提交</button>
+        </div>
+        <div v-if="selectedAnswers[optIndex] !== undefined">
+          <div class="note-answer"><strong>答案：</strong> <div v-html="noteInfos.options[optIndex].answer"></div></div>
+          <div class="note-explain" v-if="noteInfos.options[optIndex].note != ''"><strong>解析：</strong> {{
+            noteInfos.options[optIndex].note }}</div>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -153,6 +154,7 @@ const fillClass = computed(() => {
 @import url(./txt.scss);
 
 table {
+
   th,
   td {
     padding: 5px 15px;
@@ -175,6 +177,7 @@ table {
     display: flex;
     justify-content: center;
     gap: 5px;
+
     img {
       max-width: 500px;
     }
@@ -189,9 +192,11 @@ table {
     &.col-1 .opt-item {
       width: 100%;
     }
+
     &.col-2 .opt-item {
       width: 49%;
     }
+
     &.col-4 .opt-item {
       width: 24%;
     }
@@ -230,14 +235,26 @@ table {
 
   .fill-opts {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 5px;
 
     input {
       padding: 5px 8px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      width: 200px;
+      width: 500px;
+
+      &.correct {
+        background: #e6f9ec;
+        border-color: #52c41a;
+        color: #1a7f37;
+      }
+
+      &.wrong {
+        background: #fdeaea;
+        border-color: #ff4d4f;
+        color: #a8071a;
+      }
     }
 
     button {
@@ -248,20 +265,6 @@ table {
       background: #1890ff;
       color: #fff;
       cursor: pointer;
-    }
-
-    .fill-result.correct {
-      color: #1a7f37;
-      background: #e6f9ec;
-      padding: 5px;
-      border-radius: 4px;
-    }
-
-    .fill-result.wrong {
-      color: #a8071a;
-      background: #fdeaea;
-      padding: 5px;
-      border-radius: 4px;
     }
   }
 }
