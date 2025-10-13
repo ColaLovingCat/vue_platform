@@ -1083,11 +1083,10 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>
                 例：由a、b构造且仅包含偶数个a的串的集合
-                <span class="txt-func"
-                  >(b<span class="txt-sup">*</span>(ab<span class="txt-sup"
-                    >*</span
-                  >a))<span class="txt-sup">*</span></span
-                >
+                <span class="txt-func">(b<span class="txt-sup">*</span>
+                (ab<span class="txt-sup">*</span>a))
+                <span class="txt-sup">*</span>
+              </span>
               </p>
               <table>
                 <thead>

@@ -2365,7 +2365,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
   {
     id: "section-070210",
     type: "topic",
-    title: "上午题-UML",
+    title: "下午题-UML",
     category: "fill",
     question: `
 阅读下列说明和UML图，回答所有问题，将解答填入答题纸的对应栏内。
@@ -2425,7 +2425,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
   {
     id: "section-070210",
     type: "topic",
-    title: "上午题-UML",
+    title: "下午题-UML",
     category: "fill",
     question: `
 阅读下列说明和UML图，回答所有问题，将解答填入答题纸的对应栏内。
@@ -2483,6 +2483,290 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         `,
         col: 1,
         list: ["", "", "", ""],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020101",
+    type: "topic",
+    title: "上午题-程序语言",
+    category: "single-select",
+    question: `以下关于高级程序设计语言实现的编译和解释方式的叙述中,正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "编译程序不参与用户程序的运行控制。而解释程序则参与",
+          "编译程序可以用高级语言编写。而解释程序只能用汇编语言编写", 
+          "编译方式处理源程序时不进行优化。而解释方式则进行优化",
+          "编译方式不生成源程序的目标程序。而解释方式则生成"
+          ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020102",
+    type: "topic",
+    title: "上午题-基本成分",
+    category: "single-select",
+    question: `逻辑表达式求值时常采用短路计箅方式。
+    "&&"、"||"、"!"分别表示逻辑与、或、非运算，"&&"、"||"为左结合，"!"为右结合，优先级从高到低为"!"、"&&"、"||"，对逻辑表达式"x && (y || !z)"进行短路计算方式求值是，___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "x为真，则整个表达式的值即为真，不需要计算y和z的值", 
+          "x为假，则整个表达式的值即为假，不需要计算y和z的值", 
+          "x为真，再根据z的值决定是否需要计算y的值", 
+          "x为假，再根据y的值决定是否需要计算z的值", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020102",
+    type: "topic",
+    title: "上午题-基本成分",
+    category: "single-select",
+    question: `程序运行过程中常使用参数在函数间传递信息，引用调用传递的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "地址", 
+          "类型", 
+          "名称", 
+          "值", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020102",
+    type: "topic",
+    title: "上午题-基本成分",
+    category: "single-select",
+    question: `
+函数t、f的定义如下所示，其中，a是整型全局变量。
+<p>t(): int x=f(a);  print a+x;</p>
+<p>f(int r): a=r+1; r=r*2; return r;</p>
+设调用函数t前a的值为5,则在函数t中以传值调用方式调用函数f时，输出为___。
+在函数t中以引用调用方式调用函数f时，输出为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "12", 
+          "16", 
+          "20", 
+          "24", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "12", 
+          "16", 
+          "20", 
+          "24", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020102",
+    type: "topic",
+    title: "上午题-基本成分",
+    category: "single-select",
+    question: `
+函数foo()、hoo()的定义如下所示，。
+<p>foo(int x): int a=2; hoo(a,x); print(a,x);</p>
+<p>hoo(int &x, int y): y=y+10; x=y-x; return;</p>
+调用函数hoo(a,x)的两个参数分别采用引用调用和值调用方式传递，则函数foo(5)的输出为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "2, 5", 
+          "2, 15", 
+          "13, 5", 
+          "13, 15", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020202",
+    type: "topic",
+    title: "上午题-符号表",
+    category: "single-select",
+    question: `编译程序对高级语言源程序进行编译的过程中，要不断收集、记录和使用源程序中一些相关符号的类型和特征等信息，并将其存入___中。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["符号表", "哈希表", "动态查找表", "栈和队列"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020203",
+    type: "topic",
+    title: "上午题-正规式",
+    category: "single-select",
+    question: `由a、b构造且仅包含偶数个a的串的集合用正规式表示为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          `<span class="txt-func">(a<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>b<span class="txt-sup">*</span></span>`, 
+          `<span class="txt-func">(b<span class="txt-sup">*</span>(ab<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>)<span class="txt-sup">*</span></span>`, 
+          `<span class="txt-func">(a<span class="txt-sup">*</span>(ba<span class="txt-sup">*</span>)<span class="txt-sup">*</span>b)<span class="txt-sup">*</span></span>`, 
+          `<span class="txt-func">(a|b)<span class="txt-sup">*</span>(aa)<span class="txt-sup">*</span></span>`, 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020204",
+    type: "topic",
+    title: "上午题-有限自动机",
+    category: "single-select",
+    question: `下图所示有限自动机的特点是___。`,
+    imgs: ["/docs/study/imgs/12-youxian.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "识别的0、1串是以0开头且以1结尾", 
+          "识别的0、1串中1的个数为偶数", 
+          "识别的0、1串中0后面必须是1", 
+          "识别的0、1串中1不能连续出现"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020205",
+    type: "topic",
+    title: "上午题-上下文无关文法",
+    category: "single-select",
+    question: `由某上下文无关文法M[S]推导出某句子的分析树如下图所示，则错误的叙述是___。`,
+    imgs: ["/docs/study/imgs/137-ti.png"],
+    options: [
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "该文法推导出的句子必须以'a'开头", 
+          "acabcbdcc是该文法推导出的一个句子", 
+          "'S➔aAcB'是该文法的一个产生式", 
+          "a、b、c、d属于该文法的终结符号集"
+        ],
+        fillAnswer: "",
+        note: "S➔aAcB|Bd；A➔AaB|c；B➔bScA|b|e；",
+      },
+    ],
+  },
+  {
+    id: "section-020206",
+    type: "topic",
+    title: "上午题-表达式",
+    category: "single-select",
+    question: `算术表达式采用逆波兰式表示时不用括号，可以利用___进行求值。
+    与逆波兰式 ab-cd+* 对应的中缀表达式是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["数组", "栈", "队列", "散列表"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 2,
+        list: ["a-b+c*d", "(a-b)*c+d", "(a-b)*(c+d)", "a-b*c+d"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020207",
+    type: "topic",
+    title: "上午题-表达式",
+    category: "single-select",
+    question: `某表达式的语法树如下图所示，采用逆波兰式表示是___。`,
+    imgs: ["/docs/study/imgs/138-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["abcd-+*", "ab-c+d*", "abc-d*+", "ab-cd+*"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020202",
+    type: "topic",
+    title: "上午题-编译程序",
+    category: "single-select",
+    question: `
+编译器和解释器是两种基本的高级语言处理程序。编译器对高级语言源程序的处理过
+程可以划分为词法分析、语法分析、语义分柝、中间代码生成、代码优化、目标代码生成
+等阶段，其中，___并不是每个编译器都必需的。与编译器相比，解释器___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: ["词法分析和语法分析", "语义分析和中间代码生成", "中间代码生成和代码优化", "代码优化和目标代码生成"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 1,
+        list: ["不参与运行控制，程序执行的速度慢", "参与运行控制，程序执行的速度慢", "参与运行控制，程序执行的速度快", "不参与运行控制，程序执行的速度快"],
         fillAnswer: "",
         note: "",
       },
