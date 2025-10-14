@@ -2244,14 +2244,14 @@ const showModal = (action: string, values: any) => {
           <div id="section-060101">
             <h4>1.1 概念</h4>
             <div class="sub-contents">
-              <p>对象object：对象名，属性，方法</p>
-              <p>类class：属性/数据/状态/变量和方法/函数/操作/行为/实现</p>
+              <p><b>对象</b> <i class="txt-en">object</i>：对象名，属性，方法</p>
+              <p><b>类</b> <i class="txt-en">class</i>：属性/数据/状态/变量和方法/函数/操作/行为/实现</p>
               <p>分类：实体类/接口类(边界类)/控制类</p>
               <p>抽象：抽取共同特征和行为</p>
-              <p>类是对象的抽象，对象是类的实例(instance)</p>
-              <p>消息message：调用方法传值给形参，相互之间通讯</p>
+              <p>类是对象的抽象，对象是类的实例 <i class="txt-en">instance</i></p>
+              <p><b>消息</b> <i class="txt-en">message</i>：调用方法传值给形参，相互之间通讯</p>
               <p>
-                封装：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
+                <b>封装</b>：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
               </p>
               <p>this：隐式引用变量，指向当前实例</p>
               <p>-区分成员变量与局部变量</p>
@@ -2261,7 +2261,7 @@ const showModal = (action: string, values: any) => {
               <p>public/private/protected：权限修饰符 公有</p>
               <p>static：静态成员变量，变量方法可类名调用，可修饰内部类</p>
               <p>final：使变量的值不可变，使方法不能被重写，使类不能继承</p>
-              <p>继承extends：子类/派生类共享父类/超类/基类的属性和方法</p>
+              <p><b>继承</b> <i class="txt-en">extends</i>：子类/派生类共享父类/超类/基类的属性和方法</p>
               <p>多重继承：多个父类，二义性</p>
               <p>
                 abstract：抽象类。可包含抽象方法，不能直接实例化，不能使用private/final/static,，可有构造方法
@@ -2271,23 +2271,23 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>隐藏：子类中具有 同名不同参 的方法，阻止父类函数行为</p>
               <p>
-                多态：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
+                <b>多态</b>：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
               </p>
               <p>参数多态/包含多态(引用子类)/过载多态(上下文)/强制多态</p>
               <p>
-                覆盖/重写@Override ：子类中具有 同名同参数
+                覆盖/重写 @Override：子类中具有 同名同参数
                 的方法，改变父类的函数行为。
               </p>
               <p>
                 动态绑定：继承后当代码运行时，通过父类引用调用父类和子类的重写方法，结果实际调用子类的方法
               </p>
               <p>
-                函数重载overload：同一个类中具有 同名不同参
+                函数重载/方法重载 <i class="txt-en">overload</i>：同一个类中具有 同名不同参
                 的方法，提供多种方式来执行相同行为
               </p>
-              <p>绑定binding：把一个方法与其所在的类/对象关联起来</p>
+              <p><b>绑定</b> <i class="txt-en">binding</i>：把一个方法与其所在的类/对象关联起来</p>
               <p>静态绑定：编译时，动态绑定：运行时</p>
-              <p>接口interface/实现implements：实现接口中的所有方法</p>
+              <p>接口 <i class="txt-en">interface</i>/实现 <i class="txt-en">implement</i>：实现接口中的所有方法</p>
             </div>
           </div>
           <div id="section-060102">
@@ -2304,7 +2304,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>定义：将OOA所创建的分析模型转化为设计模型和实现代码</p>
               <p>识别类及对象、定义属性、定义服务、识别关系、识别包</p>
-              <p>软件设计原则</p>
+              <p><b>软件设计原则</b></p>
               <p>单一责任原则：仅有一个引起变化的原因</p>
               <p>
                 开放封闭原则：开发是可拓展的，封闭是不可修改的。接口和抽象类
@@ -4971,7 +4971,7 @@ const showModal = (action: string, values: any) => {
               <p>信息隐蔽、抽象原则：只规定做什么，不规定怎么做</p>
               <p>一致性原则：保证设计过程规范、标准和文件模式统一</p>
               <p>明确性原则：功能明确，接口明确</p>
-              <p>低耦合、高内聚原则</p>
+              <p>高内聚、低耦合原则</p>
               <p>扇入扇出系数合理原则：适当为3或4，不超7</p>
               <p>规模适当原则：避免过大过小</p>
               <p>作用范围原则：模块作用范围应在其控制范围内</p>
@@ -5912,7 +5912,7 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
         </div>
-        <h2 id="chapter-13">十三、计算机网络</h2>
+        <h2 id="chapter-13">十三、计算机网络 (66-70)</h2>
         <h3 id="part-1301">1. OSI/RM 七层模型</h3>
         <div class="part-contents">
           <div id="section-130101">

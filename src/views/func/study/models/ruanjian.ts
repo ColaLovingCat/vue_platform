@@ -2953,6 +2953,638 @@ Teachers (教师号,姓名,性别,身份证号,工资)
     ],
   },
   {
+    id: "section-060101",
+    type: "topic",
+    title: "上午题-面向对象",
+    category: "single-select",
+    question: `在面向对象分析与设计中，___是应用领域中的核心类，一般用于保存系统中的信息以及提供针对这些信息的相关处理行为；
+    ___是系统内对象和系统外参与者的联系媒介；
+    ___主要是协调上述两种类对象之间的交互。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["控制类", "边界类", "实体类", "软件类"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: ["控制类", "边界类", "实体类", "软件类"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: ["控制类", "边界类", "实体类", "软件类"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060101",
+    type: "topic",
+    title: "上午题-面向对象",
+    category: "single-select",
+    question: `采用面向对象开发方法时,对象是系统运行时基本实体。以下关于对象的叙述中,正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "对象只能包括数据(属性)", 
+          "对象只能包括操作(行为)", 
+          "对象一定有相同的属性和行为", 
+          "对象通常由对象名、属性和操作三个部分组成"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060101",
+    type: "topic",
+    title: "上午题-面向对象",
+    category: "single-select",
+    question: `___是把对象的属性和服务结合成一个独立的系统单元，并尽可能隐藏对象的内部细节;
+___是指子类可以自动拥有父类的全部属性和服务;
+___是对象发出的服务请求，一般包含提供服务的对象标识、服务标识、输入信息和应答信息等。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: ["继承", "多态", "消息", "封装"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: ["继承", "多态", "消息", "封装"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["继承", "多态", "消息", "封装"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060101",
+    type: "topic",
+    title: "上午题-面向对象",
+    category: "single-select",
+    question: `不同的对象收到同一消息可以产生完全不同的结果，这一现象叫___。
+绑定是一个把过程调用和响应调用所需要执行的代码加以结合的过程。
+在一般的程序设计语言中，绑定在编译时进行的，叫做___；
+而___则是在运行时进行的，即一个给定的过程调用和代码的结合直到调用发生时才进行的。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["继承", "多态", "动态绑定", "静态绑定"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: ["继承", "多态", "动态绑定", "静态绑定"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["继承", "多态", "动态绑定", "静态绑定"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060103",
+    type: "topic",
+    title: "上午题-面向对象设计",
+    category: "single-select",
+    question: `开-闭原则 (Open-Closed Principle, OCP) 是面向对象的可复用设计的基石。
+开-闭原则是指一个软件实体应当对___开放，对___关闭；
+<p>里氏代换原则 (Liskov Substitution Principle, LSP) 是指任何___可以出现的地方，___一定可以出现；</p>
+<p>依赖倒转原则 (Dependence Inversion Principle, DIP) 就是要依赖于___，而不依赖于___，或者说要针对接口编程，不要针对实现编程。</p>`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["修改", "扩展", "分析", "设计"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: ["修改", "扩展", "分析", "设计"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["变量", "常量", "基类对象", "子类对象"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: ["变量", "常量", "基类对象", "子类对象"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: ["程序设计语言", "建模语言", "实现", "抽象"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["程序设计语言", "建模语言", "实现", "抽象"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060102",
+    type: "topic",
+    title: "上午题-面向对象分析",
+    category: "single-select",
+    question: `面向对象分析时，执行的活动顺序通常是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "认定对象、组织对象、描述对象的相互作用、确定对象的操作", 
+          "认定对象、定义属性、组织对象、确定对象的操作", 
+          "认定对象、描述对象间的相互作用、确定对象的操作、识别包", 
+          "识别类及对象、识别关系、定义属性、确定对象的操作"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-060104",
+    type: "topic",
+    title: "上午题-面向对象程序设计",
+    category: "single-select",
+    question: `在面向对象程序设计语言中,对象之间通过___方式进行通信。
+以下关于好的面向对象程序设计语言的叙述中,不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: ["消息传递", "继承", "引用", "多态"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 1,
+        list: ["应该支持被封装的对象", "应该支持类与实例的概念", "应该支持通过指针进行引用", "应该支持继承和多态"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100202",
+    type: "topic",
+    title: "上午题-耦合",
+    category: "single-select",
+    question: `模块A将学生信息，即学生姓名、学号、手机号等放到一个结构体中, 传递给模块B。模块A和B之间的耦合类型为___耦合。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: ["数据", "标记", "控制", "内容"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100201",
+    type: "topic",
+    title: "上午题-内聚",
+    category: "single-select",
+    question: `模块A, B和C有相同的程序块，块内的语句之间没有任何联系。
+    现把该程序块取出来，形成新的模块D，则模块D的内聚类型为___内聚。
+以下关于该内聚类型的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["巧合", "逻辑", "时间", "过程"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 2,
+        list: ["具有最低的内聚性", "不易修改和维护", "不易理解", "不影响模块间的耦合关系"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100401",
+    type: "topic",
+    title: "上午题-系统结构设计",
+    category: "single-select",
+    question: `在设计软件的模块结构时，___不能改进设计质量。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: ["尽量减少高扇出结构", "模块的大小适中", "将具有相似功能的模块合并", "完善模块的功能"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100402",
+    type: "topic",
+    title: "上午题-系统文档",
+    category: "single-select",
+    question: `在开发信息系统时，用于系统开发人员与项目管理人员沟通的主要文档是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["系统开发合同", "系统设计说明书", "系统开发计划", "系统测试报告"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100404",
+    type: "topic",
+    title: "上午题-数据流图",
+    category: "single-select",
+    question: `数据流图(DFD)对系统的功能和功能之间的数据流进行建模；其中顶层数据流图描述了系统的___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["处理过程", "输入与输出", "数据存储", "数据实体"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100404",
+    type: "topic",
+    title: "上午题-数据流图",
+    category: "single-select",
+    question: `在结构化分析中,用数据流图描述___。
+    当采用数据流图对一个图书馆管理系统进行分析时，___是一个外部实体。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "数据对象之间的关系,用于对数据建模", 
+          "数据在系统中如何被传送或变换，以及如何对数据流进行变换的功能或子功能，用于对功能建模", 
+          "系统对外部事件如何响应，如何动作，用于对行为建模", 
+          "数据流图中的各个组成部分"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: ["读者", "图书", "借书证", "借阅"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100403",
+    type: "topic",
+    title: "上午题-数据字典",
+    category: "single-select",
+    question: `数据字典是结构化分析的一个重要输出。数据字典的条目不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: ["外部实体", "数据流", "数据项", "基本加工"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-120103",
+    type: "topic",
+    title: "上午题-防火墙",
+    category: "single-select",
+    question: `防火墙通常分为内网、外网和 DMZ 三个区域。按照受保护程度从低到高正确的排列次序为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: ["内网、外网和 DMZ", "外网、DMZ 和内网", "DMZ、内网和外网", "内网、DMZ 和外网"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-120201",
+    type: "topic",
+    title: "上午题-病毒",
+    category: "single-select",
+    question: `计算机病毒的特征不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: ["传染性", "触发性", "隐蔽性", "自毁性"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-120202",
+    type: "topic",
+    title: "上午题-网络攻击",
+    category: "single-select",
+    question: `下列攻击类型中，___是以被攻击对象不能继续提供服务为首要目标。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: ["跨站脚本", "拒绝服务", "信息篡改", "口令猜测"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-120102",
+    type: "topic",
+    title: "上午题-网络安全",
+    category: "single-select",
+    question: `下列不能用于远程登陆或控制的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: ["IGMP", "SSH", "Telnet", "RFB"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130102",
+    type: "topic",
+    title: "上午题-网络设备",
+    category: "single-select",
+    question: `下列网络互连设备中，属于物理层的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: ["交换机", "中继器", "路由器", "网桥"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130204",
+    type: "topic",
+    title: "上午题-协议",
+    category: "single-select",
+    question: `ICMP协议属于因特网中的___协议, ICMP协议数据单元封装在中传送。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["数据链路层", "网络层", "传输层", "会话层"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: ["以太帧", "TCP段", "UDP数据报", "IP数据报"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130201",
+    type: "topic",
+    title: "上午题-协议",
+    category: "single-select",
+    question: `默认情况下, FTP服务器的控制端口为___，上传文件时的端口为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: ["大于1024的端口", "20", "80", "21"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 1,
+        list: ["大于1024的端口", "20", "80", "21"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130203",
+    type: "topic",
+    title: "上午题-协议",
+    category: "single-select",
+    question: `以下协议中属于应用层协议的是___，该协议的报文封装在___中传送。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: ["SNMP", "ARP", "ICMP", "X.25"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 1,
+        list: ["TCP", "IP", "UDP", "ICMP"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130201",
+    type: "topic",
+    title: "上午题-协议",
+    category: "single-select",
+    question: `以下关于 TCP/IP 协议和层次对应关系的表示中,正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          `<table><tbody>
+          <tr><td>HTTP</td><td>SNMP</td></tr>
+          <tr><td>TCP</td><td>UDP</td></tr>
+          <tr><td colspan='2'>IP</td></tr>
+          </tbody></table>`,
+          `<table><tbody>
+          <tr><td>FTP</td><td>Telnet</td></tr>
+          <tr><td>UDP</td><td>TCP</td></tr>
+          <tr><td colspan='2'>ARP</td></tr>
+          </tbody></table>`,
+          `<table><tbody>
+          <tr><td>HTTP</td><td>SMTP</td></tr>
+          <tr><td>TCP</td><td>UDP</td></tr>
+          <tr><td colspan='2'>IP</td></tr>
+          </tbody></table>`,
+          `<table><tbody>
+          <tr><td>SMTP</td><td>FTP</td></tr>
+          <tr><td>UDP</td><td>TCP</td></tr>
+          <tr><td colspan='2'>ARP</td></tr>
+          </tbody></table>`,
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130202",
+    type: "topic",
+    title: "上午题-协议",
+    category: "single-select",
+    question: `相比于 TCP, UDP 的优势为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: ["可靠传输", "开销较小", "拥塞控制", "流量控制"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130501",
+    type: "topic",
+    title: "上午题-IP地址",
+    category: "single-select",
+    question: `IP地址块 222.125.80.128/26 包含了___个可用主机地址。其中最小地址是___，最大地址是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["14", "30", "62", "126"],
+        fillAnswer: "",
+        note: "/26表示32位中26位网络地址，6位主机地址，再扣除全0和全1的，总共有 2^6-2=62",
+      },
+      {
+        answer: `B`,
+        col: 2,
+        list: ["222.125.80.128", "222.125.80.129", "222.125.80.159", "222.125.80.160"],
+        fillAnswer: "",
+        note: "解构为222.125.80.10 00 0000，其中10000001为最小129，10111110为最大",
+      },
+       {
+        answer: `B`,
+        col: 2,
+        list: ["222.125.80.128", "222.125.80.190", "222.125.80.192", "222.125.80.254"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130501",
+    type: "topic",
+    title: "上午题-IP地址",
+    category: "single-select",
+    question: `分配给某公司网络的地址块是220.17.192.0/20,该网络被划分为___个C类子网。不属于该公司网络的子网地址是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["4", "8", "16", "32"],
+        fillAnswer: "",
+        note: "构成为 20位网络号，4位子网号，8位主机号，2^4=16个子网",
+      },
+      {
+        answer: `D`,
+        col: 2,
+        list: ["220.17.203.0", "220.17.205.0", "220.17.207.0", "220.17.213.0"],
+        fillAnswer: "",
+        note: "解构为 220.17.1100 0000.0，子网段可从 11000000=192 至11001111=207",
+      },
+    ],
+  },
+  {
     id: "section-01",
     type: "topic",
     title: "上午题-sample",
