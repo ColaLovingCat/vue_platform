@@ -51,7 +51,6 @@ const jump = (values: any) => {
             <router-view></router-view>
         </div>
     </div>
-
 </template>
 
 <style scoped lang="scss">

@@ -94,6 +94,18 @@ const routes = [
 
   //
   {
+    path: "/matchs",
+    name: "matchs",
+    component: () => import("@/views/func/matchs/view.vue"),
+    children: [
+      {
+        path: "/matchs/LOLS15",
+        name: "matchs-LOLS15",
+        component: () => import("@/views/func/matchs/lol-s15.vue"),
+      },
+    ],
+  },
+  {
     path: "/icons",
     name: "icons",
     component: () => import("@/views/func/icons/view.vue"),
