@@ -128,7 +128,7 @@ const getInputClass = (optIndex: number) => {
       </div>
       <!-- 显示解析 -->
       <div v-if="selectedAnswers[optIndex] !== undefined && option.note" class="note-explain">
-        <strong>解析：</strong> {{ option.note }}
+        <strong>解析：</strong> <span v-html="option.note"></span>
       </div>
     </div>
 

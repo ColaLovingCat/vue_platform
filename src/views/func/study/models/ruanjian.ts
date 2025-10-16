@@ -83,8 +83,11 @@ export const notes = [
     imgs: [],
     options: [
       {
-        answer: "B", col: 4, list: ["128", "256", "512", "1024"], fillAnswer: "",
-        note: ""
+        answer: "B",
+        col: 4,
+        list: ["128", "256", "512", "1024"],
+        fillAnswer: "",
+        note: "",
       },
       {
         answer: "C",
@@ -189,8 +192,8 @@ export const notes = [
         col: 4,
         list: ["4", "5", "6", "7"],
         fillAnswer: "",
-        note: ""
-      }
+        note: "",
+      },
     ],
   },
   {
@@ -264,12 +267,18 @@ export const notes = [
     imgs: [],
     options: [
       {
-        answer: "C", col: 1, list: ["40", "70", "90", "100"], fillAnswer: "",
-        note: ""
+        answer: "C",
+        col: 1,
+        list: ["40", "70", "90", "100"],
+        fillAnswer: "",
+        note: "",
       },
       {
-        answer: "D", col: 1, list: ["20", "30", "40", "45"], fillAnswer: "",
-        note: ""
+        answer: "D",
+        col: 1,
+        list: ["20", "30", "40", "45"],
+        fillAnswer: "",
+        note: "",
       },
     ],
   },
@@ -383,8 +392,11 @@ export const notes = [
     imgs: [],
     options: [
       {
-        answer: "C", col: 1, list: ["40", "80", "160", "200"], fillAnswer: "",
-        note: ""
+        answer: "C",
+        col: 1,
+        list: ["40", "80", "160", "200"],
+        fillAnswer: "",
+        note: "",
       },
     ],
   },
@@ -421,8 +433,11 @@ export const notes = [
     imgs: [],
     options: [
       {
-        answer: "D", col: 1, list: ["ECC", "DSA", "RSA", "DES"], fillAnswer: "",
-        note: ""
+        answer: "D",
+        col: 1,
+        list: ["ECC", "DSA", "RSA", "DES"],
+        fillAnswer: "",
+        note: "",
       },
     ],
   },
@@ -564,12 +579,18 @@ export const notes = [
     imgs: ["/docs/study/imgs/101-ti.png"],
     options: [
       {
-        answer: "B", col: 1, list: ["0", "1", "n", "任意正整数"], fillAnswer: "",
-        note: ""
+        answer: "B",
+        col: 1,
+        list: ["0", "1", "n", "任意正整数"],
+        fillAnswer: "",
+        note: "",
       },
       {
-        answer: "A", col: 1, list: ["n、0", "0、n", "1、n", "n、1"], fillAnswer: "",
-        note: ""
+        answer: "A",
+        col: 1,
+        list: ["n、0", "0、n", "1、n", "n、1"],
+        fillAnswer: "",
+        note: "",
       },
     ],
   },
@@ -1692,7 +1713,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
           "无需进行分解，因为达到了3NF",
           "无需进行分解，因为达到了BCNF",
           "尽管不存在部分函数依赖，但还存在传递依赖，所以需要进行分解",
-          "需要进行分解，因为存在冗余、修改操作的不一致性、插入和删除异常"
+          "需要进行分解，因为存在冗余、修改操作的不一致性、插入和删除异常",
         ],
         fillAnswer: "",
         note: "",
@@ -1808,7 +1829,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: "B",
         col: 2,
-        list: ["年龄和出生年月", "年龄和联系方式", "出生年月和联系方式", "出生年月和年龄"],
+        list: [
+          "年龄和出生年月",
+          "年龄和联系方式",
+          "出生年月和联系方式",
+          "出生年月和年龄",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -1853,7 +1879,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
           "职工和教师实体保持各自属性不变",
           "职工实体中加入职称属性，删除教师实体",
           "教师也是学校的职工，故直接将教师实体删除",
-          "将教师实体所有属性并入职工实体,删除教师实体"
+          "将教师实体所有属性并入职工实体,删除教师实体",
         ],
         fillAnswer: "",
         note: "",
@@ -1881,7 +1907,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: "A",
         col: 2,
-        list: ["S中应加入关系模式D的主键", "S中应加入关系模式C的主键", "D中应加入关系模式S的主键", "C中应加入关系模式S的主键"],
+        list: [
+          "S中应加入关系模式D的主键",
+          "S中应加入关系模式C的主键",
+          "D中应加入关系模式S的主键",
+          "C中应加入关系模式S的主键",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -1905,7 +1936,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: "C",
         col: 1,
-        list: ["程序文档、数据字典和数据流图", "需求说明文档、程序文档和数据流图", "需求说明文档、数据字典和数据流图", "需求说明文档、数据字典和程序文档"],
+        list: [
+          "程序文档、数据字典和数据流图",
+          "需求说明文档、程序文档和数据流图",
+          "需求说明文档、数据字典和数据流图",
+          "需求说明文档、数据字典和程序文档",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -1988,7 +2024,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
           "D2、D3加排它锁都成功",
           "D2、D3加共享锁都成功",
           "D2加共享锁成功, D3加排它锁失败",
-          "D2、D3加排它锁和共享锁都失败"
+          "D2、D3加排它锁和共享锁都失败",
         ],
         fillAnswer: "",
         note: "",
@@ -2138,7 +2174,8 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         note: "",
       },
       {
-        answer: "这个联系类型会从 n:1 变为 n:n。可以将维修单和维修工之间的联系分解为两个 1:n 的联系，并引入一个新的实体(如维修任务)，用来表示每项维修内容。",
+        answer:
+          "这个联系类型会从 n:1 变为 n:n。可以将维修单和维修工之间的联系分解为两个 1:n 的联系，并引入一个新的实体(如维修任务)，用来表示每项维修内容。",
         col: 1,
         list: ["", "", "", ""],
         fillAnswer: "",
@@ -2200,14 +2237,16 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         note: "",
       },
       {
-        answer: "供货关系的主键为(供货商编号, 团购点编号)，外键为供货商编号和团购点编号; 订单关系的主键为订单编号, 外键为团购点编号和客户电话",
+        answer:
+          "供货关系的主键为(供货商编号, 团购点编号)，外键为供货商编号和团购点编号; 订单关系的主键为订单编号, 外键为团购点编号和客户电话",
         col: 1,
         list: ["", "", "", ""],
         fillAnswer: "",
         note: "",
       },
       {
-        answer: "新增加的 快递实体 与 客户实体之间的 收取联系 为 n:1；快递 关系模式的主键为快递编号，外键为客户电话",
+        answer:
+          "新增加的 快递实体 与 客户实体之间的 收取联系 为 n:1；快递 关系模式的主键为快递编号，外键为客户电话",
         col: 1,
         list: ["", "", "", ""],
         fillAnswer: "",
@@ -2239,17 +2278,19 @@ Teachers (教师号,姓名,性别,身份证号,工资)
 <p><b>[问题4]</b></p>
 <p>根据说明，采用结构化语言对 "道闸控制" 的加工逻辑进行描述</p>
     `,
-    imgs: ["/docs/study/imgs/129-ti.png","/docs/study/imgs/130-ti.png"],
+    imgs: ["/docs/study/imgs/129-ti.png", "/docs/study/imgs/130-ti.png"],
     options: [
       {
-        answer: "<p>E1：车辆</p><p>E2：车主</p><p>E3：支付系统</p><p>E4：管理人员</p><p>E5：道闸控制系统</p>",
+        answer:
+          "<p>E1：车辆</p><p>E2：车主</p><p>E3：支付系统</p><p>E4：管理人员</p><p>E5：道闸控制系统</p>",
         col: 1,
         list: ["", "", "", ""],
         fillAnswer: "",
         note: "",
       },
       {
-        answer: "<p>D1：停车记录表</p><p>D2：会员信息表</p><p>D3：基础信息表(车位信息，计费规则等)</p>",
+        answer:
+          "<p>D1：停车记录表</p><p>D2：会员信息表</p><p>D3：基础信息表(车位信息，计费规则等)</p>",
         col: 1,
         list: ["", "", "", ""],
         fillAnswer: "",
@@ -2312,7 +2353,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
 <p><b>[问题4]</b></p>
 <p>根据说明，"数据处理" 可以分解为哪些子加工？进一步进行分解时，需要注意哪三种常见的错误？</p>
     `,
-    imgs: ["/docs/study/imgs/131-ti.png","/docs/study/imgs/132-ti.png"],
+    imgs: ["/docs/study/imgs/131-ti.png", "/docs/study/imgs/132-ti.png"],
     options: [
       {
         answer: `
@@ -2384,7 +2425,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
 <p><b>[问题3]</b></p>
 <p>根据说明中的描述，给出图中所对应的类名</p>
     `,
-    imgs: ["/docs/study/imgs/133-ti.png","/docs/study/imgs/134-ti.png"],
+    imgs: ["/docs/study/imgs/133-ti.png", "/docs/study/imgs/134-ti.png"],
     options: [
       {
         answer: `
@@ -2445,7 +2486,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
 <p><b>[问题3]</b></p>
 <p>简要解释用例之间的 include、extend和generalize 关系的内涵</p>
 `,
-    imgs: ["/docs/study/imgs/135-ti.png","/docs/study/imgs/136-ti.png"],
+    imgs: ["/docs/study/imgs/135-ti.png", "/docs/study/imgs/136-ti.png"],
     options: [
       {
         answer: `
@@ -2501,10 +2542,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         col: 1,
         list: [
           "编译程序不参与用户程序的运行控制。而解释程序则参与",
-          "编译程序可以用高级语言编写。而解释程序只能用汇编语言编写", 
+          "编译程序可以用高级语言编写。而解释程序只能用汇编语言编写",
           "编译方式处理源程序时不进行优化。而解释方式则进行优化",
-          "编译方式不生成源程序的目标程序。而解释方式则生成"
-          ],
+          "编译方式不生成源程序的目标程序。而解释方式则生成",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -2523,10 +2564,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `B`,
         col: 1,
         list: [
-          "x为真，则整个表达式的值即为真，不需要计算y和z的值", 
-          "x为假，则整个表达式的值即为假，不需要计算y和z的值", 
-          "x为真，再根据z的值决定是否需要计算y的值", 
-          "x为假，再根据y的值决定是否需要计算z的值", 
+          "x为真，则整个表达式的值即为真，不需要计算y和z的值",
+          "x为假，则整个表达式的值即为假，不需要计算y和z的值",
+          "x为真，再根据z的值决定是否需要计算y的值",
+          "x为假，再根据y的值决定是否需要计算z的值",
         ],
         fillAnswer: "",
         note: "",
@@ -2544,12 +2585,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `A`,
         col: 1,
-        list: [
-          "地址", 
-          "类型", 
-          "名称", 
-          "值", 
-        ],
+        list: ["地址", "类型", "名称", "值"],
         fillAnswer: "",
         note: "",
       },
@@ -2571,24 +2607,14 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `B`,
         col: 4,
-        list: [
-          "12", 
-          "16", 
-          "20", 
-          "24", 
-        ],
+        list: ["12", "16", "20", "24"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: `D`,
         col: 4,
-        list: [
-          "12", 
-          "16", 
-          "20", 
-          "24", 
-        ],
+        list: ["12", "16", "20", "24"],
         fillAnswer: "",
         note: "",
       },
@@ -2609,12 +2635,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `C`,
         col: 4,
-        list: [
-          "2, 5", 
-          "2, 15", 
-          "13, 5", 
-          "13, 15", 
-        ],
+        list: ["2, 5", "2, 15", "13, 5", "13, 15"],
         fillAnswer: "",
         note: "",
       },
@@ -2649,10 +2670,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `B`,
         col: 4,
         list: [
-          `<span class="txt-func">(a<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>b<span class="txt-sup">*</span></span>`, 
-          `<span class="txt-func">(b<span class="txt-sup">*</span>(ab<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>)<span class="txt-sup">*</span></span>`, 
-          `<span class="txt-func">(a<span class="txt-sup">*</span>(ba<span class="txt-sup">*</span>)<span class="txt-sup">*</span>b)<span class="txt-sup">*</span></span>`, 
-          `<span class="txt-func">(a|b)<span class="txt-sup">*</span>(aa)<span class="txt-sup">*</span></span>`, 
+          `<span class="txt-func">(a<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>b<span class="txt-sup">*</span></span>`,
+          `<span class="txt-func">(b<span class="txt-sup">*</span>(ab<span class="txt-sup">*</span>a)<span class="txt-sup">*</span>)<span class="txt-sup">*</span></span>`,
+          `<span class="txt-func">(a<span class="txt-sup">*</span>(ba<span class="txt-sup">*</span>)<span class="txt-sup">*</span>b)<span class="txt-sup">*</span></span>`,
+          `<span class="txt-func">(a|b)<span class="txt-sup">*</span>(aa)<span class="txt-sup">*</span></span>`,
         ],
         fillAnswer: "",
         note: "",
@@ -2671,10 +2692,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `D`,
         col: 2,
         list: [
-          "识别的0、1串是以0开头且以1结尾", 
-          "识别的0、1串中1的个数为偶数", 
-          "识别的0、1串中0后面必须是1", 
-          "识别的0、1串中1不能连续出现"
+          "识别的0、1串是以0开头且以1结尾",
+          "识别的0、1串中1的个数为偶数",
+          "识别的0、1串中0后面必须是1",
+          "识别的0、1串中1不能连续出现",
         ],
         fillAnswer: "",
         note: "",
@@ -2693,10 +2714,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: ``,
         col: 1,
         list: [
-          "该文法推导出的句子必须以'a'开头", 
-          "acabcbdcc是该文法推导出的一个句子", 
-          "'S➔aAcB'是该文法的一个产生式", 
-          "a、b、c、d属于该文法的终结符号集"
+          "该文法推导出的句子必须以'a'开头",
+          "acabcbdcc是该文法推导出的一个句子",
+          "'S➔aAcB'是该文法的一个产生式",
+          "a、b、c、d属于该文法的终结符号集",
         ],
         fillAnswer: "",
         note: "S➔aAcB|Bd；A➔AaB|c；B➔bScA|b|e；",
@@ -2759,14 +2780,24 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `C`,
         col: 2,
-        list: ["词法分析和语法分析", "语义分析和中间代码生成", "中间代码生成和代码优化", "代码优化和目标代码生成"],
+        list: [
+          "词法分析和语法分析",
+          "语义分析和中间代码生成",
+          "中间代码生成和代码优化",
+          "代码优化和目标代码生成",
+        ],
         fillAnswer: "",
         note: "",
       },
       {
         answer: `B`,
         col: 1,
-        list: ["不参与运行控制，程序执行的速度慢", "参与运行控制，程序执行的速度慢", "参与运行控制，程序执行的速度快", "不参与运行控制，程序执行的速度快"],
+        list: [
+          "不参与运行控制，程序执行的速度慢",
+          "参与运行控制，程序执行的速度慢",
+          "参与运行控制，程序执行的速度快",
+          "不参与运行控制，程序执行的速度快",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -2784,7 +2815,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `A`,
         col: 1,
-        list: ["该软件文档属于职务作品, 著作权归公司", "该软件文档不属于职务作品, 程序员享有著作权", "该软件文档属于职务作品, 但程序员享有复制权", "该软件文档不属于职务作品, 著作权由公司和程序员共同享有"],
+        list: [
+          "该软件文档属于职务作品, 著作权归公司",
+          "该软件文档不属于职务作品, 程序员享有著作权",
+          "该软件文档属于职务作品, 但程序员享有复制权",
+          "该软件文档不属于职务作品, 著作权由公司和程序员共同享有",
+        ],
         fillAnswer: "",
         note: "程序员只享有署名权",
       },
@@ -2801,7 +2837,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `B`,
         col: 1,
-        list: ["该软件属于委托单位", "若该单位与李某对软件的归属有特别的约定, 则遵从约定；无约定的, 原则上归属于李某", "取决于该软件是否属于单位分派给李某的", "无论李某与该单位有无特别约定, 该软件属于李某"],
+        list: [
+          "该软件属于委托单位",
+          "若该单位与李某对软件的归属有特别的约定, 则遵从约定；无约定的, 原则上归属于李某",
+          "取决于该软件是否属于单位分派给李某的",
+          "无论李某与该单位有无特别约定, 该软件属于李某",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -2839,14 +2880,24 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `A`,
         col: 4,
-        list: ["侵犯了著作权", "不构成侵权行为", "侵犯了商标权", "属于不正当竞争"],
+        list: [
+          "侵犯了著作权",
+          "不构成侵权行为",
+          "侵犯了商标权",
+          "属于不正当竞争",
+        ],
         fillAnswer: "",
         note: "",
       },
       {
         answer: `B`,
         col: 4,
-        list: ["侵犯了著作权", "不构成侵权行为", "侵犯了商标权", "属于不正当竞争"],
+        list: [
+          "侵犯了著作权",
+          "不构成侵权行为",
+          "侵犯了商标权",
+          "属于不正当竞争",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -2864,10 +2915,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `D`,
         col: 1,
         list: [
-          "在中国销售, M 需要向 L 支付专利许可使用费", 
-          "返销美国, M 不需要向 L 支付专利许可使用费", 
-          "在其他国家销售, M 需要向 L 支付专利许可使用费", 
-          "在中国销售, M 不需要向 L 支付专利许可使用费"
+          "在中国销售, M 需要向 L 支付专利许可使用费",
+          "返销美国, M 不需要向 L 支付专利许可使用费",
+          "在其他国家销售, M 需要向 L 支付专利许可使用费",
+          "在中国销售, M 不需要向 L 支付专利许可使用费",
         ],
         fillAnswer: "",
         note: "",
@@ -2905,10 +2956,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `A`,
         col: 1,
         list: [
-          "侵权, 支付合理费用后可以继续使用该软件", 
-          "侵权, 须承担赔偿责任", 
-          "不侵权, 可继续使用该软件", 
-          "不侵权, 不需承担任何法律责任"
+          "侵权, 支付合理费用后可以继续使用该软件",
+          "侵权, 须承担赔偿责任",
+          "不侵权, 可继续使用该软件",
+          "不侵权, 不需承担任何法律责任",
         ],
         fillAnswer: "",
         note: "",
@@ -2929,7 +2980,12 @@ Teachers (教师号,姓名,性别,身份证号,工资)
       {
         answer: `C`,
         col: 2,
-        list: ["软件著作权和专利权", "商业秘密权和专利权", "软件著作权和商业秘密权", "软件著作权和商标权"],
+        list: [
+          "软件著作权和专利权",
+          "商业秘密权和专利权",
+          "软件著作权和商业秘密权",
+          "软件著作权和商标权",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -2997,10 +3053,10 @@ Teachers (教师号,姓名,性别,身份证号,工资)
         answer: `D`,
         col: 2,
         list: [
-          "对象只能包括数据(属性)", 
-          "对象只能包括操作(行为)", 
-          "对象一定有相同的属性和行为", 
-          "对象通常由对象名、属性和操作三个部分组成"
+          "对象只能包括数据(属性)",
+          "对象只能包括操作(行为)",
+          "对象一定有相同的属性和行为",
+          "对象通常由对象名、属性和操作三个部分组成",
         ],
         fillAnswer: "",
         note: "",
@@ -3141,10 +3197,10 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
         answer: `A`,
         col: 1,
         list: [
-          "认定对象、组织对象、描述对象的相互作用、确定对象的操作", 
-          "认定对象、定义属性、组织对象、确定对象的操作", 
-          "认定对象、描述对象间的相互作用、确定对象的操作、识别包", 
-          "识别类及对象、识别关系、定义属性、确定对象的操作"
+          "认定对象、组织对象、描述对象的相互作用、确定对象的操作",
+          "认定对象、定义属性、组织对象、确定对象的操作",
+          "认定对象、描述对象间的相互作用、确定对象的操作、识别包",
+          "识别类及对象、识别关系、定义属性、确定对象的操作",
         ],
         fillAnswer: "",
         note: "",
@@ -3170,7 +3226,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `C`,
         col: 1,
-        list: ["应该支持被封装的对象", "应该支持类与实例的概念", "应该支持通过指针进行引用", "应该支持继承和多态"],
+        list: [
+          "应该支持被封装的对象",
+          "应该支持类与实例的概念",
+          "应该支持通过指针进行引用",
+          "应该支持继承和多态",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3213,7 +3274,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `D`,
         col: 2,
-        list: ["具有最低的内聚性", "不易修改和维护", "不易理解", "不影响模块间的耦合关系"],
+        list: [
+          "具有最低的内聚性",
+          "不易修改和维护",
+          "不易理解",
+          "不影响模块间的耦合关系",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3230,7 +3296,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `D`,
         col: 1,
-        list: ["尽量减少高扇出结构", "模块的大小适中", "将具有相似功能的模块合并", "完善模块的功能"],
+        list: [
+          "尽量减少高扇出结构",
+          "模块的大小适中",
+          "将具有相似功能的模块合并",
+          "完善模块的功能",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3247,7 +3318,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `C`,
         col: 4,
-        list: ["系统开发合同", "系统设计说明书", "系统开发计划", "系统测试报告"],
+        list: [
+          "系统开发合同",
+          "系统设计说明书",
+          "系统开发计划",
+          "系统测试报告",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3283,10 +3359,10 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
         answer: `B`,
         col: 1,
         list: [
-          "数据对象之间的关系,用于对数据建模", 
-          "数据在系统中如何被传送或变换，以及如何对数据流进行变换的功能或子功能，用于对功能建模", 
-          "系统对外部事件如何响应，如何动作，用于对行为建模", 
-          "数据流图中的各个组成部分"
+          "数据对象之间的关系,用于对数据建模",
+          "数据在系统中如何被传送或变换，以及如何对数据流进行变换的功能或子功能，用于对功能建模",
+          "系统对外部事件如何响应，如何动作，用于对行为建模",
+          "数据流图中的各个组成部分",
         ],
         fillAnswer: "",
         note: "",
@@ -3328,7 +3404,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `B`,
         col: 1,
-        list: ["内网、外网和 DMZ", "外网、DMZ 和内网", "DMZ、内网和外网", "内网、DMZ 和外网"],
+        list: [
+          "内网、外网和 DMZ",
+          "外网、DMZ 和内网",
+          "DMZ、内网和外网",
+          "内网、DMZ 和外网",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3547,14 +3628,24 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: `B`,
         col: 2,
-        list: ["222.125.80.128", "222.125.80.129", "222.125.80.159", "222.125.80.160"],
+        list: [
+          "222.125.80.128",
+          "222.125.80.129",
+          "222.125.80.159",
+          "222.125.80.160",
+        ],
         fillAnswer: "",
         note: "解构为222.125.80.10 00 0000，其中10000001为最小129，10111110为最大",
       },
-       {
+      {
         answer: `B`,
         col: 2,
-        list: ["222.125.80.128", "222.125.80.190", "222.125.80.192", "222.125.80.254"],
+        list: [
+          "222.125.80.128",
+          "222.125.80.190",
+          "222.125.80.192",
+          "222.125.80.254",
+        ],
         fillAnswer: "",
         note: "",
       },
@@ -3585,6 +3676,1374 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     ],
   },
   {
+    id: "section-110701",
+    type: "topic",
+    title: "上午题-CMM",
+    category: "single-select",
+    question: `以下关于 CMM 的叙述中不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "CMM 是指软件过程能力成熟度模型",
+          "CMM 根据软件过程的不同成熟度划分了5个等级。其中 1级被认为成熟度最高。5级被认为成熟度最低",
+          "CMMI 的任务是将己有的几个 CMM 模型结合在一起,使之构成 '集成模型'",
+          "采用更成熟的 CMM 模型, 一般来说可以提高最终产品的质量",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110702",
+    type: "topic",
+    title: "上午题-CMMI",
+    category: "single-select",
+    question: `能力成熟度模型集成 (CMMI) 是若干过程模型的综合和改进。
+连续式模型和阶段式模型是 CMMI 提供的两种表示方法，而连续式模型包括 6个过程域能力等级,
+其中___使用量化(统计学)手段改变和优化过程域，以应对客户要求的改变和持续改进计划中的过程域的功效。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "CL2 (己管理的)",
+          "CL3 (己定义级的)",
+          "CL4 (定垦管理的)",
+          "CL5 (优化的)",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110101",
+    type: "topic",
+    title: "上午题-瀑布模型",
+    category: "single-select",
+    question: `某开发小组欲为一公司开发一个产品控制软件，监控产品的生产和销售过程，从购买各种材料开始，到产品的加工和销售进行全程跟踪。
+购买材料的流程、产品的加工过程以及销售过程可能会发生变化。
+该软件的开发最不适宜采用___模型,主要是因为这种模型___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["瀑布", "原型", "增量", "喷泉"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "不能解决风险",
+          "不能快速提交软件",
+          "难以适应变化的需求",
+          "不能理解用户的需求",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110103",
+    type: "topic",
+    title: "上午题-增量模型",
+    category: "single-select",
+    question: `以下关于增量模型优点的叙述中,不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "强调开发阶段性早期计划",
+          "第一个可交付版本所需要的时间少和成本低",
+          "开发由增量表示的小系统所承担的风险小",
+          "系统管理成本低、效率高、配置简单",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110104",
+    type: "topic",
+    title: "上午题-原型模型",
+    category: "single-select",
+    question: `为了有效地捕获系统需求，应采用___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: ["瀑布模型", "V 模型", "原型模型", "螺旋模型"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110105",
+    type: "topic",
+    title: "上午题-螺旋模型",
+    category: "single-select",
+    question: `关于螺旋模型, 下列陈述中不正确的是___，___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "将风险分析加入到瀑布模型中",
+          "将开发过程划分为几个螺旋周期，每个螺旋周期大致和瀑布模型相符",
+          "适合于大规模、复杂且具有高风险的项目",
+          "可以快速的提供一个初始版本让用户测试",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "支持用户需求的动态变化",
+          "要求开发人员具有风险分析能力",
+          "基于该模型进行软件开发，开发成本低",
+          "过多的迭代次数可能会增加开发成本，进而延迟提交时间",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110106",
+    type: "topic",
+    title: "上午题-喷泉模型",
+    category: "single-select",
+    question: `喷泉模型是一种适合于面向___开发方法的软件过程模型。该过程模型的特点不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["对象", "数据", "数据流", "事件"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "以用户需求为动力",
+          "支持软件重用",
+          "具有迭代性",
+          "开发活动之间存在明显的界限",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110107",
+    type: "topic",
+    title: "上午题-统一过程模型",
+    category: "single-select",
+    question: `以下关于 统一过程UP 的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "UP 是以用例和风险为驱动，以架构为中心, 迭代并且增量的开发过程",
+          "UP 定义了四个阶段，即起始、精化、构建和确认阶段",
+          "每次迭代都包含计划、分析、设计、构造、集成、测试以及内部和外部发布",
+          "每个迭代有五个核心工作流",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110108",
+    type: "topic",
+    title: "上午题-敏捷过程",
+    category: "single-select",
+    question: `以下关于 敏捷统一过程(AUP) 的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "在大型任务上连续",
+          "在小型活动上迭代",
+          "每一个不同的系统都需要一套不同的策略、约定和方法论",
+          "采用经典的 UP 阶段性活动，即初始化、精化、构件和转换",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110108",
+    type: "topic",
+    title: "上午题-敏捷过程",
+    category: "single-select",
+    question: `以下关于 极限编程(XP) 的最佳实践的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "只处理当前的需求,使设计保持简单",
+          "编写完程序之后编写测试代码",
+          "可以按日甚至按小时为客户提供可运行的版本",
+          "系统最终用户代表应该全程配合 XP团队",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110108",
+    type: "topic",
+    title: "上午题-敏捷过程",
+    category: "single-select",
+    question: `在敏捷过程的开发方法中，___使用了迭代的方法，其中把每段时间(30天)一次的迭代称为一个 "冲刺" 并按需求的优先级别来实现产品，多个自组织和自治的小组并行地递增实现产品。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: ["极限编程 XP", "水晶法", "并列争求法", "自适应软件开发"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110108",
+    type: "topic",
+    title: "上午题-敏捷过程",
+    category: "single-select",
+    question: `敏捷开发方法中，___认为每一种不同的项目都需要一套不同的策略、约定和方法论。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "极限编程 (XP)",
+          "水晶法 (Crystal)",
+          "并列争求法 (Scrum)",
+          "自适应软件开发 (ASD)",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110402",
+    type: "topic",
+    title: "上午题-系统设计",
+    category: "single-select",
+    question: `软件详细设计阶段的主要任务不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "数据结构设计",
+          "算法设计",
+          "模块之间的接口设计",
+          "数据库的物理设计",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110501",
+    type: "topic",
+    title: "上午题-系统测试",
+    category: "single-select",
+    question: `在软件开发过程中，系统测试阶段的测试目标来自于___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["需求分析", "概要设计", "详细设计", "软件实现"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110505",
+    type: "topic",
+    title: "上午题-系统测试",
+    category: "single-select",
+    question: `自底向上的集成测试策略的优点包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "主要的设计问题可以在测试早期处理",
+          "不需要写驱动程序",
+          "不需要写桩程序",
+          "不需要进行回归测试",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110502",
+    type: "topic",
+    title: "上午题-黑盒测试",
+    category: "single-select",
+    question: `招聘系统要求求职的人年龄在20岁到60岁之间(含)，学历为本科、硕士或博士，专业为计算机科学与技术、通信工程或者电子工程。
+其中___不是好的测试用例。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "(20,本科,电子工程)",
+          "(18,本科,通信工程)",
+          "(18,大专,电子工程)",
+          "(25,硕士,生物学)",
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110504",
+    type: "topic",
+    title: "上午题-McCabe度量法",
+    category: "single-select",
+    question: `软件的复杂性主要体现在程序的复杂性。
+___是度量软件复杂性的一个主要参数。
+若采用 McCabe度量法 计算环路复杂性，则对于下图所示的程序图，其环路复杂度为___。`,
+    imgs: ["/docs/study/imgs/139-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["代码行数", "常量的数量", "变量的数量", "调用的库函数的数量"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["2", "3", "4", "5"],
+        fillAnswer: "",
+        note: "11 - 9 + 2",
+      },
+    ],
+  },
+  {
+    id: "section-110503",
+    type: "topic",
+    title: "上午题-白盒测试",
+    category: "single-select",
+    question: `用白盒测试技术对下面流程图进行测试，至少采用___个测试用例才能实现路径覆盖。`,
+    imgs: ["/docs/study/imgs/140-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["3", "4", "6", "8"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110503",
+    type: "topic",
+    title: "上午题-白盒测试",
+    category: "single-select",
+    question: `用白盒测试技术对下面流程图进行测试，设计的用例如下表所示。
+至少采用测试用例___才能实现语句覆盖，至少采用测试用例___才能实现路径覆盖。`,
+    imgs: ["/docs/study/imgs/141-ti.png", "/docs/study/imgs/142-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["①", "②", "③", "④"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: ["①", "①②", "③④", "①②③④"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110503",
+    type: "topic",
+    title: "上午题-白盒测试",
+    category: "single-select",
+    question: `下图用白盒测试方法进行测试，图中有___条路径。
+    采用 McCabe度量 计算该程序图的环路复杂性为___。`,
+    imgs: ["/docs/study/imgs/143-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["3", "4", "5", "6"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: ["3", "4", "5", "6"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110503",
+    type: "topic",
+    title: "上午题-白盒测试",
+    category: "single-select",
+    question: `如下所示代码(用缩迸表示程序块)，要实现语句覆盖，至少需要___个测试用例。
+    采用 McCabe度量 计算该程序图的环路复杂性为___。`,
+    imgs: ["/docs/study/imgs/144-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: ["1", "2", "3", "4"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["1", "2", "3", "4"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110601",
+    type: "topic",
+    title: "上午题-软件维护",
+    category: "single-select",
+    question: `系统可维护性是指维护人员理解、改正、改动和改进软件系统的难易程度，其评价指标不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: ["可理解性", "可测试性", "可修改性", "一致性"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110601",
+    type: "topic",
+    title: "上午题-软件维护",
+    category: "single-select",
+    question: `以下关于软件维护的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "软件维护解决软件产品交付用户之后运行中发生的各种问题", 
+          "软件维护期通常比开发期长得多，投入也大得多", 
+          "软件可维护性是软件开发阶段各个时期的关键目标", 
+          "相对于软件开发任务而言，软件维护工作要简单得多"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110601",
+    type: "topic",
+    title: "上午题-软件维护",
+    category: "single-select",
+    question: `某搜索引擎在交付后，开发人员修改了其中的索引方法，使得用户可以更快地得到搜索结果。这种修改属于___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: ["正确性", "适应性", "完善性", "预防性"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110803",
+    type: "topic",
+    title: "上午题-软件质量",
+    category: "single-select",
+    question: `软件可维护性是一个系统在特定的时间间隔内可以正常进行维护活动的概率。
+用 MTTF 和 MTTR 分别表示平均无故障时间和平均故障修复时间，则软件可维护性计算公式为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: ["MTTF/ (1+MTTF)", "1/ (1+MTTF)", "MTTR/ (1+MTTR)", "1/ (1+MTTR)"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110805",
+    type: "topic",
+    title: "上午题-沟通管理",
+    category: "single-select",
+    question: `在进行软件开发时，采用无主程序员的开发小组,成员之间相互平等；
+而主程序员负责制的开发小组，由一个主程序员和若千成员组成，成员之间没有沟通。
+在一个由8名开发人员构成的小组中，无主程序员组和主程序员组的沟通路径分别是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: ["32和8", "32和7", "28和8", "28和7"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110806",
+    type: "topic",
+    title: "上午题-成本管理",
+    category: "single-select",
+    question: `软件项目成本估算模型 COCOMO II 中，体系结构阶段模型基于___进行估算。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: ["应用程序点数量", "功能点数量", "复用或生成的代码行数", "源代码的行数"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110801",
+    type: "topic",
+    title: "上午题-进度管理",
+    category: "single-select",
+    question: `以下关于进度管理工具 Gantt图 的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "能清晰地表达每个任务的开始时间、结束时间和持续时间", 
+          "能清晰地表达任务之间的并行关系", 
+          "不能清晰地确定任务之间的依赖关系", 
+          "能清晰地确定影响进度的关键任务"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110801",
+    type: "topic",
+    title: "上午题-进度管理",
+    category: "single-select",
+    question: `在进行进度安排时, PERT图不能清晰地描述___，但可以给出哪些任务完成后才能开始另一些任务。
+某项目X包含任务A、B、...、J，其 PERT图如下图所示(A=1表示任务A的持续时间是1天)，则项目X的关键路径是___。`,
+    imgs: ["/docs/study/imgs/145-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "每个任务从何时开始", 
+          "每个任务到何时结束", 
+          "各任务之间的并行情况", 
+          "各任务之间的依赖关系"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 2,
+        list: ["A-D-H-J", "B-E-H-J", "B-F-J", "C-G-I-J"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110801",
+    type: "topic",
+    title: "上午题-进度管理",
+    category: "single-select",
+    question: `下图是一个软件项目的活动图。
+其中顶点表示项目里程碑，连接顶点的边表示活动，边上的权重表示完成该活动所需要的时间(天)，
+则活动___不在关键路径上，活动 BI 和 EG 的松弛时间分别是___。`,
+    imgs: ["/docs/study/imgs/146-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["BD", "BI", "GH", "KL"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: ["0和1", "1和0", "0和2", "2和0"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110801",
+    type: "topic",
+    title: "上午题-进度管理",
+    category: "single-select",
+    question: `某项目的活动持续时间及其依赖关系如下表所示，则完成该项目的最少时间为___天。`,
+    imgs: ["/docs/study/imgs/147-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: ["43", "45", "50", "55"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110804",
+    type: "topic",
+    title: "上午题-软件配置管理",
+    category: "single-select",
+    question: `配置管理贯穿软件开发的整个过程。以下内容中,不属于配置管理的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["版本控制", "风险管理", "变更管理", "配置状态报告"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110802",
+    type: "topic",
+    title: "上午题-风险管理",
+    category: "single-select",
+    question: `在风险管理中，通常需要进行风险监测，其目的不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: ["消除风险", "评估所预测的风险是否发生", "保证正确实施了风险缓解步骤", "收集用于后续进行风险分析的信息"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-110901",
+    type: "topic",
+    title: "上午题-软件质量模型",
+    category: "single-select",
+    question: `在 ISO/IEC 软件质量模型中，可移植性是指与软件可从某环境移到另一环境的能力有关的一组属性，其子特性不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["适应性", "易测试性", "易安装性", "易替换性"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-01",
+    type: "topic",
+    title: "上午题-sample",
+    category: "single-select",
+    question: `McCall 软件质量模型从软件产品的运行、修正和转移三个方面确定了11个质量特性。
+其中___不属于产品运行方面的质量特性。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: ["正确性", "可靠性", "效率", "灵活性"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-111003",
+    type: "topic",
+    title: "上午题-软件工具",
+    category: "single-select",
+    question: `软件维护工具不包括___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["版本控制", "配置管理", "文档分析", "逆向工程"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140102",
+    type: "topic",
+    title: "上午题-复杂度",
+    category: "single-select",
+    question: `根据渐进分析，表达式序列：
+<span class='txt-func'>n<span class='txt-sub'>4</span></span>,
+<span class='txt-func'>lgn</span>,
+<span class='txt-func'>2<span class='txt-sub'>n</span></span>,
+<span class='txt-func'>1000n</span>,
+<span class='txt-func'>n<span class='txt-sub'>2/3</span></span>,
+<span class='txt-func'>n!</span>
+从低到高排序为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          `
+<span class='txt-func'>lgn</span>,
+<span class='txt-func'>1000n</span>,
+<span class='txt-func'>n<span class='txt-sup'>2/3</span></span>,
+<span class='txt-func'>2<span class='txt-sup'>n</span></span>,
+<span class='txt-func'>n!</span>,
+<span class='txt-func'>n<span class='txt-sup'>4</span></span>
+          `, 
+          `
+<span class='txt-func'>n<span class='txt-sup'>2/3</span></span>,
+<span class='txt-func'>1000n</span>,
+<span class='txt-func'>lgn</span>,
+<span class='txt-func'>n<span class='txt-sup'>4</span></span>,
+<span class='txt-func'>n!</span>,
+<span class='txt-func'>2<span class='txt-sup'>n</span></span>
+          `,
+        `
+<span class='txt-func'>lgn</span>,
+<span class='txt-func'>1000n</span>,
+<span class='txt-func'>n<span class='txt-sup'>2/3</span></span>,
+<span class='txt-func'>2<span class='txt-sup'>n</span></span>,
+<span class='txt-func'>n<span class='txt-sup'>4</span></span>,
+<span class='txt-func'>n!</span>
+          `,
+        `
+<span class='txt-func'>lgn</span>,
+<span class='txt-func'>n<span class='txt-sup'>2/3</span></span>,
+<span class='txt-func'>1000n</span>,
+<span class='txt-func'>n<span class='txt-sup'>4</span></span>,
+<span class='txt-func'>2<span class='txt-sup'>n</span></span>,
+<span class='txt-func'>n!</span>
+          `,],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140102",
+    type: "topic",
+    title: "上午题-复杂度",
+    category: "single-select",
+    question: `己知算法A的运行时间函数为<span class='txt-func'>T(n)=8T(n/2)+n<span class='txt-sup'>2</span></span>
+，其中n表示问题的规模，则该算法的时间复杂度为___。
+另己知算法B的运行时间函数为<span class='txt-func'>T(n)=XT(n/4)+n<span class='txt-sup'>2</span></span>
+，其中n表示问题的规模。对充分大的n，若要算法B比算法A快，则X的最大值为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(n)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "<span class='txt-func'>log<span class='txt-sub'>2</span><span class='txt-sup'>8</span></span> = 3",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: ["15", "17", "63", "65"],
+        fillAnswer: "",
+        note: "<span class='txt-func'>log<span class='txt-sub'>4</span><span class='txt-sup'>X</span></span> < <span class='txt-func'>log<span class='txt-sub'>2</span><span class='txt-sup'>8</span></span> = <span class='txt-func'>log<span class='txt-sub'>4</span><span class='txt-sup'>64</span></span>",
+      },
+    ],
+  },
+  {
+    id: "section-030102",
+    type: "topic",
+    title: "上午题-线性表",
+    category: "single-select",
+    question: `设有一个包含n个元素的有序线性表，在等概率情况下删除其中的一个元素。
+若采用顺序存储结构，则平均需要移动___个元素；
+若采用单链存储结构，则平均需要移动___个元素。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: ["1", "(n-1)/2", "logn", "n"],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: ["0", "1", "(n-1)/2", "n/2"],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030103",
+    type: "topic",
+    title: "上午题-栈",
+    category: "single-select",
+    question: `若栈采用顺序存储方式，现有两个栈共享空间V[1...n]，top[i]代表i(i=1,2) 个栈的栈顶
+(两个栈都空时 top[1]=1 top[2]=n)，栈1的底在V[1]，栈2的底在V[n]，则栈满 (即n个元素暂存在这两个栈)
+的条件是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "top[1]=top[2]", 
+          "top[1]+top[2]==1", 
+          "top[1]+top[2]==n", 
+          "top[1]-top[2]==1", 
+        ],
+        fillAnswer: "",
+        note: "top[1]代表该栈可填入的位置，top[2]代表栈顶的位置",
+      },
+    ],
+  },
+  {
+    id: "section-030102",
+    type: "topic",
+    title: "上午题-线性表",
+    category: "single-select",
+    question: `对于线性表，相对于顺序存储，采用链表存储的缺点是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "数据元素之间的关系需要占用存储空间，导致存储密度不高", 
+          "表中结点必须占用地址连续的存储单元，存储密度不高", 
+          "插入新元素时需要遍历整个链表, 运算的时间效率不高", 
+          "删除元素时需要遍历整个链表，运算的时间效率不高"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030103",
+    type: "topic",
+    title: "上午题-栈和队列",
+    category: "single-select",
+    question: `设有栈S和队列Q初始状态为空，数据元素序列a,b,c,d,e,f依次通过栈S且多个元素从S出栈后立即进入队列Q，
+若出队的序列是b,d,e,c,a，则S中的元素最多时，栈底到栈顶的元素依次为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "a,b,c", 
+          "a,c,d", 
+          "a,c,e,f", 
+          "a,d,f,e"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030104",
+    type: "topic",
+    title: "上午题-串",
+    category: "single-select",
+    question: `设S是一个长度为n的非空字符串，其中的字符各不相同，则其互异的非平凡子串(非空且不同于S本身)个数为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "2n-1", 
+          "n^2", 
+          "n(n+1)/2", 
+          "(n+2)(n-1)/2"
+        ],
+        fillAnswer: "",
+        note: "从单个字母的n个字串，到长度为n-1的2个字串，总共(n+2)(n-1)/2个",
+      },
+    ],
+  },
+  {
+    id: "section-030105",
+    type: "topic",
+    title: "上午题-模式匹配",
+    category: "single-select",
+    question: `在字符串的 KMP 模式匹配箅法中。需先求解模式串的 next 函数值。其定义如下式所示;
+j表示模式串中字符的序号(从1开始),若模式串P 为 'abaac'，则其next函数值为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "01234", 
+          "01122", 
+          "01211", 
+          "01111"
+        ],
+        fillAnswer: "",
+        note: "i=3时，ab的最长公共前后缀为0+1=1，同理i=4时aba为2，i=5时abaa为2",
+      },
+    ],
+  },
+  {
+    id: "section-030201",
+    type: "topic",
+    title: "上午题-数组",
+    category: "single-select",
+    question: `二维数组a[1..N, 1..N]可以按行存储或按列存储。
+对于数组元素a[i,j] (1<=i, j<=N)，当___时，在按行和按列两种存储方式下，其偏移量相同。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "i≠j", 
+          "i=j", 
+          "i&gt;j", 
+          "i&lt;j"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030202",
+    type: "topic",
+    title: "上午题-矩阵",
+    category: "single-select",
+    question: `___是对稀疏矩阵进行压缩存储的方式。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "二维数组和双向链表", 
+          "三元组顺序表和十字链表", 
+          "邻接矩阵和十字链表", 
+          "索引顺序表和双向链表"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030301",
+    type: "topic",
+    title: "上午题-树",
+    category: "single-select",
+    question: `某树共有n个结点，其中所有分支结点的度为k(即每个非叶子结点的子树数目)，则该树中叶子结点的个数为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "(n(k+1)-1)/k", 
+          "(n(k+1)+1)/k", 
+          "(n(k-1)+1)/k", 
+          "(n(k-1)-1)/k", 
+        ],
+        fillAnswer: "",
+        note: "由性质1可得，树中的总度数为 n-1，则度数不为0的节点数为 (n-1)/k，所以叶子节点个数为 n-(n-1)/k",
+      },
+    ],
+  },
+  {
+    id: "section-030302",
+    type: "topic",
+    title: "上午题-二叉树",
+    category: "single-select",
+    question: `二叉树的高度是指其层数，空二叉树的高度为0，仅有根结点的二叉树高度为1。
+若某二叉树中共有1024个结点，则该二叉树的高度是整数区间___中的任一值。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "(10,1024)", 
+          "[10,1024]", 
+          "(11,1024)", 
+          "[11,1024]"
+        ],
+        fillAnswer: "",
+        note: "完全二叉树",
+      },
+    ],
+  },
+  {
+    id: "section-030302",
+    type: "topic",
+    title: "上午题-二叉树",
+    category: "single-select",
+    question: `具有3个节点的二叉树有5种，可推测出具有4个节点的二叉树有___种。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "10", 
+          "11", 
+          "14", 
+          "15"
+        ],
+        fillAnswer: "",
+        note: "卡特兰数 <span class='txt-func'>C<span class='txt-sup'>n</span><span class='txt-sub'>2n</span>/(n+1)</span>",
+      },
+    ],
+  },
+  {
+    id: "section-030302",
+    type: "topic",
+    title: "上午题-二叉树",
+    category: "single-select",
+    question: `对下面的二叉树进行顺序存储(用数组MEM表示)，
+己知结点A、B、C在MEM中对应元素的下标分别为1、2、3，那么结点D、E、F对应的数组元素下标为___。`,
+    imgs: ["/docs/study/imgs/151-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "4、5、6", 
+          "4、7、10", 
+          "6、7、8", 
+          "6、7、14"
+        ],
+        fillAnswer: "",
+        note: "n节点的左节点为2n，右节点为2n+1",
+      },
+    ],
+  },
+  {
+    id: "section-030303",
+    type: "topic",
+    title: "上午题-二叉树遍历",
+    category: "single-select",
+    question: `某二叉树的中序遍历为 {20, 30, 10, 50, 40}，先序遍历为 {10, 20, 30, 40, 50}，则后序遍历为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "50, 40, 30, 20, 10", 
+          "30, 20, 10, 50, 40", 
+          "30, 20, 50, 40, 10", 
+          "20, 30, 10, 40, 50"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030304",
+    type: "topic",
+    title: "上午题-二叉排序树",
+    category: "single-select",
+    question: `可以构造出下图所示的二叉排序树的关键码序列是___。`,
+    imgs: ["/docs/study/imgs/152-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "10 13 17 19 23 27 31 40 65 91", 
+          "23 40 91 17 19 10 31 65 27 13", 
+          "23 19 40 27 17 13 10 91 65 31", 
+          "27 31 40 65 91 13 10 17 23 19"
+        ],
+        fillAnswer: "",
+        note: "构造过程中 小于放置左子树，大于放置右子树",
+      },
+    ],
+  },
+  {
+    id: "section-030306",
+    type: "topic",
+    title: "上午题-哈夫曼编码",
+    category: "single-select",
+    question: `己知一个文件中出现的各字符及其对应的频率如下表所示。
+采用 Huffman 编码，则该文件中字符a和c的码长分别为___；字符序列 "110001001101" 的编码应为___。`,
+    imgs: ["/docs/study/imgs/153-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "1和3", 
+          "1和4", 
+          "3和3", 
+          "3和4"
+        ],
+        fillAnswer: "",
+        note: "从最小的开始构建，小左大右，再重复构造哈夫曼树，再左标0右标1",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "face", 
+          "bace", 
+          "acde", 
+          "fade"
+        ],
+        fillAnswer: "",
+        note: "从左向右直接匹配",
+      },
+    ],
+  },
+  {
+    id: "section-030305",
+    type: "topic",
+    title: "上午题-最优二叉树",
+    category: "single-select",
+    question: `以下关于哈夫曼树的叙述，正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "哈夫曼树一定是满二叉树，其每层结点数都达到最大值", 
+          "哈夫曼树一定是平衡二叉树，其每个结点左右子树的高度差为-1、0或1", 
+          "哈夫曼树中左孩子结点的权值小于父结点，右孩子结点的权值大于父结点", 
+          "哈夫曼树中叶子结点的权值趑小则距离树根趑远，叶子结点的权值越大则距离树根越近"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030401",
+    type: "topic",
+    title: "上午题-图",
+    category: "single-select",
+    question: `某简单无向连通图G的顶点数为n，则图G最少和最多分别有___条边。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "n, n^2/2", 
+          "n-1, n*(n-1)/2", 
+          "n, n*(n-1)/2", 
+          "n-1, n^2/2"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030402",
+    type: "topic",
+    title: "上午题-图的存储",
+    category: "single-select",
+    question: `对于如下所示的有向图，其邻接矩阵是一个___的矩阵，采用邻接链表存储时,
+顶点1的表结点个数为2,顶点5的表结点个数为0,顶点2和3的表结点个数分别为___。`,
+    imgs: ["/docs/study/imgs/154-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "5*5", 
+          "5*7", 
+          "7*5", 
+          "7*7"
+        ],
+        fillAnswer: "",
+        note: "节点个数",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "2, 1", 
+          "2, 2", 
+          "3, 4", 
+          "4, 3"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030403",
+    type: "topic",
+    title: "上午题-图的遍历",
+    category: "single-select",
+    question: `某有向图如下所示，从顶点 v1 出发对其迸行深度优先遍历，可能得到的遍历序列是___。
+从顶点 v1 出发对其进行广度优先遍历，可能得到的遍历序列是___。`,
+    imgs: ["/docs/study/imgs/155-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "①②③", 
+          "①③④", 
+          "①②④", 
+          "②③④"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "①②", 
+          "①③", 
+          "②③", 
+          "③④"
+        ],
+        fillAnswer: "",
+        note: "广度肯定先看左右子节点",
+      },
+    ],
+  },
+  {
+    id: "section-030403",
+    type: "topic",
+    title: "上午题-图的遍历",
+    category: "single-select",
+    question: `图G的邻接矩阵如下图所示(顶点依次为v0、v1、v2、v3、v4、v5)，G是___。
+对G进行广度优先遍历可能的遍历序列为___。`,
+    imgs: ["/docs/study/imgs/156-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "无向图", 
+          "有向图", 
+          "完全图", 
+          "强连通图"
+        ],
+        fillAnswer: "",
+        note: "非01表示，且只有v0到v1，没有v1到v0",
+      },
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          "v0、v1、v2、v3、v4、v5", 
+          "v0、v2、v4、v5、v1、v3", 
+          "v0、v1、v3、v5、v2、v4", 
+          "v0、v2、v4、v2、v5、v1"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
     id: "section-01",
     type: "topic",
     title: "上午题-sample",
@@ -3595,7 +5054,12 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
       {
         answer: ``,
         col: 1,
-        list: ["", "", "", ""],
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
         fillAnswer: "",
         note: "",
       },

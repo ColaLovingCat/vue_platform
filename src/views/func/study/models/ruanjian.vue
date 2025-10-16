@@ -1083,10 +1083,12 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>
                 例：由a、b构造且仅包含偶数个a的串的集合
-                <span class="txt-func">(b<span class="txt-sup">*</span>
-                (ab<span class="txt-sup">*</span>a))
-                <span class="txt-sup">*</span>
-              </span>
+                <span class="txt-func"
+                  >(b<span class="txt-sup">*</span> (ab<span class="txt-sup"
+                    >*</span
+                  >a))
+                  <span class="txt-sup">*</span>
+                </span>
               </p>
               <table>
                 <thead>
@@ -1375,6 +1377,8 @@ const showModal = (action: string, values: any) => {
                 srcset=""
               />
             </div>
+          </div>
+          <div id="section-030202">
             <h4>2.2 矩阵 <i class="txt-en">Matrices</i></h4>
             <div class="sub-contents">
               <p>具有m行n列的二维数组</p>
@@ -1389,7 +1393,7 @@ const showModal = (action: string, values: any) => {
               <p>压缩存储，以按行存储为例</p>
               <img
                 class="img-44"
-                style="width: 500px"
+                style="width: 600px"
                 src="/docs/study/imgs/44-juzhen.png"
                 alt=""
                 srcset=""
@@ -1410,7 +1414,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <img
                 class="img-45"
-                style="width: 300px"
+                style="width: 200px"
                 src="/docs/study/imgs/45-tree.png"
                 alt=""
                 srcset=""
@@ -1452,14 +1456,14 @@ const showModal = (action: string, values: any) => {
                 alt=""
                 srcset=""
               />
-              <p>性质1：二叉树第 I 层 (i≥1)上最多有 2i-1 个节点</p>
-              <p>性质2：高度为h的二叉树至多有 2h-1 个节点</p>
-              <p>性质3：二叉树中度为0的节点数等于度为2的节点数+1</p>
-              <p>性质4：有n个节点的完全二叉树高度为⌊log2n⌋+1或⌈log2(n+1)⌉</p>
+              <p>性质1：二叉树第 i(i≥1) 层上最多有 <span class="txt-func">2<span class="txt-sup">i-1</span></span> 个节点</p>
+              <p>性质2：高度为h的二叉树至多有 <span class="txt-func">2<span class="txt-sup">h</span>-1</span> 个节点</p>
+              <p>性质3：二叉树中度为0的节点数n0等于度为2的节点数n2+1，即 n0=n2+1</p>
+              <p>性质4：有n个节点的完全二叉树高度为 ⌊log2n⌋+1 或 ⌈log2(n+1)⌉</p>
               <p>存储结构</p>
               <img
                 class="img-47"
-                style="width: 500px"
+                style="width: 750px"
                 src="/docs/study/imgs/47-tree.png"
                 alt=""
                 srcset=""
@@ -2101,12 +2105,14 @@ const showModal = (action: string, values: any) => {
               <p>第一范式：R的每个属性A的值域只包含<b>原子项</b></p>
               <p>比如 courses='Math, English'</p>
               <p>
-                第二范式：且每个非主属性都完全函数依赖于候选码，<b>不存在部分函数依赖</b>
+                第二范式：且每个非主属性都完全函数依赖于候选码，<b
+                  >不存在部分函数依赖</b
+                >
               </p>
               <p>判断部分函数依赖：看候选码的子集能否单独确定非主属性</p>
               <p>
-                比如 score(student_id, course_id, student_name, score) 中
-                主键是 (student_id, course_id) 但 student_name 只依赖于 student_id
+                比如 score(student_id, course_id, student_name, score) 中 主键是
+                (student_id, course_id) 但 student_name 只依赖于 student_id
               </p>
               <p>第三范式：且非主属性对候选码<b>不存在传递函数依赖</b></p>
               <p>判断传递函数依赖： (X,Y)→Z (X,Z)→W ⟹ (X,Y)→W</p>
@@ -2119,11 +2125,16 @@ const showModal = (action: string, values: any) => {
                 BC范式：且F中的每个依赖的决定因素必定包含R的某个候选码，进一步消除主属性对码的部分和传递函数依赖
               </p>
               <p>
-                比如 R=(student, teacher, course)中F={(student, teacher)→course, (student, course)→teacher, teacher→course},teacher是决定因素，不包含候选码
+                比如 R=(student, teacher, course)中F={(student, teacher)→course,
+                (student, course)→teacher,
+                teacher→course},teacher是决定因素，不包含候选码
               </p>
-              <p>第四范式：消除非平凡且非函数依赖的多值依赖，在R(X,Y,Z)中若X相同时交换Y的值仍可以找到相同的元组</p>
               <p>
-                比如 students(student_id, hobby, language) 中 hobby 与 language独立
+                第四范式：消除非平凡且非函数依赖的多值依赖，在R(X,Y,Z)中若X相同时交换Y的值仍可以找到相同的元组
+              </p>
+              <p>
+                比如 students(student_id, hobby, language) 中 hobby 与
+                language独立
               </p>
             </div>
           </div>
@@ -2244,14 +2255,26 @@ const showModal = (action: string, values: any) => {
           <div id="section-060101">
             <h4>1.1 概念</h4>
             <div class="sub-contents">
-              <p><b>对象</b> <i class="txt-en">object</i>：对象名，属性，方法</p>
-              <p><b>类</b> <i class="txt-en">class</i>：属性/数据/状态/变量和方法/函数/操作/行为/实现</p>
+              <p>
+                <b>对象</b> <i class="txt-en">object</i>：对象名，属性，方法
+              </p>
+              <p>
+                <b>类</b>
+                <i class="txt-en">class</i
+                >：属性/数据/状态/变量和方法/函数/操作/行为/实现
+              </p>
               <p>分类：实体类/接口类(边界类)/控制类</p>
               <p>抽象：抽取共同特征和行为</p>
-              <p>类是对象的抽象，对象是类的实例 <i class="txt-en">instance</i></p>
-              <p><b>消息</b> <i class="txt-en">message</i>：调用方法传值给形参，相互之间通讯</p>
               <p>
-                <b>封装</b>：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
+                类是对象的抽象，对象是类的实例 <i class="txt-en">instance</i>
+              </p>
+              <p>
+                <b>消息</b>
+                <i class="txt-en">message</i>：调用方法传值给形参，相互之间通讯
+              </p>
+              <p>
+                <b>封装</b
+                >：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
               </p>
               <p>this：隐式引用变量，指向当前实例</p>
               <p>-区分成员变量与局部变量</p>
@@ -2261,7 +2284,11 @@ const showModal = (action: string, values: any) => {
               <p>public/private/protected：权限修饰符 公有</p>
               <p>static：静态成员变量，变量方法可类名调用，可修饰内部类</p>
               <p>final：使变量的值不可变，使方法不能被重写，使类不能继承</p>
-              <p><b>继承</b> <i class="txt-en">extends</i>：子类/派生类共享父类/超类/基类的属性和方法</p>
+              <p>
+                <b>继承</b>
+                <i class="txt-en">extends</i
+                >：子类/派生类共享父类/超类/基类的属性和方法
+              </p>
               <p>多重继承：多个父类，二义性</p>
               <p>
                 abstract：抽象类。可包含抽象方法，不能直接实例化，不能使用private/final/static,，可有构造方法
@@ -2271,7 +2298,8 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>隐藏：子类中具有 同名不同参 的方法，阻止父类函数行为</p>
               <p>
-                <b>多态</b>：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
+                <b>多态</b
+                >：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
               </p>
               <p>参数多态/包含多态(引用子类)/过载多态(上下文)/强制多态</p>
               <p>
@@ -2282,12 +2310,19 @@ const showModal = (action: string, values: any) => {
                 动态绑定：继承后当代码运行时，通过父类引用调用父类和子类的重写方法，结果实际调用子类的方法
               </p>
               <p>
-                函数重载/方法重载 <i class="txt-en">overload</i>：同一个类中具有 同名不同参
-                的方法，提供多种方式来执行相同行为
+                函数重载/方法重载 <i class="txt-en">overload</i>：同一个类中具有
+                同名不同参 的方法，提供多种方式来执行相同行为
               </p>
-              <p><b>绑定</b> <i class="txt-en">binding</i>：把一个方法与其所在的类/对象关联起来</p>
+              <p>
+                <b>绑定</b>
+                <i class="txt-en">binding</i
+                >：把一个方法与其所在的类/对象关联起来
+              </p>
               <p>静态绑定：编译时，动态绑定：运行时</p>
-              <p>接口 <i class="txt-en">interface</i>/实现 <i class="txt-en">implement</i>：实现接口中的所有方法</p>
+              <p>
+                接口 <i class="txt-en">interface</i>/实现
+                <i class="txt-en">implement</i>：实现接口中的所有方法
+              </p>
             </div>
           </div>
           <div id="section-060102">
@@ -5044,7 +5079,12 @@ const showModal = (action: string, values: any) => {
           <div id="section-100404">
             <h4>4.4 数据流图 DFD <i class="txt-en">Data Flow Diagram</i></h4>
             <div class="sub-contents">
-              <p>基本图形元素：数据流 <i class="txt-en">Data Flow</i>、加工 <i class="txt-en">Process</i>、数据存储 <i class="txt-en">Data Store</i>、外部实体 <i class="txt-en">External Agent</i></p>
+              <p>
+                基本图形元素：数据流 <i class="txt-en">Data Flow</i>、加工
+                <i class="txt-en">Process</i>、数据存储
+                <i class="txt-en">Data Store</i>、外部实体
+                <i class="txt-en">External Agent</i>
+              </p>
               <img
                 class="img-30"
                 style="width: 600px"
@@ -5056,11 +5096,13 @@ const showModal = (action: string, values: any) => {
                 数据流：加工➔加工、加工➔数据存储(写)、数据存储➔加工(读)、外部实体➔加工(输入)、加工➔外部实体(输出)
               </p>
               <p>数据流的起点或终点必须有一个是加工</p>
+              <p>加工：数据流的转换和处理，必须有输入和输出</p>
               <p>
-                加工：数据流的转换和处理，必须有输入和输出
+                有输出无输入为奇迹，有输入无输出为黑洞，输入不足以产生输出为灰洞
               </p>
-              <p>有输出无输入为奇迹，有输入无输出为黑洞，输入不足以产生输出为灰洞</p>
-              <p>数据存储：存储数据和提供数据，存储加工的输出数据和提供加工的输入数据</p>
+              <p>
+                数据存储：存储数据和提供数据，存储加工的输出数据和提供加工的输入数据
+              </p>
               <p>外部实体：当前系统之外的人员组织，数据发源地和归宿地</p>
               <p>父图子图平衡：输入输出要保持一致</p>
               <p>
@@ -5106,7 +5148,9 @@ const showModal = (action: string, values: any) => {
                 <span class="txt-define">特点</span
                 >增量划分、迭代开发、重复循环、增量交付
               </p>
-              <p><span class="txt-define">缺点</span>管理成本高，效率低</p>
+              <p>
+                <span class="txt-define">缺点</span>管理成本高，效率低，配置复杂
+              </p>
             </div>
           </div>
           <div id="section-110104">
@@ -5163,7 +5207,7 @@ const showModal = (action: string, values: any) => {
             <h4>1.8 敏捷过程 <i class="txt-en">Agile</i></h4>
             <div class="sub-contents">
               <p>通过迭代、协作和快速响应变化来提高团队的效率和灵活性</p>
-              <p>极限编程(XP)：4个价值观、5个原则、12个最佳实践、行为</p>
+              <p>1.极限编程(XP)：4个价值观、5个原则、12个最佳实践、行为</p>
               <p>4个价值观：沟通、简单性假设、反馈、勇气</p>
               <p>12个最佳实践</p>
               <table>
@@ -5221,13 +5265,13 @@ const showModal = (action: string, values: any) => {
                 </tbody>
               </table>
               <p>
-                水晶法
+                2.水晶法
                 <i class="txt-en">Crystal</i
                 >：以人为本，不同项目需要不同策略、约定和方法论
               </p>
               <p>开发式源码：程序开发人员再地域上分布很广</p>
               <p>
-                并列争求法
+                3.并列争求法
                 <i class="txt-en">Scrum</i
                 >：迭代的增量化工程方法，按需求的优先级别实现产品。30天为一个<b
                   >冲刺</b
@@ -5235,10 +5279,10 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>功能驱动开发 FDD：首席程序员和类程序员</p>
               <p>
-                自适应软件开发
+                4.自适应软件开发
                 ASD：三个非线性开发阶段：猜测、合作、学习。强调开发方法的适应性，为软件的重要性提供基础，适应组织和管理层次
               </p>
-              <p>敏捷统一过程(AUP)：在大型上连续，在小型上迭代</p>
+              <p>5.敏捷统一过程(AUP)：在大型上连续，在小型上迭代</p>
               <p>建模、实现、测试、部署、配置及项目管理、环境管理</p>
             </div>
           </div>
@@ -5678,14 +5722,17 @@ const showModal = (action: string, values: any) => {
                 <span class="txt-define">分类</span>项目风险、技术风险、商业风险
               </p>
               <p>风险识别：建立风险条目检查表</p>
-              <p>风险预测：风险暴露=发生概率*影响后果(本质、范围、时间)</p>
+              <p>风险预测：</p>
+              <p>
+                风险暴露
+                <i class="txt-en">Risk Exposure</i>
+                = 风险发生概率
+                <i class="txt-en">Risk Probability</i>
+                * 风险影响后果(本质、范围、时间)
+                <i class="txt-en">Risk Impact</i>
+              </p>
               <p>风险评估：定义风险参照水准，成本、进度、性能</p>
               <p>风险控制：风险避免(主动)、风险监控、RMMM计划/风险管理策略</p>
-              <p>
-                风险曝光度
-                <i class="txt-en">Risk Exposure</i
-                >：计算方法是风险出现的概率乘以风险可能造成的损失
-              </p>
             </div>
           </div>
           <div id="section-110803">
@@ -5744,7 +5791,7 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <div id="section-110902">
-            <h4>9.2 Mc Call 软件质量模型</h4>
+            <h4>9.2 McCall 软件质量模型</h4>
             <div class="sub-contents">
               <p>产品运行：正确性、可靠性、易使用性、效率、完整性</p>
               <p>产品修正：可维护性、灵活性、可测试性</p>
@@ -6497,8 +6544,19 @@ const showModal = (action: string, values: any) => {
           <div id="section-140102">
             <h4>1.2 效率</h4>
             <div class="sub-contents">
+              <p>大O表示法</p>
+              <img
+                class="img-148"
+                style="width: 600px"
+                src="/docs/study/imgs/148-fuza.png"
+              />
               <p>时间复杂度</p>
               <p>空间复杂度</p>
+              <img
+                class="img-149"
+                style="width: 600px"
+                src="/docs/study/imgs/149-fuza.png"
+              />
             </div>
           </div>
         </div>

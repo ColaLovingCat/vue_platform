@@ -17,6 +17,7 @@ const pageInfos = reactive({
   ],
   txts: [
     [
+      { symbol: "≠" },
       { symbol: "➔" },
       { symbol: "➜" },
       { symbol: "➡" },
@@ -64,13 +65,30 @@ const pageInfos = reactive({
       { symbol: "🔓" },
     ],
     [
-      { symbol: "𝜋" },
-      { symbol: "𝜎" },
-      { symbol: "ρ" },
+      { symbol: "α" },
+      { symbol: "β" },
+      { symbol: "γ" },
       { symbol: "δ" },
+      { symbol: "ε" },
+      { symbol: "ζ" },
+      { symbol: "η" },
+      { symbol: "θ" },
+      { symbol: "ι" },
+      { symbol: "κ" },
       { symbol: "λ" },
       { symbol: "μ" },
+      { symbol: "ν" },
+      { symbol: "ξ" },
+      { symbol: "ο" },
+      { symbol: "𝜋" },
+      { symbol: "ρ" },
+      { symbol: "𝜎" },
+      { symbol: "τ" },
+      { symbol: "υ" },
       { symbol: "ϕ" },
+      { symbol: "χ" },
+      { symbol: "ψ" },
+      { symbol: "ω" },
     ],
   ],
 });
@@ -106,6 +124,8 @@ const pageInfos = reactive({
         </tr>
       </tbody>
     </table>
+    <h4>带圈数字</h4>
+    <p>①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳</p>
   </div>
 </template>
 
