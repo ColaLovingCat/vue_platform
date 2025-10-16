@@ -2,16 +2,8 @@
 import { onMounted, ref, reactive, computed, watch } from 'vue'
 
 import swissView from './swiss.vue'
+import tournamentView from './tournament.vue'
 import * as db from './datas'
-
-import { useRouter } from "vue-router";
-const router = useRouter();
-const pageGo = (path: string, query: any) => {
-  router.push({
-    path,
-    query,
-  });
-};
 
 // name
 defineOptions({
@@ -24,6 +16,8 @@ const pageInfos = reactive({
   name: '',
   type: 'swiss',
   rounds: [] as any[],
+  winners: [] as any[],
+  losers: [] as any[],
 })
 
 onMounted(() => {
@@ -32,6 +26,7 @@ onMounted(() => {
       name: item.name,
     })
   })
+  changeTab(pageInfos.tabs[0])
 })
 
 const changeTab = (values: any) => {
@@ -39,7 +34,10 @@ const changeTab = (values: any) => {
   if (temp) {
     pageInfos.name = temp.name
     pageInfos.type = temp.type
+    //
     pageInfos.rounds = temp.rounds
+    pageInfos.winners = temp.winners
+    pageInfos.losers = temp.losers
   }
 }
 </script>
@@ -55,7 +53,17 @@ const changeTab = (values: any) => {
       </template>
     </div>
     <div class="section-contents">
-      <swissView :rounds="pageInfos.rounds"></swissView>
+      <template v-if="pageInfos.type == 'swiss'">
+        <swissView :rounds="pageInfos.rounds"></swissView>
+      </template>
+      <template v-if="pageInfos.type == 'tournament'">
+        <tournamentView :rounds="pageInfos.rounds"></tournamentView>
+      </template>
+      <template v-if="pageInfos.type == 'doubles'">
+        <tournamentView :rounds="pageInfos.winners"></tournamentView>
+        <div class="lines"></div>
+        <tournamentView :rounds="pageInfos.losers"></tournamentView>
+      </template>
     </div>
   </div>
 </template>
@@ -70,7 +78,18 @@ const changeTab = (values: any) => {
   gap: 10px;
 
   .tab-item {
+    cursor: pointer;
+    padding: 3px 5px;
     color: #fff;
+    border-radius: 4px;
+
+    &.active {
+      background: #0094ff;
+    }
   }
+}
+
+.lines {
+  height: 50px;
 }
 </style>

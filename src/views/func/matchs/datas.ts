@@ -118,33 +118,9 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TES',
-                                icon: 'TES.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: '100T',
-                                icon: '100T.png',
-                                score: 0,
-                            },
-                        },
-                        {
-                            top: {
-                                team: 'AL',
-                                icon: 'AL.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'GEN',
-                                icon: 'GNG.png',
-                                score: 0,
-                            },
-                        },
-                        {
-                            top: {
                                 team: 'KT',
                                 icon: 'KT.png',
-                                score: 0,
+                                score: 1,
                             },
                             bottom: {
                                 team: 'TSW',
@@ -154,16 +130,41 @@ export const list = [
                         },
                         {
                             top: {
+                                team: 'TES',
+                                icon: 'TES.png',
+                                score: 1,
+                            },
+                            bottom: {
+                                team: '100T',
+                                icon: '100T.png',
+                                score: 0,
+                            },
+                        },
+                        {
+                            top: {
+                                team: 'CFO',
+                                icon: 'CFO.png',
+                                score: 1,
+                            },
+                            bottom: {
                                 team: 'T1',
                                 icon: 'T1.png',
                                 score: 0,
                             },
-                            bottom: {
-                                team: 'CFO',
-                                icon: 'CFO.png',
+
+                        },
+                        {
+                            top: {
+                                team: 'GEN',
+                                icon: 'GNG.png',
                                 score: 0,
                             },
-                        }
+                            bottom: {
+                                team: 'AL',
+                                icon: 'AL.png',
+                                score: 1,
+                            },
+                        },
                     ],
                 },
                 {
@@ -174,14 +175,14 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'BLG',
-                                icon: 'BLG.png',
+                                team: 'VKS',
+                                icon: 'VKS.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'FNC',
-                                icon: 'Fnatic.png',
-                                score: 0,
+                                team: 'FLY',
+                                icon: 'FLY.png',
+                                score: 1,
                             },
                         },
                         {
@@ -193,33 +194,33 @@ export const list = [
                             bottom: {
                                 team: 'G2',
                                 icon: 'G2.png',
+                                score: 1,
+                            },
+                        },
+                        {
+                            top: {
+                                team: 'BLG',
+                                icon: 'BLG.png',
+                                score: 1,
+                            },
+                            bottom: {
+                                team: 'FNC',
+                                icon: 'Fnatic.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
+                                team: 'HLE',
+                                icon: 'HLE.png',
+                                score: 1,
+                            },
+                            bottom: {
                                 team: 'PSG',
                                 icon: 'PSG.png',
                                 score: 0,
                             },
-                            bottom: {
-                                team: 'HLE',
-                                icon: 'HLE.png',
-                                score: 0,
-                            },
                         },
-                        {
-                            top: {
-                                team: 'FLY',
-                                icon: 'FLY.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'VKS',
-                                icon: 'VKS.png',
-                                score: 0,
-                            },
-                        }
                     ],
                 }
             ],
@@ -232,25 +233,25 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'CFO',
+                                icon: 'CFO.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'AL',
+                                icon: 'AL.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'KT',
+                                icon: 'KT.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'TES',
+                                icon: 'TES.png',
                                 score: 0,
                             },
                         },
@@ -264,49 +265,49 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'G2',
+                                icon: 'G2.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'BLG',
+                                icon: 'BLG.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'GEN',
+                                icon: 'GNG.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'T1',
+                                icon: 'T1.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'TSW',
+                                icon: 'Team Secret.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'FLY',
+                                icon: 'FLY.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: '100T',
+                                icon: '100T.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'HLE',
+                                icon: 'HLE.png',
                                 score: 0,
                             },
                         },
@@ -320,25 +321,25 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'VKS',
+                                icon: 'VKS.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'PSG',
+                                icon: 'PSG.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'MKOI',
+                                icon: 'MKOI.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'FNC',
+                                icon: 'Fnatic.png',
                                 score: 0,
                             },
                         },
@@ -481,6 +482,480 @@ export const list = [
                     ],
                 },
             ],
-        ]
+        ],
+        winners: [],
+        losers: [],
+    },
+    {
+        name: '淘汰赛-8强模板',
+        type: 'tournament',
+        rounds: [
+            [
+                {
+                    name: "GAME1",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME2",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME3",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME4",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME5",
+                    round: "四强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME6",
+                    round: "四强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME7",
+                    round: "决赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ],
+        ],
+        winners: [],
+        losers: [],
+    },
+    {
+        name: '双败淘汰赛16强模板',
+        type: 'doubles',
+        rounds: [],
+        winners: [
+            [
+                {
+                    name: "GAME1",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME2",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME3",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME4",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME3",
+                    round: "胜者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME3",
+                    round: "胜者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME6",
+                    round: "胜者组决赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ],
+            [
+                {
+                    name: "GAME6",
+                    round: "决赛",
+                    time: "-/-",
+                    bo: 5,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ]
+        ],
+        losers: [
+            [
+                {
+                    name: "GAME5",
+                    round: "败者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME6",
+                    round: "败者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME5",
+                    round: "败者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME5",
+                    round: "败者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME5",
+                    round: "败者组决赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ]
+        ],
+    },
+    {
+        name: '双败淘汰赛-8强模板',
+        type: 'doubles',
+        rounds: [],
+        winners: [
+            [
+                {
+                    name: "GAME1",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME2",
+                    round: "淘汰赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME3",
+                    round: "胜者组决赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ],
+            [
+                {
+                    name: "GAME6",
+                    round: "决赛",
+                    time: "-/-",
+                    bo: 5,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ]
+        ],
+        losers: [
+            [
+                {
+                    name: "GAME4",
+                    round: "败者组",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME5",
+                    round: "败者组决赛",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ]
+        ],
     },
 ]

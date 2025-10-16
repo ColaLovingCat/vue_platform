@@ -20,22 +20,34 @@ const props = defineProps({
 
 onMounted(() => { })
 
-watch(
-    () => props.changeMark,
-    (newValue, oldValue) => { }
-)
+const getTeamClass = (match: any, bo: number, team: string): string => {
+    const { top: teamA, bottom: teamB } = match;
 
-const getClass = (match: any, bo: number, team: string) => {
-    const scoreA = match.top.score
-    const scoreB = match.bottom.score
+    // 检查 TBD 情况
+    if ((team === "top" && teamA.team === "TBD") ||
+        (team === "bottom" && teamB.team === "TBD")) {
+        return 'tbd';
+    }
 
-    const best = Math.floor(bo / 2) + 1
-    console.log('Testing: ', scoreA, scoreB, best);
-    if (scoreA < best && scoreB < best) return '';
+    // 计算获胜所需分数
+    const winningScore = Math.floor(bo / 2) + 1;
 
-    if (team == "top") return scoreA < scoreB ? 'lose' : ''
-    if (team == "bottom") return scoreA > scoreB ? 'lose' : ''
-}
+    // 检查比赛是否已结束
+    const isMatchFinished = teamA.score >= winningScore || teamB.score >= winningScore;
+    if (!isMatchFinished) {
+        return '';
+    }
+
+    // 根据队伍位置返回结果
+    if (team === "top") {
+        return teamA.score < teamB.score ? 'lose' : '';
+    }
+    if (team === "bottom") {
+        return teamA.score > teamB.score ? 'lose' : '';
+    }
+
+    return '';
+};
 </script>
 
 <template>
@@ -51,13 +63,16 @@ const getClass = (match: any, bo: number, team: string) => {
                         <div class="list-matchs">
                             <template v-for="match in round.matchs">
                                 <div class="match-item">
-                                    <div class="item-team" :class="getClass(match, round.bo, 'top')">
+                                    <div class="item-team" :class="getTeamClass(match, round.bo, 'top')">
                                         <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
                                         {{ match.top.team }}
                                     </div>
-                                    <span class="item-score">{{ match.top.score }} <span>VS</span> {{ match.bottom.score
-                                        }}</span>
-                                    <div class="item-team" :class="getClass(match, round.bo, 'bottom')">
+                                    <span class="item-score">
+                                        {{ match.top.score }}
+                                        <span>VS</span>
+                                        {{ match.bottom.score }}
+                                    </span>
+                                    <div class="item-team" :class="getTeamClass(match, round.bo, 'bottom')">
                                         {{ match.bottom.team }}
                                         <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
                                     </div>
@@ -123,6 +138,7 @@ const getClass = (match: any, bo: number, team: string) => {
             align-items: center;
             gap: 10px;
 
+            &.tbd,
             &.lose {
                 opacity: 0.4;
             }
