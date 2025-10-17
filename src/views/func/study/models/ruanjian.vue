@@ -219,12 +219,10 @@ const showModal = (action: string, values: any) => {
             <h4>1.1 CPU <i class="txt-en">Central Processing Unit</i></h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">功能</span
-                >程序控制：执行存储在内存中的指令序列、操作控制、时间控制、数据处理
+                <span class="txt-define">功能</span>程序控制：执行存储在内存中的指令序列、操作控制、时间控制、数据处理
               </p>
               <p>
-                <span class="txt-define">组成</span
-                >运算器、控制器、寄存器组、总线
+                <span class="txt-define">组成</span>运算器、控制器、寄存器组、总线
               </p>
             </div>
           </div>
@@ -235,54 +233,57 @@ const showModal = (action: string, values: any) => {
             </h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">功能</span
-                >执行具体的算术运算、逻辑运算和逻辑测试，并返回结果
+                <span class="txt-define">功能</span>执行具体的算术运算、逻辑运算和逻辑测试，并返回结果
               </p>
-              <p><b>算术逻辑单元(ALU)</b> ：执行算术运算、逻辑运算</p>
-              <p>
-                <b>累加寄存器(AC)</b>
-                <i class="txt-en">Accumulator Register</i
-                >：为ALU提供数据和暂存运算结果
+              <p><b>算术逻辑单元(ALU) </b>
+                <i class="txt-en">Arithmetic and Logic Unit</i>
+                ：执行算术运算、逻辑运算
               </p>
               <p>
-                <b>数据缓冲寄存器(DR)</b> ：内存<span class="txt-symbol">⇔</span
-                >CPU之间进行数据中转
+                <b>累加寄存器(AC) </b>
+                <i class="txt-en">Accumulator Register</i>
+                ：为ALU提供数据和暂存运算结果
               </p>
               <p>
-                <b>状态条件寄存器(PSW)</b>
+                <b>数据缓冲寄存器(DR) </b>
+                <i class="txt-en">Data Register</i>
+                ：内存<span class="txt-symbol">⇔</span>CPU之间进行数据中转
+              </p>
+              <p>
+                <b>状态条件寄存器(PSW) </b>
+                <i class="txt-en">Program Status Word</i>
                 ：更新指令执行的状态标志和控制标志，保存和记录特定的状态信息和条件
               </p>
-              <img
-                class="img-01 img-abs"
-                style="width: 320px"
-                src="/docs/study/imgs/01-cpu.png"
-              />
+              <img class="img-01 img-abs" style="width: 320px" src="/docs/study/imgs/01-cpu.png" />
             </div>
           </div>
           <div id="section-010103">
             <h4>1.3 控制器单元(CU) <i class="txt-en">Control Unit</i></h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">功能</span
-                >生成控制信号，保证程序指令有序正确的执行并处理异常事件，实现自动化和稳定性
+                <span class="txt-define">功能</span>生成控制信号，保证程序指令有序正确的执行并处理异常事件，实现自动化和稳定性
               </p>
               <p>
-                <b>程序计数器(PC)</b>
-                <i class="txt-en">Program Counter</i
-                >：存储当前执行的指令地址和指令计数，指示下一条要执行的指定地址
+                <b>程序计数器(PC) </b>
+                <i class="txt-en">Program Counter</i>
+                ：存储当前执行的指令地址和指令计数，指示下一条要执行的指定地址
               </p>
               <p>
-                <b>指令寄存器(IR)</b>
-                <i class="txt-en">Instruction Register</i>：内存
-                <span class="txt-symbol">⇒</span>DR<span class="txt-symbol"
-                  >⇒</span
-                >
+                <b>指令寄存器(IR) </b>
+                <i class="txt-en">Instruction Register</i>
+                ：内存
+                <span class="txt-symbol">⇒</span>DR<span class="txt-symbol">⇒</span>
                 IR暂存执行的指令(操作码+地址码)
               </p>
               <p>
-                <b>指令译码器(ID)</b> ：分析指令的操作码和操作数，确定操作类型
+                <b>指令译码器(ID) </b> 
+                <i class="txt-en">Instruction Decoder</i>
+                ：分析指令的操作码和操作数，确定操作类型
               </p>
-              <p><b>地址寄存器(AR)</b> ：保存访问的内存单元的地址</p>
+              <p>
+                <b>地址寄存器(AR) </b> 
+                <i class="txt-en">Address Register</i>
+                ：保存访问的内存单元的地址</p>
             </div>
           </div>
         </div>
@@ -352,11 +353,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                 </tbody>
               </table>
-              <img
-                class="img-02 img-abs"
-                style="width: 150px"
-                src="/docs/study/imgs/02-jinzhi.png"
-              />
+              <img class="img-02 img-abs" style="width: 150px" src="/docs/study/imgs/02-jinzhi.png" />
             </div>
           </div>
           <div id="section-010202">
@@ -380,84 +377,56 @@ const showModal = (action: string, values: any) => {
                     <td>原码</td>
                     <td>1 010 1101</td>
                     <td>
-                      <span class="txt-func"
-                        >-(2<span class="txt-sup">n-1</span>-1)</span
-                      >
+                      <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
                       ~
-                      <span class="txt-func"
-                        >2<span class="txt-sup">n-1</span>-1</span
-                      >
+                      <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >-(1-2<span class="txt-sup">-(n-1)</span>)</span
-                      >
+                      <span class="txt-func">-(1-2<span class="txt-sup">-(n-1)</span>)</span>
                       ~
-                      <span class="txt-func"
-                        >1-2<span class="txt-sup">-(n-1)</span></span
-                      >
+                      <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
                     </td>
                   </tr>
                   <tr>
                     <td>反码</td>
                     <td>1 101 0010</td>
                     <td>
-                      <span class="txt-func"
-                        >-(2<span class="txt-sup">n-1</span>-1)</span
-                      >
+                      <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
                       ~
-                      <span class="txt-func"
-                        >2<span class="txt-sup">n-1</span>-1</span
-                      >
+                      <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >-(1-2<span class="txt-sup">-(n-1)</span>)</span
-                      >
+                      <span class="txt-func">-(1-2<span class="txt-sup">-(n-1)</span>)</span>
                       ~
-                      <span class="txt-func"
-                        >1-2<span class="txt-sup">-(n-1)</span></span
-                      >
+                      <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
                     </td>
                   </tr>
                   <tr>
                     <td>补码</td>
                     <td>1 101 0011</td>
                     <td>
-                      <span class="txt-func"
-                        >-2<span class="txt-sup">n-1</span></span
-                      >
+                      <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
                       ~
-                      <span class="txt-func"
-                        >2<span class="txt-sup">n-1</span>-1</span
-                      >
+                      <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                     </td>
                     <td>
                       <span class="txt-func">-1</span>
                       ~
-                      <span class="txt-func"
-                        >1-2<span class="txt-sup">-(n-1)</span></span
-                      >
+                      <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
                     </td>
                   </tr>
                   <tr>
                     <td>移码</td>
                     <td>0 101 0011</td>
                     <td>
-                      <span class="txt-func"
-                        >-2<span class="txt-sup">n-1</span></span
-                      >
+                      <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
                       ~
-                      <span class="txt-func"
-                        >2<span class="txt-sup">n-1</span>-1</span
-                      >
+                      <span class="txt-func">2<span class="txt-sup">n-1</span>-1</span>
                     </td>
                     <td>
                       <span class="txt-func">-1</span>
                       ~
-                      <span class="txt-func"
-                        >1-2<span class="txt-sup">-(n-1)</span></span
-                      >
+                      <span class="txt-func">1-2<span class="txt-sup">-(n-1)</span></span>
                     </td>
                   </tr>
                 </tbody>
@@ -470,22 +439,14 @@ const showModal = (action: string, values: any) => {
               <p>
                 <span class="txt-define">定义</span>用 [阶符S+阶码E] +
                 [数符+尾数F] 表示
-                <span class="txt-func"
-                  >N=(-1)<span class="txt-sup">S</span>*2<span class="txt-sup"
-                    >𝐸</span
-                  >∗𝐹</span
-                >
+                <span class="txt-func">N=(-1)<span class="txt-sup">S</span>*2<span class="txt-sup">𝐸</span>∗𝐹</span>
               </p>
               <p>阶码决定数值范围，尾数决定精度</p>
               <p>
                 运算时先<b>对阶</b>：将小阶向大阶对齐，尾数右移、尾数计算、格式化
               </p>
               <p>R位阶码移码+M位尾数补码 可表示范围:</p>
-              <img
-                class="img-03"
-                style="width: 350px"
-                src="/docs/study/imgs/03-fanwei.png"
-              />
+              <img class="img-03" style="width: 350px" src="/docs/study/imgs/03-fanwei.png" />
             </div>
           </div>
         </div>
@@ -503,8 +464,7 @@ const showModal = (action: string, values: any) => {
             <h4>3.2 奇偶校验码</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">定义</span
-                >将编码中1的个数变为奇数或偶数，可以检测
+                <span class="txt-define">定义</span>将编码中1的个数变为奇数或偶数，可以检测
                 奇数个错误，码距2，不能纠错
               </p>
             </div>
@@ -513,14 +473,11 @@ const showModal = (action: string, values: any) => {
             <h4>3.3 海明码</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">定义</span
-                >数据位n之间的特定位置插入k个校验位。利用多组数位的奇偶性来检错和纠错
+                <span class="txt-define">定义</span>数据位n之间的特定位置插入k个校验位。利用多组数位的奇偶性来检错和纠错
               </p>
               <p>
                 必须满足
-                <span class="txt-func"
-                  >2<span class="txt-sup">K</span>-1 ≥ n+k</span
-                >
+                <span class="txt-func">2<span class="txt-sup">K</span>-1 ≥ n+k</span>
               </p>
             </div>
           </div>
@@ -671,8 +628,7 @@ const showModal = (action: string, values: any) => {
             <h4>5.2 中断</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">定义</span
-                >暂停当前程序，执行中断服务程序，完成后返回源程序
+                <span class="txt-define">定义</span>暂停当前程序，执行中断服务程序，完成后返回源程序
               </p>
               <p><b>中断向量</b>：提供中断服务程序的入口地址</p>
               <p><b>中断响应时间</b>：从发出中断请求到开始进入中断处理程序</p>
@@ -761,17 +717,10 @@ const showModal = (action: string, values: any) => {
                 <p>操作周期：最长操作时间</p>
                 <p>吞吐率：1/最长操作时间</p>
                 <p>
-                  <b
-                    >n条指令的吞吐率 TP
-                    <i class="txt-en">Though Put rate</i
-                    >：n/单条指令的执行时间+(n-1)*最长的时间段</b
-                  >
+                  <b>n条指令的吞吐率 TP
+                    <i class="txt-en">Though Put rate</i>：n/单条指令的执行时间+(n-1)*最长的时间段</b>
                 </p>
-                <img
-                  class="img-04 img-abs"
-                  style="width: 450px"
-                  src="/docs/study/imgs/04-liushui.png"
-                />
+                <img class="img-04 img-abs" style="width: 450px" src="/docs/study/imgs/04-liushui.png" />
               </div>
             </div>
             <div id="section-010604">
@@ -798,8 +747,7 @@ const showModal = (action: string, values: any) => {
             <h4>7.1 总线</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">定义</span
-                >负责传输数据地址和控制信号，减少信号线的数量
+                <span class="txt-define">定义</span>负责传输数据地址和控制信号，减少信号线的数量
               </p>
               <p>系统总线：数据总线(双向)、地址总线(单向)、控制总线</p>
               <p>数据总线的宽度为字长，地址总线的宽带为内存容量的指数</p>
@@ -817,44 +765,24 @@ const showModal = (action: string, values: any) => {
               <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
               <p>
                 <b>对称加密</b>
-                <i class="txt-en">Symmetric Encryption</i
-                >：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密
+                <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密
               </p>
-              <img
-                class="img-06"
-                style="width: 400px"
-                src="/docs/study/imgs/06-jiami.png"
-              />
+              <img class="img-06" style="width: 400px" src="/docs/study/imgs/06-jiami.png" />
               <p>
                 <b>非对称加密</b>
-                <i class="txt-en">Asymmetric Encryption</i
-                >：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密
+                <i class="txt-en">Asymmetric Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密
               </p>
-              <img
-                class="img-07"
-                style="width: 400px"
-                src="/docs/study/imgs/07-jiami.png"
-              />
+              <img class="img-07" style="width: 400px" src="/docs/study/imgs/07-jiami.png" />
               <p>
-                <b>信息摘要</b
-                >：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要
+                <b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要
               </p>
-              <img
-                class="img-08"
-                style="width: 400px"
-                src="/docs/study/imgs/08-jiami.png"
-              />
+              <img class="img-08" style="width: 400px" src="/docs/study/imgs/08-jiami.png" />
               <p>数据完整性、一致性，不可逆，唯一性</p>
               <p>
                 <b>数字签名</b>
-                <i class="txt-en">Digital Signature</i
-                >：结合非对称和散列函数，发送方私钥加密摘要，公钥解密
+                <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密
               </p>
-              <img
-                class="img-09"
-                style="width: 400px"
-                src="/docs/study/imgs/09-jiami.png"
-              />
+              <img class="img-09" style="width: 400px" src="/docs/study/imgs/09-jiami.png" />
               <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
               <p>
                 用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性
@@ -875,30 +803,19 @@ const showModal = (action: string, values: any) => {
                   </tr>
                 </tbody>
               </table>
-              <img
-                class="img-05 img-abs"
-                style="width: 200px"
-                src="/docs/study/imgs/05-sign.png"
-              />
+              <img class="img-05 img-abs" style="width: 200px" src="/docs/study/imgs/05-sign.png" />
             </div>
           </div>
           <div id="section-010802">
             <h4>8.2 可靠性模型</h4>
             <div class="sub-contents">
               <p>
-                串联系统：<span class="txt-func"
-                  >P=R<span class="txt-sub">1</span>R<span class="txt-sub"
-                    >2</span
-                  >...R<span class="txt-sub">N</span></span
-                >
+                串联系统：<span class="txt-func">P=R<span class="txt-sub">1</span>R<span class="txt-sub">2</span>...R<span
+                    class="txt-sub">N</span></span>
               </p>
               <p>
-                并联系统：<span class="txt-func"
-                  >P=1-(1-R<span class="txt-sub">1</span>)(1-R<span
-                    class="txt-sub"
-                    >2</span
-                  >)...(1-R<span class="txt-sub">N</span>)</span
-                >
+                并联系统：<span class="txt-func">P=1-(1-R<span class="txt-sub">1</span>)(1-R<span
+                    class="txt-sub">2</span>)...(1-R<span class="txt-sub">N</span>)</span>
               </p>
             </div>
           </div>
@@ -926,9 +843,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>
                 每秒百万个浮点操作 MFLOPS
-                <i class="txt-en"
-                  >Million Floating-point Operations per Second</i
-                >
+                <i class="txt-en">Million Floating-point Operations per Second</i>
                 与MIPS相似，针对浮点操作
               </p>
               <p>字长</p>
@@ -946,10 +861,7 @@ const showModal = (action: string, values: any) => {
             <h4>1.1 低级语言和高级语言</h4>
             <div class="sub-contents">
               <p>
-                机器语言<span class="txt-symbol">⇒</span>汇编语言：符号化<span
-                  class="txt-symbol"
-                  >⇒</span
-                >高级语言：编译解释
+                机器语言<span class="txt-symbol">⇒</span>汇编语言：符号化<span class="txt-symbol">⇒</span>高级语言：编译解释
               </p>
               <p>
                 解释型语言：解释器，不会生成目标代码，边解释边执行，解释器参与执行，执行效率低，灵活性好，可移植性强
@@ -1047,36 +959,27 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>
                 <b>语法分析</b>
-                <i class="txt-en">Parsing</i
-                >：构建语法树，检查所有语法错误，进行结构分析。如缺少右括号，没有分号等
+                <i class="txt-en">Parsing</i>：构建语法树，检查所有语法错误，进行结构分析。如缺少右括号，没有分号等
               </p>
               <p>自上而下 递归向下/预测分析 自下而上 移进-归约/算符优先</p>
               <p>
                 <b>语义分析</b>
-                <i class="txt-en">Semantic Analysis</i
-                >：只能检查静态语义错误，进行类型分析和检查。如变量未声明、重复声明，函数参数类型不对等
+                <i class="txt-en">Semantic Analysis</i>：只能检查静态语义错误，进行类型分析和检查。如变量未声明、重复声明，函数参数类型不对等
               </p>
               <p>
                 <b>中间代码生成</b>
-                <i class="txt-en">Intermediate Code Generation</i
-                >：有后缀式、三元式、四元式、三地址码、树图等。有利于进行与具体机器无关的优化处理和可移植性
+                <i class="txt-en">Intermediate Code Generation</i>：有后缀式、三元式、四元式、三地址码、树图等。有利于进行与具体机器无关的优化处理和可移植性
               </p>
               <p>代码优化 <i class="txt-en">Optimization</i></p>
               <p>
                 <b>目标代码生成</b>
-                <i class="txt-en">Code Generation</i
-                >：与目标机器的体系结构相关，包含分配寄存器，指令选择、代码布局等
+                <i class="txt-en">Code Generation</i>：与目标机器的体系结构相关，包含分配寄存器，指令选择、代码布局等
               </p>
               <p>
-                <b>符号表管理</b
-                >：不断收集记录和使用的相关符号类型和特征等必要信息，辅助语义的正确性检查和代码生成
+                <b>符号表管理</b>：不断收集记录和使用的相关符号类型和特征等必要信息，辅助语义的正确性检查和代码生成
               </p>
               <p>出错处理</p>
-              <img
-                class="img-11 img-abs"
-                style="width: 380px"
-                src="/docs/study/imgs/11-bianyi.png"
-              />
+              <img class="img-11 img-abs" style="width: 380px" src="/docs/study/imgs/11-bianyi.png" />
             </div>
           </div>
           <div id="section-020203">
@@ -1084,10 +987,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>
                 例：由a、b构造且仅包含偶数个a的串的集合
-                <span class="txt-func"
-                  >(b<span class="txt-sup">*</span> (ab<span class="txt-sup"
-                    >*</span
-                  >a))
+                <span class="txt-func">(b<span class="txt-sup">*</span> (ab<span class="txt-sup">*</span>a))
                   <span class="txt-sup">*</span>
                 </span>
               </p>
@@ -1109,33 +1009,25 @@ const showModal = (action: string, values: any) => {
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >a<span class="txt-sup">*</span></span
-                      >
+                      <span class="txt-func">a<span class="txt-sup">*</span></span>
                     </td>
                     <td>闭包，任意个元素，包含空集：{Φ,a,aa,aaa,...}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >(a|b)<span class="txt-sup">*</span></span
-                      >
+                      <span class="txt-func">(a|b)<span class="txt-sup">*</span></span>
                     </td>
                     <td>任意个可选元素：{Φ,a,b,aa,ab,bb,aaa,...}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >a(a|b)<span class="txt-sup">*</span></span
-                      >
+                      <span class="txt-func">a(a|b)<span class="txt-sup">*</span></span>
                     </td>
                     <td>以a为开头：{a,aa,ab,aaa,...}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >(a|b)<span class="txt-sup">*</span>abb</span
-                      >
+                      <span class="txt-func">(a|b)<span class="txt-sup">*</span>abb</span>
                     </td>
                     <td>以abb为结尾：{aabb,babb,aaabb,ababb,...}</td>
                   </tr>
@@ -1144,23 +1036,19 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <div id="section-020204">
-            <h4>2.4 有限自动机</h4>
+            <h4>2.4 有限自动机 <i class="txt-en">finite automata</i></h4>
             <div class="sub-contents">
               <p>词法分析的工具，正确识别正规集</p>
               <p>确定的有限自动机 (DFA)</p>
               <p>不确定的有限自动机 (NFA)：状态转移不确定</p>
               <p>下图可表示以1为结尾的正规集</p>
-              <img
-                class="img-12"
-                style="width: 300px"
-                src="/docs/study/imgs/12-youxian.png"
-              />
+              <img class="img-12" style="width: 300px" src="/docs/study/imgs/12-youxian.png" />
             </div>
           </div>
           <div id="section-020205">
             <h4>2.5 文法</h4>
             <div class="sub-contents">
-              <p>上下文无关文法 CFG</p>
+              <p>上下文无关文法 CFG <i class="txt-en">context-free grammar</i></p>
               <p>广泛用于程序设计语言的语法规则</p>
               <p>S是起始符号，表示句子的起始位置</p>
               <p>V是非终结符集合，用于构造句子的符号</p>
@@ -1209,13 +1097,7 @@ const showModal = (action: string, values: any) => {
               <p>单链表: 每个节点包含数据域和指针域，指针域指向下一节点</p>
               <p>循环链表: 尾节点的指针指向头节点，形成一个环</p>
               <p>双向链表: 每个节点有两个指针，指向前驱节点和后继节点</p>
-              <img
-                class="img-33"
-                style="width: 450px"
-                src="/docs/study/imgs/33-liner.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-33" style="width: 450px" src="/docs/study/imgs/33-liner.png" alt="" srcset="" />
               <table>
                 <thead>
                   <tr>
@@ -1264,13 +1146,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>栈: 只允许固定一端插入和删除元素，遵循先进后出 LIFO</p>
               <p>队列: 只允许队尾插入，队头删除元素，遵循先进先出 FIFO</p>
-              <img
-                class="img-34"
-                style="width: 450px"
-                src="/docs/study/imgs/34-stack.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-34" style="width: 450px" src="/docs/study/imgs/34-stack.png" alt="" srcset="" />
               <p>均可使用顺序存储和链式存储</p>
               <p>
                 循环队列：将队列存储空间的最后一个位置绕到第一个位置，形成逻辑上的环状空间，避免假溢出
@@ -1295,70 +1171,28 @@ const showModal = (action: string, values: any) => {
                 当主串与模式串部分匹配后出现不匹配字符时，通过next数组确定模式串应回溯的位置，而非从头开始匹配
               </p>
               <p>核心：通过最长公共前后缀求next[j]数组</p>
-              <img
-                class="img-35"
-                style="width: 250px"
-                src="/docs/study/imgs/35-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-35" style="width: 250px" src="/docs/study/imgs/35-kmp.png" alt="" srcset="" />
               <p>
                 初始状态：遍历至j的位置，next[j]也就是i表示的是p[0,…,j-1]的最长公共前后缀的长度，前后缀区域相等①=②
               </p>
-              <img
-                class="img-36"
-                style="width: 450px"
-                src="/docs/study/imgs/36-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-36" style="width: 450px" src="/docs/study/imgs/36-kmp.png" alt="" srcset="" />
               <p>令i++,j++，如果 p[i]=p[j-1]，继续下一个</p>
-              <img
-                class="img-37"
-                style="width: 450px"
-                src="/docs/study/imgs/37-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-37" style="width: 450px" src="/docs/study/imgs/37-kmp.png" alt="" srcset="" />
               <p>
                 如果 p[i]!=p[j-1]，则需要找新的最长公共前后缀，使得 ③+p[i'] =
                 ④+p[j-1]
               </p>
-              <img
-                class="img-38"
-                style="width: 450px"
-                src="/docs/study/imgs/38-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-38" style="width: 450px" src="/docs/study/imgs/38-kmp.png" alt="" srcset="" />
               <p>
                 等同于，在①(或②)中找最长公共前后缀，也就是当长度为i时的
                 next[i]，令i=next[i]，继续找寻p[i]=p[j-1]
               </p>
-              <img
-                class="img-39"
-                style="width: 450px"
-                src="/docs/study/imgs/39-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-39" style="width: 450px" src="/docs/study/imgs/39-kmp.png" alt="" srcset="" />
               <p>
                 回到KMP算法，当匹配到主串s[i]和字串p[j]不相同时，不同于暴力方式下偏移一个位置后再依次比对，可以转换为求①②区域的最长公共前后缀，将字串偏移相应位置后再依次匹配后续字符
               </p>
-              <img
-                class="img-40"
-                style="width: 350px"
-                src="/docs/study/imgs/40-kmp.png"
-                alt=""
-                srcset=""
-              />
-              <img
-                class="img-41"
-                style="width: 350px"
-                src="/docs/study/imgs/41-kmp.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-40" style="width: 350px" src="/docs/study/imgs/40-kmp.png" alt="" srcset="" />
+              <img class="img-41" style="width: 350px" src="/docs/study/imgs/41-kmp.png" alt="" srcset="" />
             </div>
           </div>
         </div>
@@ -1370,35 +1204,17 @@ const showModal = (action: string, values: any) => {
               <p>
                 存储于一个连续空间且具有相同数据类型的元素集合，可通过索引(下标)来访问元素
               </p>
-              <img
-                class="img-42"
-                style="width: 250px"
-                src="/docs/study/imgs/42-shuzu.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-42" style="width: 250px" src="/docs/study/imgs/42-shuzu.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-030202">
             <h4>2.2 矩阵 <i class="txt-en">Matrices</i></h4>
             <div class="sub-contents">
               <p>具有m行n列的二维数组</p>
-              <img
-                class="img-43"
-                style="width: 200px"
-                src="/docs/study/imgs/43-juzhen.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-43" style="width: 200px" src="/docs/study/imgs/43-juzhen.png" alt="" srcset="" />
               <p>存储方式：按行优先，按列优先</p>
               <p>压缩存储，以按行存储为例</p>
-              <img
-                class="img-44"
-                style="width: 600px"
-                src="/docs/study/imgs/44-juzhen.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-44" style="width: 600px" src="/docs/study/imgs/44-juzhen.png" alt="" srcset="" />
             </div>
           </div>
         </div>
@@ -1413,13 +1229,7 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">Children</i> 构成，节点之间存在一种层级
                 <i class="txt-en">Hierarchical</i> 关系
               </p>
-              <img
-                class="img-45"
-                style="width: 200px"
-                src="/docs/study/imgs/45-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-45" style="width: 200px" src="/docs/study/imgs/45-tree.png" alt="" srcset="" />
               <table>
                 <tbody>
                   <tr>
@@ -1450,13 +1260,7 @@ const showModal = (action: string, values: any) => {
             <h4>3.2 二叉树</h4>
             <div class="sub-contents">
               <p>每个节点最多只能有两个子节点 (度最大为2)，称为左右子树</p>
-              <img
-                class="img-46"
-                style="width: 400px"
-                src="/docs/study/imgs/46-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-46" style="width: 400px" src="/docs/study/imgs/46-tree.png" alt="" srcset="" />
               <p>
                 性质1：二叉树第 i(i≥1) 层上最多有
                 <span class="txt-func">2<span class="txt-sup">i-1</span></span>
@@ -1472,13 +1276,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>性质4：有n个节点的完全二叉树高度为 ⌊log2n⌋+1 或 ⌈log2(n+1)⌉</p>
               <p>存储结构</p>
-              <img
-                class="img-47"
-                style="width: 750px"
-                src="/docs/study/imgs/47-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-47" style="width: 750px" src="/docs/study/imgs/47-tree.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-030303">
@@ -1491,13 +1289,7 @@ const showModal = (action: string, values: any) => {
               <p>先序+中序构造</p>
               <p>后序+中序构造</p>
               <p>层次+中序构造</p>
-              <img
-                class="img-48"
-                style="width: 150px"
-                src="/docs/study/imgs/48-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-48" style="width: 150px" src="/docs/study/imgs/48-tree.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-030304">
@@ -1506,13 +1298,7 @@ const showModal = (action: string, values: any) => {
               <p>根节点的值大于左子树所有节点值，小于右子树所有节点值。</p>
               <p>中序遍历的结果是有序序列。</p>
               <p>可用过关键字序列反向构造。</p>
-              <img
-                class="img-49"
-                style="width: 150px"
-                src="/docs/study/imgs/49-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-49" style="width: 150px" src="/docs/study/imgs/49-tree.png" alt="" srcset="" />
               <p>平衡二叉树 (AVL树)</p>
               <p>
                 二叉树中的任意节点的左右子树的高度之差绝对值不超过1，且为二叉排序树
@@ -1542,13 +1328,7 @@ const showModal = (action: string, values: any) => {
               <p>规则3：新节点放入末尾</p>
               <p>规则4：权值相同，同从前往后</p>
               <p>规则5：用到子树时再调用</p>
-              <img
-                class="img-50"
-                style="width: 150px"
-                src="/docs/study/imgs/50-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-50" style="width: 150px" src="/docs/study/imgs/50-tree.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-030306">
@@ -1556,16 +1336,9 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>等长编码：对每个字符编制相同长度的二进制码</p>
               <p>过程及其压缩比：先构造哈夫曼树，再根据左0右1构建编码</p>
-              <img
-                class="img-51"
-                style="width: 450px"
-                src="/docs/study/imgs/51-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-51" style="width: 450px" src="/docs/study/imgs/51-tree.png" alt="" srcset="" />
               <p>
-                等长编码长度为3 (22< 5< 23)，压缩比为 1-(40*1+60*3)/100*3=0.27
-              </p>
+                等长编码长度为3 (22< 5< 23)，压缩比为 1-(40*1+60*3)/100*3=0.27 </p>
             </div>
           </div>
           <div id="section-030307">
@@ -1574,13 +1347,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 对于n个结点的二叉树，在存储结构中有n+1个空链域，利用这些空链域存放在某种遍历次序下该结点的前驱结点和后继结点的指针，称为线索。加上线索的二叉树称为线索二叉树
               </p>
-              <img
-                class="img-52"
-                style="width: 450px"
-                src="/docs/study/imgs/52-tree.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-52" style="width: 450px" src="/docs/study/imgs/52-tree.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-030308">
@@ -1614,17 +1381,9 @@ const showModal = (action: string, values: any) => {
             <h4>4.1 图 <i class="txt-en">Graph</i></h4>
             <div class="sub-contents">
               <p>由顶点V和连接这些节点的边E组成的集合</p>
-              <img
-                class="img-53"
-                style="width: 450px"
-                src="/docs/study/imgs/53-tu.png"
-              />
+              <img class="img-53" style="width: 450px" src="/docs/study/imgs/53-tu.png" />
               <p>顶点数n、边数e、各顶点的度D(v)之间的关系</p>
-              <img
-                class="img-54"
-                style="width: 150px"
-                src="/docs/study/imgs/54-tu.png"
-              />
+              <img class="img-54" style="width: 150px" src="/docs/study/imgs/54-tu.png" />
               <table>
                 <tbody>
                   <tr>
@@ -1650,11 +1409,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-030402">
             <h4>4.2 存储结构</h4>
             <div class="sub-contents">
-              <img
-                class="img-55"
-                style="width: 450px"
-                src="/docs/study/imgs/55-tu.png"
-              />
+              <img class="img-55" style="width: 450px" src="/docs/study/imgs/55-tu.png" />
             </div>
           </div>
           <div id="section-030403">
@@ -1663,11 +1418,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 从图的任意结点出发，沿着某条搜索路径，对图中所有结点进行访问且只访问一次
               </p>
-              <img
-                class="img-56"
-                style="width: 250px"
-                src="/docs/study/imgs/56-tu.png"
-              />
+              <img class="img-56" style="width: 250px" src="/docs/study/imgs/56-tu.png" />
               <p>深度优先遍历 DFS</p>
               <p>1.首先访问出发顶点V</p>
               <p>2.依次从V出发搜索V的任意一个邻接点W</p>
@@ -1686,28 +1437,40 @@ const showModal = (action: string, values: any) => {
             <h4>4.4 拓扑排序</h4>
             <div class="sub-contents">
               <p>
-                顶点活动网(AOV网)：形象地反映出整个工程中各个活动之间的先后关系的有向图
+                顶点活动网(AOV网) <i class="txt-en">Activity On Vertex Network</i>：形象地反映出整个工程中各个活动之间的先后关系的有向图
               </p>
-              <p>有向无环图(DAG图)：不存在回路的有向图</p>
-              <p>算法：依次输出没有入度的顶点，并删除该</p>
-              <p>点和以该点为弧尾的弧</p>
-              <p>边活动网(AOE网)：以边表示活动，且边有权值</p>
+              <p>有向无环图(DAG图) <i class="txt-en">Directed Acyclic Graph</i>：不存在回路的有向图</p>
+              <p>拓扑序列：在AOV网中不存在回路，使得每一个活动的所有前驱活动都排列在该活动的前面</p>
+              <p>算法：依次输出没有入度的顶点，并删除该点和以该点为弧尾的弧</p>
+              <p>边活动网(AOE网) <i class="txt-en">Activity On Edges Network</i>：以边表示活动，且边有权值</p>
               <p>入度为0的为源点，出度为0的为汇点</p>
-              <p>事件最早发生时间etv：从源点到该顶点的最长路径</p>
-              <p>事件最晚发生时间itv</p>
-              <p>活动最早开始时间ete：弧头的事件的最早发生时间</p>
-              <p>活动最晚开始时间ite：保证弧尾事件的最晚发生时间不拖后</p>
+              <table>
+                  <tbody>
+                      <tr>
+                          <td>事件最早发生时间etv</td>
+                          <td>从源点到该顶点的最长路径</td>
+                      </tr>
+                      <tr>
+                          <td>事件最晚发生时间itv</td>
+                          <td>在不推迟整个工期的前提下，事件 Vj 所允许的最晚发生时间</td>
+                      </tr>
+                      <tr>
+                          <td>活动最早开始时间ete</td>
+                          <td>弧头的事件的最早发生时间</td>
+                      </tr>
+                      <tr>
+                          <td>活动最晚开始时间ite</td>
+                          <td>保证弧尾事件的最晚发生时间不拖后</td>
+                      </tr>
+                  </tbody>
+              </table>
               <p>
                 关键路径：如果弧的最早开始时间等于最晚开始时间，那么称这条弧所代表的活动为关键活动，由关键活动所构成的路径称为关键路径
               </p>
               <p>
                 最短路径：从连接图中的某个顶点出发到达到达另外一个顶点所经过的边的权重和最小的那一条路径
               </p>
-              <img
-                class="img-57"
-                style="width: 250px"
-                src="/docs/study/imgs/57-tu.png"
-              />
+              <img class="img-57" style="width: 250px" src="/docs/study/imgs/57-tu.png" />
             </div>
           </div>
           <div id="section-030405">
@@ -1810,13 +1573,7 @@ const showModal = (action: string, values: any) => {
             <h4>6.1 堆 <i class="txt-en">Heap</i></h4>
             <div class="sub-contents">
               <p>从完全二叉树的角度出发，符合以下规则：</p>
-              <img
-                class="img-58"
-                style="width: 250px"
-                src="/docs/study/imgs/58-dui.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-58" style="width: 250px" src="/docs/study/imgs/58-dui.png" alt="" srcset="" />
               <p>构建过程：根据大小调整子树中根节点和左右节点的位置</p>
             </div>
           </div>
@@ -1828,8 +1585,7 @@ const showModal = (action: string, values: any) => {
             <h4>1.1 概念</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">特征</span
-                >无形性、专有性、<b>地域性</b>、时间性、可复制性
+                <span class="txt-define">特征</span>无形性、专有性、<b>地域性</b>、时间性、可复制性
               </p>
               <p>
                 地域性：仅在授权国家或地区管辖范围内有效，需在不同国家或地区分别申请
@@ -1846,8 +1602,7 @@ const showModal = (action: string, values: any) => {
             <h4>1.2 著作权</h4>
             <div class="sub-contents">
               <p>
-                <b>人身权</b
-                >包括：发表权(终生+死亡后50年)、署名权、修改权和作品完整权；其余为财产权(受时间限制)
+                <b>人身权</b>包括：发表权(终生+死亡后50年)、署名权、修改权和作品完整权；其余为财产权(受时间限制)
               </p>
             </div>
           </div>
@@ -1945,8 +1700,7 @@ const showModal = (action: string, values: any) => {
               <p>数据库 DB <i class="txt-en">DataBase</i></p>
               <p>
                 数据库系统 DBS
-                <i class="txt-en">DataBase System</i
-                >：由数据库、硬件、软件和人员组成
+                <i class="txt-en">DataBase System</i>：由数据库、硬件、软件和人员组成
               </p>
               <p>
                 数据库管理员 DBA <i class="txt-en">DataBase Administrator</i>
@@ -1956,12 +1710,10 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">DataBase Management System</i>
               </p>
               <p>
-                <span class="txt-define">功能</span
-                >数据定义，数据库操作，数据库运行管理，数据的组织、存储和管理，数据库的建立和维护
+                <span class="txt-define">功能</span>数据定义，数据库操作，数据库运行管理，数据的组织、存储和管理，数据库的建立和维护
               </p>
               <p>
-                <span class="txt-define">特征</span
-                >数据结构化且统一管理，有较高的数据独立性，数据控制功能（数据库的安全性、完整性、并发控制、故障恢复）
+                <span class="txt-define">特征</span>数据结构化且统一管理，有较高的数据独立性，数据控制功能（数据库的安全性、完整性、并发控制、故障恢复）
               </p>
             </div>
           </div>
@@ -2025,8 +1777,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>用户需求分析：确定系统边界</p>
               <p>
-                <span class="txt-define">输出</span
-                >需求说明文档/功能模块图/数据字典/数据流程图DFD
+                <span class="txt-define">输出</span>需求说明文档/功能模块图/数据字典/数据流程图DFD
               </p>
               <p>概念模型设计：局部合并取消冲突(属性/命名/结构)</p>
               <p><span class="txt-define">输出</span>基本ER图</p>
@@ -2042,11 +1793,7 @@ const showModal = (action: string, values: any) => {
               <p>图形：实体-矩形/属性-椭圆/联系-菱形 弱实体</p>
               <p>弱实体：双边矩形</p>
               <p>超类⇔子类</p>
-              <img
-                class="img-126"
-                style="width: 250px"
-                src="/docs/study/imgs/126-chaolei.png"
-              />
+              <img class="img-126" style="width: 250px" src="/docs/study/imgs/126-chaolei.png" />
               <p>属性：复合属性/多值属性/派生属性</p>
               <p>联系：1:1/1:n/m:n</p>
               <p>一个实体A</p>
@@ -2063,7 +1810,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                   <tr>
                     <td>比较运算符</td>
-                    <td>> ≥ < ≤ = ≠</td>
+                    <td>> ≥ < ≤=≠</td>
                   </tr>
                   <tr>
                     <td>逻辑运算符</td>
@@ -2116,9 +1863,7 @@ const showModal = (action: string, values: any) => {
               <p>第一范式：R的每个属性A的值域只包含<b>原子项</b></p>
               <p>比如 courses='Math, English'</p>
               <p>
-                第二范式：且每个非主属性都完全函数依赖于候选码，<b
-                  >不存在部分函数依赖</b
-                >
+                第二范式：且每个非主属性都完全函数依赖于候选码，<b>不存在部分函数依赖</b>
               </p>
               <p>判断部分函数依赖：看候选码的子集能否单独确定非主属性</p>
               <p>
@@ -2170,20 +1915,14 @@ const showModal = (action: string, values: any) => {
                 <b>not null/unique/default/primary key/foreign key/check</b>
               </p>
               <div class="box-code" style="width: 700px; height: 500px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_03"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_03"></codeView>
               </div>
               <p>
                 数据操作语言 DML
                 <i class="txt-en">Data Manipulation Language</i>
               </p>
               <div class="box-code" style="width: 700px; height: 500px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_01"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_01"></codeView>
               </div>
               <p>数据查询语言 DQL <i class="txt-en">Data Query Language</i></p>
               <p>
@@ -2194,10 +1933,7 @@ const showModal = (action: string, values: any) => {
               <p>聚合函数: <b>COUNT/SUM/AVG/MAX/MIN</b></p>
               <p>连接查询: <b>INNER/LEFT/RIGHT/FULL OUTER JOIN</b></p>
               <div class="box-code" style="width: 700px; height: 500px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_02"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_02"></codeView>
               </div>
               <p>
                 数据控制语言 DCL <i class="txt-en">Data Control Language</i>
@@ -2207,34 +1943,22 @@ const showModal = (action: string, values: any) => {
                 [user] PUBLIC/WITH GRANT OPTION 可分发
               </p>
               <div class="box-code" style="width: 700px; height: 400px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_04"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_04"></codeView>
               </div>
               <p>视图 <i class="txt-en">View</i></p>
               <p>CREATE VIEW .. AS SELECT .. FROM ... WITH CHECK OPTION</p>
               <div class="box-code" style="width: 700px; height: 400px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_05"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_05"></codeView>
               </div>
               <p>索引 <i class="txt-en">Index</i></p>
               <p>改变的是内模式</p>
               <p>CREATE UNIQUE唯一/CLUSTER聚簇 INDEX .. ON ..</p>
               <div class="box-code" style="width: 700px; height: 400px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_06"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_06"></codeView>
               </div>
               <p>存储过程 <i class="txt-en">Stored Procedure</i></p>
               <div class="box-code" style="width: 700px; height: 400px">
-                <codeView
-                  :configs="codeConfig('sql')"
-                  :value="db.sql_07"
-                ></codeView>
+                <codeView :configs="codeConfig('sql')" :value="db.sql_07"></codeView>
               </div>
             </div>
           </div>
@@ -2271,8 +1995,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>
                 <b>类</b>
-                <i class="txt-en">class</i
-                >：属性/数据/状态/变量和方法/函数/操作/行为/实现
+                <i class="txt-en">class</i>：属性/数据/状态/变量和方法/函数/操作/行为/实现
               </p>
               <p>分类：实体类/接口类(边界类)/控制类</p>
               <p>抽象：抽取共同特征和行为</p>
@@ -2284,8 +2007,7 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">message</i>：调用方法传值给形参，相互之间通讯
               </p>
               <p>
-                <b>封装</b
-                >：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
+                <b>封装</b>：把客观事物封装成抽象的类，并隐藏实现细节，使得代码模块化
               </p>
               <p>this：隐式引用变量，指向当前实例</p>
               <p>-区分成员变量与局部变量</p>
@@ -2297,8 +2019,7 @@ const showModal = (action: string, values: any) => {
               <p>final：使变量的值不可变，使方法不能被重写，使类不能继承</p>
               <p>
                 <b>继承</b>
-                <i class="txt-en">extends</i
-                >：子类/派生类共享父类/超类/基类的属性和方法
+                <i class="txt-en">extends</i>：子类/派生类共享父类/超类/基类的属性和方法
               </p>
               <p>多重继承：多个父类，二义性</p>
               <p>
@@ -2309,8 +2030,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>隐藏：子类中具有 同名不同参 的方法，阻止父类函数行为</p>
               <p>
-                <b>多态</b
-                >：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
+                <b>多态</b>：继承父类的方法并重写，并通过父类的引用调用，向上转型。在运行时会调用对应子类中的方法，灵活可拓展
               </p>
               <p>参数多态/包含多态(引用子类)/过载多态(上下文)/强制多态</p>
               <p>
@@ -2326,8 +2046,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>
                 <b>绑定</b>
-                <i class="txt-en">binding</i
-                >：把一个方法与其所在的类/对象关联起来
+                <i class="txt-en">binding</i>：把一个方法与其所在的类/对象关联起来
               </p>
               <p>静态绑定：编译时，动态绑定：运行时</p>
               <p>
@@ -2362,15 +2081,13 @@ const showModal = (action: string, values: any) => {
                 依赖倒置原则：细节依赖于抽象，抽象不依赖于细节。高层模块不应该依赖于底层模块，都依赖于底层模块的抽象
               </p>
               <p>
-                <span class="txt-define">例</span
-                >computer类不应该依赖于某个型号的CPU，而应该依赖于CPU的抽象类，有利于解耦
+                <span class="txt-define">例</span>computer类不应该依赖于某个型号的CPU，而应该依赖于CPU的抽象类，有利于解耦
               </p>
               <p>
                 接口分离原则：接口属于客户。依赖于抽象，不依赖于具体。一个类对另一个类的依赖应该建立在最小接口之上
               </p>
               <p>
-                <span class="txt-define">例</span
-                >安全门应分别依赖于防火接口、防水接口、防盗接口，这样既可以创建防火防水防盗的安全门类，也可以创建防火防盗的安全门类
+                <span class="txt-define">例</span>安全门应分别依赖于防火接口、防水接口、防盗接口，这样既可以创建防火防水防盗的安全门类，也可以创建防火防盗的安全门类
               </p>
               <p>共同封闭原则：变化对包产生影响则对包中所有类产生影响</p>
               <p>共同重用原则：重用包中的一个类，需要重用所有类</p>
@@ -2408,63 +2125,31 @@ const showModal = (action: string, values: any) => {
             <h4>1.1 事物</h4>
             <div class="sub-contents">
               <p>结构事物</p>
-              <img
-                class="img-60"
-                style="width: 350px"
-                src="/docs/study/imgs/60-uml.png"
-              />
+              <img class="img-60" style="width: 350px" src="/docs/study/imgs/60-uml.png" />
               <p>行为事物</p>
-              <img
-                class="img-61"
-                style="width: 250px"
-                src="/docs/study/imgs/61-uml.png"
-              />
+              <img class="img-61" style="width: 250px" src="/docs/study/imgs/61-uml.png" />
               <p>分组事物</p>
               <p>注释事物</p>
-              <img
-                class="img-62"
-                style="width: 250px"
-                src="/docs/study/imgs/62-uml.png"
-              />
+              <img class="img-62" style="width: 250px" src="/docs/study/imgs/62-uml.png" />
             </div>
           </div>
           <div id="section-070102">
             <h4>1.2 关系</h4>
             <div class="sub-contents">
               <p><b>依赖</b>关系：一个事物的语义依赖另一个事物，临时引用</p>
-              <img
-                class="img-63"
-                style="width: 250px"
-                src="/docs/study/imgs/63-uml.png"
-              />
+              <img class="img-63" style="width: 250px" src="/docs/study/imgs/63-uml.png" />
               <p><b>关联</b>关系：长期引用，可标注重复度(多重度)/角色</p>
               <p>单向关联</p>
               <p>关联类：多对多</p>
-              <img
-                class="img-64"
-                style="width: 250px"
-                src="/docs/study/imgs/64-uml.png"
-              />
+              <img class="img-64" style="width: 250px" src="/docs/study/imgs/64-uml.png" />
               <p>聚集：是强关联关系，整体和部分间的结构关系</p>
               <p><b>聚合</b>：松散绑定，整体消失部分仍存在</p>
               <p><b>组合</b>：生命周期绑定，整体消失部分也消失</p>
-              <img
-                class="img-65"
-                style="width: 250px"
-                src="/docs/study/imgs/65-uml.png"
-              />
+              <img class="img-65" style="width: 250px" src="/docs/study/imgs/65-uml.png" />
               <p><b>泛化</b>关系(继承)：一般/特殊的关系，子类/父类之间的关系</p>
-              <img
-                class="img-66"
-                style="width: 250px"
-                src="/docs/study/imgs/66-uml.png"
-              />
+              <img class="img-66" style="width: 250px" src="/docs/study/imgs/66-uml.png" />
               <p><b>实现</b>关系：一个类元指定了另一个类元保证执行的契约</p>
-              <img
-                class="img-67"
-                style="width: 250px"
-                src="/docs/study/imgs/67-uml.png"
-              />
+              <img class="img-67" style="width: 250px" src="/docs/study/imgs/67-uml.png" />
             </div>
           </div>
         </div>
@@ -2481,11 +2166,7 @@ const showModal = (action: string, values: any) => {
               <p>斜体：抽象类/方法</p>
               <p>权限修饰符：+public/-private/#protected/~包</p>
               <p>非直接对象/直接对象</p>
-              <img
-                class="img-68"
-                style="width: 450px"
-                src="/docs/study/imgs/68-uml.png"
-              />
+              <img class="img-68" style="width: 450px" src="/docs/study/imgs/68-uml.png" />
             </div>
           </div>
           <div id="section-070202">
@@ -2495,11 +2176,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 某一时刻一组对象(对象名:类名/下划线/属性值)以及之间的关系(链)
               </p>
-              <img
-                class="img-69"
-                style="width: 450px"
-                src="/docs/study/imgs/69-uml.png"
-              />
+              <img class="img-69" style="width: 450px" src="/docs/study/imgs/69-uml.png" />
             </div>
           </div>
           <div id="section-070203">
@@ -2509,29 +2186,13 @@ const showModal = (action: string, values: any) => {
               <p>对系统的语境/需求建模</p>
               <p>一组用例(椭圆)、参与者(人员)以及之间的关系(箭头)</p>
               <p>包含关系&lt;&lt;include&gt;&gt;：虚线箭头</p>
-              <img
-                class="img-70"
-                style="width: 250px"
-                src="/docs/study/imgs/70-uml.png"
-              />
+              <img class="img-70" style="width: 250px" src="/docs/study/imgs/70-uml.png" />
               <p>扩展关系&lt;&lt;extend&gt;&gt;：虚线箭头</p>
-              <img
-                class="img-71"
-                style="width: 250px"
-                src="/docs/study/imgs/71-uml.png"
-              />
+              <img class="img-71" style="width: 250px" src="/docs/study/imgs/71-uml.png" />
               <p>泛化关系：实线空心箭头</p>
-              <img
-                class="img-72"
-                style="width: 250px"
-                src="/docs/study/imgs/72-uml.png"
-              />
+              <img class="img-72" style="width: 250px" src="/docs/study/imgs/72-uml.png" />
               <p>用例图</p>
-              <img
-                class="img-73"
-                style="width: 450px"
-                src="/docs/study/imgs/73-uml.png"
-              />
+              <img class="img-73" style="width: 450px" src="/docs/study/imgs/73-uml.png" />
             </div>
           </div>
           <div id="section-070204">
@@ -2543,11 +2204,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>同步/调用消息、异步消息(半箭头)、返回消息(虚线)</p>
               <p>对象需实现的方法</p>
-              <img
-                class="img-74"
-                style="width: 450px"
-                src="/docs/study/imgs/74-uml.png"
-              />
+              <img class="img-74" style="width: 450px" src="/docs/study/imgs/74-uml.png" />
             </div>
           </div>
           <div id="section-070205">
@@ -2557,11 +2214,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 强调参加交互的接收和发送消息的对象的结构组织，有路径和顺序号，可嵌套
               </p>
-              <img
-                class="img-75"
-                style="width: 450px"
-                src="/docs/study/imgs/75-uml.png"
-              />
+              <img class="img-75" style="width: 450px" src="/docs/study/imgs/75-uml.png" />
             </div>
           </div>
           <div id="section-070206">
@@ -2578,11 +2231,7 @@ const showModal = (action: string, values: any) => {
               <p>时间时间：when/after</p>
               <p>当事件触发/监护条件为真/状态内部活动执行完时，状态变迁</p>
               <p>描述一个对象在多个用例中的行为，对反应型对象建模</p>
-              <img
-                class="img-76"
-                style="width: 450px"
-                src="/docs/study/imgs/76-uml.png"
-              />
+              <img class="img-76" style="width: 450px" src="/docs/study/imgs/76-uml.png" />
             </div>
           </div>
           <div id="section-070207">
@@ -2593,11 +2242,7 @@ const showModal = (action: string, values: any) => {
                 是一种特殊的状态图，展现了在系统内从一个活动到另一个活动的流程，强调对象间的控制流程，对工作流/操作建模
               </p>
               <p>包含：初态/活动/流/合并分岔/合并汇合/分支/监护表达式</p>
-              <img
-                class="img-77"
-                style="width: 450px"
-                src="/docs/study/imgs/77-uml.png"
-              />
+              <img class="img-77" style="width: 450px" src="/docs/study/imgs/77-uml.png" />
             </div>
           </div>
           <div id="section-070208">
@@ -2607,11 +2252,7 @@ const showModal = (action: string, values: any) => {
               <p>一组构件/组件之间的组织和依赖</p>
               <p>供接口：整圆</p>
               <p>需接口：半圆</p>
-              <img
-                class="img-78"
-                style="width: 450px"
-                src="/docs/study/imgs/78-uml.png"
-              />
+              <img class="img-78" style="width: 450px" src="/docs/study/imgs/78-uml.png" />
             </div>
           </div>
           <div id="section-070209">
@@ -2735,10 +2376,7 @@ const showModal = (action: string, values: any) => {
             <h4>2.3 实现</h4>
             <div class="sub-contents">
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jiandan_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jiandan_01"></codeView>
               </div>
             </div>
           </div>
@@ -2754,12 +2392,10 @@ const showModal = (action: string, values: any) => {
               <p>用于当一个类不知道它所必须创建的对象的类时</p>
               <p>用于当一个类希望由它的子类来指定它所传概念的对象时</p>
               <p>
-                <span class="txt-define">优点</span
-                >无须对原工厂进行任何修改，满足开闭原则
+                <span class="txt-define">优点</span>无须对原工厂进行任何修改，满足开闭原则
               </p>
               <p>
-                <span class="txt-define">缺点</span
-                >每增加一个产品需增加一个具体产品类和具体工厂类
+                <span class="txt-define">缺点</span>每增加一个产品需增加一个具体产品类和具体工厂类
               </p>
             </div>
           </div>
@@ -2774,38 +2410,23 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象产品 <i class="txt-en">Product</i></p>
               <div class="box-code" style="width: 800px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_gongchang_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_01"></codeView>
               </div>
               <p>具体产品 <i class="txt-en">Concrete Product</i></p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_gongchang_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_02"></codeView>
               </div>
               <p>抽象工厂 <i class="txt-en">Abstract Factory</i></p>
               <div class="box-code" style="width: 800px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_gongchang_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_03"></codeView>
               </div>
               <p>具体工厂 <i class="txt-en">Concrete Factory</i></p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_gongchang_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_gongchang_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_gongchang_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -2825,8 +2446,7 @@ const showModal = (action: string, values: any) => {
             <h4>4.1 概念</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">定义</span
-                >提供创建一系列相关或相互依赖对象的接口, 无需指定具体类
+                <span class="txt-define">定义</span>提供创建一系列相关或相互依赖对象的接口, 无需指定具体类
               </p>
               <p>工厂模式只生产同种类产品，同类产品称为同等级产品</p>
               <p>
@@ -2838,8 +2458,7 @@ const showModal = (action: string, values: any) => {
               <p>用于强调一系列相关的产品对象的设计以便进行联合使用时</p>
               <p>用于提供一个产品类库只想显示接口而不是实现时</p>
               <p>
-                <span class="txt-define">缺点</span
-                >当产品族中需增加新产品时，需修改所有的工厂类
+                <span class="txt-define">缺点</span>当产品族中需增加新产品时，需修改所有的工厂类
               </p>
             </div>
           </div>
@@ -2854,38 +2473,23 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象产品 <i class="txt-en">Product</i></p>
               <div class="box-code" style="width: 800px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_chouxiang_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_01"></codeView>
               </div>
               <p>具体产品 <i class="txt-en">Concrete Product</i></p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_chouxiang_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_02"></codeView>
               </div>
               <p>抽象工厂 <i class="txt-en">Abstract Factory</i></p>
               <div class="box-code" style="width: 800px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_chouxiang_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_03"></codeView>
               </div>
               <p>具体工厂 <i class="txt-en">Concrete Factory</i></p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_chouxiang_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 800px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_chouxiang_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_chouxiang_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -2911,8 +2515,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>用于复杂对象的创建独立于该对象的组成部分及装配方式时</p>
               <p>
-                <span class="txt-define">优点</span
-                >一般产品类和生成器类是比较稳定的
+                <span class="txt-define">优点</span>一般产品类和生成器类是比较稳定的
               </p>
               <p>
                 <span class="txt-define">缺点</span>要求产品具有较多的共同点
@@ -2922,11 +2525,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080502">
             <h4>5.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-79 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/79-sheji.png"
-              />
+              <img class="img-79 img-abs" style="width: 450px" src="/docs/study/imgs/79-sheji.png" />
             </div>
           </div>
           <div id="section-080503">
@@ -2934,45 +2533,29 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>产品类 <i class="txt-en">Product</i>：要创建的复杂对象</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shengchengqi_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_01"></codeView>
               </div>
               <p>抽象生成器类 <i class="txt-en">Builder</i>：指定部件接口</p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shengchengqi_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_02"></codeView>
               </div>
               <p>
                 具体生成器类 <i class="txt-en">ConcreteBuilder</i>：实现 Builder
                 接口，完成复杂产品的各个部件的具体创建方法，并在构造过程完成后，提供产品的实例
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shengchengqi_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_04"></codeView>
               </div>
               <p>
                 指挥者类
-                <i class="txt-en">Director</i
-                >：调用具体生成器来创建各部分的对象，只负责保证对象各部分的完整创建或顺序创建
+                <i class="txt-en">Director</i>：调用具体生成器来创建各部分的对象，只负责保证对象各部分的完整创建或顺序创建
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shengchengqi_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shengchengqi_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shengchengqi_05"></codeView>
               </div>
             </div>
           </div>
@@ -2991,11 +2574,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080602">
             <h4>6.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-80 img-abs"
-                style="width: 550px"
-                src="/docs/study/imgs/80-sheji.png"
-              />
+              <img class="img-80 img-abs" style="width: 550px" src="/docs/study/imgs/80-sheji.png" />
             </div>
           </div>
           <div id="section-080603">
@@ -3004,10 +2583,7 @@ const showModal = (action: string, values: any) => {
               <p>抽象原型类：Cloneable/具体原型类/访问类</p>
               <p>用于一个系统要独立于产品的创建、构成和表示时</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_yuanxing_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_yuanxing_01"></codeView>
               </div>
             </div>
           </div>
@@ -3028,10 +2604,7 @@ const showModal = (action: string, values: any) => {
             <h4>7.3 实现</h4>
             <div class="sub-contents">
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_danli_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_danli_01"></codeView>
               </div>
             </div>
           </div>
@@ -3049,11 +2622,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080802">
             <h4>8.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-81 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/81-sheji.png"
-              />
+              <img class="img-81 img-abs" style="width: 450px" src="/docs/study/imgs/81-sheji.png" />
             </div>
           </div>
           <div id="section-080803">
@@ -3061,43 +2630,28 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>客户端</p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shipei_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shipei_01"></codeView>
               </div>
               <p>
                 目标接口 <i class="txt-en">Target</i>：业务所需的抽象类或接口
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shipei_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shipei_02"></codeView>
               </div>
               <p>适配者类 <i class="txt-en">Adaptee</i>：被访问的接口</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shipei_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shipei_03"></codeView>
               </div>
               <p>
                 适配器类
                 <i class="txt-en">Adapter</i>：通过继承或引用Adaptee，转成Target
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shipei_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shipei_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 250px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_shipei_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_shipei_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3131,11 +2685,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080902">
             <h4>9.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-82 img-abs"
-                style="width: 625px"
-                src="/docs/study/imgs/82-sheji.png"
-              />
+              <img class="img-82 img-abs" style="width: 625px" src="/docs/study/imgs/82-sheji.png" />
             </div>
           </div>
           <div id="section-080903">
@@ -3143,46 +2693,29 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>
                 实现化角色
-                <i class="txt-en">Implementor</i
-                >：定义实现化角色的接口，供扩展抽象化角色调用
+                <i class="txt-en">Implementor</i>：定义实现化角色的接口，供扩展抽象化角色调用
               </p>
               <div class="box-code" style="width: 700px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_qiao_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_qiao_01"></codeView>
               </div>
               <p>具体实现化角色 <i class="txt-en">ConcreteImplementor</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_qiao_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_qiao_02"></codeView>
               </div>
               <p>
                 抽象化角色
-                <i class="txt-en">Abstraction</i
-                >：定义抽象类，并包含一个对实现化对象的引用
+                <i class="txt-en">Abstraction</i>：定义抽象类，并包含一个对实现化对象的引用
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_qiao_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_qiao_03"></codeView>
               </div>
               <p>扩展抽象化角色 <i class="txt-en">RefinedAbstraction</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_qiao_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_qiao_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_qiao_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_qiao_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3204,11 +2737,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081002">
             <h4>10.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-83 img-abs"
-                style="width: 250px"
-                src="/docs/study/imgs/83-sheji.png"
-              />
+              <img class="img-83 img-abs" style="width: 250px" src="/docs/study/imgs/83-sheji.png" />
             </div>
           </div>
           <div id="section-081003">
@@ -3216,31 +2745,19 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象根节点 <i class="txt-en">Component</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zuhe_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_01"></codeView>
               </div>
               <p>叶子节点 <i class="txt-en">Leaf</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zuhe_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_02"></codeView>
               </div>
               <p>树枝节点 <i class="txt-en">Composite</i>：定义子组件的行为</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zuhe_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zuhe_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zuhe_04"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3279,11 +2796,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081102">
             <h4>11.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-84 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/84-sheji.png"
-              />
+              <img class="img-84 img-abs" style="width: 450px" src="/docs/study/imgs/84-sheji.png" />
             </div>
           </div>
           <div id="section-081103">
@@ -3291,38 +2804,23 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象构件角色 <i class="txt-en">Component</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuang_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_01"></codeView>
               </div>
               <p>具体构件角色 <i class="txt-en">ConcreteComponent</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuang_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_02"></codeView>
               </div>
               <p>抽象装饰角色 <i class="txt-en">Decorator</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuang_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_03"></codeView>
               </div>
               <p>具体装饰角色 <i class="txt-en">ConcreteDecorator</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuang_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuang_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuang_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3346,8 +2844,7 @@ const showModal = (action: string, values: any) => {
                 为多个复杂子系统中的接口提供对外的一个统一的接口或界面。智能控制平台统一控制灯光，电视和空调
               </p>
               <p>
-                <span class="txt-define">缺点</span
-                >不符合开闭原则，当增加一个子系统时需修改外观类的代码
+                <span class="txt-define">缺点</span>不符合开闭原则，当增加一个子系统时需修改外观类的代码
               </p>
               <p>
                 当一个复杂系统的子系统很多时，外观模式可以为系统设计一个简单的接口供外界访问。
@@ -3363,11 +2860,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081202">
             <h4>12.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-85 img-abs"
-                style="width: 250px"
-                src="/docs/study/imgs/85-sheji.png"
-              />
+              <img class="img-85 img-abs" style="width: 250px" src="/docs/study/imgs/85-sheji.png" />
             </div>
           </div>
           <div id="section-081203">
@@ -3378,24 +2871,15 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">Facade</i>：为多个子系统对外提供一个共同的接口
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_wai_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_wai_01"></codeView>
               </div>
               <p>子系统角色 <i class="txt-en">SubSystem</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_wai_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_wai_02"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_wai_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_wai_03"></codeView>
               </div>
             </div>
           </div>
@@ -3427,11 +2911,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081302">
             <h4>13.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-86 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/86-sheji.png"
-              />
+              <img class="img-86 img-abs" style="width: 450px" src="/docs/study/imgs/86-sheji.png" />
             </div>
           </div>
           <div id="section-081303">
@@ -3439,34 +2919,22 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象享元角色 <i class="txt-en">Flyweight</i></p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_xiang_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_xiang_01"></codeView>
               </div>
               <p>具体享元角色 <i class="txt-en">ConcreteFlyweight</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_xiang_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_xiang_03"></codeView>
               </div>
               <p>非享元角色 <i class="txt-en">UnsharableFlyweight</i></p>
               <p>
                 享元工厂角色 <i class="txt-en">FlyweightFactory</i>：单例工厂
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_xiang_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_xiang_02"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_xiang_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_xiang_04"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3507,11 +2975,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081402">
             <h4>14.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-87 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/87-sheji.png"
-              />
+              <img class="img-87 img-abs" style="width: 450px" src="/docs/study/imgs/87-sheji.png" />
             </div>
           </div>
           <div id="section-081403">
@@ -3519,34 +2983,22 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象主题类 <i class="txt-en">Subject</i></p>
               <div class="box-code" style="width: 700px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dai_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dai_01"></codeView>
               </div>
               <p>真实主题类 <i class="txt-en">RealSubject</i></p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dai_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dai_02"></codeView>
               </div>
               <p>
                 代理类 <i class="txt-en">Proxy</i>:
                 提供了与真实主题相同的接口，其内部含有对真实主题的引用
               </p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dai_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dai_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dai_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dai_04"></codeView>
               </div>
             </div>
           </div>
@@ -3564,11 +3016,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081502">
             <h4>15.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-88 img-abs"
-                style="width: 650px"
-                src="/docs/study/imgs/88-sheji.png"
-              />
+              <img class="img-88 img-abs" style="width: 650px" src="/docs/study/imgs/88-sheji.png" />
             </div>
           </div>
           <div id="section-081503">
@@ -3576,31 +3024,19 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象处理者角色 <i class="txt-en">Handler</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ze_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ze_01"></codeView>
               </div>
               <p>具体处理者角色 <i class="txt-en">ConcreteHandler</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ze_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ze_02"></codeView>
               </div>
               <p>请假类 <i class="txt-en">Client</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ze_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ze_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ze_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ze_04"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3626,11 +3062,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081602">
             <h4>16.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-89 img-abs"
-                style="width: 650px"
-                src="/docs/study/imgs/89-sheji.png"
-              />
+              <img class="img-89 img-abs" style="width: 650px" src="/docs/study/imgs/89-sheji.png" />
             </div>
           </div>
           <div id="section-081603">
@@ -3638,45 +3070,27 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象命令类角色 <i class="txt-en">Command</i></p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_01"></codeView>
               </div>
               <p>具体命令角色 <i class="txt-en">ConcreteCommand</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_02"></codeView>
               </div>
               <p>实现者/接收者角色 <i class="txt-en">Receiver</i></p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_03"></codeView>
               </div>
               <p>调用者/请求者角色 <i class="txt-en">Invoker</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_04"></codeView>
               </div>
               <p>订单类</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_05"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_mingling_06"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_mingling_06"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3706,11 +3120,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081702">
             <h4>17.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-90 img-abs"
-                style="width: 550px"
-                src="/docs/study/imgs/90-sheji.png"
-              />
+              <img class="img-90 img-abs" style="width: 550px" src="/docs/study/imgs/90-sheji.png" />
             </div>
           </div>
           <div id="section-081703">
@@ -3718,42 +3128,27 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象表达式角色 <i class="txt-en">AbstractExpression</i></p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jieshi_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_01"></codeView>
               </div>
               <p>终结符表达式角色 <i class="txt-en">TerminalExpression</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jieshi_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_04"></codeView>
               </div>
               <p>
                 非终结符表达式角色 <i class="txt-en">NonterminalExpression</i>
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jieshi_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_02"></codeView>
               </div>
               <p>
                 环境角色 <i class="txt-en">Context</i>：用于存储变量和对应的值
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jieshi_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_jieshi_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_jieshi_05"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3775,56 +3170,34 @@ const showModal = (action: string, values: any) => {
           <div id="section-081802">
             <h4>18.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-91 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/91-sheji.png"
-              />
+              <img class="img-91 img-abs" style="width: 450px" src="/docs/study/imgs/91-sheji.png" />
             </div>
           </div>
           <div id="section-081803">
             <h4>18.3 实现</h4>
             <div class="sub-contents">
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_05"></codeView>
               </div>
               <p>抽象聚合角色 <i class="txt-en">Aggregate</i></p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_01"></codeView>
               </div>
               <p>具体聚合角色 <i class="txt-en">ConcreteAggregate</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_02"></codeView>
               </div>
               <p>抽象迭代器角色 <i class="txt-en">Iterator</i></p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_03"></codeView>
               </div>
               <p>具体迭代器角色 <i class="txt-en">ConcreteIterator</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_04"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_dei_06"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_dei_06"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -3850,11 +3223,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-081902">
           <h4>19.2 类图</h4>
           <div class="sub-contents">
-            <img
-              class="img-92 img-abs"
-              style="width: 450px"
-              src="/docs/study/imgs/92-sheji.png"
-            />
+            <img class="img-92 img-abs" style="width: 450px" src="/docs/study/imgs/92-sheji.png" />
           </div>
         </div>
         <div id="section-081903">
@@ -3862,38 +3231,23 @@ const showModal = (action: string, values: any) => {
           <div class="sub-contents">
             <p>抽象中介者角色 <i class="txt-en">Mediator</i></p>
             <div class="box-code" style="width: 700px; height: 150px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_zhong_01"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_zhong_01"></codeView>
             </div>
             <p>具体中介者角色 <i class="txt-en">ConcreteMediator</i></p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_zhong_02"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_zhong_02"></codeView>
             </div>
             <p>抽象同事类角色 <i class="txt-en">Colleague</i></p>
             <div class="box-code" style="width: 700px; height: 200px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_zhong_03"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_zhong_03"></codeView>
             </div>
             <p>具体同事类角色 <i class="txt-en">ConcreteColleague</i></p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_zhong_04"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_zhong_04"></codeView>
             </div>
             <p>调用</p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_zhong_05"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_zhong_05"></codeView>
             </div>
             <p>结果</p>
             <div class="list-result">
@@ -3916,11 +3270,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-082002">
           <h4>20.2 类图</h4>
           <div class="sub-contents">
-            <img
-              class="img-93 img-abs"
-              style="width: 450px"
-              src="/docs/study/imgs/93-sheji.png"
-            />
+            <img class="img-93 img-abs" style="width: 450px" src="/docs/study/imgs/93-sheji.png" />
           </div>
         </div>
         <div id="section-082003">
@@ -3928,43 +3278,28 @@ const showModal = (action: string, values: any) => {
           <div class="sub-contents">
             <p>
               发起人角色
-              <i class="txt-en">Originator</i
-              >：记录当前时刻的内部状态信息，提供创建备忘录和恢复备忘录数据的功能，实现其他业务功能，它可以访问备忘录里的所有信息
+              <i class="txt-en">Originator</i>：记录当前时刻的内部状态信息，提供创建备忘录和恢复备忘录数据的功能，实现其他业务功能，它可以访问备忘录里的所有信息
             </p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_bei_01"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_bei_01"></codeView>
             </div>
             <p>
               备忘录角色
-              <i class="txt-en">Memento</i
-              >：负责存储发起人的内部状态，在需要的时候提供这些内部状态给发起人
+              <i class="txt-en">Memento</i>：负责存储发起人的内部状态，在需要的时候提供这些内部状态给发起人
             </p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_bei_02"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_bei_02"></codeView>
             </div>
             <p>
               管理者角色
-              <i class="txt-en">Caretaker</i
-              >：对备忘录进行管理，提供保存与获取备忘录的功能，但其不能对备忘录的内容进行访问与修改
+              <i class="txt-en">Caretaker</i>：对备忘录进行管理，提供保存与获取备忘录的功能，但其不能对备忘录的内容进行访问与修改
             </p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_bei_03"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_bei_03"></codeView>
             </div>
             <p>调用</p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_bei_04"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_bei_04"></codeView>
             </div>
             <p>结果</p>
             <div class="list-result">
@@ -3997,11 +3332,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-082102">
           <h4>21.2 类图</h4>
           <div class="sub-contents">
-            <img
-              class="img-94 img-abs"
-              style="width: 450px"
-              src="/docs/study/imgs/94-sheji.png"
-            />
+            <img class="img-94 img-abs" style="width: 450px" src="/docs/study/imgs/94-sheji.png" />
           </div>
         </div>
         <div id="section-082103">
@@ -4009,38 +3340,23 @@ const showModal = (action: string, values: any) => {
           <div class="sub-contents">
             <p>抽象主题 <i class="txt-en">Subject</i></p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_guan_01"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_guan_01"></codeView>
             </div>
             <p>具体主题 <i class="txt-en">ConcreteSubject</i></p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_guan_02"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_guan_02"></codeView>
             </div>
             <p>抽象观察者 <i class="txt-en">Observer</i></p>
             <div class="box-code" style="width: 700px; height: 100px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_guan_03"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_guan_03"></codeView>
             </div>
             <p>具体观察者 <i class="txt-en">ConcreteObserver</i></p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_guan_04"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_guan_04"></codeView>
             </div>
             <p>调用</p>
             <div class="box-code" style="width: 700px; height: 300px">
-              <codeView
-                :configs="codeConfig('java')"
-                :value="db.code_guan_05"
-              ></codeView>
+              <codeView :configs="codeConfig('java')" :value="db.code_guan_05"></codeView>
             </div>
             <p>结果</p>
             <div class="list-result">
@@ -4063,11 +3379,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082202">
             <h4>22.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-95 img-abs"
-                style="width: 650px"
-                src="/docs/study/imgs/95-sheji.png"
-              />
+              <img class="img-95 img-abs" style="width: 650px" src="/docs/study/imgs/95-sheji.png" />
             </div>
           </div>
           <div id="section-082203">
@@ -4075,31 +3387,19 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象状态角色 <i class="txt-en">State</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuangtai_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_01"></codeView>
               </div>
               <p>具体状态角色 <i class="txt-en">ConcreteState</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuangtai_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_02"></codeView>
               </div>
               <p>环境角色 <i class="txt-en">Context</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuangtai_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_zhuangtai_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_zhuangtai_04"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -4127,11 +3427,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082302">
             <h4>23.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-96 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/96-sheji.png"
-              />
+              <img class="img-96 img-abs" style="width: 450px" src="/docs/study/imgs/96-sheji.png" />
             </div>
           </div>
           <div id="section-082303">
@@ -4139,31 +3435,19 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象策略类角色 <i class="txt-en">Strategy</i></p>
               <div class="box-code" style="width: 700px; height: 100px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ce_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ce_01"></codeView>
               </div>
               <p>具体策略类角色 <i class="txt-en">ConcreteCommand</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ce_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ce_02"></codeView>
               </div>
               <p>环境类角色 <i class="txt-en">Context</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ce_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ce_03"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_ce_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_ce_04"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -4190,11 +3474,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082402">
             <h4>24.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-97 img-abs"
-                style="width: 450px"
-                src="/docs/study/imgs/97-sheji.png"
-              />
+              <img class="img-97 img-abs" style="width: 450px" src="/docs/study/imgs/97-sheji.png" />
             </div>
           </div>
           <div id="section-082403">
@@ -4202,24 +3482,15 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象类角色 <i class="txt-en">AbstractClass</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_moban_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_moban_01"></codeView>
               </div>
               <p>具体子类角色 <i class="txt-en">ConcreteClass</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_moban_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_moban_02"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_moban_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_moban_03"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -4252,11 +3523,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082502">
             <h4>25.2 类图</h4>
             <div class="sub-contents">
-              <img
-                class="img-98 img-abs"
-                style="width: 550px"
-                src="/docs/study/imgs/98-sheji.png"
-              />
+              <img class="img-98 img-abs" style="width: 550px" src="/docs/study/imgs/98-sheji.png" />
             </div>
           </div>
           <div id="section-082503">
@@ -4264,45 +3531,27 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>抽象访问者角色 <i class="txt-en">Visitor</i></p>
               <div class="box-code" style="width: 700px; height: 200px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_01"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_01"></codeView>
               </div>
               <p>具体访问者角色 <i class="txt-en">ConcreteVisitor</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_02"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_02"></codeView>
               </div>
               <p>抽象元素角色 <i class="txt-en">Element</i></p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_03"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_03"></codeView>
               </div>
               <p>具体元素角色 <i class="txt-en">ConcreteElement</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_04"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_04"></codeView>
               </div>
               <p>对象结构角色 <i class="txt-en">ObjectStructure</i></p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_05"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_05"></codeView>
               </div>
               <p>调用</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('java')"
-                  :value="db.code_fang_06"
-                ></codeView>
+                <codeView :configs="codeConfig('java')" :value="db.code_fang_06"></codeView>
               </div>
               <p>结果</p>
               <div class="list-result">
@@ -4329,21 +3578,17 @@ const showModal = (action: string, values: any) => {
             <h4>1.1 概述</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">地位</span
-                >应用软件、系统软件、操作系统、计算机硬件
+                <span class="txt-define">地位</span>应用软件、系统软件、操作系统、计算机硬件
               </p>
               <img src="/docs/study/imgs/99-op.png" style="width: 300px" />
               <p>
-                <span class="txt-define">功能</span
-                >管理系统的硬件、软件、数据资源，控制程序运行，人机之间的接口，应用软件与硬件之间的接口
+                <span class="txt-define">功能</span>管理系统的硬件、软件、数据资源，控制程序运行，人机之间的接口，应用软件与硬件之间的接口
               </p>
               <p>
-                <span class="txt-define">特征</span
-                >并发性、共享性、虚拟性、不确定性
+                <span class="txt-define">特征</span>并发性、共享性、虚拟性、不确定性
               </p>
               <p>
-                <span class="txt-define">分类</span
-                >批处理、分时、实时、网络、分布式、微机、嵌入式
+                <span class="txt-define">分类</span>批处理、分时、实时、网络、分布式、微机、嵌入式
               </p>
             </div>
           </div>
@@ -4360,14 +3605,11 @@ const showModal = (action: string, values: any) => {
                 包含在进程中，可与同属一个进程的其他线程共享进程所拥有的全部资源，线程与线程之间是不可见的
               </p>
               <p>
-                共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、<b
-                  >栈</b
-                >
+                共享内存地址空间、代码、数据、文件，不共享程序计数器、寄存器、<b>栈</b>
               </p>
               <p>
                 进程
-                <i class="txt-en">Process</i
-                >：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB)
+                <i class="txt-en">Process</i>：资源分配的最小单位，系统执行的独立单元，由程序、数据、程序控制块(PCB)
                 <i class="txt-en">Process Control Block</i> 组成
               </p>
               <p>
@@ -4375,20 +3617,12 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">Running</i>、阻塞
                 <i class="txt-en">Waiting/Blocked</i>
               </p>
-              <img
-                class="img-14"
-                style="width: 250px"
-                src="/docs/study/imgs/14-santai.png"
-              />
+              <img class="img-14" style="width: 250px" src="/docs/study/imgs/14-santai.png" />
               <p>
                 五态模型：创建 <i class="txt-en">New</i>、终止
                 <i class="txt-en">Terminated</i>
               </p>
-              <img
-                class="img-118"
-                style="width: 300px"
-                src="/docs/study/imgs/118-wutai.png"
-              />
+              <img class="img-118" style="width: 300px" src="/docs/study/imgs/118-wutai.png" />
             </div>
           </div>
           <div id="section-090202">
@@ -4398,11 +3632,7 @@ const showModal = (action: string, values: any) => {
               <p>表示和描述进程之间的先后顺序和执行的依赖关系</p>
               <p>顺序执行：顺序性/封闭性/可再现性</p>
               <p>并发执行：无封闭性，相互制约</p>
-              <img
-                class="img-117"
-                style="width: 300px"
-                src="/docs/study/imgs/117-bingfa.png"
-              />
+              <img class="img-117" style="width: 300px" src="/docs/study/imgs/117-bingfa.png" />
             </div>
           </div>
           <div id="section-090203">
@@ -4423,23 +3653,14 @@ const showModal = (action: string, values: any) => {
               <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
               <p>
                 <b>信号量S</b>
-                <i class="txt-en">Semaphore</i
-                >：正数为可用资源数，负数的绝对值为等待资源数
+                <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数
               </p>
               <p>信号量S的编号，由(12,13,23,34)排序决定</p>
               <p>先做的进程 V(S)，后做的进程 P(S)</p>
-              <img
-                class="img-17"
-                style="width: 250px"
-                src="/docs/study/imgs/17-pv.png"
-              />
+              <img class="img-17" style="width: 250px" src="/docs/study/imgs/17-pv.png" />
               <p>执行前等待资源<b>P(S)减</b>，S≤0则等待</p>
               <p>执行后释放资源<b>V(S)加</b>，S≤0则唤醒</p>
-              <img
-                class="img-16"
-                style="width: 250px"
-                src="/docs/study/imgs/16-pv.png"
-              />
+              <img class="img-16" style="width: 250px" src="/docs/study/imgs/16-pv.png" />
               <p>
                 实现互斥：在临界区中执行PV，确保同一时间内仅有一个进程在临界区中
               </p>
@@ -4458,11 +3679,7 @@ const showModal = (action: string, values: any) => {
                 实现生产线程与消费线程的解耦
               </p>
               <p>容量为1的缓冲区</p>
-              <img
-                class="img-18"
-                style="width: 300px"
-                src="/docs/study/imgs/18-pv.png"
-              />
+              <img class="img-18" style="width: 300px" src="/docs/study/imgs/18-pv.png" />
               <p>容量为n的缓冲区</p>
               <p>
                 缓冲区+互斥信号量S+同步信号量(S1<b>可放产品数n</b>+S2<b>剩余产品数0</b>)
@@ -4475,8 +3692,7 @@ const showModal = (action: string, values: any) => {
             <h4>2.6 死锁</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">必要条件</span
-                >互斥、请求保持和等待、不可剥夺、环路等待
+                <span class="txt-define">必要条件</span>互斥、请求保持和等待、不可剥夺、环路等待
               </p>
               <p>
                 同类资源分配不当引起死锁：n个进程，每个所需k个资源，至少需要资源数
@@ -4581,11 +3797,7 @@ const showModal = (action: string, values: any) => {
                 P进程，R资源：R->P 代表资源R已分配给进程P的资源数，P->R
                 代表进程P还需要请求资源R的资源数
               </p>
-              <img
-                class="img-15"
-                style="width: 320px"
-                src="/docs/study/imgs/15-ziyuan.png"
-              />
+              <img class="img-15" style="width: 320px" src="/docs/study/imgs/15-ziyuan.png" />
               <p>阻塞节点：该节点所请求的资源已分配完</p>
               <p>非阻塞节点：可化简</p>
               <p>死锁状态：所有进程都是阻塞节点</p>
@@ -4681,18 +3893,10 @@ const showModal = (action: string, values: any) => {
             <h4>3.4 段页式存储</h4>
             <div class="sub-contents">
               <p>地址结构：段号s + 段内页号p + 页内地址w</p>
-              <img
-                class="img-20"
-                style="width: 400px"
-                src="/docs/study/imgs/20-cunchu.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-20" style="width: 400px" src="/docs/study/imgs/20-cunchu.png" alt="" srcset="" />
               <p>
-                页的大小为4K(=<span class="txt-func"
-                  >2<span class="txt-sup">2</span></span
-                >*<span class="txt-func">2<span class="txt-sup">10</span></span
-                >)，每个段<b>最大允许</b>有
+                页的大小为4K(=<span class="txt-func">2<span class="txt-sup">2</span></span>*<span class="txt-func">2<span
+                    class="txt-sup">10</span></span>)，每个段<b>最大允许</b>有
                 <span class="txt-func">2<span class="txt-sup">p</span></span>
                 页，最多有
                 <span class="txt-func">2<span class="txt-sup">s</span></span> 段
@@ -4710,13 +3914,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-090402">
             <h4>4.2 输入输出</h4>
             <div class="sub-contents">
-              <img
-                class="img-21"
-                style="width: 450px"
-                src="/docs/study/imgs/21-shebei.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-21" style="width: 450px" src="/docs/study/imgs/21-shebei.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-090403">
@@ -4724,21 +3922,9 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>输入T>传送M>处理C</p>
               <p>单缓冲区：(T+M)*(n-1)+(T+M+C)</p>
-              <img
-                class="img-24"
-                style="width: 450px"
-                src="/docs/study/imgs/24-shebei.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-24" style="width: 450px" src="/docs/study/imgs/24-shebei.png" alt="" srcset="" />
               <p>双缓冲区：T*(n-1)+(T+M+C)</p>
-              <img
-                class="img-25"
-                style="width: 450px"
-                src="/docs/study/imgs/25-shebei.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-25" style="width: 450px" src="/docs/study/imgs/25-shebei.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-090404">
@@ -4751,11 +3937,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 扇区：每个磁道被划分为多个扇区，扇区是存储数据的最小单位；一般扇区大小为512字节
               </p>
-              <img
-                class="img-113"
-                style="width: 300px"
-                src="/docs/study/imgs/113-cipan.png"
-              />
+              <img class="img-113" style="width: 300px" src="/docs/study/imgs/113-cipan.png" />
               <p>
                 先寻找对应磁道，再等待周期旋转至指定扇区，产生寻道时间和等待时间
               </p>
@@ -4808,17 +3990,9 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>最后一个物理块的时间为 读取时间+处理时间=2ms+4ms=6ms</p>
               <p>所以总时间为 198ms+6ms=204ms</p>
-              <img
-                class="img-22"
-                style="width: 400px"
-                src="/docs/study/imgs/22-shebei.png"
-              />
+              <img class="img-22" style="width: 400px" src="/docs/study/imgs/22-shebei.png" />
               <p>修改顺序来优化 =(2ms+4ms)*10=60ms</p>
-              <img
-                class="img-23"
-                style="width: 200px"
-                src="/docs/study/imgs/23-shebei.png"
-              />
+              <img class="img-23" style="width: 200px" src="/docs/study/imgs/23-shebei.png" />
               <p>磁道距离*移动速度+延迟+传输</p>
             </div>
           </div>
@@ -4869,8 +4043,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>
                 位示图
-                <i class="txt-cn">bitmap</i
-                >：对每个物理空间用一位标识，1则使用，0则空闲
+                <i class="txt-cn">bitmap</i>：对每个物理空间用一位标识，1则使用，0则空闲
               </p>
               <p>逻辑编号 0/1字 代表物理块 0~31位 32*(n+1)-1</p>
               <p>求所需位示图的字大小</p>
@@ -5080,11 +4253,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 加工逻辑(小说明)：结构化语言(顺序/选择/重复)、判定表、判定树
               </p>
-              <img
-                class="img-29"
-                style="width: 600px"
-                src="/docs/study/imgs/29-dd.png"
-              />
+              <img class="img-29" style="width: 600px" src="/docs/study/imgs/29-dd.png" />
             </div>
           </div>
           <div id="section-100404">
@@ -5096,13 +4265,7 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">Data Store</i>、外部实体
                 <i class="txt-en">External Agent</i>
               </p>
-              <img
-                class="img-30"
-                style="width: 600px"
-                src="/docs/study/imgs/30-dfd.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-30" style="width: 600px" src="/docs/study/imgs/30-dfd.png" alt="" srcset="" />
               <p>
                 数据流：加工➔加工、加工➔数据存储(写)、数据存储➔加工(读)、外部实体➔加工(输入)、加工➔外部实体(输出)
               </p>
@@ -5132,12 +4295,11 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>需求分析>设计>编码>测试>运行与维护</p>
               <p>
-                <span class="txt-define">特点</span
-                >结构化方法，以项目的阶段评审和文档控制来指导，<b>需求明确</b>，管理成本低
+                <span class="txt-define">特点</span>结构化方法，以项目的阶段评审和文档控制来指导，<b>需求明确</b>，管理成本低
               </p>
               <p>
-                <span class="txt-define">缺点</span
-                >由于各个阶段的依赖关系，需求变更较大时，会导致整个项目的延迟；测试阶段在开发结束后才进行，可能导致问题的发现和修复较晚；客户参与程度较低，可能导致最终产品与客户需求有较大差距，风险控制弱
+                <span
+                  class="txt-define">缺点</span>由于各个阶段的依赖关系，需求变更较大时，会导致整个项目的延迟；测试阶段在开发结束后才进行，可能导致问题的发现和修复较晚；客户参与程度较低，可能导致最终产品与客户需求有较大差距，风险控制弱
               </p>
             </div>
           </div>
@@ -5151,13 +4313,10 @@ const showModal = (action: string, values: any) => {
             <h4>1.3 增量模型</h4>
             <div class="sub-contents">
               <p>
-                将软件系统划分成多个增量，每个增量分别开发、测试和部署，然后按顺序进行整合。<b
-                  >首个增量是核心</b
-                >
+                将软件系统划分成多个增量，每个增量分别开发、测试和部署，然后按顺序进行整合。<b>首个增量是核心</b>
               </p>
               <p>
-                <span class="txt-define">特点</span
-                >增量划分、迭代开发、重复循环、增量交付
+                <span class="txt-define">特点</span>增量划分、迭代开发、重复循环、增量交付
               </p>
               <p>
                 <span class="txt-define">缺点</span>管理成本高，效率低，配置复杂
@@ -5170,8 +4329,7 @@ const showModal = (action: string, values: any) => {
               <p>演化模型：迭代的过程模型，适用于需求缺乏准确认识的情况</p>
               <p>创建快速原型，了解需求和反馈。需求不明确，经常变化，规模小</p>
               <p>
-                <span class="txt-define">特点</span
-                >实际可行、具有基本特征、构造方便快速，动态需求
+                <span class="txt-define">特点</span>实际可行、具有基本特征、构造方便快速，动态需求
               </p>
             </div>
           </div>
@@ -5183,8 +4341,7 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>螺旋周期：制定计划、风险分析、实施工程、客户评估</p>
               <p>
-                <span class="txt-define">缺点</span
-                >需要较高的技术和管理能力，且增加成本
+                <span class="txt-define">缺点</span>需要较高的技术和管理能力，且增加成本
               </p>
             </div>
           </div>
@@ -5195,8 +4352,7 @@ const showModal = (action: string, values: any) => {
                 以用户需求为动力，以对象作为驱动，<b>面向对象</b>，迭代无间隙
               </p>
               <p>
-                <span class="txt-define">特点</span
-                >迭代性，无间隙性，无边界可同步进行，开发效率高，复用好
+                <span class="txt-define">特点</span>迭代性，无间隙性，无边界可同步进行，开发效率高，复用好
               </p>
               <p>过程：分析、设计、实现、维护、演化</p>
               <p>
@@ -5209,8 +4365,7 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>用例和风险驱动、以架构为中心、迭代且增量</p>
               <p>
-                <span class="txt-define">阶段</span
-                >起始阶段：生命周期目标、精化阶段：生命周期架构、构建阶段：初始运行功能、移交阶段：产品发布
+                <span class="txt-define">阶段</span>起始阶段：生命周期目标、精化阶段：生命周期架构、构建阶段：初始运行功能、移交阶段：产品发布
               </p>
             </div>
           </div>
@@ -5277,16 +4432,12 @@ const showModal = (action: string, values: any) => {
               </table>
               <p>
                 2.水晶法
-                <i class="txt-en">Crystal</i
-                >：以人为本，不同项目需要不同策略、约定和方法论
+                <i class="txt-en">Crystal</i>：以人为本，不同项目需要不同策略、约定和方法论
               </p>
               <p>开发式源码：程序开发人员再地域上分布很广</p>
               <p>
                 3.并列争求法
-                <i class="txt-en">Scrum</i
-                >：迭代的增量化工程方法，按需求的优先级别实现产品。30天为一个<b
-                  >冲刺</b
-                >
+                <i class="txt-en">Scrum</i>：迭代的增量化工程方法，按需求的优先级别实现产品。30天为一个<b>冲刺</b>
               </p>
               <p>功能驱动开发 FDD：首席程序员和类程序员</p>
               <p>
@@ -5328,16 +4479,14 @@ const showModal = (action: string, values: any) => {
                 结构化分析结果：一套分层的数据流图、一本数据词典、一组小说明、补充材料
               </p>
               <p>
-                <span class="txt-define">分类</span
-                >包括业务需求、用户需求、系统需求
+                <span class="txt-define">分类</span>包括业务需求、用户需求、系统需求
               </p>
               <p>
-                <span class="txt-define">包含</span
-                >功能需求、性能需求、用户或人的因素、环境需求、界面需求、文档需求、数据需求、资源使用需求、安全保密需求、可靠性需求、软件成本消耗与开发进度需求、其他非功能性需求
+                <span
+                  class="txt-define">包含</span>功能需求、性能需求、用户或人的因素、环境需求、界面需求、文档需求、数据需求、资源使用需求、安全保密需求、可靠性需求、软件成本消耗与开发进度需求、其他非功能性需求
               </p>
               <p>
-                <span class="txt-define">工具</span
-                >数据流图与数据字典、决策表与决策树
+                <span class="txt-define">工具</span>数据流图与数据字典、决策表与决策树
               </p>
             </div>
           </div>
@@ -5472,29 +4621,17 @@ const showModal = (action: string, values: any) => {
               <p>语句覆盖：覆盖每个语句，分支不执行语句时可以不覆盖</p>
               <p>判定(分支)覆盖：每个判定表达式的结果都要真假覆盖</p>
               <p>条件覆盖：逻辑条件的可能值都要真假覆盖 A>0 B>0/A < 0 B < 0</p>
-              <p>判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
-              <p>条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
-              <p>路径覆盖：覆盖被测试程序中的所有可能路径</p>
-              <img
-                class="img-31"
-                style="width: 600px"
-                src="/docs/study/imgs/31-ceshi.png"
-                alt=""
-                srcset=""
-              />
+                  <p>判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
+                  <p>条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
+                  <p>路径覆盖：覆盖被测试程序中的所有可能路径</p>
+                  <img class="img-31" style="width: 600px" src="/docs/study/imgs/31-ceshi.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-110504">
             <h4>5.4 McCabe度量法</h4>
             <div class="sub-contents">
               <p>V(G)=m-n+2 m为有向弧数，n为节点数</p>
-              <img
-                class="img-32"
-                style="width: 400px"
-                src="/docs/study/imgs/32-mccabe.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-32" style="width: 400px" src="/docs/study/imgs/32-mccabe.png" alt="" srcset="" />
             </div>
           </div>
           <div id="section-110505">
@@ -5533,9 +4670,7 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>正确性维护</td>
                     <td>
-                      指改正在系统开发阶段已发生但在系统测试阶段尚未发现的<b
-                        >错误</b
-                      >
+                      指改正在系统开发阶段已发生但在系统测试阶段尚未发现的<b>错误</b>
                     </td>
                   </tr>
                   <tr>
@@ -5686,42 +4821,22 @@ const showModal = (action: string, values: any) => {
             <div class="sub-contents">
               <p>甘特图/<b>Gantt图</b></p>
               <p>
-                <span class="txt-define">优点</span
-                >能够清晰地描述每个任务从何时开始、到何时结束，任务的进展情况以及各个任务之间的并行性
+                <span class="txt-define">优点</span>能够清晰地描述每个任务从何时开始、到何时结束，任务的进展情况以及各个任务之间的并行性
               </p>
               <p>
-                <span class="txt-define">缺点</span
-                >不能清晰地反映出各任务之间的依赖关系，难以确定整个项目的关键所在，也不能反映计划中有潜力的部分
+                <span class="txt-define">缺点</span>不能清晰地反映出各任务之间的依赖关系，难以确定整个项目的关键所在，也不能反映计划中有潜力的部分
               </p>
-              <img
-                class="img-28"
-                style="width: 250px"
-                src="/docs/study/imgs/28-gantt.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-28" style="width: 250px" src="/docs/study/imgs/28-gantt.png" alt="" srcset="" />
               <p>项目计划评审技术图/<b>PERT图</b></p>
               <p>
                 <span class="txt-define">缺点</span>不能反映任务之间的并行关系
               </p>
-              <img
-                class="img-27"
-                style="width: 150px"
-                src="/docs/study/imgs/27-pert.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-27" style="width: 150px" src="/docs/study/imgs/27-pert.png" alt="" srcset="" />
               <p>正推取大值，反推取小值</p>
               <p>松弛时间：最迟-最早</p>
               <p>关键路径：项目的最短工期</p>
               <p><b>项目活动图</b>：里程碑、活动、活动时间</p>
-              <img
-                class="img-26"
-                style="width: 380px"
-                src="/docs/study/imgs/26-pert.png"
-                alt=""
-                srcset=""
-              />
+              <img class="img-26" style="width: 380px" src="/docs/study/imgs/26-pert.png" alt="" srcset="" />
               <p>画项目活动图</p>
             </div>
           </div>
@@ -5910,12 +5025,10 @@ const showModal = (action: string, values: any) => {
             <h4>2.1 病毒</h4>
             <div class="sub-contents">
               <p>
-                <span class="txt-define">特征</span
-                >传播性、隐蔽性、感染性、潜伏性、触发性、破坏性
+                <span class="txt-define">特征</span>传播性、隐蔽性、感染性、潜伏性、触发性、破坏性
               </p>
               <p>
-                <span class="txt-define">类型</span
-                >蠕虫病毒、特洛伊木马、后门病毒、宏病毒
+                <span class="txt-define">类型</span>蠕虫病毒、特洛伊木马、后门病毒、宏病毒
               </p>
               <p>宏病毒：文本文档、电子表格等</p>
             </div>
@@ -6015,8 +5128,7 @@ const showModal = (action: string, values: any) => {
                     <td>数据链路层</td>
                     <td>
                       将比特流封装为帧
-                      <i class="txt-en">Frame</i
-                      >，进行物理寻址(MAC地址)，CRC校验
+                      <i class="txt-en">Frame</i>，进行物理寻址(MAC地址)，CRC校验
                     </td>
                   </tr>
                   <tr>
@@ -6556,18 +5668,10 @@ const showModal = (action: string, values: any) => {
             <h4>1.2 效率</h4>
             <div class="sub-contents">
               <p>大O表示法</p>
-              <img
-                class="img-148"
-                style="width: 600px"
-                src="/docs/study/imgs/148-fuza.png"
-              />
+              <img class="img-148" style="width: 600px" src="/docs/study/imgs/148-fuza.png" />
               <p>时间复杂度</p>
               <p>空间复杂度</p>
-              <img
-                class="img-149"
-                style="width: 600px"
-                src="/docs/study/imgs/149-fuza.png"
-              />
+              <img class="img-149" style="width: 600px" src="/docs/study/imgs/149-fuza.png" />
             </div>
           </div>
         </div>
@@ -6628,14 +5732,10 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>直接插入排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td><span class="txt-func">O(n)</span></td>
                     <td><span class="txt-func">O(1)</span></td>
@@ -6645,14 +5745,10 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>希尔排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">1.3</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">1.3</span>)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td><span class="txt-func">O(n)</span></td>
                     <td><span class="txt-func">O(1)</span></td>
@@ -6662,14 +5758,10 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>简单选择排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td>
                       <span class="txt-func">
@@ -6698,14 +5790,10 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>冒泡排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td><span class="txt-func">O(n)</span></td>
                     <td><span class="txt-func">O(1)</span></td>
@@ -6718,9 +5806,7 @@ const showModal = (action: string, values: any) => {
                       <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">O(n<span class="txt-sup">2</span>)</span>
                     </td>
                     <td>
                       <span class="txt-func">O(nlgn)</span>
@@ -6779,17 +5865,11 @@ const showModal = (action: string, values: any) => {
               <p>4.终止：成功放置n行</p>
               <p>递归求解</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_huisu_01"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_huisu_01"></codeView>
               </div>
               <p>循环求解</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_huisu_02"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_huisu_02"></codeView>
               </div>
             </div>
           </div>
@@ -6807,10 +5887,7 @@ const showModal = (action: string, values: any) => {
               <p>递归：边界条件、递归模式</p>
               <p>阶乘</p>
               <div class="box-code" style="width: 700px; height: 150px">
-                <codeView
-                  :configs="codeConfig('typescript')"
-                  :value="db.code_fenzhi_01"
-                ></codeView>
+                <codeView :configs="codeConfig('typescript')" :value="db.code_fenzhi_01"></codeView>
               </div>
             </div>
           </div>
@@ -6821,10 +5898,7 @@ const showModal = (action: string, values: any) => {
               <p>求解：对两个子序列递归排序</p>
               <p>合并：合并两个子序列并排序</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_fenzhi_02"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_fenzhi_02"></codeView>
               </div>
             </div>
           </div>
@@ -6836,10 +5910,7 @@ const showModal = (action: string, values: any) => {
               <p>2.和右子段的最大子段和相同</p>
               <p>3.跨区时为 左子段的右边界最大值+右子段的左边界最大值</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_fenzhi_03"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_fenzhi_03"></codeView>
               </div>
             </div>
           </div>
@@ -6880,27 +5951,16 @@ const showModal = (action: string, values: any) => {
               </p>
               <p>
                 case2：确定放入物品 i 时，前提条件是背包容量W大于
-                <span class="txt-func">w<span class="txt-sub">𝑖</span></span
-                >，剩余背包容量为
-                <span class="txt-func">j-w<span class="txt-sub">𝑖</span></span
-                >，则问题转换为求 从下标 [1,i-1] 中任意选取物品放入容量为
+                <span class="txt-func">w<span class="txt-sub">𝑖</span></span>，剩余背包容量为
+                <span class="txt-func">j-w<span class="txt-sub">𝑖</span></span>，则问题转换为求 从下标 [1,i-1] 中任意选取物品放入容量为
                 <span class="txt-func">j-w<span class="txt-sub">𝑖</span></span>
                 的背包时的最大价值，即
-                <span class="txt-func"
-                  >dp[i-1][j-w<span class="txt-sub">𝑖</span>]</span
-                >，则此时最大价值为
-                <span class="txt-func"
-                  >dp[i-1][j-w<span class="txt-sub">𝑖</span>]+𝑣<span
-                    class="txt-sub"
-                    >𝑖</span
-                  ></span
-                >
+                <span class="txt-func">dp[i-1][j-w<span class="txt-sub">𝑖</span>]</span>，则此时最大价值为
+                <span class="txt-func">dp[i-1][j-w<span class="txt-sub">𝑖</span>]+𝑣<span
+                    class="txt-sub">𝑖</span></span>
                 ，所以状态转移方程为
-                <span class="txt-func"
-                  >dp[i][j] = max(dp[i-1][j], dp[i-1][j-w<span class="txt-sub"
-                    >𝑖</span
-                  >]+𝑣<span class="txt-sub">𝑖</span>)</span
-                >
+                <span class="txt-func">dp[i][j] = max(dp[i-1][j], dp[i-1][j-w<span class="txt-sub">𝑖</span>]+𝑣<span
+                    class="txt-sub">𝑖</span>)</span>
               </p>
               <p>3.dp数组初始化</p>
               <p>dp[0][j] 使用各个容量的背包放入编号0物品的最大价值</p>
@@ -6920,9 +5980,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >𝑣<span class="txt-sub">𝑖</span></span
-                      >
+                      <span class="txt-func">𝑣<span class="txt-sub">𝑖</span></span>
                     </td>
                     <td>2</td>
                     <td>3</td>
@@ -6931,9 +5989,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                   <tr>
                     <td>
-                      <span class="txt-func"
-                        >w<span class="txt-sub">𝑖</span></span
-                      >
+                      <span class="txt-func">w<span class="txt-sub">𝑖</span></span>
                     </td>
                     <td>1</td>
                     <td>2</td>
@@ -6942,16 +5998,9 @@ const showModal = (action: string, values: any) => {
                   </tr>
                 </tbody>
               </table>
-              <img
-                class="img-59"
-                style="width: 250px"
-                src="/docs/study/imgs/59-dongtai.png"
-              />
+              <img class="img-59" style="width: 250px" src="/docs/study/imgs/59-dongtai.png" />
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_dongtai_01"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_dongtai_01"></codeView>
               </div>
             </div>
           </div>
@@ -6993,10 +6042,7 @@ const showModal = (action: string, values: any) => {
               <p>按最大 单位重量价值 先归并排序O(nlgn)，再依次放入</p>
               <p>时间复杂度：O(nlgn)</p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_tanxin_01"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_tanxin_01"></codeView>
               </div>
             </div>
           </div>
@@ -7015,10 +6061,7 @@ const showModal = (action: string, values: any) => {
                 的最后一个活动的结束时间比较，如果不冲突则放入，如果冲突则考虑下一场地或新场地
               </p>
               <div class="box-code" style="width: 700px; height: 300px">
-                <codeView
-                  :configs="codeConfig('cpp')"
-                  :value="db.code_tanxin_02"
-                ></codeView>
+                <codeView :configs="codeConfig('cpp')" :value="db.code_tanxin_02"></codeView>
               </div>
             </div>
           </div>
@@ -7042,12 +6085,8 @@ const showModal = (action: string, values: any) => {
       <!-- 目录 -->
       <div class="menus">
         <ul>
-          <li
-            v-for="item in pageInfos.menus"
-            :key="item.id"
-            :data-id="item.id"
-            :class="{ active: activeId === item.id }"
-          >
+          <li v-for="item in pageInfos.menus" :key="item.id" :data-id="item.id"
+            :class="{ active: activeId === item.id }">
             <a @click="scrollTo(item.id)" :class="`level-${item.level}`">{{
               item.text
             }}</a>
@@ -7057,13 +6096,7 @@ const showModal = (action: string, values: any) => {
     </div>
   </div>
 
-  <a-modal
-    v-model:open="noteModal"
-    centered
-    width="80vw"
-    :title="`[${noteInfos.title}]`"
-    :footer="[]"
-  >
+  <a-modal v-model:open="noteModal" centered width="80vw" :title="`[${noteInfos.title}]`" :footer="[]">
     <noteView :data="noteInfos"></noteView>
     <div class="btns" style="margin-top: 10px">
       <a-button @click="scrollTo(noteInfos.id)">索引知识点</a-button>
