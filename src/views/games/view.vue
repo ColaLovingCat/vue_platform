@@ -338,8 +338,8 @@ const games = [
     rules: {},
     ruleList: [],
   },
-    // 九宫格拼图
-    {
+  // 九宫格拼图
+  {
     code: "puzzle",
     name: "九宫格拼图",
     isActive: true,

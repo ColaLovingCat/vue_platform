@@ -16,13 +16,15 @@ defineOptions({
 })
 
 const datas: any = ref([
+    { title: "学习卡片", path: 'study-list', img: 'study.png' },
     { title: "文章", path: 'articles', img: 'article.png' },
     { title: "查询", path: 'query', img: 'seo.png' },
-    { title: "学习卡片", path: 'study-list', img: 'study.png' },
-    { title: "F1", path: 'f1', img: 'f1.jpg' },
     { title: "Pokémon", path: 'pokes', img: 'pokemon.png' },
     { title: "怪猎物语2", path: 'mhs2', img: 'mhs2.png' },
     { title: "Amiibo", path: 'amiibo', img: 'amiibo.jpg' },
+    { title: "F1", path: 'f1', img: 'f1.jpg' },
+    { title: "电竞赛事", path: 'matchs', img: 'matchs.png' },
+    { title: "单机游戏", path: 'games', img: 'games.png' },
     { title: "游戏库", path: 'games', img: 'switch.jpg' },
     { title: "动物森友会", path: 'animals', img: 'animal.png' },
     { title: "书架", path: 'books', img: 'books.jpg' },
@@ -35,7 +37,6 @@ const datas: any = ref([
     { title: "CS GO", path: 'icons', query: { type: "csgo" }, img: 'csgo.jpg' },
     { title: "M-League", path: 'icons', query: { type: "majiang" }, img: 'majiang.jpg' },
     { title: "公司", path: 'icons', query: { type: "company" }, img: 'company.jpeg' },
-    { title: "排序", path: 'sort', img: 'calc.png' },
     { title: "壁纸", path: 'wallpapers', img: 'wallpaper.jpg' },
     { title: "单机-扫雷", path: 'games-mine', img: 'mine.jpg' },
     { title: "单机-九宫格", path: 'games-puzzle', img: 'puzzle.jpg' },

@@ -5,6 +5,7 @@ import * as db from "./ruanjian";
 
 import codeView from "@/components/editor-code/view.vue";
 import noteView from "./note-card.vue";
+import sortView from "../comps/sort.vue";
 
 import * as extend from "@/commons/utils/extends";
 
@@ -1456,9 +1457,19 @@ const showModal = (action: string, values: any) => {
                 alt=""
                 srcset=""
               />
-              <p>性质1：二叉树第 i(i≥1) 层上最多有 <span class="txt-func">2<span class="txt-sup">i-1</span></span> 个节点</p>
-              <p>性质2：高度为h的二叉树至多有 <span class="txt-func">2<span class="txt-sup">h</span>-1</span> 个节点</p>
-              <p>性质3：二叉树中度为0的节点数n0等于度为2的节点数n2+1，即 n0=n2+1</p>
+              <p>
+                性质1：二叉树第 i(i≥1) 层上最多有
+                <span class="txt-func">2<span class="txt-sup">i-1</span></span>
+                个节点
+              </p>
+              <p>
+                性质2：高度为h的二叉树至多有
+                <span class="txt-func">2<span class="txt-sup">h</span>-1</span>
+                个节点
+              </p>
+              <p>
+                性质3：二叉树中度为0的节点数n0等于度为2的节点数n2+1，即 n0=n2+1
+              </p>
               <p>性质4：有n个节点的完全二叉树高度为 ⌊log2n⌋+1 或 ⌈log2(n+1)⌉</p>
               <p>存储结构</p>
               <img
@@ -6661,9 +6672,9 @@ const showModal = (action: string, values: any) => {
                       >
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(n<span class="txt-sup">2</span>)</span
-                      >
+                      <span class="txt-func">
+                        O(n<span class="txt-sup">2</span>)
+                      </span>
                     </td>
                     <td><span class="txt-func">O(1)</span></td>
                     <td>❌</td>
@@ -6672,19 +6683,13 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>堆排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td><span class="txt-func">O(1)</span></td>
                     <td>❌</td>
@@ -6710,9 +6715,7 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>快速排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
                       <span class="txt-func"
@@ -6720,14 +6723,10 @@ const showModal = (action: string, values: any) => {
                       >
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(log<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(lgn)</span>
                     </td>
                     <td>❌</td>
                     <td>✅</td>
@@ -6735,19 +6734,13 @@ const showModal = (action: string, values: any) => {
                   <tr>
                     <td>归并排序</td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td>
-                      <span class="txt-func"
-                        >O(nlog<span class="txt-sub">2</span>n)</span
-                      >
+                      <span class="txt-func">O(nlgn)</span>
                     </td>
                     <td><span class="txt-func">O(n)</span></td>
                     <td>✅</td>
@@ -6758,62 +6751,9 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <div id="section-140302">
-            <h4>
-              3.2 直接插入排序 <i class="txt-en">straight insertion sort</i>
-            </h4>
+            <h4>3.2 排序演示</h4>
             <div class="sub-contents">
-              <p>
-                逐一将元素与之前位置的元素比较，若小于则交换位置，直至不小于
-              </p>
-            </div>
-          </div>
-          <div id="section-140303">
-            <h4>3.3 希尔排序 <i class="txt-en">shells sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                又称
-                缩小增量法。先取一个小于n的增量d，将距离为d的值放入同一组，进行插入排序；然后取第二个增量，直至增量为1，进行直接插入排序
-              </p>
-            </div>
-          </div>
-          <div id="section-140304">
-            <h4>3.4 简单选择排序 <i class="txt-en">selection sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                在指针范围内，将最小值与开头位置进行交换，缩小指针区域并重复
-              </p>
-            </div>
-          </div>
-          <div id="section-140305">
-            <h4>3.5 堆排序 <i class="txt-en">heap sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                将序列建立为大顶堆，然后将首位(最大值)和末尾进行交换，然后重复进行大顶堆和交换操作
-              </p>
-            </div>
-          </div>
-          <div id="section-140306">
-            <h4>3.6 冒泡排序 <i class="txt-en">bubble sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                依次对比两两元素，如果逆序则交换位置，最终最大值会排至最后，重复操作
-              </p>
-            </div>
-          </div>
-          <div id="section-140307">
-            <h4>3.7 快速排序 <i class="txt-en">quick sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                基于枢轴值依次排序，将序列分为左序列均小于枢轴，右区域均大于枢轴，枢轴归位，重复
-              </p>
-            </div>
-          </div>
-          <div id="section-140308">
-            <h4>3.8 归并排序 <i class="txt-en">merging sort</i></h4>
-            <div class="sub-contents">
-              <p>
-                先将序列递归平均分组，之后进行合并，依次加两个序列的值进行，将较小值计入次序
-              </p>
+              <sortView></sortView>
             </div>
           </div>
         </div>

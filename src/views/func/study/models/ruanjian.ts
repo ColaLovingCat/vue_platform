@@ -5044,6 +5044,335 @@ j表示模式串中字符的序号(从1开始),若模式串P 为 'abaac'，则�
     ],
   },
   {
+    id: "section-030404",
+    type: "topic",
+    title: "上午题-拓扑排序",
+    category: "single-select",
+    question: `拓扑序列是有向无环图中所有顶点的一个线性序列。
+若有向图中存在弧<V, W>或存在从顶点 V 到 W 的路径，则在该有向图的任拓扑序列中, V 一定在 W 之前。
+下面有向图的拓扑序列是___。`,
+    imgs: ["/docs/study/imgs/157-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "41235", 
+          "43125", 
+          "42135", 
+          "41325"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140202",
+    type: "topic",
+    title: "上午题-二分查找",
+    category: "single-select",
+    question: `对于有序表(8,15,19,23,26,31,40,65,91)，用二分法进行查找时，可能的关键字比较顺序为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "26，23，19", 
+          "26，8，19", 
+          "26，40，65", 
+          "26，31，40"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030503",
+    type: "topic",
+    title: "上午题-哈希表",
+    category: "single-select",
+    question: `设散列函数为H(key)=Key%11，对于关键码序列(23,40,91,17,19,10,31,65,26)，用线件探查法解决冲突构造的哈希表为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          `
+          <table>
+            <tr>
+              <td>哈希地址</td>
+              <td>0</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>关键码</td>
+              <td>10</td>
+              <td>23</td>
+              <td></td>
+              <td>91</td>
+              <td>26</td>
+              <td></td>
+              <td>17</td>
+              <td>40</td>
+              <td>19</td>
+              <td>31</td>
+              <td>65</td>
+            </tr>
+          </table>
+          `, 
+          `
+          <table>
+            <tr>
+              <td>哈希地址</td>
+              <td>0</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>关键码</td>
+              <td>65</td>
+              <td>23</td>
+              <td></td>
+              <td>91</td>
+              <td>26</td>
+              <td></td>
+              <td>17</td>
+              <td>40</td>
+              <td>19</td>
+              <td>31</td>
+              <td>10</td>
+            </tr>
+          </table>
+          `, 
+          `
+          <table>
+            <tr>
+              <td>哈希地址</td>
+              <td>0</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>关键码</td>
+              <td></td>
+              <td>23</td>
+              <td>10</td>
+              <td>91</td>
+              <td>26</td>
+              <td></td>
+              <td>17</td>
+              <td>40</td>
+              <td>19</td>
+              <td>31</td>
+              <td>65</td>
+            </tr>
+          </table>
+          `, 
+          `
+          <table>
+            <tr>
+              <td>哈希地址</td>
+              <td>0</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>关键码</td>
+              <td></td>
+              <td>23</td>
+              <td>65</td>
+              <td>91</td>
+              <td>26</td>
+              <td></td>
+              <td>17</td>
+              <td>40</td>
+              <td>19</td>
+              <td>31</td>
+              <td>10</td>
+            </tr>
+          </table>
+          `, 
+        ],
+        fillAnswer: "",
+        note: "10 构造时哈希值为 10%11=10，65 构造时 65%11=10，则必须 (65+1)%11=0",
+      },
+    ],
+  },
+  {
+    id: "section-030601",
+    type: "topic",
+    title: "上午题-堆",
+    category: "single-select",
+    question: `n个关键码构成的序列{k1,k2,...,kn}，当且仅当满足下列关系时称其为堆。
+    以下关键码序列中，___不是堆。`,
+    imgs: ["/docs/study/imgs/158-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "15,25,21,53,73,65,33", 
+          "15,25,21,33,73,65,53", 
+          "73,65,25,21,15,53,33", 
+          "73,65,25,33,53,15,21"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140301",
+    type: "topic",
+    title: "上午题-插入排序",
+    category: "single-select",
+    question: `现需要对一个基本有序的数组进行排序，此时最适宜采用的算法为___排序算法，时间复杂度为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "插入", 
+          "快速", 
+          "归并", 
+          "堆"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          `<span class="txt-func">O(n)</span>`, 
+          `<span class="txt-func">O(nlgn)</span>`, 
+          `<span class="txt-func">O(n<span class="txt-sup">2</span>)</span>`, 
+          `<span class="txt-func">O(n<span class="txt-sup">2</span>lgn)</span>`, 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140301",
+    type: "topic",
+    title: "上午题-快速排序",
+    category: "single-select",
+    question: `对数组 A=(2,8,7,1,3,5,6,4) 用快速排序算法的划分方法进行一趟划分后得到的数组A为___(非递减排序,以最后个元素为基准元素)。
+    进行一趟划分的计算时间为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "(1,2,8,7,3,5,6,4)", 
+          "(1,2,3,4,8,7,5,6)", 
+          "(2,3,1,4,7,5,6,8)", 
+          "(2,1,3,4,8,7,5,6)"
+        ],
+        fillAnswer: "",
+        note: "快速排序，i,j的指针向中间靠",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(1)</span>", 
+          "<span class='txt-func'>O(lgn)</span>", 
+          "<span class='txt-func'>O(n)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140301",
+    type: "topic",
+    title: "上午题-归并排序",
+    category: "single-select",
+    question: `用插入排序和归并排序算法对数组 [3,1,4,1,5,9,6,5] 进行从小到大排序，则分别需要进行___次元素间比较。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "12，14", 
+          "10，14", 
+          "12，16", 
+          "10，16"
+        ],
+        fillAnswer: "",
+        note: "插入排序将待排元素与有序序列中的元素依次比较，归并排序将序列先分成最小子集，再合并，合并时依次对比两个序列的元素，移动小元素的指针",
+      },
+    ],
+  },
+  {
+    id: "section-140301",
+    type: "topic",
+    title: "上午题-选择排序",
+    category: "single-select",
+    question: `用某排序方法对一元素序列进行非递减排序时，若该方法可保证在排序前后排序码相同者的相对位置不变，则称该排序方法是稳定的。
+简单选择排序方法是不稳定的，___可以说明这个性质。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          "21 48 21* 63 17", 
+          "17 21 21* 48 63", 
+          "63 31 48 21* 17", 
+          "21* 17 48 63 21"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
     id: "section-01",
     type: "topic",
     title: "上午题-sample",
