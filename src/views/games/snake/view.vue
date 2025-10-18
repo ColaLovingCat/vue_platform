@@ -23,9 +23,10 @@ const gameInfos = reactive({
   direction: '', // 方向
   food: {} as Block, // 食物
   //
-  score: 0,
   interval: null as number | null,
+  score: 0,
   isPaused: false,
+  status: '',
 })
 
 
@@ -101,6 +102,7 @@ function onKeydown(e: KeyboardEvent) {
     if (gameInfos.direction !== 'left') gameInfos.direction = 'right'
   }
 }
+
 // 移动
 function moveSnake() {
   if (gameInfos.isPaused) return // 暂停时不更新
@@ -123,7 +125,7 @@ function moveSnake() {
     || gameInfos.snake.some(seg => seg.x === head.x && seg.y === head.y)
   ) {
     if (gameInfos.interval) clearInterval(gameInfos.interval)
-    alert(`游戏结束！得分：${gameInfos.score}`)
+    gameInfos.status = "已结束"
     return
   }
 
@@ -143,7 +145,9 @@ function moveSnake() {
 // 暂停
 function togglePause() {
   gameInfos.isPaused = !gameInfos.isPaused
+  gameInfos.status = gameInfos.isPaused ? "已暂停" : "运行中"
 }
+
 // 重启游戏
 function restart() {
   gameInfos.score = 0
@@ -155,23 +159,32 @@ function restart() {
   //
   if (gameInfos.interval) clearInterval(gameInfos.interval)
   gameInfos.interval = setInterval(moveSnake, 150)
+  gameInfos.status = "运行中"
 }
 </script>
 
 <template>
   <div class="box-games">
-    <div class="box-tips">
-      <p>控制方向: <span>↑</span><span>↓</span><span>←</span><span>→</span></p>
-      <p>暂停/继续: <span>Space</span></p>
-      <p>重开游戏: <span>R</span></p>
+    <div class="box-infos">
+      <div class="box-tips">
+        <div class="box-contents">
+          <p class="item-score">{{ gameInfos.score }}</p>
+          <p class="item-status">{{ gameInfos.status }}</p>
+        </div>
+      </div>
+      <div class="box-tips">
+        <div class="header">
+          <h4>提示</h4>
+        </div>
+        <div class="box-contents">
+          <p>控制方向: <span>↑</span><span>↓</span><span>←</span><span>→</span></p>
+          <p>暂停/继续: <span>Space</span></p>
+          <p>重开游戏: <span>R</span></p>
+        </div>
+      </div>
     </div>
     <div class="box-canvas">
       <canvas ref="canvas" width="400" height="400"></canvas>
-    </div>
-    <div class="box-infos">
-      <p>Score{{ gameInfos.score }}</p>
-      <button @click="togglePause">{{ gameInfos.isPaused ? '继续' : '暂停' }}</button>
-      <button @click="restart">Restart</button>
     </div>
   </div>
 </template>

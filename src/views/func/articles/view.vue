@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { onMounted, ref, reactive } from 'vue'
 
 import articleView from '@/components/articles/view.vue'
 
-import * as XLSX from 'xlsx'
+import * as xlsx from '@/commons/utils/xlsx'
 
 // name
 defineOptions({
@@ -22,7 +22,7 @@ const pageInfos = reactive({
 })
 
 onMounted(async () => {
-    let datas = await readExcel();
+    let datas = await xlsx.readExcel('/docs/datas/articles.xlsx');
     Object.keys(datas).map((key: string) => {
         if (key.indexOf("_contents") > -1) {
             const no = key.split("_")[0]
@@ -83,29 +83,6 @@ onMounted(async () => {
     //
     showArticle(articles.value[0], 0)
 })
-
-const readExcel = async () => {
-    try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL('/docs/datas/articles.xlsx', import.meta.url).href)
-        const arrayBuffer = await response.arrayBuffer()
-
-        // 解析Excel数据
-        const data = new Uint8Array(arrayBuffer)
-        const workbook = XLSX.read(data, { type: 'array' })
-
-        // 获取第一个工作表的数据
-        const result: any = {}
-        workbook.SheetNames.map((sheet: any) => {
-            result[sheet] = XLSX.utils.sheet_to_json(workbook.Sheets[sheet])
-        })
-
-        return result
-    } catch (error) {
-        console.error('读取Excel文件失败:', error)
-    }
-    return {}
-}
 
 const showArticle = (article: any, index: number) => {
     pageInfos.status = "open"

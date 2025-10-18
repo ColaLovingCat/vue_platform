@@ -233,26 +233,26 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'CFO',
-                                icon: 'CFO.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'AL',
-                                icon: 'AL.png',
-                                score: 0,
-                            },
-                        },
-                        {
-                            top: {
                                 team: 'KT',
                                 icon: 'KT.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'TES',
                                 icon: 'TES.png',
                                 score: 0,
+                            },
+                        },
+                        {
+                            top: {
+                                team: 'CFO',
+                                icon: 'CFO.png',
+                                score: 1,
+                            },
+                            bottom: {
+                                team: 'AL',
+                                icon: 'AL.png',
+                                score: 2,
                             },
                         },
                     ],
@@ -265,21 +265,21 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'G2',
-                                icon: 'G2.png',
+                                team: 'TSW',
+                                icon: 'Team Secret.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'BLG',
-                                icon: 'BLG.png',
-                                score: 0,
+                                team: 'FLY',
+                                icon: 'FLY.png',
+                                score: 1,
                             },
                         },
                         {
                             top: {
                                 team: 'GEN',
                                 icon: 'GNG.png',
-                                score: 0,
+                                score: 1,
                             },
                             bottom: {
                                 team: 'T1',
@@ -289,13 +289,13 @@ export const list = [
                         },
                         {
                             top: {
-                                team: 'TSW',
-                                icon: 'Team Secret.png',
-                                score: 0,
+                                team: 'G2',
+                                icon: 'G2.png',
+                                score: 1,
                             },
                             bottom: {
-                                team: 'FLY',
-                                icon: 'FLY.png',
+                                team: 'BLG',
+                                icon: 'BLG.png',
                                 score: 0,
                             },
                         },
@@ -308,7 +308,7 @@ export const list = [
                             bottom: {
                                 team: 'HLE',
                                 icon: 'HLE.png',
-                                score: 0,
+                                score: 1,
                             },
                         },
                     ],
@@ -321,6 +321,18 @@ export const list = [
                     matchs: [
                         {
                             top: {
+                                team: 'FNC',
+                                icon: 'Fnatic.png',
+                                score: 0,
+                            },
+                            bottom: {
+                                team: 'MKOI',
+                                icon: 'MKOI.png',
+                                score: 0,
+                            },
+                        },
+                        {
+                            top: {
                                 team: 'VKS',
                                 icon: 'VKS.png',
                                 score: 0,
@@ -328,18 +340,6 @@ export const list = [
                             bottom: {
                                 team: 'PSG',
                                 icon: 'PSG.png',
-                                score: 0,
-                            },
-                        },
-                        {
-                            top: {
-                                team: 'MKOI',
-                                icon: 'MKOI.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'FNC',
-                                icon: 'Fnatic.png',
                                 score: 0,
                             },
                         },
@@ -613,7 +613,7 @@ export const list = [
         losers: [],
     },
     {
-        name: '双败淘汰赛16强模板',
+        name: '双败淘汰赛-16强模板',
         type: 'doubles',
         rounds: [],
         winners: [

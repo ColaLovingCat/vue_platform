@@ -77,6 +77,11 @@ function moveTile(index: number) {
 }
 // 键盘控制移动切片
 function handleKeydown(e: any) {
+  if ((e.key === 'r' || e.code === 'r')) {
+    shuffle()
+    return
+  }
+
   if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
     moveEmptyByKey(e.key)
   }
@@ -123,21 +128,29 @@ function isAdjacent(i1: any, i2: any) {
 
 <template>
   <div class="box-games">
-    <div class="box-tips">
-      <p>控制方向: <span>▲</span><span>▼</span><span>◀</span><span>▶</span></p>
-      <p>重开游戏: <span>R</span></p>
+    <div class="box-infos">
+      <div class="box-tips">
+        <div class="box-contents">
+          <p class="item-score">{{ gameInfos.moveCount }}</p>
+          <p class="item-status">{{ isSolved ? '恭喜完成拼图！' : '未完成' }}</p>
+          <select v-model="gameInfos.currentImage" @change="shuffle">
+            <option v-for="img in imageList" :key="img" :value="img">{{ img }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="box-tips">
+        <div class="header">
+          <h4>提示</h4>
+        </div>
+        <div class="box-contents">
+          <p>控制方向: <span>▲</span><span>▼</span><span>◀</span><span>▶</span></p>
+          <p>重开游戏: <span>R</span></p>
+        </div>
+      </div>
     </div>
     <div class="box-puzzle">
       <div v-for="(tile, index) in gameInfos.tiles" :key="tile.id" class="tile" :class="{ empty: tile.empty }"
         :style="getTileStyle(tile, index)" @click="moveTile(index)"></div>
-    </div>
-    <div class="box-infos">
-      <select v-model="gameInfos.currentImage" @change="shuffle">
-        <option v-for="img in imageList" :key="img" :value="img">{{ img }}</option>
-      </select>
-      <span class="move-counter">步数：{{ gameInfos.moveCount }}</span>
-      <button @click="shuffle">Restart</button>
-      <div v-if="isSolved" class="win-text">🎉 恭喜完成拼图！</div>
     </div>
   </div>
 </template>

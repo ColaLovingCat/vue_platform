@@ -14,20 +14,13 @@ defineOptions({
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const previewCanvasRef = ref<HTMLCanvasElement | null>(null)
-const gameConfigs = reactive({
-  // 画布大小
-  rows: 25,
-  cols: 10,
-  // 像素大小
-  size: 25,
-})
+
 const gameInfos = reactive({
   score: 0,
   level: 1,
   isPaused: false,
+  status: "",
 })
-
-
 const pageInfos = reactive({
   configs: {
     // 画布大小
@@ -36,7 +29,6 @@ const pageInfos = reactive({
     // 像素大小
     size: 25,
   },
-  score: 0,
 })
 
 // 定义俄罗斯方块的所有形状（7种类型，每种有4个旋转状态）
@@ -317,7 +309,7 @@ function clearLines() {
 
   // 添加得分：每消一行 +100 分（可自定义）
   if (linesCleared > 0) {
-    pageInfos.score += linesCleared * 100
+    gameInfos.score += linesCleared * 100
   }
 
   // 填补顶部空白行
@@ -383,30 +375,42 @@ function gameLoop(timestamp: number) {
 
 <template>
   <div class="box-games">
-    <div class="box-tips">
-      <p>控制方向: <span>←</span><span>→</span></p>
-      <p>旋转方块: <span>↑</span></p>
-      <p>加速下落: <span>↓</span></p>
-      <p>直接下落: <span>Space</span></p>
-      <p>重开游戏: <span>R</span></p>
+    <div class="box-infos">
+      <div class="box-next">
+        <canvas ref="previewCanvasRef" width="80" height="80"></canvas>
+      </div>
+      <div class="box-tips">
+        <div class="box-contents">
+          <p class="item-score">{{ gameInfos.score }}</p>
+          <p class="item-status">{{ gameInfos.status }}</p>
+        </div>
+      </div>
+      <div class="box-tips">
+        <div class="header">
+          <h4>提示</h4>
+        </div>
+        <div class="box-contents">
+          <p>控制方向: <span>←</span><span>→</span></p>
+          <p>旋转方块: <span>↑</span></p>
+          <p>加速下落: <span>↓</span></p>
+          <p>直接下落: <span>Space</span></p>
+          <p>重开游戏: <span>R</span></p>
+        </div>
+      </div>
     </div>
     <div class="box-map">
       <canvas ref="canvasRef"></canvas>
-    </div>
-    <div class="box-infos">
-      <div style="margin-top: 10px">
-        <div>下一块：</div>
-        <canvas ref="previewCanvasRef" width="80" height="80" style="border:1px solid #ccc;" />
-      </div>
-      <div style="margin-top: 12px; font-size: 18px;">
-        得分：{{ pageInfos.score }}
-      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @import url(../com/games.scss);
+
+.box-next {
+  padding: 3px;
+  background: #c4cecf;
+}
 
 .box-map {
   width: max-content;

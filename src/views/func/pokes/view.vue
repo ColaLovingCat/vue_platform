@@ -2,32 +2,36 @@
 import { ref, computed, onMounted, reactive } from 'vue'
 
 import pokes from './pokes.vue'
-import * as XLSX from 'xlsx'
+import * as xlsx from '@/commons/utils/xlsx'
 
 const datas: any = ref([])
 const changeMark: any = ref(false)
 
-const searchInfos = reactive({
-    text: '',
-})
-const dataShow = computed(() => {
-    let result: any = []
-    if (searchInfos.text != '') {
-        // result = datas.value.filter((a: any) => a.name.indexOf(searchInfos.text) > -1)
-        datas.value.map((item: any) => {
-            if (item.name.indexOf(searchInfos.text) > -1) {
-                result.push({ ...item })
-            }
-        })
-    } else {
-        result = [...datas.value]
-    }
-    return result
+const pageInfos = reactive({
+    types: [] as any[],
+    natures: [] as any[],
+    timelines: [] as any[],
 })
 
+const searchInfos = reactive({
+    text: '' as any,
+    datas: [] as any[]
+})
+const handleSearch = () => {
+    // 执行搜索逻辑
+    const searchText = searchInfos.text.trim().toLowerCase();
+
+    const result = searchText
+        ? datas.value.filter((item: any) =>
+            item.cnName.toLowerCase().includes(searchText)
+        )
+        : datas.value;
+    searchInfos.datas = [...result]
+};
+
 onMounted(async () => {
-    let temps: any = await readExcel()
-    const { pokes, shapes } = temps
+    let temps: any = await xlsx.readExcel('/docs/datas/pokes.xlsx')
+    const { pokes, shapes, natures, types } = temps
     shapes.map((item: any) => {
         let temp = pokes.find((a: any) => a.no == item.no)
         if (temp) {
@@ -40,31 +44,14 @@ onMounted(async () => {
     })
     //
     datas.value = [...pokes]
+    handleSearch()
+    //
+    pageInfos.natures = [...natures]
+    pageInfos.types = [...types]
 })
 
-const readExcel = async () => {
-    try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL('/docs/datas/pokes.xlsx', import.meta.url).href)
-        const arrayBuffer = await response.arrayBuffer()
-
-        // 解析Excel数据
-        const data = new Uint8Array(arrayBuffer)
-        const workbook = XLSX.read(data, { type: 'array' })
-
-        // 获取第一个工作表的数据
-        const pokes = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
-        const shapes = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]])
-
-        return { pokes, shapes }
-    } catch (error) {
-        console.error('读取Excel文件失败:', error)
-    }
-    return {}
-}
-
+// 属性
 const typeModal = ref(false)
-const types: any = ref([])
 const getStyle = (values: any) => {
     let result = {
         color: "#fff",
@@ -74,7 +61,7 @@ const getStyle = (values: any) => {
         case 0: {
             result = {
                 color: "#fff",
-                background: '#9ca3af'
+                background: '#5b5b5b'
             }
             break;
         }
@@ -95,12 +82,10 @@ const getStyle = (values: any) => {
     }
     return result
 }
-
+// 性格
 const natureModal = ref(false)
-const natures: any = ref([])
-
+// 游戏列表
 const timelineModal = ref(false)
-const timelines: any = ref([])
 
 const showModal = (action: string, values: any) => {
     switch (action) {
@@ -131,42 +116,43 @@ const showModal = (action: string, values: any) => {
             </div>
             <div class="right">
                 <a-button type="primary" @click="showModal('timeline', {})">游戏</a-button>
-                <a-button type="primary" @click="showModal('nature', {})">招式</a-button>
-                <a-button type="primary" @click="showModal('nature', {})">特性</a-button>
-                <a-button type="primary" @click="showModal('nature', {})">道具</a-button>
-                <a-button type="primary" @click="showModal('nature', {})">异常状态</a-button>
-                <a-button type="primary" @click="showModal('nature', {})">球种</a-button>
+                <a-button type="primary" @click="showModal('', {})">招式</a-button>
+                <a-button type="primary" @click="showModal('', {})">特性</a-button>
+                <a-button type="primary" @click="showModal('', {})">道具</a-button>
+                <a-button type="primary" @click="showModal('', {})">异常状态</a-button>
+                <a-button type="primary" @click="showModal('', {})">球种</a-button>
                 <a-button type="primary" @click="showModal('nature', {})">性格</a-button>
                 <a-button type="primary" @click="showModal('type', {})">属性</a-button>
-                <a-input v-model:value="searchInfos.text" placeholder="search" @change="changeMark = !changeMark" />
+                <a-input v-model:value="searchInfos.text" placeholder="search" allow-clear @change="handleSearch" />
             </div>
         </div>
         <div class="list-pokes">
-            <div v-for="(poke) in dataShow">
+            <div v-for="(poke) in searchInfos.datas" :key="poke.no">
                 <pokes :data="poke" :change-mark="changeMark"></pokes>
             </div>
         </div>
 
     </div>
 
+    <!-- 属性 -->
     <a-modal v-model:open="typeModal" width="990px" centered :closable="false" :header="null" :footer="null">
         <div class="box-types">
             <table class="table-types">
                 <thead>
                     <tr>
                         <th></th>
-                        <th v-for="column in types" class="th-type">
+                        <th v-for="column in pageInfos.types" class="th-type">
                             <img class="td-type item-type" v-bind:src="'/docs/pokemons/types/' + column.type + '.png'">
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="row in types">
+                    <tr v-for="row in pageInfos.types">
                         <td>
                             <img class="td-type item-type" v-bind:src="'/docs/pokemons/types/' + row.type + '.png'">
                         </td>
-                        <td v-for="item in row.list" class="td-rate">
-                            <div class="rate-item" :style="getStyle(item.rate)"> {{ item.rate }}</div>
+                        <td v-for="item in pageInfos.types" class="td-rate">
+                            <div class="rate-item" :style="getStyle(row[item.type])"> {{ row[item.type] }}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -174,14 +160,15 @@ const showModal = (action: string, values: any) => {
         </div>
     </a-modal>
 
+    <!-- 性格 -->
     <a-modal v-model:open="natureModal" width="600px" centered :closable="false" :header="null" :footer="null">
         <div class="list-natures">
-            <table class="table-natures">
+            <table class="table-natures" style="width: 100%;">
                 <tbody>
-                    <tr v-for="item in natures">
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.plus }}</td>
-                        <td>{{ item.down }}</td>
+                    <tr v-for="item in pageInfos.natures">
+                        <td>{{ item.nature }}</td>
+                        <td>+{{ item.plus }}</td>
+                        <td>-{{ item.down }}</td>
                         <td>{{ item.like }}</td>
                         <td>{{ item.dislike }}</td>
                     </tr>
@@ -193,7 +180,7 @@ const showModal = (action: string, values: any) => {
     <a-modal v-model:open="timelineModal" width="600px" centered :closable="false" :header="null" :footer="null">
         <div class="box-timelines">
             <a-timeline mode="alternate">
-                <a-timeline-item v-for="game in timelines">
+                <a-timeline-item v-for="game in pageInfos.timelines">
                     <div class="game-item">
                         <div class="item-year">
                             {{ game.year }}

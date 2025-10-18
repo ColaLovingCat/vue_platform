@@ -1,16 +1,14 @@
 <script lang="ts" setup>
-import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { onMounted, reactive } from 'vue'
 
-import * as db from './datas'
+import * as xlsx from '@/commons/utils/xlsx'
 import * as extend from '@/commons/utils/extends'
-import * as XLSX from 'xlsx'
 
 // name
 defineOptions({
     name: 'custom-name'
 })
 
-const datas: any = ref([])
 const pageInfos = reactive({
     series: [] as any[],
     show: 'items',
@@ -20,73 +18,51 @@ const pageInfos = reactive({
     cars: [] as any[],
     sanrio: [] as any[],
 })
+
 const searchInfos = reactive({
-    series: '',
+    series: 'All',
     text: '',
+    datas: [] as any[]
 })
-const changeMark = ref(false)
-const dataShow = computed(() => {
+const handleSearch = () => {
     let result: any[] = []
     switch (pageInfos.show) {
         case "items":
             result = [...pageInfos.items]
-            if (searchInfos.series != '') {
+            if (searchInfos.series != 'All') {
                 result = result.filter((a: any) => a.series == searchInfos.series)
             }
-            if (searchInfos.text != '') {
-                // result = datas.value.filter((a: any) => a.name.indexOf(searchInfos.text) > -1)
-                datas.value.map((item: any) => {
-                    if (item.name.indexOf(searchInfos.text) > -1) {
-                        result.push({ ...item })
-                    }
-                })
+            const searchText = searchInfos.text.trim().toLowerCase();
+            if (searchText != '') {
+                result = result.filter((item: any) =>
+                    item.name.toLowerCase().includes(searchText)
+                )
             }
             break;
         default:
+            //@ts-ignore
             result = [...pageInfos[pageInfos.show]]
             break;
     }
-
-    return result
-})
+    searchInfos.datas = [...result]
+};
 
 onMounted(async () => {
-    const temps: any = await readExcel()
-    pageInfos.items = [...db.items]
+    const temps: any = await xlsx.readExcel('/docs/datas/amiibos.xlsx')
+    pageInfos.items = [...temps.items]
     pageInfos.villagers = [...temps.villagers]
     pageInfos.cars = [...temps.cars]
     pageInfos.sanrio = [...temps.sanrio]
     //
-    const temp = extend.ExArray.uniqueSingle([{ value: 'All' }, ...db.items.filter((a: any) => a.series != '').map((a: any) => ({
+    const temp = extend.ExArray.uniqueSingle([{ value: 'All' }, ...temps.items.filter((a: any) => a.series != '').map((a: any) => ({
         value: a.series
     }))], 'value')
     pageInfos.series = temp.map((a: string) => ({
         value: a, label: a
     }))
+    //
+    handleSearch()
 })
-
-const readExcel = async () => {
-    try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL('/docs/datas/amiibos.xlsx', import.meta.url).href)
-        const arrayBuffer = await response.arrayBuffer()
-
-        // 解析Excel数据
-        const data = new Uint8Array(arrayBuffer)
-        const workbook = XLSX.read(data, { type: 'array' })
-
-        // 获取第一个工作表的数据
-        const villagers = XLSX.utils.sheet_to_json(workbook.Sheets["villagers"])
-        const cars = XLSX.utils.sheet_to_json(workbook.Sheets["cars"])
-        const sanrio = XLSX.utils.sheet_to_json(workbook.Sheets["sanrio"])
-
-        return { villagers, cars, sanrio }
-    } catch (error) {
-        console.error('读取Excel文件失败:', error)
-    }
-    return {}
-}
-
 </script>
 
 <template>
@@ -96,25 +72,25 @@ const readExcel = async () => {
                 <div class="logo">
                     <img src="/docs/amiibo/comps/logo.png" alt="" srcset="">
                 </div>
-                <span>Total: {{ dataShow.length }}</span>
+                <span>Total: {{ searchInfos.datas.length }}</span>
             </div>
             <div class="right">
-                <a-radio-group v-model:value="pageInfos.show">
+                <a-radio-group v-model:value="pageInfos.show" @change="handleSearch">
                     <a-radio-button value="items">Amiibo</a-radio-button>
                     <a-radio-button value="villagers">村民</a-radio-button>
                     <a-radio-button value="cars">房车</a-radio-button>
                     <a-radio-button value="sanrio">三丽鸥</a-radio-button>
                 </a-radio-group>
-                <a-select ref="select" v-model:value="searchInfos.series" style="width: 200px">
+                <a-select ref="select" v-model:value="searchInfos.series" style="width: 200px" @change="handleSearch">
                     <a-select-option v-for="item in pageInfos.series" :value="item.value">{{ item.label
-                        }}</a-select-option>
+                    }}</a-select-option>
                 </a-select>
                 <a-input v-model:value="searchInfos.text" placeholder="search" style="width: 200px"
-                    @change="changeMark = !changeMark" />
+                    @change="handleSearch" />
             </div>
         </div>
         <div class="list-amiibos" :class="`list-${pageInfos.show}`">
-            <template v-for="amiibo in dataShow">
+            <template v-for="amiibo in searchInfos.datas">
                 <div class="amiibo-item">
                     <div class="item-infos">
                         <div class="item-name">{{ amiibo.name }}</div>

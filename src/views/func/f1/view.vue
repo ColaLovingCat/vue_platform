@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
 
-import * as XLSX from 'xlsx'
+import * as xlsx from '@/commons/utils/xlsx'
 import * as extend from '@/commons/utils/extends'
 
 // name
@@ -13,8 +13,18 @@ const months = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
+
+const pageInfos = reactive({
+  year: 2025,
+  //
+  rounds: [] as any[],
+  currentRound: 0,
+  // 积分 排名 分站冠军 领奖台 杆位
+  drivers: [] as any[],
+})
+
 onMounted(async () => {
-  let temps: any = await readExcel()
+  let temps: any = await xlsx.readExcel('/docs/datas/f1.xlsx')
   const { rounds, races, result, drivers, teams } = temps
   pageInfos.drivers = [...drivers]
   pageInfos.drivers.map((driver: any) => {
@@ -81,6 +91,7 @@ onMounted(async () => {
     }
   })
 })
+
 const formatDate = (excelDate: number) => {
   const excelEpoch = new Date(1899, 11, 31);
   const date = new Date(excelEpoch.getTime() + excelDate * 24 * 60 * 60 * 1000);
@@ -95,39 +106,6 @@ const formatTime = (excelTime: number) => {
   // 格式化为 HH:MM
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 }
-
-const readExcel = async () => {
-  try {
-    // 动态导入Excel文件
-    const response = await fetch(new URL('/docs/datas/f1.xlsx', import.meta.url).href)
-    const arrayBuffer = await response.arrayBuffer()
-
-    // 解析Excel数据
-    const data = new Uint8Array(arrayBuffer)
-    const workbook = XLSX.read(data, { type: 'array' })
-
-    // 获取第一个工作表的数据
-    const rounds = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
-    const races = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]])
-    const result = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[2]])
-    const drivers = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[3]])
-    const teams = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[4]])
-
-    return { rounds, races, result, drivers, teams }
-  } catch (error) {
-    console.error('读取Excel文件失败:', error)
-  }
-  return {}
-}
-
-const pageInfos = reactive({
-  year: 2025,
-  //
-  rounds: [] as any[],
-  currentRound: 0,
-  // 积分 排名 分站冠军 领奖台 杆位
-  drivers: [] as any[],
-})
 </script>
 
 <template>

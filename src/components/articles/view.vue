@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, provide, onMounted, computed, reactive, onBeforeUnmount } from "vue";
 
-import * as XLSX from 'xlsx'
+import * as xlsx from '@/commons/utils/xlsx'
 import * as extend from '@/commons/utils/extends'
 
 import wordTip from "./wordTip.vue";
@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 })
 
 const loadWordDic = async () => {
-    let temps: any = await readExcel()
+    let temps: any = await xlsx.readExcel('/docs/datas/words.xlsx')
     // 处理词库
     const wordMap: Record<string, Word> = {};
     const orgWords = temps.words.sort((a: any, b: any) => a.word.localeCompare(b.word))
@@ -73,25 +73,6 @@ const loadWordDic = async () => {
     });
     //
     wordDic.value = Object.values(wordMap)
-}
-const readExcel = async () => {
-    try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL('/docs/datas/words.xlsx', import.meta.url).href)
-        const arrayBuffer = await response.arrayBuffer()
-
-        // 解析Excel数据
-        const data = new Uint8Array(arrayBuffer)
-        const workbook = XLSX.read(data, { type: 'array' })
-
-        // 获取第一个工作表的数据
-        const words = XLSX.utils.sheet_to_json(workbook.Sheets['words'])
-
-        return { words }
-    } catch (error) {
-        console.error('读取Excel文件失败:', error)
-    }
-    return {}
 }
 
 provide('wordDic', wordDic)

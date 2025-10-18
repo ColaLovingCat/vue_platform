@@ -48,6 +48,102 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
 
     return '';
 };
+
+const qualifiedTeams = computed(() => {
+    const teamRecords = computeTeamRecords(props.rounds);
+    const winners: any[] = []; // 赢了3场的队伍（晋级）
+    const losers: any[] = [];  // 输了3场的队伍（淘汰）
+
+    Object.entries(teamRecords).forEach(([team, record]: any) => {
+        if (record.wins >= 3) {
+            winners.push({
+                team: team,
+                icon: record.icon,
+                wins: record.wins,
+                losses: record.losses
+            });
+        }
+        if (record.losses >= 3) {
+            losers.push({
+                team: team,
+                icon: record.icon,
+                wins: record.wins,
+                losses: record.losses
+            });
+        }
+    });
+
+    // 补全空位到8个
+    const fillEmptySlots = (list: any[], type: 'winner' | 'loser') => {
+        const filledList = [...list];
+        while (filledList.length < 8) {
+            filledList.push({
+                team: '',
+                icon: '',
+                wins: 0,
+                losses: 0,
+                isEmpty: true
+            });
+        }
+        return filledList;
+    };
+
+    const filledWinners = fillEmptySlots(winners, 'winner');
+    const filledLosers = fillEmptySlots(losers, 'loser');
+
+    const result = {
+        winners: filledWinners,
+        losers: filledLosers,
+        allRecords: teamRecords
+    }
+    return result;
+});
+
+// 计算队伍胜负场次
+function computeTeamRecords(rounds: any) {
+    const teamRecords: any = {};
+    // 遍历所有轮次
+    rounds.forEach((roundGroup: any) => {
+        roundGroup.forEach((round: any) => {
+            round.matchs.forEach((match: any) => {
+                const topTeam = match.top.team;
+                const bottomTeam = match.bottom.team;
+                const topScore = match.top.score;
+                const bottomScore = match.bottom.score;
+                const topIcon = match.top.icon;
+                const bottomIcon = match.bottom.icon;
+
+                // 初始化队伍记录
+                if (!teamRecords[topTeam]) {
+                    teamRecords[topTeam] = {
+                        wins: 0,
+                        losses: 0,
+                        icon: topIcon
+                    };
+                }
+                if (!teamRecords[bottomTeam]) {
+                    teamRecords[bottomTeam] = {
+                        wins: 0,
+                        losses: 0,
+                        icon: bottomIcon
+                    };
+                }
+
+                // 计算胜负（排除未进行的比赛，score为0且对手score也为0）
+                if (topScore > 0 || bottomScore > 0) {
+                    if (topScore > bottomScore) {
+                        teamRecords[topTeam].wins += 1;
+                        teamRecords[bottomTeam].losses += 1;
+                    } else if (bottomScore > topScore) {
+                        teamRecords[bottomTeam].wins += 1;
+                        teamRecords[topTeam].losses += 1;
+                    }
+                }
+            });
+        });
+    });
+    return teamRecords;
+}
 </script>
 
 <template>
@@ -83,6 +179,32 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
                 </template>
             </div>
         </template>
+        <div class="list-round">
+            <div class="round-item">
+                <div class="item-infos">
+                    <h4>晋级</h4>
+                </div>
+                <div class="list-teams">
+                    <template v-for="team in qualifiedTeams.winners">
+                        <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
+                            <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="round-item">
+                <div class="item-infos">
+                    <h4>淘汰</h4>
+                </div>
+                <div class="list-teams">
+                    <template v-for="team in qualifiedTeams.losers">
+                        <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
+                            <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -146,6 +268,31 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
             img {
                 width: 50px;
             }
+        }
+    }
+}
+
+.list-teams {
+    padding: 10px;
+    border: 1px solid #c4cecf9d;
+    display: flex;
+    gap: 15px;
+
+    .team-item {
+        width: 50px;
+        height: 50px;
+
+        &.item-empty {
+            border: 1px dashed #ffffff5d;
+            border-radius: 50%;
+
+            img {
+                display: none;
+            }
+        }
+
+        img {
+            width: 50px;
         }
     }
 }

@@ -36,7 +36,7 @@ const obstacleInterval = 1500 // ms
 let lastObstacleTime = 0
 
 // Game
-const score = ref(0)
+// const score = ref(0)
 let gameOver = false
 let animationId: any
 const isGameOver = ref(false)
@@ -61,7 +61,7 @@ function resetGame() {
   dino.y = 150
   dino.velocityY = 0
   obstacles.length = 0
-  score.value = 0
+  gameInfos.score = 0
   isGameOver.value = false
   gameOver = false
   lastObstacleTime = 0
@@ -108,7 +108,7 @@ function loop(timestamp: any) {
 
     if (obs.x + obs.width < 0) {
       obstacles.splice(i, 1)
-      score.value++
+      gameInfos.score++
     }
   }
 
@@ -144,23 +144,35 @@ onUnmounted(() => {
 
 <template>
   <div class="box-games">
-    <canvas ref="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <div class="score">Score: {{ score }}</div>
-    <div v-if="isGameOver" class="game-over">Game Over - Press R to Restart</div>
+    <div class="box-infos">
+      <div class="box-tips">
+        <div class="box-contents">
+          <p class="item-score">{{ gameInfos.score }}</p>
+          <p v-if="isGameOver" class="item-status">Game Over</p>
+        </div>
+      </div>
+      <div class="box-tips">
+        <div class="header">
+          <h4>提示</h4>
+        </div>
+        <div class="box-contents">
+          <p>重开游戏: <span>R</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="box-canvas">
+      <canvas ref="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @import url(../com/games.scss);
 
-.box-games {
-  width: 800px;
-  margin: 20px auto;
-  border: 2px solid #ccc;
-}
-
-canvas {
+.box-canvas {
   display: block;
+  width: 800px;
+  border: 2px solid #ccc;
   background-color: #f4f4f4;
 }
 

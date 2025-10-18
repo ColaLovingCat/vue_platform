@@ -56,7 +56,18 @@ const enum types {
             <div class="item-infos" :class="types[poke.type1]"
                 :style="`background-image: url(/docs/pokemons/bg/${types[poke.type1]}.png)`">
                 <div class="item-titles">
-                    <h3>{{ poke.cnName }}</h3>
+                    <template v-if="poke.sp == '超进化'">
+                        <h3>超级{{ poke.cnName }}</h3>
+                    </template>
+                    <template v-else-if="poke.sp == '超进化X'">
+                        <h3>超级{{ poke.cnName }} X</h3>
+                    </template>
+                    <template v-else-if="poke.sp == '超进化Y'">
+                        <h3>超级{{ poke.cnName }} Y</h3>
+                    </template>
+                    <template v-else>
+                        <h3>{{ poke.cnName }}</h3> <span class="item-sp">{{ poke.sp }}</span>
+                    </template>
                 </div>
                 <img class="item-img" v-bind:src="`/docs/pokemons/pokes/${poke.img}`"
                     v-bind:class="'item-' + poke.shape" alt="" srcset="">
@@ -213,6 +224,9 @@ const enum types {
             font-weight: 700;
             border-radius: 5px 5px 0 0;
             border-bottom: 4px solid #000;
+            display: flex;
+            align-items: end;
+            gap: 5px;
         }
 
         &.Bug {
