@@ -71,6 +71,11 @@ const changeTab = (values: any) => {
 <style scoped lang="scss">
 .sections {
   background: #000;
+
+  .section-contents {
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
 }
 
 .list-tabs {

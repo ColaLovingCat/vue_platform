@@ -323,24 +323,24 @@ export const list = [
                             top: {
                                 team: 'FNC',
                                 icon: 'Fnatic.png',
-                                score: 0,
+                                score: 1,
                             },
                             bottom: {
                                 team: 'MKOI',
                                 icon: 'MKOI.png',
-                                score: 0,
+                                score: 2,
                             },
                         },
                         {
                             top: {
                                 team: 'VKS',
                                 icon: 'VKS.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'PSG',
                                 icon: 'PSG.png',
-                                score: 0,
+                                score: 1,
                             },
                         },
                     ],
@@ -355,37 +355,37 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'G2',
+                                icon: 'G2.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'FLY',
+                                icon: 'FLY.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'GEN',
+                                icon: 'GNG.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'TES',
+                                icon: 'TES.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'HLE',
+                                icon: 'HLE.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'CFO',
+                                icon: 'CFO.png',
                                 score: 0,
                             },
                         },
@@ -399,37 +399,37 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'BLG',
+                                icon: 'BLG.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'VKS',
+                                icon: 'VKS.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'MKOI',
+                                icon: 'MKOI.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'TSW',
+                                icon: 'Team Secret.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: '100T',
+                                icon: '100T.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'T1',
+                                icon: 'T1.png',
                                 score: 0,
                             },
                         },
