@@ -2,6 +2,7 @@
 import { onMounted, ref, reactive, computed, watch } from "vue";
 
 import * as db from "./ruanjian";
+import * as exdb from "./datas";
 
 import codeView from "@/components/editor-code/view.vue";
 import noteView from "./note-card.vue";
@@ -17,6 +18,8 @@ defineOptions({
 const pageInfos = reactive({
   menus: [] as any[],
   notes: [] as any[],
+  //
+  ports: [] as any[],
 });
 
 const contentRef = ref<HTMLElement>();
@@ -35,6 +38,8 @@ const codeConfig = (language: string) => {
 onMounted(() => {
   pageInfos.notes = [...db.notes];
   refreshMenus();
+  //
+  pageInfos.ports = [...exdb.ports];
 });
 
 const refreshMenus = () => {
@@ -276,14 +281,15 @@ const showModal = (action: string, values: any) => {
                 IR暂存执行的指令(操作码+地址码)
               </p>
               <p>
-                <b>指令译码器(ID) </b> 
+                <b>指令译码器(ID) </b>
                 <i class="txt-en">Instruction Decoder</i>
                 ：分析指令的操作码和操作数，确定操作类型
               </p>
               <p>
-                <b>地址寄存器(AR) </b> 
+                <b>地址寄存器(AR) </b>
                 <i class="txt-en">Address Register</i>
-                ：保存访问的内存单元的地址</p>
+                ：保存访问的内存单元的地址
+              </p>
             </div>
           </div>
         </div>
@@ -763,6 +769,8 @@ const showModal = (action: string, values: any) => {
             <h4>8.1 加密技术和认证技术</h4>
             <div class="sub-contents">
               <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
+              <p>公钥：用于加密信息，验证数字签名</p>
+              <p>私钥：用于解密信息，创建数字签名</p>
               <p>
                 <b>对称加密</b>
                 <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密
@@ -783,7 +791,7 @@ const showModal = (action: string, values: any) => {
                 <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密
               </p>
               <img class="img-09" style="width: 400px" src="/docs/study/imgs/09-jiami.png" />
-              <p><b>数字证书</b>：CA权威机构颁布，由CA的私钥加密形成数字证书</p>
+              <p><b>数字证书</b>：证书颁发机构 CA <i class="txt-en">Certificate Authority</i> 颁布，由CA的私钥加密形成数字证书</p>
               <p>
                 用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性
               </p>
@@ -1445,24 +1453,24 @@ const showModal = (action: string, values: any) => {
               <p>边活动网(AOE网) <i class="txt-en">Activity On Edges Network</i>：以边表示活动，且边有权值</p>
               <p>入度为0的为源点，出度为0的为汇点</p>
               <table>
-                  <tbody>
-                      <tr>
-                          <td>事件最早发生时间etv</td>
-                          <td>从源点到该顶点的最长路径</td>
-                      </tr>
-                      <tr>
-                          <td>事件最晚发生时间itv</td>
-                          <td>在不推迟整个工期的前提下，事件 Vj 所允许的最晚发生时间</td>
-                      </tr>
-                      <tr>
-                          <td>活动最早开始时间ete</td>
-                          <td>弧头的事件的最早发生时间</td>
-                      </tr>
-                      <tr>
-                          <td>活动最晚开始时间ite</td>
-                          <td>保证弧尾事件的最晚发生时间不拖后</td>
-                      </tr>
-                  </tbody>
+                <tbody>
+                  <tr>
+                    <td>事件最早发生时间etv</td>
+                    <td>从源点到该顶点的最长路径</td>
+                  </tr>
+                  <tr>
+                    <td>事件最晚发生时间itv</td>
+                    <td>在不推迟整个工期的前提下，事件 Vj 所允许的最晚发生时间</td>
+                  </tr>
+                  <tr>
+                    <td>活动最早开始时间ete</td>
+                    <td>弧头的事件的最早发生时间</td>
+                  </tr>
+                  <tr>
+                    <td>活动最晚开始时间ite</td>
+                    <td>保证弧尾事件的最晚发生时间不拖后</td>
+                  </tr>
+                </tbody>
               </table>
               <p>
                 关键路径：如果弧的最早开始时间等于最晚开始时间，那么称这条弧所代表的活动为关键活动，由关键活动所构成的路径称为关键路径
@@ -5451,6 +5459,26 @@ const showModal = (action: string, values: any) => {
                   </tr>
                 </tbody>
               </table>
+              <div class="list-items">
+                <template v-for="item in pageInfos.ports">
+                  <h4>{{ item.category }}</h4>
+                  <div class="list-ports">
+                    <template v-for="port in item.list">
+                      <div class="port-item">
+                        <div class="item-name">{{ port.name }}</div>
+                        <div class="item-type">{{ port.type }}</div>
+                        <div class="item-infos">
+                          <div class="item-icon">
+                            <i class="fa-solid" :class="`fa-${port.icon}`"></i>
+                          </div>
+                          <div class="item-port">{{ port.port }}</div>
+                        </div>
+                        <div class="item-full">{{ port.full }}</div>
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </div>
             </div>
           </div>
           <div id="section-130202">
@@ -5503,6 +5531,7 @@ const showModal = (action: string, values: any) => {
             <h4>3.1 分类</h4>
             <div class="sub-contents">
               <p>按分布范围分：局域网 LAN、域域网 MAN、广域网 WAN、因特网</p>
+              <img class="img-162" style="width: 700px" src="/docs/study/imgs/162-wan.png" />
               <p>按拓扑结构分：总线型、星型、环型</p>
             </div>
           </div>
@@ -5604,7 +5633,7 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <div id="section-130602">
-            <h4>6.2 WWW服务</h4>
+            <h4>6.2 WWW服务/Web相关</h4>
             <div class="sub-contents">
               <p>HTTP状态码：200/404/500</p>
               <p>URL：协议名://主机名.域名.域名后缀.域名分类/目录/网页</p>
@@ -5620,6 +5649,10 @@ const showModal = (action: string, values: any) => {
               <p>
                 建立TCP连接三次握手>TLS/SSL握手>浏览器发送请求报文>服务器处理请求，返回响应报文>浏览器解析响应并渲染页面>断开连接
               </p>
+              <p>HTTPS过程：</p>
+              <img class="img-159" style="width: 700px" src="/docs/study/imgs/159-https.png" />
+              <p>浏览器渲染网页：</p>
+              <img class="img-160" style="width: 990px" src="/docs/study/imgs/160-web.png" />
             </div>
           </div>
           <div id="section-130603">
@@ -6116,6 +6149,61 @@ img {
     position: absolute;
     top: 0;
     right: 20px;
+  }
+}
+
+.list-ports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .port-item {
+    padding: 10px;
+    width: 180px;
+    color: #fff;
+    border: 1px solid #0000008d;
+    border-radius: 8px;
+    background: #2e3033;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    .item-name {
+      padding: 2px 15px;
+      width: max-content;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 30px;
+      background: #00884a;
+    }
+
+    .item-type {
+      font-size: 12px;
+    }
+
+    .item-infos {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .item-icon {
+        font-size: 24px;
+      }
+
+      .item-port {
+        padding: 2px 15px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 30px;
+        background: #e43981;
+      }
+    }
+
+    .item-full {
+      font-size: 10px;
+    }
   }
 }
 </style>

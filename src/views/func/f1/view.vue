@@ -53,7 +53,7 @@ onMounted(async () => {
     }
   })
   pageInfos.drivers = extend.ExArray.sortbyEle(pageInfos.drivers, (a: any) => a.score, 'desc')
-
+  //
   pageInfos.rounds = [...rounds]
   pageInfos.rounds.map((round: any) => {
     round.hasSprint = false
