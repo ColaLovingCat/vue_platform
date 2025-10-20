@@ -7,7 +7,7 @@ pipeline {
     
     environment {
         // 可以在这里定义环境变量
-        PROJECT_NAME = 'vue_platform',
+        PROJECT_NAME = 'vue_platform'
         DEPLOY_PATH = '/docs/codes/vue_platform'
     }
     
