@@ -355,6 +355,18 @@ export const list = [
                     matchs: [
                         {
                             top: {
+                                team: 'CFO',
+                                icon: 'CFO.png',
+                                score: 0,
+                            },
+                            bottom: {
+                                team: 'HLE',
+                                icon: 'HLE.png',
+                                score: 0,
+                            },
+                        },
+                        {
+                            top: {
                                 team: 'G2',
                                 icon: 'G2.png',
                                 score: 0,
@@ -377,18 +389,6 @@ export const list = [
                                 score: 0,
                             },
                         },
-                        {
-                            top: {
-                                team: 'HLE',
-                                icon: 'HLE.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'CFO',
-                                icon: 'CFO.png',
-                                score: 0,
-                            },
-                        },
                     ],
                 },
                 {
@@ -399,18 +399,6 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'BLG',
-                                icon: 'BLG.png',
-                                score: 0,
-                            },
-                            bottom: {
-                                team: 'VKS',
-                                icon: 'VKS.png',
-                                score: 0,
-                            },
-                        },
-                        {
-                            top: {
                                 team: 'MKOI',
                                 icon: 'MKOI.png',
                                 score: 0,
@@ -418,6 +406,18 @@ export const list = [
                             bottom: {
                                 team: 'TSW',
                                 icon: 'Team Secret.png',
+                                score: 0,
+                            },
+                        },
+                        {
+                            top: {
+                                team: 'BLG',
+                                icon: 'BLG.png',
+                                score: 0,
+                            },
+                            bottom: {
+                                team: 'VKS',
+                                icon: 'VKS.png',
                                 score: 0,
                             },
                         },
