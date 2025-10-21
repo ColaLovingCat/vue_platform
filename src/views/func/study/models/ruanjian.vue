@@ -2367,7 +2367,8 @@ const showModal = (action: string, values: any) => {
           <div id="section-080103">
             <h4>1.3 下午题</h4>
             <div class="sub-contents">
-              <p></p>
+              <p>中介者模式</p>
+              <p>策略模式</p>
             </div>
           </div>
         </div>
@@ -5742,7 +5743,8 @@ const showModal = (action: string, values: any) => {
           <div id="section-140103">
             <h4>1.3 下午题</h4>
             <div class="sub-contents">
-              <p></p>
+              <p>希尔排序</p>
+              <p>DNA编辑距离</p>
             </div>
           </div>
         </div>

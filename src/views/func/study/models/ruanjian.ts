@@ -5839,9 +5839,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "装饰器 (Decorator)"
         ],
         fillAnswer: "",
-        note: `
-        享元模式是通过共享对象减少内存占用，用于大量细粒度对象
-        GUI 系统在不同平台上 Win或Mac 有不同实现`,
+        note: `享元模式是通过共享对象减少内存占用，用于大量细粒度对象，GUI 系统在不同平台上 Win或Mac 有不同实现`,
       },
     ],
   },
@@ -5865,7 +5863,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "原型 (Prototype)", 
           "工厂方法 (Factory Method)"
         ],
-        fillAnswer: "",
+        fillAnswer: "因为复杂对象的构建与表示分离",
         note: "",
       },
       {
@@ -6007,7 +6005,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "中介者 (Mediator)"
         ],
         fillAnswer: "",
-        note: "",
+        note: "需求变化时只需增加新的策略类，不影响原有代码",
       },
     ],
   },
@@ -6032,7 +6030,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
         ],
         fillAnswer: "",
-        note: "",
+        note: "复杂度递推式 T(n)=2T(n/2)+O(n)，解得 O(nlgn)",
       },
     ],
   },
@@ -6060,7 +6058,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "16.67"
         ],
         fillAnswer: "",
-        note: "",
+        note: "此时选择物品 1,2,5，总重量10，总价值15",
       },
       {
         answer: `A`,
@@ -6139,7 +6137,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "<span class='txt-func'>O(2<span class='txt-sup'>n</span>)</span>", 
         ],
         fillAnswer: "",
-        note: "",
+        note: "复杂度主要取决于填表过程，三个嵌套的for循环",
       },
       {
         answer: `A`,
@@ -6151,7 +6149,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "<span class='txt-func'>O(2<span class='txt-sup'>n</span>)</span>", 
         ],
         fillAnswer: "",
-        note: "",
+        note: "空间复杂度主要取决于存储计算结果的表格，二维表格",
       },
       {
         answer: `D`,
@@ -6163,7 +6161,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "(A1xA2)x((A3xA4)xA5)", 
         ],
         fillAnswer: "",
-        note: "A1(20x15) A2(15x4) A3(4x10) A4(10x20) A5(20x25)",
+        note: "A1(20x15) A2(15x4) A3(4x10) A4(10x20) A5(20x25)， 最优计算顺序为 (A1xA2)x((A3xA4)xA5)，相乘次数为 20*15*4 + 20*10*25 + 20*4*25 = 2700",
       },
     ],
   },
@@ -6201,7 +6199,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "<span class='txt-func'>O(n2<span class='txt-sup'>n</span>)</span>", 
         ],
         fillAnswer: "",
-        note: "i和j的两重循环",
+        note: "复杂度主要取决于填表过程，两个嵌套的for循环",
       },
     ],
   },
@@ -6262,7 +6260,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
         ],
         fillAnswer: "",
-        note: "",
+        note: "复杂度主要取决于遍历房子",
       },
        {
         answer: `B`,
@@ -6323,7 +6321,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "630, 430", 
         ],
         fillAnswer: "",
-        note: "",
+        note: "计算过程：部分背包问题：取物品1、2、3、4全部装入，剩余20容量装入物品5的2/5，价值为100+120+60+240+110=630；0/1背包问题：取物品1、2、4全部装入，价值为100+120+240=460",
       },
     ],
   },
@@ -6332,11 +6330,213 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
     type: "topic",
     title: "上午题-活动选择",
     category: "single-select",
-    question: `___。`,
-    imgs: [],
+    question: `现需要申请一些场地举办一批活动, 每个活动有开始时间和结束时间。
+在同一个场地, 如果一个活动结束之前, 另一个活动不能开始, 即两个活动冲突。
+若活动A从1时间开始, 5时间结束, 活动B从5时间开始, 8时间结束, 则活动A和B不冲突。
+现要计算n个活动需要的最少场地数。
+求解该问题的基本思路如下 (假设需要场地数为m, 活动数为n, 场地集合为P1, P2, …, Pm) , 初始条件P均无活动安排：
+<p>(1) 采用快速排序算法对n个活动的开始时间从小到大排序, 得到活动a1, a2, …, an。对每个活动ai,i从1到n, 重复步骤(2),(3),(4)；</p>
+<p>(2) 从P1开始, 判断ai与P1的最后一个活动是否冲突, 若冲突, 考虑下一个场地P2, …；</p>
+<p>(3) 一旦发现ai与某个Pj的最后一个活动不冲突, 则将aj安排到Pj, 考虑下一个活动；</p>
+<p>(4) 若ai与所有已安排活动的Pj的最后一个活动均冲突, 则将ai安排到一个新的场地, 考虑下一个活动；</p>
+<p>(5) 将n减去没有安排活动的场地数即可得到所用的最少场地数。</p>
+算法首先采用快速排序算法进行排序, 其算法设计策略是___；后面步骤采用的算法设计策略是___。整个算法的时间复杂度是___。
+下表给出了n=11的活动集合, 根据上述算法, 得到最少的场地数为___。`,
+    imgs: ["/docs/study/imgs/207-ti.png"],
     options: [
       {
-        answer: ``,
+        answer: `A`,
+        col: 4,
+        list: [
+          "分治", 
+          "动态规划", 
+          "贪心", 
+          "回溯"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "分治", 
+          "动态规划", 
+          "贪心", 
+          "回溯"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(lgn)</span>", 
+          "<span class='txt-func'>O(n)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "快排时间复杂度为O(nlgn)，后续步骤为O(n<span class='txt-sup'>2</span>)，整体时间复杂度为O(n<span class='txt-sup'>2</span>)",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "4", 
+          "5", 
+          "6", 
+          "7"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-080103",
+    type: "topic",
+    title: "下午题-设计模式",
+    category: "fill",
+    question: `
+<p>阅读下列说明和代码，将代码补全</p>
+<p><b>[说明]</b></p>
+<p>在线支付是电子商务的一个重要环节, 不同的电子商务平台提供了不同的支付接口。
+现在需要整合不同电子商务平台的支付接口, 使得客户在不同平台上购物时, 不需要关心具体的支付接口。
+拟采用中介者 (Mediator) 设计模式来实现该需求, 所设计的类图如图所示。</p>
+<p><b>[代码]</b></p>
+<div class="note-codes">
+  <div>
+    <p>import java.util.*;</p>
+
+    <p style="margin-top: 10px"></p>
+    <p>interface WebServiceMediator {</p>
+      <p style="padding-left: 20px">public ___;</p>
+      <p style="padding-left: 20px">public void SetAmazon (WebService amazon);</p>
+      <p style="padding-left: 20px">public void SetEbay (WebService ebay);</p>
+    <p>}</p>
+
+    <p style="margin-top: 10px"></p>
+    <p>class ConcreteServiceMediator implements WebServiceMediator {</p>
+      <p style="padding-left: 20px">private webService amazon;</p>
+      <p style="padding-left: 20px">private WebService ebay;</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">public ConcreteServiceMediator() {</p>
+      <p style="padding-left: 40px">amazon = null;</p>
+      <p style="padding-left: 40px">ebay = null;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">public void SetAmazon(WebService amazon) {</p>
+      <p style="padding-left: 40px">this.amazon = amazon;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">public void SetEbay(WebService ebay) {</p>
+      <p style="padding-left: 40px">this.ebay = ebay;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">public void buy(double money, WebService service) {</p>
+      <p style="padding-left: 40px">if (service == amazon)</p>
+      <p style="padding-left: 60px">amazon.search(money);</p>
+      <p style="padding-left: 40px">else</p>
+      <p style="padding-left: 60px">ebay.search(money);</p>
+      <p style="padding-left: 20px">}</p>
+    <p>}</p>
+  </div>
+
+  <div>
+    <p style="margin-top: 10px"></p>
+    <p>abstract class WebService {</p>
+    <p style="padding-left: 20px">protected ___ mediator;</p>
+    <p style="padding-left: 20px">public abstract void SetMediator(WebServiceMediator mediator);</p>
+    <p style="padding-left: 20px">public ___;</p>
+    <p style="padding-left: 20px">public abstract void search(double money);</p>
+    <p>}</p>
+
+    <p style="margin-top: 10px"></p>
+    <p>class Amazon extends WebService {</p>
+    <p style="padding-left: 20px">public void SetMediator(WebServiceMediator mediator) {</p>
+    <p style="padding-left: 40px">this.mediator = mediator;</p>
+    <p style="padding-left: 20px">}</p>
+    <p style="margin-top: 10px"></p>
+    <p style="padding-left: 20px">public void buyService(double money) {</p>
+    <p style="padding-left: 40px">___;</p>
+    <p style="padding-left: 20px">}</p>
+    <p style="margin-top: 10px"></p>
+    <p style="padding-left: 20px">public void search(double money) {</p>
+    <p style="padding-left: 40px">system.out.printIn("Amazon receive: " + money);</p>
+    <p style="padding-left: 20px">}</p>
+    <p>}</p>
+
+    <p style="margin-top: 10px"></p>
+    <p>class Ebay extends WebService {</p>
+    <p style="padding-left: 20px">public void SetMediator(WebServiceMediator mediator) {</p>
+    <p style="padding-left: 40px">this.mediator = mediator;</p>
+    <p style="padding-left: 20px">}</p>
+    <p style="margin-top: 10px"></p>
+    <p style="padding-left: 20px">public void buyService(double money) {</p>
+    <p style="padding-left: 40px">___;</p>
+    <p style="padding-left: 20px">}</p>
+    <p style="margin-top: 10px"></p>
+    <p style="padding-left: 20px">public void search(double money) {</p>
+    <p style="padding-left: 40px">system.out.printIn("Ebay receive: " + money);</p>
+    <p style="padding-left: 20px">}</p>
+    <p>}</p>
+  </div>
+</div>
+`,
+    imgs: ["/docs/study/imgs/209-ti.png"],
+    options: [
+      {
+        answer: `void buy(double money, WebService service)`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `WebServiceMediator`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `abstract void buyService(double money)`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "使用抽象方法声明 buyService，由子类实现",
+      },
+      {
+        answer: `mediator.buy(money, this)`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "使用中介者的buy方法进行购买",
+      },
+      {
+        answer: `mediator.buy(money, this)`,
         col: 1,
         list: [
           "", 
@@ -6363,16 +6563,19 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
 <div class="note-codes">
   <div>
     <p>import java.util.*;</p>
+
     <p style="margin-top: 10px"></p>
     <p>interface BrakeBehavior {</p>
       <p style="padding-left: 20px">public ___;</p>
       <p style="padding-left: 20px">/* 其余代码省略 */</p>
     <p>}</p>
+
     <p style="margin-top: 10px"></p>
     <p>class LongWheelBrake implements BrakeBehavior {</p>
       <p style="padding-left: 20px">public void stop() { System.out.println("模拟长轮胎刹车痕迹！"); }</p>
       <p style="padding-left: 20px">/* 其余代码省略 */</p>
     <p>}</p>
+
     <p style="margin-top: 10px"></p>
     <p>class ShortWheelBrake implements BrakeBehavior {</p>
       <p style="padding-left: 20px">public void stop() { System.out.println("模拟短轮胎刹车痕迹！"); }</p>
@@ -6475,7 +6678,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
 <p>阅读下列说明和代码，回答所有问题，将解答填入对应栏内</p>
 <p><b>[说明]</b></p>
 <p>希尔排序算法又称最小增量排序算法，其基本思想是:</p>
-<p>步骤1：构造一个步长序列 deltal,delta2...deltak, 其中 delta1 = n/2，后面的每个 delta 是前一个的 1/2, deltak=1；</p>
+<p>步骤1：构造一个步长序列 delta1, delta2, ..., deltak, 其中 delta1 = n/2，后面的每个 delta 是前一个的 1/2, deltak=1；</p>
 <p>步骤2：根据步长序列进行 k 趟排序；</p>
 <p>步骤3：对第1趟排序，根据对应的步长 delta, 将等步长位置元素分组，对同一组内元索在原位置上进行直接插入排序。</p>
 <p><b>[代码]</b></p>
@@ -6496,12 +6699,12 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
     <p>void shellsort(int data[], int n) {</p>
       <p style="padding-left: 20px">int *delta, k, i, t, dk, j;</p>
       <p style="padding-left: 20px">k = n;</p>
-      <p style="padding-left: 20px">delta = (int *) malloc(sizeof(int) * (n / 2));</p>
+      <p style="padding-left: 20px">delta = (int *) malloc(sizeof(int) * (n / 2)); // 为delta申请空间</p>
       <p style="padding-left: 20px">i = 0;</p>
       <p style="padding-left: 20px">do {</p>
       <p style="padding-left: 40px">___;</p>
       <p style="padding-left: 40px">delta[i++] = k;</p>
-      <p style="padding-left: 20px">} while ___;</p>
+      <p style="padding-left: 20px">} while (___);</p>
       <p style="padding-left: 20px">i = 0;</p>
       <p style="padding-left: 20px">while ((dk = delta[i]) > 0) {</p>
       <p style="padding-left: 40px">for(k = delta[i]; k < n; ++k)</p>
@@ -6528,7 +6731,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
     imgs: [],
     options: [
       {
-        answer: ``,
+        answer: `k = k / 2`,
         col: 1,
         list: [
           "", 
@@ -6540,7 +6743,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
         note: "",
       },
       {
-        answer: ``,
+        answer: `k > 0`,
         col: 1,
         list: [
           "", 
@@ -6552,7 +6755,19 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
         note: "",
       },
       {
-        answer: ``,
+        answer: `data[k] < data[k - dk]`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "判断是否是逆序对",
+      },
+      {
+        answer: `data[j + dk] = t`,
         col: 1,
         list: [
           "", 
@@ -6564,7 +6779,168 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
         note: "",
       },
       {
-        answer: ``,
+        answer: `小于`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "因为该算法的时间复杂度介于<span class='txt-func'>O(nlgn)</span>和<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>之间",
+      },
+      {
+        answer: `否`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "希尔排序是不稳定排序算法",
+      },
+      {
+        answer: `(4,9,-1,8,20,7,15)`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "delta1 为 7/2=3，则(15,9,7,8,20,-1,4) 分为三组:(15,8,4),(9,20),(7,-1)，分别进行插入排序，得到 (4,9,-1,8,20,7,15)",
+      },
+    ],
+  },
+  {
+    id: "section-140103",
+    type: "topic",
+    title: "下午题-算法",
+    category: "fill",
+    question: `
+<p>阅读下列说明和代码，回答所有问题，将解答填入对应栏内</p>
+<p><b>[说明]</b></p>
+<p>生物学上通常采用编辑距离来定义两个物种 DNA 序列的相似性, 从而刻画物种之间的进化关系。
+具体来说, 编辑距离是指将一个字符串变换为另一个字符所需要的最小操作次数。
+操作有三种, 分别为：插入一个字符、删除一个字符以及将一个字符修改为另一个字符。
+用字符数组 str1 和 str2分别表示长度为len1和len2的字符串, 定义二维数组d记录求解编辑距离的子问题量优解, 则该二维数组可以递归定义如下图所示。</p>
+<p><b>[代码]</b></p>
+下面是算法的C语言实现
+<div style="display: flex; gap: 20px;">
+<div style="width: 550px;">
+<p>(1) 常量和变量说明</p>
+<p><b>A,B</b>: 两个字符数组</p>
+<p><b>d</b>: 二维数组</p>
+<p><b>i,j</b>: 循环变量</p>
+<p><b>temp</b>: 临时变量</p>
+</div>
+<div style="flex: 1;">
+<p>(2) 程序</p>
+<div class="note-codes">
+  <div>
+    <p>#include &lt;stdio.h&gt;</p>
+    <p>#define N 100</p>
+    <p style="margin-top: 10px"></p>
+    <p>char A[N] = "CTGA";</p>
+    <p>char B[N] = "ACGCTA";</p>
+    <p>int d[N][N];</p>
+    <p style="margin-top: 10px"></p>
+    <p>int min(int a, int b) {</p>
+      <p style="padding-left: 20px">return a < b ? a : b;</p>
+    <p>}</p>
+    <p style="margin-top: 10px"></p>
+    <p>int editdistance(char *str1, int len1, char *str2, int len2) {</p>
+      <p style="padding-left: 20px">int i, j;</p>
+      <p style="padding-left: 20px">int diff;</p>
+      <p style="padding-left: 20px">int temp;</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">for (i = 0; i < len1; i++) {</p>
+      <p style="padding-left: 40px">d[i][0] = i;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">for (j = 0; j < len2; j++) {</p>
+      <p style="padding-left: 40px">___;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="margin-top: 10px"></p>
+      <p style="padding-left: 20px">for (i = 1; i <= len1; i++) {</p>
+      <p style="padding-left: 40px">for (j = 1; j <= len2; j++) {</p>
+      <p style="padding-left: 60px">if (___) {</p>
+      <p style="padding-left: 80px">d[i][j] = d[i-1][j-1];</p>
+      <p style="padding-left: 60px">} else {</p>
+      <p style="padding-left: 80px">temp = min(d[i-1][j]+1, d[i][j]+1)</p>
+      <p style="padding-left: 80px">d[i][j] = min(temp, ___);</p>
+      <p style="padding-left: 60px">}</p>
+      <p style="padding-left: 40px">}</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="padding-left: 20px">return ___;</p>
+    <p>}</p>
+  </div>
+</div>
+</div>
+</div>
+<p><b>[问题1]</b></p>
+<p>根据以上说明和代码，填空</p>
+<p><b>[问题2]</b></p>
+<p>根据说明和代码，算法采用了___设计策略，时间复杂度为___。(用O表示，两个字符串的长度分别用m和n表示)</p>
+<p><b>[问题3]</b></p>
+<p>已知两个字符串 A="CTGA" 和 B="ACGCTA"，根据说明和代码，可得到这两个字符串的编辑距离为___。</p>
+`,
+    imgs: ["/docs/study/imgs/208-ti.png"],
+    options: [
+      {
+        answer: `d[0][j] = j`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "初始化第一行，表示将空字符串转换为长度为j的字符串所需的编辑距离",
+      },
+      {
+        answer: `str1[i-1] == str2[j-1]`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "表示两个字符相等，不需要编辑操作",
+      },
+      {
+        answer: `d[i-1][j-1]+1`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "对比应替换操作的编辑距离，加1表示进行替换操作",
+      },
+      {
+        answer: `d[len1][len2]`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "返回的编辑距离，即将字符串str1转换为str2所需的最小编辑距离",
+      },
+      {
+        answer: `动态规划`,
         col: 1,
         list: [
           "", 
@@ -6576,7 +6952,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
         note: "",
       },
       {
-        answer: ``,
+        answer: `O(mn)`,
         col: 1,
         list: [
           "", 
@@ -6585,10 +6961,10 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           ""
         ],
         fillAnswer: "",
-        note: "",
+        note: "复杂度由两个嵌套循环决定",
       },
       {
-        answer: ``,
+        answer: `4`,
         col: 1,
         list: [
           "", 
@@ -6597,19 +6973,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           ""
         ],
         fillAnswer: "",
-        note: "",
-      },
-      {
-        answer: ``,
-        col: 1,
-        list: [
-          "", 
-          "", 
-          "", 
-          ""
-        ],
-        fillAnswer: "",
-        note: "",
+        note: "大致的编辑步骤为: CTGA -> A CTGA (插入A) -> ACGA (删除T) -> ACGTA (插入T) -> ACGCTA (插入C)",
       },
     ],
   },
