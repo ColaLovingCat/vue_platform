@@ -2239,7 +2239,7 @@ const showModal = (action: string, values: any) => {
               <p>时间时间：when/after</p>
               <p>当事件触发/监护条件为真/状态内部活动执行完时，状态变迁</p>
               <p>描述一个对象在多个用例中的行为，对反应型对象建模</p>
-              <img class="img-76" style="width: 450px" src="/docs/study/imgs/76-uml.png" />
+              <img class="img-76" style="width: 400px" src="/docs/study/imgs/76-uml.png" />
             </div>
           </div>
           <div id="section-070207">
@@ -2250,7 +2250,7 @@ const showModal = (action: string, values: any) => {
                 是一种特殊的状态图，展现了在系统内从一个活动到另一个活动的流程，强调对象间的控制流程，对工作流/操作建模
               </p>
               <p>包含：初态/活动/流/合并分岔/合并汇合/分支/监护表达式</p>
-              <img class="img-77" style="width: 450px" src="/docs/study/imgs/77-uml.png" />
+              <img class="img-77" style="width: 700px" src="/docs/study/imgs/77-uml.png" />
             </div>
           </div>
           <div id="section-070208">
@@ -2260,7 +2260,7 @@ const showModal = (action: string, values: any) => {
               <p>一组构件/组件之间的组织和依赖</p>
               <p>供接口：整圆</p>
               <p>需接口：半圆</p>
-              <img class="img-78" style="width: 450px" src="/docs/study/imgs/78-uml.png" />
+              <img class="img-78" style="width: 400px" src="/docs/study/imgs/78-uml.png" />
             </div>
           </div>
           <div id="section-070209">
@@ -2269,6 +2269,7 @@ const showModal = (action: string, values: any) => {
               <p>静态部署视图/物理</p>
               <p>对面向对象系统的物理方面建模的方法</p>
               <p>展现系统的软件和硬件之间的物理关系，在实施阶段使用</p>
+              <img class="img-172" style="width: 400px" src="/docs/study/imgs/172-bushu.png" />
             </div>
           </div>
           <div id="section-070210">
@@ -2363,6 +2364,12 @@ const showModal = (action: string, values: any) => {
               </table>
             </div>
           </div>
+          <div id="section-080103">
+            <h4>1.3 下午题</h4>
+            <div class="sub-contents">
+              <p></p>
+            </div>
+          </div>
         </div>
         <h3 id="part-0802">2. 简单工厂模式</h3>
         <div class="part-contents">
@@ -2410,6 +2417,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080302">
             <h4>3.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-176" style="width: 450px" src="/docs/study/imgs/176-moshi.png" />
               <p>生产两种咖啡：美式和拿铁</p>
             </div>
           </div>
@@ -2473,6 +2481,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080402">
             <h4>4.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-177" style="width: 550px" src="/docs/study/imgs/177-moshi.png" />
               <p>生产咖啡的同时，还要生产两种甜点：提拉米苏和抹茶慕斯</p>
             </div>
           </div>
@@ -2533,6 +2542,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080502">
             <h4>5.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-178" style="width: 550px" src="/docs/study/imgs/178-moshi.png" />
               <img class="img-79 img-abs" style="width: 450px" src="/docs/study/imgs/79-sheji.png" />
             </div>
           </div>
@@ -2582,6 +2592,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080602">
             <h4>6.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-179" style="width: 550px" src="/docs/study/imgs/179-moshi.png" />
               <img class="img-80 img-abs" style="width: 550px" src="/docs/study/imgs/80-sheji.png" />
             </div>
           </div>
@@ -2606,7 +2617,9 @@ const showModal = (action: string, values: any) => {
           </div>
           <div id="section-080702">
             <h4>7.2 类图</h4>
-            <div class="sub-contents"></div>
+            <div class="sub-contents">
+              <img class="img-180" style="width: 550px" src="/docs/study/imgs/180-moshi.png" />
+            </div>
           </div>
           <div id="section-080703">
             <h4>7.3 实现</h4>
@@ -2630,6 +2643,8 @@ const showModal = (action: string, values: any) => {
           <div id="section-080802">
             <h4>8.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-181" style="width: 500px" src="/docs/study/imgs/181-moshi.png" />
+              <img class="img-182" style="width: 500px" src="/docs/study/imgs/182-moshi.png" />
               <img class="img-81 img-abs" style="width: 450px" src="/docs/study/imgs/81-sheji.png" />
             </div>
           </div>
@@ -2693,6 +2708,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-080902">
             <h4>9.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-183" style="width: 550px" src="/docs/study/imgs/183-moshi.png" />
               <img class="img-82 img-abs" style="width: 625px" src="/docs/study/imgs/82-sheji.png" />
             </div>
           </div>
@@ -2745,6 +2761,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081002">
             <h4>10.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-184" style="width: 500px" src="/docs/study/imgs/184-moshi.png" />
               <img class="img-83 img-abs" style="width: 250px" src="/docs/study/imgs/83-sheji.png" />
             </div>
           </div>
@@ -2804,6 +2821,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081102">
             <h4>11.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-185" style="width: 500px" src="/docs/study/imgs/185-moshi.png" />
               <img class="img-84 img-abs" style="width: 450px" src="/docs/study/imgs/84-sheji.png" />
             </div>
           </div>
@@ -2868,6 +2886,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081202">
             <h4>12.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-186" style="width: 700px" src="/docs/study/imgs/186-moshi.png" />
               <img class="img-85 img-abs" style="width: 250px" src="/docs/study/imgs/85-sheji.png" />
             </div>
           </div>
@@ -2919,6 +2938,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081302">
             <h4>13.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-187" style="width: 700px" src="/docs/study/imgs/187-moshi.png" />
               <img class="img-86 img-abs" style="width: 450px" src="/docs/study/imgs/86-sheji.png" />
             </div>
           </div>
@@ -2983,6 +3003,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081402">
             <h4>14.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-188" style="width: 600px" src="/docs/study/imgs/188-moshi.png" />
               <img class="img-87 img-abs" style="width: 450px" src="/docs/study/imgs/87-sheji.png" />
             </div>
           </div>
@@ -3024,6 +3045,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081502">
             <h4>15.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-189" style="width: 700px" src="/docs/study/imgs/189-moshi.png" />
               <img class="img-88 img-abs" style="width: 650px" src="/docs/study/imgs/88-sheji.png" />
             </div>
           </div>
@@ -3070,6 +3092,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081602">
             <h4>16.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-190" style="width: 600px" src="/docs/study/imgs/190-moshi.png" />
               <img class="img-89 img-abs" style="width: 650px" src="/docs/study/imgs/89-sheji.png" />
             </div>
           </div>
@@ -3128,6 +3151,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081702">
             <h4>17.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-191" style="width: 600px" src="/docs/study/imgs/191-moshi.png" />
               <img class="img-90 img-abs" style="width: 550px" src="/docs/study/imgs/90-sheji.png" />
             </div>
           </div>
@@ -3178,6 +3202,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-081802">
             <h4>18.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-192" style="width: 600px" src="/docs/study/imgs/192-moshi.png" />
               <img class="img-91 img-abs" style="width: 450px" src="/docs/study/imgs/91-sheji.png" />
             </div>
           </div>
@@ -3231,6 +3256,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-081902">
           <h4>19.2 类图</h4>
           <div class="sub-contents">
+              <img class="img-193" style="width: 600px" src="/docs/study/imgs/193-moshi.png" />
             <img class="img-92 img-abs" style="width: 450px" src="/docs/study/imgs/92-sheji.png" />
           </div>
         </div>
@@ -3278,6 +3304,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-082002">
           <h4>20.2 类图</h4>
           <div class="sub-contents">
+              <img class="img-194" style="width: 600px" src="/docs/study/imgs/194-moshi.png" />
             <img class="img-93 img-abs" style="width: 450px" src="/docs/study/imgs/93-sheji.png" />
           </div>
         </div>
@@ -3340,6 +3367,7 @@ const showModal = (action: string, values: any) => {
         <div id="section-082102">
           <h4>21.2 类图</h4>
           <div class="sub-contents">
+              <img class="img-195" style="width: 600px" src="/docs/study/imgs/195-moshi.png" />
             <img class="img-94 img-abs" style="width: 450px" src="/docs/study/imgs/94-sheji.png" />
           </div>
         </div>
@@ -3387,6 +3415,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082202">
             <h4>22.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-196" style="width: 600px" src="/docs/study/imgs/196-moshi.png" />
               <img class="img-95 img-abs" style="width: 650px" src="/docs/study/imgs/95-sheji.png" />
             </div>
           </div>
@@ -3435,6 +3464,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082302">
             <h4>23.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-197" style="width: 600px" src="/docs/study/imgs/197-moshi.png" />
               <img class="img-96 img-abs" style="width: 450px" src="/docs/study/imgs/96-sheji.png" />
             </div>
           </div>
@@ -3482,6 +3512,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082402">
             <h4>24.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-198" style="width: 600px" src="/docs/study/imgs/198-moshi.png" />
               <img class="img-97 img-abs" style="width: 450px" src="/docs/study/imgs/97-sheji.png" />
             </div>
           </div>
@@ -3531,6 +3562,7 @@ const showModal = (action: string, values: any) => {
           <div id="section-082502">
             <h4>25.2 类图</h4>
             <div class="sub-contents">
+              <img class="img-199" style="width: 600px" src="/docs/study/imgs/199-moshi.png" />
               <img class="img-98 img-abs" style="width: 550px" src="/docs/study/imgs/98-sheji.png" />
             </div>
           </div>
@@ -5707,6 +5739,12 @@ const showModal = (action: string, values: any) => {
               <img class="img-149" style="width: 600px" src="/docs/study/imgs/149-fuza.png" />
             </div>
           </div>
+          <div id="section-140103">
+            <h4>1.3 下午题</h4>
+            <div class="sub-contents">
+              <p></p>
+            </div>
+          </div>
         </div>
         <h3 id="part-1402">2. 查找算法</h3>
         <div class="part-contents">
@@ -5892,6 +5930,7 @@ const showModal = (action: string, values: any) => {
               <p>
                 给定一个N*N(N=4)棋盘上摆放N个皇后，满足任意两个皇后不处于同一行、同一列、同一斜线上
               </p>
+              <img class="img-205" style="width: 300px;" src="/docs/study/imgs/205-huanghou.png" />
               <p>1.逐行放置</p>
               <p>2.合法性检查：是否同列或同斜线(插值的绝对值相等)</p>
               <p>3.回溯：如果本行摆放失败，回溯上一行从新摆放</p>
@@ -6031,7 +6070,7 @@ const showModal = (action: string, values: any) => {
                   </tr>
                 </tbody>
               </table>
-              <img class="img-59" style="width: 250px" src="/docs/study/imgs/59-dongtai.png" />
+              <img class="img-59" style="width: 850px" src="/docs/study/imgs/59-dongtai.png" />
               <div class="box-code" style="width: 700px; height: 300px">
                 <codeView :configs="codeConfig('cpp')" :value="db.code_dongtai_01"></codeView>
               </div>

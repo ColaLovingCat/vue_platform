@@ -5373,6 +5373,1247 @@ j表示模式串中字符的序号(从1开始),若模式串P 为 'abaac'，则�
     ],
   },
   {
+    id: "section-070102",
+    type: "topic",
+    title: "上午题-UML",
+    category: "single-select",
+    question: `某电商系统在采用面向对象方法进行设计时，识别出网店、商品、购物车、订单、买家、库存、支付(微信、支付宝)等类。其中，购物车与商品之间适合采用___关系，网店与商品之间适合采用___关系。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "关联", 
+          "依赖", 
+          "组合", 
+          "聚合"
+        ],
+        fillAnswer: "",
+        note: "可独立存在",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "关联", 
+          "依赖", 
+          "组合", 
+          "聚合"
+        ],
+        fillAnswer: "",
+        note: "网店倒闭了，商品会下架",
+      },
+    ],
+  },
+  {
+    id: "section-070102",
+    type: "topic",
+    title: "上午题-UML",
+    category: "single-select",
+    question: `采用面向对象方法进行系统开发时，需要对两者之间关系创建新类的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "汽车和座位", 
+          "主人和宠物", 
+          "医生和病人", 
+          "部门和员工"
+        ],
+        fillAnswer: "",
+        note: "实体间关系为多对多",
+      },
+    ],
+  },
+  {
+    id: "section-070201",
+    type: "topic",
+    title: "上午题-类图",
+    category: "single-select",
+    question: `某类图如图所示，下列错误的是___。`,
+    imgs: ["/docs/study/imgs/163-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "一个A1的对象可能与一个A2的对象关联", 
+          "一个A的非直接对象可能与一个A1的对象关联", 
+          "类B1的对象可能通过A2与C1的对象关联", 
+          "有可能A的直接对象与B1的对象关联"
+        ],
+        fillAnswer: "",
+        note: "抽象类不能实例化",
+      },
+    ],
+  },
+  {
+    id: "section-070201",
+    type: "topic",
+    title: "上午题-类图",
+    category: "single-select",
+    question: `某类图如图所示，该UML图为___，下列叙述错误的是___。`,
+    imgs: ["/docs/study/imgs/164-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "对象图", 
+          "类图", 
+          "组件图", 
+          "部署图"
+        ],
+        fillAnswer: "",
+        note: "对象图会包含实例的名称",
+      },
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "如果B的一个实例被删除，所有包含A的实例都被删除", 
+          "A的一个实例可能与B的一个实例关联", 
+          "B的一个实例可被唯一的一个A的实例所包含", 
+          "B的一个实例可能与B的另外两个实例关联", 
+        ],
+        fillAnswer: "",
+        note: "A选项中 A为整体B为部分，表示A被删除则B会被删除",
+      },
+    ],
+  },
+  {
+    id: "section-070203",
+    type: "topic",
+    title: "上午题-用例图",
+    category: "single-select",
+    question: `如下所示的UML图中，(I)是___，(II)是___，(III)是___。`,
+    imgs: ["/docs/study/imgs/165-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "参与者", 
+          "用例", 
+          "泛化关系", 
+          "包含关系"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "参与者", 
+          "用例", 
+          "泛化关系", 
+          "包含关系"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "参与者", 
+          "用例", 
+          "泛化关系", 
+          "包含关系"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-070204",
+    type: "topic",
+    title: "上午题-序列图",
+    category: "single-select",
+    question: `如下所示的UML图中，该图为___，用于展示系统中___。`,
+    imgs: ["/docs/study/imgs/166-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "用例图", 
+          "活动图", 
+          "序列图", 
+          "交互图"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "一个用例和一个对象的行为", 
+          "一个用例和多个对象的行为", 
+          "多个用例和一个对象的行为", 
+          "多个用例和多个对象的行为"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-070205",
+    type: "topic",
+    title: "上午题-通信图",
+    category: "single-select",
+    question: `如下所示的UML图中，该图为___，用于展示系统中___。
+Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
+    imgs: ["/docs/study/imgs/167-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "类图", 
+          "组件图", 
+          "通信图", 
+          "部署图"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          "对象之间的消息流及其顺序", 
+          "完成任务所进行的活动", 
+          "对象的状态转换及其事件顺序", 
+          "对象之间信息的时间顺序"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "1:getGraphic()", 
+          "2:getCarPos()", 
+          "1.1:CurrentArea()", 
+          "2.1:getCarLocation()"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-070206",
+    type: "topic",
+    title: "上午题-状态图",
+    category: "single-select",
+    question: `某软件系统限定: 用户登录失败的次数不能超过3次，采用如下所示的 UML状态图 对用户登录状态进行建模。
+假设活动状态时 Logging in, 那么当 Valid Entry 发生时___。
+其中, [tries<3] 和 triest++ 分别为___和___。`,
+    imgs: ["/docs/study/imgs/168-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "保持在 Logging in 状态", 
+          "若 [tries<3] 为 true，则 Logging in 变为下一个活动状态", 
+          "Logging in 立刻变为下一个活动状态", 
+          "若 tries=3 为 true，则 Logging in 变为下一个活动状态", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "状态", 
+          "转换", 
+          "监护条件", 
+          "转换后效果"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "状态", 
+          "转换", 
+          "监护条件", 
+          "转换后效果"
+        ],
+        fillAnswer: "",
+        note: "转换=触发事件+监护条件+动作",
+      },
+    ],
+  },
+  {
+    id: "section-070206",
+    type: "topic",
+    title: "上午题-状态图",
+    category: "single-select",
+    question: `当UML状态图用于对系统、类或用例的动态方面建模时，通常是对___建模。
+以下 UML 状态图中，假设活动的状态是 A, 事件 b=0 发生并且 a>5，发生条件是 C状态到D状态 的转换条件的是___，D变为活动的状态。
+有关状态图的叙述中，不正确的是___。`,
+    imgs: ["/docs/study/imgs/169-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "系统的词汇", 
+          "反应型对象", 
+          "活动流程", 
+          "对象快照"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+       {
+        answer: `B`,
+        col: 1,
+        list: [
+          "一旦状态 A 的 exit 动作完成或如果当前执行 do 动作，则终止执行", 
+          "一旦状态 A 和 B 的所有动作完成", 
+          "一旦正在进行的状态 A 完成", 
+          "一旦状态 B的 exit 动作完成"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "动作可以在状态内执行，也可以在状态转换时执行", 
+          "当触发转换的事件发生并且转换没有指定的监护条件时，对象将离开当前状态，并且其 do 动作终止", 
+          "when (b=5)称为时间事件", 
+          "状态由事件触发"
+        ],
+        fillAnswer: "",
+        note: "转换由事件触发",
+      },
+    ],
+  },
+  {
+    id: "section-070207",
+    type: "topic",
+    title: "上午题-活动图",
+    category: "single-select",
+    question: `如下所示的UML图中，该图为___，(I)是___，(II)是___。`,
+    imgs: ["/docs/study/imgs/170-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "序列图", 
+          "状态图", 
+          "通信图", 
+          "活动图"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "合并分岔", 
+          "分支", 
+          "合并汇合", 
+          "流"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "分支条件", 
+          "监护表达式", 
+          "动作名", 
+          "流名称"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-070208",
+    type: "topic",
+    title: "上午题-构件图",
+    category: "single-select",
+    question: `如下所示的UML图中，该图为___，用于展示___，①和②分别表示___。`,
+    imgs: ["/docs/study/imgs/171-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "类图", 
+          "组件图", 
+          "通信图", 
+          "部署图"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "一组对象、接口、协作和之间的关系", 
+          "收发消息的对象的结构组织", 
+          "组件之间的组织和依赖", 
+          "面向对象系统的物理模型"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "供接口和供接口", 
+          "需接口和需接口", 
+          "供接口和需接口", 
+          "需接口和供接口", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-070209",
+    type: "topic",
+    title: "上午题-部署图",
+    category: "single-select",
+    question: `如果要表示待开发软件系统中软件组件和硬件之间的物理关系，通常采用 UML 中的___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "组件图", 
+          "部署图", 
+          "类图", 
+          "网络图"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-080401",
+    type: "topic",
+    title: "上午题-抽象工厂模式",
+    category: "single-select",
+    question: `为图形用户界面 (GUI) 组件定义不同平台的并行类层次结构，适合采用___模式。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "享元 (Flyweight)", 
+          "抽象工厂 (Abstract Factory)", 
+          "外观 (Facade)", 
+          "装饰器 (Decorator)"
+        ],
+        fillAnswer: "",
+        note: `
+        享元模式是通过共享对象减少内存占用，用于大量细粒度对象
+        GUI 系统在不同平台上 Win或Mac 有不同实现`,
+      },
+    ],
+  },
+  {
+    id: "section-080501",
+    type: "topic",
+    title: "上午题-生成器模式",
+    category: "single-select",
+    question: `某快餐厅主要制作并出售儿童套餐,一般包括主餐(各类比萨)、饮料和玩具。其餐品种类可能不同但制作过程相同。
+前台服务员(Waiter)调度厨师制作套餐。
+欲开发软件，实现该制作过程，设计如下所示类图。该设计采用___模式，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
+其中，___构造一个使用 Builder 接口的对象。该模式属于___模式，该模式适用于___的情况。`,
+    imgs: ["/docs/study/imgs/173-ti.png"],
+    options: [
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          "生成器 (Builder)", 
+          "抽象工厂 (Abstract Factory)", 
+          "原型 (Prototype)", 
+          "工厂方法 (Factory Method)"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "PizzaBuilder", 
+          "SpicyPizzaBuilder", 
+          "Waiter", 
+          "Pizza"
+        ],
+        fillAnswer: "",
+        note: "导演创建对象",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "创建型对象", 
+          "结构型对象", 
+          "行为型对象", 
+          "结构型类"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "当一个系统应该独立于它的产品创建、构成和表示时", 
+          "当一个类希望由它的子类来指定它所创建的对象的时候", 
+          "当要强调一系列相关的产品对象的设计以便迸行联合使用时", 
+          "当构造过程必须允许被构造的对象有不同的表示时"
+        ],
+        fillAnswer: "",
+        note: "A/C-抽象工厂 B-工厂方法",
+      },
+    ],
+  },
+  {
+    id: "section-080901",
+    type: "topic",
+    title: "上午题-桥接模式",
+    category: "single-select",
+    question: `欲开发一个绘图软件，要求使用不同的绘图程序绘制不同的图形，该绘图软件的扩展性要求将不断扩充新的图形和新的绘图程序。
+以绘制直线和图形为例，得到如下图所示的类图。
+该设计采用___模式将抽象部分与其实现部分分离，使它们都可以独立地变化。
+其中___定义了实现类地接口，该模式适用于___的情况，该模式属于___模式。`,
+    imgs: ["/docs/study/imgs/174-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "适配器 (Adapter)", 
+          "装饰 (Decorator)", 
+          "桥接 (Bridge)", 
+          "组合 (Composite)"
+        ],
+        fillAnswer: "",
+        note: "将抽象部分与其实现部分分离",
+      },
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "Shape", 
+          "Circle 和 Rectangle", 
+          "V1Drawing 和 V2Drawing", 
+          "Drawing"
+        ],
+        fillAnswer: "",
+        note: "抽象类的接口 实现类接口",
+      },
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "不希望在抽象和它的实现部分之间有一个固定绑定关系", 
+          "想表示对象的部分-整体层次结构", 
+          "想使用一个己经存在的类, 而它的接口不符合要求", 
+          "在不影响其他对象的悄况下，以动态、透明的方式给单个对象添加职责"
+        ],
+        fillAnswer: "",
+        note: "B-组合模式 C-适配器模式 D-装饰模式",
+      },
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "创建型对象", 
+          "结构型对象", 
+          "行为型对象", 
+          "结构型类"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-082101",
+    type: "topic",
+    title: "上午题-观察者模式",
+    category: "single-select",
+    question: `观察者 (Observer) 模式适用于___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "访问一个聚合对象的内容而无须暴露它的内部表示", 
+          "减少多个对象或类之闻的通信复杂性", 
+          "将对象的状态恢复到先前的状态", 
+          "一对多对象依赖关系，当一个象修改后，依赖它的对象都自动得到通知"
+        ],
+        fillAnswer: "",
+        note: "A-迭代器模式 B-中介者模式 C-备忘录模式",
+      },
+    ],
+  },
+  {
+    id: "section-082301",
+    type: "topic",
+    title: "上午题-策略模式",
+    category: "single-select",
+    question: `在设计某购物中心的收银软件系统时，要求能够支持在不同时堋推出打折、返利、满减等下同促销活动，则适合采用___模式。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 2,
+        list: [
+          "策略 (Strategy)", 
+          "访问者 (Visitor)", 
+          "观察者 (Obserer)", 
+          "中介者 (Mediator)"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140503",
+    type: "topic",
+    title: "上午题-最大子段和问题",
+    category: "single-select",
+    question: `最大子段和问题描述为：在n个整数(包含负数)的数组A中,求和最大的非空连续子数组。
+如数组 A=(-2, 11, -4, 13, -5, -2)，其中子数组 B=(11, -4, 13) 具有最大子段和20。
+求解该问题，可以将数组分为两个n/2个整数的子数组，最大子段或或在前半段，或在后半段，或跨越中间元素。
+通过该方法继续划分问题，直至最后求出最大子段和，该算法的时间复杂度为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140602",
+    type: "topic",
+    title: "上午题-0-1背包问题",
+    category: "single-select",
+    question: `考虑一个背包问题。
+共有n=5个物品，背包容量为W=10,物品的重量和价值分别为：w={2,2,6,5,4}，v={6,3,5,4,6}，求背包问题的最大装包价值。
+若此为0-1背包问题，分析该问题具有最优子结构，定义递归式如下图所示。
+其中c(i,j)表示i个物品，容量为j的0-1背包问题的最大装包价值, 最终要求解c(n,W)。
+采用自底向上的动态规划方法求解，得到最大装包价值为___，算法的时间复杂度为___。
+若此为部分背包问题，首先采用归并排序算法，根据物品的单位重量价值从大到小排序，然后依次将物品放入背包直至所有物品放入背包中或者背包再无容量。
+则得到的最大装包价值为___，算法的时间复杂度为___。`,
+    imgs: ["/docs/study/imgs/202-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "11", 
+          "14", 
+          "15", 
+          "16.67"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(nW)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(nlgnW)</span>", 
+        ],
+        fillAnswer: "",
+        note: "两个嵌套的for循环",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "11", 
+          "14", 
+          "15", 
+          "16.67"
+        ],
+        fillAnswer: "",
+        note: "取最大单位价值依次放入",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(nW)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(nlgnW)</span>", 
+        ],
+        fillAnswer: "",
+        note: "归并排序时间复杂度",
+      },
+    ],
+  },
+  {
+    id: "section-140603",
+    type: "topic",
+    title: "上午题-矩阵连乘",
+    category: "single-select",
+    question: `己知矩阵 Am*n 和 Bn*p 相乘的时间复杂度为O(mnp)。
+矩阵相乘满足结合律，如三个矩阵 A,B,C 相乘的顺序可以是 (A*B)*C，也可以是 A* (B*C)。
+不同的相乘顺序所需进行的乘法次数可能有很大的差别，因此确定n个矩阵相乘的最优计算顺序是一个非常重要的问题。
+己知确定n个矩阵A1A2...An相乘的计箅顺序具有最优子结构，
+即A1A2...An的最优计算顺序包含其孑问题A2A2...Ak和Ak+1Ak+2...An (l<k<n) 的最优计算顺序。
+可以列出其递归式为如下图所示。
+其中，Ai的维度为Pi-1*Pi，m[i,j]表示AiAi+1...Aj最优计算顺序的相乘次数。
+先采用自底向上的方法求n个矩阵相乘的最优计算顺序。
+则求解该问题的算法设计策略为___。算法的时间复杂度为___，空间复杂度为___。
+给定一个实例, (P0P1...Ps) = (20,15,4,10,20,25)，最优计算顺序为___。`,
+    imgs: ["/docs/study/imgs/200-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "分治法", 
+          "动态规划法", 
+          "贪心法", 
+          "回溯法"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+          "<span class='txt-func'>O(2<span class='txt-sup'>n</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+          "<span class='txt-func'>O(2<span class='txt-sup'>n</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "(((A1xA2)xA3)xA4)xA5", 
+          "A1x(A2x(A3x(A4xA5)))", 
+          "((A1xA2)xA3)x(A4xA5", 
+          "(A1xA2)x((A3xA4)xA5)", 
+        ],
+        fillAnswer: "",
+        note: "A1(20x15) A2(15x4) A3(4x10) A4(10x20) A5(20x25)",
+      },
+    ],
+  },
+  {
+    id: "section-140604",
+    type: "topic",
+    title: "上午题-最长公共子串",
+    category: "single-select",
+    question: `求解两个长度为n的序列X和Y的一个最长公共序列 (如序列 ABCBDAB 和 BDCABA 的一个最长公共子序列为 BCBA)
+可以采用多种计算方法。
+如可以采用蛮力法，对X的每一个子序列，判断其是否也是Y的子序列，最后求出最长的即可，该方法的时间复杂度为___。
+经分析发现该问题具有最优子结构，可以定义序列长度分别为1和j的两个序列X和Y的最长公共子序列的长度为 C[i,j]，如下式所示。
+采用自底向上的方法实现该算法，则时间复杂度为___。`,
+    imgs: ["/docs/study/imgs/201-ti.png"],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+          "<span class='txt-func'>O(n2<span class='txt-sup'>n</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "蛮力法中，序列X的子序列数为<span class='txt-func'>2<span class='txt-sup'>n</span></span>，判断子序列是否在序列Y中的时间为n，因此时间复杂度为<span class='txt-func'>O(n2<span class='txt-sup'>n</span>)</span>",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>lgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>3</span>)</span>", 
+          "<span class='txt-func'>O(n2<span class='txt-sup'>n</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "i和j的两重循环",
+      },
+    ],
+  },
+  {
+    id: "section-140501",
+    type: "topic",
+    title: "上午题-分治法",
+    category: "single-select",
+    question: `现有16枚外形相同的硬币。其中有一枚比真币的重量轻的假币，若采用分治法找出这枚假币，至少比较___次才能够找出该假币。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "3", 
+          "4", 
+          "5", 
+          "6"
+        ],
+        fillAnswer: "",
+        note: "按“三分”思想分组并称量，第一步称 6 vs 6，若不平衡，则假币在较轻的 6 枚中，剩下两次比较足以定位，若平衡，则假币在剩下的 4 枚中，用两次比较可找出",
+      },
+    ],
+  },
+  {
+    id: "section-140701",
+    type: "topic",
+    title: "上午题-贪心法",
+    category: "single-select",
+    question: `在一条笔直公路的一边有许多房子，现要安装消防栓，每个消防栓的覆盖范围远大于房子的面积，如下图所示。
+现求解能覆盖所有房子的最少消防栓数和安装方案 (问题求解过程中，可将房子和消防栓均视为直线上的点)。
+该问题求解算法的基本思路为: 从左端的第一栋房子开始，在其右侧 m 米处安装一个消防栓，去掉被该消防栓覆盖的所有房子，在剩余的房子中重复上述操作，直到所有房子被覆盖。
+算法采用的设计策略为___；对应的时间复杂度为___。
+假设公路起点 A 的坐标为0，消防栓的覆盖范围(半径)为20米，10栋房子的坐标为 (10,20,30,35,60,80,160,210,260,300)，单位为米。
+根据上述算法，共需要安装___个消防栓，以下关于该求解算法的叙述中，正确的是___。`,
+    imgs: ["/docs/study/imgs/203-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "分治", 
+          "动态规划", 
+          "贪心", 
+          "回溯"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "<span class='txt-func'>O(lgn)</span>", 
+          "<span class='txt-func'>O(n)</span>", 
+          "<span class='txt-func'>O(nlgn)</span>", 
+          "<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+       {
+        answer: `B`,
+        col: 4,
+        list: [
+          "4", 
+          "5", 
+          "6", 
+          "7"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+       {
+        answer: `A`,
+        col: 2,
+        list: [
+          "肯定可以求得问题的一个最优解", 
+          "可以求得问题的所有最优解", 
+          "对有些实例，可能得不到最优解", 
+          "只能得到近似最优解"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140702",
+    type: "topic",
+    title: "上午题-部分背包问题",
+    category: "single-select",
+    question: `考虑下述背包问题的实例。
+有5件物品，背包容量为100，每件物品的价值和重量如下表所示，
+并已经按照物品的单位重量价值从大到小排好序，根据物品单位重量价值大优先的策略装入背包中，则采用了___设计策略。
+考虑0/1背包问题 (每件物品或者全部装入背包或者全部不装入背包) 和部分背包问题 (物品可以部分装入背包) 求解该实例得到的最大价值分别为___。`,
+    imgs: ["/docs/study/imgs/204-ti.png"],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "分治", 
+          "贪心", 
+          "动态规划", 
+          "回溯"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "605, 630", 
+          "605, 605", 
+          "430, 630", 
+          "630, 430", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140703",
+    type: "topic",
+    title: "上午题-活动选择",
+    category: "single-select",
+    question: `___。`,
+    imgs: [],
+    options: [
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-080103",
+    type: "topic",
+    title: "下午题-设计模式",
+    category: "fill",
+    question: `
+<p>阅读下列说明和代码，将代码补全</p>
+<p><b>[说明]</b></p>
+<p>某软件公司欲开发一款汽车竞速类游戏, 需模拟长轮胎和短轮胎急刹车时在路面上留下的不同痕迹，并考虑后续能模拟更多种轮胎急刹车时的痕迹。
+现采用策略(Strategy)设计模式来实现该需求，所设计的类图如图所示。</p>
+<p><b>[代码]</b></p>
+<div class="note-codes">
+  <div>
+    <p>import java.util.*;</p>
+    <p style="margin-top: 10px"></p>
+    <p>interface BrakeBehavior {</p>
+      <p style="padding-left: 20px">public ___;</p>
+      <p style="padding-left: 20px">/* 其余代码省略 */</p>
+    <p>}</p>
+    <p style="margin-top: 10px"></p>
+    <p>class LongWheelBrake implements BrakeBehavior {</p>
+      <p style="padding-left: 20px">public void stop() { System.out.println("模拟长轮胎刹车痕迹！"); }</p>
+      <p style="padding-left: 20px">/* 其余代码省略 */</p>
+    <p>}</p>
+    <p style="margin-top: 10px"></p>
+    <p>class ShortWheelBrake implements BrakeBehavior {</p>
+      <p style="padding-left: 20px">public void stop() { System.out.println("模拟短轮胎刹车痕迹！"); }</p>
+      <p style="padding-left: 20px">/* 其余代码省略 */</p>
+    <p>}</p>
+  </div>
+  <div>
+    <p>abstract class Car {</p>
+      <p style="padding-left: 20px">protected ___ wheel;</p>
+      <p style="padding-left: 20px">public void brake() { ___; }</p>
+      <p style="padding-left: 20px">/* 其余代码省略 */</p>
+    <p>}</p>
+    <p style="margin-top: 10px"></p>
+    <p>class ShortWheelCar extgend Car {</p>
+      <p style="padding-left: 20px">public ShortWheelCar(BrakeBehavior behavior) {</p>
+      <p style="padding-left: 40px">___;</p>
+      <p style="padding-left: 20px">}</p>
+      <p style="padding-left: 20px">/* 其余代码省略 */</p>
+    <p>}</p>
+  </div>
+  <div>
+    <p>class StrategyTest {</p>
+      <p style="padding-left: 20px">BrakeBehavior brake = new BrakeBehavior();</p>
+      <p style="padding-left: 20px">ShortWheelCar car1 = new ShortWheelCar(brake);</p>
+      <p style="padding-left: 20px">car1.___;</p>
+    <p>}</p>
+  </div>
+</div>
+`,
+    imgs: ["/docs/study/imgs/206-ti.png"],
+    options: [
+      {
+        answer: `void stop()`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `BrakeBehavior`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `wheel.stop()`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `this.wheel = behavior`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: `brake()`,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-140103",
+    type: "topic",
+    title: "下午题-算法",
+    category: "fill",
+    question: `
+<p>阅读下列说明和代码，回答所有问题，将解答填入对应栏内</p>
+<p><b>[说明]</b></p>
+<p>希尔排序算法又称最小增量排序算法，其基本思想是:</p>
+<p>步骤1：构造一个步长序列 deltal,delta2...deltak, 其中 delta1 = n/2，后面的每个 delta 是前一个的 1/2, deltak=1；</p>
+<p>步骤2：根据步长序列进行 k 趟排序；</p>
+<p>步骤3：对第1趟排序，根据对应的步长 delta, 将等步长位置元素分组，对同一组内元索在原位置上进行直接插入排序。</p>
+<p><b>[代码]</b></p>
+下面是算法的C语言实现
+<div style="display: flex; gap: 20px;">
+<div style="width: 550px;">
+<p>(1) 常量和变量说明</p>
+<p><b>data</b>: 待排序数组data，长度为n，待排序数据在 data[0]、data[1]、...data[n-1]中</p>
+<p><b>n</b>: 数组data中的元素个数</p>
+<p><b>delta</b>: 步长数组</p>
+</div>
+<div style="flex: 1;">
+<p>(2) 程序</p>
+<div class="note-codes">
+  <div>
+    <p>#include &lt;stdio.h&gt;</p>
+    <p style="margin-top: 10px"></p>
+    <p>void shellsort(int data[], int n) {</p>
+      <p style="padding-left: 20px">int *delta, k, i, t, dk, j;</p>
+      <p style="padding-left: 20px">k = n;</p>
+      <p style="padding-left: 20px">delta = (int *) malloc(sizeof(int) * (n / 2));</p>
+      <p style="padding-left: 20px">i = 0;</p>
+      <p style="padding-left: 20px">do {</p>
+      <p style="padding-left: 40px">___;</p>
+      <p style="padding-left: 40px">delta[i++] = k;</p>
+      <p style="padding-left: 20px">} while ___;</p>
+      <p style="padding-left: 20px">i = 0;</p>
+      <p style="padding-left: 20px">while ((dk = delta[i]) > 0) {</p>
+      <p style="padding-left: 40px">for(k = delta[i]; k < n; ++k)</p>
+      <p style="padding-left: 60px">if (___) {</p>
+      <p style="padding-left: 80px">t = data[k];</p>
+      <p style="padding-left: 80px">for (j = k -dk; j >= 0 && t < data[j]; j -= dk)</p>
+      <p style="padding-left: 100px">data[j + dk] = data[j];</p>
+      <p style="padding-left: 80px">___;</p>
+      <p style="padding-left: 60px">}</p>
+      <p style="padding-left: 40px">++i;</p>
+      <p style="padding-left: 20px">}</p>
+    <p>}</p>
+  </div>
+</div>
+</div>
+</div>
+<p><b>[问题1]</b></p>
+<p>根据以上说明和代码，填空</p>
+<p><b>[问题2]</b></p>
+<p>根据说明和代码，该算法的时间复杂度___<span class='txt-func'>O(n<span class='txt-sup'>2</span>)</span>(小于、等于、大于)，该算法是否稳定___(是、否)。</p>
+<p><b>[问题3]</b></p>
+<p>对数组(15,9,7,8,20,-1,4)用希尔排序方法进行排序，经过第一趟排后得到的数组为___。</p>
+`,
+    imgs: [],
+    options: [
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+      {
+        answer: ``,
+        col: 1,
+        list: [
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
     id: "section-01",
     type: "topic",
     title: "上午题-sample",
@@ -5610,11 +6851,13 @@ void queen(int j)
     }
 }`;
 
+// 阶乘
 export const code_fenzhi_01 = `const solve = (num: number): number => {
   if (num > 0) return num * solve(num - 1)
   return 1
 }`;
 
+// 归并排序
 export const code_fenzhi_02 = `#include <climits>
 
 void MergeSort(int A[], int p, int r)
@@ -5655,37 +6898,53 @@ void Merge(int A[], int p, int q, int r)
 }
 `;
 
+// 最大子段和问题
 export const code_fenzhi_03 = `int MaxSubSum(int *Array, int left, int right)
 {
     int sum = 0;
     int i;
+
+    // 【递归终止条件】当区间只剩一个元素时
     if (left == right)
     {
+        // 如果该元素为正，则最大子序列和就是它本身；否则为0（表示不取）
         if (Array[left] > 0) sum = Array[left];
         else sum = 0;
     }
     else
     {
+        // 【分治步骤】取中点，将区间一分为二
         int center = (left + right) / 2;
+
+        // 递归求解左半部分的最大子序列和
         int leftsum = MaxSubSum(Array, left, center);
+
+        // 递归求解右半部分的最大子序列和
         int rightsum = MaxSubSum(Array, center + 1, right);
+        
         // 跨区时
-        int s1 = 0;
-        int lefts = 0;
+        // 从中点向左扫描，求左边的最大连续和
+        int s1 = 0; // 左侧最大和
+        int lefts = 0; // 左侧累计和
         for (i = center; i >= left; i--)
         {
             lefts = lefts + Array[i];
-            if (lefts > s1) s1 = lefts;
+            if (lefts > s1) 
+                s1 = lefts; // 记录目前为止最大的左侧和
         }
-        int s2 = 0;
-        int rights = 0;
+
+        // 从中点右边第一个元素开始向右扫描，求右边的最大连续和
+        int s2 = 0; // 右侧最大和
+        int rights = 0; // 右侧累计和
         for (i = center + 1; i <= right; i++)
         {
             rights = rights + Array[i];
             if (rights > s2)
-                s2 = rights;
+                s2 = rights; // 记录目前为止最大的右侧和
         }
+        // 跨越中点的最大子序列和
         sum = s1 + s2;
+
         // 求最大值
         if (sum < leftsum) sum = leftsum;
         if (sum < rightsum) sum = rightsum;
