@@ -362,19 +362,19 @@ export const list = [
                             bottom: {
                                 team: 'HLE',
                                 icon: 'HLE.png',
-                                score: 0,
+                                score: 2,
                             },
                         },
                         {
                             top: {
                                 team: 'G2',
                                 icon: 'G2.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'FLY',
                                 icon: 'FLY.png',
-                                score: 0,
+                                score: 1,
                             },
                         },
                         {
