@@ -36,7 +36,7 @@ const pageInfos = reactive({
       code: "selection",
       name: "选择排序",
       en: "selection sort",
-      desc: "在指针范围内，选取待排序列的 [最小元素*]，与 开头位置* 进行交换，最小值归位，缩小指针区域并重复",
+      desc: "选取待排序列的 [最小元素*]，与 开头位置* 进行交换，最小值归位，缩小指针区域并重复",
     },
     {
       code: "heap",

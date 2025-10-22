@@ -3,7 +3,7 @@ import { onMounted, ref, reactive, computed, watch } from "vue";
 
 // name
 defineOptions({
-  name: "custom-name",
+  name: "note-card",
 });
 
 // props
@@ -38,7 +38,7 @@ const selectedAnswers = ref<Record<string, any>>({});
 const fillAnswer = ref("");
 
 // 初始化
-onMounted(() => refreshData());
+onMounted(() => refreshData())
 watch(
   () => props.data,
   () => refreshData(),
@@ -46,9 +46,33 @@ watch(
 );
 
 const refreshData = () => {
-  Object.assign(noteInfos, props.data);
+  const temp = JSON.parse(JSON.stringify(props.data))
+  Object.assign(noteInfos, randomizeOptions(temp));
+  //
   selectedAnswers.value = {};
   fillAnswer.value = "";
+};
+// 随机打乱选项
+const randomizeOptions = (data: any) => {
+  data.options.forEach((opt: any) => {
+    // 保护：确保 opt.list 是数组
+    const originalList = Array.isArray(opt.list) ? [...opt.list] : [];
+    const correctIndex = nos.indexOf(opt.answer);
+    const correctText = originalList[correctIndex];
+
+    // Fisher–Yates 洗牌（比排序 + Math.random 更稳妥）
+    for (let i = originalList.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [originalList[i], originalList[j]] = [originalList[j], originalList[i]];
+    }
+
+    opt.list = originalList;
+
+    // 找到正确选项的新下标并更新 opt.answer（基于我们克隆后的本地数据）
+    const newIdx = originalList.indexOf(correctText);
+    opt.answer = newIdx >= 0 ? nos[newIdx] : opt.answer;
+  });
+  return data
 };
 
 // 点击选项
@@ -109,7 +133,7 @@ const getInputClass = (optIndex: number) => {
 
 <template>
   <div class="box-note w-full h-full">
-    <p class="question" v-html="noteInfos.question"></p>
+    <p class="question" v-html="`<span class='note-titles'>[${noteInfos.title}]</span> ${noteInfos.question}`"></p> 
 
     <!-- 图片 -->
     <div class="list-imgs" v-if="noteInfos.imgs.length > 0">
@@ -141,7 +165,9 @@ const getInputClass = (optIndex: number) => {
           <button @click="checkAnswer(optIndex, -1)">提交</button>
         </div>
         <div v-if="selectedAnswers[optIndex] !== undefined">
-          <div class="note-answer"><strong>答案：</strong> <div v-html="noteInfos.options[optIndex].answer"></div></div>
+          <div class="note-answer"><strong>答案：</strong>
+            <div v-html="noteInfos.options[optIndex].answer"></div>
+          </div>
           <div class="note-explain" v-if="noteInfos.options[optIndex].note != ''"><strong>解析：</strong> {{
             noteInfos.options[optIndex].note }}</div>
         </div>

@@ -106,11 +106,6 @@ const routes = [
 
   //
   {
-    path: "/articles",
-    name: "articles",
-    component: () => import("@/views/func/articles/view.vue"),
-  },
-  {
     path: "/wallpapers",
     name: "wallpapers",
     component: () => import("@/views/func/wallpapers/view.vue"),
@@ -168,18 +163,20 @@ const routes = [
     component: () => import("@/views/func/query/view.vue"),
   },
 
-
   {
     path: "/study-list",
     name: "study-list",
-    component: () => import("@/views/func/study/list.vue"),
-    children: [
-      {
-        path: "/study-list/ruanjian",
-        name: "study-ruanjian",
-        component: () => import("@/views/func/study/models/ruanjian.vue"),
-      },
-    ],
+    component: () => import("@/views/study/list.vue"),
+  },
+  {
+    path: "/study-ruanjian",
+    name: "study-ruanjian",
+    component: () => import("@/views/study/ruanjian/view.vue"),
+  },
+  {
+    path: "/articles",
+    name: "articles",
+    component: () => import("@/views/study/articles/view.vue"),
   },
 ];
 

@@ -20,11 +20,11 @@ const pageInfos = reactive({
     tabs: [
         {
             name: '软件设计师',
-            path: '/study-list/ruanjian',
+            path: '/study-ruanjian',
         },
         {
             name: 'Vue',
-            path: '/study-list/vue',
+            path: '/study-vue',
         },
     ],
 })
@@ -46,9 +46,6 @@ const jump = (values: any) => {
                     <div class="item-name">{{ tab.name }}</div>
                 </div>
             </template>
-        </div>
-        <div class="section-contents">
-            <router-view></router-view>
         </div>
     </div>
 </template>
