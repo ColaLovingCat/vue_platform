@@ -206,7 +206,7 @@ export const list = [
     options: [
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["水平奇偶", "垂直奇偶", "海明码", "循环冗余"],
         fillAnswer: "",
         note: "",
@@ -223,7 +223,7 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 2,
         list: [
           "指令种类丰富",
           "高效的流水线操作",
@@ -292,7 +292,7 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["DRAM", "SRAM", "Cache", "EEPROM"],
         fillAnswer: "",
         note: "",
@@ -309,7 +309,7 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["全相联映像", "组相联映像", "直接映像", "无法确定"],
         fillAnswer: "",
         note: "",
@@ -326,7 +326,7 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 2,
         list: [
           "专门的硬件自动完成",
           "程序员进行调度",
@@ -370,7 +370,7 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 2,
         list: [
           "提高总线的传输带宽",
           "增加总线的功能",
@@ -393,7 +393,7 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 4,
         list: ["40", "80", "160", "200"],
         fillAnswer: "",
         note: "",
@@ -410,14 +410,14 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
         fillAnswer: "",
         note: "",
@@ -434,7 +434,7 @@ export const list = [
     options: [
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["ECC", "DSA", "RSA", "DES"],
         fillAnswer: "",
         note: "",
@@ -469,7 +469,7 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 2,
         list: [
           "3R/2+2R/3",
           "R/3+R/2",
@@ -539,7 +539,7 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 2,
         list: [
           "系统有2个资源正在被占用",
           "系统有2个进程正在等待资源",
@@ -562,7 +562,7 @@ export const list = [
     options: [
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["-2~n", "-(n-1)~1", "-(n-1)~2", "-(n-2)~2"],
         fillAnswer: "",
         note: "",
@@ -580,14 +580,14 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 4,
         list: ["0", "1", "n", "任意正整数"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["n、0", "0、n", "1、n", "n、1"],
         fillAnswer: "",
         note: "",
@@ -676,14 +676,14 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["时间片到", "释放了扫描仪", "释放了打印机", "已完成"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: "C",
-        col: 1,
+        col: 2,
         list: [
           "等待、就绪、等待和等待",
           "运行、就绪、运行和等待",
@@ -706,7 +706,7 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 2,
         list: [
           "等待、运行、等待和就绪",
           "运行、就绪、等待和就绪",
@@ -729,14 +729,14 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 4,
         list: ["①②⑤", "③④⑤", "②④⑤", "②④⑥"],
         fillAnswer: "",
         note: "m≥n*(w-1)+1",
       },
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["1、1和1", "1、1和2", "1、1和3", "1、2和1"],
         fillAnswer: "",
         note: "",
@@ -777,14 +777,14 @@ export const list = [
     options: [
       {
         answer: "D",
-        col: 1,
+        col: 4,
         list: ["1、1和0", "1、1和1", "2、1和0", "2、0和1"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: "B",
-        col: 1,
+        col: 2,
         list: [
           "P1>P2>P4>P5>P3",
           "P5>P2>P4>P3>P1",
@@ -848,14 +848,14 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["0", "1", "2", "4"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: "C",
-        col: 1,
+        col: 4,
         list: ["2C25H", "4096H", "4C25H", "8C25H"],
         fillAnswer: "",
         note: "2 C25 H 为页号2，对应页帧号4，所以答案为 4 C25 H",
@@ -920,14 +920,14 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 4,
         list: ["100", "107", "152", "170"],
         fillAnswer: "",
         note: "(10+5)*(10-1)+(10+5+2)=152",
       },
       {
         answer: "B",
-        col: 1,
+        col: 4,
         list: ["100", "107", "152", "170"],
         fillAnswer: "",
         note: "10*(10-1)+(10+5+2)=107",
@@ -945,14 +945,14 @@ export const list = [
     options: [
       {
         answer: "A",
-        col: 1,
+        col: 2,
         list: ["⑦⑩①②④③⑨⑧⑤⑥", "①⑦⑩②③④⑥⑤⑧⑨", "⑦⑩①②④③⑥⑤⑧⑨", "①⑦⑩②③④⑧⑨⑥⑤"],
         fillAnswer: "",
         note: "只看柱面号",
       },
       {
         answer: "C",
-        col: 1,
+        col: 2,
         list: ["⑦⑩①②④③⑨⑧⑤⑥", "①⑦⑩②③④⑥⑤⑧⑨", "⑦⑩①②④③⑥⑤⑧⑨", "①⑦⑩②③④⑧⑨⑥⑤"],
         fillAnswer: "",
         note: "",
@@ -970,7 +970,7 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 2,
         list: ["①②③④⑤⑥", "⑤①②④③⑥", "②③④⑤①⑥", "④②③⑤①⑥"],
         fillAnswer: "",
         note: "",
@@ -1131,7 +1131,7 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 2,
         list: [
           "基本表、存储文件和视图",
           "视图、基本表和存储文件",
@@ -1577,7 +1577,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
     title: "上午题-SQL语句",
     category: "single-select",
     question: `
-己知关系模式: 图书 (图书编号,图书类型,图书名称,作者,出版社,出版日期,ISBN) 图书编号唯一识别一本图书。建立 "计算机" 类图书的视图 Computer-BOOK, 并要求进行修改、插入操作时保证该视图只有计算机类的图书。实现上逑要求的 SQL 语句如下:
+己知关系模式: 图书 (图书编号,图书类型,图书名称,作者,出版社,出版日期,ISBN) 图书编号唯一识别一本图书。建立 "计算机" 类图书的视图 Computer-BOOK, 并要求进行修改、插入操作时保证该视图只有计算机类的图书。实现上述要求的 SQL 语句如下:
 <p>CREATE ___ AS SELECT 图书编号,图书类型,图书名称,作者,出版社,出版日期 FROM 图书 WHERE 图书类型 = '计算机' ___;</p>
     `,
     imgs: [],
@@ -2589,7 +2589,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
     options: [
       {
         answer: `A`,
-        col: 1,
+        col: 4,
         list: ["地址", "类型", "名称", "值"],
         fillAnswer: "",
         note: "",
@@ -2869,7 +2869,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
     options: [
       {
         answer: `D`,
-        col: 1,
+        col: 2,
         list: ["甲公司", "乙公司", "甲、乙公司均", "由甲、乙公司协商确定谁"],
         fillAnswer: "",
         note: "专利权只看谁先申请",
@@ -3011,7 +3011,7 @@ Teachers (教师号,姓名,性别,身份证号,工资)
     options: [
       {
         answer: `C`,
-        col: 1,
+        col: 4,
         list: ["发表权", "发行权", "署名权", "展览权"],
         fillAnswer: "",
         note: "",
@@ -3228,14 +3228,14 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `A`,
-        col: 1,
+        col: 4,
         list: ["消息传递", "继承", "引用", "多态"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: `C`,
-        col: 1,
+        col: 2,
         list: [
           "应该支持被封装的对象",
           "应该支持类与实例的概念",
@@ -3257,7 +3257,7 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `B`,
-        col: 1,
+        col: 4,
         list: ["数据", "标记", "控制", "内容"],
         fillAnswer: "",
         note: "",
@@ -3305,7 +3305,7 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `D`,
-        col: 1,
+        col: 2,
         list: [
           "尽量减少高扇出结构",
           "模块的大小适中",
@@ -3413,7 +3413,7 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `B`,
-        col: 1,
+        col: 2,
         list: [
           "内网、外网和 DMZ",
           "外网、DMZ 和内网",
@@ -3435,7 +3435,7 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `D`,
-        col: 1,
+        col: 4,
         list: ["传染性", "触发性", "隐蔽性", "自毁性"],
         fillAnswer: "",
         note: "",
@@ -3452,7 +3452,7 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `B`,
-        col: 1,
+        col: 4,
         list: ["跨站脚本", "拒绝服务", "信息篡改", "口令猜测"],
         fillAnswer: "",
         note: "",
@@ -3551,14 +3551,14 @@ ___是对象发出的服务请求，一般包含提供服务的对象标识、�
     options: [
       {
         answer: `A`,
-        col: 1,
+        col: 4,
         list: ["SNMP", "ARP", "ICMP", "X.25"],
         fillAnswer: "",
         note: "",
       },
       {
         answer: `C`,
-        col: 1,
+        col: 4,
         list: ["TCP", "IP", "UDP", "ICMP"],
         fillAnswer: "",
         note: "",
@@ -4151,7 +4151,7 @@ ___是度量软件复杂性的一个主要参数。
     type: "topic",
     title: "上午题-白盒测试",
     category: "single-select",
-    question: `如下所示代码(用缩迸表示程序块)，要实现语句覆盖，至少需要___个测试用例。
+    question: `如下所示代码(用缩进表示程序块)，要实现语句覆盖，至少需要___个测试用例。
     采用 McCabe度量 计算该程序图的环路复杂性为___。`,
     imgs: ["/docs/study/imgs/144-ti.png"],
     options: [
@@ -4403,7 +4403,7 @@ ___是度量软件复杂性的一个主要参数。
     options: [
       {
         answer: `A`,
-        col: 1,
+        col: 2,
         list: ["消除风险", "评估所预测的风险是否发生", "保证正确实施了风险缓解步骤", "收集用于后续进行风险分析的信息"],
         fillAnswer: "",
         note: "",
@@ -5448,7 +5448,7 @@ j表示模式串中字符的序号(从1开始),若模式串P 为 'abaac'，则�
     options: [
       {
         answer: `D`,
-        col: 1,
+        col: 2,
         list: [
           "一个A1的对象可能与一个A2的对象关联", 
           "一个A的非直接对象可能与一个A1的对象关联", 
@@ -5994,7 +5994,11 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
           "一对多对象依赖关系，当一个象修改后，依赖它的对象都自动得到通知"
         ],
         fillAnswer: "",
-        note: "A-迭代器模式 B-中介者模式 C-备忘录模式",
+        note: `
+        <p>迭代器模式: 访问一个聚合对象的内容而无须暴露它的内部表示</p>
+        <p>中介者模式: 减少多个对象或类之闻的通信复杂性</p>
+        <p>备忘录模式: 将对象的状态恢复到先前的状态</p>
+        `,
       },
     ],
   },
@@ -7233,6 +7237,554 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
         ],
         fillAnswer: "",
         note: "公式 A[i][j] = A[0][0] + 2 * ((i * cols) + j)，得出列数 cols = 19，则 A[5][5] = 300",
+      },
+    ],
+  },
+  {
+    id: "section-140701",
+    type: "topic",
+    title: "上午题-贪心法",
+    category: "single-select",
+    question: `采用贪心策略求解___问题，一定可以得到最优解。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "分数背包", 
+          "0-1背包", 
+          "旅行商", 
+          "最长公共子序列"
+        ],
+        fillAnswer: "",
+        note: "0-1背包: 动态规划；旅行商: 分支定界法；最长公共子序列: 动态规划",
+      },
+    ],
+  },
+  {
+    id: "section-110107",
+    type: "topic",
+    title: "上午题-统一过程模型",
+    category: "single-select",
+    question: `统一过程模型的四个阶段中，在___阶段进行需求分析和架构演进。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "移交", 
+          "精化", 
+          "构建", 
+          "初始"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-130201",
+    type: "topic",
+    title: "上午题-TCP/IP",
+    category: "single-select",
+    question: `下列协议中不属于安全协议的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "IPsec", 
+          "SNMP", 
+          "SFTP", 
+          "HTTPS"
+        ],
+        fillAnswer: "",
+        note: "SNMP: 用于网络设备管理，默认无加密与认证机制；SFTP: 基于 SSH 的安全文件传输协议，数据加密传输",
+      },
+    ],
+  },
+  {
+    id: "section-060101",
+    type: "topic",
+    title: "上午题-面向对象",
+    category: "single-select",
+    question: `以下关于方法重载 (Overload) 和方法覆盖 (Override) 与多态的关系的叙述中，错误的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 1,
+        list: [
+          "覆盖通过动态绑定机制实现多态", 
+          "重载通过动态绑定机制实现多态", 
+          "重载属于编译时多态，在一个类中定义多个名称相同而参数不同的方法", 
+          "覆盖属于运行时多态，子类重新定义父类中已定义的方法"
+        ],
+        fillAnswer: "",
+        note: "重载 是在 编译时 根据参数列表来决定调用哪个方法，静态绑定；覆盖 是在 运行时 根据对象实际类型决定调用哪个方法，动态绑定",
+      },
+    ],
+  },
+  {
+    id: "section-110503",
+    type: "topic",
+    title: "上午题-白盒测试",
+    category: "single-select",
+    question: `以下关于白盒测试原则的叙述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 1,
+        list: [
+          "在所有的逻辑判断中，取'真' 和 取'假' 的两种情况至少都能执行一次", 
+          "程序模块中的所有独立路径至少执行一次", 
+          "每个循环都应在边界条件和一般条件下各执行一次", 
+          "在输入条件规定的取值范围的情况下，合理的输入和不合理的输入至少都能执行一次"
+        ],
+        fillAnswer: "",
+        note: "该描述更接近黑盒测试原则，关注输入输出的有效性，而不是程序内部逻辑。属于输入域测试，不是白盒测试。",
+      },
+    ],
+  },
+  {
+    id: "section-060105",
+    type: "topic",
+    title: "上午题-面向对象测试",
+    category: "single-select",
+    question: `对采用面向对象方法开发的系统迸行测试时，通常从不同层次迸行测试。对类中定义的每个方法进行测试属于___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "系统", 
+          "算法", 
+          "类", 
+          "模板"
+        ],
+        fillAnswer: "",
+        note: "算法层: 测试类中的每个方法",
+      },
+    ],
+  },
+  {
+    id: "section-140202",
+    type: "topic",
+    title: "上午题-二分查找",
+    category: "single-select",
+    question: `以下关于折半查找的叙述中，不正确的是___。采用折半查找等概率查找某个包含8个元素的有序表，查找成功的平均查找长度为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "是一个分治算法", 
+          "只能应用于有序表", 
+          "查找成功和不成功的平均查找长度是一样的", 
+          "若表长为n，时间复杂度为 O(log2n)"
+        ],
+        fillAnswer: "",
+        note: "成功和不成功时的比较次数分布不同",
+      },
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "9/8", 
+          "1/8", 
+          "20/8", 
+          "21/8"
+        ],
+        fillAnswer: "",
+        note: "构建平衡二叉查找树后，每个节点的“查找次数”是其层数，平均查找长度为 (1*1+2*2+4*3+1*4)/8=21/8",
+      },
+    ],
+  },
+  {
+    id: "section-090503",
+    type: "topic",
+    title: "上午题-位示图",
+    category: "single-select",
+    question: `某文件管理系统在磁盘上建立了位示图 (bitmap), 记录磁盘的使用情况。
+若计算机系统的字长为128位，磁盘的容量为1024GB，物理块的大小为8MB, 那么该位示图的大小为___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 4,
+        list: [
+          "4096", 
+          "1024", 
+          "2048", 
+          "4098"
+        ],
+        fillAnswer: "",
+        note: `
+        <p>计算磁盘物理块个数: 1024GB/8MB = 1024*1024/8 块= 131072 块</p>
+        <p>每个物理块所需的大小为: 131072b</p>
+        <p>系统的字数量: 131072b / 128b = 1024</p>
+        `,
+      },
+    ],
+  },
+  {
+    id: "section-120103",
+    type: "topic",
+    title: "上午题-防火墙",
+    category: "single-select",
+    question: `防火墙不具备___功能。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "病毒防治", 
+          "状态检测", 
+          "代理", 
+          "包过滤"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-030305",
+    type: "topic",
+    title: "上午题-哈夫曼树",
+    category: "single-select",
+    question: `一棵哈夫曼树共有127个节点，对其进行哈夫曼编码，共能得到___个字符的编码。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "64", 
+          "127", 
+          "63", 
+          "126"
+        ],
+        fillAnswer: "",
+        note: `
+        <p>哈夫曼树只包含度为0和度为2的节点</p>
+        <p>根据树的性质 树中的节点总数 = 树中所有节点的度数之和+1，度为2的节点数*2+1=总结点数127，则度为2的节点数为63，度为0的节点数为64</p>
+        <p>根据二叉树的性质 二叉树中度为0的节点数n0 = 度为2的节点数n2+1 度为0的节点数(=度为2的节点数*2+1)+度为2的节点数=总结点数127，则度为2的节点数为63，度为0的节点数为64</p>
+        `,
+      },
+    ],
+  },
+  {
+    id: "section-010203",
+    type: "topic",
+    title: "上午题-浮点数",
+    category: "single-select",
+    question: `浮点加减法运算过程中需要以下操作要素：
+    <p>① 零操作数检查</p>
+    <p>② 规格化及舍入处理</p>
+    <p>③ 尾数加减运算</p>
+    <p>④ 对阶操作</p>
+    正确的加减法运算操作流程是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "①③④②", 
+          "①④③②", 
+          "②①④③", 
+          "④③②①"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-020102",
+    type: "topic",
+    title: "上午题-语言",
+    category: "single-select",
+    question: `在C/C++程序中，对于函数中定义的非静态局部变量，其存储空间在___中。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "栈区", 
+          "静态数据区", 
+          "文本区", 
+          "自由堆区"
+        ],
+        fillAnswer: "",
+        note: "栈区存储非静态局部变量、函数参数、返回地址等；堆区存储动态分配的内存，malloc, new；静态数据区存储全局变量、静态变量、常量等；文本区即是代码区",
+      },
+    ],
+  },
+  {
+    id: "section-010501",
+    type: "topic",
+    title: "上午题-I/O控制方式",
+    category: "single-select",
+    question: `在微型计算机中，管理键盘最适合采用的I/O控制方式是___方式。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 4,
+        list: [
+          "DMA", 
+          "无条件传送", 
+          "程序查询", 
+          "中断"
+        ],
+        fillAnswer: "",
+        note: `
+        <p>键盘输入的特点为: 输入频率低，不连续，数据量低</p>
+        <p>DMA: 适合大批量高速数据传输，比如磁盘、显卡、网卡</p>
+        <p>无条件传送/程序直接控制: CPU 主动发送/接收数据，不判断设备状态，适合简单但效率低，设备速度快、数据少</p>
+        <p>程序查询/轮询: CPU 不断查询设备状态寄存器，等待就绪再传送数据</p>
+        <p>中断: 设备准备好后主动通知 CPU，CPU 暂停当前工作进行处理，适合设备速度慢、交互不频繁的场合</p>
+        `,
+      },
+    ],
+  },
+  {
+    id: "section-050103",
+    type: "topic",
+    title: "上午题-三级模式",
+    category: "single-select",
+    question: `数据库的基本表、存储文件和视图的结构分别对应___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "用户视图、内部视图和概念视图", 
+          "用户视图、概念视图和内部视图", 
+          "概念视图、用户视图和内部视图", 
+          "概念视图、内部视图和用户视图", 
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-050501",
+    type: "topic",
+    title: "上午题-事务",
+    category: "single-select",
+    question: `在 SQL 中，结束事务通常可以使用 COMMIT 和 ROLLBACK 语句。若某事务T执行了___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "ROLLBACK 语句，则可将T对数据库的更新撇销", 
+          "ROLLBACK 语句，则可将T对数据库的更新写入数据库", 
+          "COMMIT 语句，则T对数据库的影响可用 ROLLBACK 语句来撤销", 
+          "ROLLBACK 语句，则表示T已正确的执行完毕"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-100202",
+    type: "topic",
+    title: "上午题-耦合性",
+    category: "single-select",
+    question: `在设计模块M和模块N时，___是最佳设计。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "M和N 通过通信模块传送数据", 
+          "M和N 通过公共数据域传送数据", 
+          "M和N 通过简单数据参数交换信息", 
+          "M直接访问N的数据", 
+        ],
+        fillAnswer: "",
+        note: "简单数据-数据耦合；通信模块-外部耦合；公共数据环境-公共耦合；直接访问-内容耦合",
+      },
+    ],
+  },
+  {
+    id: "section-010502",
+    type: "topic",
+    title: "上午题-中断",
+    category: "single-select",
+    question: `中断向量提供的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `B`,
+        col: 2,
+        list: [
+          "中断源的设备地址", 
+          "中断服务程序的入口地址", 
+          "传递数据的起始地址", 
+          "主程序的断点地址"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-010202",
+    type: "topic",
+    title: "上午题-定点数",
+    category: "single-select",
+    question: `计算机系统中，定点数常采用补码表示，以下叙述中错误的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "补码零的表示是唯一的", 
+          "可以将减法运算转化为加法运算", 
+          "符号位可以与数值位一起参与运算", 
+          "与真值的对应关系简单且直观"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-010801",
+    type: "topic",
+    title: "上午题-加密技术",
+    category: "single-select",
+    question: `在PKI体系中，由 SSL/TSL 实现 HTTPS 应用。
+    浏览器和服务器之间用于加密HTTP消息的方式是___，如果服务器证书被撤销那么会产生的后果是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `D`,
+        col: 2,
+        list: [
+          "对方公钥 + 公钥加密", 
+          "本方公钥 + 公钥加密", 
+          "会话密钥 + 公钥加密", 
+          "会话密钥 + 对称加密", 
+        ],
+        fillAnswer: "",
+        note: "握手阶段 使用 非对称加密 交换一个 会话密钥(对称密钥)，通信阶段 进行对称加密通信",
+      },
+      {
+        answer: `C`,
+        col: 2,
+        list: [
+          "服务器不能执行加解密", 
+          "服务器不能执行签名", 
+          "客户端无法再信任服务器", 
+          "客户端无法发送加密信息给服务器"
+        ],
+        fillAnswer: "",
+        note: "",
+      },
+    ],
+  },
+  {
+    id: "section-120202",
+    type: "topic",
+    title: "上午题-网络攻击",
+    category: "single-select",
+    question: `以下关于入侵防御系统功能的描述中，不正确的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `C`,
+        col: 1,
+        list: [
+          "监测并分析用户和系统的网络活动", 
+          "匹配特征库识别已知的网络攻击行为", 
+          "联动入侵检测系统使其阻断网络攻击行为", 
+          "检测僵尸网络、木马控制等僵尸主机行为"
+        ],
+        fillAnswer: "",
+        note: "IPS 和 IDS",
+      },
+    ],
+  },
+  {
+    id: "section-050301",
+    type: "topic",
+    title: "上午题-函数依赖",
+    category: "single-select",
+    question: `给定关系模式 R(U,F)，其中U为属性集，F是U上的一组函数，属于自反律的是___。`,
+    imgs: [],
+    options: [
+      {
+        answer: `A`,
+        col: 1,
+        list: [
+          "若Y∈X∈U，则X➔Y为F所蕴含", 
+          "若X➔Y，Y➔Z，则X➔Z为F所蕴含", 
+          "若X➔Y，Z∈Y，则X➔Z为F所蕴含", 
+          "若X➔Y，X➔Z，则X➔YZ为F所蕴含", 
+        ],
+        fillAnswer: "",
+        note: `
+        <p>自反律: 若Y∈X∈U，则X➔Y为F所蕴含</p>
+        <p>增广律: 若X➔Y为F所蕴含，且Z∈U，则XZ➔YZ为F所蕴含</p>
+        <p>传递律: 若X➔Y，Y➔Z，则X➔Z为F所蕴含</p>
+        <p>合并规则: 若X➔Y，X➔Z，则X➔YZ为F所蕴含</p>
+        <p>伪传递率: 若X➔Y，WY➔Z，则XW➔Z为F所蕴含</p>
+        <p>分解规则: 若X➔Y，Z∈Y，则X➔Z为F所蕴含</p>
+        `,
+      },
+    ],
+  },
+  {
+    id: "section-030405",
+    type: "topic",
+    title: "上午题-最小生成树",
+    category: "single-select",
+    question: `采用 Kruskal 算法求解下图的最小生成树，采用的算法设计策略是___，该最小生成树的权值是___。`,
+    imgs: ["/docs/study/imgs/211-ti.png"],
+    options: [
+      {
+        answer: `C`,
+        col: 4,
+        list: [
+          "分治法", 
+          "动态规划", 
+          "贪心法", 
+          "回溯法"
+        ],
+        fillAnswer: "",
+        note: "依次选取权值最小的边，若边形成环则跳过",
+      },
+      {
+        answer: `A`,
+        col: 4,
+        list: [
+          "14", 
+          "16", 
+          "20", 
+          "32"
+        ],
+        fillAnswer: "",
+        note: "1+4+4+3+2 = 14",
       },
     ],
   },

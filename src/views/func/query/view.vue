@@ -17,7 +17,20 @@ const pageInfos = reactive({
   ],
   txts: [
     [
+      { symbol: "±" },
       { symbol: "≠" },
+      { symbol: "≤" },
+      { symbol: "≥" },
+      { symbol: "≈" },
+      { symbol: "∈" },
+      { symbol: "∧" },
+      { symbol: "∨" },
+      { symbol: "¬" },
+      { symbol: "∩" },
+      { symbol: "∪" },
+      { symbol: "⨝" },
+    ],
+    [
       { symbol: "➔" },
       { symbol: "➜" },
       { symbol: "➡" },
@@ -131,9 +144,11 @@ const pageInfos = reactive({
 
 <style scoped lang="scss">
 table {
+
   th,
   td {
     padding: 5px 10px;
+    text-align: center;
     font-size: 18px;
     border: 1px solid #c4cecf7d;
   }

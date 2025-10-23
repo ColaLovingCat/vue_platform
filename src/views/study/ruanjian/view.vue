@@ -325,6 +325,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <th>码制</th>
                       <th></th>
+                      <th>0</th>
                       <th>-45</th>
                       <th>定点整数</th>
                       <th>定点小数</th>
@@ -334,6 +335,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>原码</td>
                       <td>最高位为符号位，0正1负</td>
+                      <th>0000 0000 / 1000 0000</th>
                       <td>1 010 1101</td>
                       <td>
                         <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
@@ -349,6 +351,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>反码</td>
                       <td>正数相同，负数按位求反</td>
+                      <th>0000 0000 / 1111 1111</th>
                       <td>1 101 0010</td>
                       <td>
                         <span class="txt-func">-(2<span class="txt-sup">n-1</span>-1)</span>
@@ -364,6 +367,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>补码</td>
                       <td>正数相同，负数反码加1</td>
+                      <th>0000 0000</th>
                       <td>1 101 0011</td>
                       <td>
                         <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
@@ -379,6 +383,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>移码</td>
                       <td>补码符号位取反</td>
+                      <th>1000 0000</th>
                       <td>0 101 0011</td>
                       <td>
                         <span class="txt-func">-2<span class="txt-sup">n-1</span></span>
@@ -753,11 +758,13 @@ const showModal = (action: string, values: any) => {
                   <tbody>
                     <tr>
                       <td>对称加密</td>
-                      <td>DES AES <i class="txt-en">Advanced Encryption Standard</i> 3DES RC-5 IDEA RC4</td>
+                      <td>DES <i class="txt-en">Data Encryption Standard</i> AES <i class="txt-en">Advanced Encryption
+                          Standard</i> 3DES RC-5 IDEA RC4</td>
                     </tr>
                     <tr>
                       <td>非对称加密</td>
-                      <td>DSA RSA ECC</td>
+                      <td>DSA <i class="txt-en">Digital Signature Algorithm</i> RSA ECC <i class="txt-en">Elliptic
+                          Curves Cryptography</i></td>
                     </tr>
                     <tr>
                       <td>信息摘要</td>
@@ -1297,7 +1304,7 @@ const showModal = (action: string, values: any) => {
               <h4>3.6 哈夫曼编码</h4>
               <div class="sub-contents">
                 <p>等长编码：对每个字符编制相同长度的二进制码</p>
-                <p>过程及其压缩比：先构造哈夫曼树，再根据左0右1构建编码</p>
+                <p>过程及其压缩比：先 左小右大 构造哈夫曼树，再根据 左0右1 构建编码</p>
                 <img class="img-51" style="width: 450px" src="/docs/study/imgs/51-tree.png" alt="" srcset="" />
                 <p>
                   等长编码长度为3 (22< 5< 23)，压缩比为 1-(40*1+60*3)/100*3=0.27 </p>
@@ -1334,6 +1341,8 @@ const showModal = (action: string, values: any) => {
                     </tr>
                   </tbody>
                 </table>
+                <p>将子树的子节点连接虚线，老大子节点为左节点，其余都是右节点，合并时都是作为前一个的右子树</p>
+                <p>三棵树n1,n2,n3的森林转一棵二叉树，左子树节点为n1-1，右子树节点为n2+n3</p>
               </div>
             </div>
           </div>
@@ -1805,6 +1814,13 @@ const showModal = (action: string, values: any) => {
                 <p>A3传递律 合并规则 分解规则</p>
                 <p>闭包：求候选码，可反向求/传递依赖/冗余</p>
                 <p>求主属性/非主属性</p>
+                <p>公理系统</p>
+                <p>自反律: 若Y∈X∈U，则X➔Y为F所蕴含</p>
+                <p>增广律: 若X➔Y为F所蕴含，且Z∈U，则XZ➔YZ为F所蕴含</p>
+                <p>传递律: 若X➔Y，Y➔Z，则X➔Z为F所蕴含</p>
+                <p>合并规则: 若X➔Y，X➔Z，则X➔YZ为F所蕴含</p>
+                <p>伪传递率: 若X➔Y，WY➔Z，则XW➔Z为F所蕴含</p>
+                <p>分解规则: 若X➔Y，Z∈Y，则X➔Z为F所蕴含</p>
               </div>
             </div>
             <div id="section-050302">
@@ -2071,10 +2087,10 @@ const showModal = (action: string, values: any) => {
             <div id="section-060105">
               <h4>1.5 面向对象测试</h4>
               <div class="sub-contents">
-                <p>算法层</p>
-                <p>类层</p>
-                <p>模板层</p>
-                <p>系统层</p>
+                <p>算法层: 测试类中的每个方法</p>
+                <p>类层: 测试一个类中的所有方法和属性</p>
+                <p>模板层: 测试一组类之间的交互</p>
+                <p>系统层: 测试整个系统</p>
               </div>
             </div>
           </div>
@@ -2315,6 +2331,19 @@ const showModal = (action: string, values: any) => {
                       </td>
                     </tr>
                   </tbody>
+                </table>
+                <p style="margin-top: 10px"></p>
+                <table>
+                  <tr>
+                    <td>设计模式</td>
+                    <td>意图</td>
+                    <td>优缺点</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -4038,7 +4067,7 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p>
                   位示图
-                  <i class="txt-cn">bitmap</i>：对每个物理空间用一位标识，1则使用，0则空闲
+                  <i class="txt-cn">bitmap</i>：用 一位 代表 一个物理块，1则使用，0则空闲
                 </p>
                 <p>逻辑编号 0/1字 代表物理块 0~31位 32*(n+1)-1</p>
                 <p>求所需位示图的字大小</p>
@@ -4368,7 +4397,7 @@ const showModal = (action: string, values: any) => {
               <h4>1.8 敏捷过程 <i class="txt-en">Agile</i></h4>
               <div class="sub-contents">
                 <p>通过迭代、协作和快速响应变化来提高团队的效率和灵活性</p>
-                <p>1.极限编程(XP)：4个价值观、5个原则、12个最佳实践、行为</p>
+                <p>1.极限编程 (XP)：4个价值观、5个原则、12个最佳实践、行为</p>
                 <p>4个价值观：沟通、简单性假设、反馈、勇气</p>
                 <p>12个最佳实践</p>
                 <table>
@@ -4437,9 +4466,9 @@ const showModal = (action: string, values: any) => {
                 <p>功能驱动开发 FDD：首席程序员和类程序员</p>
                 <p>
                   4.自适应软件开发
-                  ASD：三个非线性开发阶段：猜测、合作、学习。强调开发方法的适应性，为软件的重要性提供基础，适应组织和管理层次
+                  (ASD)：三个非线性开发阶段：猜测、合作、学习。强调开发方法的适应性，为软件的重要性提供基础，适应组织和管理层次
                 </p>
-                <p>5.敏捷统一过程(AUP)：在大型上连续，在小型上迭代</p>
+                <p>5.敏捷统一过程 (AUP)：在大型上连续，在小型上迭代</p>
                 <p>建模、实现、测试、部署、配置及项目管理、环境管理</p>
               </div>
             </div>
@@ -4619,12 +4648,12 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>技术：逻辑覆盖、循环覆盖、基本路径测试</p>
                 <p>逻辑覆盖</p>
-                <p>语句覆盖：覆盖每个语句，分支不执行语句时可以不覆盖</p>
-                <p>判定(分支)覆盖：每个判定表达式的结果都要真假覆盖</p>
-                <p>条件覆盖：逻辑条件的可能值都要真假覆盖 A>0 B>0/A < 0 B < 0</p>
-                    <p>判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
-                    <p>条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
-                    <p>路径覆盖：覆盖被测试程序中的所有可能路径</p>
+                <p>1.语句覆盖：覆盖每个语句，分支不执行语句时可以不覆盖</p>
+                <p>2.判定(分支)覆盖：每个判定表达式的结果都要真假覆盖</p>
+                <p>3.条件覆盖：逻辑条件的可能值都要真假覆盖 A>0 B>0/A < 0 B < 0</p>
+                    <p>4.判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
+                    <p>5.条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
+                    <p>6.路径覆盖：覆盖被测试程序中的所有可能路径</p>
                     <img class="img-31" style="width: 600px" src="/docs/study/imgs/31-ceshi.png" alt="" srcset="" />
               </div>
             </div>
@@ -4834,8 +4863,10 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <img class="img-27" style="width: 150px" src="/docs/study/imgs/27-pert.png" alt="" srcset="" />
                 <p>正推取大值，反推取小值</p>
+                <img class="img-210" style="width: 650px" src="/docs/study/imgs/210-pert.png" alt="" srcset="" />
                 <p>松弛时间：最迟-最早</p>
                 <p>关键路径：项目的最短工期</p>
+                <p>1➔2➔3➔4➔6➔8➔10➔11</p>
                 <p><b>项目活动图</b>：里程碑、活动、活动时间</p>
                 <img class="img-26" style="width: 380px" src="/docs/study/imgs/26-pert.png" alt="" srcset="" />
                 <p>画项目活动图</p>
@@ -5020,16 +5051,7 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
             <div id="section-120104">
-              <h4>1.4 网络攻击</h4>
-              <div class="sub-contents">
-                <p>截获 <i class="txt-en">Interception</i>：非法获取或监听信息。例如窃听网络报文、捕获邮件、被动监听</p>
-                <p>篡改/修改 <i class="txt-en">Modification</i>：非法更改信息内容。在传输中修改报文、注入恶意代码</p>
-                <p>中断 <i class="txt-en">Interruption</i>：破坏服务或资源可用性。如拒绝服务、物理破坏介质</p>
-                <p>伪造/伪装/生成 <i class="txt-en">Fabrication</i>：伪造数据或实体。伪造身份、伪造报文、重放攻击等</p>
-              </div>
-            </div>
-            <div id="section-120105">
-              <h4>1.5 访问控制 <i class="txt-en">Access Control</i></h4>
+              <h4>1.4 访问控制 <i class="txt-en">Access Control</i></h4>
               <div class="sub-contents">
                 <p>自主访问控制(DAC)：资源拥有者决定谁可以访问资源，基于访问控制列表（ACL）或权限表</p>
                 <p>强制访问控制(MAC)：系统根据安全策略强制控制访问，用户无法改变权限（如军事安全等级）</p>
@@ -5055,6 +5077,10 @@ const showModal = (action: string, values: any) => {
             <div id="section-120202">
               <h4>2.2 网络攻击</h4>
               <div class="sub-contents">
+                <p>截获 <i class="txt-en">Interception</i>：非法获取或监听信息。例如窃听网络报文、捕获邮件、被动监听</p>
+                <p>篡改/修改 <i class="txt-en">Modification</i>：非法更改信息内容。在传输中修改报文、注入恶意代码</p>
+                <p>中断 <i class="txt-en">Interruption</i>：破坏服务或资源可用性。如拒绝服务、物理破坏介质</p>
+                <p>伪造/伪装/生成 <i class="txt-en">Fabrication</i>：伪造数据或实体。伪造身份、伪造报文、重放攻击等</p>
                 <table>
                   <tbody>
                     <tr>
