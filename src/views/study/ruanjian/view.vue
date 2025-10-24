@@ -2334,16 +2334,18 @@ const showModal = (action: string, values: any) => {
                 </table>
                 <p style="margin-top: 10px"></p>
                 <table>
-                  <tr>
-                    <td>设计模式</td>
-                    <td>意图</td>
-                    <td>优缺点</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td>设计模式</td>
+                      <td>意图</td>
+                      <td>优缺点</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>

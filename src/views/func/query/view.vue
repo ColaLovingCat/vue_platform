@@ -17,6 +17,11 @@ const pageInfos = reactive({
   ],
   txts: [
     [
+      { symbol: "℃"},
+      { symbol: "Ω"},
+      { symbol: "‰"},
+    ],
+    [
       { symbol: "±" },
       { symbol: "≠" },
       { symbol: "≤" },
@@ -29,6 +34,8 @@ const pageInfos = reactive({
       { symbol: "∩" },
       { symbol: "∪" },
       { symbol: "⨝" },
+      { symbol: "∵" },
+      { symbol: "∴" },
     ],
     [
       { symbol: "➔" },
