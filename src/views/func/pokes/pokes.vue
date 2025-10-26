@@ -114,6 +114,19 @@ const enum types {
                 v-bind:src="'/docs/pokemons/shapes/' + shape.shapeCode + '.png'" v-on:click="changeShape(shape)" alt=""
                 srcset="">
         </div>
+        <div class="item-icons">
+            <div class="item-evo">
+                <template v-if="poke.evoOpt == '等级进化'">
+                    {{ poke.evoNeed }}
+                </template>
+                <template v-if="poke.evoOpt == '道具进化'">
+                    {{ poke.evoNeed }}
+                </template>
+                <template v-if="poke.evoOpt == '交换进化'">
+                    {{ poke.evoOpt }} {{ poke.evoNeed }}
+                </template>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -387,6 +400,23 @@ const enum types {
 
     &:hover .item-shapes {
         animation: showShapes 0.6s forwards;
+    }
+
+    .item-icons {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .item-evo {
+            padding: 2px 5px;
+            background: #000000a1;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 5px;
+        }
     }
 }
 

@@ -1,5 +1,131 @@
 export const list = [
     {
+        name: '英雄联盟S15-淘汰赛',
+        type: 'tournament',
+        rounds: [
+            [
+                {
+                    name: "GAME1",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "AL",
+                        icon: "AL.png",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "T1",
+                        icon: "T1.png",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME2",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "G2",
+                        icon: "G2.png",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TES",
+                        icon: "TES.png",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME3",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "KT",
+                        icon: "KT.png",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "CFO",
+                        icon: "CFO.png",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME4",
+                    round: "八强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "GEN",
+                        icon: "GNG.png",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "HLE",
+                        icon: "HLE.png",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME5",
+                    round: "四强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME6",
+                    round: "四强战",
+                    time: "-/-",
+                    bo: 3,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                },
+            ],
+            [
+                {
+                    name: "GAME7",
+                    round: "决赛",
+                    time: "-/-",
+                    bo: 5,
+                    top: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "TBD",
+                        icon: "",
+                        score: 0
+                    },
+                }
+            ],
+        ],
+        winners: [],
+        losers: [],
+    },
+    {
         name: '英雄联盟S15-瑞士轮',
         type: 'swiss',
         rounds: [
@@ -381,7 +507,7 @@ export const list = [
                             top: {
                                 team: 'GEN',
                                 icon: 'GNG.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'TES',
@@ -401,19 +527,19 @@ export const list = [
                             top: {
                                 team: 'MKOI',
                                 icon: 'MKOI.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'TSW',
                                 icon: 'Team Secret.png',
-                                score: 0,
+                                score: 1,
                             },
                         },
                         {
                             top: {
                                 team: 'BLG',
                                 icon: 'BLG.png',
-                                score: 0,
+                                score: 2,
                             },
                             bottom: {
                                 team: 'VKS',
@@ -430,7 +556,7 @@ export const list = [
                             bottom: {
                                 team: 'T1',
                                 icon: 'T1.png',
-                                score: 0,
+                                score: 2,
                             },
                         },
                     ],
@@ -445,38 +571,38 @@ export const list = [
                     matchs: [
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
-                                score: 0,
+                                team: 'CFO',
+                                icon: 'CFO.png',
+                                score: 2,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'FLY',
+                                icon: 'FLY.png',
                                 score: 0,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
-                                score: 0,
+                                team: 'BLG',
+                                icon: 'BLG.png',
+                                score: 1,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
-                                score: 0,
+                                team: 'TES',
+                                icon: 'TES.png',
+                                score: 2,
                             },
                         },
                         {
                             top: {
-                                team: 'TBD',
-                                icon: '',
+                                team: 'MKOI',
+                                icon: 'MKOI.png',
                                 score: 0,
                             },
                             bottom: {
-                                team: 'TBD',
-                                icon: '',
-                                score: 0,
+                                team: 'T1',
+                                icon: 'T1.png',
+                                score: 2,
                             },
                         },
                     ],

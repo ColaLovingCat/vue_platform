@@ -2,86 +2,63 @@
 import { ref, computed, onMounted, reactive } from 'vue'
 
 import pokes from './pokes.vue'
+import typeView from './types.vue'
+
 import * as xlsx from '@/commons/utils/xlsx'
+import * as extend from '@/commons/utils/extends'
+
+import * as current from './datas.service'
 
 const datas: any = ref([])
 const changeMark: any = ref(false)
 
 const pageInfos = reactive({
-    types: [] as any[],
+    gens: [] as any[],
     natures: [] as any[],
     timelines: [] as any[],
 })
 
 const searchInfos = reactive({
     text: '' as any,
+    gen: '',
     datas: [] as any[]
 })
 const handleSearch = () => {
+    let result: any[] = datas.value
+
+    // 按世代过滤
+    if (searchInfos.gen && searchInfos.gen != '') {
+        const genInfos = pageInfos.gens.find((item: any) => item.name == searchInfos.gen)
+        if (genInfos && genInfos.datas) {
+            result = datas.value.filter((poke: any) => {
+                return genInfos.datas.find((genPoke: any) => genPoke.totalNo == poke.no)
+            }
+            )
+        }
+    }
+
     // 执行搜索逻辑
     const searchText = searchInfos.text.trim().toLowerCase();
-
-    const result = searchText
-        ? datas.value.filter((item: any) =>
+    if (searchText) {
+        result = result.filter((item: any) =>
             item.cnName.toLowerCase().includes(searchText)
         )
-        : datas.value;
+    }
+
     searchInfos.datas = [...result]
 };
 
 onMounted(async () => {
-    let temps: any = await xlsx.readExcel('/docs/datas/pokes.xlsx')
-    const { pokes, shapes, natures, types } = temps
-    shapes.map((item: any) => {
-        let temp = pokes.find((a: any) => a.no == item.no)
-        if (temp) {
-            if (temp.shapes) {
-                temp.shapes.push(item)
-            } else {
-                temp.shapes = [item]
-            }
-        }
-    })
-    //
-    datas.value = [...pokes]
+    const db = await current.getDB()
+    datas.value = [...db.pokes]
     handleSearch()
     //
-    pageInfos.natures = [...natures]
-    pageInfos.types = [...types]
+    pageInfos.natures = [...db.natures]
+    pageInfos.gens = db.gens
 })
 
 // 属性
 const typeModal = ref(false)
-const getStyle = (values: any) => {
-    let result = {
-        color: "#fff",
-        background: '#c4cecf4d'
-    }
-    switch (values) {
-        case 0: {
-            result = {
-                color: "#fff",
-                background: '#5b5b5b'
-            }
-            break;
-        }
-        case 0.5: {
-            result = {
-                color: "#fff",
-                background: '#ef4444'
-            }
-            break;
-        }
-        case 2: {
-            result = {
-                color: "#fff",
-                background: '#22c55e'
-            }
-            break;
-        }
-    }
-    return result
-}
 // 性格
 const natureModal = ref(false)
 // 游戏列表
@@ -112,7 +89,7 @@ const showModal = (action: string, values: any) => {
                 <div class="logo">
                     <img src="/docs/pokemons/comps/logo.png" alt="" srcset="">
                 </div>
-                <span>Total: {{ datas.length }}</span>
+                <span>Total: {{ searchInfos.datas.length }}</span>
             </div>
             <div class="right">
                 <a-button type="primary" @click="showModal('timeline', {})">游戏</a-button>
@@ -123,7 +100,14 @@ const showModal = (action: string, values: any) => {
                 <a-button type="primary" @click="showModal('', {})">球种</a-button>
                 <a-button type="primary" @click="showModal('nature', {})">性格</a-button>
                 <a-button type="primary" @click="showModal('type', {})">属性</a-button>
-                <a-input v-model:value="searchInfos.text" placeholder="search" allow-clear @change="handleSearch" />
+
+                <a-select ref="select" v-model:value="searchInfos.gen" style="width: 200px;" @change="handleSearch"
+                    allow-clear>
+                    <a-select-option v-for="item in pageInfos.gens" :value="item.name">{{ item.name }}</a-select-option>
+                </a-select>
+
+                <a-input v-model:value="searchInfos.text" style="width: 200px;" placeholder="search" allow-clear
+                    @change="handleSearch" />
             </div>
         </div>
         <div class="list-pokes">
@@ -136,28 +120,7 @@ const showModal = (action: string, values: any) => {
 
     <!-- 属性 -->
     <a-modal v-model:open="typeModal" width="990px" centered :closable="false" :header="null" :footer="null">
-        <div class="box-types">
-            <table class="table-types">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th v-for="column in pageInfos.types" class="th-type">
-                            <img class="td-type item-type" v-bind:src="'/docs/pokemons/types/' + column.type + '.png'">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="row in pageInfos.types">
-                        <td>
-                            <img class="td-type item-type" v-bind:src="'/docs/pokemons/types/' + row.type + '.png'">
-                        </td>
-                        <td v-for="item in pageInfos.types" class="td-rate">
-                            <div class="rate-item" :style="getStyle(row[item.type])"> {{ row[item.type] }}</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <typeView></typeView>
     </a-modal>
 
     <!-- 性格 -->
@@ -220,28 +183,6 @@ const showModal = (action: string, values: any) => {
     justify-content: center;
     column-gap: 45px;
     row-gap: 35px;
-}
-
-.table-types {
-    background: #0000008d;
-
-    .th-type {
-        padding: 0 5px;
-    }
-
-    .td-type {
-        width: 40px;
-        height: 40px;
-    }
-
-    .rate-item {
-        width: 30px;
-        height: 30px;
-        margin: 0 auto;
-        text-align: center;
-        line-height: 30px;
-        border-radius: 50%;
-    }
 }
 
 .table-natures {
