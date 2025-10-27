@@ -2330,6 +2330,12 @@ const showModal = (action: string, values: any) => {
                         <p>访问者模式 <i class="txt-en">Visitor</i></p>
                       </td>
                     </tr>
+                    <tr>
+                      <td></td>
+                      <td>工厂</td>
+                      <td>适配桥组装外享代</td>
+                      <td></td>
+                    </tr>
                   </tbody>
                 </table>
                 <p style="margin-top: 10px"></p>
