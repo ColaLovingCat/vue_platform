@@ -7,40 +7,25 @@ export const list = [
                 {
                     name: "GAME1",
                     round: "八强战",
-                    time: "-/-",
-                    bo: 3,
+                    time: "10/28",
+                    bo: 5,
                     top: {
-                        team: "AL",
-                        icon: "AL.png",
-                        score: 0
+                        team: "HLE",
+                        icon: "HLE.png",
+                        score: 1
                     },
                     bottom: {
-                        team: "T1",
-                        icon: "T1.png",
-                        score: 0
+                        team: "GEN",
+                        icon: "GNG.png",
+                        score: 3
                     },
+                    
                 },
                 {
                     name: "GAME2",
                     round: "八强战",
-                    time: "-/-",
-                    bo: 3,
-                    top: {
-                        team: "G2",
-                        icon: "G2.png",
-                        score: 0
-                    },
-                    bottom: {
-                        team: "TES",
-                        icon: "TES.png",
-                        score: 0
-                    },
-                },
-                {
-                    name: "GAME3",
-                    round: "八强战",
-                    time: "-/-",
-                    bo: 3,
+                    time: "10/29",
+                    bo: 5,
                     top: {
                         team: "KT",
                         icon: "KT.png",
@@ -53,18 +38,34 @@ export const list = [
                     },
                 },
                 {
-                    name: "GAME4",
+                    name: "GAME3",
                     round: "八强战",
-                    time: "-/-",
-                    bo: 3,
+                    time: "10/30",
+                    bo: 5,
                     top: {
-                        team: "GEN",
-                        icon: "GNG.png",
+                        team: "G2",
+                        icon: "G2.png",
                         score: 0
                     },
                     bottom: {
-                        team: "HLE",
-                        icon: "HLE.png",
+                        team: "TES",
+                        icon: "TES.png",
+                        score: 0
+                    },
+                },
+                {
+                    name: "GAME4",
+                    round: "八强战",
+                    time: "10/31",
+                    bo: 5,
+                    top: {
+                        team: "AL",
+                        icon: "AL.png",
+                        score: 0
+                    },
+                    bottom: {
+                        team: "T1",
+                        icon: "T1.png",
                         score: 0
                     },
                 },
@@ -73,11 +74,11 @@ export const list = [
                 {
                     name: "GAME5",
                     round: "四强战",
-                    time: "-/-",
-                    bo: 3,
+                    time: "11/01",
+                    bo: 5,
                     top: {
-                        team: "TBD",
-                        icon: "",
+                        team: "GEN",
+                        icon: "GNG.png",
                         score: 0
                     },
                     bottom: {
@@ -89,8 +90,8 @@ export const list = [
                 {
                     name: "GAME6",
                     round: "四强战",
-                    time: "-/-",
-                    bo: 3,
+                    time: "11/02",
+                    bo: 5,
                     top: {
                         team: "TBD",
                         icon: "",
@@ -107,7 +108,7 @@ export const list = [
                 {
                     name: "GAME7",
                     round: "决赛",
-                    time: "-/-",
+                    time: "11/09",
                     bo: 5,
                     top: {
                         team: "TBD",
