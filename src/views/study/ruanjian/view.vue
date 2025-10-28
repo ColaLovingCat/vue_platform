@@ -796,12 +796,12 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p>主频=倍频*外频，时钟周期=1/主频</p>
                 <p>
-                  平均每条指令的平均时钟周期个数CPI
+                  平均每条指令的平均时钟周期个数 CPI
                   <i class="txt-en">Clock per Instuction</i>=
                   时钟周期总数/指令总条数
                 </p>
                 <p>
-                  每时钟周期运行指令条数IPC
+                  每时钟周期运行指令条数 IPC
                   <i class="txt-en">Instuction per Clock</i>=
                   指令总条数/时钟周期数
                 </p>
@@ -6317,7 +6317,7 @@ const showModal = (action: string, values: any) => {
         <div class="notes">
           <div v-for="note in visibleNotes" :key="note.id" class="note-card">
             <h4>
-              [{{ note.title }}]
+              例题
               <i class="fa-solid fa-eye" @click="showModal('note', note)"></i>
             </h4>
             <p v-if="note.type === 'text'">{{ note.content }}</p>

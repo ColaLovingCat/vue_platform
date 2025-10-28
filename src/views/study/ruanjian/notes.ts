@@ -413,7 +413,7 @@ export const list = [
         col: 4,
         list: ["解密和签名", "加密和签名", "解密和认证", "加密和认证"],
         fillAnswer: "",
-        note: "",
+        note: "公钥加密，私钥解密；私钥签名，公钥验签",
       },
       {
         answer: "D",
@@ -754,7 +754,7 @@ export const list = [
     options: [
       {
         answer: "C",
-        col: 1,
+        col: 2,
         list: [
           "图1和图2都可化简",
           "图1和图2都不可化简",
@@ -873,14 +873,14 @@ export const list = [
     options: [
       {
         answer: "B",
-        col: 1,
+        col: 4,
         list: ["8", "3", "5", "2"],
         fillAnswer: "",
         note: "物理页大小为1KB即1024，二进制为 100 0000 0000，则页号1对应的物理页为3",
       },
       {
         answer: "A",
-        col: 1,
+        col: 4,
         list: ["4、4", "4、5", "5、4", "5、5"],
         fillAnswer: "",
         note: "",
@@ -7180,7 +7180,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
     imgs: [],
     options: [
       {
-        answer: ``,
+        answer: `C`,
         col: 4,
         list: [
           "统一过程模型", 
