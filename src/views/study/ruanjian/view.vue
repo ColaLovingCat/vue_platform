@@ -4491,12 +4491,14 @@ const showModal = (action: string, values: any) => {
                   <span
                     class="txt-define">缺点</span>由于各个阶段的依赖关系，需求变更较大时，会导致整个项目的延迟；测试阶段在开发结束后才进行，可能导致问题的发现和修复较晚；客户参与程度较低，可能导致最终产品与客户需求有较大差距，风险控制弱
                 </p>
+                <img class="img-212" style="width: 400px" src="/docs/study/imgs/212-pubu.jpg" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110102">
               <h4>1.2 V模型</h4>
               <div class="sub-contents">
                 <p>变体，质量保证活动，开发与测试结合，测试贯彻始终，有V选瀑</p>
+                <img class="img-213" style="width: 600px" src="/docs/study/imgs/213-v.jpg" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110103">
@@ -4521,6 +4523,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">特点</span>实际可行、具有基本特征、构造方便快速，动态需求
                 </p>
+                <img class="img-216" style="width: 300px" src="/docs/study/imgs/216-yuanxing.png" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110105">
@@ -4533,6 +4536,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">缺点</span>需要较高的技术和管理能力，且增加成本
                 </p>
+                <img class="img-214" style="width: 500px" src="/docs/study/imgs/214-luoxuan.png" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110106">
@@ -4548,6 +4552,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">缺点</span>团队成员多，需严格管理文档
                 </p>
+                <img class="img-215" style="width: 300px" src="/docs/study/imgs/215-penquan.png" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110107">
@@ -4902,31 +4907,31 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>初始级</td>
                       <td>
-                        软件过程的特点是杂乱无章，有时甚至很混，几乎没有明确定义的步骤，项目的成功完全依赖个人努力和英雄式核心任务的作用
+                        软件过程的特点是杂乱无章，有时甚至很混，几乎没有明确定义的步骤，项目的成功完全<b>依赖个人努力和英雄式核心任务</b>的作用
                       </td>
                     </tr>
                     <tr>
                       <td>可重复级</td>
                       <td>
-                        建立了基本的项目管理过程和实践来跟踪项目费用、进度和功能特性，有必要的过程准则来重复以前在同类项目中的成功
+                        建立了<b>基本的项目管理过程和实践来跟踪项目</b>费用、进度和功能特性，有必要的过程准则来重复以前在同类项目中的成功
                       </td>
                     </tr>
                     <tr>
                       <td>已定义级</td>
                       <td>
-                        管理和工程两方面的软件过程已文档化、标准化，并综合成整个软件开发组织的标准软件过程。所有项目都采用根据实际情况修改后得到的标准软件过程来开发和维护软件
+                        管理和工程两方面的软件过程已<b>文档化、标准化</b>，并综合成整个软件开发组织的<b>标准软件</b>过程。所有项目都采用根据实际情况修改后得到的标准软件过程来开发和维护软件
                       </td>
                     </tr>
                     <tr>
                       <td>已管理级</td>
                       <td>
-                        指定了软件过程和产品质量的详细度量标准。软件过程的产品质量都被开发组织的成员所理解和控制
+                        指定了软件过程和产品质量的详细度量标准。软件过程的<b>产品质量</b>都被开发组织的成员所理解和控制
                       </td>
                     </tr>
                     <tr>
                       <td>优化级</td>
                       <td>
-                        加强了定量分析，通过来自过程质量反馈和来自新观念、新技术的反馈使过程能不断持续地改进
+                        加强了<b>定量分析</b>，通过来自过程质量反馈和来自新观念、新技术的反馈使过程能不断持续地改进
                       </td>
                     </tr>
                   </tbody>
@@ -4967,39 +4972,39 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>未完成级</td>
                       <td>CL0</td>
-                      <td>过程域未执行或未得到CL1中定义的目标</td>
+                      <td>过程域<b>未执行或未得到C</b>L1中定义的目标</td>
                     </tr>
                     <tr>
                       <td>已执行级</td>
                       <td>CL1</td>
                       <td>
-                        其共性目标是过程将可标识的输入工作产品转换成可标识的输出工作产品，已实现支持过程域的特定目标
+                        其共性目标是过程将可标识的<b>输入</b>工作产品<b>转换成</b>可标识的<b>输出</b>工作产品，已实现支持过程域的特定目标
                       </td>
                     </tr>
                     <tr>
                       <td>已管理级</td>
                       <td>CL2</td>
                       <td>
-                        其共性目标集中于已管理的过程的制度化，针对单个过程实例的额能力
+                        其共性目标集中于<b>已管理</b>的过程的制度化，针对单个过程实例的额能力
                       </td>
                     </tr>
                     <tr>
                       <td>已定义级</td>
                       <td>CL3</td>
                       <td>
-                        其共性目标集中于已定义的过程的制度化，关注过程的组织标准化和部署
+                        其共性目标集中于<b>已定义</b>的过程的制度化，关注过程的组织标准化和部署
                       </td>
                     </tr>
                     <tr>
                       <td>定量管理级</td>
                       <td>CL4</td>
-                      <td>其共性目标集中于可定量管理的过程的制度化</td>
+                      <td>其共性目标集中于可<b>定量管理</b>的过程的制度化</td>
                     </tr>
                     <tr>
                       <td>优化级</td>
                       <td>CL5</td>
                       <td>
-                        使用量化手段改变和优化过程域，以满足客户要求的改变和持续改进计划中的过程域的功效
+                        使用<b>量化手段改变和优化</b>过程域，以满足客户要求的改变和持续改进计划中的过程域的功效
                       </td>
                     </tr>
                   </tbody>
