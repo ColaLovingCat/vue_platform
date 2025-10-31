@@ -495,6 +495,7 @@ const showModal = (action: string, values: any) => {
                 <p>相联存储器：按<b>内容</b>存取</p>
                 <p>闪存FLASH：按<b>块</b>为单位，可代替辅存</p>
                 <p>虚拟存储器：主存+辅存</p>
+                <p>依据于 局部性原理</p>
               </div>
             </div>
             <div id="section-010402">

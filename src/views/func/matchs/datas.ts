@@ -29,7 +29,7 @@ export const list = [
                     top: {
                         team: "KT",
                         icon: "KT.png",
-                        score: 0
+                        score: 3
                     },
                     bottom: {
                         team: "CFO",
@@ -45,12 +45,12 @@ export const list = [
                     top: {
                         team: "G2",
                         icon: "G2.png",
-                        score: 0
+                        score: 1
                     },
                     bottom: {
                         team: "TES",
                         icon: "TES.png",
-                        score: 0
+                        score: 3
                     },
                 },
                 {
@@ -61,12 +61,12 @@ export const list = [
                     top: {
                         team: "AL",
                         icon: "AL.png",
-                        score: 0
+                        score: 2
                     },
                     bottom: {
                         team: "T1",
                         icon: "T1.png",
-                        score: 0
+                        score: 3
                     },
                 },
             ],
@@ -82,8 +82,8 @@ export const list = [
                         score: 0
                     },
                     bottom: {
-                        team: "TBD",
-                        icon: "",
+                        team: "KT",
+                        icon: "KT.png",
                         score: 0
                     },
                 },
@@ -93,13 +93,13 @@ export const list = [
                     time: "11/02",
                     bo: 5,
                     top: {
-                        team: "TBD",
-                        icon: "",
+                        team: "TES",
+                        icon: "TES.png",
                         score: 0
                     },
                     bottom: {
-                        team: "TBD",
-                        icon: "",
+                        team: "T1",
+                        icon: "T1.png",
                         score: 0
                     },
                 },
