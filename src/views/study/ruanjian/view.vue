@@ -1695,7 +1695,7 @@ const showModal = (action: string, values: any) => {
                 <p>数据模型包含</p>
                 <p>概念数据模型：实体/属性/码/域/联系 (1:1/1:*/*:*)/E-R图</p>
                 <p>结构数据模型(DBMS)：层次(树)、网状(网)、关系和面向对象</p>
-                <p>关系模型：<b>二维表格</b>结构。关系>关系模式>关系文件</p>
+                <p><b>关系模型</b>：二维表格结构。关系>关系模式>关系文件</p>
                 <p>五元组R[U,D,dom.F] R关系名/U属性组/F数据依赖 学号>姓名</p>
                 <p>体系结构：集中式数据库、C/S结构、分布式数据库、并行数据库</p>
                 <p>术语：关系/元组(行)/属性(列)/域(取值范围)/关系模式</p>
@@ -1706,7 +1706,7 @@ const showModal = (action: string, values: any) => {
               <h4>1.3 三级模式-两级映像</h4>
               <div class="sub-contents">
                 <p>
-                  三级模式：外模式/用户模式-视图、概念模式-基本表、内模式/物理模式-存储文件
+                  三级模式：外模式/用户模式/子模式-视图、概念模式/模式-基本表、内模式/物理模式/存储模式-存储文件
                 </p>
                 <p>两级映像：外-概念(逻辑独立性)、概念-内(物理独立性)</p>
               </div>
@@ -1755,6 +1755,8 @@ const showModal = (action: string, values: any) => {
                 <p>逻辑设计：转关系模式+规范化+确定完整性约束+视图</p>
                 <p><span class="txt-define">输出</span>关系模式</p>
                 <p>物理设计：DBMS特性、硬件、OS特性</p>
+                <p>数据库实施阶段</p>
+                <p>数据库运行维护阶段</p>
               </div>
             </div>
             <div id="section-050202">
@@ -1765,9 +1767,8 @@ const showModal = (action: string, values: any) => {
                 <p>弱实体：双边矩形</p>
                 <p>超类⇔子类</p>
                 <img class="img-126" style="width: 250px" src="/docs/study/imgs/126-chaolei.png" />
-                <p>属性：复合属性/多值属性/派生属性</p>
+                <p>属性：原子属性和复合属性/单值属性和多值属性/派生属性</p>
                 <p>联系：1:1/1:n/m:n</p>
-                <p>一个实体A</p>
               </div>
             </div>
             <div id="section-050203">
@@ -1809,6 +1810,7 @@ const showModal = (action: string, values: any) => {
             <div id="section-050301">
               <h4>3.1 函数依赖 <i class="txt-en">Functional Dependency</i></h4>
               <div class="sub-contents">
+                <p>关系模式为一个五元组 R (U,D,dom,F) R为关系名，U为一组属性，F为一组函数依赖</p>
                 <p>函数依赖：F={(Sno,Cno)➔G}</p>
                 <p>完全函数依赖：并不是依赖于候选码的子集，类比联合主键</p>
                 <p>A3传递律 合并规则 分解规则</p>
@@ -1929,7 +1931,7 @@ const showModal = (action: string, values: any) => {
                   <codeView :configs="codeConfig('sql')" :value="db.sql_05"></codeView>
                 </div>
                 <p>索引 <i class="txt-en">Index</i></p>
-                <p>改变的是内模式</p>
+                <p>内模式是定义所有的记录类型、索引、文件的组织方式</p>
                 <p>CREATE UNIQUE唯一/CLUSTER聚簇 INDEX .. ON ..</p>
                 <div class="box-code" style="width: 700px; height: 400px">
                   <codeView :configs="codeConfig('sql')" :value="db.sql_06"></codeView>
@@ -1959,6 +1961,13 @@ const showModal = (action: string, values: any) => {
                 <p>并发控制：封锁协议</p>
                 <p>排它锁X</p>
                 <p>共享锁S: 只读</p>
+              </div>
+            </div>
+            <div id="section-050503">
+              <h4>5.3 备份和恢复</h4>
+              <div class="sub-contents">
+                <p>备份</p>
+                <p>恢复</p>
               </div>
             </div>
           </div>
@@ -2355,154 +2364,154 @@ const showModal = (action: string, values: any) => {
                       <td>子类决定产品</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>抽象工厂模式</td>
                       <td>提供一个创建一系列相关或互相依赖对象的接口，而无须指定它们具体的类</td>
                       <td>不同主题皮肤的 UI 控件</td>
                       <td>同一产品族创建</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>生成器模式</td>
                       <td>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示</td>
                       <td>build自行车的车架和座椅</td>
                       <td>先分步构建部件Part，再组装产品</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>原型模式</td>
                       <td>用原型实例指定创建对象的种类，并且通过复制这些原型创建新的对象</td>
                       <td>游戏角色克隆、复制图形对象</td>
                       <td>复制、克隆</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>单例模式</td>
                       <td>保证一个类仅有一个实例，并提供一个访问它的全局访问点</td>
                       <td>全局配置、线程池、日志管理</td>
                       <td>仅此一个</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>适配器模式</td>
                       <td>将一个类的接口转换成客户希望的另外一个接口</td>
                       <td>电源适配器</td>
                       <td>接口兼容</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>桥接模式</td>
                       <td>将抽象部分与其实现部分分离，使它们都可以独立地变化</td>
                       <td>手机品牌 + 操作系统</td>
                       <td>多维度的变化需独立扩展和组合</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>组合模式</td>
                       <td>将对象组合成树型结构以表示 "部分-整体" 的层次结构</td>
                       <td>文件目录、菜单结构</td>
                       <td>树形结构</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>装饰模式</td>
                       <td>动态地给一个对象添加一些额外的职责</td>
                       <td>炒饭->加蛋的炒饭</td>
                       <td>新建了一个更大的类，包装增强</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>外观模式</td>
                       <td>为子系统中的一组接口提供一个一致的界面</td>
                       <td>一键启动智能家居</td>
                       <td>封装复杂库的接口</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>享元模式</td>
                       <td>运用共享技术有效地支持大量细粒度的对象</td>
                       <td>字体、棋子、俄罗斯方块</td>
                       <td>可类比单例模式，对象复用</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>代理模式</td>
                       <td>为其他对象提供一种代理以控制对这个对象的访问</td>
                       <td>车票代理售卖处</td>
                       <td>控制访问</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>责任链模式</td>
                       <td>使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将对象连成一条链传递请求</td>
                       <td>请假审批流</td>
                       <td>逐级传递</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>命令模式</td>
                       <td>将一个请求封装为一个对象，从而使得可以用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作</td>
                       <td></td>
                       <td>请求封装</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>解释器模式</td>
                       <td>给定一个语言，定义它的文法的一种表示，并定义一个解释器，使用该表示来解释语言中的句子</td>
                       <td>SQL解析器</td>
                       <td>自定义语法</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>迭代器模式</td>
                       <td>提供一种方法顺序访问一个聚合对象中的各个元素，且不需要暴露该对象的内部表示</td>
                       <td>Java Iterator、数组遍历器</td>
                       <td>循环元素，顺序访问</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>中介者模式</td>
                       <td>用一个中介对象来封装一系列的对象交互，使对象不需要显式地互相医用，从而使其耦合松散，且可以独立地改变它们之间的交互</td>
                       <td>聊天室、航班调度系统</td>
                       <td>中心协调</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>备忘录模式</td>
                       <td>在不破坏封装性的前提下捕获一个对象的内部状态，并在对象之外保存这个状态，可以在之后将对象恢复到原先保存的状态</td>
                       <td>游戏存档、编辑器撤销</td>
                       <td>状态快照</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>观察者模式</td>
                       <td>定义对象之间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它们的对象都得到通知并被自动更新</td>
                       <td></td>
                       <td>发布订阅</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>状态模式</td>
                       <td>允许一个对象在其内部状态改变时改变它的行为</td>
                       <td>电梯运行开关门、订单状态流转</td>
                       <td>状态驱动，不同状态，不同行为</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>策略模式</td>
                       <td>定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换，使得算法可以独立于使用的客户而变化</td>
                       <td>支付策略、促销活动</td>
                       <td>不同节日，不同活动</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>模板方法模式</td>
                       <td>定义一个操作中的算法骨架，而将一些步骤延迟到子类中，使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤</td>
                       <td></td>
                       <td>固定流程，可扩展步骤</td>
                       <td></td>
                     </tr>
-                     <tr>
+                    <tr>
                       <td>访问者模式</td>
                       <td>表示一个作用于某对象结构中的各元素的操作，允许在不改变各元素的类的前提下定义作用于这些元素的新操作</td>
                       <td>双分派</td>
@@ -3840,6 +3849,7 @@ const showModal = (action: string, values: any) => {
                   临界区
                   <i class="txt-en">Critical Section</i>：共享资源访问代码区段
                 </p>
+                <p>有空即进、无空则等、有限等待、让权等待</p>
                 <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
                 <p>
                   <b>信号量S</b>
@@ -4513,6 +4523,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">缺点</span>管理成本高，效率低，配置复杂
                 </p>
+                <img class="img-219" style="width: 700px" src="/docs/study/imgs/219-zengliang.jpg" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110104">
@@ -4536,7 +4547,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">缺点</span>需要较高的技术和管理能力，且增加成本
                 </p>
-                <img class="img-214" style="width: 500px" src="/docs/study/imgs/214-luoxuan.png" alt="" srcset="" />
+                <img class="img-214" style="width: 600px" src="/docs/study/imgs/214-luoxuan.jpg" alt="" srcset="" />
               </div>
             </div>
             <div id="section-110106">
@@ -4559,17 +4570,22 @@ const showModal = (action: string, values: any) => {
               <h4>1.7 统一过程模型 (UP/RUP)</h4>
               <div class="sub-contents">
                 <p>用例和风险驱动、以架构为中心、迭代且增量</p>
-                <p>
-                  <span class="txt-define">阶段</span>起始阶段：生命周期目标、精化阶段：生命周期架构、构建阶段：初始运行功能、移交阶段：产品发布
-                </p>
+                <p>4个阶段的重要里程碑</p>
+                <p>起始阶段 <i class="txt-en">Inception Phase</i>：生命周期目标</p>
+                <p>精化阶段 <i class="txt-en">Elaboration Phase</i>：生命周期架构</p>
+                <p>构建阶段 <i class="txt-en">Construction Phase</i>：初始运行功能</p>
+                <p>移交阶段 <i class="txt-en">Transition Phase</i>：产品发布</p>
+                <p>每个阶段有5个核心工作流</p>
               </div>
             </div>
             <div id="section-110108">
               <h4>1.8 敏捷过程 <i class="txt-en">Agile</i></h4>
               <div class="sub-contents">
                 <p>通过迭代、协作和快速响应变化来提高团队的效率和灵活性</p>
-                <p>1.极限编程 (XP)：4个价值观、5个原则、12个最佳实践、行为</p>
+                <img class="img-218" style="width: 600px" src="/docs/study/imgs/218-agile.jpg" alt="" srcset="" />
+                <p>1.极限编程 (XP)：价值观、原则、实践、行为</p>
                 <p>4个价值观：沟通、简单性假设、反馈、勇气</p>
+                <p>5个原则：快速反馈、简单性假设、逐步修改、提倡更改、优质工作</p>
                 <p>12个最佳实践</p>
                 <table>
                   <tbody>
@@ -4632,9 +4648,10 @@ const showModal = (action: string, values: any) => {
                 <p>开发式源码：程序开发人员再地域上分布很广</p>
                 <p>
                   3.并列争求法
-                  <i class="txt-en">Scrum</i>：迭代的增量化工程方法，按需求的优先级别实现产品。30天为一个<b>冲刺</b>
+                  <i class="txt-en">Scrum</i>：迭代的增量化工程方法，按需求的优先级别实现产品。30天一次的冲刺为一个<b>冲刺</b>
                 </p>
                 <p>功能驱动开发 FDD：首席程序员和类程序员</p>
+                <img class="img-217" style="width: 600px" src="/docs/study/imgs/217-scrum.jpg" alt="" srcset="" />
                 <p>
                   4.自适应软件开发
                   (ASD)：三个非线性开发阶段：猜测、合作、学习。强调开发方法的适应性，为软件的重要性提供基础，适应组织和管理层次
@@ -4712,7 +4729,7 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p><b>概要设计</b> <i class="txt-en">Architectural Design</i></p>
                 <p>
-                  主要任务：设计软件系统总体结构，确定系统模块及其功能分工，形成系统结构图。
+                  主要任务：<b>设计软件系统总体结构</b>，确定系统模块及其功能分工，形成系统结构图。
                 </p>
                 <p>1.系统总体结构设计</p>
                 <p>2.数据结构及数据库设计：概念设计、逻辑设计、物理设计</p>
@@ -4806,7 +4823,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   等价类划分：将识别的输入域划分为若干个等价类，每个等价类包含具有相同特征和行为的输入。例如数字参可划分正数、零、负数，然后选择代表性数据，不可两个都不合理
                 </p>
-                <p>边界值分析：在输入范围中确认边界，选择上点/离点/内点</p>
+                <p><b>边界值分析</b>：在输入范围中确认边界，选择上点/离点/内点</p>
                 <p>错误推测：凭经验而言，来推测有可能产生问题的地方</p>
                 <p>因果图：通过一个结果来反推出导致该结果的原因</p>
               </div>
@@ -4822,7 +4839,7 @@ const showModal = (action: string, values: any) => {
                 <p>1.语句覆盖：覆盖每个语句，分支不执行语句时可以不覆盖</p>
                 <p>2.判定(分支)覆盖：每个判定表达式的结果都要真假覆盖</p>
                 <p>3.条件覆盖：逻辑条件的可能值都要真假覆盖 A>0 B>0/A < 0 B < 0</p>
-                    <p>4.判定/条件覆盖：条件可能值和判定结果都要真假覆盖</p>
+                    <p>4.判定/条件覆盖：条件的整体和部分条件都要真假覆盖</p>
                     <p>5.条件组合覆盖：条件可能值组合覆盖，满足上述三个</p>
                     <p>6.路径覆盖：覆盖被测试程序中的所有可能路径</p>
                     <img class="img-31" style="width: 600px" src="/docs/study/imgs/31-ceshi.png" alt="" srcset="" />
@@ -4833,6 +4850,8 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p>V(G)=m-n+2 m为有向弧数，n为节点数</p>
                 <img class="img-32" style="width: 400px" src="/docs/study/imgs/32-mccabe.png" alt="" srcset="" />
+                <p>代码行数是度量软件复杂度的一个主要参数</p>
+                <p>伪代码</p>
               </div>
             </div>
             <div id="section-110505">
@@ -4846,7 +4865,7 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>过程：编写驱动模块，测试桩模块</p>
                 <p>集成测试：依据软件概要设计文档</p>
-                <p>方法：自顶向下、自底向上、回归测试(变更)、冒烟测试</p>
+                <p>方法：自顶向下(不写驱动模块)、自底向上(不写桩模块)、回归测试(变更则重测)、冒烟测试</p>
                 <p>确认测试：确认先前发现的缺陷是否已经修复或解决</p>
                 <p>系统测试</p>
               </div>
@@ -4862,9 +4881,9 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>系统可维护性<b>评价指标</b>：可理解性、可测试性、可修改性</p>
                 <p>维护期很长，更复杂，在每个阶段都需要考虑提高可维护性</p>
-                <p>软件文档是软件可维护性的决定因素：用户文档、系统文档</p>
+                <p><b>软件文档</b>是软件可维护性的决定因素：用户文档、系统文档</p>
                 <p>高质量文档可以提高开发质量，工作量大，只好不坏</p>
-                <p>内容：硬件维护、软件维护、数据维护</p>
+                <p>内容：硬件维护、<b>软件维护</b>、数据维护</p>
                 <p>软件可维护性类型：</p>
                 <table>
                   <tbody>
@@ -4883,7 +4902,7 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>完/改善性维护</td>
                       <td>
-                        对已有的软件系统增加一些在系统分析和设计阶段中没有规定的功能与性能特征
+                        对已有的软件系统增加一些在系统分析和设计阶段中没有规定的功能与性能特征，扩充功能，改善性能
                       </td>
                     </tr>
                     <tr>
@@ -5040,7 +5059,6 @@ const showModal = (action: string, values: any) => {
                 <p>1➔2➔3➔4➔6➔8➔10➔11</p>
                 <p><b>项目活动图</b>：里程碑、活动、活动时间</p>
                 <img class="img-26" style="width: 380px" src="/docs/study/imgs/26-pert.png" alt="" srcset="" />
-                <p>画项目活动图</p>
               </div>
             </div>
             <div id="section-110802">
@@ -5050,14 +5068,14 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">分类</span>项目风险、技术风险、商业风险
                 </p>
-                <p>风险识别：建立风险条目检查表</p>
-                <p>风险预测：</p>
+                <p>风险识别：试图系统化地指出对项目计划的威胁，建立风险条目检查表</p>
+                <p>风险预测：风险发生的可能性和产生的后果</p>
                 <p>
                   风险暴露
                   <i class="txt-en">Risk Exposure</i>
                   = 风险发生概率
                   <i class="txt-en">Risk Probability</i>
-                  * 风险影响后果(本质、范围、时间)
+                  * 风险影响后果 (本质、范围、时间)
                   <i class="txt-en">Risk Impact</i>
                 </p>
                 <p>风险评估：定义风险参照水准，成本、进度、性能</p>
@@ -5067,19 +5085,22 @@ const showModal = (action: string, values: any) => {
             <div id="section-110803">
               <h4>8.3 软件质量</h4>
               <div class="sub-contents">
-                <p>可靠性：MTTF/(1+MTTF) 平均无故障时间 ToFailure</p>
-                <p>可用性：MTBF/(1+MTBF) 平均失效间隔时间 BetweenFailure</p>
-                <p>可维护性：1/(1+MTTR) 平均修复时间 ToRepair</p>
+                <p>可靠性：MTTF/(1 + MTTF) 平均无故障时间 ToFailure</p>
+                <p>可用性：MTBF/(1 + MTBF) 平均失效间隔时间 BetweenFailure</p>
+                <p>可维护性：1/(1 + MTTR) 平均修复时间 ToRepair</p>
               </div>
             </div>
             <div id="section-110804">
               <h4>8.4 软件配置管理</h4>
               <div class="sub-contents">
                 <p>
-                  目标：变更标识、变更控制、版本控制、确保变更正确的实现、变更报告
+                  <span class="txt-define">主要目标</span> 变更标识、变更控制、版本控制、确保变更正确的实现、变更报告
                 </p>
                 <p>
-                  内容：版本管理、配置支持、变更支持、过程支持、团队支持、变化报告、审计支持。
+                  <span class="txt-define">主要内容</span> 版本管理、配置支持、变更支持、过程支持、团队支持、变化报告、审计支持
+                </p>
+                <p>
+                  <span class="txt-define">主要内容</span> 软件配置标识、变更管理、版本控制、系统建立、配置审核、配置状态报告
                 </p>
                 <p>变更管理、版本控制、系统建立、配置审核、配置状态报告</p>
                 <p>配置项/配置基线</p>
@@ -5097,9 +5118,8 @@ const showModal = (action: string, values: any) => {
               <h4>8.6 成本管理</h4>
               <div class="sub-contents">
                 <p>软件项目估算</p>
-                <p>
-                  COCOMO估算模型：用于估计软件开发项目的成本、进度和资源需求的模型。包含基本(静态单变量)、中级(静态多变量)、详细(系统/子系统/模块)
-                </p>
+                <p>COCOMO估算模型：用于估计软件开发项目的成本、进度和资源需求的模型。</p>
+                <p>包含基本(静态单变量)、中级(静态多变量)、详细(系统/子系统/模块)</p>
                 <p>
                   COCOMOII模型：应用组装模型(对象点)、早期设计阶段模型(功能点)、体系结构阶段模型(代码行)
                 </p>
@@ -5120,7 +5140,7 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
             <div id="section-110902">
-              <h4>9.2 McCall 软件质量模型</h4>
+              <h4>9.2 Mc Call 软件质量模型</h4>
               <div class="sub-contents">
                 <p>产品运行：正确性、可靠性、易使用性、效率、完整性</p>
                 <p>产品修正：可维护性、灵活性、可测试性</p>
@@ -5137,7 +5157,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   模块结构：控制流结构、数据流结构、模块结构与功能结构之间的对应关系
                 </p>
-                <p>技术评审：揭露质量问题</p>
+                <p>技术评审：揭露质量问题，发现程序中的错误</p>
               </div>
             </div>
             <div id="section-111002">
@@ -5190,6 +5210,7 @@ const showModal = (action: string, values: any) => {
                 <p>SSL(安全套接层)：传输层安全协议。端口号443</p>
                 <p>TLS(传输层安全协议)：是SSL3.0的后续版本</p>
                 <p>HTTPS：使用SSL加密算法的HTTP</p>
+                <p>MiMe(多用途互联网邮件扩展类型)：扩展电子邮件模板</p>
                 <p>PGP(优良保密协议)：基于RSA公钥加密体系的邮件加密软件</p>
                 <p>IPSec：加密IP数据报文</p>
                 <p>PP2P：加密链路层</p>
@@ -5212,12 +5233,13 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p>内网、DMZ/隔离区/非军事化区-放置公用服务器、外网</p>
                 <p>发展阶段：包过滤、应用代理网关、状态检测技术</p>
-                <p>包过滤：处于网络层和数据链路层 TCP-IP</p>
+                <p><b>包过滤</b>：处于网络层和数据链路层 TCP-IP</p>
                 <p>优点：对用户完全透明，低水平控制</p>
-                <p>缺点：无法防范黑客攻击，不支持应用层协议</p>
-                <p>应用代理网关：经过应用代理软件转发</p>
-                <p>优点：可以检测应用层、网络层和传输层，检测能力强</p>
-                <p>缺点：处理速度慢</p>
+                <p>缺点：无法防范黑客攻击，不支持应用层协议，访问控制粒度太粗糙</p>
+                <p><b>应用代理网关</b>：经过应用代理软件转发，彻底隔断内网和外网的通信</p>
+                <p>优点：可以检测应用层、网络层和传输层的协议特征，对数据包的检测能力强</p>
+                <p>缺点：难以配置，处理速度慢</p>
+                <p><b>状态检测技术</b>：结合代理和包过滤防火墙的优点</p>
                 <p>防火墙工作层次越高，工作效率越低，安全性越高</p>
               </div>
             </div>
@@ -5239,10 +5261,11 @@ const showModal = (action: string, values: any) => {
                   <span class="txt-define">特征</span>传播性、隐蔽性、感染性、潜伏性、触发性、破坏性
                 </p>
                 <p>
-                  <span class="txt-define">类型</span>蠕虫 <i class="txt-en">worm</i>、特洛伊木马、后门病毒、宏病毒 <i class="txt-en">macro
-                    virus</i>
+                  <span class="txt-define">类型</span>蠕虫 <i class="txt-en">worm</i>、特洛伊木马 <i class="txt-en">trojan</i>、后门病毒 <i class="txt-en">backdoor</i>、
+                  宏病毒 <i class="txt-en">macro virus</i>
                 </p>
                 <p>宏病毒：文本文档、电子表格等</p>
+                <p>木马软件: 冰河</p>
               </div>
             </div>
             <div id="section-120202">
