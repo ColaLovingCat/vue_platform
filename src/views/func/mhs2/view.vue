@@ -11,12 +11,15 @@ const searchInfos = reactive({
     text: '',
 })
 const dataShow = computed(() => {
-    let result: any = []
-    if (searchInfos.text != '') {
-        result = datas.value.filter((a: any) => a.name.indexOf(searchInfos.text) > -1)
-    } else {
-        result = [...datas.value]
+    let result: any[] = datas.value
+    
+    const searchText = searchInfos.text.trim().toLowerCase();
+    if (searchText) {
+        result = result.filter((item: any) =>
+            item.name.toLowerCase().includes(searchText)
+        )
     }
+    
     return result
 })
 
@@ -40,7 +43,7 @@ onMounted(() => {
         </div>
         <div class="list-monster">
             <div v-for="(monster) in dataShow">
-                <monsters :data="monster"></monsters>
+                <monsters :data="monster" :key="monster.index"></monsters>
             </div>
         </div>
         <div class="box-maps">

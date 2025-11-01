@@ -182,7 +182,7 @@ const showModal = (action: string, values: any) => {
                   <span class="txt-define">功能</span>程序控制：执行存储在内存中的指令序列、操作控制、时间控制、数据处理
                 </p>
                 <p>
-                  <span class="txt-define">组成</span>运算器、控制器、寄存器组、总线
+                  <span class="txt-define">组成</span>运算器、控制器、寄存器组、内部总线
                 </p>
               </div>
             </div>
@@ -398,6 +398,8 @@ const showModal = (action: string, values: any) => {
                     </tr>
                   </tbody>
                 </table>
+                <p>补码适合进行数字相加减</p>
+                <p>移码适合浮点数阶码</p>
               </div>
             </div>
             <div id="section-010203">
@@ -414,6 +416,7 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>R位阶码移码+M位尾数补码 可表示范围:</p>
                 <img class="img-03" style="width: 350px" src="/docs/study/imgs/03-fanwei.png" />
+                <p>规格化数</p>
               </div>
             </div>
           </div>
@@ -492,10 +495,10 @@ const showModal = (action: string, values: any) => {
                 </table>
                 <p>Cache与主存之间的地址映射由<b>硬件自动</b>完成</p>
                 <p>辅存与主存之间的地址映射由<b>硬件和软件</b>结合完成</p>
-                <p>相联存储器：按<b>内容</b>存取</p>
+                <p>虚拟存储器：主存+辅存，依据于局部性原理，为了扩大主存容量，其容量由计算机的地址结构决定</p>
+                <p>相联存储器：按<b>内容</b>存取，用于高速缓冲存储器</p>
                 <p>闪存FLASH：按<b>块</b>为单位，可代替辅存</p>
-                <p>虚拟存储器：主存+辅存</p>
-                <p>依据于 局部性原理</p>
+                <p>内存：静态数据区(全局变量和静态变量)、代码区、栈区(编译器自动分配释放)、堆区(程序员分配释放)</p>
               </div>
             </div>
             <div id="section-010402">
@@ -506,7 +509,8 @@ const showModal = (action: string, values: any) => {
                   地址映像：主存地址和Cache地址的转换，是由<b>硬件自动</b>完成
                 </p>
                 <p>替换算法：目的是提高命中率</p>
-                <p>地址映像方法</p>
+                <p>随机替换算法、先进先出算法、近期最少使用算法、优化替代算法</p>
+                <p>Cache地址映像方法</p>
                 <table>
                   <thead>
                     <tr>
@@ -610,7 +614,9 @@ const showModal = (action: string, values: any) => {
           <p>
             计算机体系结构的逻辑实现，包括机器内的数据流和控制流的组成以及逻辑设计等
           </p>
-          <p>计算机实现：计算机组织的物理实现</p>
+          <p>组织：各种部件的动态联系和管理</p>
+          <p>实现：计算机组织的物理实现，各模块设计的组装完成</p>
+          <p>性能：计算机系统的行为表现</p>
           <div class="part-contents">
             <div id="section-010601">
               <h4>6.1 Flynn分类法</h4>
@@ -717,7 +723,9 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>系统总线：数据总线(双向)、地址总线(单向)、控制总线</p>
                 <p>数据总线的宽度为字长，地址总线的宽带为内存容量的指数</p>
-                <p>PCI-并行内总线 SCSI-并行外总线 RS232-串行外总线</p>
+                <p>内总线：ISA、EISA、PCI</p>
+                <p>外总线：RS-232、SCSI、USB、IEEE-1394</p>
+                <p>PCI-并行内总线 SCSI-并行外总线 RS-232-串行外总线</p>
                 <p>带宽：总线的最大数据传输率</p>
                 <p>带宽=时钟频率*总线宽度/时钟周期</p>
               </div>
@@ -728,6 +736,7 @@ const showModal = (action: string, values: any) => {
             <div id="section-010801">
               <h4>8.1 加密技术和认证技术</h4>
               <div class="sub-contents">
+                <p>信息安全：保密性、完整性、可用性、可控性、可审查性</p>
                 <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
                 <p>公钥：用于加密信息，验证数字签名</p>
                 <p>私钥：用于解密信息，创建数字签名</p>
@@ -755,6 +764,8 @@ const showModal = (action: string, values: any) => {
                 <p>
                   用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性
                 </p>
+                <p>公开密钥基础建设 PKI <i class="txt-en">Public Key Infrastructure</i>: 是信息安全技术的核心，包括加密、数字签名、数据完整性机制、数字信封、双重数字签名等</p>
+                <p>保证 机密性-不被偷看、完整性-不被篡改、有效性-不被否认</p>
                 <table>
                   <tbody>
                     <tr>
@@ -903,6 +914,8 @@ const showModal = (action: string, values: any) => {
                     </tr>
                   </tbody>
                 </table>
+                <p>语法错误：非法字符、拼写错误、缺少分号、关键字不匹配</p>
+                <p>语义错误：类型不一致、参数不匹配、死循环、作为除数的变量为0</p>
               </div>
             </div>
           </div>
@@ -1693,7 +1706,7 @@ const showModal = (action: string, values: any) => {
               <h4>1.2 概念</h4>
               <div class="sub-contents">
                 <p>信息=数据+数据处理</p>
-                <p>数据模型包含</p>
+                <p>数据模型: 三要素为数据结构、数据操作、基本数据模型</p>
                 <p>概念数据模型：实体/属性/码/域/联系 (1:1/1:*/*:*)/E-R图</p>
                 <p>结构数据模型(DBMS)：层次(树)、网状(网)、关系和面向对象</p>
                 <p><b>关系模型</b>：二维表格结构。关系>关系模式>关系文件</p>
@@ -2257,6 +2270,51 @@ const showModal = (action: string, values: any) => {
               <div class="sub-contents">
                 <p>类图：依赖、关联(聚合、组合)、泛化</p>
                 <p>用例图：包含、扩展、泛化</p>
+              </div>
+            </div>
+            <div id="section-070211">
+              <h4>2.11 总结</h4>
+              <div class="sub-contents">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>类图</td>
+                      <td>展现了一组类、接口、协作和他们之间的静态结构和关系：依赖、泛化、关联</td>
+                    </tr>
+                    <tr>
+                      <td>对象图</td>
+                      <td>展现了某一时刻一组对象以及它们之间的关系，一般包含对象和链</td>
+                    </tr>
+                    <tr>
+                      <td>用例图</td>
+                      <td>展现了一组用例、参与者以及它们之间的关系：扩展、包含、泛化，描述用户、需求及功能单元之间的关系</td>
+                    </tr>
+                    <tr>
+                      <td>序列图/时序图/顺序图</td>
+                      <td>是场景的图形化表示，描述了以时间顺序组织的对象之间的发送消息的交互活动，由对象、生命线、激活、消息组成</td>
+                    </tr>
+                    <tr>
+                      <td>通信图/协作图</td>
+                      <td>强调参加交互的各对象结构的信息，由对象、链接、带顺序号的消息构成</td>
+                    </tr>
+                    <tr>
+                      <td>状态图</td>
+                      <td>描述对象具有的各种状态、状态之间的转换过程以及触发状态转换的各种事件和条件</td>
+                    </tr>
+                    <tr>
+                      <td>活动图</td>
+                      <td>描述满足用例要求所要进行的活动以及活动间的约束条件，有利于识别并行活动</td>
+                    </tr>
+                    <tr>
+                      <td>组件图/构件图</td>
+                      <td>描述系统中遵从并实现一组接口的物理的、可替换的软件模块，由构件、接口、关系、供需端口、连接器构成</td>
+                    </tr>
+                    <tr>
+                      <td>部署图</td>
+                      <td>由节点以及节点之间的关系组成，描述系统运行时的结构</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -3790,6 +3848,8 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">分类</span>批处理、分时、实时、网络、分布式、微机、嵌入式
                 </p>
+                <p>UNIX是多用户多任务的分时操作系统</p>
+                <p>功能: 进程管理、文件管理、存储管理、设备管理、作业管理</p>
               </div>
             </div>
           </div>
@@ -3823,6 +3883,8 @@ const showModal = (action: string, values: any) => {
                   <i class="txt-en">Terminated</i>
                 </p>
                 <img class="img-118" style="width: 300px" src="/docs/study/imgs/118-wutai.png" />
+                <p>高级通信方式：共享存储模式、消息传递模式、管道通信</p>
+                <p>管程 <i class="txt-en">Monitor</i></p>
               </div>
             </div>
             <div id="section-090202">
@@ -3838,24 +3900,26 @@ const showModal = (action: string, values: any) => {
             <div id="section-090203">
               <h4>2.3 进程通信</h4>
               <div class="sub-contents">
-                <p>同步：合作进程间的直接制约</p>
-                <p>互斥：申请临界资源间的间接制约</p>
+                <p>同步：合作进程间的直接制约，表示两个任务可以同时执行</p>
+                <p>互斥：申请临界资源间的间接制约，一个资源在同一时间内只能由一个任务单独使用，需要加锁</p>
               </div>
             </div>
             <div id="section-090204">
               <h4>2.4 信号量PV操作与前驱图</h4>
               <div class="sub-contents">
-                <p>临界资源：各进程间需要以互斥方式对其进行访问的资源</p>
+                <p>临界资源 <i class="txt-en">Critical Resource</i>：各进程间需要以互斥方式对其进行访问的资源</p>
                 <p>
                   临界区
                   <i class="txt-en">Critical Section</i>：共享资源访问代码区段
                 </p>
-                <p>有空即进、无空则等、有限等待、让权等待</p>
+                <p>有空即进、无空则等、有限访问、让权等待</p>
                 <p>整型信号量：公用信号量-互斥1/私用信号量-同步</p>
                 <p>
                   <b>信号量S</b>
                   <i class="txt-en">Semaphore</i>：正数为可用资源数，负数的绝对值为等待资源数
                 </p>
+                <p>互斥信号量，对临界资源采用互斥访问，初值为1</p>
+                <p>同步信号量，对共享资源的访问控制，初值为共享资源个数</p>
                 <p>信号量S的编号，由(12,13,23,34)排序决定</p>
                 <p>先做的进程 V(S)，后做的进程 P(S)</p>
                 <img class="img-17" style="width: 250px" src="/docs/study/imgs/17-pv.png" />
@@ -3901,7 +3965,7 @@ const showModal = (action: string, values: any) => {
                 </p>
                 <p>系统采用轮流分配资源，资源数m小于进程所需资源总数n*k</p>
                 <p>
-                  死锁处理：鸵鸟策略、预防策略、避免策略-<b>银行家算法</b>、检测与解除死锁
+                  死锁处理：鸵鸟策略、死锁预防、死锁避免-<b>银行家算法</b>、死锁检测(允许死锁产生，检测产生再解除)、死锁解除(重新启动系统，资源剥夺，撤销进程)
                 </p>
                 <p>按顺序调用进程：P4->P2</p>
                 <p>总资源数：R1-8/R2-7/R3-4，计算 总可用资源数：R1-1/R2-1/R3-0</p>
@@ -4139,6 +4203,8 @@ const showModal = (action: string, values: any) => {
                   扇区：每个磁道被划分为多个扇区，扇区是存储数据的最小单位；一般扇区大小为512字节
                 </p>
                 <img class="img-113" style="width: 300px" src="/docs/study/imgs/113-cipan.png" />
+                <p>磁盘容量: 内圈周长*最大位密度*每面磁道数*面数/8</p>
+                <p>每面磁道数: (外直径-内直径)*磁道密度/2</p>
                 <p>
                   先寻找对应磁道，再等待周期旋转至指定扇区，产生寻道时间和等待时间
                 </p>
@@ -4173,6 +4239,10 @@ const showModal = (action: string, values: any) => {
                     </tr>
                   </tbody>
                 </table>
+                <p>三级调度</p>
+                <p>高：决定处于输入池中的哪个后备作业可以调入主系统做好运行的准备，成为一个或一组就绪进程</p>
+                <p>中：决定处于交换区中的就绪进程哪个可以调入内存，以便直接参与对CPU的竞争</p>
+                <p>低：决定处于内存中的就绪进程哪个可以占用CPU，最活跃最重要，对系统影响很大</p>
               </div>
             </div>
             <div id="section-090406">
@@ -4226,7 +4296,7 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
             <div id="section-090502">
-              <h4>5.2 树形文件</h4>
+              <h4>5.2 文件目录</h4>
               <div class="sub-contents">
                 <p>文件控制块：基本信息类、存取控制信息类、使用信息类</p>
                 <p>文件属性：R只读文件、A存档属性、S系统文件、H隐藏文件</p>
@@ -4242,12 +4312,14 @@ const showModal = (action: string, values: any) => {
             <div id="section-090503">
               <h4>5.3 空间存储</h4>
               <div class="sub-contents">
+                <p>管理方式: 空闲区表、位示图、空闲块链、成组链接法</p>
                 <p>
                   位示图
                   <i class="txt-cn">bitmap</i>：用 一位 代表 一个物理块，1则使用，0则空闲
                 </p>
                 <p>逻辑编号 0/1字 代表物理块 0~31位 32*(n+1)-1</p>
                 <p>求所需位示图的字大小</p>
+                <img class="img-220" style="width: 400px" src="/docs/study/imgs/220-weishi.png" />
               </div>
             </div>
           </div>
@@ -4489,6 +4561,7 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <h2 id="chapter-11">十一、软件工程</h2>
+            <p>可行性分析与项目开发计划、需求分析、概要设计、详细设计、编码测试、维护</p>
           <h3 id="part-1101">1. 软件开发模型</h3>
           <div class="part-contents">
             <div id="section-110101">
@@ -4668,10 +4741,10 @@ const showModal = (action: string, values: any) => {
               <h4>2.1 方法</h4>
               <div class="sub-contents">
                 <p>
-                  结构化开发方法：结构化分析 <i class="txt-en">Structured Analysis</i>、设计、程序设计。
+                  结构化开发方法：结构化分析 <i class="txt-en">Structured Analysis</i>、设计、程序设计，面向数据流的开发方法
                 </p>
                 <p>核心思想: 需求明确、<b>自顶向下、逐步分解</b></p>
-                <p>Jackson方法：面向数据结构，适合于小规模项目</p>
+                <p>Jackson方法：面向数据结构的开发方法，适合于小规模项目</p>
                 <p>原型法：需求不明确，业务理论不确定，需求经常变化</p>
                 <p>
                   面向对象开发方法：更好的复用性，适合于系统项目大，采用统一建模语言
@@ -5092,7 +5165,7 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
             <div id="section-110804">
-              <h4>8.4 软件配置管理</h4>
+              <h4>8.4 软件配置管理 SCM</h4>
               <div class="sub-contents">
                 <p>
                   <span class="txt-define">主要目标</span> 变更标识、变更控制、版本控制、确保变更正确的实现、变更报告
@@ -5262,7 +5335,8 @@ const showModal = (action: string, values: any) => {
                   <span class="txt-define">特征</span>传播性、隐蔽性、感染性、潜伏性、触发性、破坏性
                 </p>
                 <p>
-                  <span class="txt-define">类型</span>蠕虫 <i class="txt-en">worm</i>、特洛伊木马 <i class="txt-en">trojan</i>、后门病毒 <i class="txt-en">backdoor</i>、
+                  <span class="txt-define">类型</span>蠕虫 <i class="txt-en">worm</i>、特洛伊木马 <i
+                    class="txt-en">trojan</i>、后门病毒 <i class="txt-en">backdoor</i>、
                   宏病毒 <i class="txt-en">macro virus</i>
                 </p>
                 <p>宏病毒：文本文档、电子表格等</p>

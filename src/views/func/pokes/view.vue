@@ -4,9 +4,6 @@ import { ref, computed, onMounted, reactive } from 'vue'
 import pokes from './pokes.vue'
 import typeView from './types.vue'
 
-import * as xlsx from '@/commons/utils/xlsx'
-import * as extend from '@/commons/utils/extends'
-
 import * as current from './datas.service'
 
 const datas: any = ref([])
