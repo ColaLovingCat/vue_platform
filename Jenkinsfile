@@ -31,27 +31,20 @@ pipeline {
             steps {
                 sh 'npm run build:test'
             }
-            post {
-                success {
-                    // 构建成功后存档制品
-                    archiveArtifacts artifacts: 'dist/**', fingerprint: true
-                }
-            }
         }
         
         stage('Deploy to Nginx') {
             steps {
                 sh """
-                    echo "开始部署 Vue 项目到 Nginx..."
-                    # 创建部署目录
+                    echo "🚀 开始部署 Vue 项目..."
+                    # 确保目标目录存在
                     sudo mkdir -p ${DEPLOY_PATH}
-                    # 清理旧文件
+                    # 删除旧文件
+                    echo "🧹 清理旧文件..."
                     sudo rm -rf ${DEPLOY_PATH}/*
-                    # 复制构建文件
+                    # 复制新构建文件
+                    echo "📦 复制新文件..."
                     sudo cp -r dist/* ${DEPLOY_PATH}/
-                    # 设置权限
-                    sudo chown -R www-data:www-data ${DEPLOY_PATH}/
-                    sudo chmod -R 755 ${DEPLOY_PATH}/
                     echo "文件部署完成"
                 """
             }
