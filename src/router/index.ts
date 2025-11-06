@@ -174,6 +174,11 @@ const routes = [
     component: () => import("@/views/study/ruanjian/view.vue"),
   },
   {
+    path: "/study-vue",
+    name: "study-vue",
+    component: () => import("@/views/study/vue/view.vue"),
+  },
+  {
     path: "/articles",
     name: "articles",
     component: () => import("@/views/study/articles/view.vue"),

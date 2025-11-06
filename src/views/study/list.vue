@@ -19,10 +19,12 @@ const pageInfos = reactive({
     tabs: [
         {
             name: '软件设计师',
+            cover: 'ruanjian.png',
             path: '/study-ruanjian',
         },
         {
             name: 'Vue',
+            cover: 'vue.jpeg',
             path: '/study-vue',
         },
     ],
@@ -40,8 +42,10 @@ const jump = (values: any) => {
         <div class="list-tabs">
             <template v-for="tab in pageInfos.tabs">
                 <div class="tab-item" @click="jump(tab)">
-                    <div class="item-icon"></div>
-                    <div class="item-name">{{ tab.name }}</div>
+                    <img :src="`/docs/study/covers/${tab.cover}`" alt="" srcset="">
+                    <div class="item-infos">
+                        <div class="item-name">{{ tab.name }}</div>
+                    </div>
                 </div>
             </template>
         </div>
@@ -64,8 +68,8 @@ const jump = (values: any) => {
 
     .tab-item {
         cursor: pointer;
+        position: relative;
         flex: 1;
-        padding: 5px;
         max-width: 350px;
         height: 460px;
         text-align: center;
@@ -73,6 +77,18 @@ const jump = (values: any) => {
 
         &:hover {
             box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+        }
+
+        .item-infos {
+            position: absolute;
+            bottom: 0;
+            padding: 10px 0;
+            width: 100%;
+            background: linear-gradient(to top, #000, #00000000);
+
+            .item-name {
+                color: #fff;
+            }
         }
     }
 }

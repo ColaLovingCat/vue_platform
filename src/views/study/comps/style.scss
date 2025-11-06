@@ -121,32 +121,13 @@
   }
 }
 
-.list-prots {
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
+img {
+  height: unset;
 
-  .prot-item {
-    padding: 3px;
-    border-radius: 5px;
-    background: #c4cecf5d;
-
-    &:hover {
-      .item-desc {
-        display: block;
-      }
-    }
-
-    .item-port {
-      color: #f00;
-      font-size: 12px;
-    }
-
-    .item-desc {
-      font-size: 12px;
-    }
+  &.img-abs {
+    position: absolute;
+    top: 0;
+    right: 20px;
   }
 }
 
@@ -155,4 +136,9 @@
   padding: 5px;
   color: #fff;
   background: #000;
+}
+
+.box-note {
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
 }

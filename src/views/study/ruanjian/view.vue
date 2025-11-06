@@ -164,6 +164,7 @@ const showModal = (action: string, values: any) => {
 <template>
   <div class="sections">
     <div class="study-contents">
+
       <div class="left">
         <div class="content" ref="contentRef">
           <div class="header">
@@ -3904,10 +3905,10 @@ const showModal = (action: string, values: any) => {
                 <img class="img-18" style="width: 300px" src="/docs/study/imgs/18-pv.png" />
                 <p>容量为n的缓冲区</p>
                 <p>
-                  缓冲区+互斥信号量S+同步信号量(S1<b>可放产品数n</b>+S2<b>剩余产品数0</b>)
+                  缓冲区+互斥信号量(S<b>临界数1</b>)+同步信号量(S1<b>空位数n</b>+S2<b>产品数0</b>)
                 </p>
-                <p>生产者：P(S1)>P(S)>V(S)>V(S2)</p>
-                <p>消费者：P(S2)>P(S)>V(S)>V(S1)</p>
+                <p>生产者：P(S1)等待空位>P(S)请求进入临界区>V(S)离开临界区>V(S2)增加产品数</p>
+                <p>消费者：P(S2)减少产品数或等待产品>P(S)>V(S)>V(S1)</p>
               </div>
             </div>
             <div id="section-090206">
@@ -6440,6 +6441,7 @@ const showModal = (action: string, values: any) => {
           </div>
         </div>
       </div>
+
       <div class="right">
         <!-- 补充信息 -->
         <div class="notes">
@@ -6485,17 +6487,7 @@ const showModal = (action: string, values: any) => {
 
 <style scoped lang="scss">
 @import url("../comps/style.scss");
-@import url(../comps/txt.scss);
-
-img {
-  height: unset;
-
-  &.img-abs {
-    position: absolute;
-    top: 0;
-    right: 20px;
-  }
-}
+@import url("../comps/txt.scss");
 
 .list-ports {
   display: flex;
@@ -6550,10 +6542,5 @@ img {
       font-size: 10px;
     }
   }
-}
-
-.box-note {
-  max-height: calc(100vh - 170px);
-  overflow-y: auto;
 }
 </style>
