@@ -261,26 +261,48 @@ const showModal = (action: string, values: any) => {
                 <table>
                   <tbody>
                     <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td></td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td></td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td>11</td>
                       <td>10</td>
                       <td>9</td>
                       <td>8</td>
+                      <td></td>
                       <td>7</td>
                       <td>6</td>
                       <td>5</td>
                       <td>4</td>
+                      <td></td>
                       <td>3</td>
                       <td>2</td>
                       <td>1</td>
                       <td>0</td>
                     </tr>
                     <tr>
+                      <td>2048</td>
                       <td>1024</td>
                       <td>512</td>
                       <td>256</td>
+                      <td></td>
                       <td>128</td>
                       <td>64</td>
                       <td>32</td>
                       <td>16</td>
+                      <td></td>
                       <td>8</td>
                       <td>4</td>
                       <td>2</td>
@@ -610,16 +632,21 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <h3 id="part-0106">6. 计算机体系结构 <i class="txt-en">Computer Architecture</i></h3>
-          <p>计算机体系结构：指计算机的概念性结构和功能属性</p>
-          <p>
-            计算机体系结构的逻辑实现，包括机器内的数据流和控制流的组成以及逻辑设计等
-          </p>
-          <p>组织：各种部件的动态联系和管理</p>
-          <p>实现：计算机组织的物理实现，各模块设计的组装完成</p>
-          <p>性能：计算机系统的行为表现</p>
           <div class="part-contents">
             <div id="section-010601">
-              <h4>6.1 Flynn分类法</h4>
+              <h4>6.1 概念</h4>
+              <div class="sub-contents">
+                <p>计算机体系结构：指计算机的概念性结构和功能属性</p>
+                <p>
+                  计算机体系结构的逻辑实现，包括机器内的数据流和控制流的组成以及逻辑设计等
+                </p>
+                <p>组织：各种部件的动态联系和管理</p>
+                <p>实现：计算机组织的物理实现，各模块设计的组装完成</p>
+                <p>性能：计算机系统的行为表现</p>
+              </div>
+            </div>
+            <div id="section-010602">
+              <h4>6.2 Flynn分类法</h4>
               <div class="sub-contents">
                 <p>单指令流、单数据流 SISD</p>
                 <p>单指令流、多数据流 SIMD</p>
@@ -627,8 +654,8 @@ const showModal = (action: string, values: any) => {
                 <p>多指令流、多数据流 MIMD</p>
               </div>
             </div>
-            <div id="section-010602">
-              <h4>6.2 指令集架构</h4>
+            <div id="section-010603">
+              <h4>6.3 指令集架构</h4>
               <div class="sub-contents">
                 <table>
                   <thead>
@@ -682,8 +709,8 @@ const showModal = (action: string, values: any) => {
                 </table>
               </div>
             </div>
-            <div id="section-010603">
-              <h4>6.3 流水线技术</h4>
+            <div id="section-010604">
+              <h4>6.4 流水线技术</h4>
               <div class="sub-contents">
                 <p>执行时间：首条总时间+(n-1)*最长操作时间</p>
                 <p><b>加速比</b>：不采用和采用的时间比</p>
@@ -696,12 +723,12 @@ const showModal = (action: string, values: any) => {
                 <img class="img-04 img-abs" style="width: 450px" src="/docs/study/imgs/04-liushui.png" />
               </div>
             </div>
-            <div id="section-010604">
-              <h4>6.4 冯诺依曼结构和哈弗结构</h4>
+            <div id="section-010605">
+              <h4>6.5 冯诺依曼结构和哈弗结构</h4>
               <div class="sub-contents"></div>
             </div>
-            <div id="section-010605">
-              <h4>6.5 操作数寻址</h4>
+            <div id="section-010606">
+              <h4>6.6 操作数寻址</h4>
               <div class="sub-contents">
                 <p>立即寻址：指令中 1</p>
                 <p>直接寻址：内存地址 3</p>
@@ -731,80 +758,10 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
           </div>
-          <h3 id="part-0108">8. 加密和认证技术</h3>
+          <h3 id="part-0108">8. 计算机性能指标</h3>
           <div class="part-contents">
             <div id="section-010801">
-              <h4>8.1 加密技术和认证技术</h4>
-              <div class="sub-contents">
-                <p>信息安全：保密性、完整性、可用性、可控性、可审查性</p>
-                <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
-                <p>公钥：用于加密信息，验证数字签名</p>
-                <p>私钥：用于解密信息，创建数字签名</p>
-                <p>
-                  <b>对称加密</b>
-                  <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密
-                </p>
-                <img class="img-06" style="width: 400px" src="/docs/study/imgs/06-jiami.png" />
-                <p>
-                  <b>非对称加密</b>
-                  <i class="txt-en">Asymmetric Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密
-                </p>
-                <img class="img-07" style="width: 400px" src="/docs/study/imgs/07-jiami.png" />
-                <p>
-                  <b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要
-                </p>
-                <img class="img-08" style="width: 400px" src="/docs/study/imgs/08-jiami.png" />
-                <p>数据完整性、一致性，不可逆，唯一性</p>
-                <p>
-                  <b>数字签名</b>
-                  <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密
-                </p>
-                <img class="img-09" style="width: 400px" src="/docs/study/imgs/09-jiami.png" />
-                <p><b>数字证书</b>：证书颁发机构 CA <i class="txt-en">Certificate Authority</i> 颁布，由CA的私钥加密形成数字证书</p>
-                <p>
-                  用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性
-                </p>
-                <p>公开密钥基础建设 PKI <i class="txt-en">Public Key Infrastructure</i>: 是信息安全技术的核心，包括加密、数字签名、数据完整性机制、数字信封、双重数字签名等</p>
-                <p>保证 机密性-不被偷看、完整性-不被篡改、有效性-不被否认</p>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>对称加密</td>
-                      <td>DES <i class="txt-en">Data Encryption Standard</i> AES <i class="txt-en">Advanced Encryption
-                          Standard</i> 3DES RC-5 IDEA RC4</td>
-                    </tr>
-                    <tr>
-                      <td>非对称加密</td>
-                      <td>DSA <i class="txt-en">Digital Signature Algorithm</i> RSA ECC <i class="txt-en">Elliptic
-                          Curves Cryptography</i></td>
-                    </tr>
-                    <tr>
-                      <td>信息摘要</td>
-                      <td>Hash函数 MD5-128 SHA</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <img class="img-05 img-abs" style="width: 200px" src="/docs/study/imgs/05-sign.png" />
-              </div>
-            </div>
-            <div id="section-010802">
-              <h4>8.2 可靠性模型</h4>
-              <div class="sub-contents">
-                <p>
-                  串联系统：<span class="txt-func">P=R<span class="txt-sub">1</span>R<span class="txt-sub">2</span>...R<span
-                      class="txt-sub">N</span></span>
-                </p>
-                <p>
-                  并联系统：<span class="txt-func">P=1-(1-R<span class="txt-sub">1</span>)(1-R<span
-                      class="txt-sub">2</span>)...(1-R<span class="txt-sub">N</span>)</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <h3 id="part-0109">9. 计算机性能指标</h3>
-          <div class="part-contents">
-            <div id="section-010901">
-              <h4>9.1 指标</h4>
+              <h4>8.1 指标</h4>
               <div class="sub-contents">
                 <p>主频=倍频*外频，时钟周期=1/主频</p>
                 <p>
@@ -3838,7 +3795,7 @@ const showModal = (action: string, values: any) => {
                 <p>
                   <span class="txt-define">地位</span>应用软件、系统软件、操作系统、计算机硬件
                 </p>
-                <img src="/docs/study/imgs/99-op.png" style="width: 300px" />
+                <img src="/docs/study/imgs/99-op.png" style="width: 400px" />
                 <p>
                   <span class="txt-define">功能</span>管理系统的硬件、软件、数据资源，控制程序运行，人机之间的接口，应用软件与硬件之间的接口
                 </p>
@@ -4561,7 +4518,7 @@ const showModal = (action: string, values: any) => {
             </div>
           </div>
           <h2 id="chapter-11">十一、软件工程</h2>
-            <p>可行性分析与项目开发计划、需求分析、概要设计、详细设计、编码测试、维护</p>
+          <p>可行性分析与项目开发计划、需求分析、概要设计、详细设计、编码测试、维护</p>
           <h3 id="part-1101">1. 软件开发模型</h3>
           <div class="part-contents">
             <div id="section-110101">
@@ -5162,6 +5119,15 @@ const showModal = (action: string, values: any) => {
                 <p>可靠性：MTTF/(1 + MTTF) 平均无故障时间 ToFailure</p>
                 <p>可用性：MTBF/(1 + MTBF) 平均失效间隔时间 BetweenFailure</p>
                 <p>可维护性：1/(1 + MTTR) 平均修复时间 ToRepair</p>
+                <p>可靠性模型</p>
+                <p>
+                  串联系统：<span class="txt-func">P=R<span class="txt-sub">1</span>R<span class="txt-sub">2</span>...R<span
+                      class="txt-sub">N</span></span>
+                </p>
+                <p>
+                  并联系统：<span class="txt-func">P=1-(1-R<span class="txt-sub">1</span>)(1-R<span
+                      class="txt-sub">2</span>)...(1-R<span class="txt-sub">N</span>)</span>
+                </p>
               </div>
             </div>
             <div id="section-110804">
@@ -5394,6 +5360,64 @@ const showModal = (action: string, values: any) => {
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+          <h3 id="part-1203">3. 加密和认证技术</h3>
+          <div class="part-contents">
+            <div id="section-120301">
+              <h4>3.1 加密技术和认证技术</h4>
+              <div class="sub-contents">
+                <p>信息安全：保密性、完整性、可用性、可控性、可审查性</p>
+                <p>窃听-加密、篡改-摘要、假冒、否认-数字签名</p>
+                <p>公钥：用于加密信息，验证数字签名</p>
+                <p>私钥：用于解密信息，创建数字签名</p>
+                <p>
+                  <b>对称加密</b>
+                  <i class="txt-en">Symmetric Encryption</i>：相同的密钥加解密。速度快，适合加密大量明文数据，私钥加密/共享密钥加密
+                </p>
+                <img class="img-06" style="width: 400px" src="/docs/study/imgs/06-jiami.png" />
+                <p>
+                  <b>非对称加密</b>
+                  <i class="txt-en">Asymmetric Encryption</i>：用接收方的公钥加密，接收方用私钥解密。高安全性，但加密解密速度慢，公钥加密
+                </p>
+                <img class="img-07" style="width: 400px" src="/docs/study/imgs/07-jiami.png" />
+                <p>
+                  <b>信息摘要</b>：将明文进行Hash算法发送信息摘要，接收方解密后对比摘要
+                </p>
+                <img class="img-08" style="width: 400px" src="/docs/study/imgs/08-jiami.png" />
+                <p>数据完整性、一致性，不可逆，唯一性</p>
+                <p>
+                  <b>数字签名</b>
+                  <i class="txt-en">Digital Signature</i>：结合非对称和散列函数，发送方私钥加密摘要，公钥解密
+                </p>
+                <img class="img-09" style="width: 400px" src="/docs/study/imgs/09-jiami.png" />
+                <p><b>数字证书</b>：证书颁发机构 CA <i class="txt-en">Certificate Authority</i> 颁布，由CA的私钥加密形成数字证书</p>
+                <p>
+                  用于身份认证：用CA的公钥验证证书真伪，用发送方的公钥来验证消息的真实性
+                </p>
+                <p>公开密钥基础建设 PKI <i class="txt-en">Public Key Infrastructure</i>:
+                  是信息安全技术的核心，包括加密、数字签名、数据完整性机制、数字信封、双重数字签名等</p>
+                <p>保证 机密性-不被偷看、完整性-不被篡改、有效性-不被否认</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>对称加密</td>
+                      <td>DES <i class="txt-en">Data Encryption Standard</i> AES <i class="txt-en">Advanced Encryption
+                          Standard</i> 3DES RC-5 IDEA RC4</td>
+                    </tr>
+                    <tr>
+                      <td>非对称加密</td>
+                      <td>DSA <i class="txt-en">Digital Signature Algorithm</i> RSA ECC <i class="txt-en">Elliptic
+                          Curves Cryptography</i></td>
+                    </tr>
+                    <tr>
+                      <td>信息摘要</td>
+                      <td>Hash函数 MD5-128 SHA</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <img class="img-05 img-abs" style="width: 200px" src="/docs/study/imgs/05-sign.png" />
               </div>
             </div>
           </div>

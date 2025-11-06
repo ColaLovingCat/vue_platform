@@ -156,7 +156,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010605",
+    id: "section-010606",
     type: "topic",
     title: "上午题-寻址",
     category: "single-select",
@@ -214,7 +214,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010602",
+    id: "section-010603",
     type: "topic",
     title: "上午题-指令集架构",
     category: "single-select",
@@ -236,7 +236,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010602",
+    id: "section-010603",
     type: "topic",
     title: "上午题-指令集架构",
     category: "single-select",
@@ -258,7 +258,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010603",
+    id: "section-010604",
     type: "topic",
     title: "上午题-流水线",
     category: "single-select",
@@ -401,7 +401,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010801",
+    id: "section-120301",
     type: "topic",
     title: "上午题-加密和认证",
     category: "single-select",
@@ -425,7 +425,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010801",
+    id: "section-120301",
     type: "topic",
     title: "上午题-加密算法",
     category: "single-select",
@@ -442,7 +442,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010801",
+    id: "section-120301",
     type: "topic",
     title: "上午题-加密算法",
     category: "single-select",
@@ -459,7 +459,7 @@ export const list = [
     ],
   },
   {
-    id: "section-010802",
+    id: "section-110803",
     type: "topic",
     title: "上午题-可靠性",
     category: "single-select",
@@ -7669,7 +7669,7 @@ Mapping对象获取汽车当前位置 (GPS Location)的消息为___。`,
     ],
   },
   {
-    id: "section-010801",
+    id: "section-120301",
     type: "topic",
     title: "上午题-加密技术",
     category: "single-select",
