@@ -27,6 +27,21 @@ const pageInfos = reactive({
             cover: 'vue.jpeg',
             path: '/study-vue',
         },
+        {
+            name: 'TypeScript',
+            cover: 'ts.png',
+            path: '/study-ts',
+        },
+        {
+            name: 'Python',
+            cover: 'python.png',
+            path: '/study-python',
+        },
+        {
+            name: '算法',
+            cover: 'suan.png',
+            path: '/study-suan',
+        },
     ],
 })
 
@@ -88,6 +103,8 @@ const jump = (values: any) => {
 
             .item-name {
                 color: #fff;
+                font-size: 21px;
+                font-weight: 700;
             }
         }
     }
