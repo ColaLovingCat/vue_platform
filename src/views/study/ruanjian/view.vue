@@ -5956,6 +5956,7 @@ const showModal = (action: string, values: any) => {
                   建立TCP连接三次握手>TLS/SSL握手>浏览器发送请求报文>服务器处理请求，返回响应报文>浏览器解析响应并渲染页面>断开连接
                 </p>
                 <p>HTTPS过程：</p>
+                <img class="img-221" style="width: 588px" src="/docs/study/imgs/221-https.png" />
                 <img class="img-159" style="width: 700px" src="/docs/study/imgs/159-https.png" />
                 <p>浏览器渲染网页：</p>
                 <img class="img-160" style="width: 990px" src="/docs/study/imgs/160-web.png" />
