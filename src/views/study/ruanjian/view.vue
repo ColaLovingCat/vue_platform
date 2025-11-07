@@ -2084,11 +2084,21 @@ const showModal = (action: string, values: any) => {
               <h4>1.1 事物</h4>
               <div class="sub-contents">
                 <p>结构事物</p>
+                <p>类：具有相同属性相同操作相同关系相同语义的对象的描述</p>
+                <p>接口：描述元素的外部可见行为，即服务集合的定义说明</p>
+                <p>协作：描述了一组事物间的相互作用的集合</p>
+                <p>用例：代表一个系统或系统的一部分行为，是一组动作序列的集合</p>
+                <p>构件：系统中物理存在，可替换的部件</p>
+                <p>节点：运行时存在的物理元素</p>
                 <img class="img-60" style="width: 350px" src="/docs/study/imgs/60-uml.png" />
                 <p>行为事物</p>
+                <p>交互：实现某功能的一组构件事物之间的消息的集合，涉及消息、动作序列、链接</p>
+                <p>状态机：描述事物或交互在生命周期内响应事件所经历的状态序列</p>
                 <img class="img-61" style="width: 250px" src="/docs/study/imgs/61-uml.png" />
                 <p>分组事物</p>
+                <p>把元素组织成组的机制</p>
                 <p>注释事物</p>
+                <p>注解: 对元素进行约束或解释的简单符号</p>
                 <img class="img-62" style="width: 250px" src="/docs/study/imgs/62-uml.png" />
               </div>
             </div>
@@ -2145,8 +2155,10 @@ const showModal = (action: string, values: any) => {
                 <p>对系统的语境/需求建模</p>
                 <p>一组用例(椭圆)、参与者(人员)以及之间的关系(箭头)</p>
                 <p>包含关系&lt;&lt;include&gt;&gt;：虚线箭头</p>
+                <p>抽取公共部分，用来复用功能，“用户注册” 和 “用户登录” 都需要 “验证用户信息”</p>
                 <img class="img-70" style="width: 250px" src="/docs/study/imgs/70-uml.png" />
                 <p>扩展关系&lt;&lt;extend&gt;&gt;：虚线箭头</p>
+                <p>在某种情况下才会发生，“用户登录” 成功后，如果检测到账号异常，则需要 “发送安全警告”</p>
                 <img class="img-71" style="width: 250px" src="/docs/study/imgs/71-uml.png" />
                 <p>泛化关系：实线空心箭头</p>
                 <img class="img-72" style="width: 250px" src="/docs/study/imgs/72-uml.png" />
@@ -5612,50 +5624,50 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>应用层</td>
                       <td rowspan="3">
-                        <div class="list-prots" style="width: 400px">
-                          <div class="prot-item">
+                        <div class="list-ip" style="width: 400px">
+                          <div class="port-item">
                             <div class="item-name">
                               POP3 <span class="item-port">110</span>
                             </div>
                             <div class="item-desc">邮件收取</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               SMTP <span class="item-port">25</span>
                             </div>
                             <div class="item-desc">邮件传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               IMAP <span class="item-port">143</span>
                             </div>
                             <div class="item-desc">邮件传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               HTTP <span class="item-port">80</span>
                             </div>
                             <div class="item-desc">网页传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               HTTPS <span class="item-port">443</span>
                             </div>
                             <div class="item-desc">网页安全传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               FTP <span class="item-port">数据 20/控制 21</span>
                             </div>
                             <div class="item-desc">文件传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               SSH <span class="item-port">22</span>
                             </div>
                             <div class="item-desc">远程登录</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               Telnet <span class="item-port">23</span>
                             </div>
@@ -5664,34 +5676,34 @@ const showModal = (action: string, values: any) => {
                         </div>
                       </td>
                       <td rowspan="3">
-                        <div class="list-prots">
-                          <div class="prot-item">
+                        <div class="list-ip">
+                          <div class="port-item">
                             <div class="item-name">NFS</div>
                             <div class="item-desc">网络文件服务</div>
                           </div>
                         </div>
                       </td>
                       <td rowspan="3">
-                        <div class="list-prots" style="width: 400px">
-                          <div class="prot-item">
+                        <div class="list-ip" style="width: 400px">
+                          <div class="port-item">
                             <div class="item-name">
                               DNS <span class="item-port">53</span>
                             </div>
                             <div class="item-desc">域名解析过程</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               DHCP <span class="item-port">67</span>
                             </div>
                             <div class="item-desc">动态IP分配</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               TFTP <span class="item-port">69</span>
                             </div>
                             <div class="item-desc">简单文件传输</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">
                               SNMP <span class="item-port">161</span>
                             </div>
@@ -5710,8 +5722,8 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>传输层</td>
                       <td>
-                        <div class="list-prots">
-                          <div class="prot-item">
+                        <div class="list-ip">
+                          <div class="port-item">
                             <div class="item-name">TCP</div>
                             <div class="item-desc">可靠 面向连接</div>
                           </div>
@@ -5719,8 +5731,8 @@ const showModal = (action: string, values: any) => {
                       </td>
                       <td></td>
                       <td>
-                        <div class="list-prots">
-                          <div class="prot-item">
+                        <div class="list-ip">
+                          <div class="port-item">
                             <div class="item-name">UDP</div>
                             <div class="item-desc">不可靠 无连接 快速</div>
                           </div>
@@ -5731,28 +5743,28 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>网络层</td>
                       <td colspan="3">
-                        <div class="list-prots">
-                          <div class="prot-item">
+                        <div class="list-ip">
+                          <div class="port-item">
                             <div class="item-name">IP</div>
                             <div class="item-desc">IPv4 / IPv6</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">ICMP</div>
                             <div class="item-desc">差错报告与控制</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">IGMP</div>
                             <div class="item-desc">组播管理</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">IPSec</div>
                             <div class="item-desc">加密IP数据报文</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">ARP</div>
                             <div class="item-desc">地址解析 IP->MAC</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">RARP</div>
                             <div class="item-desc">反地址解析 MAC->IP</div>
                           </div>
@@ -5763,22 +5775,22 @@ const showModal = (action: string, values: any) => {
                     <tr>
                       <td>数据链路层</td>
                       <td colspan="3" rowspan="2">
-                        <div class="list-prots">
-                          <div class="prot-item">
+                        <div class="list-ip">
+                          <div class="port-item">
                             <div class="item-name">Ethernet</div>
                             <div class="item-desc">以太网</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">Token-Ring</div>
                             <div class="item-desc">令牌环</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">帧中继</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">PPP</div>
                           </div>
-                          <div class="prot-item">
+                          <div class="port-item">
                             <div class="item-name">CSMA/CD</div>
                           </div>
                         </div>
@@ -5916,8 +5928,9 @@ const showModal = (action: string, values: any) => {
               </div>
             </div>
             <div id="section-130502">
-              <h4>5.2 子网划分</h4>
+              <h4>5.2 子网划分 <i class="txt-en">Subnetting</i></h4>
               <div class="sub-contents">
+                <p>IP地址被分为：网络号、子网号、主机号</p>
                 <p>例：将B类IP地址168.195.0.0划分为27个子网，子网掩码为多少</p>
                 <p>
                   B类地址则前16位是网络号，后16位会主机号。需要取5个主机位(32>27)。
@@ -6488,6 +6501,35 @@ const showModal = (action: string, values: any) => {
 <style scoped lang="scss">
 @import url("../comps/style.scss");
 @import url("../comps/txt.scss");
+
+.list-ip {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+
+  .port-item {
+    padding: 3px;
+    border-radius: 5px;
+    background: #c4cecf5d;
+
+    &:hover {
+      .item-desc {
+        display: block;
+      }
+    }
+
+    .item-port {
+      color: #f00;
+      font-size: 12px;
+    }
+
+    .item-desc {
+      font-size: 12px;
+    }
+  }
+}
 
 .list-ports {
   display: flex;
