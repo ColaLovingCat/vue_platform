@@ -156,6 +156,11 @@ const routes = [
     name: "games-xiaoxiaole",
     component: () => import("@/views/games/xiaoxiaole/view.vue"),
   },
+  {
+    path: "/games-dungeon",
+    name: "games-dungeon",
+    component: () => import("@/views/games/dungeon/view.vue"),
+  },
 
   {
     path: "/query",

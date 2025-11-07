@@ -46,6 +46,7 @@ const datas: any = ref([
     { title: "单机-恐龙快跑", path: 'games-t-rex', img: 't-rex.jpeg' },
     { title: "单机-消消乐", path: 'games-xiaoxiaole', img: 'xiaoxiaole.jpg' },
     { title: "五子棋", path: 'games-wuzi', img: 'wuzi.jpg' },
+    { title: "地下城", path: 'games-dungeon', img: 'dungeon.jpg' },
 ])
 
 onMounted(() => { })
