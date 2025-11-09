@@ -100,7 +100,7 @@ export const list = [
                     bottom: {
                         team: "T1",
                         icon: "T1.png",
-                        score: 0
+                        score: 3
                     },
                 },
             ],
@@ -113,12 +113,12 @@ export const list = [
                     top: {
                         team: "KT",
                         icon: "KT.png",
-                        score: 0
+                        score: 2
                     },
                     bottom: {
-                        team: "TBD",
-                        icon: "",
-                        score: 0
+                        team: "T1",
+                        icon: "T1.png",
+                        score: 3
                     },
                 }
             ],

@@ -442,6 +442,12 @@ const showModal = (action: string, values: any) => {
                 <p>规格化数</p>
               </div>
             </div>
+            <div id="section-010204">
+              <h4>2.4 算数运算和逻辑运算</h4>
+              <div class="sub-contents">
+                <p>短路计算</p>
+              </div>
+            </div>
           </div>
           <h3 id="part-0103">3. 校验码</h3>
           <div class="part-contents">
@@ -3826,7 +3832,7 @@ const showModal = (action: string, values: any) => {
           <h3 id="part-0902">2. 进程管理</h3>
           <div class="part-contents">
             <div id="section-090201">
-              <h4>2.1 概念</h4>
+              <h4>2.1 进程的组成和状态</h4>
               <div class="sub-contents">
                 <p>
                   线程 <i class="txt-en">Thread</i>：CPU可独立调度和分配的最小单位
@@ -4143,11 +4149,11 @@ const showModal = (action: string, values: any) => {
           <h3 id="part-0904">4. 设备管理</h3>
           <div class="part-contents">
             <div id="section-090401">
-              <h4>4.1 设备分类</h4>
+              <h4>4.1 概述</h4>
               <div class="sub-contents"></div>
             </div>
             <div id="section-090402">
-              <h4>4.2 输入输出</h4>
+              <h4>4.2 I/O软件</h4>
               <div class="sub-contents">
                 <img class="img-21" style="width: 450px" src="/docs/study/imgs/21-shebei.png" alt="" srcset="" />
               </div>
