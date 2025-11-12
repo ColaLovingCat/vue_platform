@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed, watch } from 'vue'
-import * as db from './datas'
+import { ref, onMounted } from 'vue'
+import * as xlsx from '@/commons/utils/xlsx'
 
-onMounted(() => {
-    datas.value = [...db.list]
+onMounted(async () => {
+    let res: any = await xlsx.readExcel('/docs/datas/books.xlsx')
+    res.books.map((item: any) => {
+        item.tags = item.tags.split(';')
+    })
+    datas.value = [...res.books]
 })
 
 const datas: any = ref([])
