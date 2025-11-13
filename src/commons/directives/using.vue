@@ -31,9 +31,6 @@ const loadMore = () => {
 const getlistData = (size: number) => {
     fetch('/api/user/list?size=' + size)
         .then((resp: any) => {
-            if (!resp.ok) {
-                throw new Error(`HTTP error! status: ${resp.status}`);
-            }
             return resp.json();
         })
         .then((resp: any) => {
@@ -41,7 +38,6 @@ const getlistData = (size: number) => {
             pageInfos.items = [...pageInfos.items, ...result.list]
         })
         .catch(err => {
-            console.error('Fetch 错误:', err);
         });
 }
 
@@ -62,36 +58,43 @@ const addLog = (message: string) => {
         <div class="box-test">
             <div class="test-item">
                 <p class="titles">输入防抖 默认500ms</p>
+                <p class="txt-code">v-debounce:input="handleInput"</p>
                 <a-input v-debounce:input="handleInput" />
             </div>
             <div class="test-item">
                 <p class="titles">点击防抖 1000ms</p>
+                <p class="txt-code">v-debounce:click.1000="handleClick"</p>
                 <a-button v-debounce:click.1000="handleClick">Click</a-button>
             </div>
             <div class="test-item">
                 <p class="titles">点击节流（1秒内只触发一次）</p>
+                <p class="txt-code">v-throttle:click.1000="handleClick"</p>
                 <button v-throttle:click.1000="handleClick">节流点击</button>
             </div>
             <div class="test-item">
                 <p class="titles">日期格式化</p>
+                <p class="txt-code">v-date-format="pageInfos.currentTime" :data-format="'YYYY-MM-DD HH'"</p>
                 <p>{{ pageInfos.currentTime }}</p>
                 <p v-date-format="pageInfos.currentTime"></p>
                 <p v-date-format="pageInfos.currentTime" :data-format="'YYYY-MM-DD HH'"></p>
             </div>
             <div class="test-item">
                 <p class="titles">保留小数</p>
+                <p class="txt-code">v-data-fixed:3="pageInfos.data"</p>
                 <p>{{ pageInfos.data }}</p>
                 <p v-data-fixed="pageInfos.data"></p>
                 <p v-data-fixed:3="pageInfos.data"></p>
             </div>
             <div class="test-item">
                 <p class="titles">滚动底部加载新数据</p>
+                <p class="txt-code">v-scroll-load="loadMore"</p>
                 <div v-scroll-load="loadMore" class="box-scrolls">
                     <p class="scorll-item" v-for="item in pageInfos.items" :key="item">{{ item.title }}</p>
                 </div>
             </div>
             <div class="test-item">
                 <p class="titles">监听元素大小变化，支持防抖</p>
+                <p class="txt-code">v-resize:500="onResize"</p>
                 <a-textarea :rows="6" v-resize:500="onResize"></a-textarea>
             </div>
         </div>

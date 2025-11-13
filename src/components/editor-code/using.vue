@@ -21,9 +21,19 @@ onMounted(() => {
 
 const lans = [
     { code: 'json', sample: '{"a":"a","b":"b"}' },
-    { code: 'css', sample: '.btn { font-size: 16px; }' },
     { code: 'xml', sample: '<?xml version="1.0"?><RECORD><FIELD ID="1" xsi:type="CharTerm" TERMINATOR="\t" MAX_LENGTH="12"/></RECORD>' },
-    { code: 'sql', sample: "select * from dbo.Table where [Status] = 'Open'" },
+    { code: 'sql', sample: "SELECT * FROM dbo.Table WHERE [Status] = 'Open'" },
+    { code: 'html', sample: '<html><header></header><body></body></html>' },
+    { code: 'css', sample: '.btn { font-size: 16px; }' },
+    { code: 'scss', sample: '.btn { font-size: 16px; &.active { background: red; } }' },
+    { code: 'javascript', sample: 'function test(a, b) { return a + b; }' },
+    { code: 'typescript', sample: 'const test = (a: number, b: number) => { return a + b; }' },
+    
+    { code: 'python', sample: 'def add(a, b): return a + b' },
+    { code: 'cpp', sample: 'int main() { return 0; }' },
+    { code: 'csharp', sample: 'class Test { static void Main() {} }' },
+    { code: 'java', sample: 'public class Main { public static void main(String[] args) {} }' },
+    { code: 'go', sample: 'package main func main() {}' },
 ]
 const changeLan = (lan: any) => {
     configs.value.language = lan

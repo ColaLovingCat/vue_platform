@@ -11,6 +11,7 @@ export interface SystemInfos {
     response_type: string;
     redirect_uri?: string;
   };
+  adminKey: string;
 }
 
 export interface MenuInfos {

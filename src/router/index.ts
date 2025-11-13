@@ -16,7 +16,7 @@ const routes = [
       {
         path: "/configs-users",
         name: "configs-users",
-        component: () => import("@/views/func/manages/users/users.vue"),
+        component: () => import("@/views/system/users/users.vue"),
       },
     ],
   },

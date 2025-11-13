@@ -1,140 +1,156 @@
 <script lang="ts" setup>
-import { onMounted, onBeforeUnmount, onUnmounted, ref, watch, useTemplateRef } from 'vue'
-import * as echarts from 'echarts'
+import {
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  ref,
+  watch,
+  useTemplateRef,
+} from "vue";
+import * as echarts from "echarts";
+
+import { logger } from '@/commons/utils/logger'
+const log = logger.create("eCharts");
 
 const defaultOptions: any = {
   // 全局样式
-  color: [ // 颜色
-    '#c23531',
-    '#2f4554',
-    '#61a0a8',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
+  color: [
+    // 颜色
+    "#c23531",
+    "#2f4554",
+    "#61a0a8",
+    "#d48265",
+    "#91c7ae",
+    "#749f83",
+    "#ca8622",
+    "#bda29a",
+    "#6e7074",
+    "#546570",
+    "#c4ccd3",
   ],
-  backgroundColor: 'transparent', // 背景
-  textStyle: { // 文本
-    color: '#071c43',
+  backgroundColor: "transparent", // 背景
+  textStyle: {
+    // 文本
+    color: "#071c43",
     fontWeight: 500,
-    fontSize: 18
+    fontSize: 18,
   },
   // 标题
   title: {
     show: false,
-    left: 'center',
+    left: "center",
     //
-    text: '',
+    text: "",
     textStyle: {},
-    subtext: '',
+    subtext: "",
     subtextStyle: {},
     //
-    link: '',
-    target: 'blank'
+    link: "",
+    target: "blank",
   },
   // 网格
   grid: {
     left: 0,
     bottom: 0,
-    containLabel: true
+    containLabel: true,
   },
   //
-  legend: { // 图例
+  legend: {
+    // 图例
     show: true,
     data: [],
-    orient: 'vertical', // vertical| horizontal
-    x: 'right', // left| center| right
-    y: 'middle', // top| middle| bottom
+    orient: "vertical", // vertical| horizontal
+    x: "right", // left| center| right
+    y: "middle", // top| middle| bottom
     // 分页
-    type: 'scroll',
+    type: "scroll",
     height: 600,
-    textStyle: {}
+    textStyle: {},
   },
-  tooltip: { // 提示
+  tooltip: {
+    // 提示
     show: true,
-    trigger: 'axis', // item| axis
+    trigger: "axis", // item| axis
     axisPointer: {
-      type: 'cross' // line| cross| shadow
+      type: "cross", // line| cross| shadow
     },
     formatter: function (params: any) {
-      console.log('Testing: ', params)
       if (Array.isArray(params)) {
-        return params.map(p =>
-          `<b>${p.seriesName}</b>: ${p.value}<br>`
-        ).join('');
+        return params
+          .map((p) => `<b>${p.seriesName}</b>: ${p.value}<br>`)
+          .join("");
       } else {
         return `<b>${params.seriesName}</b>: ${params.value}`;
       }
-    }
+    },
   },
   //
   xAxis: {
     show: true,
-    type: 'category', // category| value| time
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    type: "category", // category| value| time
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     boundaryGap: false, // 边界不留空隙
     //
-    name: '',
-    nameLocation: 'center',
+    name: "",
+    nameLocation: "center",
     nameGap: 15,
     // 轴线
     axisLine: {
       show: false,
       lineStyle: {
-        type: 'solid'
-      }
+        type: "solid",
+      },
     },
     // 刻度线
     axisTick: {
-      show: false
+      show: false,
     },
     // 标签
     axisLabel: {
       show: false,
-      color: '#fff',
+      color: "#fff",
       fontSize: 14,
-      formatter: '{value} %'
+      formatter: "{value} %",
     },
     // 网格线分割
     splitLine: {
       show: false,
       lineStyle: {
-        type: 'dashed',
-        opacity: 0.6
-      }
+        type: "dashed",
+        opacity: 0.6,
+      },
     },
     // 网格颜色分割
     splitArea: {
-      show: false
-    }
+      show: false,
+    },
   },
   yAxis: [
     {
-      type: 'value',
+      type: "value",
+      axisLabel: {
+        formatter: "{value} %",
+      },
       offset: 0,
     },
     {
-      type: 'value'
-    }
+      type: "value",
+    },
   ],
   //
   series: [
     {
-      name: 'Bar',
-      type: 'bar',
-      stack: '',
+      name: "Bar",
+      type: "bar",
+      stack: "",
       data: [820, 932, 901, 934, 1290, 1330, 1320],
-      color: '#ea0016',
+      color: "#ea0016",
       barWidth: 30,
       itemStyle: {
         // 柱状图样式配置
         color: {
           // 设置颜色为渐变色
-          type: 'linear', // 渐变类型为线性渐变
+          type: "linear", // 渐变类型为线性渐变
           x: 0, // 渐变起点为 x 轴坐标 0
           y: 0, // 渐变起点为 y 轴坐标 0
           x2: 0, // 渐变终点为 x 轴坐标 0
@@ -143,40 +159,40 @@ const defaultOptions: any = {
             {
               // 渐变颜色点列表
               offset: 0, // 渐变颜色点的偏移值（0-1）
-              color: '#007bc0' // 第一个颜色点的颜色为红色
+              color: "#007bc0", // 第一个颜色点的颜色为红色
             },
             {
               offset: 1, // 渐变颜色点的偏移值（0-1）
-              color: '#007bc03d' // 第二个颜色点的颜色为绿色
-            }
-          ]
-        }
+              color: "#007bc03d", // 第二个颜色点的颜色为绿色
+            },
+          ],
+        },
       },
       label: {
         show: false,
-        color: '#fff',
-        fontWeight: 'normal',
-        fontSize: 12
+        color: "#fff",
+        fontWeight: "normal",
+        fontSize: 12,
       },
       // 刻度线
-      markLine: {}
+      markLine: {},
     },
     {
-      name: 'Line',
-      type: 'line',
+      name: "Line",
+      type: "line",
       yAxisIndex: 1,
       data: [10, 12, 15, 17, 21, 8, 2],
-      symbol: 'none',
+      symbol: "none",
       smooth: false,
       lineStyle: {
-        type: 'dashed',
-        width: 4
+        type: "dashed",
+        width: 4,
       },
       // 区域图
       areaStyle: {
         color: {
           // 设置颜色为渐变色
-          type: 'linear', // 渐变类型为线性渐变
+          type: "linear", // 渐变类型为线性渐变
           x: 0, // 渐变起点为 x 轴坐标 0
           y: 0, // 渐变起点为 y 轴坐标 0
           x2: 0, // 渐变终点为 x 轴坐标 0
@@ -185,124 +201,125 @@ const defaultOptions: any = {
             {
               // 渐变颜色点列表
               offset: 0, // 渐变颜色点的偏移值（0-1）
-              color: '#B7E88F8D' // 第一个颜色点的颜色为红色
+              color: "#B7E88F8D", // 第一个颜色点的颜色为红色
             },
             {
               offset: 1, // 渐变颜色点的偏移值（0-1）
-              color: '#B7E88F2D' // 第二个颜色点的颜色为绿色
-            }
-          ]
-        }
-      }
-    }
+              color: "#B7E88F2D", // 第二个颜色点的颜色为绿色
+            },
+          ],
+        },
+      },
+    },
   ],
   //
   toolbox: {
     feature: {
-      dataZoom: { yAxisIndex: 'none' },
+      dataZoom: { yAxisIndex: "none" },
       restore: {},
-      saveAsImage: {}
-    }
+      saveAsImage: {},
+    },
   },
   dataZoom: [
     {
-      type: 'inside', // 支持鼠标滚轮缩放
+      type: "inside", // 支持鼠标滚轮缩放
       xAxisIndex: [0],
       start: 0,
-      end: 100
+      end: 100,
     },
     {
-      type: 'slider', // 底部带滑块的缩放
+      type: "slider", // 底部带滑块的缩放
       xAxisIndex: [0],
       start: 0,
-      end: 100
-    }
+      end: 100,
+    },
   ],
   //
   animationDuration: 1000,
-  animationEasing: 'cubicOut',
+  animationEasing: "cubicOut",
   //
   responsive: true,
-  maintainAspectRatio: true
-}
+  maintainAspectRatio: true,
+};
 
 // name
 defineOptions({
-  name: 'custom-name'
-})
+  name: "custom-name",
+});
 
 // props
 const props = defineProps({
   options: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   width: {
     type: String,
-    default: '100%'
+    default: "100%",
   },
   height: {
     type: String,
-    default: '100%'
+    default: "100%",
   },
   changeMark: {
     type: Boolean,
-    require: false
-  }
-})
+    require: false,
+  },
+});
 
 // emits
 const emit = defineEmits<{
-  (event: 'chartClick', values: any): void
-}>()
+  (event: "chartClick", values: any): void;
+}>();
 
-const echartsRef: any = useTemplateRef('echartsRef')
-let chartInstance: any = null
+const echartsRef: any = useTemplateRef("echartsRef");
+let chartInstance: any = null;
 
-const error = ref(false)
+const error = ref(false);
 
 onMounted(() => {
   resizeObserver.observe(echartsRef.value.parentElement);
   //
-  chartInstance = echarts.init(echartsRef.value)
-  refreshChart()
-})
+  chartInstance = echarts.init(echartsRef.value);
+  refreshChart();
+});
 
 onBeforeUnmount(() => {
   resizeObserver.disconnect();
-})
+});
 
 onUnmounted(() => {
-  chartInstance.dispose()
-})
+  chartInstance.dispose();
+});
 
 watch(
   () => props.changeMark,
   () => {
-    chartInstance.clear()
-    refreshChart()
+    chartInstance.clear();
+    refreshChart();
   }
-)
+);
 
 const refreshChart = () => {
-  error.value = false
+  error.value = false;
   //
   try {
+    log.log("options", props.options);
     // 初始化图表
-    chartInstance.setOption(props.options)
+    chartInstance.setOption(props.options);
     //
-    chartInstance.on('click', (params: any) => {
-      emit('chartClick', params)
-    })
+    chartInstance.on("click", (params: any) => {
+      emit("chartClick", params);
+    });
   } catch (err) {
-    error.value = true
+    error.value = true;
   }
-}
+};
 
 const resizeObserver = new ResizeObserver(() => {
   if (chartInstance) {
-    console.log('[eChart] resize')
     chartInstance.resize();
+    log.log("resize");
   }
 });
 </script>

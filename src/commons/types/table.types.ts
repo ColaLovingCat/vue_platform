@@ -5,10 +5,10 @@ export interface TableInfos {
 }
 
 export interface Pagination {
-  index: number // 当前页数
-  total: number // 总行数
-  size: number // 每页行数
-  options?: number[] // 可选择的行数
+  pageIndex: number // 当前页数
+  totalCount: number // 总行数
+  pageSize: number // 每页行数
+  sizeOptions?: number[] // 可选择的行数
 }
 export interface ColumInfos {
   key: string | number

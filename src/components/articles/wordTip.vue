@@ -107,8 +107,10 @@ const clickItem = (tk: any) => {
         <template v-for="(tk, i) in tokenize(props.text)" :key="i">
             <a-popover v-if="tk.type === 'match'" placement="top" trigger="hover">
                 <template #content>
+                    <!-- <pre style="margin: 0; white-space: pre-wrap">{{ renderTip(tk.tip) }}</pre> -->
                     <pre style="margin: 0; white-space: pre-wrap" v-html="renderTip(tk.tip)"></pre>
                 </template>
+                <!-- 点击时触发 select -->
                 <span :class="tk.tip?.notFound ? 'txt-none' : 'txt-highlight'" @click="clickItem(tk)">
                     {{ tk.text }}
                 </span>

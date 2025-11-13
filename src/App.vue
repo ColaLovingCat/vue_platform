@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed, reactive } from 'vue'
 import type { Ref } from 'vue'
 import eventBus from '@/commons/utils/eventBus'
 
@@ -15,12 +15,20 @@ const systemInfosStore = useSystemInfosStore()
 const headerStatus = computed(() => systemInfosStore.systemStatus.headerShow)
 const theme = computed(() => systemInfosStore.systemStatus.theme)
 
+const env = import.meta.env.VITE_APP_ENV
+
 import * as systemDB from '@/commons/datas/datas.system'
 import layoutView from '@/components/layouts/layout.vue'
+import formView from '@/components/forms/view.vue'
 
 import * as extend from '@/commons/utils/extends'
 import * as messageBox from '@/commons/utils/messages'
+import { logger } from '@/commons/utils/logger'
+const log = logger.create("App");
+
 import * as current from './views/login/login.service'
+import * as user from './views/system/users/users.services'
+import * as messages from '@/commons/utils/messages'
 
 // 设备类型
 const deviceType = ref("");
@@ -56,7 +64,6 @@ onMounted(async () => {
 
   // 检测token
   let token = extend.ExLocalStore.get('token')
-  // console.log('[App] token: ', token)
   if (token && token != '') {
     // 如果有token则加载用户信息和菜单
     getinfosUser()
@@ -88,7 +95,7 @@ const updateSize = () => {
 
 // 语言
 import { useI18n } from 'vue-i18n'
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const changeLanguage = (lang: string) => {
   locale.value = lang
   //
@@ -113,7 +120,7 @@ const getinfosAzure = async () => {
   let resp: any = await current.getinfosAzure()
   const { status, data } = resp;
   if (status) {
-    console.log('[App] azure: ', data)
+    log.log('azure', data)
     systemInfosStore.setAzure({
       host: data.host,
       client_id: data.clientID,
@@ -134,12 +141,12 @@ const getinfosUser = async () => {
     const { status, data, message } = resp
     if (status) {
       userInfosStore.refresh({ ...data })
-      console.log('[App] user: ', userInfosStore.userInfos)
+      log.log('user', userInfosStore.userInfos)
     } else {
       messageBox.showError(message)
     }
   } catch (error) {
-    console.error('[App] error:', error)
+    log.error('error', error)
     logout()
   } finally {
     loadingStore.end()
@@ -160,7 +167,7 @@ const jumpHome = () => {
 // 注销
 const logout = () => {
   clearSystem()
-  console.log('[App] user: ', 'log out')
+  log.log('user', 'log out')
   pageGo('/login', {
     type: 'logout'
   })
@@ -181,6 +188,90 @@ const pageGo = (path: string, query: any = {}) => {
     path,
     query
   })
+}
+
+//
+const changeModal = ref(false)
+const changeConfig = reactive({
+  class: {
+    forms: '',
+    items: 'inline',
+    label: 'col-4'
+  },
+  format: {
+    date: 'YYYY-MM-DD',
+    time: 'HH:mm:ss'
+  },
+  showError: false
+})
+const changeList: any = ref([
+  {
+    type: 'input',
+    key: 'newPassword',
+    label: 'New Password',
+    isPassword: true,
+    required: true,
+  },
+  {
+    type: 'input',
+    key: 'confirmPassword',
+    label: 'Confirm Password',
+    isPassword: true,
+    required: true,
+  },
+])
+const changeInfos = ref({
+  newPassword: '',
+  confirmPassword: '',
+})
+const changePassword = async () => {
+  const { newPassword, confirmPassword } = changeInfos.value;
+
+  // 校验确认密码是否匹配
+  if (newPassword !== confirmPassword) {
+    messages.showError(t("message.password.notmatch"))
+    return;
+  }
+
+  // 校验复杂度：长度>=12，包含大小字母+数字
+  const complexityRegex = /^(?=.*[A-Za-z])(?=.*\d).{12,}$/;
+  if (!complexityRegex.test(newPassword)) {
+    messages.showError(t("message.password.notcom"))
+    return;
+  }
+
+  const params = {
+    id: userInfosStore.userInfos.id,
+    newPassword: newPassword
+  }
+  let resp: any = await user.updatePassword(params)
+  const { status, data, message } = resp;
+  if (status) {
+    messages.showSuccess(t("message.password.notcom"))
+    changeModal.value = false;
+    //
+    logout()
+  } else {
+    messages.showError(message)
+  }
+}
+
+const showModal = (action: string, values: any) => {
+  switch (action) {
+    case 'changePassword': {
+      if (extend.ExString.isNotEmpty(userInfosStore.userInfos.id)) {
+        changeInfos.value = {
+          newPassword: '',
+          confirmPassword: '',
+        }
+        changeModal.value = true
+      }
+      break
+    }
+    default: {
+      break
+    }
+  }
 }
 </script>
 
@@ -204,10 +295,14 @@ const pageGo = (path: string, query: any = {}) => {
         <template #overlay>
           <a-menu>
             <a-menu-item key="0">
+              <i class="fa-solid fa-code"></i>
+              <span>{{ t(`env.${env}`) }}</span>
+            </a-menu-item>
+            <a-menu-item key="1">
               <i class="fa-solid fa-globe"></i>
               <span>{{ deviceType }}</span>
             </a-menu-item>
-            <a-menu-item key="1">
+            <a-menu-item key="2">
               <i class="fa-solid fa-display"></i>
               <span>{{ width }} × {{ height }}</span>
             </a-menu-item>
@@ -216,7 +311,8 @@ const pageGo = (path: string, query: any = {}) => {
       </a-dropdown>
       <!-- 主题 -->
       <div class="themes">
-        <a-switch v-model:checked="themesStatus" checked-children="亮" un-checked-children="暗" @change="toggleThemes" />
+        <a-switch v-model:checked="themesStatus" :checked-children="t('system.theme.light')"
+          :un-checked-children="t('system.theme.dark')" @change="toggleThemes" />
       </div>
       <!-- 语言 -->
       <div class="langs">
@@ -233,7 +329,11 @@ const pageGo = (path: string, query: any = {}) => {
           <a-menu>
             <a-menu-item key="0" @click="logout">
               <i class="fa-solid fa-power-off"></i>
-              <span>{{ $t('system.logout') }}</span>
+              <span>{{ $t('btn.logout') }}</span>
+            </a-menu-item>
+            <a-menu-item key="1" @click="showModal('changePassword', {})">
+              <i class="fa-solid fa-key"></i>
+              <span>{{ $t('system.changePassword') }}</span>
             </a-menu-item>
           </a-menu>
         </template>
@@ -241,6 +341,11 @@ const pageGo = (path: string, query: any = {}) => {
     </template>
   </layoutView>
   <div class="loading" v-if="loadingStatus"></div>
+
+  <a-modal v-model:open="changeModal" width="600px" title="Change Password" @ok="changePassword">
+    <formView ref="searchRef" :config="changeConfig" :forms="changeList" v-model:values="changeInfos">
+    </formView>
+  </a-modal>
 </template>
 
 <style scoped lang="scss"></style>

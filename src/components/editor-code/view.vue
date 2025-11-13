@@ -69,8 +69,8 @@ onMounted(() => {
 
     formatTxt()
 
-    console.log('[monaco] languages:', monaco.languages.getLanguages());
-    console.log('[monaco] language:', editor.getModel()?.getLanguageId());
+    // console.log('[monaco] languages:', monaco.languages.getLanguages());
+    // console.log('[monaco] language:', editor.getModel()?.getLanguageId());
 
     editor.onDidChangeModelContent(() => {
         emits('update:value', editor.getValue())
@@ -127,7 +127,6 @@ const format = (str: string, language: string = props.configs.language) => {
                 return vkbeautify.css(str, 2);
             }
             case 'sql': {
-                // return vkbeautify.sql(str, 2);
                 return sqlFormatter(str, { language: "sql" });
             }
         }

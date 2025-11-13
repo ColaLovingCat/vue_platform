@@ -1,11 +1,13 @@
-// src/services/websocketService.ts
-export class WebSocketService {
-  private ws: WebSocket | null = null
-  private url: string
+import { logger } from "@/commons/utils/logger";
+const log = logger.create("WebSocket");
 
-  private onMessageCallback: (data: any) => void
-  private onOpenCallback: () => void
-  private onCloseCallback: (status: boolean) => void
+export class WebSocketService {
+  private ws: WebSocket | null = null;
+  private url: string;
+
+  private onMessageCallback: (data: any) => void;
+  private onOpenCallback: () => void;
+  private onCloseCallback: (status: boolean) => void;
 
   constructor(
     host: string,
@@ -13,47 +15,47 @@ export class WebSocketService {
     onOpen: () => void,
     onClose: (status: boolean) => void
   ) {
-    this.url = host
-    this.onMessageCallback = onMessage
-    this.onOpenCallback = onOpen
-    this.onCloseCallback = onClose
+    this.url = host;
+    this.onMessageCallback = onMessage;
+    this.onOpenCallback = onOpen;
+    this.onCloseCallback = onClose;
   }
 
   connect() {
-    this.ws = new WebSocket(this.url)
+    this.ws = new WebSocket(this.url);
 
     this.ws.onopen = () => {
-      console.log('[WebSocket] 连接成功:', this.url)
-      this.onOpenCallback()
-    }
+      log.log("连接成功", this.url);
+      this.onOpenCallback();
+    };
 
     this.ws.onmessage = (event) => {
-      const data = JSON.parse(event.data)
-      this.onMessageCallback(data)
-    }
+      const data = JSON.parse(event.data);
+      this.onMessageCallback(data);
+    };
 
     this.ws.onclose = () => {
-      console.log('[WebSocket] 连接关闭')
-      this.onCloseCallback(true)
-    }
+      log.log("连接关闭");
+      this.onCloseCallback(true);
+    };
 
     this.ws.onerror = (error) => {
-      console.error('[WebSocket] 发生错误:', error)
-      this.onCloseCallback(false)
-    }
+      log.error("发生错误:", error);
+      this.onCloseCallback(false);
+    };
   }
 
   sendMessage(message: any) {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(JSON.stringify(message))
+      this.ws.send(JSON.stringify(message));
     } else {
-      console.warn('[WebSocket] 连接未建立，消息发送失败')
+      log.error("连接未建立，消息发送失败");
     }
   }
 
   close() {
     if (this.ws) {
-      this.ws.close()
+      this.ws.close();
     }
   }
 }

@@ -253,7 +253,8 @@ defineExpose({
 <template>
   <div class="forms" :class="config.class.forms">
     <template v-for="form in forms" :key="form.key">
-      <div class="form-item" v-if="!isHidden(form)" :class="config.class.items">
+      <!-- Form Item -->
+      <div class="form-item" v-if="!isHidden(form)" :class="`item-${form.key} ${config.class.items}`">
         <!-- Label -->
         <label :class="config.class.label" :for="form.key">
           {{ form.label }}
@@ -284,24 +285,27 @@ defineExpose({
             </template>
             <!-- Normal -->
             <template v-else>
-              <a-input style="width: 100%;" :id="form.key" :placeholder="form.placeholder ? form.placeholder : form.label"
-                v-model:value="formValues[form.key]" @change="onChanged(form)" :disabled="form.disabled"
-                :allowClear="form.activeClear" :status="errorInfos[form.key] ? 'error' : ''" />
+              <a-input style="width: 100%;" :id="form.key"
+                :placeholder="form.placeholder ? form.placeholder : form.label" v-model:value="formValues[form.key]"
+                @change="onChanged(form)" :disabled="form.disabled" :allowClear="form.activeClear"
+                :status="errorInfos[form.key] ? 'error' : ''" />
             </template>
           </template>
           <!-- Textarea -->
           <template v-if="form.type == 'textarea'">
-            <a-textarea style="width: 100%;" :id="form.key" :placeholder="form.placeholder ? form.placeholder : form.label"
-              v-model:value="formValues[form.key]" @change="onChanged(form)" :disabled="form.disabled"
-              :allowClear="form.activeClear" :status="errorInfos[form.key] ? 'error' : ''" />
+            <a-textarea style="width: 100%;" :id="form.key"
+              :placeholder="form.placeholder ? form.placeholder : form.label" v-model:value="formValues[form.key]"
+              @change="onChanged(form)" :disabled="form.disabled" :allowClear="form.activeClear"
+              :status="errorInfos[form.key] ? 'error' : ''" />
           </template>
 
           <!-- Select -->
           <template v-if="form.type == 'select'">
             <a-select style="width: 100%;" :id="form.key" :mode="form.isMulti ? 'multiple' : undefined"
-              :placeholder="form.placeholder ? form.placeholder : form.label" v-model:value="formValues[form.key]" @change="onChanged(form)"
-              :disabled="form.disabled" :allowClear="form.activeClear" :show-search="form.activeSearch"
-              :filter-option="filterOption" :status="errorInfos[form.key] ? 'error' : ''">
+              :placeholder="form.placeholder ? form.placeholder : form.label" v-model:value="formValues[form.key]"
+              @change="onChanged(form)" :disabled="form.disabled" :allowClear="form.activeClear"
+              :show-search="form.activeSearch" :filter-option="filterOption"
+              :status="errorInfos[form.key] ? 'error' : ''">
               <a-select-option v-for="option in form.list" :key="option.value" :value="option.value">
                 {{ option.label }}
               </a-select-option>
@@ -320,7 +324,7 @@ defineExpose({
           <template v-if="form.type == 'radios'">
             <a-radio-group style="width: 100%;" :id="form.key" :name="form.key" v-model:value="formValues[form.key]"
               @change="onChanged(form)" :disabled="form.disabled">
-              <a-radio v-for="option in form.list" :key="option.value" :value="option.value">
+              <a-radio v-for="option in form.list" :key="option.label" :value="option.value">
                 <span v-if="errorInfos[form.key]" style="color: red">{{ option.label }}</span>
                 <span v-else>{{ option.label }}</span>
               </a-radio>
@@ -330,7 +334,7 @@ defineExpose({
           <template v-if="form.type == 'checks'">
             <a-checkbox-group style="width: 100%;" :id="form.key" :name="form.key" v-model:value="formValues[form.key]"
               @change="onChanged(form)" :disabled="form.disabled">
-              <a-checkbox v-for="option in form.list" :key="option.value" :value="option.value">
+              <a-checkbox v-for="option in form.list" :key="option.label" :value="option.value">
                 <span v-if="errorInfos[form.key]" style="color: red">{{ option.label }}</span>
                 <span v-else>{{ option.label }}</span>
               </a-checkbox>
@@ -372,6 +376,7 @@ defineExpose({
             </slot>
           </template>
 
+          <!-- Error -->
           <div class="error-infos" v-if="config.showError">{{ errorInfos[form.key] }}</div>
         </div>
       </div>

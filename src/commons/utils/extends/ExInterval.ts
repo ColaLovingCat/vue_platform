@@ -10,8 +10,22 @@ export class ExInterval {
    * @param func 触发的方法
    * @param time 频次
    * @param name 名称
+   * @param immediate 是否立即执行一次
    */
-  create(func: Function, time: number, name: string) {
+  create(
+    func: Function,
+    time: number,
+    name: string,
+    immediate: boolean = false
+  ) {
+    if (immediate) {
+      try {
+        func();
+      } catch (err) {
+        console.error("[Interval Immediate Error]", err);
+      }
+    }
+
     const id = setInterval(function () {
       console.info("[Interal]", { name, time, id });
       func();
@@ -63,49 +77,63 @@ export class ExInterval {
     this.list = [];
     console.info("[Interval]:", "Clear All");
   }
-}
 
-/**
- * @summary 每天定时run任务
- * @description 例如：每天 03:30 自动执行某个回调函数
- *
- * @param {() => void} callback - 需要定时执行的任务函数
- * @param {{ hour: number, minute: number }} triggerTime - 触发时间（24小时制）
- *
- * @example
- * // 每天凌晨 03:30 执行 myTask
- * scheduleNextUpdate(myTask, { hour: 3, minute: 30 });
- */
-export const scheduleTask = (
-  callback: () => void,
-  triggerTime: { hour: number; minute: number }
-): void => {
-  const now = new Date();
+  /**
+   * @summary 每天定时 run 任务
+   * @description 例如：每天 03:30 自动执行某个回调函数
+   * @param callback - 需要定时执行的任务函数
+   * @param {{ hour: number, minute: number }} triggerTime - 触发时间（24小时制）
+   * @param immediate - 是否立即执行一次
+   * @example
+   * // 每天凌晨 03:30 执行 myTask
+   * scheduleNextUpdate(myTask, { hour: 3, minute: 30 });
+   */
+  static scheduleTask(
+    triggerTime: { hour: number; minute: number },
+    callback: (nextTime: Date) => void,
+    immediate: boolean = false
+  ): void {
+    const now = new Date();
 
-  // 生成今天的目标时间
-  const target = new Date();
-  target.setHours(triggerTime.hour, triggerTime.minute, 0, 0);
+    // 计算下一次目标时间
+    const getNextTarget = (): Date => {
+      const t = new Date();
+      t.setHours(triggerTime.hour, triggerTime.minute, 0, 0);
+      if (t <= new Date()) {
+        t.setDate(t.getDate() + 1); // 已经过了今天 → 明天
+      }
+      return t;
+    };
 
-  // 如果当前时间已经过了今天的目标时间，则调度到明天
-  if (now > target) {
-    target.setDate(target.getDate() + 1);
+    if (immediate) {
+      try {
+        const nextTarget = getNextTarget();
+        callback(nextTarget); // 告诉用户：下一次什么时候执行
+      } catch (err) {
+        console.error("[Schedule Immediate Error]", err);
+      }
+    }
+
+    const target = getNextTarget();
+    const delay = target.getTime() - now.getTime();
+
+    console.log(
+      `[Timer] next: ${target.toLocaleString()}, left: ${(
+        delay /
+        1000 /
+        60
+      ).toFixed(1)} mins`
+    );
+
+    setTimeout(() => {
+      // 执行回调时，告诉用户：下一次运行的时间（再+1天）
+      const nextTarget = new Date(target);
+      nextTarget.setDate(nextTarget.getDate() + 1);
+
+      callback(nextTarget);
+
+      // 继续调度
+      ExInterval.scheduleTask(triggerTime, callback);
+    }, delay);
   }
-
-  // 计算时间差（毫秒）
-  const delay = target.getTime() - now.getTime();
-
-  console.log(
-    `[Timer] next: ${target.toLocaleString()}, left: ${(
-      delay /
-      1000 /
-      60
-    ).toFixed(1)} mins`
-  );
-
-  // 使用 setTimeout 调度
-  setTimeout(() => {
-    callback();
-    // 递归调用，保证每天都调度一次
-    scheduleTask(callback, triggerTime);
-  }, delay);
-};
+}

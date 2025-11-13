@@ -4,7 +4,11 @@ import {
   GLTFLoader,
   FontLoader,
 } from "three/examples/jsm/Addons.js";
+//@ts-ignore
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+
+// 直接导入 JSON 字体文件，Vite 会在构建时处理路径
+import helvetikerFontUrl from "@/assets/fonts/json/helvetiker_bold.typeface.json?url";
 
 const gltfLoader = new GLTFLoader();
 export const loadGLB = (path: string) => {
@@ -39,7 +43,7 @@ export const loadText = (text: string, size: number) => {
   // 加载字体
   return new Promise((resolve, reject) => {
     fontLoader.load(
-      "/systems/fonts/json/helvetiker_bold.typeface.json",
+      helvetikerFontUrl,
       function (font) {
         const geometry = new TextGeometry(text, {
           font: font,

@@ -24,7 +24,6 @@ interface SheetData {
   sheetName: string;
   data: any[];
 }
-
 interface ExportExcelOptions {
   arraySeparator?: string;
   dateFormat?: string;
@@ -32,7 +31,7 @@ interface ExportExcelOptions {
 
 export const exportExcel = (
   sheets: SheetData[], 
-  filename: string, 
+  filename: string = 'export.xlsx', 
   options: ExportExcelOptions = {}
 ): void => {
   try {

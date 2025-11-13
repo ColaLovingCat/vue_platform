@@ -1,11 +1,11 @@
 import axios, { type AxiosRequestConfig } from "axios";
+import { checkAPI, type RequestOptions } from "../types/api.types";
 
-import { type FetchOptions, checkAPI } from "./fetch";
 import * as extend from "./extends";
 
 export const axiosRequest = (
   url: string,
-  options: FetchOptions = {},
+  options: RequestOptions = {},
   remarks = ""
 ) => {
   const method = (options.method || "GET").toUpperCase();

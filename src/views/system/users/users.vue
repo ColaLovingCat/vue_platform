@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, ref, type Ref, reactive } from 'vue'
 
+import { useSystemInfosStore } from '@/commons/stores/index'
+const systemInfosStore = useSystemInfosStore()
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 import formView from '@/components/forms/view.vue'
 import type { FormItem } from '@/components/forms/form.types'
 import type { TableInfos } from '@/commons/types/table.types'
@@ -41,6 +46,11 @@ const pageInfos: TableInfos = reactive({
             title: 'Email'
         },
         {
+            key: 'status',
+            dataIndex: 'status',
+            title: 'isActive'
+        },
+        {
             key: 'roles',
             dataIndex: 'roles',
             title: 'Roles'
@@ -53,9 +63,9 @@ const pageInfos: TableInfos = reactive({
     ],
     rows: [] as any[],
     pagination: {
-        index: 0,
-        size: 10,
-        total: 0,
+        pageIndex: 0,
+        pageSize: 10,
+        totalCount: 0,
     }
 })
 
@@ -99,24 +109,36 @@ const searchInfos: any = ref({
     username: '',
     ntAccount: '',
 })
-
 //
 const search = () => {
-    console.log('Testing: ', searchInfos.value)
+    pageInfos.pagination.pageIndex = 0
+    getlistData()
 }
 const getlistData = async () => {
-    const params = {}
+    let params: any = {
+        page: pageInfos.pagination.pageIndex + 1,
+        size: pageInfos.pagination.pageSize,
+        sort: '',
+    }
+    if (searchInfos.value.userno && searchInfos.value.userno != '')
+        params.userno = 'match:' + searchInfos.value.userno
+    if (searchInfos.value.username && searchInfos.value.username != '')
+        params.username = 'match:' + searchInfos.value.username
+    if (searchInfos.value.ntAccount && searchInfos.value.ntAccount != '')
+        params.ntAccount = 'match:' + searchInfos.value.ntAccount
+    //
     let resp: any = await current.getlistUsers(params)
     const { status, data, message } = resp;
     if (status) {
-        pageInfos.rows = [...data]
-        pageInfos.pagination.total = 1
+        const { pagination, items } = data
+        pageInfos.rows = [...items]
+        pageInfos.pagination.totalCount = pagination.totalCount
     } else {
         messages.showError(message)
     }
 }
 
-// User Modal
+//#region User Modal
 const userModal = ref(false)
 const userConfig = reactive({
     class: {
@@ -171,6 +193,11 @@ const userForms: Ref<FormItem[]> = ref([
         isEmail: true
     },
     {
+        type: 'switch',
+        key: 'status',
+        label: 'isActive',
+    },
+    {
         type: 'select',
         key: 'roleIDs',
         label: 'Roles',
@@ -180,7 +207,7 @@ const userForms: Ref<FormItem[]> = ref([
 ])
 const enum formIndex {
     password = 2,
-    roles = 6,
+    roles = 7,
 }
 const userInfos: any = ref({
     userno: '',
@@ -189,6 +216,7 @@ const userInfos: any = ref({
     ntAccount: '',
     deptName: '',
     email: '',
+    status: true,
     roleIDs: [],
 })
 const userInfo = reactive({
@@ -204,6 +232,7 @@ const clearUser = () => {
         ntAccount: '',
         deptName: '',
         email: '',
+        status: true,
         roleIDs: [],
     }
 }
@@ -229,16 +258,30 @@ const saveUser = async () => {
         userInfo.action == "New" ?
             Object.assign(params, { id: '' }) :
             Object.assign(params, { id: userInfo.id })
-        console.log('Testing: ', params)
         //
         let resp: any = await current.saveUser(params)
         const { status, data, message } = resp;
         if (status) {
-            userModal.value = false
+            messages.showSuccess(t("message.save"))
             getlistData()
+            //
+            userModal.value = false
         } else {
             messages.showError(message)
         }
+    }
+}
+const resetPassword = async (values: any) => {
+    const params = {
+        id: values.id
+    }
+    let resp: any = await current.resetPassword(params)
+    const { status, data } = resp;
+    if (status) {
+        messages.showConfirm({
+            title: t("password.new"),
+            message: data
+        }, () => { })
     }
 }
 const deleteUser = async (values: any) => {
@@ -248,12 +291,15 @@ const deleteUser = async (values: any) => {
     let resp: any = await current.deleteUser(params)
     const { status, data, message } = resp;
     if (status) {
+        messages.showSuccess(t("message.delete"))
         getlistData()
     } else {
         messages.showError(message)
     }
 }
+//#endregion
 
+//#region Role
 const roleModal = ref(false)
 //
 const roleConfig = reactive({
@@ -322,17 +368,18 @@ const saveRole = async () => {
         let resp: any = await current.saveRole(params)
         const { status, data, message } = resp;
         if (status) {
+            messages.showSuccess(t("message.save"))
+            getlistRoles()
+            //
             roleInfos.value = {
                 roleName: '',
                 remark: '',
             }
-            //
-            getlistRoles()
         } else {
             messages.showError(message)
         }
     } else {
-        messages.showError("Please complete all required fields.")
+        messages.showError(t("message.complete"))
     }
 }
 const deleteRole = async (values: any) => {
@@ -342,6 +389,7 @@ const deleteRole = async (values: any) => {
     let resp: any = await current.deleteRole(params)
     const { status, data, message } = resp;
     if (status) {
+        messages.showSuccess(t("message.delete"))
         getlistRoles()
         //
         getlistData()
@@ -349,6 +397,7 @@ const deleteRole = async (values: any) => {
         messages.showError(message)
     }
 }
+//#endregion
 
 // Modal
 const showModal = (action: string, values: any) => {
@@ -373,7 +422,6 @@ const showModal = (action: string, values: any) => {
             clearUser()
             //
             Object.assign(userInfos.value, values)
-            console.log('Testing: ', values)
             userInfos.value.roleIDs = values.roles.map((a: any) => a.id)
             getlistRoles()
             //
@@ -396,29 +444,30 @@ const showModal = (action: string, values: any) => {
 <template>
     <div class="sections">
         <div class="section-header">
-            <h4 class="titles">User management</h4>
-            <h5 class="sub-titles">Manage your team members and their account permissions here.</h5>
+            <h4 class="titles">{{ $t('user.title') }}</h4>
+            <h5 class="sub-titles">{{ $t('user.desc') }}</h5>
         </div>
         <div class="section-contents">
             <div class="box-bar">
-                <div class="header">All users <span class="header-infos">{{ pageInfos.rows.length }}</span></div>
+                <div class="header">{{ $t('user.allUsers') }} <span class="header-infos">{{ pageInfos.rows.length
+                        }}</span></div>
                 <div class="tools">
                     <div class="box-search">
                         <formView ref="searchRef" :config="formConfig" :forms="searchForms"
                             v-model:values="searchInfos">
                         </formView>
                         <a-button type="default" @click="search">
-                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                            <i class="fa-solid fa-magnifying-glass"></i> {{ $t('btn.search') }}
                         </a-button>
                     </div>
                     <!-- <a-button type="default" @click="search">
                         <i class="fa-solid fa-filter"></i> Filters
                     </a-button> -->
                     <a-button type="primary" @click="showModal('add', {})">
-                        <i class="fa-solid fa-plus"></i> Add user
+                        <i class="fa-solid fa-plus"></i> {{ $t('user.addUser') }}
                     </a-button>
                     <a-button type="primary" @click="showModal('roles', {})">
-                        <i class="fa-solid fa-gear"></i> Role config
+                        <i class="fa-solid fa-gear"></i> {{ $t('user.roleConfig') }}
                     </a-button>
                 </div>
 
@@ -426,6 +475,14 @@ const showModal = (action: string, values: any) => {
             <div class="box-table box-shadow">
                 <a-table :columns="pageInfos.columns" :data-source="pageInfos.rows">
                     <template #bodyCell="{ column, record }">
+                        <template v-if="column.key === 'status'">
+                            <div v-if="record.status" class="item-status status-success">
+                                {{ $t('form.active') }}
+                            </div>
+                            <div v-else class="item-status status-default">
+                                {{ $t('form.inactive') }}
+                            </div>
+                        </template>
                         <template v-if="column.key === 'roles'">
                             <div class="list-roles">
                                 <template v-for="role in record.roles">
@@ -435,15 +492,30 @@ const showModal = (action: string, values: any) => {
                         </template>
                         <template v-if="column.key === 'actions'">
                             <div class="btns">
-                                <a-button type="default" @click="showModal('update', record)">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a-button>
-                                <a-popconfirm title="Are you sure delete this user?" ok-text="Yes" cancel-text="No"
-                                    @confirm="deleteUser(record)">
-                                    <a-button type="default">
-                                        <i class="fa-solid fa-trash"></i>
+                                <a-tooltip>
+                                    <template #title>{{ $t('btn.edit') }}</template>
+                                    <a-button type="default" @click="showModal('update', record)">
+                                        <i class="fa-solid fa-edit"></i>
                                     </a-button>
-                                </a-popconfirm>
+                                </a-tooltip>
+                                <a-tooltip>
+                                    <template #title>{{ $t('system.changePassword') }}</template>
+                                    <a-popconfirm title="Are you sure reset password for this user?" ok-text="Yes"
+                                        cancel-text="No" @confirm="resetPassword(record)">
+                                        <a-button type="default">
+                                            <i class="fa-solid fa-key"></i>
+                                        </a-button>
+                                    </a-popconfirm>
+                                </a-tooltip>
+                                <a-tooltip>
+                                    <template #title>{{ $t('btn.delete') }}</template>
+                                    <a-popconfirm title="Are you sure delete this user?" ok-text="Yes" cancel-text="No"
+                                        @confirm="deleteUser(record)">
+                                        <a-button type="default">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a-button>
+                                    </a-popconfirm>
+                                </a-tooltip>
                             </div>
                         </template>
                     </template>
@@ -469,7 +541,7 @@ const showModal = (action: string, values: any) => {
                         </template>
                         <template v-if="column.key === 'actions'">
                             <div class="btns">
-                                <template v-if="record.roleName === 'SystemAdmin'">
+                                <template v-if="record.roleName === systemInfosStore.systemInfos.adminKey">
                                     <a-button type="default" disabled class="btn btn-tools">
                                         <i class="fa-solid fa-lock"></i>
                                     </a-button>
@@ -544,6 +616,22 @@ const showModal = (action: string, values: any) => {
 
     .box-search {
         display: flex;
+    }
+}
+
+.item-status {
+    padding: 3px 10px;
+    width: max-content;
+    border-radius: 5px;
+
+    &.status-success {
+        color: #fff;
+        background: var(--color-success);
+    }
+
+    &.status-default {
+        color: #0000006d;
+        background: var(--color-gray);
     }
 }
 

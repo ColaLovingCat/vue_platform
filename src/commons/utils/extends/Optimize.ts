@@ -8,6 +8,45 @@
  */
 export const Optimize = {
   /**
+   * @summary 执行Promise队列，若其中一个出错则报错
+   */
+  promiseFlow: function (arr: Promise<any>[], callback: Function) {
+    Promise.all(arr)
+      .then((res) => {
+        callback({
+          status: 1,
+          message: "",
+        });
+      })
+      .catch((err) => {
+        callback({
+          status: -1,
+          message: err,
+        });
+      });
+  },
+
+  /**
+   * @summary 执行队列，按顺序依次执行（上一个完成后才执行下一个）
+   * @param arr 返回 Promise 的函数数组
+   */
+  async promiseQueue(arr: (() => Promise<any>)[], callback: Function) {
+    try {
+      for (const fn of arr) {
+        await fn();
+      }
+      callback({ status: 1, message: "all finished" });
+    } catch (err) {
+      callback({ status: -1, message: err });
+    }
+  },
+
+  /**
+   * @summary 等待
+   */
+  sleep: (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms)),
+
+  /**
    * @summary 防抖，减少频繁触发的事件的执行次数
    * @param func 被防抖的原函数
    * @param wait 在等待时间结束后，才可以重新触发一次函数，若重复触发则重置wait时间
@@ -44,6 +83,7 @@ export const Optimize = {
       }
     };
   },
+
   /**
    * @summary 节流，确保函数在指定时间间隔内只被调用一次
    * @param func 被节流的原函数
@@ -68,6 +108,7 @@ export const Optimize = {
       }
     };
   },
+
   /**
    * @summary 柯里化函数，把接受多个参数的函数，变换成 接受单一参数的，并返回接受余下的参数且返回结果的 新函数
    * @param func 需要柯里化的函数
@@ -92,6 +133,7 @@ export const Optimize = {
       }
     };
   },
+
   /**
    * @summary 组合函数，两个函数自动依次执行
    * @param fns 要组合的函数列表
@@ -125,6 +167,7 @@ export const Optimize = {
     }
     return composeFn;
   },
+  
   /**
    * @summary 单例模式
    * @param func 构造函数

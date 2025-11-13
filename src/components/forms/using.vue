@@ -5,6 +5,8 @@ import formView from '@/components/forms/view.vue'
 import type { FormItem } from '@/components/forms/form.types';
 
 import * as messages from '@/commons/utils/messages'
+import { logger } from '@/commons/utils/logger'
+const log = logger.create("Form");
 
 // name
 defineOptions({
@@ -163,7 +165,7 @@ const formValue: any = ref({
 })
 //
 const onChange = (key: string) => {
-    console.log('[Form] changed: ', key)
+    log.log('changed', key)
 }
 const onSubmit = () => {
     if (formRef.value?.validate()) {
@@ -198,9 +200,16 @@ const onSubmit = () => {
     display: flex;
     gap: 20px;
 
-    >* {
-        flex: 1;
+    .box-form {
         padding: 20px;
+        width: 700px;
+    }
+
+    .box-result {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 }
 </style>

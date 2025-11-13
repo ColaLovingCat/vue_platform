@@ -3,10 +3,10 @@ import { deepCopyObj } from "./pub";
 /**
  * @summary Object拓展方法
  * @param stringifyParams  将对象序列化字符串
- * @param buildODataFilter 生成支持嵌套分组的 `$filter`
- * @param copy             深拷贝对象
  * @param typeOf           获取数据类型
+ * @param copy             深拷贝对象
  * @param getValuebyPath   按路径安全获取对象值
+ * @param buildODataFilter 生成支持嵌套分组的 `$filter`
  */
 export interface ExObject {
   /**
@@ -14,14 +14,14 @@ export interface ExObject {
    */
   stringifyParams(obj: Record<string, any>): string;
   /**
-   * @summary 深拷贝对象
-   */
-  copy<T>(obj: T): T;
-  /**
    * @summary 获取数据类型
    * @returns {string} Number | String | Boolean | Null | Undefined | Object | Array | Date | Function | RegExp | BigInt | Symbol
    */
   typeOf(obj: any): string;
+  /**
+   * @summary 深拷贝对象
+   */
+  copy<T>(obj: T): T;
   /**
    * @summary 按路径安全获取对象值，不存在则返回默认值
    * @param object 目标对象
@@ -89,19 +89,28 @@ export const ExObject: ExObject = {
     }
     return pairs.join("&");
   },
-  copy: function (obj: any) {
-    return deepCopyObj(obj);
-  },
   typeOf: function (obj: any) {
     return Object.prototype.toString.call(obj).slice(8, -1);
   },
+  copy: function (obj: any) {
+    return deepCopyObj(obj);
+  },
   getValuebyPath: function (object: any, path: any) {
     if (!object) return null;
+
+    // 如果是数组，直接用；否则转成数组路径
     const pathArr = Array.isArray(path)
       ? path
-      : path.split(".").filter(Boolean);
+      : path
+          // 先把 [0] 这样的数组下标转成 .0 的形式
+          .replace(/\[(\d+)\]/g, ".$1")
+          // 按 "." 分割
+          .split(".")
+          // 过滤掉空值（避免出现连续的点号）
+          .filter(Boolean);
 
-    return pathArr.reduce((o: any, prop: any) => {
+    // 逐层取值
+    return pathArr.reduce((o: any, prop: string) => {
       return o != null && prop in o ? o[prop] : null;
     }, object);
   },

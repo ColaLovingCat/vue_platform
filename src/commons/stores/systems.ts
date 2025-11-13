@@ -19,10 +19,12 @@ export const useSystemInfosStore = defineStore("systemInfos", {
           response_type: "",
           redirect_uri: "",
         },
+        adminKey: "SystemAdmin",
       },
       systemStatus: {
         theme: "default",
         headerShow: true, // 隐藏头部，全屏
+        siderShow: true, // 隐藏侧边，全屏
         logoutShow: false, // 避免多个注销弹窗
       },
     };
@@ -39,6 +41,10 @@ export const useSystemInfosStore = defineStore("systemInfos", {
     },
     setHeader(status: boolean) {
       this.systemStatus.headerShow = status;
+    },
+    setSider(status: boolean) {
+      console.log("Testing: ", status);
+      this.systemStatus.siderShow = status;
     },
     setTheme(theme: string) {
       this.systemStatus.theme = theme;

@@ -9,7 +9,6 @@ export * from "./extends/ExInterval";
 export * from "./extends/ExLocalStore";
 export * from "./extends/ExPaginator";
 
-export * from "./extends/ExPromise";
 export * from "./extends/Optimize";
 
 /**

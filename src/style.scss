@@ -10,3 +10,31 @@
 @import url(@/assets/styles/box.css);
 @import url(@/assets/styles/btns.css);
 @import url(@/assets/styles/table.css);
+
+.headers {
+  .menus {
+    flex: 1;
+  }
+
+  .ant-menu {
+    justify-content: center;
+
+    .router-link-active {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+html[data-theme="dark"] {
+  .ant-menu {
+    color: var(--color-page-text);
+    background: var(--color-page-bg) !important;
+    justify-content: center;
+
+    .ant-menu-submenu-title:hover,
+    .ant-menu-item:hover {
+      color: var(--color-page-text) !important;
+    }
+  }
+}

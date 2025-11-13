@@ -9,21 +9,6 @@ import "@fortawesome/fontawesome-free/css/all.css";
 
 const app = createApp(App);
 
-// 导入语言文件
-import { createI18n } from "vue-i18n";
-import en from "@/assets/locales/en.json";
-import zh from "@/assets/locales/zh.json";
-const i18n = createI18n({
-  locale: "zh", // 默认语言
-  legacy: false, // 支持 Composition API
-  globalInjection: true, // 全局注册$t方法
-  messages: {
-    en,
-    zh,
-  },
-});
-app.use(i18n);
-
 // pinia
 import { createPinia } from "pinia";
 const pinia = createPinia();
@@ -59,5 +44,47 @@ app.use(router);
 // 注册所有自定义指令
 import directives from "@/commons/directives";
 app.use(directives);
+
+// 导入语言文件
+import { createI18n } from "vue-i18n";
+import en from "@/assets/locales/en.json";
+import zh from "@/assets/locales/zh.json";
+import { readExcel } from "@/commons/utils/xlsx";
+const useJson = false;
+async function initI18n() {
+  if (useJson) {
+    const i18n = createI18n({
+      locale: "zh", // 默认语言
+      legacy: false, // 支持 Composition API
+      globalInjection: true, // 全局注册$t方法
+      messages: {
+        en,
+        zh,
+      },
+    });
+    app.use(i18n);
+  } else {
+    const excelData = await readExcel("/docs/datas/lang.xlsx");
+    const messagesSheet = excelData["list"] || [];
+
+    const zh: Record<string, string> = {};
+    const en: Record<string, string> = {};
+    messagesSheet.forEach((row: any) => {
+      const key = row.type + "." + row.code;
+      zh[key] = row.zh || "";
+      en[key] = row.en || "";
+    });
+
+    const i18n = createI18n({
+      locale: "zh",
+      legacy: false,
+      globalInjection: true,
+      messages: { en, zh },
+    });
+
+    app.use(i18n);
+  }
+}
+await initI18n();
 
 app.mount("#app");

@@ -52,7 +52,9 @@ export interface ExDate {
       | "24h"
       | "3d"
       | "7d"
+      | "current_week"
       | "last_week"
+      | "current_month"
       | "last_month"
       | "last_year"
   ): string[];
@@ -292,6 +294,8 @@ export const ExDate: ExDate = {
     const dateNow = new Date();
     let year = dateNow.getFullYear();
     let month = dateNow.getMonth() + 1;
+    const dayNum = dateNow.getDay() || 7;
+
     switch (type) {
       case "current_shift": {
         result[1] = this.format(dateNow, "yyyy/MM/dd HH:mm:ss");
@@ -331,10 +335,26 @@ export const ExDate: ExDate = {
         result[1] = this.format(dateNow, "yyyy-MM-dd HH:mm:ss");
         break;
       }
+      case "current_week": {
+        // 周一
+        const start = this.add(dateNow, "d", -(dayNum - 1));
+        // 周日
+        const end = this.add(dateNow, "d", 7 - dayNum);
+        result[0] = this.format(start, "yyyy-MM-dd 00:00:00");
+        result[1] = this.format(end, "yyyy-MM-dd 23:59:59");
+        break;
+      }
       case "last_week": {
         const dayNum = dateNow.getDay();
         result[0] = this.format(this.add(dateNow, "d", -(dayNum + 6)));
         result[1] = this.format(this.add(dateNow, "d", -dayNum));
+        break;
+      }
+      case "current_month": {
+        const start = new Date(year, month - 1, 1);
+        const end = new Date(year, month, 0); // 当前月的最后一天
+        result[0] = this.format(start, "yyyy-MM-dd 00:00:00");
+        result[1] = this.format(end, "yyyy-MM-dd 23:59:59");
         break;
       }
       case "last_month": {

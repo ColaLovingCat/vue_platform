@@ -15,7 +15,6 @@ import * as messageBox from '@/commons/utils/messages'
 import * as current from './login.service'
 
 onMounted(async () => {
-  // systemInfosStore.setHeader(false)
   // 背景
   if (canvas.value) {
     ctx = canvas.value.getContext('2d');
@@ -151,7 +150,7 @@ const login = () => {
   switch (systemInfosStore.systemInfos.loginMode) {
     case 'sso-local': {
       const params = {
-        userno: loginForm.account,
+        account: loginForm.account,
         password: loginForm.password
       }
       current.login(params).then(
@@ -177,7 +176,7 @@ const login = () => {
     }
     case 'sso-iuser': {
       let params = {
-        ntAccount: loginForm.account,
+        account: loginForm.account,
         password: loginForm.password
       }
       current.loginiUser(params).then(
@@ -238,6 +237,7 @@ const loginSSO = () => {
           </div>
         </div>
         <div class="bg-img">
+          <img src="/docs/imgs/earth.jpg" alt="" srcset="">
         </div>
       </div>
       <div class="col-right">
@@ -247,7 +247,7 @@ const loginSSO = () => {
             <p class="title-second">- Login only works from Bosch network -</p>
             <a-button type="primary" class="btn btn-sso" @click="loginSSO">
               <i class="fa-solid fa-cloud"></i>
-              <span>{{ $t('system.login.sso') }}</span>
+              <span>{{ $t('btn.sso') }}</span>
             </a-button>
           </div>
           <div class="box-iuser" v-else>
@@ -271,7 +271,7 @@ const loginSSO = () => {
 
               <a-form-item>
                 <a-button type="primary" class="btn btn-login" html-type="submit">
-                  {{ $t('system.login') }}
+                  {{ $t('btn.login') }}
                 </a-button>
               </a-form-item>
             </a-form>
@@ -284,7 +284,7 @@ const loginSSO = () => {
               <div class="btns">
                 <a-button type="primary" class="btn btn-sso" @click="loginSSO">
                   <i class="fa-solid fa-cloud"></i>
-                  <span>{{ $t('system.login.sso') }}</span>
+                  <span>{{ $t('btn.sso') }}</span>
                 </a-button>
               </div>
             </div>

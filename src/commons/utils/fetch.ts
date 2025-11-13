@@ -1,22 +1,14 @@
+import { checkAPI, type RequestOptions } from "../types/api.types";
 import * as extend from "./extends";
 
-export interface FetchOptions {
-  // 默认
-  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-  data?: any; // 请求体数据（POST/PUT等）或查询参数（GET）
-  // 头部
-  type?: string; // Content-Type，例：'application/json'，设为 'none' 则不设置
-  headers?: Record<string, string>;
-  // 返回
-  dataType?: "json" | "text" | "blob"; // 期望的响应数据类型，默认是 json
-  activeBody?: boolean; // 是否需要返回响应头信息 {headers,body}
-  // credentials?: RequestCredentials  // 可选：是否发送 cookie
-  // mode?: RequestMode                // 可选：请求的模式，通常用于跨域设置
-}
+import { logger } from "@/commons/utils/logger";
+const log = logger.create("Fetch");
+
+const authKey = "Authorization";
 
 export const fetchRequest = (
   url: string,
-  options: FetchOptions = {},
+  options: RequestOptions = {},
   remarks = ""
 ) => {
   const opts: any = {};
@@ -35,7 +27,7 @@ export const fetchRequest = (
   const token = extend.ExLocalStore.get("token");
   if (token) {
     Object.assign(opts.headers, {
-      Authorization: token,
+      [authKey]: token,
     });
   }
   // opts.credentials = options.credentials || 'include'; // 设置cookie是否一起发送 omit | same-origin | include
@@ -43,7 +35,8 @@ export const fetchRequest = (
   // 格式化参数
   switch (opts.method) {
     // 拼接GET参数
-    case "GET": {
+    case "GET":
+    case "DELETE": {
       if (options.data) {
         url += "?" + extend.ExObject.stringifyParams(options.data);
       }
@@ -51,6 +44,8 @@ export const fetchRequest = (
     }
     // body存入POST参数
     case "POST":
+    case "PUT":
+    case "PATCH":
     default: {
       opts.body = !options.type ? JSON.stringify(options.data) : options.data;
       break;
@@ -66,9 +61,9 @@ export const fetchRequest = (
         remarks != "" ? console.log(remarks + " Status: ", res.status) : void 0;
 
         // 刷新token
-        const token = res.headers.get("Authorization");
+        const token = res.headers.get(authKey);
         if (token) {
-          console.log("[Fetch] token: ", token);
+          log.log("token", token);
           extend.ExLocalStore.set("token", token);
         }
 
@@ -130,17 +125,3 @@ export const fetchRequest = (
   });
 };
 
-export const checkAPI = (url: string) => {
-  // 接口以http或https开头
-  const check =
-    new RegExp("^http.*$").test(url) || new RegExp("^https.*$").test(url);
-  if (check) return url;
-
-  // 前端部署在wwwroot中
-  //@ts-ignore
-  if (import.meta.env.VITE_APP_ROOT == "true") return url;
-
-  // 默认地址
-  //@ts-ignore
-  return import.meta.env.VITE_APP_API_URL + url;
-};

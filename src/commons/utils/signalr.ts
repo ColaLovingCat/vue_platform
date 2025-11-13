@@ -1,6 +1,7 @@
-// src/services/signalrService.ts
+import { logger } from "@/commons/utils/logger";
+const log = logger.create("SignalR");
 
-import * as signalR from '@microsoft/signalr';
+import * as signalR from "@microsoft/signalr";
 
 class SignalRService {
   public isActive = false;
@@ -12,7 +13,7 @@ class SignalRService {
   async startConnection(host: string): Promise<void> {
     if (!this.connection) {
       this.connection = new signalR.HubConnectionBuilder()
-        .withUrl(host + '/chatHub', {
+        .withUrl(host + "/chatHub", {
           skipNegotiation: true,
           transport: signalR.HttpTransportType.WebSockets,
         })
@@ -20,27 +21,27 @@ class SignalRService {
         .configureLogging(signalR.LogLevel.Information)
         .build();
 
-      this.connection.on('ReceiveMessage', (msg: any) => {
-        console.log('[SignalR]: ', 'ReceiveMessage');
+      this.connection.on("ReceiveMessage", (msg: any) => {
+        log.log("ReceiveMessage");
         if (this.listener) {
           this.listener(msg);
         }
       });
 
       this.connection.onclose(() => {
-        console.log('[SignalR]: ', 'Closed');
+        log.log("Closed");
         this.isActive = false;
       });
 
       try {
         await this.connection.start();
-        console.log('[SignalR]: ', 'Connected');
+        log.log("Connected");
         this.isActive = true;
         if (this.afterStart) {
           this.afterStart();
         }
       } catch (err) {
-        console.error('[SignalR]: ', 'Error while starting connection: ' + err);
+        log.error("Error while starting connection: " + err);
         this.connection = null;
       }
     }
@@ -50,10 +51,10 @@ class SignalRService {
     if (this.connection) {
       try {
         await this.connection.start();
-        console.log('[SignalR]: ', 'Connected');
+        log.log("Connected");
         this.isActive = true;
       } catch (err) {
-        console.error('[SignalR]: ', 'Error while starting connection: ' + err);
+        log.error("Error while starting connection: " + err);
         this.connection = null;
       }
     }
@@ -63,10 +64,10 @@ class SignalRService {
     if (this.connection) {
       try {
         await this.connection.stop();
-        console.log('[SignalR]: ', 'Disconnected');
+        log.log("Disconnected");
         this.isActive = false;
       } catch (err) {
-        console.error('[SignalR]: ', 'Error while stopping connection: ' + err);
+        log.error("Error while stopping connection: " + err);
       } finally {
         this.connection = null;
       }
@@ -76,13 +77,13 @@ class SignalRService {
   async sendMessage(message: any): Promise<void> {
     if (this.connection) {
       try {
-        await this.connection.invoke('SendMessage', message);
-        console.log('[SignalR]: ', 'SendMessage');
+        await this.connection.invoke("SendMessage", message);
+        log.log("SendMessage");
       } catch (err) {
-        console.error('[SignalR]: ', 'Error while sending message: ' + err);
+        log.error("Error while sending message: " + err);
       }
     } else {
-      console.error('[SignalR]: ', 'No active connection to send message');
+      log.error("No active connection to send message");
     }
   }
 

@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 
 import * as extend from '@/commons/utils/extends'
 import * as messages from '@/commons/utils/messages'
+import { checkAPI } from '@/commons/types/api.types';
 
 import { WebSocketService } from '@/commons/utils/websocket'
 import chartView from '@/components/echarts/view.vue'
@@ -14,6 +15,9 @@ import 'katex/dist/katex.min.css'
 //@ts-ignore
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
+
+import { logger } from '@/commons/utils/logger'
+const log = logger.create("Chat");
 
 const debug = true
 
@@ -107,7 +111,7 @@ const emit = defineEmits<{
   (event: 'received', values: any): void // 回答已接收完
   (event: 'cleared', values: any): void
   (event: 'clickItem', values: any): void // 点击了某一元素 table|chart
-  (event: 'update:thread_id', values: any): void // 点击了某一元素 table|chart
+  (event: 'update:thread_id', values: any): void
 }>()
 // props
 const props = defineProps({
@@ -134,50 +138,34 @@ const props = defineProps({
   }
 })
 
-const chatInfos: {
-  host: string,
-  isActive: boolean,
-  //
-  thread_id: string,
-  connectionID: string,
-  botName: string,
-  //
-  message: string,
-  messages: ChatRecord[]
-  isAutoScroll: boolean,
-  //
-  // limit: number,
-  count: number,
-  timer: any,
-  //
-  isThinking: boolean,
-} = reactive({
+const apiUrl = checkAPI('/ws')
+const chatInfos = reactive<Record<string, any>>({
   // wb状态
-  host: `wss://${new URL(import.meta.env.VITE_APP_COMMON_URL).host}/ws`,
+  host: apiUrl.replace(/^http/, 'ws'),
   isActive: false,
   //
-  thread_id: '', // 聊天的唯一ID，可以连接上下文
+  serverID: '',
+  socketID: '',
+  //
+  // thread_id: '', // 聊天的唯一ID，可以连接上下文
   connectionID: '', // 当前对话的ID
   botName: '小博',
   //
   message: '',
-  messages: [],
+  messages: [] as ChatRecord[],
   isAutoScroll: true,  // 是否自动滚动
   // 计时器
-  // limit: 5,
   count: 0,
-  timer: null,
+  timer: null as any,
   //
   isThinking: false,
+  isSearch: false,
+  isImage: false,
+  isCode: false,
 })
 
 let wss: WebSocketService | null = null;
 onMounted(async () => {
-  // 生成唯一ID
-  chatInfos.thread_id = extend.ExString.uuid()
-  emit('update:thread_id', chatInfos.thread_id);
-  if (debug) console.log('[Chat] thread_id:', chatInfos.thread_id)
-
   // 启用websocket服务
   wss = new WebSocketService(chatInfos.host, receiveMessage,
     () => {
@@ -203,7 +191,7 @@ watch(
   () => props.changeMark,
   async () => {
     if (props.record) {
-      if (debug) console.log('[Chat] watch: ', props.record)
+      if (debug) log.log('[Chat] watch: ', props.record)
       let record: any = { ...props.record }
       //
       switch (record.action) {
@@ -284,7 +272,7 @@ const sendMessage = (event?: KeyboardEvent) => {
 
   // 是否有其他聊天正在继续
   if (chatInfos.connectionID != '') {
-    if (debug) console.log('[Chat] another conversation wait')
+    if (debug) log.log('another conversation wait')
     messages.showInfo(
       'Another conversation is currently in progress. Please wait until it is completed.'
     )
@@ -365,7 +353,7 @@ const copyToClipboard = async (message: any) => {
 };
 // 重新生成该问题
 const regenerate = (values: any) => {
-  if (debug) console.log('[Chat] regenerate')
+  if (debug) log.log('regenerate')
   const connectionID = values.connectionID
   const message = values.messages[0].data
   //
@@ -379,7 +367,7 @@ const regenerate = (values: any) => {
 }
 // 直接提问
 const sendDirect = (message: any) => {
-  if (debug) console.log('[Chat] send directly')
+  if (debug) log.log('send directly')
   chatInfos.message = message
   sendMessage()
 }
@@ -392,11 +380,11 @@ const startTimer = () => {
   chatInfos.count = 0
   chatInfos.timer = setInterval(() => {
     chatInfos.count++
-    if (debug) console.log('[Chat] timer:', chatInfos.count)
+    if (debug) log.log('timer:', chatInfos.count)
 
     // 已超时
     if (chatInfos.count > props.configs.limit) {
-      if (debug) console.log('[Chat] clear timer with timeout')
+      if (debug) log.log('clear timer with timeout')
       messages.showError('The conversation has timed out')
       outTimer()
     }
@@ -404,7 +392,7 @@ const startTimer = () => {
 }
 // 已超时
 const outTimer = () => {
-  if (debug) console.log('[Timer] timeout')
+  if (debug) log.log('timeout')
   let loadingChat = chatInfos.messages.find((a: any) => a.connectionID == chatInfos.connectionID && a.isBot)
   if (loadingChat) {
     // 清除loading元素
@@ -418,7 +406,7 @@ const outTimer = () => {
     ]
   }
   // 结束对话
-  if (debug) console.log('[Chat] end with timeout')
+  if (debug) log.log('end with timeout')
   endChat()
 }
 // 清除超时计时器
@@ -431,24 +419,24 @@ const clearTimer = () => {
 // 初始化聊天信息
 const clearChat = (mark: boolean = false) => {
   // 判断 当前是否有对话正在进行中
-  if (debug) console.log('[Chat] end with clear')
+  if (debug) log.log('end with clear')
   endChat()
   //
   chatInfos.messages = []
-  if (debug) console.log('[Trans] clear')
+  log.log('trans cleared')
   emit('cleared', {})
 
   // 开启新聊天的时候重新生成一个ID
-  if (mark) {
-    chatInfos.thread_id = extend.ExString.uuid()
-    emit('update:thread_id', chatInfos.thread_id);
-  }
+  // if (mark) {
+  //   chatInfos.thread_id = extend.ExString.uuid()
+  //   emit('update:thread_id', chatInfos.thread_id);
+  // }
 }
 // 对话结束
 const endChat = () => {
   // 通知父组件
   if (chatInfos.connectionID != '') {
-    if (debug) console.log('[Trans] received')
+    log.log('trans received')
     emit('received', {
       connectionID: chatInfos.connectionID
     })
@@ -461,16 +449,27 @@ const endChat = () => {
 // Receive
 // 处理回复信息
 const receiveMessage = (msg: any): any => {
+  const message: any = formatStr(msg.message);
+  const remarks: any = formatStr(msg.remarks);
+
+  if (msg.category == "init") {
+    chatInfos.serverID = message.serverID
+    chatInfos.socketID = message.socketID
+    emit('update:thread_id', message.socketID);
+    //
+    log.log('init', message)
+    return false
+  }
+
   if (chatInfos.connectionID == msg.connectionID) {
+    if (debug) log.log('message:', msg)
+
     // 重置当前计时器
     if (chatInfos.timer) {
       clearTimer()
-      if (debug) console.log('[Chat] clear timer with receive')
-      // chatInfos.count = 0
-      // if (debug) console.log('[Chat] reset timer with receive')
+      if (debug) log.log('clear timer with receive')
     }
 
-    let remarks = JSON.parse(msg.remarks)
     switch (msg.category) {
       case 'text': {
         // 思考开始
@@ -550,10 +549,23 @@ const receiveMessage = (msg: any): any => {
       })
     } else {
       // 对话结束
-      if (debug) console.log('[Chat] end with response_end')
+      if (debug) log.log('end with response_end')
       endChat()
     }
+
+    return false
   }
+
+  if (chatInfos.socketID == msg.to) {
+    log.log('to me: ', message)
+  }
+}
+const formatStr = (str: string) => {
+  let result = str
+  try {
+    result = JSON.parse(str);
+  } catch (e) { }
+  return result
 }
 
 // 接收信息
@@ -646,7 +658,7 @@ const tableClick = (column: string, row: any) => {
   })
 }
 
-// 处理Chart
+//#region Chart
 const chartClick = (event: any) => {
   emit('clickItem', {
     action: 'chart',
@@ -863,6 +875,12 @@ const formatFPY = (arr: any, params: any) => {
   }
   return result
 }
+//#endregion
+
+const toolsDropMenu = ref(false)
+const toggleSwitch = (action: keyof typeof chatInfos) => {
+  chatInfos[action] = !chatInfos[action]
+}
 
 defineExpose({
   clearChat
@@ -873,7 +891,7 @@ defineExpose({
   <div class="app-chat">
     <!-- 聊天窗口 -->
     <div class="chat-contents" ref="container" @wheel="handleUserScroll">
-      <div class="list-chat">
+      <div class="list-chat" v-if="chatInfos.messages.length > 0">
         <div class="chat-item" v-for="record in chatInfos.messages" :key="record.connectionID"
           :class="record.isBot ? '' : 'item-user'">
           <div class="item-content">
@@ -1029,11 +1047,15 @@ defineExpose({
           </div>
         </div>
       </div>
+      <div class="empty" v-else>
+        <span>What can I do for you?</span>
+      </div>
     </div>
 
     <!-- 信息输入 -->
     <div class="chat-footer" v-if="props.configs.activeInput">
       <div class="box-input">
+        <div class="files"></div>
         <div class="input">
           <a-textarea :autoSize="{ minRows: 1, maxRows: 4 }" v-model:value="chatInfos.message"
             @keydown.enter="sendMessage" placeholder="Message here..." />
@@ -1055,30 +1077,32 @@ defineExpose({
               </a-button>
             </a-tooltip>
             <!-- Tools -->
-            <a-dropdown placement="topLeft">
+            <a-dropdown placement="topLeft" v-model:open="toolsDropMenu">
               <a-button><i class="fa-solid fa-sliders"></i> Tools</a-button>
               <template #overlay>
                 <a-menu>
                   <a-menu-item>
-                    <div class="btn-switch">
+                    <div class="btn-switch" :class="chatInfos.isThinking ? 'active' : ''"
+                      @click="toggleSwitch('isThinking')">
                       <i class="fa-solid fa-lightbulb"></i>
                       Think for longer
                     </div>
                   </a-menu-item>
                   <a-menu-item>
-                    <div class="btn-switch">
+                    <div class="btn-switch" :class="chatInfos.isSearch ? 'active' : ''"
+                      @click="toggleSwitch('isSearch')">
                       <i class="fa-solid fa-globe"></i>
                       Search the web
                     </div>
                   </a-menu-item>
                   <a-menu-item>
-                    <div class="btn-switch">
+                    <div class="btn-switch" :class="chatInfos.isImage ? 'active' : ''" @click="toggleSwitch('isImage')">
                       <i class="fa-solid fa-images"></i>
                       Create an image
                     </div>
                   </a-menu-item>
                   <a-menu-item>
-                    <div class="btn-switch">
+                    <div class="btn-switch" :class="chatInfos.isCode ? 'active' : ''" @click="toggleSwitch('isCode')">
                       <i class="fa-solid fa-code"></i>
                       Write or code
                     </div>

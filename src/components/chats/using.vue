@@ -2,19 +2,17 @@
 import { ref, reactive, onMounted } from 'vue'
 import chats from '@/components/chats/view.vue'
 
-const pageInfos: any = reactive({
-    isOpen: true,
-    //
+const pageInfos = reactive({
     connectionID: '',
     thread_id: '',
-    sendQueues: [],
+    sendQueues: [] as any[],
     isProcessing: false,
 })
 
 const chatRef: any = ref(null)
 const chatConfigs = {
-  activeInput: true,
-  limit: 10,
+  activeInput: true, // 开启输入
+  limit: 10, // 未收到信息超时限制，0则不超时
 }
 let chatRecord: any = null
 const chatMark = ref(false)
@@ -66,7 +64,7 @@ const clickItem = (event: any) => {
 
 <template>
     <div class="box-chats">
-        <chats ref="chatRef" :configs="chatConfigs" :record="chatRecord" :change-mark="chatMark"
+        <chats ref="chatRef" :configs="chatConfigs" :thread_id="pageInfos.thread_id" :record="chatRecord" :change-mark="chatMark"
             @sended="afterSend($event)" @received="afterReceive($event)" @cleared="afterClear()"
             @clickItem="clickItem($event)"></chats>
     </div>

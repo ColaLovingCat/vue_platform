@@ -53,7 +53,6 @@ const pageInfos = reactive({
             b: 5
         },
     },
-    //
     date: {
         value: dayjs("2025/08/31 09:00:00"),
         format: "YYYY/MM/DD HH:mm:ss",
@@ -63,6 +62,40 @@ const pageInfos = reactive({
         gap: dayjs("2025/09/17 09:00:00"),
         period: '7d' as any,
     },
+    object: {
+        sample: {
+            user: {
+                profile: {
+                    name: "Alice",
+                    age: 20
+                }
+            },
+            users: [
+                { name: "Tom", age: 25 },
+                { name: "Jerry", age: 30 }
+            ]
+        },
+        path: 'users.0.name',
+        oData: {
+            and: [
+                { Name: { op: "contains", value: 'ad', not: true } },
+                {
+                    and: [
+                        { Age: { op: "gt", value: 21 } },
+                        { Birthday: { op: "now", link: "eq" } },
+                        { Address: { op: "length", link: "eq", value: 5 } },
+                    ]
+                }
+            ]
+        }
+    },
+    interval: new extend.ExInterval(),
+    schedule: {
+        hour: 0,
+        minute: 0
+    },
+    nextTime: '',
+    localStorage: '',
 })
 
 const calcResult = ref<string | null>(null)
@@ -82,22 +115,16 @@ watchEffect(async () => {
     }
 })
 
-const datas: any = ref()
+const datas = ref<extend.ExPaginator<any> | null>(null);
+const columns = [
+    { title: "ID", dataIndex: "id", key: "id" },
+    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "Age", dataIndex: "age", key: "age" },
+    { title: "Email", dataIndex: "email", key: "email" },
+];
+
 onMounted(() => {
     getlistData()
-    //
-    console.log('Testing: format', extend.ExObject.buildODataFilter({
-        and: [
-            { Name: { op: "contains", value: 'ad', not: true } },
-            {
-                and: [
-                    { Age: { op: "gt", value: 21 } },
-                    { Birthday: { op: "now", link: "eq" } },
-                    { Address: { op: "length", link: "eq", value: 5 } },
-                ]
-            }
-        ]
-    }))
 })
 
 const getlistData = () => {
@@ -120,11 +147,35 @@ const getlistData = () => {
             console.error('Fetch 错误:', err);
         });
 }
+const handleTableChange = (pagination: any) => {
+    if (!datas.value) return;
+
+    datas.value.setSize(pagination.pageSize);
+    datas.value.goTo(pagination.current - 1);
+};
+
+const create = () => {
+    pageInfos.interval.create(() => {
+        console.log('Testing: ', '已运行')
+    }, 5000, "测试", true)
+}
+const schedule = () => {
+    extend.ExInterval.scheduleTask(pageInfos.schedule, (nextTime: Date) => {
+        pageInfos.nextTime = nextTime.toLocaleString()
+    }, true)
+}
+
+const setLocal = () => {
+    extend.ExLocalStore.set('extend-using', { value: 'extend-using' })
+}
+const getLocal = () => {
+    pageInfos.localStorage = extend.ExLocalStore.get('extend-using')
+}
 </script>
 
 <template>
     <div class="sections">
-        <!-- String -->
+        <!-- ExString -->
         <div class="box box-string">
             <div class="box-header">
                 <h4 class="titles">ExString</h4>
@@ -202,7 +253,7 @@ const getlistData = () => {
             </div>
         </div>
 
-        <!-- Number -->
+        <!-- ExNumber -->
         <div class="box box-number">
             <div class="box-header">
                 <h4 class="titles">ExNumber</h4>
@@ -268,7 +319,7 @@ const getlistData = () => {
             </div>
         </div>
 
-        <!-- Array -->
+        <!--  -->
         <div class="box box-array">
             <div class="box-header">
                 <h4 class="titles">ExArray</h4>
@@ -278,7 +329,7 @@ const getlistData = () => {
             </div>
         </div>
 
-        <!-- Date -->
+        <!-- ExDate -->
         <div class="box box-date">
             <div class="box-header">
                 <h4 class="titles">ExDate</h4>
@@ -350,55 +401,181 @@ const getlistData = () => {
             </div>
         </div>
 
+        <!-- ExObject -->
         <div class="box box-object">
             <div class="box-header">
                 <h4 class="titles">ExObject</h4>
             </div>
             <div class="box-contents">
+                <div class="example-item">
+                    <span class="item-func">stringifyParams</span>
+                    <span>{{ extend.ExObject.stringifyParams({ a: "a1", b: "b1" }) }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">typeOf</span>
+                </div>
+                <div class="example-item">
+                    <span>null = {{ extend.ExObject.typeOf(null) }}</span>
+                    <span>undefined = {{ extend.ExObject.typeOf(undefined) }}</span>
+                    <span>"a" = {{ extend.ExObject.typeOf("") }}</span>
+                    <span>1 = {{ extend.ExObject.typeOf(1) }}</span>
+                    <span>true = {{ extend.ExObject.typeOf(true) }}</span>
+                    <span>Symbol() = {{ extend.ExObject.typeOf(Symbol()) }}</span>
+                    <span>10n = {{ extend.ExObject.typeOf(10n) }}</span>
+                </div>
+                <div class="example-item">
+                    <span>{ a: "a1" } = {{ extend.ExObject.typeOf({ a: "a1" }) }}</span>
+                    <span>["a1"] = {{ extend.ExObject.typeOf(["a1"]) }}</span>
+                    <span>function(){} = {{ extend.ExObject.typeOf(function () { }) }}</span>
+                    <span>/abc/ = {{ extend.ExObject.typeOf(/abc/) }}</span>
+                    <span>new Date() = {{ extend.ExObject.typeOf(new Date()) }}</span>
+                    <span>new Error() = {{ extend.ExObject.typeOf(new Error()) }}</span>
+                </div>
+                <div class="example-item">
+                    <span>new Map() = {{ extend.ExObject.typeOf(new Map()) }}</span>
+                    <span>new Set() = {{ extend.ExObject.typeOf(new Set()) }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">getValuebyPath</span>
+                    <a-input v-model:value="pageInfos.object.path" style="width: 200px;" />
+                    <span>{{ extend.ExObject.getValuebyPath(pageInfos.object.sample, pageInfos.object.path) }}</span>
+                </div>
+                <div class="example-item">
+                    <span>{{ pageInfos.object.sample }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">buildODataFilter</span>
+                    <span>{{ extend.ExObject.buildODataFilter(pageInfos.object.oData) }}</span>
+                </div>
             </div>
         </div>
 
+        <!-- ExWeb -->
         <div class="box box-web">
             <div class="box-header">
                 <h4 class="titles">ExWeb</h4>
             </div>
             <div class="box-contents">
+                <div class="example-item">
+                    <span class="item-func">url</span>
+                    <span>{{ extend.ExWeb.url() }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">params</span>
+                    <span>{{ extend.ExWeb.params() }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">query</span>
+                    <span>(encode/decode) {{ extend.ExWeb.query('type') }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">browser</span>
+                    <span>{{ extend.ExWeb.browser() }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">device</span>
+                    <span>{{ extend.ExWeb.device() }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">viewSize</span>
+                    <span>{{ extend.ExWeb.viewSize() }}</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">close</span>
+                    <a-button type="default" @click="extend.ExWeb.close()">close</a-button>
+                </div>
             </div>
         </div>
 
+        <!-- ExInterval -->
+        <div class="box box-promise">
+            <div class="box-header">
+                <h4 class="titles">ExInterval</h4>
+            </div>
+            <div class="box-contents">
+                <div class="example-item">
+                    <span>LastID: {{ pageInfos.interval.lastID }}</span>
+                    <span>IDs: {{ pageInfos.interval.list }}</span>
+                </div>
+                <div class="example-item">
+                    <a-button @click="create">create</a-button>
+                    <a-button @click="pageInfos.interval.stop()">stop</a-button>
+                    <a-button @click="pageInfos.interval.clear()">clear</a-button>
+                    <a-button @click="pageInfos.interval.clearAll()">clearAll</a-button>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">scheduleTask</span>
+                    <a-input-number v-model:value="pageInfos.schedule.hour" style="width: 200px;" :max="24" />
+                    <a-input-number v-model:value="pageInfos.schedule.minute" style="width: 200px;" :max="60" />
+                    <a-button @click="schedule">schedule</a-button>
+                </div>
+                <div class="example-item">
+                    <span>Next Run: {{ pageInfos.nextTime }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ExLocalStore -->
+        <div class="box box-promise">
+            <div class="box-header">
+                <h4 class="titles">ExLocalStore</h4>
+            </div>
+            <div class="box-contents">
+                <div class="example-item">
+                    <a-button @click="setLocal">set</a-button>
+                    <a-button @click="getLocal">get</a-button>
+                </div>
+                <div class="example-item">
+                    <span>{{ pageInfos.localStorage }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ExPaginator -->
         <div class="box box-pagination">
             <div class="box-header">
                 <h4 class="titles">ExPaginator</h4>
             </div>
             <div class="box-contents">
-                <div class="box-show">
-                    <div>
-                        <span @click="datas?.prev()"><i class="fa-solid fa-angle-left"></i></span>
-                        <span>current: {{ datas?.pagination.index }} </span>
-                        <span>total: {{ datas?.pagination.total }} </span>
-                        <span @click="datas?.next()"><i class="fa-solid fa-angle-right"></i></span>
-                    </div>
-                    <table class='table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="row in datas?.rows">
-                                <td>{{ row.name }}</td>
-                                <td>{{ row.date }}</td>
-                                <td>{{ row.title }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="box-code"></div>
+                <a-table v-if="datas" :columns="columns" :dataSource="datas.rows" :pagination="{
+                    current: datas.pagination.index + 1, // 转换成 antd 从1开始
+                    pageSize: datas.pagination.size,
+                    total: datas.pagination.total,
+                    showSizeChanger: true, // 允许修改每页大小
+                    pageSizeOptions: ['5', '10', '20', '50']
+                }" rowKey="_rowNo" @change="handleTableChange" />
             </div>
         </div>
 
+
+        <div class="box box-optimize">
+            <div class="box-header">
+                <h4 class="titles">Optimize</h4>
+            </div>
+            <div class="box-contents">
+                <div class="example-item">
+                    <span class="item-func">promiseFlow</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">promiseQueue</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">debounceFn</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">throttleFn</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">curryFn</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">composeFns</span>
+                </div>
+                <div class="example-item">
+                    <span class="item-func">singletonFn</span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
