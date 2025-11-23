@@ -3,7 +3,7 @@ import type { SystemInfos } from "@/commons/types/datas.types";
 const appConfigs: SystemInfos = {
   name: "Demo System",
   loginMode: "sso-only",
-  azure: "request",
+  azure: "configs",
   azureAuto: false,
   azureConfigs: {
     host: "https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/authorize",
