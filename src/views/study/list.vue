@@ -42,6 +42,11 @@ const pageInfos = reactive({
             cover: 'suan.png',
             path: '/study-suan',
         },
+        {
+            name: 'unity',
+            cover: 'suan.png',
+            path: '/study-unity',
+        },
     ],
 })
 
