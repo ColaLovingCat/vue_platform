@@ -180,19 +180,34 @@ const showModal = (action: string, values: any) => {
                         <div id="section-010102">
                             <h4>1.2 目录</h4>
                             <div class="sub-contents">
-                                <p>>Assets</p>
-                                <p>-Animation //动画</p>
-                                <p>-Audios //音频</p>
-                                <p>-Materials //材质</p>
-                                <p>-Packages //资源</p>
-                                <p>-Plugins //插件</p>
-                                <p>-Prefabs //预制体</p>
-                                <p>-Scenes //场景</p>
-                                <p>-Scripts //脚本</p>
-                                <p>-Settings //输入系统</p>
-                                <p>-Sprites //精灵</p>
-                                <p>-Tilemaps //瓦片地图</p>
-                                <p>-Tiles //瓦片</p>
+                                <p>Assets/</p>
+                                <p>├─ Animation/           # 动画资源</p>
+                                <p>│   ├─ .anim            # 动画剪辑</p>
+                                <p>│   └─ AnimatorController</p>
+                                <p>├─ Audios/              # 音频</p>
+                                <p>│   ├─ BGM/             # 背景音乐</p>
+                                <p>│   └─ SFX/             # 音效</p>
+                                <p>├─ Materials/           # 材质</p>
+                                <p>│   └─ .mat             # 材质文件</p>
+                                <p>├─ Packages/            # Unity Package 管理</p>
+                                <p>├─ Plugins/             # 第三方插件 / DLL</p>
+                                <p>├─ Prefabs/             # 预制体</p>
+                                <p>│   ├─ Characters/      # 角色预制体</p>
+                                <p>│   ├─ Props/           # 道具 / 物件</p>
+                                <p>│   └─ UI/              # UI 预制体</p>
+                                <p>├─ Scenes/              # 场景</p>
+                                <p>│   └─ .unity</p>
+                                <p>├─ Scripts/             # 脚本</p>
+                                <p>│   ├─ Controllers/     # 逻辑控制器</p>
+                                <p>│   ├─ Managers/        # 游戏管理器</p>
+                                <p>│   └─ UI/              # UI 脚本</p>
+                                <p>├─ Settings/            # 项目设置</p>
+                                <p>│   └─ Input System/    # 输入系统等</p>
+                                <p>├─ Sprites/             # 2D 精灵</p>
+                                <p>│   ├─ Characters/      # 角色精灵</p>
+                                <p>│   └─ UI/              # UI 精灵</p>
+                                <p>├─ Tilemaps/            # 瓦片地图对象</p>
+                                <p>└─ Tiles/               # 瓦片资源</p>
                             </div>
                         </div>
                     </div>
