@@ -386,8 +386,8 @@ const formatTime = (excelTime: number) => {
   position: absolute;
   right: 20px;
   bottom: 20px;
-  width: 80vw;
-  height: 800px;
+  width: 500px;
+  height: 200px;
   background: #fff;
   z-index: 999;
 }
