@@ -53,52 +53,204 @@ onMounted(() => { })
 </script>
 
 <template>
-    <div class="list">
-        <div class="wiki-item" v-for="item in datas" @click="pageGo(item.path, item.query)">
-            <img :src="`/docs/covers/${item.img}`" alt="" srcset="">
-            <div class="item-titles">{{ item.title }}</div>
+    <div class="entertainment-wrapper">
+        <div class="list">
+            <div class="wiki-item" v-for="(item, index) in datas" :key="index" @click="pageGo(item.path, item.query)"
+                :style="{ '--order': index }">
+                <!-- 装饰性光晕背景 -->
+                <div class="item-glow"></div>
+
+                <div class="card-content">
+                    <div class="img-wrapper">
+                        <img :src="`/docs/covers/${item.img}`" alt="">
+                        <!-- 右上角小标签增加可爱度 -->
+                        <div class="tag">GO!</div>
+                    </div>
+
+                    <div class="info">
+                        <span class="title">{{ item.title }}</span>
+                        <div class="decoration">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.list {
-    width: 1400px;
-    margin: 0 auto;
+.entertainment-wrapper {
+    padding: 40px 20px;
     display: flex;
-    flex-wrap: wrap;
-    column-gap: 30px;
-    row-gap: 30px;
+    justify-content: center;
+}
 
-    .wiki-item {
-        cursor: pointer;
+.list {
+    display: grid;
+    // 紧凑布局：卡片宽度减小到 280px，间距减小
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.wiki-item {
+    position: relative;
+    cursor: pointer;
+    // --- 静态动画：呼吸浮动 ---
+    // 通过 --order 偏移动画时间，让卡片看起来此起彼伏
+    animation: float-card 4s ease-in-out infinite;
+    animation-delay: calc(var(--order) * -0.5s);
+
+    .item-glow {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        background: rgba(100, 180, 255, 0.15);
+        filter: blur(30px);
+        border-radius: 20px;
+        transition: 0.5s;
+        z-index: 0;
+    }
+
+    .card-content {
         position: relative;
-        width: 400px;
-        height: 200px;
+        z-index: 1;
+        background: #fff;
+        border-radius: 20px;
+        padding: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5); // 果冻效果
+    }
+
+    .img-wrapper {
+        position: relative;
+        width: 100%;
+        height: 160px; // 高度减小更紧凑
         overflow: hidden;
-        border-radius: 15px;
+        border-radius: 14px;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.6s;
         }
 
-        .item-titles {
+        .tag {
             position: absolute;
-            left: 15px;
-            bottom: 15px;
-            color: #fff;
-            font-size: 21px;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(135deg, #ffdb58 0%, #ffc107 100%);
+            color: #333;
+            padding: 3px 12px;
+            border-radius: 20px 20px 5px 20px; // 不规则圆角更显俏皮
+            font-size: 11px;
+            font-weight: 900;
+            box-shadow: 0 4px 10px rgba(255, 219, 88, 0.4);
+            pointer-events: none; // 防止标签干扰点击图片
+
+            // 动画核心
+            opacity: 0;
+            transform: scale(0.5) translateY(10px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+    }
+
+    .info {
+        margin-top: 12px;
+        padding: 0 5px 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+            font-size: 18px;
             font-weight: 700;
-            transition: 0.6s;
+            color: #444;
+            transition: 0.3s;
         }
 
-        &:hover {
-            .item-titles {
-                font-size: 25px;
+        .decoration {
+            display: flex;
+            gap: 3px;
+
+            span {
+                width: 6px;
+                height: 6px;
+                background: #eee;
+                border-radius: 50%;
+                transition: 0.3s;
             }
         }
+    }
+
+    // --- 鼠标悬停交互 ---
+    &:hover {
+        animation-play-state: paused; // 悬停时停止浮动，聚焦交互
+
+        .card-content {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: #64b5f6;
+        }
+
+        .item-glow {
+            background: rgba(100, 180, 255, 0.4);
+            transform: scale(1.2);
+        }
+
+        .img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .tag {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotate(-5deg); // 悬停时微微向左倾斜
+        }
+
+        .info {
+            .title {
+                color: #1976d2;
+            }
+
+            .decoration span {
+                background: #64b5f6;
+
+                &:nth-child(2) {
+                    transform: translateY(-5px);
+                    background: #ff7043;
+                }
+            }
+        }
+    }
+
+    // 点击时的回弹感
+    &:active {
+        .card-content {
+            transform: scale(0.95);
+        }
+    }
+}
+
+// 静态浮动动画定义
+@keyframes float-card {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-6px) rotate(1deg);
+    }
+
+    66% {
+        transform: translateY(-3px) rotate(-1deg);
     }
 }
 </style>
