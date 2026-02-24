@@ -74,7 +74,6 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 // 1. 初始化读取数据
 onMounted(async () => {
-
     const currentYear = new Date().getFullYear();
     const years = [];
     for (let year = 2025; year <= currentYear; year++) {
@@ -111,7 +110,8 @@ const processData = () => {
     // A. 处理车手积分榜 (Standings)
     const currentYearResult = result.filter(r => r.year === year);
 
-    const processedDrivers = drivers.map((d: any) => {
+    const yearDrivers = drivers.filter(r => r.year === year);
+    const processedDrivers = yearDrivers.map((d: any) => {
         const driverResults = currentYearResult.filter(r => r.driverName === d.name);
 
         // 计算各项指标
@@ -293,7 +293,7 @@ const formatTime = (excelTime: number) => {
                                 <div class="round-tag">ROUND {{ round.round }}</div>
                                 <div class="country-line">
                                     <img :src="`/docs/flags/${round.country}.png`" class="mini-flag" />
-                                    <span class="country-name">{{ round.country }}</span>
+                                    <span class="country-name">{{ round.country }}<template v-if="round.city"> - {{ round.city }}</template></span>
                                     <span class="sprint-badge" v-if="round.hasSprint">SPRINT</span>
                                 </div>
                                 <div class="circuit-name">{{ round.circuit }}</div>
@@ -318,7 +318,7 @@ const formatTime = (excelTime: number) => {
                                     :style="{ '--order': index }">
                                     <div class="session-meta">
                                         <span class="step-tag">{{ race.step }}</span>
-                                        <span class="session-time">{{ formatTime(race.startTime) }}</span>
+                                        <span class="session-time">{{ formatTime(race.startTime) }}<template v-if="race.endTime"> - {{ formatTime(race.endTime) }}</template></span>
                                     </div>
 
                                     <!-- 赛车赛道区域 -->
@@ -521,6 +521,16 @@ $f1-silver: #949498;
     &:hover {
         transform: translateX(10px);
         border-color: $f1-red;
+
+        .car-img {
+            animation: carDriveIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            animation-delay: calc(var(--order) * 0.15s + 0.3s);
+        }
+
+        .speed-lines {
+            animation: speedFade 0.8s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.15s + 0.3s);
+        }
     }
 
     &.active {
@@ -649,20 +659,7 @@ $f1-silver: #949498;
         .session-item {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-
-            /* 核心：只有当父级 .f1-card 是 .active 时才触发赛车进场 */
-            .f1-card.active & {
-                .car-img {
-                    animation: carDriveIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-                    animation-delay: calc(var(--order) * 0.15s + 0.3s);
-                }
-
-                .speed-lines {
-                    animation: speedFade 0.8s ease-out forwards;
-                    animation-delay: calc(var(--order) * 0.15s + 0.3s);
-                }
-            }
+            gap: 6px;  
         }
 
         .session-meta {
@@ -727,10 +724,12 @@ $f1-silver: #949498;
             padding-right: 10px;
 
             .car-img {
+                width: 95px;
                 height: 28px;
                 z-index: 2;
-                transform: translateX(100vw); // 初始位置在屏幕外
+                transform: translateX(-150px); // 初始位置在屏幕外
                 will-change: transform;
+                opacity: 0;
 
                 &.is-placeholder {
                     filter: brightness(0) opacity(0.2); // 未开始的比赛车子是阴影
@@ -765,7 +764,7 @@ $f1-silver: #949498;
 /* 进场动画 */
 @keyframes carDriveIn {
     0% {
-        transform: translateX(150px) skewX(-15deg);
+        transform: translateX(-150px) skewX(-15deg);
         opacity: 0;
     }
     70% {
