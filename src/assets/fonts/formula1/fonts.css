@@ -1,0 +1,22 @@
+/* Formula1 */
+
+@font-face {
+  font-family: "Formula1";
+  src: url("./Formula1-Regular.woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("./Formula1-Bold.woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("./Formula1-Black.woff2");
+  font-weight: 800;
+  font-style: normal;
+}

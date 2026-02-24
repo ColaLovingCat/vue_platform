@@ -45,6 +45,11 @@ const routes = [
     name: "f1",
     component: () => import("@/views/func/f1/view.vue"),
   },
+  {
+    path: "/f1_old",
+    name: "f1_old",
+    component: () => import("@/views/func/f1/view_old.vue"),
+  },
 
   // Games
   {
