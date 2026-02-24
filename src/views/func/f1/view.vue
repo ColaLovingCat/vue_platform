@@ -108,21 +108,21 @@ const processData = () => {
     const { rounds, races, result, drivers, teams } = rawData;
 
     // A. 处理车手积分榜 (Standings)
-    const currentYearResult = result.filter(r => r.year === year);
-
     const yearDrivers = drivers.filter(r => r.year === year);
+
+    const currentYearResult = result.filter(r => r.year === year);
     const processedDrivers = yearDrivers.map((d: any) => {
+    console.log('Testin:', d.name);
         const driverResults = currentYearResult.filter(r => r.driverName === d.name);
 
+    console.log('Testing', driverResults);
         // 计算各项指标
         const score = driverResults.reduce((sum, r) => sum + (Number(r.score) || 0), 0);
         const wins = driverResults.filter(r => r.step === 'Race' && r.position === 1).length;
         const podiums = driverResults.filter(r => r.step === 'Race' && r.position <= 3).length;
         const poles = driverResults.filter(r => r.step === 'Qualifying' && r.position === 1).length;
 
-        // 获取所属车队颜色 (取最后一场比赛的车队为准)
-        const lastTeamName = driverResults.length > 0 ? driverResults[driverResults.length - 1].teamName : d.team;
-        const teamInfo = teams.find(t => t.name === lastTeamName || t.newName === lastTeamName);
+        const teamInfos = teams.find(t => t.code === d.teamCode);
 
         return {
             ...d,
@@ -130,8 +130,7 @@ const processData = () => {
             win: wins,
             award: podiums,
             first: poles,
-            color: teamInfo?.color || '#999',
-            teamCode: teamInfo?.code || 'TBC'
+            color: teamInfos?.color || '#999',
         };
     });
 
@@ -389,8 +388,11 @@ const formatTime = (excelTime: number) => {
                             <div class="info-side">
                                 <div class="driver-meta">
                                     <div class="number-flag">
-                                        <img class="driver-no" :src="`/docs/f1/nos/${driver.no}.png`" alt="" srcset="">
                                         <img :src="`/docs/flags/${driver.country}.png`" class="flag" />
+                                        <img :src="`/docs/f1/teams/${driver.teamCode}.png`" class="flag" />
+                                    </div>
+                                    <div class="number-flag">
+                                        <img class="driver-no" :src="`/docs/f1/nos/${driver.no}.png`" alt="" srcset="">
                                     </div>
                                     <div class="driver-name">
                                         <span class="fname">{{ driver.name.split(' ')[0] }}</span>
@@ -807,7 +809,7 @@ $f1-silver: #949498;
     border-radius: 16px;
 
     .list-drivers {
-        height: calc(100vh - 580px);
+        height: calc(100vh - 550px);
         overflow-y: auto;
         padding-right: 8px;
 
