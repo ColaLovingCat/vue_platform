@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, onMounted, computed, watch } from 'vue'
+import { reactive, onMounted, computed, watch, nextTick, onUnmounted } from 'vue'
 
 import chartView from '@/components/echarts/view.vue'
 
@@ -13,7 +13,10 @@ const pageInfos = reactive({
     //
     currentRound: '',
     rounds: [] as any[],
+    //
+    viewMode: 'drivers', // 'drivers' | 'teams'
     drivers: [] as any[],
+    constructors: [] as any[],
     // Echarts 配置
     changeMark: false,
     options: {
@@ -64,11 +67,40 @@ let rawData: {
     rounds: any[],
     races: any[],
     result: any[],
+    circuits: any[],
     drivers: any[],
-    teams: any[]
+    teams: any[],
+    mapping: any[]
 } | null = null;
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+let observer: IntersectionObserver | null = null;
+const initObserver = () => {
+    // 创建观察器
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // 当元素进入视窗 (isIntersecting 为 true)
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-active');
+
+                // 如果你希望动画只执行一次，可以停止观察该元素
+                // observer?.unobserve(entry.target);
+            } else {
+                // 如果你希望每次滚出去再滚回来都重复执行，可以移除类名
+                entry.target.classList.remove('animate-active');
+            }
+        });
+    }, {
+        threshold: 0.2, // 元素出现 20% 时触发
+        rootMargin: '0px 0px -50px 0px' // 距离底部还有50px时提前触发，观感更顺滑
+    });
+
+    // 获取所有需要观察的卡片
+    const cards = document.querySelectorAll('.f1-card');
+    cards.forEach(card => observer?.observe(card));
+};
 
 // --- 核心逻辑 ---
 
@@ -79,7 +111,7 @@ onMounted(async () => {
     for (let year = 2025; year <= currentYear; year++) {
         years.push(year);
     }
-    pageInfos.year = currentYear
+    pageInfos.year = 2025 // currentYear
     pageInfos.availableYears = years
 
     // 假设 F1.xlsx 包含多年数据，或者你根据年份动态拼路径
@@ -88,41 +120,69 @@ onMounted(async () => {
 
     // 初始处理
     processData();
+
+    // 确保数据渲染完成后再绑定观察器
+    await nextTick();
+    initObserver();
+});
+
+onUnmounted(() => {
+    // 销毁观察器防止内存泄漏
+    if (observer) {
+        observer.disconnect();
+    }
 });
 
 // 2. 监听年份变化
-watch(() => pageInfos.year, () => {
+watch(() => pageInfos.year, async () => {
     if (rawData) {
         processData();
+
+        // 等待 DOM 更新后重新绑定
+        await nextTick();
+        if (observer) {
+            observer.disconnect(); // 先清空旧的
+        }
+        initObserver(); // 再绑定新的
     }
 });
 
 // 3. 数据处理主函数
-const DEFAULT_TEAM_COLOR = '#33333d'; // 默认中性深灰
-const DEFAULT_CAR_IMG = 'generic';   // 对应一张通用的赛车剪影图
-const DEFAULT_NO_IMG = 'tbc';        // 对应一张显示“?”或“--”的号码图
 const processData = () => {
     if (!rawData) return;
 
     const { year } = pageInfos;
-    const { rounds, races, result, drivers, teams } = rawData;
+    const { rounds, races, result, circuits, drivers, teams, mapping } = rawData;
 
-    // A. 处理车手积分榜 (Standings)
+    // 当前年份的信息
+    const yearRounds = rounds.filter(r => r.year == year);
+    races.map((race: any) => {
+        race.date = formatDate(race.date)
+        race.week = weekDays[race.date.getDay()];
+        race.startTime = formatTime(race.startTime)
+        if (race.endTime) race.endTime = formatTime(race.endTime)
+    })
     const yearDrivers = drivers.filter(r => r.year === year);
+    const yearResult = result.filter(r => r.year === year);
+    yearResult.map((r: any) => {
+        if (r.teamName) {
+            let teamName = mapping.find((a: any) => (a.teamName == r.teamName));
+            r.teamCode = teamName.teamCode
+        }
+    })
+    const yearTeams = teams.filter(r => r.year == year);
 
-    const currentYearResult = result.filter(r => r.year === year);
+    // 处理车手积分榜
     const processedDrivers = yearDrivers.map((d: any) => {
-    console.log('Testin:', d.name);
-        const driverResults = currentYearResult.filter(r => r.driverName === d.name);
+        const driverResults = yearResult.filter(r => r.driverName === d.name);
 
-    console.log('Testing', driverResults);
         // 计算各项指标
         const score = driverResults.reduce((sum, r) => sum + (Number(r.score) || 0), 0);
         const wins = driverResults.filter(r => r.step === 'Race' && r.position === 1).length;
         const podiums = driverResults.filter(r => r.step === 'Race' && r.position <= 3).length;
         const poles = driverResults.filter(r => r.step === 'Qualifying' && r.position === 1).length;
 
-        const teamInfos = teams.find(t => t.code === d.teamCode);
+        const teamInfos = yearTeams.find(t => t.code === d.teamCode);
 
         return {
             ...d,
@@ -133,75 +193,105 @@ const processData = () => {
             color: teamInfos?.color || '#999',
         };
     });
-
-    // 按积分排序
     pageInfos.drivers = extend.ExArray.sortbyEle(processedDrivers, (a: any) => a.score, 'desc');
 
-    // B. 处理赛程 (Calendar)
-    const yearRounds = rounds.filter(r => r.year == year);
+    // 处理车队积分榜
+    const constructorData = yearTeams.map((team: any) => {
+        const teamResults = yearResult.filter(r => r.teamCode === team.code);
+
+        // 计算总分
+        const totalScore = teamResults.reduce((sum, r) => sum + (Number(r.score) || 0), 0);
+
+        // 找出该车队当年的车手 (去重)
+        const teamDriverNames = [...new Set(teamResults.map(r => r.driverName))];
+        const teamDriverInfos = teamDriverNames.map(name => {
+            return drivers.find(d => d.name === name);
+        }).filter(d => d); // 过滤掉找不到的情况
+
+        return {
+            ...team,
+            score: totalScore,
+            drivers: teamDriverInfos, // 包含 code, name 等
+        };
+    });
+    pageInfos.constructors = extend.ExArray.sortbyEle(constructorData, (t: any) => t.score, 'desc');
+
+    // 处理赛程
+    let nextSessionFound = false;
     pageInfos.rounds = yearRounds.map(round => {
+        const mapInfos = circuits.find(c => c.id === round.circuitID);
         const roundRaces = races.filter(ra => ra.year === year && ra.round === round.round);
 
         // 未找到比赛信息
         if (roundRaces.length === 0) return {
             ...round,
+            ...mapInfos,
             month: 'TBC',
             range: '---',
             hasSprint: false,
             races: []
         };
 
-        // 计算日期范围
-        const startRace = roundRaces[0];
-        const endRace = roundRaces[roundRaces.length - 1];
-        const startDate = formatDate(startRace.date);
-        const endDate = formatDate(endRace.date);
-
         // 找出该分站的冠军（Race 步骤的第一名）
         let showRaces = roundRaces.filter((a: any) => a.isShow == 1).map((race: any) => {
             // 查找该 Session 的结果
-            let resultInfos = result.filter((a: any) =>
-                a.year == race.year &&
+            let resultInfos = yearResult.filter((a: any) =>
                 a.round == race.round &&
                 a.step == race.step &&
                 a.position == 1 // 只要第一名
             );
 
-            if (resultInfos.length > 0) {
+            let isFinished = resultInfos.length > 0;
+            let isNext = false;
+
+            // 如果这轮还没跑，且之前还没标记过 Next，那么这一场就是我们要强调的 Next
+            if (!isFinished && !nextSessionFound) {
+                isNext = true;
+                nextSessionFound = true; // 之后的所有场次都不会再被标记为 Next
+            }
+
+            if (isFinished) {
                 // 情况 A：比赛已结束，有胜者数据
                 let winner = resultInfos[0];
-                let teamInfos = teams.find((a: any) => (a.name == winner.teamName || a.newName == winner.teamName));
+                let teamInfos = yearTeams.find((a: any) => (a.code == winner.teamCode));
 
                 return {
                     ...race,
                     no: winner.driverNo,
-                    team: teamInfos?.code || 'TBC',
-                    color: teamInfos?.color || DEFAULT_TEAM_COLOR,
-                    isFinished: true // 标记已完赛
+                    team: teamInfos.code,
+                    color: teamInfos.color,
+                    isFinished: true, // 标记已完赛
+                    isNext: false
                 };
             } else {
                 // 情况 B：比赛未开始或无结果
                 return {
                     ...race,
-                    no: DEFAULT_NO_IMG,
-                    team: DEFAULT_CAR_IMG,
-                    color: DEFAULT_TEAM_COLOR,
-                    isFinished: false // 标记未完赛
+                    no: '#33333d',
+                    team: 'TBC',
+                    color: 'TBC',
+                    isFinished: false, // 标记未完赛
+                    isNext: isNext
                 };
             }
         });
 
+        // 计算日期范围
+        const startRace = roundRaces[0];
+        const endRace = roundRaces[roundRaces.length - 1];
+
         return {
             ...round,
-            month: months[startDate.getMonth()],
-            range: `${startDate.getDate()}-${endDate.getDate()}`,
+            ...mapInfos,
+            month: months[startRace.date.getMonth()],
+            range: `${startRace.date.getDate()}-${endRace.date.getDate()}`,
             hasSprint: roundRaces.some(ra => ra.step === 'Sprint'),
             races: showRaces,
         };
     });
 
-    // C. 更新图表
-    updateChart(yearRounds, currentYearResult);
+    // 更新图表
+    updateChart(yearRounds, yearResult);
 };
 
 // 4. 更新图表逻辑
@@ -250,7 +340,7 @@ const formatDate = (excelDate: number) => {
 }
 const formatTime = (excelTime: number) => {
     // 计算总秒数
-    const totalSeconds = excelTime * 24 * 60 * 60;
+    const totalSeconds = Math.round(excelTime * 24 * 60 * 60); // 四舍五入修正
     // 计算小时、分钟和秒
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -292,7 +382,8 @@ const formatTime = (excelTime: number) => {
                                 <div class="round-tag">ROUND {{ round.round }}</div>
                                 <div class="country-line">
                                     <img :src="`/docs/flags/${round.country}.png`" class="mini-flag" />
-                                    <span class="country-name">{{ round.country }}<template v-if="round.city"> - {{ round.city }}</template></span>
+                                    <span class="country-name">{{ round.country }}<template v-if="round.city"> - {{
+                                        round.city }}</template></span>
                                     <span class="sprint-badge" v-if="round.hasSprint">SPRINT</span>
                                 </div>
                                 <div class="circuit-name">{{ round.circuit }}</div>
@@ -314,28 +405,46 @@ const formatTime = (excelTime: number) => {
                         <div class="card-details" v-if="round.races && round.races.length">
                             <div class="sessions-grid">
                                 <div v-for="(race, index) in round.races" :key="race.step" class="session-item"
-                                    :style="{ '--order': index }">
+                                    :class="{ 'is-next-session': race.isNext }" :style="{ '--order': index }">
                                     <div class="session-meta">
                                         <span class="step-tag">{{ race.step }}</span>
-                                        <span class="session-time">{{ formatTime(race.startTime) }}<template v-if="race.endTime"> - {{ formatTime(race.endTime) }}</template></span>
+                                        <div class="meta-right">
+                                            <span class="day-tag">{{ race.week }}</span>
+                                            <span class="session-time">{{ race.startTime }}<template
+                                                    v-if="race.endTime"> -
+                                                    {{ race.endTime }}</template></span>
+                                        </div>
                                     </div>
 
                                     <!-- 赛车赛道区域 -->
-                                    <div class="winner-preview" :style="{ '--team-color': race.color || '#333' }">
+                                    <div class="winner-preview"
+                                        :class="{ 'is-upcoming': !race.isFinished, 'is-next-bg': race.isNext }"
+                                        :style="{ '--team-color': race.isNext ? '#e10600' : race.color }">
+                                        <!-- 如果是 Next，增加一个背景流光效果 -->
+                                        <div class="next-glow-line" v-if="race.isNext"></div>
+
                                         <!-- 赛道背景装饰线 -->
                                         <div class="track-line"></div>
 
-                                        <!-- 赛车图片：带动画 -->
-                                        <div class="car-anim-container">
-                                            <img :src="`/docs/f1/cars/${race.team || 'generic'}.png`" class="car-img"
-                                                :class="{ 'is-placeholder': !race.isFinished }" />
-                                            <!-- 尾迹云动画 (可选) -->
-                                            <div class="speed-lines" v-if="race.isFinished"></div>
+                                        <!-- 特殊展示：未开始时显示“发车灯”状态 -->
+                                        <div v-if="!race.isFinished" class="lights-out-status">
+                                            <template v-if="race.isNext">
+                                                <div class="light-dot" v-for="i in 5" :key="i"></div>
+                                            </template>
+                                            <span class="status-label" :class="{ 'highlight': race.isNext }">
+                                                {{ race.isNext ? 'UP NEXT' : 'READY TO RACE' }}
+                                            </span>
                                         </div>
-
-                                        <!-- 车号展示 (可选) -->
+                                        <!-- 车号展示 -->
                                         <div class="driver-no-overlay" v-if="race.isFinished">
                                             {{ race.no }}
+                                        </div>
+                                        <!-- 赛车图片：带动画 -->
+                                        <div class="car-anim-container">
+                                            <img :src="`/docs/f1/cars/${race.team}.png`" class="car-img"
+                                                :class="{ 'is-placeholder': !race.isFinished }" />
+                                            <!-- 尾迹云动画 -->
+                                            <div class="speed-lines" v-if="race.isFinished"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -349,63 +458,122 @@ const formatTime = (excelTime: number) => {
             <aside class="sidebar-section">
                 <!-- 积分榜 -->
                 <div class="standings-container">
-                    <h3 class="section-title">DRIVER STANDINGS</h3>
-                    <div class="list-drivers">
-                        <div v-for="(driver, index) in pageInfos.drivers" :key="driver.code" class="driver-f1-card">
-                            <!-- 车队色条指示器 -->
-                            <div class="team-indicator" :style="{ background: driver.color }"></div>
-
-                            <!-- 左侧：战绩数据区 -->
-                            <div class="stats-side">
-                                <div class="top-main-stats">
-                                    <div class="rank-box">
-                                        <span class="value">{{ index + 1 }}</span>
-                                        <span class="label">RANK</span>
-                                    </div>
-                                    <div class="points-box">
-                                        <span class="value">{{ driver.score }}</span>
-                                        <span class="label">PTS</span>
-                                    </div>
-                                </div>
-
-                                <div class="bottom-minor-stats">
-                                    <div class="stat-pill">
-                                        <span class="t">POL</span>
-                                        <span class="v">{{ driver.first }}</span>
-                                    </div>
-                                    <div class="stat-pill">
-                                        <span class="t">P1</span>
-                                        <span class="v">{{ driver.win }}</span>
-                                    </div>
-                                    <div class="stat-pill">
-                                        <span class="t">POD</span>
-                                        <span class="v">{{ driver.award }}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 右侧：选手形象与基础信息 -->
-                            <div class="info-side">
-                                <div class="driver-meta">
-                                    <div class="number-flag">
-                                        <img :src="`/docs/flags/${driver.country}.png`" class="flag" />
-                                        <img :src="`/docs/f1/teams/${driver.teamCode}.png`" class="flag" />
-                                    </div>
-                                    <div class="number-flag">
-                                        <img class="driver-no" :src="`/docs/f1/nos/${driver.no}.png`" alt="" srcset="">
-                                    </div>
-                                    <div class="driver-name">
-                                        <span class="fname">{{ driver.name.split(' ')[0] }}</span>
-                                        <span class="lname">{{ driver.name.split(' ')[1] }}</span>
-                                    </div>
-                                </div>
-
-                                <!-- 大照片展示区 -->
-                                <div class="photo-wrapper">
-                                    <img :src="`/docs/f1/drivers/${driver.code}.png`" class="driver-img" />
-                                </div>
-                            </div>
+                    <!-- 顶部标题与切换按钮 -->
+                    <div class="standings-header">
+                        <h3 class="section-title">STANDINGS</h3>
+                        <div class="view-switcher">
+                            <button :class="{ active: pageInfos.viewMode === 'drivers' }"
+                                @click="pageInfos.viewMode = 'drivers'">DRIVERS</button>
+                            <button :class="{ active: pageInfos.viewMode === 'teams' }"
+                                @click="pageInfos.viewMode = 'teams'">TEAMS</button>
                         </div>
+                    </div>
+
+                    <div class="list-drivers">
+                        <!-- 视图一：选手列表 (保持你原来的代码) -->
+                        <template v-if="pageInfos.viewMode === 'drivers'">
+                            <div v-for="(driver, index) in pageInfos.drivers" :key="driver.code" class="driver-f1-card">
+                                <!-- 车队色条指示器 -->
+                                <div class="team-indicator" :style="{ background: driver.color }"></div>
+
+                                <!-- 左侧：战绩数据区 -->
+                                <div class="stats-side">
+                                    <div class="top-main-stats">
+                                        <div class="rank-box">
+                                            <span class="value">{{ index + 1 }}</span>
+                                            <span class="label">RANK</span>
+                                        </div>
+                                        <div class="points-box">
+                                            <span class="value">{{ driver.score }}</span>
+                                            <span class="label">PTS</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-minor-stats">
+                                        <div class="stat-pill">
+                                            <span class="t">POL</span>
+                                            <span class="v">{{ driver.first }}</span>
+                                        </div>
+                                        <div class="stat-pill">
+                                            <span class="t">P1</span>
+                                            <span class="v">{{ driver.win }}</span>
+                                        </div>
+                                        <div class="stat-pill">
+                                            <span class="t">POD</span>
+                                            <span class="v">{{ driver.award }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 右侧：选手形象与基础信息 -->
+                                <div class="info-side">
+                                    <!-- 编号 (作为姓名和品牌的过渡) -->
+                                    <div class="mid-section">
+                                        <img :src="`/docs/f1/nos/${driver.code}_${driver.no}.png`"
+                                            class="img-driver-no" />
+                                    </div>
+
+                                    <!-- 车队形象 (显著位置) -->
+                                    <div class="team-header">
+                                        <div class="team-brand">
+                                            <img :src="`/docs/f1/teams/${driver.teamCode}.png`"
+                                                class="img-team-large" />
+                                            <div class="team-divider" :style="{ background: driver.color }"></div>
+                                            <img :src="`/docs/flags/${driver.country}.png`" class="img-flag-mini" />
+                                        </div>
+                                    </div>
+
+                                    <!-- 姓名区域 (压低重心) -->
+                                    <div class="name-footer">
+                                        <div class="fname">{{ driver.name.split(' ')[0] }}</div>
+                                        <div class="lname">{{ driver.name.split(' ')[1] }}</div>
+                                    </div>
+
+                                    <!-- 背景形象区 -->
+                                    <div class="photo-wrapper">
+                                        <img :src="`/docs/f1/drivers/${driver.code}.png`" class="driver-img" />
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- 视图二：车队列表 -->
+                        <template v-else>
+                            <div v-for="(team, index) in pageInfos.constructors" :key="team.code" class="team-f1-card">
+                                <!-- 背景车队代码装饰 (可选，增加设计感) -->
+                                <div class="bg-team-code">{{ team.code }}</div>
+
+                                <!-- 车队色条指示器 -->
+                                <div class="team-indicator" :style="{ background: team.color }"></div>
+
+                                <!-- 1. 左上：排名与积分 -->
+                                <div class="top-left-stats">
+                                    <img :src="`/docs/f1/teams/${team.code}.png`" class="team-logo" />
+                                    <div class="color-divider" :style="{ background: team.color }"></div>
+                                    <div class="points-value">
+                                        <span class="num">{{ team.score }}</span>
+                                        <span class="unit">PTS</span>
+                                    </div>
+                                </div>
+
+                                <!-- 2. 右上：车队图标与名称 -->
+                                <div class="top-right-drivers">
+                                    <div class="list-drivers">
+                                        <div v-for="d in team.drivers" :key="d.code" class="mini-driver-card">
+                                            <div class="driver-img-box">
+                                                <img :src="`/docs/f1/drivers/${d.code}.png`" />
+                                            </div>
+                                            <span class="driver-code">{{ d.code }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. 底层/整体偏下：车辆图片 (作为视觉核心) -->
+                                <div class="bottom-car-visual">
+                                    <img :src="`/docs/f1/cars/${team.code}.png`" class="team-car-img" />
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
 
@@ -520,10 +688,7 @@ $f1-silver: #949498;
     overflow: hidden;
     border: 1px solid #333;
 
-    &:hover {
-        transform: translateX(10px);
-        border-color: $f1-red;
-
+    &.animate-active {
         .car-img {
             animation: carDriveIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
             animation-delay: calc(var(--order) * 0.15s + 0.3s);
@@ -533,6 +698,11 @@ $f1-silver: #949498;
             animation: speedFade 0.8s ease-out forwards;
             animation-delay: calc(var(--order) * 0.15s + 0.3s);
         }
+    }
+
+    &:hover {
+        transform: translateX(10px);
+        border-color: $f1-red;
     }
 
     &.active {
@@ -551,13 +721,13 @@ $f1-silver: #949498;
     .card-body {
         display: flex;
         align-items: center;
-        padding: 20px;
-        gap: 30px;
+        padding: 10px 20px;
+        gap: 20px;
     }
 
     .date-box {
         padding-right: 20px;
-        min-width: 80px;
+        width: 120px;
         border-right: 1px solid #444;
         display: flex;
         flex-direction: column;
@@ -648,7 +818,7 @@ $f1-silver: #949498;
     // 详情展示区
     .card-details {
         background: rgba(0, 0, 0, 0.3);
-        padding: 15px 20px;
+        padding: 5px 20px;
         border-top: 1px solid #333;
 
         .sessions-grid {
@@ -661,7 +831,7 @@ $f1-silver: #949498;
         .session-item {
             display: flex;
             flex-direction: column;
-            gap: 6px;  
+            gap: 6px;
         }
 
         .session-meta {
@@ -678,10 +848,25 @@ $f1-silver: #949498;
                 letter-spacing: 0.5px;
             }
 
-            .session-time {
-                font-size: 11px;
-                color: #888;
-                font-family: monospace;
+            .meta-right {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                .day-tag {
+                    font-size: 10px;
+                    background: #444;
+                    color: #fff;
+                    padding: 1px 4px;
+                    border-radius: 2px;
+                    font-weight: 900;
+                }
+
+                .session-time {
+                    font-size: 11px;
+                    color: #888;
+                    font-family: monospace;
+                }
             }
         }
 
@@ -693,6 +878,26 @@ $f1-silver: #949498;
             overflow: hidden;
             display: flex;
             align-items: center;
+
+            &.is-next-bg {
+                background: linear-gradient(90deg, #3a0000 0%, #15151e 100%) !important;
+                border-bottom: 1px solid #e10600 !important; // 实线红边
+                box-shadow: inset 0 0 15px rgba(225, 6, 0, 0.2);
+
+                .track-line {
+                    opacity: 0.3;
+                    background: repeating-linear-gradient(to right, #e10600, #e10600 5px, transparent 5px, transparent 10px);
+                }
+            }
+
+            &.is-upcoming {
+                background: linear-gradient(90deg, #15151e 0%, #1f1f27 100%);
+                border-bottom: 2px dashed #444; // 未开始时使用虚线边框
+
+                .track-line {
+                    opacity: 0.1;
+                }
+            }
 
             // 底部车队色条
             &::after {
@@ -714,6 +919,69 @@ $f1-silver: #949498;
                 opacity: 0.3;
                 top: 50%;
             }
+        }
+
+        /* 横跨赛道的流光动画 */
+        .next-glow-line {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
+            animation: scanLine 3s infinite linear;
+            z-index: 1;
+        }
+
+        /* 五盏发车灯效果 */
+        .lights-out-status {
+            position: absolute;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 2;
+
+            .light-dot {
+                width: 8px;
+                height: 8px;
+                background: #331111; // 暗红色
+                border-radius: 50%;
+                box-shadow: inset 0 0 2px #000;
+
+                // 模拟 F1 发车灯闪烁
+                animation: lightPulse 2s infinite ease-in-out;
+
+                &:nth-child(2) {
+                    animation-delay: 0.2s;
+                }
+
+                &:nth-child(3) {
+                    animation-delay: 0.4s;
+                }
+
+                &:nth-child(4) {
+                    animation-delay: 0.6s;
+                }
+
+                &:nth-child(5) {
+                    animation-delay: 0.8s;
+                }
+            }
+
+            .status-label {
+                margin-left: 8px;
+                font-size: 9px;
+                font-weight: 900;
+                color: #444;
+                letter-spacing: 1px;
+            }
+        }
+
+        .status-label.highlight {
+            color: #e10600 !important;
+            font-weight: 900;
+            // animation: badgePulse 1.5s infinite; 
         }
 
         .car-anim-container {
@@ -757,10 +1025,37 @@ $f1-silver: #949498;
             font-size: 20px;
             font-weight: 900;
             font-style: italic;
-            color: rgba(255, 255, 255, 0.05); // 极淡的数字背景
+            color: rgba(255, 255, 255, 0.1); // 极淡的数字背景
             user-select: none;
         }
     }
+}
+
+// 亮起红色
+@keyframes lightPulse {
+
+    0%,
+    100% {
+        background: #331111;
+        box-shadow: none;
+    }
+
+    50% {
+        background: #e10600;
+        box-shadow: 0 0 8px #e10600;
+    }
+
+}
+
+@keyframes badgePulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scanLine {
+    0% { left: -100%; }
+    100% { left: 200%; }
 }
 
 /* 进场动画 */
@@ -769,10 +1064,12 @@ $f1-silver: #949498;
         transform: translateX(-150px) skewX(-15deg);
         opacity: 0;
     }
+
     70% {
         transform: translateX(-5px) skewX(-5deg); // 稍微冲过头一点
         opacity: 1;
     }
+
     100% {
         transform: translateX(0) skewX(0);
         opacity: 1;
@@ -780,9 +1077,22 @@ $f1-silver: #949498;
 }
 
 @keyframes speedFade {
-    0% { width: 0; opacity: 0; transform: translateX(20px); }
-    50% { width: 100px; opacity: 0.4; }
-    100% { width: 0; opacity: 0; transform: translateX(-40px); }
+    0% {
+        width: 0;
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    50% {
+        width: 100px;
+        opacity: 0.4;
+    }
+
+    100% {
+        width: 0;
+        opacity: 0;
+        transform: translateX(-40px);
+    }
 }
 
 /* 侧边栏 */
@@ -821,6 +1131,36 @@ $f1-silver: #949498;
             background: $f1-red;
         }
     }
+
+    .standings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+
+        .view-switcher {
+            display: flex;
+            background: #000;
+            padding: 2px;
+            border-radius: 4px;
+
+            button {
+                background: transparent;
+                border: none;
+                color: $f1-silver;
+                font-size: 10px;
+                font-weight: 900;
+                padding: 4px 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+
+                &.active {
+                    background: #333;
+                    color: #fff;
+                }
+            }
+        }
+    }
 }
 
 .driver-f1-card {
@@ -834,8 +1174,6 @@ $f1-silver: #949498;
     display: flex;
 
     &:hover {
-        border-color: $f1-red;
-
         .photo-wrapper .driver-img {
             transform: scale(1.1);
         }
@@ -925,67 +1263,91 @@ $f1-silver: #949498;
     // 右侧信息与形象区
     .info-side {
         flex: 1;
-        padding: 10px 15px;
+        padding-left: 5px;
         position: relative;
         display: flex;
-        align-items: end;
+        flex-direction: column;
+        justify-content: space-between; // 强制内容分布在上下两端
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+        overflow: hidden;
 
-        .driver-meta {
-            z-index: 2;
-            position: relative;
+        // 1. 顶部车队区
+        .team-header {
+            z-index: 3;
 
-            .number-flag {
+            .team-brand {
                 display: flex;
                 align-items: center;
-                gap: 8px;
-                margin-bottom: 4px;
+                gap: 12px;
 
-                .driver-no {
-                    width: 50px;
-                    height: 30px;
+                .img-team-large {
+                    height: 32px; // 显著增大车队Logo
+                    width: auto;
+                    object-fit: contain;
+                    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
                 }
 
-                .flag {
-                    width: 20px;
-                    height: 14px;
+                .team-divider {
+                    width: 2px;
+                    height: 18px;
+                    opacity: 0.6;
+                }
+
+                .img-flag-mini {
+                    width: 22px;
+                    height: 15px;
                     object-fit: cover;
                     border-radius: 2px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
                 }
-            }
-
-            .driver-name {
-                display: flex;
-                flex-direction: column;
-                line-height: 1;
-
-                .fname {
-                    font-size: 12px;
-                    text-transform: uppercase;
-                    color: $f1-silver;
-                }
-
-                .lname {
-                    font-size: 22px;
-                    font-weight: 900;
-                    text-transform: uppercase;
-                    letter-spacing: -1px;
-                }
-            }
-
-            .team-tag {
-                margin-top: 5px;
-                font-size: 11px;
-                color: $f1-silver;
-                letter-spacing: 1px;
             }
         }
 
+        // 2. 中间编号区
+        .mid-section {
+            z-index: 3;
+            margin-top: 10px;
+
+            .img-driver-no {
+                width: 50px;
+                height: 30px;
+                opacity: 0.9;
+                filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+        }
+
+        // 3. 底部姓名区 (核心优化：压到底部)
+        .name-footer {
+            z-index: 3;
+            position: relative;
+            padding-bottom: 5px; // 留出一点安全间距
+
+            .fname {
+                font-size: 13px;
+                font-weight: 500;
+                color: $f1-silver;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: -4px; // 让两行靠得更紧
+            }
+
+            .lname {
+                font-size: 24px; // 极大的姓氏
+                font-weight: 900;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: -1px;
+                line-height: 1;
+            }
+        }
+
+        // 4. 右侧照片形象
         .photo-wrapper {
             position: absolute;
-            right: 0;
-            bottom: -15px;
-            width: 160px;
-            height: 140px;
+            right: -15px; // 增加出框感
+            bottom: -20px; // 让底座更深
+            width: 180px; // 增大图片尺寸
+            height: 120%; // 高度溢出以获得更好的裁剪效果
             z-index: 1;
             pointer-events: none;
 
@@ -994,11 +1356,190 @@ $f1-silver: #949498;
                 height: 100%;
                 object-fit: contain;
                 object-position: bottom right;
-                transition: transform 0.4s ease;
-                // 使用遮罩让照片左侧半透明融合
-                mask-image: linear-gradient(to left, black 60%, transparent 100%);
+
+                // 优化蒙版：确保底部和左侧完美渐变消失，不遮盖底部的名字
+                mask-image: linear-gradient(to left bottom,
+                        black 30%,
+                        rgba(0, 0, 0, 0.5) 60%,
+                        transparent 90%);
+                -webkit-mask-image: linear-gradient(to left bottom,
+                        black 30%,
+                        rgba(0, 0, 0, 0.5) 60%,
+                        transparent 90%);
             }
         }
+    }
+}
+
+.team-f1-card {
+    position: relative;
+    height: 125px; // 车队卡片稍高一些，以展示完整的赛车
+    background: linear-gradient(135deg, #1a1a20 0%, #25252d 100%);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+    display: flex;
+
+    &:hover {
+        .bg-team-code {
+            left: calc(100% - 10px); // 移动到右侧边缘
+            transform: translateX(-100%) skewX(-15deg); // 靠右对齐并增加 F1 风格斜体
+            bottom: 40px; // 抬高位置，避开底部的车手头像
+            font-size: 50px; // 缩小尺寸
+            letter-spacing: 5px; // 增加字间距，更有科技感
+            color: rgba(255, 255, 255, 0.15); // 亮度适中，不干扰前景
+            opacity: 1;
+        }
+
+        // 也可以顺便让赛车稍微动一下，增加联动感
+        .bottom-car-visual {
+            transform: translateX(-50%);
+        }
+    }
+
+    // 背景装饰文字
+    .bg-team-code {
+        position: absolute;
+        bottom: -10px; // 初始位置靠下
+        left: 50%;
+        transform: translateX(-50%); // 初始居中
+
+        font-size: 100px;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.03);
+        z-index: 0;
+        pointer-events: none;
+        white-space: nowrap;
+
+        // 关键：贝塞尔曲线让移动像赛车起步一样有惯性感
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-transform: uppercase;
+        font-style: italic;
+    }
+
+    .team-indicator {
+        width: 3px;
+        height: 100%;
+        z-index: 2;
+    }
+
+    // 1. 左上排名
+    .top-left-stats {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .team-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .color-divider {
+            width: 2px;
+            height: 24px; // 高度与 Logo 和排名对齐
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .points-value {
+            .num {
+                font-size: 32px;
+                font-weight: 800;
+                color: $f1-red;
+            }
+
+            .unit {
+                font-size: 14px;
+                margin-left: 3px;
+                color: $f1-silver;
+            }
+        }
+    }
+
+    // 2. 右上品牌
+    .top-right-drivers {
+        position: absolute;
+        top: 15px;
+        right: 5px;
+        text-align: right;
+        z-index: 3;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+
+        .list-drivers {
+            height: 51px;
+            display: flex;
+            gap: 12px;
+
+            .mini-driver-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .driver-img-box {
+                    width: 36px;
+                    height: 36px;
+                    background: #000;
+                    border: 1px solid #444;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: top;
+                    }
+                }
+
+                .driver-code {
+                    font-size: 9px;
+                    font-weight: 900;
+                    color: $f1-silver;
+                    margin-top: 4px;
+                }
+            }
+        }
+    }
+
+    // 3. 底部车辆 (视觉重心)
+    .bottom-car-visual {
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-60%);
+        width: 280px;
+        z-index: 1;
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        .team-car-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+            // 进场动画
+            animation: teamCarDriveIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+    }
+}
+
+// 赛车进场动画
+@keyframes teamCarDriveIn {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
