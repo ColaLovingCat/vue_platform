@@ -152,11 +152,12 @@ const processData = () => {
     if (!rawData) return;
 
     const { year } = pageInfos;
-    const { rounds, races, result, circuits, drivers, teams, mapping } = rawData;
+    const { rounds, races, result, circuits, drivers, teams, mapping } = extend.ExObject.copy(rawData);
 
     // 当前年份的信息
     const yearRounds = rounds.filter(r => r.year == year);
-    races.map((race: any) => {
+    const yearRaces = races.filter(r => r.year == year);
+    yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
         race.week = weekDays[race.date.getDay()];
         race.startTime = formatTime(race.startTime)
@@ -220,7 +221,7 @@ const processData = () => {
     let nextSessionFound = false;
     pageInfos.rounds = yearRounds.map(round => {
         const mapInfos = circuits.find(c => c.id === round.circuitID);
-        const roundRaces = races.filter(ra => ra.year === year && ra.round === round.round);
+        const roundRaces = yearRaces.filter(ra => ra.year === year && ra.round === round.round);
 
         // 未找到比赛信息
         if (roundRaces.length === 0) return {
@@ -264,6 +265,7 @@ const processData = () => {
                     isNext: false
                 };
             } else {
+                console.log('No result for', race)
                 // 情况 B：比赛未开始或无结果
                 return {
                     ...race,
@@ -386,7 +388,7 @@ const formatTime = (excelTime: number) => {
                                         round.city }}</template></span>
                                     <span class="sprint-badge" v-if="round.hasSprint">SPRINT</span>
                                 </div>
-                                <div class="circuit-name">{{ round.circuit }}</div>
+                                <div class="circuit-name">{{ round.circuit }} - {{ round.zh }}</div>
                             </div>
 
                             <div class="track-thumb">
@@ -1106,7 +1108,6 @@ $f1-silver: #949498;
         font-size: 16px;
         border-left: 4px solid $f1-red;
         padding-left: 10px;
-        margin-bottom: 15px;
         letter-spacing: 1px;
     }
 }
@@ -1136,7 +1137,7 @@ $f1-silver: #949498;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         .view-switcher {
             display: flex;
