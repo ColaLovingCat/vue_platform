@@ -10,6 +10,7 @@ const datas: any = ref([])
 const changeMark: any = ref(false)
 
 const pageInfos = reactive({
+    activeAniver: false,
     gens: [] as any[],
     natures: [] as any[],
     timelines: [] as any[],
@@ -89,6 +90,7 @@ const showModal = (action: string, values: any) => {
                 <span>Total: {{ searchInfos.datas.length }}</span>
             </div>
             <div class="right">
+                <a-switch v-model:checked="pageInfos.activeAniver" />
                 <a-button type="primary" @click="showModal('timeline', {})">游戏</a-button>
                 <a-button type="primary" @click="showModal('', {})">招式</a-button>
                 <a-button type="primary" @click="showModal('', {})">特性</a-button>
@@ -109,7 +111,7 @@ const showModal = (action: string, values: any) => {
         </div>
         <div class="list-pokes">
             <div v-for="(poke) in searchInfos.datas" :key="poke.no">
-                <pokes :data="poke" :change-mark="changeMark"></pokes>
+                <pokes :active-aniver="pageInfos.activeAniver" :data="poke" :change-mark="changeMark"></pokes>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 // name
 defineOptions({
@@ -8,6 +8,10 @@ defineOptions({
 
 // props
 const props = defineProps({
+    activeAniver: {
+        type: Boolean,
+        default: false
+    },
     data: {
         type: Object,
         default: () => ({})
@@ -69,7 +73,8 @@ const enum types {
                         <h3>{{ poke.cnName }}</h3> <span class="item-sp">{{ poke.sp }}</span>
                     </template>
                 </div>
-                <img class="item-img" v-bind:src="`/docs/pokemons/pokes/${poke.img}`"
+                <img class="item-img" :class="activeAniver ? 'aniver' : ''"
+                    v-bind:src="`/docs/pokemons/${activeAniver ? '30th' : 'pokes'}/${poke.img}`"
                     v-bind:class="'item-' + poke.shape" alt="" srcset="">
             </div>
             <div class="item-no">
@@ -108,6 +113,9 @@ const enum types {
                 <img class="item-type" v-bind:src="`/docs/pokemons/types/${types[poke.type1]}.png`">
                 <img class="item-type" v-if="poke.type2" v-bind:src="`/docs/pokemons/types/${types[poke.type2]}.png`">
             </div>
+            <!-- <div class="item-anniver">
+                <img v-bind:src="`/docs/pokemons/30th/${poke.img}`">
+            </div> -->
         </div>
         <div class="item-shapes">
             <img class="item-shape" v-for="shape in poke.shapes"
@@ -362,9 +370,31 @@ const enum types {
         object-fit: cover;
         z-index: 1;
 
+        &.aniver {
+            width: 200px;
+            right: -30px;
+            bottom: -15px;
+        }
+
         &.item-dynamax {
             transform: scale(1.1);
         }
+    }
+
+    &:hover {
+        .item-anniver {
+            opacity: 0.8;
+            z-index: 1;
+        }
+    }
+
+    .item-anniver {
+        position: absolute;
+        bottom: -30px;
+        right: -18px;
+        width: 220px;
+        z-index: 0;
+        opacity: 0.2;
     }
 
     .item-gif {
