@@ -25,10 +25,6 @@ const formattedIndex = computed(() => {
 
 <template>
     <div class="monster-card" :class="monster.category?.toLowerCase()">
-        <!-- 蛋图标：作为勋章放在右上角 -->
-        <div class="egg-badge">
-            <img :src="`/docs/mhs2/monsters/${monster.index}/egg.svg`" alt="egg">
-        </div>
 
         <!-- 头部信息 -->
         <div class="card-header">
@@ -39,6 +35,25 @@ const formattedIndex = computed(() => {
                 <div class="index-no">No.{{ formattedIndex }}</div>
                 <div class="name">{{ monster.name }} <span class="type-tag">{{ monster.category }}</span></div>
             </div>
+            <div class="element-group">
+                <div class="element-item main" title="自身属性">
+                    <span class="el-label">属性</span>
+                    <img :src="`/docs/mhs2/attributes/${monster.resistance}.png`" onerror="this.style.display='none'" alt="element">
+                </div>
+                <div class="element-divider"></div>
+                <div class="element-item weak" title="弱点属性">
+                    <span class="el-label">弱点</span>
+                    <div class="icon-stack">
+                        <img :src="`/docs/mhs2/attributes/${monster.weakness}.png`" onerror="this.style.display='none'" alt="weakness">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 蛋图标：作为勋章放在右上角 -->
+        <div class="egg-badge">
+            <img :src="`/docs/mhs2/monsters/${monster.index}/egg.svg`" onerror="this.style.display='none'" alt="egg">
         </div>
 
         <!-- 照片区域：增加容器限制，防止溢出 -->
@@ -99,7 +114,7 @@ const formattedIndex = computed(() => {
     // 右上角蛋图标
     .egg-badge {
         position: absolute;
-        top: 0px;
+        top: 60px;
         right: 0px;
         z-index: 5;
         width: 70px;
@@ -141,6 +156,61 @@ const formattedIndex = computed(() => {
                 font-size: 20px;
                 font-weight: 900;
                 color: #3e2723;
+            }
+        }
+
+        // 属性组样式
+        .element-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .element-divider {
+                width: 1px;
+                height: 15px;
+                background: #d7ccc8;
+            }
+
+            .element-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    width: 22px;
+                    height: 22px;
+                    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+                }
+
+                .el-label {
+                    font-size: 8px;
+                    font-weight: bold;
+                    color: #8d6e63;
+                    text-transform: uppercase;
+                }
+
+                // 弱点属性的特殊堆叠效果
+                .icon-stack {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+                    i {
+                        position: absolute;
+                        right: -4px;
+                        bottom: -2px;
+                        font-size: 10px;
+                        color: #d84315; // 弱点警告红
+                        background: #fff;
+                        border-radius: 50%;
+                    }
+                }
+
+                &.weak {
+                    .el-label {
+                        color: #d84315;
+                    }
+                }
             }
         }
 
