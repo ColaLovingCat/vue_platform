@@ -20,43 +20,14 @@ const pageInfos = reactive({
     // Echarts 配置
     changeMark: false,
     options: {
-        title: { show: false },
-        color: ['#E10600', '#3671C6', '#2293D1', '#F596C8', '#FFF500', '#5E8FAA'],
         grid: { top: 10, bottom: 10, left: 0, right: 0, containLabel: true, },
-        legend: { show: false },
-        tooltip: {
-            // 提示
-            show: true,
-            trigger: "axis", // item| axis
-            axisPointer: {
-                type: "cross", // line| cross| shadow
-            },
-            formatter: function (params: any) {
-                if (Array.isArray(params)) {
-                    return params
-                        .map((p) => `<b>${p.seriesName}</b>: ${p.value}<br>`)
-                        .join("");
-                } else {
-                    return `<b>${params.seriesName}</b>: ${params.value}`;
-                }
-            },
-        },
         xAxis: {
             type: 'category',
             data: [],
-            axisLabel: { show: false },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    type: "dashed",
-                    opacity: 0.6,
-                },
-            },
         },
         yAxis: {
-            type: 'value', name: 'Points',
-            axisLabel: { show: false },
-            splitLine: { show: false },
+            type: 'value',
+            name: 'Points',
         },
         series: []
     } as any
@@ -76,6 +47,7 @@ let rawData: {
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
+// 赛车动画
 let observer: IntersectionObserver | null = null;
 const initObserver = () => {
     // 创建观察器
@@ -101,8 +73,6 @@ const initObserver = () => {
     const cards = document.querySelectorAll('.f1-card');
     cards.forEach(card => observer?.observe(card));
 };
-
-// --- 核心逻辑 ---
 
 // 1. 初始化读取数据
 onMounted(async () => {
@@ -155,7 +125,10 @@ const processData = () => {
     const { rounds, races, result, circuits, drivers, teams, mapping } = extend.ExObject.copy(rawData);
 
     // 当前年份的信息
-    const yearRounds = rounds.filter(r => r.year == year);
+    const yearRounds = rounds.filter(r => r.year == year).map((r: any) => {
+        const mapInfos = circuits.find(c => c.id === r.circuitID);
+        return { ...r, ...mapInfos }
+    });
     const yearRaces = races.filter(r => r.year == year);
     yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
@@ -220,13 +193,11 @@ const processData = () => {
     // 处理赛程
     let nextSessionFound = false;
     pageInfos.rounds = yearRounds.map(round => {
-        const mapInfos = circuits.find(c => c.id === round.circuitID);
         const roundRaces = yearRaces.filter(ra => ra.year === year && ra.round === round.round);
 
         // 未找到比赛信息
         if (roundRaces.length === 0) return {
             ...round,
-            ...mapInfos,
             month: 'TBC',
             range: '---',
             hasSprint: false,
@@ -284,7 +255,6 @@ const processData = () => {
 
         return {
             ...round,
-            ...mapInfos,
             month: months[startRace.date.getMonth()],
             range: `${startRace.date.getDate()}-${endRace.date.getDate()}`,
             hasSprint: roundRaces.some(ra => ra.step === 'Sprint'),
@@ -297,41 +267,115 @@ const processData = () => {
 };
 
 // 4. 更新图表逻辑
-const updateChart = (yearRounds: any[], currentYearResult: any[]) => {
+const updateChart = (yearRounds: any, yearResult: any) => {
     const sortedRounds = [...yearRounds].sort((a, b) => a.round - b.round);
     const xAxisData = sortedRounds.map(r => `R${r.round}`);
 
-    // 只展示积分前 10 的车手，否则图表太乱
-    const topDrivers = pageInfos.drivers.slice(0, 10);
-
-    const series = topDrivers.map(driver => {
-        let cumulativeScore = 0;
+    // 1. 计算每个车手的累加得分序列
+    const series = pageInfos.drivers.slice(0, 10).map((driver, index) => {
+        let cumulative = 0;
         const data = sortedRounds.map(round => {
-            const raceRes = currentYearResult.find(res =>
-                res.round === round.round &&
-                res.driverName === driver.name &&
-                res.step === 'Race'
+            const raceRes = yearResult.filter((res: any) =>
+                res.round === round.round && res.driverName === driver.name && (res.step === 'Race' || res.step == 'Sprint')
             );
-            cumulativeScore += (raceRes?.score || 0);
-            return cumulativeScore;
+            if (raceRes) {
+                raceRes.forEach((item: any) => {
+                    cumulative += (item?.score || 0);
+                })
+            }
+            return cumulative;
         });
 
+        const isP1 = index === 0;
         return {
             name: driver.name,
             type: 'line',
             data: data,
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 4,
-            lineStyle: { width: 3, color: driver.color },
-            itemStyle: { color: driver.color },
-            emphasis: { focus: 'series' }
+            smooth: 0.3, // 稍微平滑，更有流动感
+            showSymbol: false,
+            lineStyle: {
+                width: isP1 ? 5 : 2, // P1 的线加粗
+                color: driver.color,
+                shadowBlur: isP1 ? 10 : 0, // P1 增加发光
+                shadowColor: driver.color,
+                opacity: isP1 ? 1 : 0.6 // 其他车手稍微透明化
+            },
+            // --- 关键：末端标签显示 ---
+            endLabel: {
+                show: true,
+                formatter: (params: any) => `{name|${driver.code}}`,
+                offset: [10, 0], // 向右偏移，不盖在点上
+                // 为标签增加背景块，增强易读性
+                rich: {
+                    name: {
+                        color: '#fff',
+                        backgroundColor: driver.color,
+                        padding: [2, 4],
+                        borderRadius: 2,
+                        fontSize: 10,
+                        fontWeight: 'bold',
+                        fontFamily: 'Arial',
+                    }
+                }
+            },
+            // --- 自动避让重叠的关键配置 ---
+            labelLayout: {
+                moveOverlap: 'shiftY', // 重点：当标签重叠时，在 Y 轴方向自动推开
+                dx: 10
+            },
+            // 只有最后一点显示标签
+            labelLine: {
+                show: true, // 显示指引线
+                length: 10,
+                lineStyle: {
+                    color: driver.color,
+                    type: 'dashed'
+                }
+            },
+            emphasis: {
+                focus: 'series' // 鼠标悬停高亮某条线
+            },
+            // 动画效果
+            animationDuration: 2000,
+            animationEasing: 'cubicInOut'
         };
     });
 
-    pageInfos.options.xAxis.data = xAxisData;
-    pageInfos.options.series = series;
-    //
+    // 2. 更新配置
+    pageInfos.options = {
+        title: { show: false },
+        backgroundColor: 'transparent',
+        grid: { left: '1%', right: '18%', bottom: '1%', top: '15%', containLabel: true },
+        legend: { show: false },
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(21, 21, 30, 0.9)',
+            borderColor: '#444',
+            textStyle: { color: '#fff' },
+            axisPointer: { lineStyle: { color: '#e10600', width: 2 } }
+        },
+        xAxis: {
+            type: 'category',
+            data: xAxisData,
+            boundaryGap: false,
+            axisLine: { lineStyle: { color: '#444' } },
+            axisLabel: { show: false },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    type: "dashed",
+                    opacity: 0.6,
+                },
+            },
+        },
+        yAxis: {
+            type: 'value',
+            name: 'POINTS',
+            axisLabel: { show: false },
+            splitLine: { show: false },
+        },
+        series: series
+    };
     pageInfos.changeMark = !pageInfos.changeMark
 };
 
@@ -1050,14 +1094,30 @@ $f1-silver: #949498;
 }
 
 @keyframes badgePulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes scanLine {
-    0% { left: -100%; }
-    100% { left: 200%; }
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
 }
 
 /* 进场动画 */
@@ -1546,10 +1606,27 @@ $f1-silver: #949498;
 
 /* 趋势图表 */
 .chart-wrapper {
-    background: #101015; // 更深的底色
-    padding: 15px;
-    border-radius: 15px;
+    position: relative;
+    padding: 10px;
     height: 280px;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #15151e 0%, #1a1a24 100%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    &::before {
+        content: 'CHAMPIONSHIP TRACKER';
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: #e10600;
+        color: #fff;
+        padding: 2px 10px;
+        font-size: 10px;
+        font-weight: 900;
+        font-style: italic;
+        border-radius: 2px;
+    }
 
     .chart-inner {
         height: 230px;

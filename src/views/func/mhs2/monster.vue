@@ -1,78 +1,78 @@
-<script lang="ts">
-import { ref, reactive, onMounted, defineComponent, computed, watch } from 'vue'
-import type { Ref } from 'vue'
+<script setup lang="ts">
+import { computed, reactive } from 'vue'
 
-export default defineComponent({
-    props: {
-        data: {
-            type: Object
-        }
-    },
-    components: {},
-    emits: [],
-    setup(props, { emit }) {
-        const monster: any = reactive(props.data || {})
+const props = defineProps<{
+    data: any
+}>()
 
-        onMounted(() => { })
+const monster: any = reactive(props.data || {})
 
-        watch(
-            () => props.data,
-            (newValue, oldValue) => { }
-        )
+// 属性克制逻辑
+const chart: Record<string, string> = {
+    'power': 'speed',    // 力克速
+    'speed': 'skill', // 速克技
+    'skill': 'power'  // 技克力
+}
+const getWeakness = (type: string) => {
+    return chart[type?.toLowerCase()] || ''
+}
 
-        const getWeakness = (type: string) => {
-            switch (type) {
-                case "power":
-                    return "speed"
-                case "skill":
-                    return "power"
-                case "speed":
-                    return "skill"
-            }
-        }
-
-        return {
-            monster,
-            getWeakness,
-        }
-    }
+// 格式化名称（如果需要处理编号）
+const formattedIndex = computed(() => {
+    return String(props.data.index).padStart(3, '0')
 })
 </script>
 
 <template>
-    <div class="monster-item">
-        <img class="img-egg" v-bind:src="`/docs/mhs2/monsters/${monster.index}/egg.svg`" alt="">
-        <div class="item-name">
-            <img class="thumb" v-bind:src="`/docs/mhs2/monsters/${monster.index}/thumb.png`" alt="" />
-            <div class="name">{{ monster.index }} {{ monster.name }}</div>
-            <div class="category">{{ monster.category }}</div>
+    <div class="monster-card" :class="monster.category?.toLowerCase()">
+        <!-- 蛋图标：作为勋章放在右上角 -->
+        <div class="egg-badge">
+            <img :src="`/docs/mhs2/monsters/${monster.index}/egg.svg`" alt="egg">
         </div>
-        <div class="item-imgs">
-            <img class="img-photo" v-bind:src="`/docs/mhs2/monsters/${monster.index}/photo.png`" alt="">
+
+        <!-- 头部信息 -->
+        <div class="card-header">
+            <div class="thumb-wrapper">
+                <img :src="`/docs/mhs2/monsters/${monster.index}/thumb.png`" class="thumb">
+            </div>
+            <div class="name-area">
+                <div class="index-no">No.{{ formattedIndex }}</div>
+                <div class="name">{{ monster.name }} <span class="type-tag">{{ monster.category }}</span></div>
+            </div>
         </div>
-        <div class="item-contents">
-            <div class="item-left">
-                <div class="titles">行动</div>
-                <div class="item-actions">
-                    <div class="acton-item" v-for="action in monster.actions">
-                        <div class="item-action">{{ action.status }}</div>
-                        <div class="item-type">
-                            <img v-bind:src="`/docs/mhs2/skills/${action.type}.svg`" alt="" srcset="">
-                        </div>
-                        <i class="fa-solid fa-angles-left"></i>
-                        <div class="item-type">
-                            <img v-bind:src="`/docs/mhs2/skills/${getWeakness(action.type)}.svg`" alt="" srcset="">
+
+        <!-- 照片区域：增加容器限制，防止溢出 -->
+        <div class="photo-container">
+            <img :src="`/docs/mhs2/monsters/${monster.index}/photo.png`" class="main-photo">
+        </div>
+
+        <!-- 核心内容 -->
+        <div class="card-content">
+            <!-- 行动倾向 -->
+            <div class="content-section actions">
+                <div class="section-title">猜拳倾向</div>
+                <div class="action-list">
+                    <div v-for="action in monster.actions" :key="action.status" class="action-row">
+                        <span class="status-label">{{ action.status }}</span>
+                        <div class="vs-flow">
+                            <img :src="`/docs/mhs2/skills/${action.type}.svg`" class="type-icon current">
+                            <i class="fa-solid fa-chevron-right separator"></i>
+                            <img :src="`/docs/mhs2/skills/${getWeakness(action.type)}.svg`" class="type-icon weakness">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="item-right">
-                <div class="titles">部位弱点</div>
-                <div class="item-parts">
-                    <div class="part-item" v-for="part in monster.parts">
-                        <div class="item-part">{{ part.part }}</div>
-                        <i class="fa-solid fa-angles-left"></i>
-                        <div class="item-part">{{ part.type }}</div>
+
+            <!-- 部位弱点 -->
+            <div class="content-section parts">
+                <div class="section-title">部位弱点</div>
+                <div class="part-list">
+                    <div v-for="part in monster.parts" :key="part.part" class="part-row">
+                        <span class="part-name">{{ part.part }}</span>
+                        <div class="weakness-badge">
+                            <i class="fa-solid fa-crosshairs"></i>
+                            {{ part.type }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,105 +81,191 @@ export default defineComponent({
 </template>
 
 <style scoped lang="scss">
-.monster-item {
+.monster-card {
     position: relative;
-    width: 340px;
-    height: 430px;
-    padding: 10px;
-    border: 4px solid #000;
-    border-radius: 8px;
-    background: #fff;
+    padding: 15px;
+    width: 320px;
+    height: 100%;
+    border: 3px solid #4e342e;
+    border-radius: 16px;
+    background: #fdfaf2; // 羊皮纸色背景
+    box-shadow: 0 8px 0 #d7ccc8, 0 15px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 
-    .titles {
-        width: 100px;
-        margin-bottom: 10px;
-        padding: 7px;
-        color: #fff;
-        border-radius: 10px;
-        background: #1F1200;
+    &:hover {
+        transform: translateY(-5px);
     }
 
-    .img-egg {
+    // 右上角蛋图标
+    .egg-badge {
         position: absolute;
-        top: -25px;
-        right: -25px;
-        z-index: 1;
-        width: 85px;
-        height: 100px;
-        border-radius: 40px;
-    }
-
-    .item-name {
-        margin-bottom: 190px;
-        padding-bottom: 5px;
-        border-bottom: 2px solid #000;
-        display: flex;
-        align-items: center;
-        column-gap: 10px;
-    }
-
-    .thumb {
-        width: 30px;
-        height: 30px;
-    }
-
-    .name {
-        font-size: 23px;
-        font-weight: 700;
-    }
-
-    .category {
-        padding: 2px 4px;
-        color: #fff;
-        font-size: 14px;
-        border-radius: 7px;
-        background: #c4cecf;
-    }
-
-    .item-imgs {
-        position: absolute;
-        top: 35px;
-        width: 345px;
-        height: 180px;
-        z-index: 0;
-        transition: 0.6s;
+        top: 0px;
+        right: 0px;
+        z-index: 5;
+        width: 70px;
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 
         img {
-            width: unset;
+            width: 100%;
         }
     }
 
-    &:hover .item-imgs {
-        z-index: 10;
-        transform: scale(1.2);
-    }
-
-
-    .item-contents {
-        display: flex;
-        column-gap: 10px;
-    }
-
-    .item-actions {
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-    }
-
-    .acton-item,
-    .part-item {
+    // 头部样式
+    .card-header {
         display: flex;
         align-items: center;
-        column-gap: 10px;
+        gap: 10px;
+        border-bottom: 2px solid #efebe9;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+
+        .thumb-wrapper {
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 3px;
+            border: 2px solid #d7ccc8;
+        }
+
+        .name-area {
+            flex: 1;
+
+            .index-no {
+                font-size: 12px;
+                color: #a1887f;
+                font-weight: bold;
+            }
+
+            .name {
+                font-size: 20px;
+                font-weight: 900;
+                color: #3e2723;
+            }
+        }
+
+        .type-tag {
+            background: #8d6e63;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
     }
 
-    .item-type {
-        width: 40px;
-        height: 40px;
+    // 照片区域
+    .photo-container {
+        width: 100%;
+        height: 160px;
+        background: #fff;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #efebe9;
+
+        .main-photo {
+            width: 120%;
+            height: 120%;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
     }
 
-    .item-type img {
-        border-radius: 50%;
+    &:hover .main-photo {
+        transform: scale(1.15) rotate(2deg);
+    }
+
+    // 内容板块
+    .card-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 10px;
+    }
+
+    .section-title {
+        font-size: 13px;
+        font-weight: 900;
+        color: #fff;
+        background: #4e342e;
+        padding: 3px 10px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        display: inline-block;
+    }
+
+    // 行动/猜拳倾向
+    .action-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 4px 8px;
+        border-radius: 8px;
+
+        .status-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #6d4c41;
+        }
+
+        .vs-flow {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .type-icon {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+
+                &.current {
+                    border: 2px solid #4caf50;
+                }
+
+                &.weakness {
+                    border: 2px solid #f44336;
+                    background: #ffebee;
+                }
+            }
+
+            .separator {
+                font-size: 10px;
+                color: #bdbdbd;
+            }
+        }
+    }
+
+    // 部位弱点
+    .part-row {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 8px;
+
+        .part-name {
+            font-size: 11px;
+            color: #8d6e63;
+            font-weight: bold;
+        }
+
+        .weakness-badge {
+            font-size: 12px;
+            font-weight: bold;
+            color: #d84315;
+            background: #fbe9e7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            i {
+                font-size: 10px;
+            }
+        }
     }
 }
 </style>
