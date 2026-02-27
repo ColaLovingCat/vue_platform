@@ -1385,35 +1385,382 @@ export const monsters = [
             { part: '翼', type: '斩/打 (倒地)' },
         ],
     },
-    { index: 100, name: '斩龙', category: '兽龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 101, name: '冻戈龙', category: '海龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 102, name: '爆鳞龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 103, name: '翼蛇龙', category: '蛇龙', type: '小', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 104, name: '大蚀龙虫', category: '甲虫', type: '小', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 105, name: '飞甲虫【红】', category: '甲虫', type: '小', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 106, name: '巨蜂', category: '甲虫', type: '小', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 107, name: '风牙龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 108, name: '恐暴龙', category: '兽龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 109, name: '狱狼龙', category: '牙龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 110, name: '千刃龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 111, name: '木桶艾露猫', category: '兽人', type: '小', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 112, name: '火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 113, name: '苍火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 114, name: '樱火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 115, name: '雷颚龙', category: '兽龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 116, name: '白疾风', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 117, name: '金雷公', category: '牙龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 118, name: '鏖魔', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 119, name: '荒钩爪', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 120, name: '紫毒姬', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 121, name: '麒麟', category: '古龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 122, name: '炎王龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 123, name: '金狮子', category: '牙兽', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 124, name: '钢龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 125, name: '冰呪龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 126, name: '青电主', category: '飞龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 127, name: '烬灭刃', category: '兽龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
-    { index: 128, name: '绚辉龙（普通）', category: '古龙', type: '大', resistance: 'none', weakness: 'none', actions: [], parts: [], },
+    {
+        index: 100, name: '斩龙', category: '兽龙', type: '大',
+        resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒', type: 'skill', },
+            { status: '蓄热/红刃', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '斩/射' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '无（倒地）' },
+        ],
+    },
+    {
+        index: 101, name: '冻戈龙', category: '海龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通(冰块剥落)', type: 'skill', },
+            { status: '冷气(冰块附着)', type: 'power', },
+            { status: '愤怒', type: 'speed', },
+        ],
+        parts: [
+            { part: '普通', type: '(冰块剥落)' },
+            { part: '头', type: '射' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '斩' },
+            { part: '冷气', type: '(冰块附着)' },
+            { part: '头', type: '打' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '打' },
+        ],
+    },
+    {
+        index: 102, name: '爆鳞龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'skill', },
+        ],
+        parts: [
+            { part: '头', type: '打' },
+            { part: '腹', type: '斩' },
+            { part: '翼', type: '射' },
+            { part: '尾', type: '斩' },
+        ],
+    },
+    {
+        index: 103, name: '翼蛇龙', category: '蛇龙', type: '小', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+        ],
+        parts: [
+            { part: '普通', type: '打' },
+        ],
+    },
+    {
+        index: 104, name: '大蚀龙虫', category: '甲虫', type: '小', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+        ],
+        parts: [
+            { part: '普通', type: '打' },
+        ],
+    },
+    {
+        index: 105, name: '飞甲虫【红】', category: '甲虫', type: '小', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+        ],
+        parts: [
+            { part: '普通', type: '打' },
+        ],
+    },
+    {
+        index: 106, name: '巨蜂', category: '甲虫', type: '小', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+        ],
+        parts: [
+            { part: '普通', type: '打' },
+        ],
+    },
+    {
+        index: 107, name: '风牙龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'skill', },
+        ],
+        parts: [
+            { part: '腹', type: '斩/射' },
+            { part: '尾', type: '斩' },
+            { part: '棘', type: '打' },
+        ],
+    },
+    {
+        index: 108, name: '恐暴龙', category: '兽龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '全' },
+            { part: '身', type: '全' },
+            { part: '腿', type: '全(倒地)' },
+            { part: '尾', type: '斩' },
+        ],
+    },
+    {
+        index: 109, name: '狱狼龙', category: '牙龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '打(倒地)' },
+            { part: '身', type: '射' },
+            { part: '尾', type: '斩' },
+        ],
+    },
+    {
+        index: 110, name: '千刃龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '射(倒地)' },
+            { part: '腹', type: '斩' },
+            { part: '翼', type: '射' },
+            { part: '腿', type: '斩/打' },
+        ],
+    },
+    {
+        index: 111, name: '木桶艾露猫', category: '兽人', type: '小', resistance: 'none', weakness: 'none',
+        actions: [
+        ],
+        parts: [
+        ],
+    },
+    {
+        index: 112, name: '火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒', type: 'skill', },
+            { status: '飞行', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '打' },
+            { part: '身', type: '斩/打' },
+            { part: '尾', type: '斩' },
+            { part: '翼', type: '斩/射（倒地）' },
+        ],
+    },
+    {
+        index: 113, name: '苍火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒', type: 'power', },
+            { status: '飞行', type: 'speed', },
+            { status: '怒后飞行', type: 'skill', },
+        ],
+        parts: [
+            { part: '头', type: '打' },
+            { part: '身', type: '斩/打' },
+            { part: '尾', type: '斩' },
+            { part: '翼', type: '斩' },
+        ],
+    },
+    {
+        index: 114, name: '樱火龙', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'power', },
+        ],
+        parts: [
+            { part: '身', type: '斩' },
+            { part: '尾', type: '打（倒地）' },
+        ],
+    },
+    {
+        index: 115, name: '雷颚龙', category: '兽龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '带电', type: 'speed', },
+            { status: '强带电', type: 'speed', },
+        ],
+        parts: [
+            { part: '身', type: '射' },
+            { part: '尾', type: '斩' },
+            { part: '腿', type: '斩/打' },
+            { part: '鼻', type: '全' },
+        ],
+    },
+    {
+        index: 116, name: '白疾风', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒（二动）', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '打' },
+            { part: '腹', type: '斩' },
+            { part: '尾', type: '射' },
+        ],
+    },
+    {
+        index: 117, name: '金雷公', category: '牙龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '真带电', type: 'speed', },
+            { status: '愤怒（不带电）', type: 'power', },
+        ],
+        parts: [
+            { part: '头', type: '斩（倒地）' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '斩' },
+        ],
+    },
+    {
+        index: 118, name: '鏖魔', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'power', },
+        ],
+        parts: [
+            { part: '角', type: '斩/射' },
+            { part: '腹', type: '打' },
+            { part: '腿', type: '打/射（倒地）' },
+            { part: '尾', type: '斩/射' },
+        ],
+    },
+    {
+        index: 119, name: '荒钩爪', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒（二动）', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '斩' },
+            { part: '腹', type: '打' },
+            { part: '腿', type: '斩/打' },
+        ],
+    },
+    {
+        index: 120, name: '紫毒姬', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '斩/打' },
+            { part: '腹', type: '斩/打' },
+            { part: '背', type: '斩/打' },
+            { part: '尾', type: '斩/打（倒地）' },
+        ],
+    },
+    {
+        index: 121, name: '麒麟', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'skill', },
+            { status: '极速（二动）', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '斩/打（倒地）' },
+            { part: '身', type: '斩/打' },
+        ],
+    },
+    {
+        index: 122, name: '炎王龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒', type: 'power', },
+            { status: '火缠', type: 'power', },
+            { status: '飞行', type: 'skill', },
+        ],
+        parts: [
+            { part: '头', type: '斩/打' },
+            { part: '腹', type: '全' },
+            { part: '尾', type: '斩/打' },
+            { part: '翼', type: '斩（倒地）' },
+        ],
+    },
+    {
+        index: 123, name: '金狮子', category: '牙兽', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '愤怒（视光环，二动，第三回合雷炮）', type: '', },
+        ],
+        parts: [
+            { part: '头', type: '斩/打' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '斩' },
+            { part: '腿', type: '斩' },
+        ],
+    },
+    {
+        index: 124, name: '钢龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒', type: 'power', },
+            { status: '飞行', type: 'speed', },
+        ],
+        parts: [
+            { part: '头', type: '全' },
+            { part: '腹', type: '打' },
+            { part: '尾', type: '射' },
+            { part: '翼', type: '射（倒地）' },
+        ],
+    },
+    {
+        index: 125, name: '冰呪龙', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '裹冰', type: 'skill', },
+            { status: '飞行(冰雾后二动)', type: 'power', },
+        ],
+        parts: [
+            { part: '头', type: '斩/打' },
+            { part: '身', type: '斩/打' },
+            { part: '尾', type: '斩' },
+            { part: '翼', type: '射（倒地）' },
+            { part: '鳞', type: '打' },
+        ],
+    },
+    {
+        index: 126, name: '青电主', category: '飞龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '蓝电', type: 'skill', },
+            { status: '蓝电愤怒飞行(二动)', type: '', },
+            { status: '飞行结束', type: 'power', },
+        ],
+        parts: [
+            { part: '头', type: '打' },
+            { part: '腹', type: '斩/打' },
+            { part: '尾', type: '斩' },
+            { part: '翼', type: '射（倒地）' },
+        ],
+    },
+    {
+        index: 127, name: '烬灭刃', category: '兽龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'power', },
+            { status: '蓄力', type: 'speed', },
+            { status: '火焰环刃', type: '', },
+            { status: '火焰环刃(断尾)', type: 'skill', },
+        ],
+        parts: [
+            { part: '头', type: '斩' },
+            { part: '身', type: '打' },
+            { part: '尾', type: '斩（倒地）' },
+        ],
+    },
+    {
+        index: 128, name: '绚辉龙（普通）', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'skill', },
+            { status: '愤怒', type: 'power', },
+        ],
+        parts: [
+            { part: '左腿', type: '斩/打' },
+            { part: '右腿', type: '斩/打' },
+            { part: '尾', type: '全' },
+        ],
+    },
+    {
+        index: 128, name: '绚辉龙（全破）', category: '古龙', type: '大', resistance: 'none', weakness: 'none',
+        actions: [
+            { status: '普通', type: 'speed', },
+            { status: '愤怒(二动)', type: 'power', },
+        ],
+        parts: [
+            { part: '角', type: '斩/打（倒地）' },
+            { part: '身', type: '斩/打' },
+        ],
+    },
 ]
 
 export const maps = [

@@ -311,17 +311,19 @@ const formattedIndex = computed(() => {
     // 部位弱点
     .part-row {
         display: flex;
-        flex-direction: column;
-        gap: 2px;
+        align-items: center;
+        gap: 5px;
         margin-bottom: 8px;
 
         .part-name {
+            width: 40px;
             font-size: 11px;
             color: #8d6e63;
             font-weight: bold;
         }
 
         .weakness-badge {
+            flex: 1;
             font-size: 12px;
             font-weight: bold;
             color: #d84315;
