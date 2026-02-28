@@ -15,7 +15,8 @@ const pageInfos = reactive({
     natures: [] as any[],
     timelines: [] as any[],
     tags:[
-        {value: 'mega', title: '超进化'}
+        {value: 'mega', title: '超进化'},
+        {value: 'dy', title: '超极巨化'},
     ],
 })
 
