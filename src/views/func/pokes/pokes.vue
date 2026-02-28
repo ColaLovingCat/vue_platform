@@ -69,6 +69,9 @@ const enum types {
                     <template v-else-if="poke.sp == '超进化Y'">
                         <h3>超级{{ poke.cnName }} Y</h3>
                     </template>
+                    <template v-else-if="poke.sp == '超进化Z'">
+                        <h3>超级{{ poke.cnName }} Z</h3>
+                    </template>
                     <template v-else>
                         <h3>{{ poke.cnName }}</h3> <span class="item-sp">{{ poke.sp }}</span>
                     </template>
@@ -76,6 +79,8 @@ const enum types {
                 <img class="item-img" :class="activeAniver ? 'aniver' : ''"
                     v-bind:src="`/docs/pokemons/${activeAniver ? '30th' : 'pokes'}/${poke.img}`"
                     v-bind:class="'item-' + poke.shape" alt="" srcset="">
+                <img class="item-gif" v-bind:src="`/docs/pokemons/gifs/${poke.img.replace('.png', '.gif')}`" alt=""
+                    srcset="" />
             </div>
             <div class="item-no">
                 <h3>{{ poke.no }}</h3>
@@ -381,31 +386,25 @@ const enum types {
         }
     }
 
-    &:hover {
-        .item-anniver {
-            opacity: 0.8;
-            z-index: 1;
-        }
-    }
-
-    .item-anniver {
-        position: absolute;
-        bottom: -30px;
-        right: -18px;
-        width: 220px;
-        z-index: 0;
-        opacity: 0.2;
-    }
-
     .item-gif {
+        opacity: 0;
         position: absolute;
-        bottom: 0;
-        width: unset;
-        height: 32px;
+        bottom: 0px;
+        right: -20px;
+        width: 155px;
+        height: unset;
+        object-fit: cover;
+        z-index: 2;
     }
 
-    .item-infos:hover .item-img {
-        animation: jump 1.5s infinite;
+    .item-infos:hover {
+        .item-img {
+            opacity: 0;
+        }
+
+        .item-gif {
+            opacity: 1;
+        }
     }
 
     .item-shapes {
