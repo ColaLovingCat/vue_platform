@@ -14,11 +14,15 @@ const pageInfos = reactive({
     gens: [] as any[],
     natures: [] as any[],
     timelines: [] as any[],
+    tags:[
+        {value: 'mega', title: '超进化'}
+    ],
 })
 
 const searchInfos = reactive({
     text: '' as any,
     gen: '',
+    tag:'',
     datas: [] as any[]
 })
 const handleSearch = () => {
@@ -33,6 +37,11 @@ const handleSearch = () => {
             }
             )
         }
+    }
+
+    // 按标签过滤
+    if (searchInfos.tag && searchInfos.tag != '') {
+        result = result.filter((poke: any) => poke.shapes && poke.shapes.find((shape: any) => shape.shapeCode == searchInfos.tag))
     }
 
     // 执行搜索逻辑
@@ -99,6 +108,11 @@ const showModal = (action: string, values: any) => {
                 <a-button type="primary" @click="showModal('', {})">球种</a-button>
                 <a-button type="primary" @click="showModal('nature', {})">性格</a-button>
                 <a-button type="primary" @click="showModal('type', {})">属性</a-button>
+
+                <a-select ref="select" v-model:value="searchInfos.tag" style="width: 150px;" @change="handleSearch"
+                    allow-clear>
+                    <a-select-option v-for="item in pageInfos.tags" :value="item.value">{{ item.title }}</a-select-option>
+                </a-select>
 
                 <a-select ref="select" v-model:value="searchInfos.gen" style="width: 200px;" @change="handleSearch"
                     allow-clear>
