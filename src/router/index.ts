@@ -63,6 +63,11 @@ const routes = [
     component: () => import("@/views/func/pokes/view.vue"),
   },
   {
+    path: "/dota2",
+    name: "dota2",
+    component: () => import("@/views/func/dota/view.vue"),
+  },
+  {
     path: "/mhs2",
     name: "mhs2",
     component: () => import("@/views/func/mhs2/view.vue"),
