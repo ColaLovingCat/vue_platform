@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-
 // props
 const props = defineProps<{
   rounds: any[]
@@ -26,10 +24,10 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
 
   // 根据队伍位置返回结果
   if (team === "top") {
-    return teamA.score == winningScore ? 'win' : 'lose';
+    return teamA.score < teamB.score ? 'lose' : teamA.score > teamB.score ? 'win' : '';
   }
   if (team === "bottom") {
-    return teamB.score == winningScore ? 'win' : 'lose';
+    return teamA.score > teamB.score ? 'lose' : teamA.score < teamB.score ? 'win' : '';
   }
 
   return '';
@@ -54,20 +52,16 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
               <div class="item-infos" :class="getTeamClass(match, match.bo, 'top')">
                 <div class="item-team">
                   <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
-                  {{ match.top.team }}
+                  <div class="team-name">{{ match.top.team }}</div>
                 </div>
-                <div class="item-score">
-                  {{ match.top.score }}
-                </div>
+                <div class="item-score">{{ match.top.score }}</div>
               </div>
               <div class="item-infos" :class="getTeamClass(match, match.bo, 'bottom')">
                 <div class="item-team">
                   <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
-                  {{ match.bottom.team }}
+                  <div class="team-name">{{ match.bottom.team }}</div>
                 </div>
-                <div class="item-score">
-                  {{ match.bottom.score }}
-                </div>
+                <div class="item-score">{{ match.bottom.score }}</div>
               </div>
             </div>
           </div>
@@ -88,7 +82,7 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
   padding: 10px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 50px;
 
   .match-item {
@@ -102,13 +96,14 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
       display: flex;
       justify-content: space-between;
 
-      &.tbd,
-      &.lose {
-        opacity: 0.4;
+      &.win {
+        background: #003300;
       }
 
-      &.win {
-        background: #0094ff;
+      &.lose {
+        background: #2e0505;
+        opacity: 0.4;
+        filter: saturate(0);
       }
 
       h4 {
@@ -126,6 +121,7 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
 
     .item-team {
       width: 250px;
+      padding: 3px 20px;
       font-weight: 800;
       border: 1px solid #c4cecf9d;
       display: flex;
@@ -133,11 +129,14 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
       align-items: center;
       gap: 10px;
 
-
-
       img {
         width: 50px;
       }
+
+      .team-name {
+        flex: 1;
+      }
+
     }
   }
 }

@@ -8,6 +8,10 @@ defineOptions({
 
 // props
 const props = defineProps({
+    limit: {
+        type: Number,
+        default: 3
+    },
     rounds: {
         type: Object,
         default: () => ({})
@@ -40,10 +44,10 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
 
     // 根据队伍位置返回结果
     if (team === "top") {
-        return teamA.score < teamB.score ? 'lose' : '';
+        return teamA.score < teamB.score ? 'lose' : teamA.score > teamB.score ? 'win' : '';
     }
     if (team === "bottom") {
-        return teamA.score > teamB.score ? 'lose' : '';
+        return teamA.score > teamB.score ? 'lose' : teamA.score < teamB.score ? 'win' : '';
     }
 
     return '';
@@ -51,11 +55,11 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
 
 const qualifiedTeams = computed(() => {
     const teamRecords = computeTeamRecords(props.rounds);
-    const winners: any[] = []; // 赢了3场的队伍（晋级）
-    const losers: any[] = [];  // 输了3场的队伍（淘汰）
+    const winners: any[] = []; // 晋级队伍
+    const losers: any[] = [];  // 淘汰队伍
 
     Object.entries(teamRecords).forEach(([team, record]: any) => {
-        if (record.wins >= 3) {
+        if (record.wins >= props.limit) {
             winners.push({
                 team: team,
                 icon: record.icon,
@@ -63,7 +67,7 @@ const qualifiedTeams = computed(() => {
                 losses: record.losses
             });
         }
-        if (record.losses >= 3) {
+        if (record.losses >= props.limit) {
             losers.push({
                 team: team,
                 icon: record.icon,
@@ -159,17 +163,17 @@ function computeTeamRecords(rounds: any) {
                         <div class="list-matchs">
                             <template v-for="match in round.matchs">
                                 <div class="match-item">
-                                    <div class="item-team" :class="getTeamClass(match, round.bo, 'top')">
+                                    <div class="item-team item-left" :class="getTeamClass(match, round.bo, 'top')">
                                         <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
-                                        {{ match.top.team }}
+                                        <div class="team-name">{{ match.top.team }}</div>
                                     </div>
                                     <span class="item-score">
                                         {{ match.top.score }}
-                                        <span>VS</span>
+                                        <span>:</span>
                                         {{ match.bottom.score }}
                                     </span>
-                                    <div class="item-team" :class="getTeamClass(match, round.bo, 'bottom')">
-                                        {{ match.bottom.team }}
+                                    <div class="item-team item-right" :class="getTeamClass(match, round.bo, 'bottom')">
+                                        <div class="team-name">{{ match.bottom.team }}</div>
                                         <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
                                     </div>
                                 </div>
@@ -184,7 +188,7 @@ function computeTeamRecords(rounds: any) {
                 <div class="item-infos">
                     <h4>晋级</h4>
                 </div>
-                <div class="list-teams">
+                <div class="list-teams win">
                     <template v-for="team in qualifiedTeams.winners">
                         <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
                             <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
@@ -196,7 +200,7 @@ function computeTeamRecords(rounds: any) {
                 <div class="item-infos">
                     <h4>淘汰</h4>
                 </div>
-                <div class="list-teams">
+                <div class="list-teams lose">
                     <template v-for="team in qualifiedTeams.losers">
                         <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
                             <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
@@ -235,13 +239,14 @@ function computeTeamRecords(rounds: any) {
 }
 
 .list-matchs {
-    border: 1px solid #c4cecf9d;
-    padding: 10px 0;
+    padding: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #c4cecf3d;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 
     .match-item {
+        padding: 5px 0;
         font-size: 18px;
         display: flex;
         align-items: center;
@@ -253,20 +258,38 @@ function computeTeamRecords(rounds: any) {
         }
 
         .item-team {
+            padding: 0 10px;
             width: 150px;
             font-weight: 800;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
 
-            &.tbd,
+            &.win {
+                background: #003300;
+            }
+
             &.lose {
+                background: #2e0505;
                 opacity: 0.4;
+                filter: saturate(0);
+            }
+
+            &.item-left {
+                .team-name {
+                    text-align: right;
+                }
             }
 
             img {
                 width: 50px;
+            }
+
+            .team-name {
+                flex: 1;
+                font-weight: 700;
             }
         }
     }
@@ -274,9 +297,18 @@ function computeTeamRecords(rounds: any) {
 
 .list-teams {
     padding: 10px;
+    border-radius: 8px;
     border: 1px solid #c4cecf9d;
     display: flex;
     gap: 15px;
+
+    &.win {
+        background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
+    }
+
+    &.lose {
+        background-image: linear-gradient(0deg, rgb(133, 1, 1), rgb(100, 1, 1));
+    }
 
     .team-item {
         width: 50px;
