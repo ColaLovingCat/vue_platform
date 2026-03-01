@@ -5,6 +5,7 @@ export const games = [
         logo: 'Dota.png',
         location: '中国 上海',
         date: '2026.08',
+        status: 'upcoming',
         winner: {
             team: "",
             icon: "",
@@ -17,6 +18,7 @@ export const games = [
         logo: 'CS.png',
         location: '德国 科隆',
         date: '2026.06.02 - 06.21',
+        status: 'upcoming',
         winner: {
             team: "",
             icon: "",
@@ -29,13 +31,14 @@ export const games = [
         logo: 'CS.png',
         location: '匈牙利 布达佩斯',
         date: '2025.11.24 - 12.14',
+        status: 'completed',
         winner: {
             team: "Vitality",
             icon: "Vitality.png",
         },
         stages: [
             {
-                stage: 'Stage3',
+                stage: '淘汰赛',
                 type: 'tournament',
                 rounds: [
                     [
@@ -156,6 +159,494 @@ export const games = [
                             },
                         }
                     ],
+                ],
+                winners: [],
+                losers: [],
+            },
+            {
+                stage: 'Stage3',
+                type: 'swiss',
+                limit: 3,
+                rounds: [
+                    [
+                        {
+                            name: 'ROUND1',
+                            round: '0-0',
+                            bo: 1,
+                            time: '09/04',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'Mouz',
+                                        icon: 'MOUZ.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'PV',
+                                        icon: 'PARIVISION.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Imperial',
+                                        icon: 'Imperial-01.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'MongolZ',
+                                        icon: 'The Mongolz.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Passion UA',
+                                        icon: 'PassionUA.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'G2',
+                                        icon: 'G2.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Spirit',
+                                        icon: 'Team Spirit.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Pain',
+                                        icon: 'PNG.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: '3DMAX',
+                                        icon: '3DMAX.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Vitality',
+                                        icon: 'Vitality.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Faze',
+                                        icon: 'FAZE.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Falcons',
+                                        icon: 'Falcons.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Furia',
+                                        icon: 'FURIA.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'NAVI',
+                                        icon: 'NAVI.png',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND2',
+                            round: '1-0',
+                            bo: 1,
+                            time: '09/04',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'Pain',
+                                        icon: 'PNG.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'G2',
+                                        icon: 'G2.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Faze',
+                                        icon: 'FAZE.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Spirit',
+                                        icon: 'Team Spirit.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Mouz',
+                                        icon: 'MOUZ.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 0,
+                                    },
+
+                                },
+                                {
+                                    top: {
+                                        team: 'Furia',
+                                        icon: 'FURIA.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Imperial',
+                                        icon: 'Imperial-01.png',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND2',
+                            round: '0-1',
+                            bo: 1,
+                            time: '10/16',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '3DMAX',
+                                        icon: '3DMAX.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Vitality',
+                                        icon: 'Vitality.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Passion UA',
+                                        icon: 'PassionUA.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Falcons',
+                                        icon: 'Falcons.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'MongolZ',
+                                        icon: 'The Mongolz.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'PV',
+                                        icon: 'PARIVISION.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'NAVI',
+                                        icon: 'NAVI.png',
+                                        score: 1,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND3',
+                            round: '2-0',
+                            bo: 3,
+                            time: '09/05',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'Mouz',
+                                        icon: 'MOUZ.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Spirit',
+                                        icon: 'Team Spirit.png',
+                                        score: 2,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Furia',
+                                        icon: 'FURIA.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'G2',
+                                        icon: 'G2.png',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '1-1',
+                            bo: 1,
+                            time: '10/18',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'Faze',
+                                        icon: 'FAZE.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'MongolZ',
+                                        icon: 'The Mongolz.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Vitality',
+                                        icon: 'Vitality.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Imperial',
+                                        icon: 'Imperial-01.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Falcons',
+                                        icon: 'Falcons.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Pain',
+                                        icon: 'PNG.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'NAVI',
+                                        icon: 'NAVI.png',
+                                        score: 1,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '0-2',
+                            bo: 3,
+                            time: '10/19',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'Passion UA',
+                                        icon: 'PassionUA.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'PV',
+                                        icon: 'PARIVISION.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: '3DMAX',
+                                        icon: '3DMAX.png',
+                                        score: 2,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND4',
+                            round: '2-1',
+                            bo: 3,
+                            time: '10/22-10/23',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'NAVI',
+                                        icon: 'NAVI.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Vitality',
+                                        icon: 'Vitality.png',
+                                        score: 2,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Mouz',
+                                        icon: 'MOUZ.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'Falcons',
+                                        icon: 'Falcons.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'G2',
+                                        icon: 'G2.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'MongolZ',
+                                        icon: 'The Mongolz.png',
+                                        score: 2,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND4',
+                            round: '1-2',
+                            bo: 3,
+                            time: '10/23-10/24',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'Pain',
+                                        icon: 'PNG.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Passion UA',
+                                        icon: 'PassionUA.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'Imperial',
+                                        icon: 'Imperial-01.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '3DMAX',
+                                        icon: '3DMAX.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Faze',
+                                        icon: 'FAZE.png',
+                                        score: 2,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND5',
+                            round: '2-2',
+                            bo: 3,
+                            time: '10/25',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'NAVI',
+                                        icon: 'NAVI.png',
+                                        score: 2,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Faze',
+                                        icon: 'FAZE.png',
+                                        score: 2,
+                                    },
+                                    bottom: {
+                                        team: 'Passion UA',
+                                        icon: 'PassionUA.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'G2',
+                                        icon: 'G2.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Falcons',
+                                        icon: 'Falcons.png',
+                                        score: 2,
+                                    },
+                                },
+                            ],
+                        },
+                    ]
                 ],
                 winners: [],
                 losers: [],
@@ -1144,6 +1635,7 @@ export const games = [
         logo: 'LOL.png',
         location: '中国 北京/上海/成都',
         date: '2025.10.14 - 11.09',
+        status: 'completed',
         winner: {
             team: "T1",
             icon: "T1.png",
@@ -1772,6 +2264,7 @@ export const games = [
         logo: 'Dota.png',
         location: '德国 汉堡',
         date: '2025.09.04 - 09.14',
+        status: 'completed',
         winner: {
             team: "Falcons",
             icon: "Falcons.png",
@@ -2678,6 +3171,7 @@ export const games = [
         logo: 'LOL.png',
         location: '',
         date: '-',
+        status: 'ongoing',
         winner: {
             team: "",
             icon: "",
@@ -2882,7 +3376,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME3",
+                            name: "GAME7",
                             round: "胜者组",
                             time: "-/-",
                             bo: 3,
@@ -2898,7 +3392,7 @@ export const games = [
                             },
                         },
                         {
-                            name: "GAME3",
+                            name: "GAME8",
                             round: "胜者组",
                             time: "-/-",
                             bo: 3,
@@ -2916,7 +3410,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME6",
+                            name: "GAME11",
                             round: "胜者组决赛",
                             time: "-/-",
                             bo: 3,
@@ -2934,7 +3428,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME6",
+                            name: "GAME13",
                             round: "决赛",
                             time: "-/-",
                             bo: 5,
@@ -2988,7 +3482,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME5",
+                            name: "GAME9",
                             round: "败者组",
                             time: "-/-",
                             bo: 3,
@@ -3004,7 +3498,7 @@ export const games = [
                             },
                         },
                         {
-                            name: "GAME5",
+                            name: "GAME10",
                             round: "败者组",
                             time: "-/-",
                             bo: 3,
@@ -3022,7 +3516,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME5",
+                            name: "GAME12",
                             round: "败者组决赛",
                             time: "-/-",
                             bo: 3,
@@ -3081,7 +3575,7 @@ export const games = [
                     ],
                     [
                         {
-                            name: "GAME3",
+                            name: "GAME4",
                             round: "胜者组决赛",
                             time: "-/-",
                             bo: 3,
@@ -3119,7 +3613,7 @@ export const games = [
                 losers: [
                     [
                         {
-                            name: "GAME4",
+                            name: "GAME3",
                             round: "败者组",
                             time: "-/-",
                             bo: 3,

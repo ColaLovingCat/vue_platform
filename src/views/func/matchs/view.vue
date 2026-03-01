@@ -16,6 +16,7 @@ interface GameInfo {
   logo: string;
   location: string;
   date: string;
+  status: string;
   winner: {
     team: string;
     icon: string;
@@ -44,12 +45,9 @@ const currentStageType = computed(() => selectedStage.value?.type || '')
 onMounted(() => {
   games.value = db.games
   if (games.value.length > 0) {
-    // 默认选中第一个游戏
-    selectedGame.value = games.value[0]
-    // 默认选中第一个游戏的第一个stage
-    if (selectedGame.value.stages.length > 0) {
-      selectedStage.value = selectedGame.value.stages[0]
-    }
+    // 默认选中第一个非upcoming的游戏，如果没有则选中第一个游戏
+    const game = games.value.find(g => g.status != 'upcoming') || games.value[0]
+    changeGame(game)
   }
 })
 
@@ -74,20 +72,6 @@ const changeStage = (stage: StageInfo) => {
   <div class="sections">
     <!-- 左侧：游戏列表和详情卡片 -->
     <div class="left-panel">
-      <!-- 游戏列表 -->
-      <div class="list-games">
-        <h3 class="panel-title">比赛列表</h3>
-        <div class="games-container">
-          <div v-for="game in games" :key="game.name" class="game-item" @click="changeGame(game)"
-            :class="{ active: selectedGame?.name === game.name }">
-            <div class="item-icon">
-              <img :src="`/docs/logos/games/${game.logo}`" alt="">
-            </div>
-            <div class="item-name">{{ game.name }}</div>
-          </div>
-        </div>
-      </div>
-
       <!-- 游戏详情卡片 -->
       <div v-if="selectedGame" class="game-detail-card">
         <h3 class="panel-title">比赛详情</h3>
@@ -113,11 +97,25 @@ const changeStage = (stage: StageInfo) => {
             </div>
             <div class="info-row winner-row">
               <span class="info-label">冠军队伍</span>
-              <div class="winner-info" v-if="selectedGame.winner.team!== ''">
+              <div class="winner-info" v-if="selectedGame.winner.team !== ''">
                 <img :src="`/docs/logos/teams/${selectedGame.winner.icon}`" alt="" class="winner-icon">
                 <span class="winner-team">{{ selectedGame.winner.team }}</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 游戏列表 -->
+      <div class="list-games">
+        <h3 class="panel-title">比赛列表</h3>
+        <div class="games-container">
+          <div v-for="game in games" :key="game.name" class="game-item" @click="changeGame(game)"
+            :class="{ active: selectedGame?.name === game.name }">
+            <div class="item-icon">
+              <img :src="`/docs/logos/games/${game.logo}`" alt="">
+            </div>
+            <div class="item-name">{{ game.name }}</div>
           </div>
         </div>
       </div>
@@ -180,15 +178,15 @@ const changeStage = (stage: StageInfo) => {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
 
-.panel-title {
-  margin: 0 0 12px 0;
-  font-size: 16px;
-  color: #f5f5f5;
-  font-weight: 600;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #0094ff;
+  .panel-title {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #f5f5f5;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0094ff;
+  }
 }
 
 // 游戏列表
@@ -197,51 +195,51 @@ const changeStage = (stage: StageInfo) => {
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-.games-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  .games-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-.game-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
-  
-  &:hover {
-    background: #ffffff14;
-  }
-  
-  &.active {
-    background: #0094ff;
-    
-    .item-name {
-      color: #f5f5f5;
-      font-weight: 500;
+    .game-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background: #ffffff14;
+      }
+
+      &.active {
+        background: #0094ff;
+
+        .item-name {
+          color: #f5f5f5;
+          font-weight: 500;
+        }
+      }
+
+      .item-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .item-name {
+        font-size: 14px;
+        color: #f5f5f5;
+      }
     }
-  }
-  
-  .item-icon {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-  
-  .item-name {
-    font-size: 14px;
-    color: #f5f5f5;
   }
 }
 
@@ -251,74 +249,74 @@ const changeStage = (stage: StageInfo) => {
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-.detail-content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  .detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
-.detail-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #eee;
-}
-
-.detail-icon {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-}
-
-.detail-title {
-  h4 {
-    margin: 0 0 4px 0;
-    font-size: 16px;
-    color: #f5f5f5;
-  }
-  
-  .detail-location {
-    font-size: 13px;
-    color: #666;
-  }
-}
-
-.detail-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.info-row {
-  display: flex;
-  align-items: center;
-  
-  .info-label {
-    width: 70px;
-    font-size: 13px;
-    color: #999;
-  }
-  
-  .info-value {
-    flex: 1;
-    font-size: 14px;
-    color: #f5f5f5;
-  }
-  
-  &.winner-row {
-    .info-value {
+    .detail-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+
+      .detail-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .detail-title {
+        h4 {
+          margin: 0 0 4px 0;
+          font-size: 16px;
+          color: #f5f5f5;
+        }
+
+        .detail-location {
+          font-size: 13px;
+          color: #666;
+        }
+      }
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .info-row {
+        display: flex;
+        align-items: center;
+
+        .info-label {
+          width: 70px;
+          font-size: 13px;
+          color: #999;
+        }
+
+        .info-value {
+          flex: 1;
+          font-size: 14px;
+          color: #f5f5f5;
+        }
+
+        &.winner-row {
+          .info-value {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+        }
+      }
     }
   }
 }
@@ -327,13 +325,13 @@ const changeStage = (stage: StageInfo) => {
   display: flex;
   align-items: center;
   gap: 8px;
-  
+
   .winner-icon {
     width: 24px;
     height: 24px;
     object-fit: contain;
   }
-  
+
   .winner-team {
     font-weight: 700;
     color: #0094ff;
@@ -358,7 +356,7 @@ const changeStage = (stage: StageInfo) => {
   gap: 10px;
   border-bottom: 1px solid #eee;
   padding-bottom: 12px;
-  
+
   .tab-item {
     padding: 8px 16px;
     border-radius: 20px;
@@ -367,17 +365,17 @@ const changeStage = (stage: StageInfo) => {
     color: #666;
     transition: all 0.3s;
     background: #f5f5f5;
-    
+
     &:hover {
       background: #e8e8e8;
     }
-    
+
     &.active {
       background: #0094ff;
       color: white;
       font-weight: 500;
     }
-    
+
     .item-name {
       white-space: nowrap;
     }
@@ -391,20 +389,20 @@ const changeStage = (stage: StageInfo) => {
 }
 
 .lines {
-  height: 30px;
+  height: 20px;
   background: linear-gradient(to bottom, transparent 50%, #eee 50%);
   background-size: 100% 20px;
   margin: 10px 0;
 }
 
 .empty-state {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 200px;
   color: #999;
   font-size: 14px;
-  background: #f9f9f9;
   border-radius: 8px;
+  background: #f9f9f94d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
