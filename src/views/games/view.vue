@@ -274,6 +274,18 @@ const games = [
     rules: {},
     ruleList: [],
   },
+  // 地下城
+  {
+    code: "dungeon",
+    name: "地下城",
+    isActive: true,
+    //
+    category: "map",
+    limit: 4,
+    model: "multi",
+    rules: {},
+    ruleList: [],
+  },
   // others
   // 扫雷
   {
@@ -292,7 +304,7 @@ const games = [
   {
     code: "xiaoxiaole",
     name: "消消乐",
-    isActive: false,
+    isActive: true,
     //
     category: "others",
     limit: 1,
@@ -354,12 +366,14 @@ const games = [
 ]
 
 const selectGame = (values: any) => {
+  if (!values.isActive) return;
+
   switch (values.code) {
     case "": {
       break
     }
     default: {
-      pageGo('/' + values.code)
+      pageGo('/games-' + values.code)
       break
     }
   }

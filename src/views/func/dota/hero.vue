@@ -9,9 +9,10 @@ interface Hero {
     attackType: string;
     line: string;
     description: string;
+    defaultAbility: any;
     ability: any[];
     talents: { level: number; desc: string }[];
-    facets?: { name: string; desc: string; icon: string }[]; // 命石
+    facets?: { name: string; desc: string; icon: string, ability?: any[] }[]; // 命石
 }
 
 const props = defineProps({
@@ -42,8 +43,10 @@ const groupedTalents = computed(() => {
 <template>
     <div class="dota2-wrapper">
         <!-- 背景层 -->
-        <div class="card-bg-pattern"></div>
-        <div class="card-glow"></div>
+        <div class="card-bg">
+            <div class="card-bg-pattern"></div>
+            <div class="card-glow"></div>
+        </div>
 
         <!-- 英雄大图 (破框展示) -->
         <div class="hero-portrait-breakout">
@@ -55,39 +58,50 @@ const groupedTalents = computed(() => {
             <header class="hero-header">
                 <div class="header-info">
                     <div class="title-row">
-                        <img :src="`/docs/dota2/stats/${statMap[hero.stat]}.png`" class="primary-stat-icon" />
-                        <div class="names">
-                            <h1>{{ hero.name }}</h1>
-                            <span class="nickname">{{ hero.nickname }}</span>
+                        <div class="row-icons">
+                            <img class="icon icon-stat" :src="`/docs/dota2/stats/${statMap[hero.stat]}.png`" />
+                            <span class="nickname">{{ hero.stat }}</span>
+                        </div>
+                        <div class="row-icons">
+                            <img class="icon icon-attack"
+                                :src="`/docs/dota2/attack_types/${attackMap[hero.attackType]}.png`" />
+                            <span class="nickname">{{ hero.attackType }}</span>
                         </div>
                     </div>
-
-                    <div class="base-stats">
-                        <div class="stat-attack">
-                            <img class="icon-attack"
-                                :src="`/docs/dota2/attack_types/${attackMap[hero.attackType]}.png`" />
-                        </div>
-                        <div class="stat-pill line">{{ hero.line }}</div>
+                    <div class="title-names">
+                        <h1>{{ hero.name }}</h1>
+                        <span class="nickname">#{{ hero.nickname }}</span>
                     </div>
 
                     <p class="hero-desc">{{ hero.description }}</p>
+                    <p class="hero-line">{{ hero.line }}</p>
                 </div>
             </header>
 
             <!-- 中间：核心机制 (命石 & 天赋) -->
             <section class="mechanics-grid">
+
                 <!-- 命石效果 (Facets) -->
                 <div class="facet-container">
                     <h4 class="sub-title">命石选择</h4>
                     <div class="facet-list">
                         <!-- 模拟数据，实际可从 props 获取 -->
-                        <div class="facet-card" v-for="i in 2" :key="i">
+                        <div class="facet-card" v-for="(facet, i) in hero.facets" :key="i">
                             <div class="facet-icon-hex">
-                                <i class="fa-solid fa-gem"></i>
+                                <img :src="`docs/dota2/heros/${hero.code}/${facet.icon}`" class="facet-icon" />
+                                <div class="f-name">{{ facet.name }}</div>
                             </div>
-                            <div class="facet-text">
-                                <div class="f-name">命石效果 {{ i }}</div>
-                                <div class="f-desc">强化英雄的特定机制，改变技能形态或被动加成。</div>
+                            <div class="f-desc">{{ facet.desc }}</div>
+                            <div class="f-ability" v-if="facet.ability && facet.ability.length > 0">
+                                <ul>
+                                    <li v-for="(ab, j) in facet.ability" :key="j">
+                                        <div class="facet-icon-hex">
+                                            <img :src="`docs/dota2/heros/${hero.code}/${ab.icon}`" class="facet-icon" />
+                                            <div class="f-name">{{ ab.name }}</div>
+                                        </div>
+                                        <div class="f-desc">{{ ab.desc }}</div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -110,48 +124,66 @@ const groupedTalents = computed(() => {
 
             <!-- 底部：技能详情 -->
             <footer class="abilities-footer">
-                <div class="ability-slot" v-for="skill in hero.ability" :key="skill.name"
-                    :class="{ 'shard-extra': skill.is_shard_skill, 'scepter-extra': skill.is_scepter_skill }">
-                    <div class="skill-icon-wrapper">
-                        <img :src="`docs/dota2/heros/${hero.code}/${skill.img}`" />
 
-                        <!-- 强化标记：如果这个技能有 A杖/魔晶 强化 -->
-                        <div class="upgrade-icons">
-                            <div v-if="skill.shard_desc" class="mini-icon shard">
-                                <img src="/docs/dota2/comps/tiny.png" />
-                            </div>
-                            <div v-if="skill.scepter_desc" class="mini-icon scepter">
-                                <img src="/docs/dota2/comps/tiny.png" />
-                            </div>
+                <!-- 默认技能 -->
+                <div class="ability-slot">
+                    <div class="ability-card">
+                        <div class="ability-icon">
+                            <img src="/docs/dota2/comps/innate_icon.png" />
+                            <div class="skill-border"></div>
                         </div>
 
-                        <div class="skill-border"></div>
+                        <div class="ability-info">
+                            <h4 class="ability-name">{{ hero.defaultAbility.name }}</h4>
+                            <p class="ability-desc">{{ hero.defaultAbility.desc }}</p>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- 悬浮窗内容增强 -->
-                    <div class="skill-popover">
-                        <h5>{{ skill.name }}</h5>
-                        <p class="desc">{{ skill.desc }}</p>
+                <!-- 技能列表 -->
+                <div class="ability-slot" v-for="skill in hero.ability" :key="skill.name">
+                    <div class="ability-card">
+                        <div class="ability-icon">
+                            <img :src="`docs/dota2/heros/${props.hero.code}/${skill.icon}`" :alt="skill.name" />
 
-                        <!-- 魔晶强化描述 -->
-                        <div v-if="skill.shard_desc" class="upgrade-section shard">
-                            <div class="u-header">
-                                <img src="/docs/dota2/comps/tiny.png" />
-                                <span>魔晶强化</span>
+                            <div class="upgrade-icons">
+                                <div v-if="skill.is_shard" class="mini-icon shard">
+                                    <img src="/docs/dota2/comps/aghs_shard.png" />
+                                </div>
+                                <div v-if="skill.is_scepter" class="mini-icon scepter">
+                                    <img src="/docs/dota2/comps/aghs_scepter.png" />
+                                </div>
                             </div>
-                            <p>{{ skill.shard_desc }}</p>
+
+                            <div class="skill-border"></div>
                         </div>
 
-                        <!-- 神杖强化描述 -->
-                        <div v-if="skill.scepter_desc" class="upgrade-section scepter">
-                            <div class="u-header">
-                                <img src="/docs/dota2/comps/tiny.png" />
-                                <span>神杖强化</span>
-                            </div>
-                            <p>{{ skill.scepter_desc }}</p>
-                        </div>
+                        <div class="ability-info">
+                            <h4 class="ability-name">{{ skill.name }}</h4>
+                            <p class="ability-desc">{{ skill.desc }}</p>
 
-                        <p class="lore">{{ skill.lore }}</p>
+                            <!-- 魔晶强化描述 -->
+                            <template v-for="desc in skill.shard_descs">
+                                <div class="upgrade-section shard">
+                                    <div class="u-header">
+                                        <span>魔晶强化</span>
+                                    </div>
+                                    <p>{{ desc }}</p>
+                                </div>
+                            </template>
+
+                            <!-- 神杖强化描述 -->
+                            <template v-for="desc in skill.scepter_descs">
+                                <div class="upgrade-section scepter">
+                                    <div class="u-header">
+                                        <span>神杖强化</span>
+                                    </div>
+                                    <p>{{ desc }}</p>
+                                </div>
+                            </template>
+
+                            <p class="ability-lore">{{ skill.lore }}</p>
+                        </div>
                     </div>
                 </div>
             </footer>
@@ -161,6 +193,9 @@ const groupedTalents = computed(() => {
 
 <style scoped lang="scss">
 $gold: #c9a45b;
+$dota2-gold-light: #e4c580;
+$dota2-text-primary: #e8e6e3;
+$dota2-text-secondary: #a0a0a0;
 $bg-dark: #0a0e14;
 $panel-bg: rgba(20, 26, 34, 0.8);
 $border-gold: rgba(201, 164, 91, 0.3);
@@ -170,10 +205,19 @@ $scepter-gold: #f0cc5e;
 .dota2-wrapper {
     position: relative;
     padding: 30px;
-    width: 850px;
+    // width: 850px;
     border: 2px solid #222;
     background: #0a0e14;
     box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), 0 30px 60px rgba(0, 0, 0, 0.5);
+
+    .card-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
 
     // 背景装饰
     .card-bg-pattern {
@@ -200,12 +244,23 @@ $scepter-gold: #f0cc5e;
     }
 }
 
+// 动画
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* 破框英雄图 */
 .hero-portrait-breakout {
     position: absolute;
-    bottom: -40px;
+    bottom: 0;
     right: -60px;
-    width: 550px;
+    width: 580px;
     height: auto;
     z-index: 1;
     pointer-events: none;
@@ -246,67 +301,61 @@ $scepter-gold: #f0cc5e;
             align-items: center;
             gap: 15px;
 
-            .primary-stat-icon {
-                width: 40px;
-            }
-
-            h1 {
-                font-size: 32px;
-                color: #fff;
-                text-transform: uppercase;
-                margin: 0;
-                letter-spacing: 2px;
-            }
-
-            .nickname {
-                color: $gold;
+            .row-icons {
                 font-size: 16px;
-                font-weight: bold;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                .icon {
+                    width: 26px;
+                }
+
+                .icon-attack {
+                    width: 20px;
+                }
             }
         }
 
-        .base-stats {
+        .title-names {
+            margin-top: 8px;
             display: flex;
-            gap: 10px;
-            margin: 10px 0;
+            align-items: end;
+            gap: 12px;
 
-            .stat-attack {
-                width: 40px;
-                display: flex;
-                justify-content: center;
-
-                .icon-attack {
-                    width: 15px;
-                    height: 15px;
-                }
+            h1 {
+                font-size: 28px;
+                font-weight: bold;
+                color: $gold;
+                text-transform: uppercase;
             }
 
-            .stat-pill {
-                background: rgba(0, 0, 0, 0.5);
-                border: 1px solid #444;
-                padding: 4px 12px;
-                border-radius: 4px;
-                font-size: 12px;
-                line-height: 15px;
-
-                &.line {
-                    border-color: $gold;
-                    color: $gold;
-                }
+            .nickname {
+                font-size: 14px;
+                color: #ccc;
+                font-style: italic;
             }
         }
 
         .hero-desc {
-            font-size: 13px;
             color: #ccc;
             line-height: 1.5;
-            margin: 0;
+            margin-top: 10px;
+        }
+
+        .hero-line {
+            font-size: 11px;
+            color: #a5e0f3;
+            font-style: italic;
+            margin-top: 6px;
         }
     }
 }
 
 /* 机制区域 */
 .mechanics-grid {
+    max-width: 900px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -329,12 +378,13 @@ $scepter-gold: #f0cc5e;
     gap: 8px;
 
     .facet-card {
+        padding: 8px;
+        border-radius: 6px;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
-        padding: 8px;
+        flex-direction: column;
         gap: 12px;
-        align-items: center;
         transition: 0.3s;
 
         &:hover {
@@ -343,25 +393,61 @@ $scepter-gold: #f0cc5e;
         }
 
         .facet-icon-hex {
-            width: 32px;
-            height: 32px;
-            background: #3b4255;
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #00d2ff;
-        }
+            gap: 10px;
 
-        .f-name {
-            font-size: 13px;
-            font-weight: bold;
-            color: #fff;
+            .facet-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .f-name {
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+            }
         }
 
         .f-desc {
-            font-size: 11px;
-            color: #888;
+            font-size: 14px;
+        }
+
+        .f-ability {
+            font-size: 13px;
+            color: #ccc;
+
+            ul {
+                padding-left: 10px;
+                margin: 4px 0;
+
+                li {
+                    margin-bottom: 6px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    .facet-icon-hex {
+                        background: linear-gradient(90deg, rgba(155, 205, 255, .09019607843137255) 0, rgba(155, 205, 255, .03529411764705882) 30%, rgba(208, 232, 255, 0));
+
+                        .facet-icon {
+                            width: 16px;
+                            height: 16px;
+                        }
+
+                        .f-name {
+                            font-size: 12px;
+                            color: #ddd;
+                        }
+                    }
+
+                    .f-desc {
+                        font-size: 12px;
+                        color: #bbb;
+                    }
+                }
+            }
+
         }
     }
 }
@@ -376,11 +462,11 @@ $scepter-gold: #f0cc5e;
         display: flex;
         align-items: center;
         gap: 10px;
-        margin-bottom: 6px;
+        margin-bottom: 15px;
 
         .t-option {
             flex: 1;
-            font-size: 11px;
+            font-size: 14px;
             color: #aaa;
 
             &.left {
@@ -417,7 +503,7 @@ $scepter-gold: #f0cc5e;
 /* 技能槽布局 */
 .abilities-footer {
     display: flex;
-    justify-content: start;
+    flex-direction: column;
     gap: 15px;
     padding-top: 20px;
     border-top: 1px solid #333;
@@ -425,29 +511,85 @@ $scepter-gold: #f0cc5e;
     .ability-slot {
         position: relative;
         cursor: pointer;
+        width: 80%;
 
-        &:hover .skill-popover {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(-10px);
+        .ability-card {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid $border-gold;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                border-color: $gold;
+                background: rgba(201, 164, 91, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .ability-icon {
+                position: relative;
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 8px;
+                    border: 1px solid $gold;
+                }
+
+                .ability-level {
+                    position: absolute;
+                    bottom: -5px;
+                    right: -5px;
+                    width: 20px;
+                    height: 20px;
+                    background: $gold;
+                    color: #0a0e14;
+                    border-radius: 50%;
+                    font-size: 10px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            .ability-info {
+                flex: 1;
+
+                .ability-name {
+                    margin: 0 0 6px 0;
+                    font-size: 16px;
+                    color: $dota2-gold-light;
+                    font-weight: 600;
+                }
+
+                .ability-desc {
+                    margin: 0 0 4px 0;
+                    font-size: 13px;
+                    color: $dota2-text-primary;
+                    line-height: 1.4;
+                }
+
+                .ability-lore {
+                    margin: 0;
+                    font-size: 12px;
+                    color: $dota2-text-secondary;
+                    font-style: italic;
+                    opacity: 0.8;
+                }
+            }
         }
 
-        .skill-icon-wrapper {
-            width: 64px;
-            height: 64px;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .skill-border {
-                position: absolute;
-                inset: -2px;
-                border: 2px solid transparent;
-                transition: 0.3s;
-            }
+        .skill-border {
+            position: absolute;
+            inset: -2px;
+            border: 2px solid transparent;
+            transition: 0.3s;
         }
 
         &:hover .skill-border {
@@ -457,35 +599,17 @@ $scepter-gold: #f0cc5e;
 
         .upgrade-icons {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
+            top: 0px;
             z-index: 5;
 
             .mini-icon {
-                width: 16px;
-                height: 16px;
-                background: #000;
-                border-radius: 50%;
-                padding: 2px;
-                border: 1px solid transparent;
+                width: 100%;
+                height: 100%;
 
                 img {
                     width: 100%;
                     height: 100%;
                     object-fit: contain;
-                }
-
-                &.shard {
-                    border-color: $shard-blue;
-                    box-shadow: 0 0 5px $shard-blue;
-                }
-
-                &.scepter {
-                    border-color: $scepter-gold;
-                    box-shadow: 0 0 5px $scepter-gold;
                 }
             }
         }
@@ -503,7 +627,7 @@ $scepter-gold: #f0cc5e;
     }
 }
 
-/* 弹出框内的强化板块 */
+/* 强化板块 */
 .upgrade-section {
     margin: 8px 0;
     padding: 8px;
@@ -548,46 +672,6 @@ $scepter-gold: #f0cc5e;
         .u-header span {
             color: $scepter-gold;
         }
-    }
-}
-
-/* 技能悬浮窗 */
-.skill-popover {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
-    background: rgba(10, 10, 15, 0.98);
-    border: 1px solid $gold;
-    padding: 12px;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-    z-index: 100;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-
-    h5 {
-        color: $gold;
-        margin: 0 0 8px 0;
-        font-size: 16px;
-        text-transform: uppercase;
-    }
-
-    .desc {
-        font-size: 13px;
-        color: #eee;
-        line-height: 1.4;
-        margin-bottom: 8px;
-    }
-
-    .lore {
-        font-size: 11px;
-        color: #777;
-        font-style: italic;
-        border-top: 1px solid #333;
-        padding-top: 8px;
     }
 }
 </style>
