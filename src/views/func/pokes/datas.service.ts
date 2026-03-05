@@ -3,7 +3,7 @@ import * as extend from '@/commons/utils/extends'
 
 export const getDB = async () => {
     let res: any = await xlsx.readExcel('/docs/datas/pokes.xlsx')
-    const { pokes, shapes, gens, natures, types } = res
+    const { pokes, shapes, gens, natures, types, timelines } = res
 
     const pokesMap: any = pokes.map((item: any) => ({
         ...item,
@@ -24,6 +24,7 @@ export const getDB = async () => {
         shapes,
         gens: groupedGens,
         natures,
-        types
+        types,
+        timelines
     }
 }

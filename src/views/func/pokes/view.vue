@@ -14,16 +14,16 @@ const pageInfos = reactive({
     gens: [] as any[],
     natures: [] as any[],
     timelines: [] as any[],
-    tags:[
-        {value: 'mega', title: '超进化'},
-        {value: 'dy', title: '超极巨化'},
+    tags: [
+        { value: 'mega', title: '超进化' },
+        { value: 'dy', title: '超极巨化' },
     ],
 })
 
 const searchInfos = reactive({
     text: '' as any,
     gen: '',
-    tag:'',
+    tag: '',
     datas: [] as any[]
 })
 const handleSearch = () => {
@@ -63,6 +63,8 @@ onMounted(async () => {
     //
     pageInfos.natures = [...db.natures]
     pageInfos.gens = db.gens
+    //
+    pageInfos.timelines = db.timelines
 })
 
 // 属性
@@ -112,7 +114,8 @@ const showModal = (action: string, values: any) => {
 
                 <a-select ref="select" v-model:value="searchInfos.tag" style="width: 150px;" @change="handleSearch"
                     allow-clear>
-                    <a-select-option v-for="item in pageInfos.tags" :value="item.value">{{ item.title }}</a-select-option>
+                    <a-select-option v-for="item in pageInfos.tags" :value="item.value">{{ item.title
+                        }}</a-select-option>
                 </a-select>
 
                 <a-select ref="select" v-model:value="searchInfos.gen" style="width: 200px;" @change="handleSearch"
@@ -154,23 +157,14 @@ const showModal = (action: string, values: any) => {
         </div>
     </a-modal>
 
-    <a-modal v-model:open="timelineModal" width="600px" centered :closable="false" :header="null" :footer="null">
-        <div class="box-timelines">
-            <a-timeline mode="alternate">
-                <a-timeline-item v-for="game in pageInfos.timelines">
-                    <div class="game-item">
-                        <div class="item-year">
-                            {{ game.year }}
-                        </div>
-                        <div class="item-name">
-                            {{ game.name }}
-                        </div>
-                        <div class="item-logo">
-                            <img :src="`/docs/pokemons/covers/${game.cover}`" alt="" srcset="">
-                        </div>
-                    </div>
-                </a-timeline-item>
-            </a-timeline>
+    <!-- 游戏列表 -->
+    <a-modal v-model:open="timelineModal" width="1300px" centered :closable="false" :header="null" :footer="null">
+        <div class="list-games">
+            <template v-for="game in pageInfos.timelines">
+                <div class="game-item" :class="['item-'+game.platform]">
+                    <img :src="`/docs/pokemons/covers/${game.cover}`" alt="" srcset="">
+                </div>
+            </template>
         </div>
     </a-modal>
 </template>
@@ -205,9 +199,30 @@ const showModal = (action: string, values: any) => {
     }
 }
 
-.box-timelines {
-    height: calc(100vh - 100px);
-    overflow: auto;
-    padding: 10px 20px;
+.list-games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .game-item {
+        &.item-GB,
+        &.item-GBC {
+            height: 200px;
+        }
+
+        &.item-GBA {
+            height: 140px;
+        }
+
+        &.item-NDS,
+        &.item-3DS {
+            height: 175px;
+        }
+
+        &.item-Switch,
+        &.item-Switch2 {
+            height: 250px;
+        }
+    }
 }
 </style>
