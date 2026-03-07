@@ -112,18 +112,18 @@ const showModal = (action: string, values: any) => {
                 <a-button type="primary" @click="showModal('nature', {})">性格</a-button>
                 <a-button type="primary" @click="showModal('type', {})">属性</a-button>
 
-                <a-select ref="select" v-model:value="searchInfos.tag" style="width: 150px;" @change="handleSearch"
+                <a-select ref="select" v-model:value="searchInfos.tag" style="width: 100px;" @change="handleSearch"
                     allow-clear>
                     <a-select-option v-for="item in pageInfos.tags" :value="item.value">{{ item.title
                         }}</a-select-option>
                 </a-select>
 
-                <a-select ref="select" v-model:value="searchInfos.gen" style="width: 200px;" @change="handleSearch"
+                <a-select ref="select" v-model:value="searchInfos.gen" style="width: 100px;" @change="handleSearch"
                     allow-clear>
                     <a-select-option v-for="item in pageInfos.gens" :value="item.name">{{ item.name }}</a-select-option>
                 </a-select>
 
-                <a-input v-model:value="searchInfos.text" style="width: 200px;" placeholder="search" allow-clear
+                <a-input v-model:value="searchInfos.text" style="width: 100px;" placeholder="search" allow-clear
                     @change="handleSearch" />
             </div>
         </div>
@@ -161,8 +161,10 @@ const showModal = (action: string, values: any) => {
     <a-modal v-model:open="timelineModal" width="1300px" centered :closable="false" :header="null" :footer="null">
         <div class="list-games">
             <template v-for="game in pageInfos.timelines">
-                <div class="game-item" :class="['item-'+game.platform]">
-                    <img :src="`/docs/pokemons/covers/${game.cover}`" alt="" srcset="">
+                <div class="game-item" :class="['item-' + game.platform]">
+                    <div class="cover">
+                        <img :src="`/docs/pokemons/covers/${game.cover}`" alt="" srcset="">
+                    </div>
                 </div>
             </template>
         </div>
@@ -205,6 +207,7 @@ const showModal = (action: string, values: any) => {
     gap: 20px;
 
     .game-item {
+
         &.item-GB,
         &.item-GBC {
             height: 200px;
@@ -223,6 +226,100 @@ const showModal = (action: string, values: any) => {
         &.item-Switch2 {
             height: 250px;
         }
+    }
+}
+
+.game-item {
+    position: relative;
+    margin: 20px 0;
+    transform: perspective(1200px) rotateY(-15deg) rotateX(5deg) translateZ(20px);
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+        transform: perspective(1200px) rotateY(-12deg) rotateX(3deg) translateZ(30px) translateY(-8px);
+
+        &::before {
+            background: linear-gradient(105deg, #5a5a5a, #8a8a8a, #aaaaaa);
+        }
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: -8px;
+        width: 10px;
+        height: calc(100% + 5px);
+        background: linear-gradient(105deg,
+                #4a4a4a 0%,
+                #7a7a7a 30%,
+                #9a9a9a 60%,
+                #7a7a7a 100%);
+        transform: rotateY(50deg) skewY(-2deg);
+        transform-origin: right;
+        border-radius: 6px 0 0 6px;
+        box-shadow:
+            -10px 0 15px rgba(0, 0, 0, 0.3),
+            inset -2px 0 8px rgba(0, 0, 0, 0.4),
+            inset 2px 2px 8px rgba(255, 255, 255, 0.2);
+        z-index: 1;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -13px;
+        left: -5px;
+        width: calc(100% - 3px);
+        height: 12px;
+        background: linear-gradient(180deg,
+                #8a8a8a 0%,
+                #5a5a5a 30%,
+                #3a3a3a 100%);
+        transform: rotateX(45deg) skewX(-2deg);
+        transform-origin: top;
+        border-radius: 0 0 6px 6px;
+        box-shadow:
+            5px 5px 10px rgba(0, 0, 0, 0.3),
+            inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        z-index: 0;
+    }
+
+    .cover {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: -2px;
+            width: 4px;
+            height: calc(100% - 10px);
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.5),
+                    rgba(255, 255, 255, 0.1));
+            border-radius: 0 2px 2px 0;
+            z-index: 3;
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px 2px 8px 2px;
+        position: relative;
+        z-index: 2;
+        box-shadow:
+            10px 15px 20px -5px rgba(0, 0, 0, 0.4),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+            inset 0 0 15px rgba(255, 255, 255, 0.2);
     }
 }
 </style>

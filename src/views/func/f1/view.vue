@@ -81,7 +81,7 @@ onMounted(async () => {
     for (let year = 2025; year <= currentYear; year++) {
         years.push(year);
     }
-    pageInfos.year = 2025 // currentYear
+    pageInfos.year = currentYear
     pageInfos.availableYears = years
 
     // 假设 F1.xlsx 包含多年数据，或者你根据年份动态拼路径
@@ -644,6 +644,7 @@ $f1-silver: #949498;
 
 * {
     font-family: 'Formula1' !important;
+    letter-spacing: 1px !important;
 }
 
 .f1-dashboard {
@@ -1071,7 +1072,7 @@ $f1-silver: #949498;
             font-size: 20px;
             font-weight: 900;
             font-style: italic;
-            color: rgba(255, 255, 255, 0.1); // 极淡的数字背景
+            // color: rgba(255, 255, 255, 0.1); // 极淡的数字背景
             user-select: none;
         }
     }
