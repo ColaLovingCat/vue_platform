@@ -62,7 +62,202 @@ export const games = [
             team: "",
             icon: "",
         },
-        stages: []
+        stages: [
+            {
+                stage: 'GROUP B',
+                type: 'doubles',
+                rounds: [],
+                winners: [
+                    [
+                        {
+                            name: "GAME1",
+                            round: "淘汰赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "GEN",
+                                icon: "GNG.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "JDG",
+                                icon: "JDG.png",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME2",
+                            round: "淘汰赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "LYON",
+                                icon: "LYON.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "LOUD",
+                                icon: "LLL.png",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME4",
+                            round: "胜者组决赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        }
+                    ],
+                ],
+                losers: [
+                    [
+                        {
+                            name: "GAME3",
+                            round: "败者组",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME5",
+                            round: "败者组决赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        },
+                    ]
+                ],
+            },
+            {
+                stage: 'GROUP A',
+                type: 'doubles',
+                rounds: [],
+                winners: [
+                    [
+                        {
+                            name: "GAME1",
+                            round: "淘汰赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "BLG",
+                                icon: "BLG.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "BFX",
+                                icon: "BFX.png",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME2",
+                            round: "淘汰赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "G2",
+                                icon: "G2.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TSW",
+                                icon: "Team Secret.png",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME4",
+                            round: "胜者组决赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        }
+                    ],
+                ],
+                losers: [
+                    [
+                        {
+                            name: "GAME3",
+                            round: "败者组",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME5",
+                            round: "败者组决赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                        },
+                    ]
+                ],
+            },
+        ]
     },
     {
         name: 'Budapest Major',
