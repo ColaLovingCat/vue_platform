@@ -1,5 +1,18 @@
 export const games = [
     {
+        name: 'S16',
+        full: '‌2026英雄联盟全球总决赛',
+        logo: 'LOL.png',
+        location: '北美',
+        date: '2026.10.16 - 11.14',
+        status: 'upcoming',
+        winner: {
+            team: "",
+            icon: "",
+        },
+        stages: []
+    },
+    {
         name: 'TI15',
         full: '2026 DOTA2 国际邀请赛',
         logo: 'Dota.png',
@@ -13,11 +26,37 @@ export const games = [
         stages: []
     },
     {
+        name: 'MSI',
+        full: '2026英雄联盟季中冠军赛',
+        logo: 'MSI.png',
+        location: '韩国 大田',
+        date: '2026.06.26 - 07.12',
+        status: 'upcoming',
+        winner: {
+            team: "",
+            icon: "",
+        },
+        stages: []
+    },
+    {
         name: 'Cologne Major',
         full: 'IEM Cologne Major 2026',
         logo: 'CS.png',
         location: '德国 科隆',
         date: '2026.06.02 - 06.21',
+        status: 'upcoming',
+        winner: {
+            team: "",
+            icon: "",
+        },
+        stages: []
+    },
+    {
+        name: '全球先锋赛',
+        full: '英雄联盟 全球先锋赛',
+        logo: 'pioneer.png',
+        location: '巴西 圣保罗',
+        date: '2026.03.16 - 03.22',
         status: 'upcoming',
         winner: {
             team: "",
