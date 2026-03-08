@@ -3,7 +3,7 @@ import * as extend from '@/commons/utils/extends'
 
 export const getDB = async () => {
     let res: any = await xlsx.readExcel('/docs/datas/pokes.xlsx')
-    const { pokes, shapes, gens, natures, types, timelines } = res
+    const { pokes, shapes, gens, areas } = res
 
     const pokesMap: any = pokes.map((item: any) => ({
         ...item,
@@ -17,14 +17,16 @@ export const getDB = async () => {
         }
     })
 
-    const groupedGens: any = extend.ExArray.group(gens, (a: any) => a.area)
+    const groupedGens: any = extend.ExArray.group(gens, (a: any) => a.area).map((a: any) => {
+        const area = areas.find((b: any) => a.name == b.name)
+        console.log('Testing', a,area)
+        if (area) return { ...a, areaCode: area.areaCode } 
+        else return a
+    })
 
     return {
+        ...res,
         pokes: pokesMap,
-        shapes,
         gens: groupedGens,
-        natures,
-        types,
-        timelines
     }
 }
