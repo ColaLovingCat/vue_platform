@@ -133,6 +133,7 @@ const processData = () => {
     yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
         race.week = weekDays[race.date.getDay()];
+        console.log('Testing', race.date, race.date.getDay(),race.week )
         race.startTime = formatTime(race.startTime)
         if (race.endTime) race.endTime = formatTime(race.endTime)
     })

@@ -64,6 +64,66 @@ export const games = [
         },
         stages: [
             {
+                stage: '淘汰赛',
+                type: 'tournament',
+                rounds: [
+                    [
+                        {
+                            name: "GAME1",
+                            round: "四强战",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 2
+                            },
+                        },
+                        {
+                            name: "GAME2",
+                            round: "四强战",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 1
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 2
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME3",
+                            round: "决赛",
+                            time: "-/-",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 3
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "TBD.png",
+                                score: 1
+                            },
+                        }
+                    ],
+                ],
+                winners: [],
+                losers: [],
+            },
+            {
                 stage: 'GROUP B',
                 type: 'doubles',
                 rounds: [],
