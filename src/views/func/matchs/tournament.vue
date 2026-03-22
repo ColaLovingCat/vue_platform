@@ -97,7 +97,7 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
       justify-content: space-between;
 
       &.win {
-        background: #003300;
+        background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
       }
 
       &.lose {

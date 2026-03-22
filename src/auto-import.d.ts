@@ -8,8 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACarousel: typeof import('ant-design-vue/es')['Carousel']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ACheckboxGroup: typeof import('ant-design-vue/es')['CheckboxGroup']
     ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
@@ -24,18 +22,13 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     AModal: typeof import('ant-design-vue/es')['Modal']
     ARadio: typeof import('ant-design-vue/es')['Radio']
-    ARadioButton: typeof import('ant-design-vue/es')['RadioButton']
     ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
     ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
     ASelect: typeof import('ant-design-vue/es')['Select']
     ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
-    ATabPane: typeof import('ant-design-vue/es')['TabPane']
-    ATabs: typeof import('ant-design-vue/es')['Tabs']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
-    ATimeline: typeof import('ant-design-vue/es')['Timeline']
-    ATimelineItem: typeof import('ant-design-vue/es')['TimelineItem']
     Barcode: typeof import('./components/barcode/barcode.vue')['default']
     Contents: typeof import('./components/layouts/contents.vue')['default']
     Layout: typeof import('./components/layouts/layout.vue')['default']

@@ -268,7 +268,7 @@ function computeTeamRecords(rounds: any) {
             gap: 10px;
 
             &.win {
-                background: #003300;
+                background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
             }
 
             &.lose {
