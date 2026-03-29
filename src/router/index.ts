@@ -73,6 +73,11 @@ const routes = [
     component: () => import("@/views/func/mhs2/view.vue"),
   },
   {
+    path: "/mhs3",
+    name: "mhs3",
+    component: () => import("@/views/func/mhs3/view.vue"),
+  },
+  {
     path: "/animals",
     name: "animals",
     component: () => import("@/views/func/animals/view.vue"),

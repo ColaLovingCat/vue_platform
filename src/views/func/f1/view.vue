@@ -413,9 +413,7 @@ const formatTime = (excelTime: number) => {
             <!-- 左侧：赛程列表 (滚动区) -->
             <section class="schedule-section">
                 <div class="list-f1">
-                    <div v-for="round in pageInfos.rounds" :key="round.round" class="f1-card"
-                        :class="{ active: pageInfos.currentRound === round.round }"
-                        @click="pageInfos.currentRound = round.round">
+                    <div v-for="round in pageInfos.rounds" :key="round.round" class="f1-card">
                         <!-- 状态边条 (F1红) -->
                         <div class="card-status"></div>
 
@@ -751,10 +749,6 @@ $f1-silver: #949498;
     &:hover {
         transform: translateX(10px);
         border-color: $f1-red;
-    }
-
-    &.active {
-        background: #2b2b35;
     }
 
     .card-status {
