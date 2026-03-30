@@ -133,7 +133,7 @@ const processData = () => {
     yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
         race.week = weekDays[race.date.getDay()];
-        console.log('Testing', race.date, race.date.getDay(),race.week )
+        console.log('Testing', race.date, race.date.getDay(), race.week)
         race.startTime = formatTime(race.startTime)
         if (race.endTime) race.endTime = formatTime(race.endTime)
     })
@@ -435,7 +435,12 @@ const formatTime = (excelTime: number) => {
                             </div>
 
                             <div class="track-thumb">
-                                <img :src="`/docs/f1/carbons/${round.img}.png`" />
+                                <a-popover title="Circuit" trigger="hover">
+                                    <template #content>
+                                        <img :src="`/docs/f1/carbons/${round.img}-full.png`" />
+                                    </template>
+                                    <img :src="`/docs/f1/carbons/${round.img}.png`" />
+                                </a-popover>
                             </div>
 
                             <div class="item-infos">
@@ -728,7 +733,6 @@ $f1-silver: #949498;
 .f1-card {
     background: $f1-dark-grey;
     border-radius: 0 15px 15px 0;
-    cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -1232,7 +1236,7 @@ $f1-silver: #949498;
 
     &:hover {
         .photo-wrapper .driver-img {
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
     }
 
@@ -1413,6 +1417,7 @@ $f1-silver: #949498;
                 height: 100%;
                 object-fit: contain;
                 object-position: bottom right;
+                transition: all 0.3s ease-out;
 
                 // 优化蒙版：确保底部和左侧完美渐变消失，不遮盖底部的名字
                 mask-image: linear-gradient(to left bottom,
@@ -1570,7 +1575,7 @@ $f1-silver: #949498;
     // 3. 底部车辆 (视觉重心)
     .bottom-car-visual {
         position: absolute;
-        bottom: -15px;
+        bottom: 0;
         left: 50%;
         transform: translateX(-60%);
         width: 280px;
