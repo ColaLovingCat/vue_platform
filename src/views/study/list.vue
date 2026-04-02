@@ -28,19 +28,9 @@ const pageInfos = reactive({
             path: '/study-vue',
         },
         {
-            name: 'TypeScript',
-            cover: 'ts.png',
-            path: '/study-ts',
-        },
-        {
-            name: 'Python',
-            cover: 'python.png',
-            path: '/study-python',
-        },
-        {
-            name: '算法',
-            cover: 'suan.png',
-            path: '/study-suan',
+            name: 'AI',
+            cover: 'ai.png',
+            path: '/study-ai',
         },
         {
             name: 'unity',
