@@ -9,15 +9,13 @@ import "highlight.js/styles/github-dark.css";
 
 export const md = new MarkdownIt({
   html: true,
-  linkify: true, // 自动识别链接
+  linkify: true,
   typographer: true,
   highlight: function (str: string, lang: any) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(str, { language: lang }).value;
-      } catch (__) {
-        /** empty **/
-      }
+      } catch (__) {}
     }
     return md.utils.escapeHtml(str);
   },
@@ -37,7 +35,6 @@ md.renderer.rules.fence = (tokens: any, idx: any) => {
   const highlightedCode = md.options.highlight
     ? md.options.highlight(token.content, token.info)
     : md.utils.escapeHtml(token.content);
-
   return `
     <div class="code-block">
       <span class="code-type">#${language}</span>
