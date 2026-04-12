@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 
-import appConfigs from '@/configs/app.config'
-const mode = appConfigs.loginMode
-
 import { useSystemInfosStore } from '@/commons/stores/index'
 const systemInfosStore = useSystemInfosStore()
 import { useLoadingStore } from '@/commons/stores/index'
 const loadingStore = useLoadingStore()
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 import eventBus from '@/commons/utils/eventBus'
 import * as extend from '@/commons/utils/extends'
-import * as messageBox from '@/commons/utils/messages'
-import * as current from './login.service'
+import * as messages from '@/commons/utils/messages'
+
+import * as current from '@/services/login.services'
+import * as users from '@/services/users.services'
 
 onMounted(async () => {
   // 背景
@@ -64,8 +66,8 @@ const onKeyDown = (event: any) => {
   }
 }
 
-const activeDynamic = false
 //#region Background
+const activeDynamic = false
 const canvas: any = ref(null)
 let ctx: any = null
 //
@@ -126,11 +128,14 @@ const resizeCanvas = () => {
 }
 //#endregion
 
-// Login
+// 用于直接跳转到指定页面
 const pageInfos = reactive({
   type: '',
   path: ''
 })
+
+const isLogin = ref(true);
+// Login
 const loginForm = reactive({
   account: '',
   password: '',
@@ -147,7 +152,7 @@ const login = () => {
     })
   )
   //
-  switch (systemInfosStore.systemInfos.loginMode) {
+  switch (systemInfosStore.infos.loginMode) {
     case 'sso-local': {
       const params = {
         account: loginForm.account,
@@ -163,13 +168,13 @@ const login = () => {
             //
             eventBus.emit('jumpHome')
           } else {
-            messageBox.showError(message)
+            messages.showError(message)
           }
         },
         (err: any) => {
           loadingStore.end()
           //
-          messageBox.showError(err)
+          messages.showError(err)
         }
       )
       break
@@ -189,13 +194,13 @@ const login = () => {
             //
             eventBus.emit('jumpHome')
           } else {
-            messageBox.showError(message)
+            messages.showError(message)
           }
         },
         (err: any) => {
           loadingStore.end()
           //
-          messageBox.showError(err)
+          messages.showError(err)
         }
       )
       break
@@ -205,10 +210,9 @@ const login = () => {
     }
   }
 }
-//
 const loginSSO = () => {
   const redirect_uri = extend.ExWeb.url().server + '/sso-auth'
-  const { host, client_id, scope, response_type } = systemInfosStore.systemInfos.azureConfigs
+  const { host, client_id, scope, response_type } = systemInfosStore.infos.azureConfigs
   let params = {
     client_id,
     scope,
@@ -222,6 +226,42 @@ const loginSSO = () => {
   let url = `${host}?` + extend.ExObject.stringifyParams(params)
   window.open(url, '_self')
 }
+// Register
+const registerForm = reactive({
+  userno: '',
+  ntAccount: '',
+  username: '',
+  department: '',
+  email: '',
+  password: '',
+  confirm: ''
+});
+const register = async () => {
+  const { password, confirm } = registerForm;
+
+  const vaild = current.checkPassword(password, confirm)
+  if (vaild == -1) {
+    messages.showError(t("message.password.notmatch"))
+    return;
+  }
+  if (vaild == -2) {
+    messages.showError(t("message.password.notcom"))
+    return;
+  }
+
+  const params = {
+    ...registerForm,
+    id: "",
+    status: 1,
+    avatar: "",
+    roleIDs: [],
+  }
+  let resp: any = await users.saveUser(params)
+  const { status, result } = resp;
+  if (status) {
+    isLogin.value = true
+  }
+};
 </script>
 
 <template>
@@ -237,45 +277,118 @@ const loginSSO = () => {
           </div>
         </div>
         <div class="bg-img">
-          <img src="/docs/imgs/earth.jpg" alt="" srcset="">
+          <!-- <img src="/docs/imgs/earth.jpg" alt="" srcset=""> -->
         </div>
       </div>
       <div class="col-right">
         <div class="box-login">
-          <div class="titles">{{ systemInfosStore.systemInfos.name }}</div>
-          <div class="box-sso" v-if="mode == 'sso-only'">
+          <div class="titles">{{ systemInfosStore.infos.name }}</div>
+
+          <!-- SSO表单 -->
+          <div class="box-sso" v-if="systemInfosStore.infos.loginMode == 'sso-only'">
             <p class="title-second">- Login only works from Bosch network -</p>
             <a-button type="primary" class="btn btn-sso" @click="loginSSO">
               <i class="fa-solid fa-cloud"></i>
               <span>{{ $t('btn.sso') }}</span>
             </a-button>
           </div>
+
           <div class="box-iuser" v-else>
-            <a-form :model="loginForm" layout="vertical" name="basic" :label-col="{ span: 5 }" autocomplete="off"
-              @finish="login">
-              <a-form-item :label="$t('system.account')" name="account"
-                :rules="[{ required: true, message: 'Please input your account!' }]">
-                <a-input v-model:value="loginForm.account" />
-              </a-form-item>
+            <transition name="fade-slide" mode="out-in">
 
-              <a-form-item :label="$t('system.password')" name="password"
-                :rules="[{ required: true, message: 'Please input your password!' }]">
-                <a-input-password v-model:value="loginForm.password" />
-              </a-form-item>
+              <!-- 登录表单 -->
+              <div v-if="isLogin" key="login">
+                <a-form :model="loginForm" layout="vertical" name="basic" :label-col="{ span: 5 }" autocomplete="off"
+                  @finish="login">
+                  <a-form-item :label="$t('system.account')" name="account"
+                    :rules="[{ required: true, message: 'Please input your account!' }]">
+                    <a-input v-model:value="loginForm.account" />
+                  </a-form-item>
 
-              <a-form-item name="remember">
-                <a-checkbox v-model:checked="loginForm.remember" class="btn-check">
-                  {{ $t('system.remember') }}
-                </a-checkbox>
-              </a-form-item>
+                  <a-form-item :label="$t('system.password')" name="password"
+                    :rules="[{ required: true, message: 'Please input your password!' }]">
+                    <a-input-password v-model:value="loginForm.password" />
+                  </a-form-item>
 
-              <a-form-item>
-                <a-button type="primary" class="btn btn-login" html-type="submit">
-                  {{ $t('btn.login') }}
-                </a-button>
-              </a-form-item>
-            </a-form>
-            <div class="others">
+                  <div class="form-footer-actions">
+                    <a-checkbox v-model:checked="loginForm.remember" class="btn-check">
+                      {{ $t('system.remember') }}
+                    </a-checkbox>
+                    <!-- 切换到注册 -->
+                    <a type="link" class="switch-btn" @click="isLogin = false">Create Account &gt;&gt;</a>
+                  </div>
+
+                  <a-form-item>
+                    <a-button type="primary" class="btn btn-login" html-type="submit">
+                      {{ $t('btn.login') }}
+                    </a-button>
+                  </a-form-item>
+                </a-form>
+              </div>
+
+              <!-- 注册表单 -->
+              <div v-else key="register">
+                <div class="sub-title">Create your account</div>
+                <a-form :model="registerForm" layout="vertical" @finish="register">
+                  <a-form-item name="userno" :rules="[{ required: true, message: 'Please input your userno!' }]">
+                    <a-input placeholder="User No" v-model:value="registerForm.userno">
+                      <template #prefix><i class="fa-solid fa-circle-user" style="color: #ccc"></i></template>
+                    </a-input>
+                  </a-form-item>
+                  
+                  <a-form-item name="ntAccount" :rules="[{ required: true, message: 'Please input your account!' }]">
+                    <a-input placeholder="NT Account" v-model:value="registerForm.ntAccount">
+                      <template #prefix><i class="fa-solid fa-circle-user" style="color: #ccc"></i></template>
+                    </a-input>
+                  </a-form-item>
+
+                  <a-form-item name="username" :rules="[{ required: true, message: 'Please input your username!' }]">
+                    <a-input placeholder="User Name" v-model:value="registerForm.username">
+                      <template #prefix><i class="fa-solid fa-user" style="color: #ccc"></i></template>
+                    </a-input>
+                  </a-form-item>
+
+                  <a-form-item name="department"
+                    :rules="[{ required: true, message: 'Please input your department!' }]">
+                    <a-input placeholder="Department" v-model:value="registerForm.department">
+                      <template #prefix><i class="fa-solid fa-briefcase" style="color: #ccc"></i></template>
+                    </a-input>
+                  </a-form-item>
+
+                  <a-form-item name="email">
+                    <a-input placeholder="Email" v-model:value="registerForm.email">
+                      <template #prefix><i class="fa-solid fa-at" style="color: #ccc"></i></template>
+                    </a-input>
+                  </a-form-item>
+
+                  <a-form-item name="password" :rules="[{ required: true, message: 'Please input password!' }]">
+                    <a-input-password placeholder="Password" v-model:value="registerForm.password">
+                      <template #prefix><i class="fa-solid fa-lock" style="color: #ccc"></i></template>
+                    </a-input-password>
+                  </a-form-item>
+
+                  <a-form-item name="confirm" :rules="[{ required: true, message: 'Please confirm password!' }]">
+                    <a-input-password placeholder="Confirm Password" v-model:value="registerForm.confirm">
+                      <template #prefix><i class="fa-solid fa-lock" style="color: #ccc"></i></template>
+                    </a-input-password>
+                  </a-form-item>
+
+                  <div class="form-footer-actions">
+                    <span>Already have an account?</span>
+                    <a type="link" class="switch-btn" @click="isLogin = true">&lt;&lt; Back to Login</a>
+                  </div>
+
+                  <a-form-item>
+                    <a-button type="primary" class="btn btn-register" html-type="submit">
+                      Register Now
+                    </a-button>
+                  </a-form-item>
+                </a-form>
+              </div>
+            </transition>
+
+            <!-- SSO -->
+            <div class="others" v-if="isLogin">
               <div class="line-divider">
                 <div class="line"></div>
                 <span>{{ $t('system.login.other') }}</span>
@@ -410,6 +523,32 @@ const loginSSO = () => {
     font-weight: 700;
   }
 
+  .sub-title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #5a5a5f;
+    font-weight: 500;
+  }
+
+  .form-footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+
+    .switch-btn {
+      color: #4c40f7;
+      cursor: pointer;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   .btn {
     height: 45px;
     font-size: 16px;
@@ -423,6 +562,11 @@ const loginSSO = () => {
 
   .btn-check {
     color: #5a5a5f;
+  }
+
+  .btn-register {
+    width: 100%;
+    background: #008dff; // 换个颜色区分注册
   }
 
   .others {
@@ -478,5 +622,21 @@ const loginSSO = () => {
     width: 100%;
     border-radius: 30px;
   }
+}
+
+// 过渡动画：淡入淡出 + 位移
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 </style>

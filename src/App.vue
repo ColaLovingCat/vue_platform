@@ -12,23 +12,22 @@ const userInfosStore = useUserInfosStore()
 
 import { useSystemInfosStore } from '@/commons/stores/index'
 const systemInfosStore = useSystemInfosStore()
-const headerStatus = computed(() => systemInfosStore.systemStatus.headerShow)
-const theme = computed(() => systemInfosStore.systemStatus.theme)
+const headerStatus = computed(() => systemInfosStore.state.headerShow)
+const theme = computed(() => systemInfosStore.state.theme)
 
 const env = import.meta.env.VITE_APP_ENV
 
-import * as systemDB from '@/commons/datas/datas.system'
+import * as systemDB from '@/commons/datas/menus'
 import layoutView from '@/components/layouts/layout.vue'
 import formView from '@/components/forms/view.vue'
 
 import * as extend from '@/commons/utils/extends'
-import * as messageBox from '@/commons/utils/messages'
+import * as messages from '@/commons/utils/messages'
 import { logger } from '@/commons/utils/logger'
 const log = logger.create("App");
 
-import * as current from './views/login/login.service'
-import * as user from './views/system/users/users.services'
-import * as messages from '@/commons/utils/messages'
+import * as current from '@/services/login.services'
+import * as user from '@/services/users.services'
 
 // 设备类型
 const deviceType = ref("");
@@ -37,6 +36,8 @@ const width = ref(0);
 const height = ref(0);
 
 onMounted(async () => {
+  systemInfosStore.setHeader(true)
+
   // 清除所有的loading状态
   loadingStore.clear()
 
@@ -56,18 +57,19 @@ onMounted(async () => {
   themesStatus.value = theme == 'default'
   setTheme(theme)
 
-  // SSO配置
-  if (systemInfosStore.systemInfos.azure == 'request') {
-    // 从后台获取获取
-    await getinfosAzure()
-  }
-
   // 检测token
   let token = extend.ExLocalStore.get('token')
   if (token && token != '') {
     // 如果有token则加载用户信息和菜单
-    getinfosUser()
-    // jumpHome()
+    await getinfosUser()
+  }
+  // 后刷新菜单
+  getlistMenus()
+
+  // SSO配置
+  if (systemInfosStore.infos.azure == 'request') {
+    // 从后台获取获取
+    await getinfosAzure()
   }
 
   // 注册全局方法
@@ -143,15 +145,13 @@ const getinfosUser = async () => {
       userInfosStore.refresh({ ...data })
       log.log('user', userInfosStore.userInfos)
     } else {
-      messageBox.showError(message)
+      messages.showError(message)
     }
   } catch (error) {
     log.error('error', error)
     logout()
   } finally {
     loadingStore.end()
-    // 后刷新菜单
-    getlistMenus()
   }
 }
 // 获取菜单
@@ -227,15 +227,12 @@ const changeInfos = ref({
 const changePassword = async () => {
   const { newPassword, confirmPassword } = changeInfos.value;
 
-  // 校验确认密码是否匹配
-  if (newPassword !== confirmPassword) {
+  const vaild = current.checkPassword(newPassword, confirmPassword)
+  if (vaild == -1) {
     messages.showError(t("message.password.notmatch"))
     return;
   }
-
-  // 校验复杂度：长度>=12，包含大小字母+数字
-  const complexityRegex = /^(?=.*[A-Za-z])(?=.*\d).{12,}$/;
-  if (!complexityRegex.test(newPassword)) {
+  if (vaild == -2) {
     messages.showError(t("message.password.notcom"))
     return;
   }

@@ -36,7 +36,7 @@ watch(
 </script>
 
 <template>
-  <a-layout class="pages">
+  <a-layout class="pages" :class="headerStatus ? '' : 'full'">
     <a-layout-header class="page-header" v-if="headerStatus">
       <div class="headers">
         <div class="logos">
@@ -55,7 +55,7 @@ watch(
         </div>
       </div>
     </a-layout-header>
-    <a-layout-content class="page-contents" :class="headerStatus ? '' : 'full'">
+    <a-layout-content class="page-contents">
       <router-view></router-view>
     </a-layout-content>
   </a-layout>

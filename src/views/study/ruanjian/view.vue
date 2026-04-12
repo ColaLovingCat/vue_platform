@@ -6505,8 +6505,8 @@ const showModal = (action: string, values: any) => {
 </template>
 
 <style scoped lang="scss">
-@import url("../comps/style.scss");
-@import url("../comps/txt.scss");
+@import url("@/views/study/comps/style.scss");
+@import url("@/views/study/comps/txt.scss");
 
 .list-ip {
   text-align: center;

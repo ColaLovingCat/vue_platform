@@ -5,12 +5,13 @@ import eventBus from '@/commons/utils/eventBus'
 import { useRouter } from 'vue-router'
 const routers = useRouter()
 
-import { useLoadingStore } from '../../commons/stores/index'
+import { useLoadingStore } from '@/commons/stores/index'
 const loadingStore = useLoadingStore()
 
-import * as extend from '../../commons/utils/extends'
-import * as meessageBox from '../../commons/utils/messages'
-import * as login from './login.service'
+import * as extend from '@/commons/utils/extends'
+import * as meessageBox from '@/commons/utils/messages'
+
+import * as login from '@/services/login.services'
 
 onMounted(() => {
   let params = extend.ExWeb.params()
@@ -42,8 +43,9 @@ onMounted(() => {
       },
       (err: any) => {
         loadingStore.end()
-        //
         meessageBox.showError(err)
+        //
+        eventBus.emit('logout')
       }
     )
   }

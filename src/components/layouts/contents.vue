@@ -20,7 +20,6 @@ onMounted(() => {
   } else {
     systemStore.showLogout(() => {
       eventBus.emit('logout')
-      // ;(window as any).eventBus.logout()
     })
   }
 })

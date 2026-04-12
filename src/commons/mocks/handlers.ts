@@ -2,7 +2,7 @@ import Mock from "mockjs";
 
 export default [
   {
-    url: "/api/user/list",
+    url: "/mocks/user/list",
     method: "get",
     response: ({ query }: any) => {
       const size = parseInt(query.size) || 5;

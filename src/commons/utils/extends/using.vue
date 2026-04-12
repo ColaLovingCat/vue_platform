@@ -176,7 +176,7 @@ const getLocal = () => {
 <template>
     <div class="sections">
         <!-- ExString -->
-        <div class="box box-string">
+        <div class="box box-string box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExString</h4>
             </div>
@@ -254,7 +254,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExNumber -->
-        <div class="box box-number">
+        <div class="box box-number box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExNumber</h4>
             </div>
@@ -319,8 +319,8 @@ const getLocal = () => {
             </div>
         </div>
 
-        <!--  -->
-        <div class="box box-array">
+        <!-- Array -->
+        <div class="box box-array box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExArray</h4>
             </div>
@@ -330,7 +330,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExDate -->
-        <div class="box box-date">
+        <div class="box box-date box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExDate</h4>
             </div>
@@ -402,7 +402,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExObject -->
-        <div class="box box-object">
+        <div class="box box-object box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExObject</h4>
             </div>
@@ -451,7 +451,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExWeb -->
-        <div class="box box-web">
+        <div class="box box-web box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExWeb</h4>
             </div>
@@ -488,7 +488,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExInterval -->
-        <div class="box box-promise">
+        <div class="box box-promise box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExInterval</h4>
             </div>
@@ -516,7 +516,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExLocalStore -->
-        <div class="box box-promise">
+        <div class="box box-promise box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExLocalStore</h4>
             </div>
@@ -532,7 +532,7 @@ const getLocal = () => {
         </div>
 
         <!-- ExPaginator -->
-        <div class="box box-pagination">
+        <div class="box box-pagination box-shadow">
             <div class="box-header">
                 <h4 class="titles">ExPaginator</h4>
             </div>
@@ -547,8 +547,8 @@ const getLocal = () => {
             </div>
         </div>
 
-
-        <div class="box box-optimize">
+        <!-- Optimize -->
+        <div class="box box-optimize box-shadow">
             <div class="box-header">
                 <h4 class="titles">Optimize</h4>
             </div>

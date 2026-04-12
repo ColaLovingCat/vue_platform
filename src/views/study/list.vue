@@ -28,6 +28,11 @@ const pageInfos = reactive({
             path: '/study-vue',
         },
         {
+            name: 'Vite',
+            cover: 'vite.png',
+            path: '/study-vite',
+        },
+        {
             name: 'AI',
             cover: 'ai.png',
             path: '/study-ai',

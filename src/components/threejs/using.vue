@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { onMounted } from 'vue'
 
 import threeView from './view.vue'
 
@@ -11,21 +11,18 @@ defineOptions({
 onMounted(() => { })
 
 const onChange = (event: any) => {
-  console.log('Testing: ', event)
+  console.log('[Change]: ', event)
 }
 </script>
 
 <template>
-  <div class="box-model">
+  <div class="sections">
     <threeView @changed="onChange"></threeView>
   </div>
 </template>
 
 <style scoped lang="scss">
-.box-model {
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 66px);
-  overflow: hidden;
+.sections {
+  padding: 0
 }
 </style>

@@ -1,23 +1,26 @@
-@import url(@/assets/fonts/boschsans/boschsans.css);
-@import url(@/assets/fonts/formula1/fonts.css);
-@import url(@/assets/fonts/boschicons/boschicons.css);
-@import url(@/assets/fonts/qweather/qweather-icons.css);
-@import url(@/assets/styles/reset.css);
+// font-awesome
+@import url(@/assets/fonts/font-awesome/css/all.min.css);
 
+// bosch
+@import url(@/assets/fonts/boschsans/boschsans.css);
+@import url(@/assets/fonts/boschicons/boschicons.css);
+
+@import url(@/assets/styles/reset.css);
 @import url(@/assets/styles/pubs.css);
 @import url(@/assets/styles/theme.css);
-@import url(@/assets/styles/loading.css);
 @import url(@/assets/styles/pages.css);
 @import url(@/assets/styles/box.css);
-@import url(@/assets/styles/btns.css);
 @import url(@/assets/styles/table.css);
+@import url(@/assets/styles/btns.css);
 
-.headers {
-  .menus {
-    flex: 1;
-  }
+@import url(@/components/chats/markdown/markdown.scss);
+@import url(@/components/workflows/styles.scss);
 
+@import url("monaco-editor/min/vs/editor/editor.main.css");
+
+.pages {
   .ant-menu {
+    width: 100%;
     justify-content: center;
 
     .router-link-active {
@@ -40,4 +43,3 @@ html[data-theme="dark"] {
   }
 }
 
-@import url(@/components/chats/markdown.scss);

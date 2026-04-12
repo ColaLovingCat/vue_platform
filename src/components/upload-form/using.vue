@@ -30,16 +30,24 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="sections flex-center">
+    <div class="sections">
         <div class="box-upload">
             <uploadView ref="uploadRef" :configs="configs" :params="params" @uploaded="uploaded"></uploadView>
         </div>
+        <uploadView ref="uploadRef" mode="simple" :configs="configs" :params="params" @uploaded="uploaded"></uploadView>
     </div>
 </template>
 
 <style scoped lang="scss">
+.sections {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px
+}
+
 .box-upload {
     width: 300px;
-    margin: 0 auto;
+    height: 200px;
 }
 </style>

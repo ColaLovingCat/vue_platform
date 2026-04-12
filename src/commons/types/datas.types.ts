@@ -1,9 +1,9 @@
 export interface SystemInfos {
-  name: string;
+  name: string; // 系统名称
   loginMode: "sso-only" | "sso-iuser" | "sso-local";
   //
-  azure: "request" | "configs";
-  azureAuto: boolean;
+  azure: "request" | "configs"; // 获取sso配置方式
+  azureAuto: boolean; // 自动SSO
   azureConfigs: {
     host: string;
     client_id: string;
@@ -11,7 +11,7 @@ export interface SystemInfos {
     response_type: string;
     redirect_uri?: string;
   };
-  adminKey: string;
+  adminKey: string; // 系统管理员角色名
 }
 
 export interface MenuInfos {

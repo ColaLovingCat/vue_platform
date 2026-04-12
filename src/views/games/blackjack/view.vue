@@ -193,7 +193,7 @@ const endGame = () => {
           <template v-for="card in pageInfos.dealer.cards">
             <div class="card-item">
               <img class="card-image"
-                :src="`docs/game/games/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
+                :src="`docs/game/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
                 alt="Card" />
             </div>
           </template>
@@ -210,7 +210,7 @@ const endGame = () => {
           <template v-for="card in pageInfos.player.cards">
             <div class="card-item">
               <img class="card-image"
-                :src="`docs/game/games/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
+                :src="`docs/game/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
                 alt="Card" />
             </div>
           </template>

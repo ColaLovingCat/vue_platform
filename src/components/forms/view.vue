@@ -306,7 +306,8 @@ defineExpose({
               @change="onChanged(form)" :disabled="form.disabled" :allowClear="form.activeClear"
               :show-search="form.activeSearch" :filter-option="filterOption"
               :status="errorInfos[form.key] ? 'error' : ''">
-              <a-select-option v-for="option in form.list" :key="option.value" :value="option.value">
+              <a-select-option v-for="option in form.list" :key="option.value" :value="option.value"
+                :label="option.label">
                 {{ option.label }}
               </a-select-option>
             </a-select>

@@ -249,7 +249,7 @@ const showModal = (action: string, values: any) => {
 </template>
 
 <style scoped lang="scss">
-@import url(../com/search.scss);
+@import url(@/views/func/com/search.scss);
 
 .sections {
     background: url(/docs/pokemons/comps/bg.jpg);

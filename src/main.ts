@@ -1,11 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-// 自定义样式
 import "./style.scss";
 import "./tailwind.css";
-// 图标库
-import "@fortawesome/fontawesome-free/css/all.css";
 
 const app = createApp(App);
 
@@ -17,7 +14,7 @@ import { createPersistedState } from "pinia-plugin-persistedstate";
 pinia.use(
   createPersistedState({
     auto: true,
-  })
+  }),
 );
 // 重写 $reset 方法 => 解决组合式api中无法使用问题
 pinia.use(({ store }) => {
@@ -27,15 +24,6 @@ pinia.use(({ store }) => {
   };
 });
 app.use(pinia);
-
-//
-import appConfigs from "./configs/app.config";
-import { useSystemInfosStore } from "./commons/stores";
-const systemInfosStore = useSystemInfosStore();
-systemInfosStore.init();
-systemInfosStore.initFromConfig({
-  ...appConfigs,
-});
 
 // router
 import router from "./router/index";
@@ -52,38 +40,32 @@ import zh from "@/assets/locales/zh.json";
 import { readExcel } from "@/commons/utils/xlsx";
 const useJson = false;
 async function initI18n() {
-  if (useJson) {
-    const i18n = createI18n({
-      locale: "zh", // 默认语言
-      legacy: false, // 支持 Composition API
-      globalInjection: true, // 全局注册$t方法
-      messages: {
-        en,
-        zh,
-      },
-    });
-    app.use(i18n);
-  } else {
-    const excelData = await readExcel("/docs/datas/lang.xlsx");
-    const messagesSheet = excelData["list"] || [];
+  let zhLan: any = {},
+    enLan: any = {};
 
-    const zh: Record<string, string> = {};
-    const en: Record<string, string> = {};
+  if (useJson) {
+    zhLan = zh;
+    enLan = en;
+  } else {
+    const excelData = await readExcel("/systems/lan/lang.xlsx");
+    const messagesSheet = excelData["list"] || [];
     messagesSheet.forEach((row: any) => {
       const key = row.type + "." + row.code;
-      zh[key] = row.zh || "";
-      en[key] = row.en || "";
+      zhLan[key] = row.zh || "";
+      enLan[key] = row.en || "";
     });
-
-    const i18n = createI18n({
-      locale: "zh",
-      legacy: false,
-      globalInjection: true,
-      messages: { en, zh },
-    });
-
-    app.use(i18n);
   }
+
+  const i18n = createI18n({
+    locale: "zh", // 默认语言
+    legacy: false, // 支持 Composition API
+    globalInjection: true, // 全局注册$t方法
+    messages: {
+      en: enLan,
+      zh: zhLan,
+    },
+  });
+  app.use(i18n);
 }
 await initI18n();
 

@@ -1,3 +1,6 @@
+import { logger } from "@/commons/utils/logger";
+const log = logger.create("IndexedDB");
+
 export interface StoreSchema {
   name: string; // 表名（object store 的名字）
   keyPath?: string; // 主键字段（如 "id"），如果不指定则默认 "id"
@@ -27,11 +30,12 @@ export interface StoreSchema {
  * ```
  */
 export class IndexedDBWrapper {
+
   private dbName: string; // 数据库名
   private version: number; // 版本号，版本变更时触发 onupgradeneeded
   private stores: StoreSchema[]; // 所有表的 schema 配置
 
-  private db: IDBDatabase | null = null; // 数据库实例，成功打开后缓存
+  private _db: IDBDatabase | null = null; // 数据库实例，成功打开后缓存
 
   /**
    * @summary 创建 IndexedDB 封装实例
@@ -50,8 +54,8 @@ export class IndexedDBWrapper {
    * - 若数据库不存在会新建
    * - 若版本号增加会触发 onupgradeneeded，可在其中建表
    */
-  async open(): Promise<IDBDatabase> {
-    if (this.db) return this.db; // 已经打开则直接返回
+  async openDB(): Promise<IDBDatabase> {
+    if (this._db) return this._db; // 已经打开则直接返回
 
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, this.version);
@@ -75,34 +79,62 @@ export class IndexedDBWrapper {
       };
       // 成功打开数据库
       request.onsuccess = () => {
-        this.db = request.result;
-        resolve(this.db);
+        this._db = request.result;
+        resolve(this._db);
       };
 
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   /**
    * 获取指定表的对象仓库
    * @param storeName 表名
    * @param mode 事务模式（默认只读，可选 "readonly" | "readwrite"）
    */
-  private getStore(storeName: string, mode: IDBTransactionMode = "readonly") {
-    if (!this.db) throw new Error("Database not opened");
-    return this.db.transaction(storeName, mode).objectStore(storeName);
+  private _getStore(storeName: string, mode: IDBTransactionMode = "readonly") {
+    if (!this._db) throw new Error("Database not opened");
+    return this._db.transaction(storeName, mode).objectStore(storeName);
+  }
+
+  /**
+   * 清空表（删除所有数据）
+   */
+  async clearTableAll(): Promise<void> {
+    await this.openDB();
+    return new Promise((resolve, reject) => {
+      const request = this._getStore(this.dbName, "readwrite").clear();
+      log.log("clearTableAll", this.dbName);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  /**
+   * 清空表（删除所有数据）
+   * @param storeName 表名
+   */
+  async clearTable(storeName: string): Promise<void> {
+    await this.openDB();
+    return new Promise((resolve, reject) => {
+      const request = this._getStore(storeName, "readwrite").clear();
+      log.log("clearTable", storeName);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
   }
 
   /**
    * 查询表中所有数据
    * @param storeName 表名
    */
-  async getlistAll<T>(storeName: string): Promise<T[]> {
-    const db = await this.open();
+  async getlistData<T>(storeName: string): Promise<T[]> {
+    await this.openDB();
     return new Promise((resolve, reject) => {
-      const request = this.getStore(storeName).getAll();
-      request.onsuccess = () => resolve(request.result as T[]);
-      request.onerror = () => reject(request.error);
+      const req = this._getStore(storeName).getAll();
+      log.log("getlist", storeName);
+      req.onsuccess = () => resolve(req.result as T[]);
+      req.onerror = () => reject(req.error);
     });
   }
 
@@ -111,10 +143,14 @@ export class IndexedDBWrapper {
    * @param storeName 表名
    * @param key 主键
    */
-  async getinfo<T>(storeName: string, key: IDBValidKey): Promise<T | undefined> {
-    const db = await this.open();
+  async getinfoData<T>(
+    storeName: string,
+    key: IDBValidKey
+  ): Promise<T | undefined> {
+    await this.openDB();
     return new Promise((resolve, reject) => {
-      const request = this.getStore(storeName).get(key);
+      const request = this._getStore(storeName).get(key);
+      log.log("getinfo", storeName);
       request.onsuccess = () => resolve(request.result as T);
       request.onerror = () => reject(request.error);
     });
@@ -129,14 +165,14 @@ export class IndexedDBWrapper {
    *  - 或 IDBKeyRange（范围查询，如 IDBKeyRange.bound(...)）
    * @returns 匹配到的结果数组
    */
-  async queryByIndex<T>(
+  async getinfoDataByIndex<T>(
     storeName: string,
     indexName: string,
     query: IDBValidKey | IDBKeyRange
   ): Promise<T[]> {
-    await this.open();
+    await this.openDB();
     return new Promise((resolve, reject) => {
-      const store = this.getStore(storeName);
+      const store = this._getStore(storeName);
       const index = store.index(indexName);
       const request = index.openCursor(query);
       const results: T[] = [];
@@ -158,42 +194,30 @@ export class IndexedDBWrapper {
   /**
    * 新增或更新数据（根据主键是否存在决定）
    * @param storeName 表名
-   * @param value 数据对象
-   * @returns 主键值
+   * @param value 值
    */
-  async save<T>(storeName: string, value: T): Promise<IDBValidKey> {
-    const db = await this.open();
+  async saveData<T>(storeName: string, value: T): Promise<IDBValidKey> {
+    await this.openDB();
     return new Promise((resolve, reject) => {
-      const request = this.getStore(storeName, "readwrite").put(value);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      const req = this._getStore(storeName, "readwrite").put(value);
+      log.log("add", storeName);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
     });
   }
-
+  
   /**
    * 删除单条数据
    * @param storeName 表名
    * @param key 主键
    */
-  async delete(storeName: string, key: IDBValidKey): Promise<void> {
-    const db = await this.open();
+  async deleteData(storeName: string, key: IDBValidKey): Promise<IDBValidKey> {
+    await this.openDB();
     return new Promise((resolve, reject) => {
-      const request = this.getStore(storeName, "readwrite").delete(key);
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  /**
-   * 清空表（删除所有数据）
-   * @param storeName 表名
-   */
-  async clear(storeName: string): Promise<void> {
-    const db = await this.open();
-    return new Promise((resolve, reject) => {
-      const request = this.getStore(storeName, "readwrite").clear();
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      const req = this._getStore(storeName, "readwrite").delete(key);
+      log.log("delete", storeName);
+      req.onsuccess = () => resolve(key);
+      req.onerror = () => reject(req.error);
     });
   }
 }

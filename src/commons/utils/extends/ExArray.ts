@@ -88,7 +88,7 @@ export interface ExArray {
   sortbyEles(
     arr: any[],
     keys: (string | ((item: any) => any))[],
-    orders?: ("asc" | "desc")[]
+    orders?: ("asc" | "desc")[],
   ): any[];
   _sortCompare(a: any, b: any): number;
   /**
@@ -125,7 +125,9 @@ export interface ExArray {
   intersect(arr1: any[], arr2: any[], type?: 0 | 1 | 2 | 3): any[];
 }
 export const ExArray: ExArray = {
-  initial: function (length: number, startIndex = 0): number[] {
+  initial: function (length: number, startIndex?: number): number[] {
+    if (!startIndex) return new Array(length).fill(0);
+
     const result: number[] = [];
     for (let loop = 0; loop < length; loop++) {
       result.push(startIndex + loop);
@@ -181,20 +183,20 @@ export const ExArray: ExArray = {
   },
   sort: function (arr: any[], sortBy = "asc") {
     return arr.sort((a, b) =>
-      sortBy === "asc" ? this._sortCompare(a, b) : this._sortCompare(b, a)
+      sortBy === "asc" ? this._sortCompare(a, b) : this._sortCompare(b, a),
     );
   },
   sortbyEle: function (arr: any[], func: Function, sortBy = "asc") {
     return arr.sort((a, b) =>
       sortBy === "asc"
         ? this._sortCompare(func(a), func(b))
-        : this._sortCompare(func(b), func(a))
+        : this._sortCompare(func(b), func(a)),
     );
   },
   sortbyEles: function (
     arr: any[],
     keys: (string | ((item: any) => any))[],
-    orders: ("asc" | "desc")[] = []
+    orders: ("asc" | "desc")[] = [],
   ) {
     return arr.sort((a, b) => {
       for (let i = 0; i < keys.length; i++) {

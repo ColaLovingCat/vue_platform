@@ -10,7 +10,7 @@ import formView from '@/components/forms/view.vue'
 import type { FormItem } from '@/components/forms/form.types'
 import type { TableInfos } from '@/commons/types/table.types'
 
-import * as current from './users.services'
+import * as current from '@/services/users.services'
 import * as messages from '@/commons/utils/messages'
 
 // name
@@ -205,7 +205,7 @@ const userForms: Ref<FormItem[]> = ref([
         isMulti: true
     },
 ])
-const enum formIndex {
+const enum FormIndex {
     password = 2,
     roles = 7,
 }
@@ -243,7 +243,7 @@ const getlistRoles = async () => {
         roleInfo.rows = [...data]
         //
         let temp = data.map((a: any) => ({ value: a.id, label: a.roleName }))
-        userForms.value[formIndex.roles].list = temp
+        userForms.value[FormIndex.roles].list = temp
     } else {
         messages.showError(message)
     }
@@ -406,7 +406,7 @@ const showModal = (action: string, values: any) => {
             userInfo.action = "New"
             //
             userInfo.id = ''
-            userForms.value[formIndex.password].hidden = false
+            userForms.value[FormIndex.password].hidden = false
             clearUser()
             //
             getlistRoles()
@@ -418,7 +418,7 @@ const showModal = (action: string, values: any) => {
             userInfo.action = "Update"
             //
             userInfo.id = values.id
-            userForms.value[formIndex.password].hidden = true
+            userForms.value[FormIndex.password].hidden = true
             clearUser()
             //
             Object.assign(userInfos.value, values)
@@ -541,7 +541,7 @@ const showModal = (action: string, values: any) => {
                         </template>
                         <template v-if="column.key === 'actions'">
                             <div class="btns">
-                                <template v-if="record.roleName === systemInfosStore.systemInfos.adminKey">
+                                <template v-if="record.roleName === systemInfosStore.infos.adminKey">
                                     <a-button type="default" disabled class="btn btn-tools">
                                         <i class="fa-solid fa-lock"></i>
                                     </a-button>

@@ -1,10 +1,6 @@
 <script lang="ts" setup>
-import { defineProps, inject, onMounted, ref, type Ref } from "vue";
-
-// import { wordDic } from "./words";
+import { defineProps, inject, type Ref } from "vue";
 import type { Token, Word, WordMatch, WordTip } from "./types";
-
-import * as XLSX from 'xlsx'
 
 const props = defineProps<{
     text: string;

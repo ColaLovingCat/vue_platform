@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import path from "path";
 
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -7,14 +8,13 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
 import { viteMockServe } from "vite-plugin-mock";
 
-import path from "path";
-
-import * as MonacoEditorPlugin from "vite-plugin-monaco-editor-esm";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    //
     // 解决 `import { ref , reactive ..... } from 'vue'` 大量引入的问题
     AutoImport({
       imports: ["vue", "vue-router", "pinia"],
@@ -31,23 +31,12 @@ export default defineConfig({
     }),
     //
     viteMockServe({
-      mockPath: "src/commons/mocks", // 你的 mock 文件夹
+      mockPath: "src/commons/mocks",
       enable: true,
     }),
     //
-    MonacoEditorPlugin.default({
-      languageWorkers: [
-        "editorWorkerService",
-        "json",
-        "html",
-        "css",
-        "typescript",
-      ],
-      publicPath: "systems/monaco",
-    }),
+    tailwindcss(),
   ],
-  // excel
-  assetsInclude: ["**/*.xlsx"],
   // 不加打包后白屏
   base: "./",
   // 关键配置@

@@ -171,6 +171,7 @@ const copyCode = async () => {
 
 <style scoped lang="scss">
 .editor-wrapper {
+    width: 100%;
     height: 100%;
     min-height: 80px;
     background: #1e1e1e;

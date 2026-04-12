@@ -7,6 +7,12 @@ const routes = [
     redirect: "/home",
   },
 
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("@/views/home/view.vue"),
+  },
+
   // 业务页面
   {
     path: "/",
@@ -17,6 +23,11 @@ const routes = [
         path: "/configs-users",
         name: "configs-users",
         component: () => import("@/views/system/users/users.vue"),
+      },
+      {
+        path: "/post-api",
+        name: "post-api",
+        component: () => import("@/components/editor-code/post.vue"),
       },
     ],
   },
@@ -34,38 +45,26 @@ const routes = [
   },
 
   {
-    path: "/home",
-    name: "home",
-    component: () => import("@/views/home/view.vue"),
+    path: "/wallpapers",
+    name: "wallpapers",
+    component: () => import("@/views/func/wallpapers/view.vue"),
   },
 
-  //
   {
     path: "/f1",
     name: "f1",
     component: () => import("@/views/func/f1/view.vue"),
   },
   {
-    path: "/f1_old",
-    name: "f1_old",
-    component: () => import("@/views/func/f1/view_old.vue"),
+    path: "/matchs",
+    name: "matchs",
+    component: () => import("@/views/func/matchs/view.vue"),
   },
 
-  // Games
-  {
-    path: "/games",
-    name: "games",
-    component: () => import("@/views/func/games/view.vue"),
-  },
   {
     path: "/pokes",
     name: "pokes",
     component: () => import("@/views/func/pokes/view.vue"),
-  },
-  {
-    path: "/dota2",
-    name: "dota2",
-    component: () => import("@/views/func/dota/view.vue"),
   },
   {
     path: "/mhs2",
@@ -87,43 +86,37 @@ const routes = [
     name: "amiibo",
     component: () => import("@/views/func/amiibo/view.vue"),
   },
-
-  //
+  {
+    path: "/dota2",
+    name: "dota2",
+    component: () => import("@/views/func/dota/view.vue"),
+  },
+  
+  {
+    path: "/games",
+    name: "games",
+    component: () => import("@/views/func/stores/games/view.vue"),
+  },
   {
     path: "/cartoons",
     name: "cartoons",
-    component: () => import("@/views/func/cartoons/view.vue"),
+    component: () => import("@/views/func/stores/cartoons/view.vue"),
   },
   {
     path: "/dragon",
     name: "dragon",
-    component: () => import("@/views/func/dragon/view.vue"),
+    component: () => import("@/views/func/stores/dragon/view.vue"),
   },
-
-  //
   {
     path: "/books",
     name: "books",
-    component: () => import("@/views/func/books/view.vue"),
+    component: () => import("@/views/func/stores/books/view.vue"),
   },
 
-  //
-  {
-    path: "/matchs",
-    name: "matchs",
-    component: () => import("@/views/func/matchs/view.vue"),
-  },
   {
     path: "/icons",
     name: "icons",
     component: () => import("@/views/func/icons/view.vue"),
-  },
-
-  //
-  {
-    path: "/wallpapers",
-    name: "wallpapers",
-    component: () => import("@/views/func/wallpapers/view.vue"),
   },
 
   {
@@ -178,9 +171,14 @@ const routes = [
   },
 
   {
+    path: "/articles",
+    name: "articles",
+    component: () => import("@/views/study/articles/view.vue"),
+  },
+  {
     path: "/query",
     name: "query",
-    component: () => import("@/views/func/query/view.vue"),
+    component: () => import("@/views/study/query/view.vue"),
   },
 
   {
@@ -204,14 +202,14 @@ const routes = [
     component: () => import("@/views/study/ai/view.vue"),
   },
   {
+    path: "/study-vite",
+    name: "study-vite",
+    component: () => import("@/views/study/vite/view.vue"),
+  },
+  {
     path: "/study-unity",
     name: "study-unity",
     component: () => import("@/views/study/unity/view.vue"),
-  },
-  {
-    path: "/articles",
-    name: "articles",
-    component: () => import("@/views/study/articles/view.vue"),
   },
 ];
 
@@ -221,6 +219,7 @@ const router = createRouter({
   routes,
 });
 
+// 拦截路由
 router.beforeEach((to: any, from: any, next: any) => {
   next();
 });

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import articleView from './view.vue'
 

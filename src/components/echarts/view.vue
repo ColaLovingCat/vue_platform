@@ -9,6 +9,7 @@ import {
 } from "vue";
 import * as echarts from "echarts";
 
+import * as extend from '@/commons/utils/extends'
 import { logger } from '@/commons/utils/logger'
 const log = logger.create("eCharts");
 
@@ -274,23 +275,45 @@ const emit = defineEmits<{
 
 const echartsRef: any = useTemplateRef("echartsRef");
 let chartInstance: any = null;
+let observer: ResizeObserver | null = null;
 
 const error = ref(false);
 
+const handleResize = () => {
+  if (chartInstance) {
+    chartInstance.resize();
+    log.log("resize");
+  }
+};
+const debouncedResize = extend.Optimize.debounceFn(handleResize, 500);
+
 onMounted(() => {
-  resizeObserver.observe(echartsRef.value.parentElement);
+  observer = new ResizeObserver(() => {
+    debouncedResize()
+  });
+  observer.observe(echartsRef.value.parentElement);
   //
   chartInstance = echarts.init(echartsRef.value);
   refreshChart();
 });
 
 onBeforeUnmount(() => {
-  resizeObserver.disconnect();
+  observer?.disconnect();
 });
 
 onUnmounted(() => {
   chartInstance.dispose();
 });
+
+watch(
+  () => props.options,
+  (newVal) => {
+    if (chartInstance) {
+      chartInstance.setOption(newVal);
+    }
+  },
+  { deep: true }
+);
 
 watch(
   () => props.changeMark,
@@ -315,13 +338,6 @@ const refreshChart = () => {
     error.value = true;
   }
 };
-
-const resizeObserver = new ResizeObserver(() => {
-  if (chartInstance) {
-    chartInstance.resize();
-    log.log("resize");
-  }
-});
 </script>
 
 <template>

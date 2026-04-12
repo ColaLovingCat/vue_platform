@@ -34,7 +34,7 @@ const drawCard = () => {
         <template v-for="(card, index) in visibleDeck" :key="card.id">
             <div class="card-item" :style="getCardStyle(index)">
                 <img class="card-image"
-                    :src="`docs/game/games/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
+                    :src="`docs/game/pokers/${card.isFaceDown ? 'poker-cover.png' : 'default/' + card.image}`"
                     alt="Card" />
             </div>
         </template>

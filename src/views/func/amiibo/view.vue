@@ -107,7 +107,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@import url(../com/search.scss);
+@import url(@/views/func/com/search.scss);
 
 .ant-radio-group {
     display: flex;
