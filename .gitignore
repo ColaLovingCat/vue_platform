@@ -12,9 +12,6 @@ dist
 dist-ssr
 *.local
 
-pnpm-lock.yaml
-src/auto-imports.d.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -25,3 +22,6 @@ src/auto-imports.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+pnpm-lock.yaml
+src/auto-import.d.ts
