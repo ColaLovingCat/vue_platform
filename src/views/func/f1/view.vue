@@ -1040,7 +1040,7 @@ $f1-silver: #949498;
             padding-right: 10px;
 
             .car-img {
-                width: 95px;
+                width: unset;
                 height: 28px;
                 z-index: 2;
                 transform: translateX(-150px); // 初始位置在屏幕外

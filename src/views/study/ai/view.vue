@@ -7,7 +7,7 @@ import noteView from "../comps/note-card.vue";
 import * as extend from "@/commons/utils/extends";
 
 import * as db from "./datas";
-import { md } from "@/components/chats/md";
+import md from "@/components/chats/markdown/markdown";
 
 // name
 defineOptions({
