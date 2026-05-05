@@ -13,6 +13,7 @@ const pageInfos = reactive({
     //
     currentRound: '',
     rounds: [] as any[],
+    result: [] as any[],
     //
     viewMode: 'drivers', // 'drivers' | 'teams'
     drivers: [] as any[],
@@ -138,6 +139,7 @@ const processData = () => {
         if (race.endTime) race.endTime = formatTime(race.endTime)
     })
     const yearDrivers = drivers.filter(r => r.year === year);
+    pageInfos.result = result;
     const yearResult = result.filter(r => r.year === year);
     yearResult.map((r: any) => {
         if (r.teamName) {
@@ -266,6 +268,22 @@ const processData = () => {
     // 更新图表
     updateChart(yearRounds, yearResult);
 };
+
+const getResult = (race: any) => {
+    const res = pageInfos.result.filter((r: any) =>
+        r.year === race.year
+        && r.round === race.round
+        && r.step === race.step)
+
+    res.forEach((r: any) => {
+        if (r.driverName) {
+            let driverInfo = pageInfos.drivers.find((a: any) => (a.name == r.driverName));
+            r.driverCode = driverInfo.code
+            r.flagCode = driverInfo.country
+        }
+    })
+    return res
+}
 
 // 4. 更新图表逻辑
 const updateChart = (yearRounds: any, yearResult: any) => {
@@ -470,6 +488,7 @@ const formatTime = (excelTime: number) => {
                                     <div class="winner-preview"
                                         :class="{ 'is-upcoming': !race.isFinished, 'is-next-bg': race.isNext }"
                                         :style="{ '--team-color': race.isNext ? '#e10600' : race.color }">
+
                                         <!-- 如果是 Next，增加一个背景流光效果 -->
                                         <div class="next-glow-line" v-if="race.isNext"></div>
 
@@ -485,17 +504,69 @@ const formatTime = (excelTime: number) => {
                                                 {{ race.isNext ? 'UP NEXT' : 'READY TO RACE' }}
                                             </span>
                                         </div>
-                                        <!-- 车号展示 -->
-                                        <div class="driver-no-overlay" v-if="race.isFinished">
-                                            {{ race.no }}
-                                        </div>
-                                        <!-- 赛车图片：带动画 -->
-                                        <div class="car-anim-container">
-                                            <img :src="`/docs/f1/cars/${race.team}.png`" class="car-img"
-                                                :class="{ 'is-placeholder': !race.isFinished }" />
-                                            <!-- 尾迹云动画 -->
-                                            <div class="speed-lines" v-if="race.isFinished"></div>
-                                        </div>
+
+                                        <template v-if="race.isFinished">
+                                            <a-popover class="winner-view" :title="false" placement="rightTop"
+                                                trigger="hover">
+                                                <template #content>
+                                                    <table class="table-result">
+                                                        <tr>
+                                                            <th>Position</th>
+                                                            <th>Driver</th>
+                                                            <th>Team</th>
+                                                            <th>Score</th>
+                                                        </tr>
+                                                        <tr v-for="res in getResult(race)" :key="res.position">
+                                                            <td class="f1-position-cell">
+                                                                <!-- 如果是数字，显示排名样式 -->
+                                                                <span v-if="!isNaN(res.position) && res.position !== ''"
+                                                                    class="pos-number">
+                                                                    {{ res.position }}
+                                                                </span>
+
+                                                                <!-- 如果不是数字（DNF, DNS, DSQ 等），显示标签样式 -->
+                                                                <span v-else class="pos-label"
+                                                                    :class="res.position.toLowerCase()">
+                                                                    {{ res.position }}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="item-driver">
+                                                                    <img class="icon-driver"
+                                                                        :src="`/docs/f1/drivers/${res.driverCode}.png`"
+                                                                        alt="" srcset="">
+                                                                    <span>{{ res.driverName }}</span>
+                                                                    <img class="icon-flag"
+                                                                        :src="`/docs/flags/${res.flagCode}.png`" alt=""
+                                                                        srcset="">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="item-team">
+                                                                    <img class="icon-team"
+                                                                        :src="`/docs/f1/teams/${res.teamCode}.png`"
+                                                                        alt="" srcset="">
+                                                                    <span>{{ res.teamName }}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{ res.score }}</td>
+                                                        </tr>
+                                                    </table>
+                                                </template>
+                                                <!-- 车号展示 -->
+                                                <div class="driver-no-overlay">
+                                                    {{ race.no }}
+                                                </div>
+
+                                                <!-- 赛车图片：带动画 -->
+                                                <div class="car-anim-container">
+                                                    <img :src="`/docs/f1/cars/${race.team}.png`" class="car-img"
+                                                        :class="{ 'is-placeholder': !race.isFinished }" />
+                                                    <!-- 尾迹云动画 -->
+                                                    <div class="speed-lines" v-if="race.isFinished"></div>
+                                                </div>
+                                            </a-popover>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -965,6 +1036,10 @@ $f1-silver: #949498;
                 opacity: 0.3;
                 top: 50%;
             }
+
+            :deep(.winner-view) {
+                width: 100%;
+            }
         }
 
         /* 横跨赛道的流光动画 */
@@ -1073,6 +1148,78 @@ $f1-silver: #949498;
             font-style: italic;
             // color: rgba(255, 255, 255, 0.1); // 极淡的数字背景
             user-select: none;
+        }
+    }
+}
+
+.table-result {
+    color: #fff;
+    background: #1f1f27;
+
+    th,
+    td {
+        padding: 5px 10px;
+    }
+
+    .item-driver,
+    .item-team {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .icon-flag {
+        margin-right: 5px;
+        width: 20px;
+        border-radius: 3px;
+    }
+
+    .icon-driver {
+        margin-right: 5px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .icon-team {
+        margin-right: 5px;
+        width: 20px;
+        vertical-align: middle;
+    }
+
+    .f1-position-cell {
+
+        /* 数字样式的设计 */
+        .pos-number {
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        /* 标签样式的设计 (DNF, DNS, DSQ) */
+        .pos-label {
+            display: inline-block;
+            background-color: #38383f;
+            /* 深灰色背景 */
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        /* 针对特定状态可以给不同颜色（可选） */
+        .pos-label.dsq {
+            background-color: #e10600;
+        }
+
+        .pos-label.dns {
+            background-color: #fcaf17;
+        }
+
+        .pos-label.dnf {
+            background-color: #71767c;
         }
     }
 }
