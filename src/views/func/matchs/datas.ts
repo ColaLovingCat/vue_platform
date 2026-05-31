@@ -44,12 +44,501 @@ export const games = [
         logo: 'CS.png',
         location: '德国 科隆',
         date: '2026.06.02 - 06.21',
-        status: 'upcoming',
+        status: 'on-going',
         winner: {
             team: "",
             icon: "",
         },
-        stages: []
+        stages: [
+            {
+                stage: 'Stage1',
+                type: 'swiss',
+                limit: 3,
+                rounds: [
+                    [
+                        {
+                            name: 'ROUND1',
+                            round: '0-0',
+                            bo: 1,
+                            time: '06/02',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: 'GL',
+                                        icon: 'GamerLegion-02.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Tyloo',
+                                        icon: 'Tyloo.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Heroic',
+                                        icon: 'Heroic-01.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Sharks',
+                                        icon: 'sharks.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'BB',
+                                        icon: 'BB-01.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'GG',
+                                        icon: 'GG.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Big',
+                                        icon: 'Big.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'M80',
+                                        icon: 'M80-01.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Mibr',
+                                        icon: 'Mibr.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'THUNDER',
+                                        icon: 'thunder.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'SINNERS',
+                                        icon: 'SINNERS.png',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND2',
+                            round: '1-0',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND2',
+                            round: '0-1',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND3',
+                            round: '2-0',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '1-1',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '0-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND4',
+                            round: '2-1',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND4',
+                            round: '1-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND5',
+                            round: '2-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ]
+                ],
+                winners: [],
+                losers: [],
+            },
+        ]
     },
     {
         name: '全球先锋赛',
@@ -3471,6 +3960,494 @@ export const games = [
             icon: "",
         },
         stages: [
+            {
+                stage: 'Major 瑞士轮',
+                type: 'swiss',
+                limit: 3,
+                rounds: [
+                    [
+                        {
+                            name: 'ROUND1',
+                            round: '0-0',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND2',
+                            round: '1-0',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND2',
+                            round: '0-1',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    [
+                        {
+                            name: 'ROUND3',
+                            round: '2-0',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '1-1',
+                            bo: 1,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND3',
+                            round: '0-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND4',
+                            round: '2-1',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            name: 'ROUND4',
+                            round: '1-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                    [
+                        {
+                            name: 'ROUND5',
+                            round: '2-2',
+                            bo: 3,
+                            time: '-/-',
+                            matchs: [
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                    bottom: {
+                                        team: '',
+                                        icon: '',
+                                        score: 0,
+                                    },
+                                },
+                            ],
+                        },
+                    ]
+                ],
+                winners: [],
+                losers: [],
+            },
             {
                 stage: '淘汰赛-8强',
                 type: 'tournament',
