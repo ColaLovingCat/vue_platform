@@ -541,6 +541,269 @@ export const games = [
         ]
     },
     {
+        name: 'LPL',
+        full: '英雄联盟职业联赛',
+        logo: 'LPL.png',
+        location: '中国',
+        date: '-',
+        status: 'on-going',
+        winner: {
+            team: "",
+            icon: "",
+        },
+        stages: [
+            {
+                stage: '2026 第二赛段',
+                type: 'doubles',
+                rounds: [],
+                winners: [
+                    [
+                        {
+                            name: "GAME1",
+                            round: "淘汰赛",
+                            time: "05/29",
+                            bo: 5,
+                            top: {
+                                team: "JDG",
+                                icon: "JDG.png",
+                                score: 3
+                            },
+                            bottom: {
+                                team: "TT",
+                                icon: "TT.png",
+                                score: 1
+                            },
+                        },
+                        {
+                            name: "GAME2",
+                            round: "淘汰赛",
+                            time: "05/29",
+                            bo: 5,
+                            top: {
+                                team: "TES",
+                                icon: "TES.png",
+                                score: 3
+                            },
+                            bottom: {
+                                team: "LGD",
+                                icon: "LGD.png",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME3",
+                            round: "淘汰赛",
+                            time: "05/30",
+                            bo: 5,
+                            top: {
+                                team: "AL",
+                                icon: "AL.png",
+                                score: 3
+                            },
+                            bottom: {
+                                team: "EDG",
+                                icon: "EDG.png",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME4",
+                            round: "淘汰赛",
+                            time: "05/30",
+                            bo: 5,
+                            top: {
+                                team: "BLG",
+                                icon: "BLG.png",
+                                score: 1
+                            },
+                            bottom: {
+                                team: "WE",
+                                icon: "WE.png",
+                                score: 3
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME5",
+                            round: "胜者组",
+                            time: "05/31",
+                            bo: 5,
+                            top: {
+                                team: "JDG",
+                                icon: "JDG.png",
+                                score: 1
+                            },
+                            bottom: {
+                                team: "TES",
+                                icon: "TES.png",
+                                score: 3
+                            },
+                        },
+                        {
+                            name: "GAME6",
+                            round: "胜者组",
+                            time: "06/01",
+                            bo: 5,
+                            top: {
+                                team: "AL",
+                                icon: "AL.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "WE",
+                                icon: "WE.png",
+                                score: 3
+                            },
+                        }
+                    ],
+                    [
+                        {
+                            name: "GAME11",
+                            round: "胜者组决赛",
+                            time: "06/07",
+                            bo: 5,
+                            top: {
+                                team: "TES",
+                                icon: "TES.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "WE",
+                                icon: "WE.png",
+                                score: 0
+                            },
+                        }
+                    ],
+                    [
+                        {
+                            name: "GAME14",
+                            round: "决赛",
+                            time: "06/14",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                        }
+                    ]
+                ],
+                losers: [
+                    [
+                        {
+                            name: "GAME7",
+                            round: "败者组",
+                            time: "06/02",
+                            bo: 5,
+                            top: {
+                                team: "LGD",
+                                icon: "LGD.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TT",
+                                icon: "TT.png",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME8",
+                            round: "败者组",
+                            time: "06/03",
+                            bo: 5,
+                            top: {
+                                team: "EDG",
+                                icon: "EDG.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "BLG",
+                                icon: "BLG.png",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME9",
+                            round: "败者组",
+                            time: "06/05",
+                            bo: 5,
+                            top: {
+                                team: "JDG",
+                                icon: "JDG.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                        },
+                        {
+                            name: "GAME10",
+                            round: "败者组",
+                            time: "06/06",
+                            bo: 5,
+                            top: {
+                                team: "AL",
+                                icon: "AL.png",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME12",
+                            round: "败者组",
+                            time: "06/08",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                        },
+                    ],
+                    [
+                        {
+                            name: "GAME13",
+                            round: "败者组决赛",
+                            time: "06/13",
+                            bo: 5,
+                            top: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                            bottom: {
+                                team: "TBD",
+                                icon: "",
+                                score: 0
+                            },
+                        },
+                    ]
+                ],
+            },
+        ]
+    },
+    {
         name: '全球先锋赛',
         full: '英雄联盟 全球先锋赛',
         logo: 'pioneer.png',
