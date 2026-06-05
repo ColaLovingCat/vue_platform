@@ -510,47 +510,50 @@ const formatTime = (excelTime: number) => {
                                                 trigger="hover">
                                                 <template #content>
                                                     <table class="table-result">
-                                                        <tr>
-                                                            <th>Position</th>
-                                                            <th>Driver</th>
-                                                            <th>Team</th>
-                                                            <th>Score</th>
-                                                        </tr>
-                                                        <tr v-for="res in getResult(race)" :key="res.position">
-                                                            <td class="f1-position-cell">
-                                                                <!-- 如果是数字，显示排名样式 -->
-                                                                <span v-if="!isNaN(res.position) && res.position !== ''"
-                                                                    class="pos-number">
-                                                                    {{ res.position }}
-                                                                </span>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Position</th>
+                                                                <th>Driver</th>
+                                                                <th>Team</th>
+                                                                <th>Score</th>
+                                                            </tr>
+                                                            <tr v-for="res in getResult(race)" :key="res.position">
+                                                                <td class="f1-position-cell">
+                                                                    <!-- 如果是数字，显示排名样式 -->
+                                                                    <span
+                                                                        v-if="!isNaN(res.position) && res.position !== ''"
+                                                                        class="pos-number">
+                                                                        {{ res.position }}
+                                                                    </span>
 
-                                                                <!-- 如果不是数字（DNF, DNS, DSQ 等），显示标签样式 -->
-                                                                <span v-else class="pos-label"
-                                                                    :class="res.position.toLowerCase()">
-                                                                    {{ res.position }}
-                                                                </span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="item-driver">
-                                                                    <img class="icon-driver"
-                                                                        :src="`/docs/f1/drivers/${res.driverCode}.png`"
-                                                                        alt="" srcset="">
-                                                                    <span>{{ res.driverName }}</span>
-                                                                    <img class="icon-flag"
-                                                                        :src="`/docs/flags/${res.flagCode}.png`" alt=""
-                                                                        srcset="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="item-team">
-                                                                    <img class="icon-team"
-                                                                        :src="`/docs/f1/teams/${res.teamCode}.png`"
-                                                                        alt="" srcset="">
-                                                                    <span>{{ res.teamName }}</span>
-                                                                </div>
-                                                            </td>
-                                                            <td>{{ res.score }}</td>
-                                                        </tr>
+                                                                    <!-- 如果不是数字（DNF, DNS, DSQ 等），显示标签样式 -->
+                                                                    <span v-else class="pos-label"
+                                                                        :class="res.position.toLowerCase()">
+                                                                        {{ res.position }}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="item-driver">
+                                                                        <img class="icon-driver"
+                                                                            :src="`/docs/f1/drivers/${res.driverCode}.png`"
+                                                                            alt="" srcset="">
+                                                                        <span>{{ res.driverName }}</span>
+                                                                        <img class="icon-flag"
+                                                                            :src="`/docs/flags/${res.flagCode}.png`"
+                                                                            alt="" srcset="">
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="item-team">
+                                                                        <img class="icon-team"
+                                                                            :src="`/docs/f1/teams/${res.teamCode}.png`"
+                                                                            alt="" srcset="">
+                                                                        <span>{{ res.teamName }}</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ res.score }}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </template>
                                                 <!-- 车号展示 -->

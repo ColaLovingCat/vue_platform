@@ -64,21 +64,45 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: 'GL',
-                                        icon: 'GamerLegion-02.png',
+                                        team: 'M80',
+                                        icon: 'M80-01.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
+                                        score: 0,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'SINNERS',
+                                        icon: 'SINNERS.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: 'NRG',
-                                        icon: 'NRG-01.png',
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Mibr',
+                                        icon: 'Mibr.png',
                                         score: 0,
+                                    },
+                                    bottom: {
+                                        team: 'THUNDER',
+                                        icon: 'thunder.png',
+                                        score: 1,
                                     },
                                 },
                                 {
                                     top: {
                                         team: 'B8',
                                         icon: 'B8.png',
-                                        score: 0,
+                                        score: 1,
                                     },
                                     bottom: {
                                         team: 'Tyloo',
@@ -95,6 +119,18 @@ export const games = [
                                     bottom: {
                                         team: 'Sharks',
                                         icon: 'sharks.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'GL',
+                                        icon: 'GamerLegion-02.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
                                         score: 0,
                                     },
                                 },
@@ -102,7 +138,7 @@ export const games = [
                                     top: {
                                         team: 'BB',
                                         icon: 'BB-01.png',
-                                        score: 0,
+                                        score: 1,
                                     },
                                     bottom: {
                                         team: 'GG',
@@ -119,43 +155,7 @@ export const games = [
                                     bottom: {
                                         team: 'Liquid',
                                         icon: 'Team Liquid.png',
-                                        score: 0,
-                                    },
-                                },
-                                {
-                                    top: {
-                                        team: 'M80',
-                                        icon: 'M80-01.png',
-                                        score: 0,
-                                    },
-                                    bottom: {
-                                        team: 'LVG',
-                                        icon: 'LVG.png',
-                                        score: 0,
-                                    },
-                                },
-                                {
-                                    top: {
-                                        team: 'Mibr',
-                                        icon: 'Mibr.png',
-                                        score: 0,
-                                    },
-                                    bottom: {
-                                        team: 'THUNDER',
-                                        icon: 'thunder.png',
-                                        score: 0,
-                                    },
-                                },
-                                {
-                                    top: {
-                                        team: 'SINNERS',
-                                        icon: 'SINNERS.png',
-                                        score: 0,
-                                    },
-                                    bottom: {
-                                        team: 'FLY',
-                                        icon: 'FLY.png',
-                                        score: 0,
+                                        score: 1,
                                     },
                                 },
                             ],
@@ -170,50 +170,50 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'THUNDER',
+                                        icon: 'thunder.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'M80',
+                                        icon: 'M80-01.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Sharks',
+                                        icon: 'sharks.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'GL',
+                                        icon: 'GamerLegion-02.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
                                         score: 0,
                                     },
 
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'BB',
+                                        icon: 'BB-01.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
                                         score: 0,
                                     },
                                 },
@@ -227,49 +227,49 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Heroic',
+                                        icon: 'Heroic-01.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
+                                        score: 1,
+                                    },
+                                },
+                                {
+                                    top: {
+                                        team: 'Mibr',
+                                        icon: 'Mibr.png',
+                                        score: 1,
+                                    },
+                                    bottom: {
+                                        team: 'Tyloo',
+                                        icon: 'Tyloo.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'SINNERS',
+                                        icon: 'SINNERS.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
+                                        score: 1,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Big',
+                                        icon: 'Big.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
-                                    },
-                                },
-                                {
-                                    top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
-                                    },
-                                    bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'GG',
+                                        icon: 'GG.png',
                                         score: 0,
                                     },
                                 },
@@ -285,26 +285,26 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'GL',
+                                        icon: 'GamerLegion-02.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'BB',
+                                        icon: 'BB-01.png',
+                                        score: 2,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'M80',
+                                        icon: 'M80-01.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'B8',
+                                        icon: 'B8.png',
+                                        score: 2,
                                     },
                                 },
                             ],
@@ -317,50 +317,50 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
+                                        score: 1,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Sharks',
+                                        icon: 'sharks.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
+                                        score: 1,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'THUNDER',
+                                        icon: 'thunder.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Big',
+                                        icon: 'Big.png',
+                                        score: 1,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Mibr',
+                                        icon: 'Mibr.png',
+                                        score: 1,
                                     },
                                 },
                             ],
@@ -373,26 +373,26 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Tyloo',
+                                        icon: 'Tyloo.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'SINNERS',
+                                        icon: 'SINNERS.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'GG',
+                                        icon: 'GG.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Heroic',
+                                        icon: 'Heroic-01.png',
+                                        score: 2,
                                     },
                                 },
                             ],
@@ -407,37 +407,37 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'GL',
+                                        icon: 'GamerLegion-02.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Big',
+                                        icon: 'Big.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Mibr',
+                                        icon: 'Mibr.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'M80',
+                                        icon: 'M80-01.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
                                         score: 0,
                                     },
                                 },
@@ -451,37 +451,37 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'THUNDER',
+                                        icon: 'thunder.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
+                                        score: 2,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Tyloo',
+                                        icon: 'Tyloo.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Sharks',
+                                        icon: 'sharks.png',
+                                        score: 1,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Heroic',
+                                        icon: 'Heroic-01.png',
                                         score: 0,
                                     },
                                 },
@@ -497,37 +497,37 @@ export const games = [
                             matchs: [
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
-                                        score: 0,
+                                        team: 'Tyloo',
+                                        icon: 'Tyloo.png',
+                                        score: 2,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'LVG',
+                                        icon: 'LVG.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Liquid',
+                                        icon: 'Team Liquid.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'FLY',
+                                        icon: 'FLY.png',
                                         score: 0,
                                     },
                                 },
                                 {
                                     top: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'NRG',
+                                        icon: 'NRG-01.png',
                                         score: 0,
                                     },
                                     bottom: {
-                                        team: '',
-                                        icon: '',
+                                        team: 'Big',
+                                        icon: 'Big.png',
                                         score: 0,
                                     },
                                 },
@@ -704,12 +704,12 @@ export const games = [
                             top: {
                                 team: "LGD",
                                 icon: "LGD.png",
-                                score: 0
+                                score: 3
                             },
                             bottom: {
                                 team: "TT",
                                 icon: "TT.png",
-                                score: 0
+                                score: 2
                             },
                         },
                         {
@@ -725,7 +725,7 @@ export const games = [
                             bottom: {
                                 team: "BLG",
                                 icon: "BLG.png",
-                                score: 0
+                                score: 3
                             },
                         },
                     ],
@@ -736,13 +736,13 @@ export const games = [
                             time: "06/05",
                             bo: 5,
                             top: {
-                                team: "JDG",
-                                icon: "JDG.png",
-                                score: 0
+                                team: "AL",
+                                icon: "AL.png",
+                                score: 3
                             },
                             bottom: {
-                                team: "TBD",
-                                icon: "",
+                                team: "LGD",
+                                icon: "LGD.png",
                                 score: 0
                             },
                         },
@@ -752,13 +752,13 @@ export const games = [
                             time: "06/06",
                             bo: 5,
                             top: {
-                                team: "AL",
-                                icon: "AL.png",
+                                team: "JDG",
+                                icon: "JDG.png",
                                 score: 0
                             },
                             bottom: {
-                                team: "TBD",
-                                icon: "",
+                                team: "BLG",
+                                icon: "BLG.png",
                                 score: 0
                             },
                         },
