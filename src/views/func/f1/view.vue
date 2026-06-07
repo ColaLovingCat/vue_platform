@@ -123,7 +123,7 @@ const processData = () => {
     if (!rawData) return;
 
     const { year } = pageInfos;
-    const { rounds, races, result, circuits, drivers, teams, mapping } = extend.ExObject.copy(rawData);
+    const { rounds, races, result, circuits, drivers, teams, mapping, moments } = extend.ExObject.copy(rawData);
 
     // 当前年份的信息
     const yearRounds = rounds.filter(r => r.year == year).map((r: any) => {
@@ -253,6 +253,10 @@ const processData = () => {
         // 计算日期范围
         const startRace = roundRaces[0];
         const endRace = roundRaces[roundRaces.length - 1];
+
+        //
+        const momentInfos = moments.filter((m: any) => m.year === year && m.round === round.round);
+        round.moments = momentInfos.length > 0 ? momentInfos : []
 
         return {
             ...round,
@@ -410,13 +414,31 @@ const formatTime = (excelTime: number) => {
     // 格式化为 HH:MM
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 }
+
+// 轮胎信息
+const tyres = [
+    { type: 'Soft', icon: 'soft.png', desc: "The softest of the three available dry compounds, the P Zero Red Soft tyres are also the mandatory Q3 compound – competitors reaching qualifying’s final shootout receive one set of this compound for use in Q3 only for their final attempts to take pole position. Whilst this will be the tyre of choice to achieve maximum out-and-out pace during a weekend, endurance is limited and timing a pit stop to change to one of the other compounds at the optimum point will be key to overall race performance." },
+    { type: 'Medium', icon: 'medium.png', desc: 'Each weekend, the P Zero Yellow Medium tyres will aim to strike the balance between performance and durability. Competitors who can make this tyre work well could end up with an advantage over their rivals by giving themselves greater strategic options through qualifying and the race.' },
+    { type: 'Hard', icon: 'hard.png', desc: 'The P Zero White Hard tyres are the hardest of the available compounds, and are therefore likely to be the slowest for outright single-lap pace, but the most durable for long runs.' },
+    { type: 'Intermediate', icon: 'intermediate.png', desc: 'The Cinturato Green Intermediate tyres are the most versatile of the rain tyres, dispersing approximately 30 litres of water per second per tyre at 300 kph. They can be used on a wet as well as a drying track.' },
+    { type: 'Wet', icon: 'wet.png', desc: 'The Cinturato Blue Wet tyres can disperse up to 85 litres of water per second per tyre at 300 kph, making them the most effective solution for heavy rain.' },
+];
 </script>
 
 <template>
     <div class="f1-dashboard">
         <!-- 顶部控制栏 -->
         <header class="f1-header">
-            <div class="f1-logo">F1 SCHEDULE <span>{{ pageInfos.year }}</span></div>
+            <div class="header-left">
+                <div class="f1-logo">
+                    F1 SCHEDULE <span>{{ pageInfos.year }}</span>
+                </div>
+                <div class="list-tyres">
+                    <div class="tyres-item" v-for="tyre in tyres" :key="tyre.type">
+                        <img :src="`/docs/f1/tyres/${tyre.icon}`" :alt="tyre.type" srcset="">
+                    </div>
+                </div>
+            </div>
             <div class="year-selector">
                 <button v-for="y in pageInfos.availableYears" :key="y" :class="{ active: pageInfos.year === y }"
                     @click="pageInfos.year = y">
@@ -448,6 +470,14 @@ const formatTime = (excelTime: number) => {
                                     <span class="sprint-badge" v-if="round.hasSprint">SPRINT</span>
                                 </div>
                                 <div class="circuit-name">{{ round.circuit }} - {{ round.zh }}</div>
+                            </div>
+
+                            <div class="circuit-moments">
+                                <a-carousel autoplay>
+                                    <div v-for="moment in round.moments">
+                                        <img class="img-moment" :src="`/docs/f1/moments/${moment.year}/${moment.round}/${moment.moment}`" />
+                                    </div>
+                                </a-carousel>
                             </div>
 
                             <div class="track-thumb">
@@ -740,6 +770,31 @@ $f1-silver: #949498;
         border-bottom: 10px solid $f1-red;
         background: #000;
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            .list-tyres {
+                display: flex;
+                gap: 10px;
+
+                .tyres-item {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 1px solid #333;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
         .f1-logo {
             font-size: 24px;
             font-weight: 900;
@@ -783,7 +838,7 @@ $f1-silver: #949498;
 /* 赛程卡片列表 */
 .schedule-section {
     flex: 1;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 185px);
     overflow-y: auto;
     padding-right: 10px;
 
@@ -903,6 +958,17 @@ $f1-silver: #949498;
         .circuit-name {
             color: $f1-silver;
             font-size: 14px;
+        }
+    }
+
+    .circuit-moments {
+        width: 260px;
+
+        .img-moment {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
         }
     }
 
@@ -1328,7 +1394,7 @@ $f1-silver: #949498;
     border-radius: 16px;
 
     .list-drivers {
-        height: calc(100vh - 550px);
+        height: calc(100vh - 565px);
         overflow-y: auto;
         padding-right: 8px;
 
