@@ -1,37 +1,21 @@
 <script lang="ts" setup>
-// props
-const props = defineProps<{
-  rounds: any[]
-}>()
+import { type RoundInfo, getTeamClass } from './public'
 
-const getTeamClass = (match: any, bo: number, team: string): string => {
-  const { top: teamA, bottom: teamB } = match;
+// name
+defineOptions({
+    name: 'tournament-name'
+})
 
-  // 检查 TBD 情况
-  if ((team === "top" && teamA.team === "TBD") ||
-    (team === "bottom" && teamB.team === "TBD")) {
-    return 'tbd';
-  }
-
-  // 计算获胜所需分数
-  const winningScore = Math.floor(bo / 2) + 1;
-
-  // 检查比赛是否已结束
-  const isMatchFinished = teamA.score >= winningScore || teamB.score >= winningScore;
-  if (!isMatchFinished) {
-    return '';
-  }
-
-  // 根据队伍位置返回结果
-  if (team === "top") {
-    return teamA.score < teamB.score ? 'lose' : teamA.score > teamB.score ? 'win' : '';
-  }
-  if (team === "bottom") {
-    return teamA.score > teamB.score ? 'lose' : teamA.score < teamB.score ? 'win' : '';
-  }
-
-  return '';
-};
+const props = defineProps({
+    rounds: {
+        type: Array as () => RoundInfo[],
+        default: () => []
+    },
+    mark: {
+        type: String,
+        default: ''
+    },
+})
 </script>
 
 <template>
@@ -49,19 +33,25 @@ const getTeamClass = (match: any, bo: number, team: string): string => {
               <h4>{{ match.time }}</h4>
             </div>
             <div class="item-teams">
-              <div class="item-infos" :class="getTeamClass(match, match.bo, 'top')">
+              <div class="item-infos" :class="getTeamClass(match, 'top', mark, match.bo)">
                 <div class="item-team">
                   <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.top.team }}</div>
                 </div>
-                <div class="item-score">{{ match.top.score }}</div>
+                <div class="item-score">
+                  {{ match.top.score }}
+                  <span v-if="match.top.score === match.bottom.score">({{ match.top.kick }})</span>
+                </div>
               </div>
-              <div class="item-infos" :class="getTeamClass(match, match.bo, 'bottom')">
+              <div class="item-infos" :class="getTeamClass(match, 'bottom', mark, match.bo)">
                 <div class="item-team">
                   <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.bottom.team }}</div>
                 </div>
-                <div class="item-score">{{ match.bottom.score }}</div>
+                <div class="item-score">
+                  {{ match.bottom.score }}
+                  <span v-if="match.top.score === match.bottom.score">({{ match.bottom.kick }})</span>
+                </div>
               </div>
             </div>
           </div>

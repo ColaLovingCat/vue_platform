@@ -134,7 +134,6 @@ const processData = () => {
     yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
         race.week = weekDays[race.date.getDay()];
-        console.log('Testing', race.date, race.date.getDay(), race.week)
         race.startTime = formatTime(race.startTime)
         if (race.endTime) race.endTime = formatTime(race.endTime)
     })
@@ -239,7 +238,6 @@ const processData = () => {
                     isNext: false
                 };
             } else {
-                console.log('No result for', race)
                 // 情况 B：比赛未开始或无结果
                 return {
                     ...race,

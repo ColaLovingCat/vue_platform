@@ -1,52 +1,118 @@
 <script lang="ts" setup>
 import { onMounted, ref, reactive, computed, watch } from 'vue'
 
-import swissView from './swiss.vue'
-import tournamentView from './tournament.vue'
-import * as db from './datas'
+import swissView from './comps/swiss.vue'
+import tournamentView from './comps/tournament.vue'
+import groupView from './comps/group.vue'
+
+import type { GameInfo, StageInfo } from './types'
+import * as xlsx from '@/commons/utils/xlsx'
 
 // name
 defineOptions({
   name: 'custom-name'
 })
 
-interface GameInfo {
-  name: string;
-  full: string;
-  logo: string;
-  location: string;
-  date: string;
-  status: string;
-  winner: {
-    team: string;
-    icon: string;
-  };
-  stages: StageInfo[];
-}
-
-interface StageInfo {
-  stage: string;
-  type: string;
-  rounds: any[];
-  limit?: number;
-  winners?: any[];
-  losers?: any[];
-}
-
 // 状态管理
-const games = ref<GameInfo[]>([])
+const game_list = ref<GameInfo[]>([])
 const selectedGame = ref<GameInfo | null>(null)
 const selectedStage = ref<StageInfo | null>(null)
-
 // 计算属性：当前选中的stage类型
 const currentStageType = computed(() => selectedStage.value?.type || '')
 
 // 初始化数据
-onMounted(() => {
-  games.value = db.games
-  if (games.value.length > 0) {
-    // 默认选中第一个非upcoming的游戏，如果没有则选中第一个游戏
-    const game = games.value.find(g => g.status != 'upcoming') || games.value[0]
+onMounted(async () => {
+  const temps: any = await xlsx.readExcel('/docs/datas/matchs.xlsx');
+  const { games, stages, rounds, matchs } = temps
+  games.map((game: GameInfo) => {
+    game.stages = []
+    //
+    game.stages = stages.filter((stage: StageInfo) => stage.game_name === game.name)
+    game.stages.map((stage: StageInfo) => {
+      const groud_rounds = [] as any[]
+      const groud_winners = [] as any[]
+      const groud_losers = [] as any[]
+      //
+      const filter_rounds = rounds.filter((round: any) => round.game_name === stage.game_name && round.stage === stage.stage)
+      filter_rounds.map((round: any) => {
+        switch (stage.type) {
+          case 'swiss':
+          case 'group': {
+            round.matchs = matchs.filter((match: any) => match.round_id === round.id).map((match: any) => {
+              return {
+                top: {
+                  team: match.top_team,
+                  icon: match.top_icon,
+                  score: match.top_score,
+                  kick: match.top_kick,
+                },
+                bottom: {
+                  team: match.bottom_team,
+                  icon: match.bottom_icon,
+                  score: match.bottom_score,
+                  kick: match.bottom_kick,
+                },
+              }
+            })
+            break
+          }
+          case 'tournament':
+          case 'doubles': {
+            const match = matchs.find((match: any) => match.round_id === round.id)
+            if (match)
+              Object.assign(round, {
+                top: {
+                  team: match.top_team,
+                  icon: match.top_icon,
+                  score: match.top_score,
+                  kick: match.top_kick,
+                },
+                bottom: {
+                  team: match.bottom_team,
+                  icon: match.bottom_icon,
+                  score: match.bottom_score,
+                  kick: match.bottom_kick,
+                },
+              })
+            break
+          }
+        }
+
+        switch (stage.type) {
+          case 'swiss':
+          case 'tournament': {
+            if (!groud_rounds[round.group]) groud_rounds[round.group] = []
+            groud_rounds[round.group].push(round)
+            break
+          }
+          case 'group': {
+            groud_rounds.push(round)
+            break
+          }
+          case 'doubles': {
+            if (round.is_winner === 1) {
+              if (!groud_winners[round.group]) groud_winners[round.group] = []
+              groud_winners[round.group].push(round)
+            } else if (round.is_winner === 0) {
+              if (!groud_losers[round.group]) groud_losers[round.group] = []
+              groud_losers[round.group].push(round)
+            }
+            break
+          }
+        }
+      })
+
+      console.log('rounds:', groud_rounds);
+      stage.rounds = groud_rounds
+      stage.winners = groud_winners
+      stage.losers = groud_losers
+    })
+  })
+  game_list.value = games
+
+  //
+  if (game_list.value.length > 0) {
+    const game = game_list.value.find(g => g.status != 'upcoming') || game_list.value[0]
     changeGame(game)
   }
 })
@@ -56,7 +122,7 @@ const changeGame = (game: GameInfo) => {
   selectedGame.value = game
   // 切换游戏时，默认选中该游戏的第一个stage
   if (game.stages.length > 0) {
-    selectedStage.value = game.stages[0]
+    selectedStage.value = game.stages.find(g => g.status == 1) || game.stages[0] || null
   } else {
     selectedStage.value = null
   }
@@ -97,9 +163,9 @@ const changeStage = (stage: StageInfo) => {
             </div>
             <div class="info-row winner-row">
               <span class="info-label">冠军队伍</span>
-              <div class="winner-info" v-if="selectedGame.winner.team !== ''">
-                <img :src="`/docs/logos/teams/${selectedGame.winner.icon}`" alt="" class="winner-icon">
-                <span class="winner-team">{{ selectedGame.winner.team }}</span>
+              <div class="winner-info" v-if="selectedGame.winner !== 'TBD'">
+                <img :src="`/docs/logos/teams/${selectedGame.winner_logo}`" alt="" class="winner-icon">
+                <span class="winner-team">{{ selectedGame.winner }}</span>
               </div>
             </div>
           </div>
@@ -110,12 +176,13 @@ const changeStage = (stage: StageInfo) => {
       <div class="list-games">
         <h3 class="panel-title">比赛列表</h3>
         <div class="games-container">
-          <div v-for="game in games" :key="game.name" class="game-item" @click="changeGame(game)"
+          <div v-for="game in game_list" :key="game.name" class="game-item" @click="changeGame(game)"
             :class="{ active: selectedGame?.name === game.name }">
             <div class="item-icon">
               <img :src="`/docs/logos/games/${game.logo}`" alt="">
             </div>
             <div class="item-name">{{ game.name }}</div>
+            <span class="status-dot" :data-status="game.status"></span>
           </div>
         </div>
       </div>
@@ -136,17 +203,21 @@ const changeStage = (stage: StageInfo) => {
         <template v-if="selectedStage">
           <!-- 根据stage类型显示不同的视图 -->
           <template v-if="currentStageType === 'swiss'">
-            <swissView :limit="selectedStage.limit" :rounds="selectedStage.rounds" />
+            <swissView :rounds="selectedStage.rounds" :mark="selectedStage.mark" :limit="selectedStage.limit" />
           </template>
 
           <template v-else-if="currentStageType === 'tournament'">
-            <tournamentView :rounds="selectedStage.rounds" />
+            <tournamentView :rounds="selectedStage.rounds" :mark="selectedStage.mark" />
           </template>
 
           <template v-else-if="currentStageType === 'doubles'">
-            <tournamentView :rounds="selectedStage.winners || []" />
+            <tournamentView :rounds="selectedStage.winners || []" :mark="selectedStage.mark" />
             <div class="lines"></div>
-            <tournamentView :rounds="selectedStage.losers || []" />
+            <tournamentView :rounds="selectedStage.losers || []" :mark="selectedStage.mark" />
+          </template>
+
+          <template v-else-if="currentStageType === 'group'">
+            <groupView :rounds="selectedStage.rounds" :mark="selectedStage.mark" />
           </template>
 
           <!-- 默认提示 -->
@@ -189,6 +260,54 @@ const changeStage = (stage: StageInfo) => {
   }
 }
 
+/* 状态点基础样式 */
+.status-dot {
+  position: absolute;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* upcoming - 灰色静态点 */
+.status-dot[data-status="upcoming"] {
+  background-color: #9ca3af;
+  box-shadow: 0 0 0px rgba(156, 163, 175, 0);
+}
+
+/* on-going - 绿色呼吸动画 */
+.status-dot[data-status="on-going"] {
+  background-color: #22c55e;
+  animation: breathe 1.5s ease-in-out infinite;
+}
+
+/* completed - 蓝色静态点 */
+.status-dot[data-status="completed"] {
+  background-color: #3b82f6;
+}
+
+/* 呼吸动画 */
+@keyframes breathe {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0);
+  }
+}
+
 // 游戏列表
 .list-games {
   background: #26292d;
@@ -202,6 +321,7 @@ const changeStage = (stage: StageInfo) => {
     gap: 8px;
 
     .game-item {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 12px;
