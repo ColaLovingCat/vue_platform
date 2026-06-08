@@ -509,10 +509,23 @@ const changeStage = (stage: StageInfo) => {
 }
 
 .lines {
-  height: 20px;
-  background: linear-gradient(to bottom, transparent 50%, #eee 50%);
-  background-size: 100% 20px;
-  margin: 10px 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent,
+    #ff3366,
+    #ffeb3b,
+    #00e5ff,
+    transparent
+  );
+  margin: 20px 0;
+  box-shadow: 0 0 12px rgba(255, 51, 102, 0.5);
+  animation: scan 3s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes scan {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 .empty-state {

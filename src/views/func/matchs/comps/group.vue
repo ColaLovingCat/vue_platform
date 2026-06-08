@@ -54,7 +54,7 @@ const standings = computed<TeamStanding[]>(() => {
     props.rounds.forEach((round) => {
         round.matchs.forEach((match) => {
             const { top, bottom } = match;
-            console.log('Testing: ',match);
+            console.log('Testing: ', match);
             if (!top.team || !bottom.team || top.team === 'TBD' || bottom.team === 'TBD' || top.score === undefined || bottom.score === undefined) {
                 return;
             }
@@ -111,7 +111,7 @@ const standings = computed<TeamStanding[]>(() => {
             <h3 class="section-title">战报</h3>
             <div class="list-rounds">
                 <template v-for="round in rounds" :key="round.name">
-                    <div class="round-item">
+                    <div class="box-card round-item">
                         <div class="item-infos">
                             <h4>{{ round.name }}</h4>
                             <h4 v-if="round.round">{{ round.round }}</h4>
@@ -120,20 +120,27 @@ const standings = computed<TeamStanding[]>(() => {
                         <div class="list-matchs">
                             <template v-for="(match, index) in round.matchs" :key="index">
                                 <div class="match-item">
-                                    <div class="item-team item-left"
-                                        :class="getTeamClass(match, 'top', mark, match.bo)">
-                                        <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
-                                        <div class="team-name">{{ match.top.team }}</div>
-                                    </div>
-                                    <span class="item-score">
-                                        {{ match.top.score }}
-                                        <span>:</span>
-                                        {{ match.bottom.score }}
-                                    </span>
-                                    <div class="item-team item-right"
-                                        :class="getTeamClass(match, 'bottom', mark, match.bo)">
-                                        <div class="team-name">{{ match.bottom.team }}</div>
-                                        <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                                    <div class="item-teams">
+                                        <div class="team-infos item-left"
+                                            :class="getTeamClass(match, 'top', mark, round.bo)">
+                                            <div class="item-team">
+                                                <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
+                                                <div class="team-name">{{ match.top.team }}</div>
+                                            </div>
+                                            <div class="item-score">
+                                                {{ match.top.score }}
+                                            </div>
+                                        </div>
+                                        <div class="team-infos item-right"
+                                            :class="getTeamClass(match, 'bottom', mark, round.bo)">
+                                            <div class="item-score">
+                                                {{ match.bottom.score }}
+                                            </div>
+                                            <div class="item-team">
+                                                <div class="team-name">{{ match.bottom.team }}</div>
+                                                <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </template>
@@ -174,8 +181,9 @@ const standings = computed<TeamStanding[]>(() => {
 </template>
 
 <style scoped lang="scss">
+@import url(./styles.scss);
+
 .box-football {
-    color: #fff;
     display: flex;
     gap: 30px;
 }
@@ -197,27 +205,13 @@ const standings = computed<TeamStanding[]>(() => {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    .round-item {
-        .item-infos {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-
-            h4 {
-                font-size: 17px;
-                font-weight: 700;
-            }
-        }
-    }
 }
 
 .list-matchs {
     padding: 5px 0;
-    border-radius: 8px;
-    border: 1px solid #c4cecf3d;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     .match-item {
         padding: 5px 0;
@@ -227,52 +221,8 @@ const standings = computed<TeamStanding[]>(() => {
         align-items: center;
         gap: 10px;
 
-        .item-score {
-            min-width: 60px;
-            text-align: center;
-            font-weight: 700;
-
-            span {
-                font-weight: 700;
-                color: #002bff;
-                margin: 0 4px;
-            }
-        }
-
         .item-team {
-            padding: 0 10px;
             width: 200px;
-            font-weight: 800;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-
-            &.win {
-                background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
-            }
-
-            &.lose {
-                background: #2e0505;
-                opacity: 0.4;
-                filter: saturate(0);
-            }
-
-            &.item-left {
-                .team-name {
-                    text-align: right;
-                }
-            }
-
-            img {
-                width: 50px;
-            }
-
-            .team-name {
-                flex: 1;
-                font-weight: 700;
-            }
         }
     }
 }

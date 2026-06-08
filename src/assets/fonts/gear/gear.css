@@ -1,0 +1,48 @@
+@font-face {
+    font-family: "gear";
+    font-style: normal;
+    font-weight: 300;
+    src:
+        url("gear.light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "gear";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        url("gear.regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "gear";
+    font-style: normal;
+    font-weight: 500;
+    src:
+        url("gear.medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "gear";
+    font-style: normal;
+    font-weight: 700;
+    src:
+        url("gear.bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "gear";
+    font-style: normal;
+    font-weight: 900;
+    src:
+        url("gear.black.otf") format("opentype");
+}
+
+@font-face {
+    font-family: gear Fallback;
+    src: local(Arial);
+    ascent-override: 101.3%;
+    descent-override: 27.08%;
+    line-gap-override: 0.0%;
+    size-adjust: 92.3%
+}

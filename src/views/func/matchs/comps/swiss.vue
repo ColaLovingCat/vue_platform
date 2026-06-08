@@ -202,7 +202,7 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
         <template v-for="item in rounds">
             <div class="list-round">
                 <template v-for="round in item">
-                    <div class="round-item">
+                    <div class="box-card round-item">
                         <div class="item-infos">
                             <h4>{{ round.time }}</h4>
                             <h4>{{ round.round }} BO{{ round.bo }}</h4>
@@ -210,18 +210,27 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                         <div class="list-matchs">
                             <template v-for="match in round.matchs">
                                 <div class="match-item">
-                                    <div class="item-team item-left" :class="getTeamClass(match, 'top', mark, round.bo)">
-                                        <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
-                                        <div class="team-name">{{ match.top.team }}</div>
-                                    </div>
-                                    <span class="item-score">
-                                        {{ match.top.score }}
-                                        <span>:</span>
-                                        {{ match.bottom.score }}
-                                    </span>
-                                    <div class="item-team item-right" :class="getTeamClass(match, 'bottom', mark, round.bo)">
-                                        <div class="team-name">{{ match.bottom.team }}</div>
-                                        <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                                    <div class="item-teams">
+                                        <div class="team-infos item-left"
+                                            :class="getTeamClass(match, 'top', mark, round.bo)">
+                                            <div class="item-team">
+                                                <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
+                                                <div class="team-name">{{ match.top.team }}</div>
+                                            </div>
+                                            <div class="item-score">
+                                                {{ match.top.score }}
+                                            </div>
+                                        </div>
+                                        <div class="team-infos item-right"
+                                            :class="getTeamClass(match, 'bottom', mark, round.bo)">
+                                            <div class="item-score">
+                                                {{ match.bottom.score }}
+                                            </div>
+                                            <div class="item-team">
+                                                <div class="team-name">{{ match.bottom.team }}</div>
+                                                <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </template>
@@ -260,8 +269,9 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
 </template>
 
 <style scoped lang="scss">
+@import url(./styles.scss);
+
 .box-rounds {
-    color: #fff;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -270,25 +280,11 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
         display: flex;
         justify-content: center;
         gap: 10px;
-
-        .round-item {
-            .item-infos {
-                display: flex;
-                justify-content: space-between;
-
-                h4 {
-                    font-size: 17px;
-                    font-weight: 700;
-                }
-            }
-        }
     }
 }
 
 .list-matchs {
     padding: 5px 0;
-    border-radius: 8px;
-    border: 1px solid #c4cecf3d;
     display: flex;
     flex-direction: column;
 
@@ -299,49 +295,13 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
         align-items: center;
         gap: 10px;
 
-        .item-score span {
-            font-weight: 700;
-            color: #002bff;
-        }
-
         .item-team {
-            padding: 0 10px;
-            width: 150px;
-            font-weight: 800;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-
-            &.win {
-                background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
-            }
-
-            &.lose {
-                background: #2e0505;
-                opacity: 0.4;
-                filter: saturate(0);
-            }
-
-            &.item-left {
-                .team-name {
-                    text-align: right;
-                }
-            }
-
-            img {
-                width: 50px;
-            }
-
-            .team-name {
-                flex: 1;
-                font-weight: 700;
-            }
+             width: 150px;
         }
     }
 }
 
+// 晋级淘汰池
 .list-teams {
     padding: 10px;
     border-radius: 8px;
