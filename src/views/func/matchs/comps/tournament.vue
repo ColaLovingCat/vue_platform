@@ -40,7 +40,7 @@ const props = defineProps({
                 </div>
                 <div class="item-score">
                   {{ match.top.score }}
-                  <span v-if="match.top.score === match.bottom.score">({{ match.top.kick }})</span>
+                  <span class="item-kick" v-if="match.top.score === match.bottom.score">({{ match.top.kick }})</span>
                 </div>
               </div>
               <div class="team-infos" :class="getTeamClass(match, 'bottom', mark, match.bo)">
@@ -50,7 +50,7 @@ const props = defineProps({
                 </div>
                 <div class="item-score">
                   {{ match.bottom.score }}
-                  <span v-if="match.top.score === match.bottom.score">({{ match.bottom.kick }})</span>
+                  <span class="item-kick" v-if="match.top.score === match.bottom.score">({{ match.bottom.kick }})</span>
                 </div>
               </div>
             </div>
