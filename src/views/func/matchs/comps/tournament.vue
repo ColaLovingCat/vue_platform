@@ -23,7 +23,7 @@ const props = defineProps({
     <template v-for="item in rounds">
       <div class="list-matchs">
         <template v-for="match in item">
-          <div class="box-card match-item">
+          <div class="box-card match-item" :class="match.is_final==1?'final':''">
             <div class="item-infos">
               <h4>{{ match.name }}</h4>
               <h4>BO{{ match.bo }}</h4>
