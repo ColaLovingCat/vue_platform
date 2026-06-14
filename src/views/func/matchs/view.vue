@@ -5,7 +5,7 @@ import swissView from './comps/swiss.vue'
 import tournamentView from './comps/tournament.vue'
 import groupView from './comps/group.vue'
 
-import type { GameInfo, StageInfo } from './types'
+import type { GameInfo, StageInfo } from './comps/public.ts'
 import * as xlsx from '@/commons/utils/xlsx'
 
 // name
@@ -217,7 +217,7 @@ const changeStage = (stage: StageInfo) => {
           </template>
 
           <template v-else-if="currentStageType === 'group'">
-            <groupView :rounds="selectedStage.rounds" :mark="selectedStage.mark" />
+            <groupView :rounds="selectedStage.rounds" :path="selectedGame.path" :mark="selectedStage.mark" />
           </template>
 
           <!-- 默认提示 -->

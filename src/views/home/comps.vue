@@ -32,6 +32,7 @@ const datas: any = ref([
     { title: "游戏库", path: 'games', img: 'switch.jpg' },
     { title: "书架", path: 'books', img: 'books.jpg' },
     { title: "动漫", path: 'cartoons', img: 'cartoon.png' },
+    { title: "世界地图", path: 'world', img: 'company.jpeg' },
     { title: "龙珠", path: 'dragon', img: 'dragonball.jpeg' },
     { title: "机动战士高达", path: 'gundam', img: 'gundam.jpeg' },
     { title: "假面骑士", path: 'icons', query: { type: "riders" }, img: 'riders.jpg' },

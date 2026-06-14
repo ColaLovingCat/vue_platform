@@ -8,7 +8,7 @@ defineOptions({
 
 const props = defineProps({
   rounds: {
-    type: Array as () => RoundInfo[],
+    type: Array as () => RoundInfo[][],
     default: () => []
   },
   mark: {

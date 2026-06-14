@@ -139,6 +139,8 @@ const processData = () => {
     })
     const yearDrivers = drivers.filter(r => r.year === year);
     pageInfos.result = result;
+    console.log(result)
+
     const yearResult = result.filter(r => r.year === year);
     yearResult.map((r: any) => {
         if (r.teamName) {
@@ -431,7 +433,8 @@ const tyres = [
         <header class="f1-header">
             <div class="header-left">
                 <div class="f1-logo">
-                    F1 SCHEDULE <span>{{ pageInfos.year }}</span>
+                    <img class="logo" src="/docs/f1/comps/logo.svg" srcset="">
+                    <span>{{ pageInfos.year }}</span>
                 </div>
                 <div class="list-tyres">
                     <div class="tyres-item" v-for="tyre in tyres" :key="tyre.type">
@@ -475,7 +478,8 @@ const tyres = [
                             <div class="circuit-moments">
                                 <a-carousel autoplay>
                                     <div v-for="moment in round.moments">
-                                        <img class="img-moment" :src="`/docs/f1/moments/${moment.year}/${moment.round}/${moment.moment}`" />
+                                        <img class="img-moment"
+                                            :src="`/docs/f1/moments/${moment.year}/${moment.round}/${moment.moment}`" />
                                     </div>
                                 </a-carousel>
                             </div>
@@ -569,6 +573,10 @@ const tyres = [
                                                                         <img class="icon-flag"
                                                                             :src="`/docs/flags/${res.flagCode}.png`"
                                                                             alt="" srcset="">
+                                                                        <img class="icon-fastest"
+                                                                            v-if="res.fastest_lap == 1"
+                                                                            src="/docs/f1/comps/fastest_lap.png" alt=""
+                                                                            srcset="">
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -796,11 +804,17 @@ $f1-silver: #949498;
         }
 
         .f1-logo {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .logo {
+                width: 70px;
+            }
 
             span {
+                font-size: 24px;
+                font-weight: 900;
                 color: $f1-red;
             }
         }
@@ -1239,6 +1253,10 @@ $f1-silver: #949498;
         margin-right: 5px;
         width: 20px;
         border-radius: 3px;
+    }
+
+    .icon-fastest {
+        width: 20px;
     }
 
     .icon-driver {

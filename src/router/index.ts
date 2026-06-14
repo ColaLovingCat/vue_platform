@@ -112,6 +112,11 @@ const routes = [
     name: "books",
     component: () => import("@/views/func/stores/books/view.vue"),
   },
+  {
+    path: "/world",
+    name: "world",
+    component: () => import("@/views/func/world/view.vue"),
+  },
 
   {
     path: "/icons",

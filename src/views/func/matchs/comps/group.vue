@@ -11,6 +11,10 @@ const props = defineProps({
         type: Array as () => RoundInfo[],
         default: () => []
     },
+    path: {
+        type: String,
+        default: ''
+    },
     mark: {
         type: String,
         default: ''
@@ -124,7 +128,7 @@ const standings = computed<TeamStanding[]>(() => {
                                         <div class="team-infos item-left"
                                             :class="getTeamClass(match, 'top', mark, round.bo)">
                                             <div class="item-team">
-                                                <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
+                                                <img :src="`/docs/${path}/${match.top.icon}`" alt="" srcset="">
                                                 <div class="team-name">{{ match.top.team }}</div>
                                             </div>
                                             <div class="item-score">
@@ -138,7 +142,7 @@ const standings = computed<TeamStanding[]>(() => {
                                             </div>
                                             <div class="item-team">
                                                 <div class="team-name">{{ match.bottom.team }}</div>
-                                                <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                                                <img :src="`/docs/${path}/${match.bottom.icon}`" alt="" srcset="">
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +170,7 @@ const standings = computed<TeamStanding[]>(() => {
                 <div v-for="row in standings" :key="row.team" class="table-row">
                     <span class="col-rank">{{ row.rank }}</span>
                     <span class="col-team">
-                        <img :src="`/docs/logos/teams/${row.icon}`" alt="" class="team-icon">
+                        <img :src="`/docs/${path}/${row.icon}`" alt="" class="team-icon">
                         <span class="team-name">{{ row.team }}</span>
                     </span>
                     <span class="col-stat">{{ row.played }}</span>

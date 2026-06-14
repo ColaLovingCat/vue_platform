@@ -1,5 +1,4 @@
 export interface GameInfo {
-    id: string;
     name: string;
     full: string;
     logo: string;
@@ -7,28 +6,34 @@ export interface GameInfo {
     date: string;
     status: string;
     winner: string;
+    path: string;
     winner_logo: string;
     stages: StageInfo[];
 }
 
 export interface StageInfo {
-    game_id: string;
-    id: string;
+    game_name: string;
     stage: string;
     type: string;
+    mark: string;
     limit?: number;
-    rounds: RoundInfo[];
-    winners?: any[];
-    losers?: any[];
+    status: number;
+    rounds: RoundInfo[] | RoundInfo[][];
+    winners: any[];
+    losers: any[];
 }
 
 export interface RoundInfo {
     id: string;
+    game_name: string;
+    stage: string;
     group: number;
     name: string;
+    is_winner: number;
     round: string;
     bo: number;
     time: string;
+    is_final: number;
     matchs: MatchInfo[];
 }
 
