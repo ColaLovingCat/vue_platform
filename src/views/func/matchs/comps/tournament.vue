@@ -11,6 +11,10 @@ const props = defineProps({
     type: Array as () => RoundInfo[][],
     default: () => []
   },
+  path: {
+    type: String,
+    default: ''
+  },
   mark: {
     type: String,
     default: ''
@@ -23,10 +27,10 @@ const props = defineProps({
     <template v-for="item in rounds">
       <div class="list-matchs">
         <template v-for="match in item">
-          <div class="box-card match-item" :class="match.is_final==1?'final':''">
+          <div class="box-card match-item" :class="match.is_final == 1 ? 'final' : ''">
             <div class="item-infos">
               <h4>{{ match.name }}</h4>
-              <h4>BO{{ match.bo }}</h4>
+              <h4 v-if="match.bo">BO{{ match.bo }}</h4>
             </div>
             <div class="item-infos">
               <h4>{{ match.round }}</h4>
@@ -35,7 +39,7 @@ const props = defineProps({
             <div class="item-teams">
               <div class="team-infos" :class="getTeamClass(match, 'top', mark, match.bo)">
                 <div class="item-team">
-                  <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
+                  <img :src="`/docs/${path}/${match.top.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.top.team }}</div>
                 </div>
                 <div class="item-score">
@@ -45,7 +49,7 @@ const props = defineProps({
               </div>
               <div class="team-infos" :class="getTeamClass(match, 'bottom', mark, match.bo)">
                 <div class="item-team">
-                  <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
+                  <img :src="`/docs/${path}/${match.bottom.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.bottom.team }}</div>
                 </div>
                 <div class="item-score">

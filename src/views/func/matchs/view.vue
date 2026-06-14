@@ -164,7 +164,7 @@ const changeStage = (stage: StageInfo) => {
             <div class="info-row winner-row">
               <span class="info-label">冠军队伍</span>
               <div class="winner-info" v-if="selectedGame.winner !== 'TBD'">
-                <img :src="`/docs/logos/teams/${selectedGame.winner_logo}`" alt="" class="winner-icon">
+                <img :src="`/docs/${selectedGame.path}/${selectedGame.winner_logo}`" alt="" class="winner-icon">
                 <span class="winner-team">{{ selectedGame.winner }}</span>
               </div>
             </div>
@@ -207,13 +207,13 @@ const changeStage = (stage: StageInfo) => {
           </template>
 
           <template v-else-if="currentStageType === 'tournament'">
-            <tournamentView :rounds="selectedStage.rounds" :mark="selectedStage.mark" />
+            <tournamentView :rounds="selectedStage.rounds" :path="selectedGame.path" :mark="selectedStage.mark" />
           </template>
 
           <template v-else-if="currentStageType === 'doubles'">
-            <tournamentView :rounds="selectedStage.winners || []" :mark="selectedStage.mark" />
+            <tournamentView :rounds="selectedStage.winners || []" :path="selectedGame.path" :mark="selectedStage.mark" />
             <div class="lines"></div>
-            <tournamentView :rounds="selectedStage.losers || []" :mark="selectedStage.mark" />
+            <tournamentView :rounds="selectedStage.losers || []" :path="selectedGame.path" :mark="selectedStage.mark" />
           </template>
 
           <template v-else-if="currentStageType === 'group'">
