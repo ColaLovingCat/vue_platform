@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { reactive, onMounted, computed, watch, nextTick, onUnmounted } from 'vue'
+import { reactive, onMounted, watch, nextTick, onUnmounted } from 'vue'
 
 import chartView from '@/components/echarts/view.vue'
+
+import radioView from './radio.vue'
+import * as radios from './radios.datas.ts'
 
 import * as xlsx from '@/commons/utils/xlsx'
 import * as extend from '@/commons/utils/extends'
