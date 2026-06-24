@@ -45,11 +45,72 @@ let rawData: {
     circuits: any[],
     drivers: any[],
     teams: any[],
-    mapping: any[]
+    mapping: any[],
+    moments: any[],
 } | null = null;
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+// Team Radio
+const radioState = reactive({
+    activeDriverCode: null as string | null,
+    data: null as (typeof radios.list)[number] | null,
+    playing: false,
+})
+
+let radioAudio: HTMLAudioElement | null = null
+let radioHideTimer: ReturnType<typeof setTimeout> | null = null
+
+const getRandomRadio = (driverCode: string) => {
+    const matched = radios.list.filter(item => item.driverCode === driverCode)
+    if (!matched.length) return null
+    return matched[Math.floor(Math.random() * matched.length)]
+}
+
+const hasRadioData = (driverCode: string) => radios.list.some(item => item.driverCode === driverCode)
+
+const playRadioSfx = async () => {
+    if (!radioAudio) {
+        radioAudio = new Audio('/docs/f1/comps/f1-radio.mp3')
+    }
+    radioAudio.currentTime = 0
+    await radioAudio.play()
+}
+
+const resetRadioState = () => {
+    if (radioHideTimer) {
+        clearTimeout(radioHideTimer)
+        radioHideTimer = null
+    }
+    radioState.playing = false
+    radioState.activeDriverCode = null
+    radioState.data = null
+}
+
+const onDriverInfoClick = async (driver: any) => {
+    if (radioState.activeDriverCode) return
+
+    const record = getRandomRadio(driver.code)
+    if (!record) return
+
+    radioState.activeDriverCode = driver.code
+    radioState.data = record
+    radioState.playing = false
+
+    try {
+        await playRadioSfx()
+    } catch {
+        // autoplay policy may block; continue showing radio
+    }
+
+    radioState.playing = true
+}
+
+const onRadioFinished = () => {
+    if (radioHideTimer) clearTimeout(radioHideTimer)
+    radioHideTimer = setTimeout(resetRadioState, 3000)
+}
 
 // 赛车动画
 let observer: IntersectionObserver | null = null;
@@ -105,6 +166,8 @@ onUnmounted(() => {
     if (observer) {
         observer.disconnect();
     }
+    resetRadioState()
+    radioAudio?.pause()
 });
 
 // 2. 监听年份变化
@@ -635,7 +698,21 @@ const tyres = [
                     <div class="list-drivers">
                         <!-- 视图一：选手列表 (保持你原来的代码) -->
                         <template v-if="pageInfos.viewMode === 'drivers'">
-                            <div v-for="(driver, index) in pageInfos.drivers" :key="driver.code" class="driver-f1-card">
+                            <div
+                                v-for="(driver, index) in pageInfos.drivers"
+                                :key="driver.code"
+                                class="driver-f1-card"
+                                :class="{ 'is-radio-active': radioState.activeDriverCode === driver.code }"
+                            >
+                                <radioView
+                                    v-if="radioState.activeDriverCode === driver.code && radioState.data"
+                                    :data="radioState.data"
+                                    :playing="radioState.playing"
+                                    embedded
+                                    @finished="onRadioFinished"
+                                />
+
+                                <template v-else>
                                 <!-- 车队色条指示器 -->
                                 <div class="team-indicator" :style="{ background: driver.color }"></div>
 
@@ -669,7 +746,11 @@ const tyres = [
                                 </div>
 
                                 <!-- 右侧：选手形象与基础信息 -->
-                                <div class="info-side">
+                                <div
+                                    class="info-side is-clickable"
+                                    :class="{ 'has-radio': hasRadioData(driver.code) }"
+                                    @click="onDriverInfoClick(driver)"
+                                >
                                     <!-- 编号 (作为姓名和品牌的过渡) -->
                                     <div class="mid-section">
                                         <img :src="`/docs/f1/nos/${driver.code}_${driver.no}.png`"
@@ -697,6 +778,7 @@ const tyres = [
                                         <img :src="`/docs/f1/drivers/${driver.code}.png`" class="driver-img" />
                                     </div>
                                 </div>
+                                </template>
                             </div>
                         </template>
 
@@ -1468,8 +1550,15 @@ $f1-silver: #949498;
     border-radius: 0 12px 12px 0;
     background: linear-gradient(135deg, #1f1f27 0%, #2b2b35 100%);
     display: flex;
+    transition: height 0.25s ease;
 
-    &:hover {
+    &.is-radio-active {
+        height: auto;
+        overflow: visible;
+        display: block;
+    }
+
+    &:hover:not(.is-radio-active) {
         .photo-wrapper .driver-img {
             transform: scale(1.2);
         }
@@ -1566,6 +1655,14 @@ $f1-silver: #949498;
         justify-content: space-between; // 强制内容分布在上下两端
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
         overflow: hidden;
+
+        &.is-clickable.has-radio {
+            cursor: pointer;
+
+            &:hover .photo-wrapper .driver-img {
+                transform: scale(1.08);
+            }
+        }
 
         // 1. 顶部车队区
         .team-header {
