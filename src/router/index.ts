@@ -115,7 +115,7 @@ const routes = [
   {
     path: "/world",
     name: "world",
-    component: () => import("@/views/func/world/view.vue"),
+    component: () => import("@/views/func/world/map.vue"),
   },
 
   {

@@ -635,10 +635,10 @@ const tyres = [
                                                                         <img class="icon-driver"
                                                                             :src="`/docs/f1/drivers/${res.driverCode}.png`"
                                                                             alt="" srcset="">
-                                                                        <span>{{ res.driverName }}</span>
                                                                         <img class="icon-flag"
                                                                             :src="`/docs/flags/${res.flagCode}.png`"
                                                                             alt="" srcset="">
+                                                                        <span>{{ res.driverName }}</span>
                                                                         <img class="icon-fastest"
                                                                             v-if="res.fastest_lap == 1"
                                                                             src="/docs/f1/comps/fastest_lap.png" alt=""
