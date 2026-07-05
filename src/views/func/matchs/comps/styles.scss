@@ -1,5 +1,5 @@
 * {
-    font-family: 'gear' 'gear Fallback';
+    font-family: 'gear';
     color: #fff;
     letter-spacing: 12%;
 }
@@ -39,6 +39,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border: 2px solid transparent;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+
+        &.is-team-hover {
+            border-color: #00e5ff;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.45);
+        }
 
         &.win {
             background-image: linear-gradient(0deg, rgb(1, 133, 36), rgb(16, 100, 1));
@@ -109,4 +117,14 @@
         }
 
     }
+}
+
+.is-team-hover-row {
+    box-shadow: inset 0 0 0 2px #00e5ff;
+    background: rgba(0, 229, 255, 0.08) !important;
+}
+
+.is-team-hover-item {
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #00e5ff, 0 0 10px rgba(0, 229, 255, 0.45);
 }

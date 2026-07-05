@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { type RoundInfo, getTeamClass } from './public'
+import { type RoundInfo, getTeamClass, useTeamHover, isTeamHovered } from './public'
 
 // name
 defineOptions({
   name: 'tournament-name'
 })
+
+const { hoveredTeam, setHoveredTeam } = useTeamHover()
 
 const props = defineProps({
   rounds: {
@@ -37,7 +39,14 @@ const props = defineProps({
               <h4>{{ match.time }}</h4>
             </div>
             <div class="item-teams">
-              <div class="team-infos" :class="getTeamClass(match, 'top', mark, match.bo)">
+              <div
+                class="team-infos"
+                :class="[
+                  getTeamClass(match, 'top', mark, match.bo),
+                  { 'is-team-hover': isTeamHovered(match.top.team, hoveredTeam) },
+                ]"
+                @mouseenter="setHoveredTeam(match.top.team)"
+              >
                 <div class="item-team">
                   <img :src="`/docs/${path}/${match.top.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.top.team }}</div>
@@ -47,7 +56,14 @@ const props = defineProps({
                   <span class="item-kick" v-if="match.top.score === match.bottom.score">({{ match.top.kick }})</span>
                 </div>
               </div>
-              <div class="team-infos" :class="getTeamClass(match, 'bottom', mark, match.bo)">
+              <div
+                class="team-infos"
+                :class="[
+                  getTeamClass(match, 'bottom', mark, match.bo),
+                  { 'is-team-hover': isTeamHovered(match.bottom.team, hoveredTeam) },
+                ]"
+                @mouseenter="setHoveredTeam(match.bottom.team)"
+              >
                 <div class="item-team">
                   <img :src="`/docs/${path}/${match.bottom.icon}`" alt="" srcset="">
                   <div class="team-name">{{ match.bottom.team }}</div>

@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { type RoundInfo, getTeamClass } from './public'
+import { type RoundInfo, getTeamClass, useTeamHover, isTeamHovered } from './public'
+import { computeGroupStandings } from './group-standings'
 
 defineOptions({
     name: 'group-view'
 })
+
+const { hoveredTeam, setHoveredTeam } = useTeamHover()
 
 const props = defineProps({
     rounds: {
@@ -21,91 +24,7 @@ const props = defineProps({
     },
 })
 
-interface TeamStanding {
-    rank: number;
-    team: string;
-    icon: string;
-    played: number;
-    wins: number;
-    draws: number;
-    losses: number;
-    goalsFor: number;
-    goalsAgainst: number;
-    goalDiff: number;
-    points: number;
-}
-
-// 计算积分榜
-const standings = computed<TeamStanding[]>(() => {
-    const records: Record<string, Omit<TeamStanding, 'rank' | 'goalDiff'>> = {};
-
-    const ensureTeam = (team: string, icon: string) => {
-        if (!records[team]) {
-            records[team] = {
-                team,
-                icon,
-                played: 0,
-                wins: 0,
-                draws: 0,
-                losses: 0,
-                goalsFor: 0,
-                goalsAgainst: 0,
-                points: 0,
-            };
-        }
-    };
-
-    props.rounds.forEach((round) => {
-        round.matchs.forEach((match) => {
-            const { top, bottom } = match;
-            console.log('Testing: ', match);
-            if (!top.team || !bottom.team || top.team === 'TBD' || bottom.team === 'TBD' || top.score === undefined || bottom.score === undefined) {
-                return;
-            }
-
-            ensureTeam(top.team, top.icon);
-            ensureTeam(bottom.team, bottom.icon);
-
-            records[top.team].played += 1;
-            records[bottom.team].played += 1;
-            records[top.team].goalsFor += top.score;
-            records[top.team].goalsAgainst += bottom.score;
-            records[bottom.team].goalsFor += bottom.score;
-            records[bottom.team].goalsAgainst += top.score;
-
-            if (top.score > bottom.score) {
-                records[top.team].wins += 1;
-                records[top.team].points += 3;
-                records[bottom.team].losses += 1;
-            } else if (bottom.score > top.score) {
-                records[bottom.team].wins += 1;
-                records[bottom.team].points += 3;
-                records[top.team].losses += 1;
-            } else {
-                records[top.team].draws += 1;
-                records[top.team].points += 1;
-                records[bottom.team].draws += 1;
-                records[bottom.team].points += 1;
-            }
-        });
-    });
-
-    return Object.values(records)
-        .map((record) => ({
-            ...record,
-            goalDiff: record.goalsFor - record.goalsAgainst,
-            rank: 0,
-        }))
-        .sort((a, b) => {
-            if (b.points !== a.points) return b.points - a.points;
-            if (b.goalDiff !== a.goalDiff) return b.goalDiff - a.goalDiff;
-            return b.goalsFor - a.goalsFor;
-        })
-        .map((record, index) => ({
-            ...record,
-            rank: index + 1,
-        }));
-});
+const standings = computed(() => computeGroupStandings(props.rounds, props.mark))
 </script>
 
 <template>
@@ -118,6 +37,7 @@ const standings = computed<TeamStanding[]>(() => {
                     <div class="box-card round-item">
                         <div class="item-infos">
                             <h4>{{ round.name }}</h4>
+                            <h4 v-if="mark === 'lol' && round.bo">BO{{ round.bo }}</h4>
                             <h4 v-if="round.round">{{ round.round }}</h4>
                             <h4>{{ round.time }}</h4>
                         </div>
@@ -125,8 +45,14 @@ const standings = computed<TeamStanding[]>(() => {
                             <template v-for="(match, index) in round.matchs" :key="index">
                                 <div class="match-item">
                                     <div class="item-teams">
-                                        <div class="team-infos item-left"
-                                            :class="getTeamClass(match, 'top', mark, round.bo)">
+                                        <div
+                                            class="team-infos item-left"
+                                            :class="[
+                                                getTeamClass(match, 'top', mark, round.bo),
+                                                { 'is-team-hover': isTeamHovered(match.top.team, hoveredTeam) },
+                                            ]"
+                                            @mouseenter="setHoveredTeam(match.top.team)"
+                                        >
                                             <div class="item-team">
                                                 <img :src="`/docs/${path}/${match.top.icon}`" alt="" srcset="">
                                                 <div class="team-name">{{ match.top.team }}</div>
@@ -135,8 +61,14 @@ const standings = computed<TeamStanding[]>(() => {
                                                 {{ match.top.score }}
                                             </div>
                                         </div>
-                                        <div class="team-infos item-right"
-                                            :class="getTeamClass(match, 'bottom', mark, round.bo)">
+                                        <div
+                                            class="team-infos item-right"
+                                            :class="[
+                                                getTeamClass(match, 'bottom', mark, round.bo),
+                                                { 'is-team-hover': isTeamHovered(match.bottom.team, hoveredTeam) },
+                                            ]"
+                                            @mouseenter="setHoveredTeam(match.bottom.team)"
+                                        >
                                             <div class="item-score">
                                                 {{ match.bottom.score }}
                                             </div>
@@ -167,7 +99,13 @@ const standings = computed<TeamStanding[]>(() => {
                     <span class="col-stat">净胜</span>
                     <span class="col-points">积分</span>
                 </div>
-                <div v-for="row in standings" :key="row.team" class="table-row">
+                <div
+                    v-for="row in standings"
+                    :key="row.team"
+                    class="table-row"
+                    :class="{ 'is-team-hover-row': isTeamHovered(row.team, hoveredTeam) }"
+                    @mouseenter="setHoveredTeam(row.team)"
+                >
                     <span class="col-rank">{{ row.rank }}</span>
                     <span class="col-team">
                         <img :src="`/docs/${path}/${row.icon}`" alt="" class="team-icon">

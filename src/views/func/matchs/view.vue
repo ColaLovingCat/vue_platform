@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { onMounted, ref, computed, watch, provide } from 'vue'
 
 import swissView from './comps/swiss.vue'
 import tournamentView from './comps/tournament.vue'
 import groupView from './comps/group.vue'
 
 import type { GameInfo, StageInfo } from './comps/public.ts'
+import { TEAM_HOVER_KEY, isTeamHighlightable } from './comps/public.ts'
 import * as xlsx from '@/commons/utils/xlsx'
 
 // name
@@ -17,6 +18,22 @@ defineOptions({
 const game_list = ref<GameInfo[]>([])
 const selectedGame = ref<GameInfo | null>(null)
 const selectedStage = ref<StageInfo | null>(null)
+const hoveredTeam = ref<string | null>(null)
+
+provide(TEAM_HOVER_KEY, {
+  hoveredTeam,
+  setHoveredTeam: (team: string) => {
+    hoveredTeam.value = isTeamHighlightable(team) ? team : null
+  },
+  clearHoveredTeam: () => {
+    hoveredTeam.value = null
+  },
+})
+
+watch([selectedGame, selectedStage], () => {
+  hoveredTeam.value = null
+})
+
 // 计算属性：当前选中的stage类型
 const currentStageType = computed(() => selectedStage.value?.type || '')
 
@@ -45,12 +62,16 @@ onMounted(async () => {
                   icon: match.top_icon,
                   score: match.top_score,
                   kick: match.top_kick,
+                  yellow: match.top_yellow,
+                  red: match.top_red,
                 },
                 bottom: {
                   team: match.bottom_team,
                   icon: match.bottom_icon,
                   score: match.bottom_score,
                   kick: match.bottom_kick,
+                  yellow: match.bottom_yellow,
+                  red: match.bottom_red,
                 },
               }
             })
@@ -199,7 +220,7 @@ const changeStage = (stage: StageInfo) => {
       </div>
 
       <!-- 赛程内容区域 -->
-      <div class="schedule-content">
+      <div class="schedule-content" @mouseleave="hoveredTeam = null">
         <template v-if="selectedStage">
           <!-- 根据stage类型显示不同的视图 -->
           <template v-if="currentStageType === 'swiss'">
@@ -211,7 +232,8 @@ const changeStage = (stage: StageInfo) => {
           </template>
 
           <template v-else-if="currentStageType === 'doubles'">
-            <tournamentView :rounds="selectedStage.winners || []" :path="selectedGame.path" :mark="selectedStage.mark" />
+            <tournamentView :rounds="selectedStage.winners || []" :path="selectedGame.path"
+              :mark="selectedStage.mark" />
             <div class="lines"></div>
             <tournamentView :rounds="selectedStage.losers || []" :path="selectedGame.path" :mark="selectedStage.mark" />
           </template>
@@ -322,13 +344,32 @@ const changeStage = (stage: StageInfo) => {
 
     .game-item {
       position: relative;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      overflow: hidden;
       padding: 10px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      &::before {
+        content: '';
+        width: 3.5rem;
+        display: flex;
+        transform: skew(348deg);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -0.5rem;
+        z-index: 0;
+        transition: left 0.2s linear;
+        background-color: var(--clr-moon-40, #2e0505);
+      }
+
+      &:hover::before {
+        left: -0.25rem;
+      }
 
       &:hover {
         background: #ffffff14;
@@ -347,6 +388,7 @@ const changeStage = (stage: StageInfo) => {
         width: 32px;
         height: 32px;
         flex-shrink: 0;
+        z-index: 1;
 
         img {
           width: 100%;
@@ -510,13 +552,12 @@ const changeStage = (stage: StageInfo) => {
 
 .lines {
   height: 3px;
-  background: linear-gradient(90deg, 
-    transparent,
-    #ff3366,
-    #ffeb3b,
-    #00e5ff,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      #ff3366,
+      #ffeb3b,
+      #00e5ff,
+      transparent);
   margin: 20px 0;
   box-shadow: 0 0 12px rgba(255, 51, 102, 0.5);
   animation: scan 3s linear infinite;
@@ -524,8 +565,13 @@ const changeStage = (stage: StageInfo) => {
 }
 
 @keyframes scan {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 .empty-state {

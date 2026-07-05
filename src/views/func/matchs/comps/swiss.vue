@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { type RoundInfo, type MatchInfo, getTeamClass } from './public'
+import { type RoundInfo, type MatchInfo, getTeamClass, useTeamHover, isTeamHovered } from './public'
 
 defineOptions({
     name: 'swiss-name'
 })
+
+const { hoveredTeam, setHoveredTeam } = useTeamHover()
 
 interface TeamRecord {
     wins: number;
@@ -211,8 +213,14 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                             <template v-for="match in round.matchs">
                                 <div class="match-item">
                                     <div class="item-teams">
-                                        <div class="team-infos item-left"
-                                            :class="getTeamClass(match, 'top', mark, round.bo)">
+                                        <div
+                                            class="team-infos item-left"
+                                            :class="[
+                                                getTeamClass(match, 'top', mark, round.bo),
+                                                { 'is-team-hover': isTeamHovered(match.top.team, hoveredTeam) },
+                                            ]"
+                                            @mouseenter="setHoveredTeam(match.top.team)"
+                                        >
                                             <div class="item-team">
                                                 <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
                                                 <div class="team-name">{{ match.top.team }}</div>
@@ -221,8 +229,14 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                                                 {{ match.top.score }}
                                             </div>
                                         </div>
-                                        <div class="team-infos item-right"
-                                            :class="getTeamClass(match, 'bottom', mark, round.bo)">
+                                        <div
+                                            class="team-infos item-right"
+                                            :class="[
+                                                getTeamClass(match, 'bottom', mark, round.bo),
+                                                { 'is-team-hover': isTeamHovered(match.bottom.team, hoveredTeam) },
+                                            ]"
+                                            @mouseenter="setHoveredTeam(match.bottom.team)"
+                                        >
                                             <div class="item-score">
                                                 {{ match.bottom.score }}
                                             </div>
@@ -245,8 +259,15 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                     <h4>晋级</h4>
                 </div>
                 <div class="list-teams win">
-                    <template v-for="team in qualifiedTeams.winners">
-                        <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
+                    <template v-for="team in qualifiedTeams.winners" :key="`win-${team.team || team.icon}`">
+                        <div
+                            class="team-item"
+                            :class="{
+                                'item-empty': team.isEmpty,
+                                'is-team-hover-item': isTeamHovered(team.team, hoveredTeam),
+                            }"
+                            @mouseenter="setHoveredTeam(team.team)"
+                        >
                             <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
                         </div>
                     </template>
@@ -257,8 +278,15 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                     <h4>淘汰</h4>
                 </div>
                 <div class="list-teams lose">
-                    <template v-for="team in qualifiedTeams.losers">
-                        <div class="team-item" :class="team.isEmpty ? 'item-empty' : ''">
+                    <template v-for="team in qualifiedTeams.losers" :key="`lose-${team.team || team.icon}`">
+                        <div
+                            class="team-item"
+                            :class="{
+                                'item-empty': team.isEmpty,
+                                'is-team-hover-item': isTeamHovered(team.team, hoveredTeam),
+                            }"
+                            @mouseenter="setHoveredTeam(team.team)"
+                        >
                             <img :src="`/docs/logos/teams/${team.icon}`" alt="" srcset="">
                         </div>
                     </template>

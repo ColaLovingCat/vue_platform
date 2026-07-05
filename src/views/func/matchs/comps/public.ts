@@ -1,3 +1,5 @@
+import { inject, ref, type InjectionKey, type Ref } from 'vue'
+
 export interface GameInfo {
     name: string;
     full: string;
@@ -37,17 +39,63 @@ export interface RoundInfo {
     matchs: MatchInfo[];
 }
 
+export interface MatchTeamSide {
+    team: string;
+    icon: string;
+    score: number;
+    kick?: number;
+    yellow?: number;
+    red?: number;
+}
+
 export interface MatchInfo {
-    top: {
-        team: string;
-        icon: string;
-        score: number;
-    };
-    bottom: {
-        team: string;
-        icon: string;
-        score: number;
-    };
+    top: MatchTeamSide;
+    bottom: MatchTeamSide;
+}
+
+export const getBoWinningScore = (bo: number) => Math.floor(bo / 2) + 1
+
+export const isBoMatchFinished = (match: MatchInfo, bo: number) => {
+    const winningScore = getBoWinningScore(bo)
+    return match.top.score >= winningScore || match.bottom.score >= winningScore
+}
+
+export type BoMatchOutcome = 'top' | 'bottom' | 'unfinished'
+
+export const getBoMatchOutcome = (match: MatchInfo, bo: number): BoMatchOutcome => {
+    if (!isBoMatchFinished(match, bo)) return 'unfinished'
+    if (match.top.score > match.bottom.score) return 'top'
+    if (match.bottom.score > match.top.score) return 'bottom'
+    return 'unfinished'
+}
+
+export interface TeamHoverContext {
+    hoveredTeam: Ref<string | null>
+    setHoveredTeam: (team: string) => void
+    clearHoveredTeam: () => void
+}
+
+export const TEAM_HOVER_KEY: InjectionKey<TeamHoverContext> = Symbol('teamHover')
+
+export const isTeamHighlightable = (team: string) => !!team && team !== 'TBD'
+
+export const isTeamHovered = (team: string, hoveredTeam: string | null) =>
+    isTeamHighlightable(team) && hoveredTeam === team
+
+export const useTeamHover = (): TeamHoverContext => {
+    const ctx = inject(TEAM_HOVER_KEY, null)
+    if (ctx) return ctx
+
+    const hoveredTeam = ref<string | null>(null)
+    return {
+        hoveredTeam,
+        setHoveredTeam: (team: string) => {
+            hoveredTeam.value = isTeamHighlightable(team) ? team : null
+        },
+        clearHoveredTeam: () => {
+            hoveredTeam.value = null
+        },
+    }
 }
 
 export const getTeamClass = (match: any, team: string, mark: string, bo: number): string => {
