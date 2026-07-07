@@ -1,6 +1,6 @@
 export const infos = {
   topic: "AI",
-  desc: "desc",
+  desc: "AI学习路线",
   contents: [
     {
       chapter: "常用词汇",
@@ -10,23 +10,40 @@ export const infos = {
           list: [
             {
               section: "简述",
-              content: `**Large Language Model** **大型语言模型**\n\n核心工作就是：根据上下文，预测下一个字（或词）是什么。`,
+              content: `
+**Large Language Model** **大型语言模型**\n\n
+核心工作就是：在给定一系列前一个 token 的情况下，预测下一个 token。\n
+基于的 **Transformer** 架构构建
+- 编码器（Encoders）\n
+- 解码器（Decoders）\n
+- 序列到序列（Seq2Seq）（编码器-解码器，Encoder–Decoder）\n
+自回归，词元化，注意力机制
+`,
             },
             {
               section: "常用LLM产品",
               content: `
 #### Frontier Models
 - **OpenAI - GPT**
+- **Google - Gemma**
 - **Anthropic - Claude**
-- **Google - Gemini**
 - **xAI - Grok**
 #### Open-weight Ecosystem
-- **Meta - LLaMA**
+- **Meta - Llama**
+- **DeepSeek - DeepSeek**
 - **阿里巴巴 - Qwen**
 - **Mistral AI - Mistral/Mixtral**
-- **DeepSeek - DeepSeek**
 - **Microsoft - Phi**
 `,
+            },
+          ],
+        },
+        {
+          part: "Prompt",
+          list: [
+            {
+              section: "简述",
+              content: `引导大语言模型的生成朝着期望的输出方向进行`,
             },
           ],
         },
@@ -47,15 +64,6 @@ export const infos = {
         },
         {
           part: "Cache",
-          list: [
-            {
-              section: "简述",
-              content: ``,
-            },
-          ],
-        },
-        {
-          part: "Prompt",
           list: [
             {
               section: "简述",
