@@ -148,6 +148,11 @@ const changeGame = (game: GameInfo) => {
     selectedStage.value = null
   }
 }
+const openGame = (game: GameInfo) => {
+  if (game.link && game.link!='') {
+    window.open(game.link, '_blank')
+  } 
+}
 
 // 切换stage
 const changeStage = (stage: StageInfo) => {
@@ -199,7 +204,7 @@ const changeStage = (stage: StageInfo) => {
         <div class="games-container">
           <div v-for="game in game_list" :key="game.name" class="game-item" @click="changeGame(game)"
             :class="{ active: selectedGame?.name === game.name }">
-            <div class="item-icon">
+            <div class="item-icon" @click="openGame(game)">
               <img :src="`/docs/logos/games/${game.logo}`" alt="">
             </div>
             <div class="item-name">{{ game.name }}</div>

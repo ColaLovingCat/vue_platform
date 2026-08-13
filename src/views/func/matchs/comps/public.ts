@@ -11,6 +11,7 @@ export interface GameInfo {
     path: string;
     winner_logo: string;
     stages: StageInfo[];
+    link: string;
 }
 
 export interface StageInfo {
