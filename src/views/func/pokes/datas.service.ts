@@ -19,7 +19,6 @@ export const getDB = async () => {
 
     const groupedGens: any = extend.ExArray.group(gens, (a: any) => a.area).map((a: any) => {
         const area = areas.find((b: any) => a.name == b.name)
-        console.log('Testing', a,area)
         if (area) return { ...a, areaCode: area.areaCode } 
         else return a
     })

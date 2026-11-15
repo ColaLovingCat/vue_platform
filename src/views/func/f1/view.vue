@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import { reactive, onMounted, watch, nextTick, onUnmounted } from 'vue'
+import { reactive, onMounted, watch, nextTick, onUnmounted, ref } from 'vue'
+
+import { toPng } from 'html-to-image'
+import { CameraOutlined, ExpandOutlined, TrophyOutlined } from '@ant-design/icons-vue'
 
 import chartView from '@/components/echarts/view.vue'
 
@@ -21,6 +24,7 @@ const pageInfos = reactive({
     viewMode: 'drivers', // 'drivers' | 'teams'
     drivers: [] as any[],
     constructors: [] as any[],
+    history: [] as any[],
     // Echarts 配置
     changeMark: false,
     options: {
@@ -47,6 +51,7 @@ let rawData: {
     teams: any[],
     mapping: any[],
     moments: any[],
+    history: any[],
 } | null = null;
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -139,26 +144,100 @@ const initObserver = () => {
     cards.forEach(card => observer?.observe(card));
 };
 
+const listF1Ref = ref<HTMLElement | null>(null)
+const capturing = ref(false)
+const historyModal = ref(false)
+const chartModal = ref(false)
+const fullChartOptions = ref<any>({})
+const fullChartChangeMark = ref(false)
+const chartSource = {
+    rounds: [] as any[],
+    result: [] as any[],
+}
+
+const waitForImages = (root: HTMLElement) => {
+    const imgs = Array.from(root.querySelectorAll('img'))
+    return Promise.all(imgs.map(img => {
+        if (img.complete) return Promise.resolve()
+        return new Promise<void>((resolve) => {
+            img.addEventListener('load', () => resolve(), { once: true })
+            img.addEventListener('error', () => resolve(), { once: true })
+        })
+    }))
+}
+
+const captureSchedule = async () => {
+    const el = listF1Ref.value
+    if (!el || capturing.value) return
+
+    capturing.value = true
+    document.querySelectorAll('.f1-card').forEach(card => card.classList.add('animate-active'))
+
+    const section = el.closest('.schedule-section') as HTMLElement | null
+    const dashboard = el.closest('.f1-dashboard') as HTMLElement | null
+    const restoreStyles: Array<() => void> = []
+
+    const unlockOverflow = (node: HTMLElement | null) => {
+        if (!node) return
+        const height = node.style.height
+        const overflow = node.style.overflow
+        node.style.height = 'auto'
+        node.style.overflow = 'visible'
+        restoreStyles.push(() => {
+            node.style.height = height
+            node.style.overflow = overflow
+        })
+    }
+
+    unlockOverflow(section)
+    unlockOverflow(dashboard)
+
+    try {
+        await nextTick()
+        await document.fonts.ready
+        await waitForImages(el)
+        await new Promise(resolve => setTimeout(resolve, 80))
+
+        const dataUrl = await toPng(el, {
+            backgroundColor: '#15151e',
+            pixelRatio: 2,
+            cacheBust: true,
+            skipAutoScale: true,
+            width: el.scrollWidth,
+            height: el.scrollHeight,
+        })
+
+        const link = document.createElement('a')
+        link.download = `f1-schedule-${pageInfos.year}.png`
+        link.href = dataUrl
+        link.click()
+    } catch (error) {
+        console.error('截取赛程失败:', error)
+    } finally {
+        restoreStyles.forEach(restore => restore())
+        capturing.value = false
+    }
+};
+
 // 1. 初始化读取数据
 onMounted(async () => {
-    const currentYear = new Date().getFullYear();
-    const years = [];
-    for (let year = 2025; year <= currentYear; year++) {
-        years.push(year);
-    }
-    pageInfos.year = currentYear
-    pageInfos.availableYears = years
-
-    // 假设 F1.xlsx 包含多年数据，或者你根据年份动态拼路径
     const temps: any = await xlsx.readExcel('/docs/datas/f1.xlsx');
     rawData = temps;
 
-    // 初始处理
+    const years = [...new Set((rawData?.rounds || []).map((r: any) => Number(r.year)))]
+        .filter((year: number) => !Number.isNaN(year))
+        .sort((a: number, b: number) => a - b);
+    pageInfos.availableYears = years;
+    pageInfos.history = [...(rawData?.history || [])]
+        .sort((a: any, b: any) => Number(b.year) - Number(a.year));
+
+    const currentYear = new Date().getFullYear();
+    pageInfos.year = years.includes(currentYear) ? currentYear : (years[years.length - 1] || currentYear);
     processData();
 
-    // 确保数据渲染完成后再绑定观察器
     await nextTick();
     initObserver();
+    yearWatchReady = true;
 });
 
 onUnmounted(() => {
@@ -166,22 +245,25 @@ onUnmounted(() => {
     if (observer) {
         observer.disconnect();
     }
+    stopFullChartReveal()
     resetRadioState()
     radioAudio?.pause()
 });
 
+let yearWatchReady = false
+
 // 2. 监听年份变化
 watch(() => pageInfos.year, async () => {
-    if (rawData) {
-        processData();
+    if (!rawData || !yearWatchReady) return
 
-        // 等待 DOM 更新后重新绑定
-        await nextTick();
-        if (observer) {
-            observer.disconnect(); // 先清空旧的
-        }
-        initObserver(); // 再绑定新的
+    processData();
+
+    // 等待 DOM 更新后重新绑定
+    await nextTick();
+    if (observer) {
+        observer.disconnect(); // 先清空旧的
     }
+    initObserver(); // 再绑定新的
 });
 
 // 3. 数据处理主函数
@@ -200,8 +282,9 @@ const processData = () => {
     yearRaces.map((race: any) => {
         race.date = formatDate(race.date)
         race.week = weekDays[race.date.getDay()];
-        race.startTime = formatTime(race.startTime)
-        if (race.endTime) race.endTime = formatTime(race.endTime)
+        race.hasStartTime = hasRaceTime(race.startTime)
+        race.startTime = race.hasStartTime ? formatTime(race.startTime) : ''
+        race.endTime = hasRaceTime(race.endTime) ? formatTime(race.endTime) : ''
     })
     const yearDrivers = drivers.filter(r => r.year === year);
     pageInfos.result = result;
@@ -215,6 +298,7 @@ const processData = () => {
         }
     })
     const yearTeams = teams.filter(r => r.year == year);
+    const roundInfoMap = new Map(yearRounds.map((r: any) => [Number(r.round), r]));
 
     // 处理车手积分榜
     const processedDrivers = yearDrivers.map((d: any) => {
@@ -226,6 +310,34 @@ const processData = () => {
         const podiums = driverResults.filter(r => r.step === 'Race' && r.position <= 3).length;
         const poles = driverResults.filter(r => r.step === 'Qualifying' && r.position === 1).length;
 
+        const scoreDetailsMap = new Map<number, any>();
+        driverResults
+            .filter((r: any) => r.step === 'Race' || r.step === 'Sprint')
+            .forEach((r: any) => {
+                const roundNo = Number(r.round);
+                const roundInfo = roundInfoMap.get(roundNo);
+                const country = roundInfo?.country || '';
+                const city = roundInfo?.city || '';
+                const existing = scoreDetailsMap.get(roundNo);
+                const next = existing || {
+                    round: r.round,
+                    location: city ? `${country}-${city}` : country,
+                    position: r.position,
+                    score: 0,
+                    hasRace: false,
+                };
+                next.score += Number(r.score) || 0;
+                if (r.step === 'Race') {
+                    next.position = r.position;
+                    next.hasRace = true;
+                } else if (!next.hasRace) {
+                    next.position = r.position;
+                }
+                scoreDetailsMap.set(roundNo, next);
+            });
+        const scoreDetails = Array.from(scoreDetailsMap.values())
+            .sort((a: any, b: any) => a.round - b.round);
+
         const teamInfos = yearTeams.find(t => t.code === d.teamCode);
 
         return {
@@ -234,6 +346,7 @@ const processData = () => {
             win: wins,
             award: podiums,
             first: poles,
+            scoreDetails,
             color: teamInfos?.color || '#999',
         };
     });
@@ -249,13 +362,84 @@ const processData = () => {
         // 找出该车队当年的车手 (去重)
         const teamDriverNames = [...new Set(teamResults.map(r => r.driverName))];
         const teamDriverInfos = teamDriverNames.map(name => {
-            return drivers.find(d => d.name === name);
+            return yearDrivers.find(d => d.name === name) || drivers.find(d => d.name === name);
         }).filter(d => d); // 过滤掉找不到的情况
+
+        const driverCodeByName = new Map(teamDriverInfos.map((d: any) => [d.name, d.code]));
+        const roundMap = new Map<number, any>();
+        teamResults
+            .filter((r: any) => r.step === 'Race' || r.step === 'Sprint' || r.step === 'Qualifying')
+            .forEach((r: any) => {
+                const code = driverCodeByName.get(r.driverName);
+                if (!code) return;
+
+                const roundNo = Number(r.round);
+                const roundInfo = roundInfoMap.get(roundNo);
+                const country = roundInfo?.country || '';
+                const city = roundInfo?.city || '';
+                const row = roundMap.get(roundNo) || {
+                    round: r.round,
+                    location: city ? `${country}-${city}` : country,
+                    byDriver: new Map<string, any>(),
+                };
+                const stat = row.byDriver.get(code) || {
+                    position: '',
+                    score: null,
+                    hasRace: false,
+                    qualiPosition: '',
+                };
+                if (r.step === 'Qualifying') {
+                    stat.qualiPosition = r.position;
+                } else {
+                    stat.score = (stat.score || 0) + (Number(r.score) || 0);
+                    if (r.step === 'Race') {
+                        stat.position = r.position;
+                        stat.hasRace = true;
+                    } else if (!stat.hasRace) {
+                        stat.position = r.position;
+                    }
+                }
+                row.byDriver.set(code, stat);
+                roundMap.set(roundNo, row);
+            });
+
+        const scoreDetails = Array.from(roundMap.values())
+            .sort((a: any, b: any) => a.round - b.round)
+            .map((row: any) => {
+                const cells = teamDriverInfos.map((d: any) => {
+                    const stat = row.byDriver.get(d.code);
+                    return {
+                        code: d.code,
+                        position: stat ? stat.position : '',
+                        score: stat ? stat.score : null,
+                        qualiPosition: stat ? stat.qualiPosition : '',
+                    };
+                });
+                const scored = cells.map((c: any) => c.score).filter((s: any) => s != null);
+                const maxScore = scored.length ? Math.max(...scored) : 0;
+                const qualiNums = cells
+                    .map((c: any) => c.qualiPosition)
+                    .filter((p: any) => p !== '' && p != null && !Number.isNaN(Number(p)))
+                    .map((p: any) => Number(p));
+                const bestQuali = qualiNums.length ? Math.min(...qualiNums) : null;
+                return {
+                    round: row.round,
+                    location: row.location,
+                    cells: cells.map((c: any) => ({
+                        ...c,
+                        isMax: c.score != null && maxScore > 0 && c.score === maxScore,
+                        isBestQuali: c.qualiPosition !== '' && c.qualiPosition != null
+                            && !Number.isNaN(Number(c.qualiPosition))
+                            && Number(c.qualiPosition) === bestQuali,
+                    })),
+                };
+            });
 
         return {
             ...team,
             score: totalScore,
             drivers: teamDriverInfos, // 包含 code, name 等
+            scoreDetails,
         };
     });
     pageInfos.constructors = extend.ExArray.sortbyEle(constructorData, (t: any) => t.score, 'desc');
@@ -339,6 +523,69 @@ const processData = () => {
     updateChart(yearRounds, yearResult);
 };
 
+const isNumericPosition = (position: any) => position !== '' && position != null && !Number.isNaN(Number(position));
+const getScorePopupContainer = () => document.body;
+const historyTeamLogoMap: Record<string, string> = {
+    'Red Bull': 'RedBulls',
+}
+const circuitMapMode = ref<'full' | 'drs'>('full')
+const getCircuitMapSrc = (img: string, mode: 'full' | 'drs' = circuitMapMode.value) =>
+    img ? `/docs/f1/carbons/${img}-${mode}.png` : ''
+const onCircuitMapError = (event: Event) => {
+    const imgEl = event.target as HTMLImageElement
+    if (imgEl.dataset.fallbackApplied === '1') return
+    // 部分赛道没有 -drs，回退到 -full
+    if (circuitMapMode.value === 'drs') {
+        imgEl.dataset.fallbackApplied = '1'
+        imgEl.src = imgEl.src.replace(/-drs\.png(?:\?.*)?$/, '-full.png')
+    }
+}
+
+const getHistoryTeamLogo = (team: string) => {
+    if (!team) return ''
+    const code = historyTeamLogoMap[team] || team.replace(/\s+/g, '')
+    return `/docs/f1/teams/${code}.png`
+}
+const onHistoryLogoError = (event: Event) => {
+    const img = event.target as HTMLImageElement
+    img.style.display = 'none'
+}
+
+/** 优先 code_teamCode.png，无则由 onDriverImgError 回退到 code.png */
+const getDriverImg = (code?: string, teamCode?: string) => {
+    if (!code) return ''
+    if (teamCode) return `/docs/f1/drivers/${code}_${teamCode}.png`
+    return `/docs/f1/drivers/${code}.png`
+}
+const onDriverImgError = (event: Event) => {
+    const img = event.target as HTMLImageElement
+    if (img.dataset.fallbackApplied === '1') return
+    const code = img.dataset.driverCode
+    if (!code) return
+    img.dataset.fallbackApplied = '1'
+    img.src = `/docs/f1/drivers/${code}.png`
+}
+const scorePopoverInnerStyle = {
+    background: '#15151e',
+    padding: '0',
+    border: '1px solid #333',
+    borderRadius: '8px',
+    boxShadow: '0 12px 28px rgba(0, 0, 0, 0.5)'
+};
+const getTeamDriverScoreTotals = (team: any) => {
+    const totals = (team.drivers || []).map((d: any, i: number) => {
+        const score = (team.scoreDetails || []).reduce((sum: number, row: any) => {
+            return sum + (Number(row.cells?.[i]?.score) || 0);
+        }, 0);
+        return { code: d.code, score };
+    });
+    const maxScore = Math.max(0, ...totals.map((t: any) => t.score));
+    return totals.map((t: any) => ({
+        ...t,
+        isMax: t.score > 0 && t.score === maxScore,
+    }));
+};
+
 const getResult = (race: any) => {
     const res = pageInfos.result.filter((r: any) =>
         r.year === race.year
@@ -356,117 +603,289 @@ const getResult = (race: any) => {
 }
 
 // 4. 更新图表逻辑
-const updateChart = (yearRounds: any, yearResult: any) => {
-    const sortedRounds = [...yearRounds].sort((a, b) => a.round - b.round);
-    const xAxisData = sortedRounds.map(r => `R${r.round}`);
+type ChartMode = 'compact' | 'full'
 
-    // 1. 计算每个车手的累加得分序列
-    const series = pageInfos.drivers.slice(0, 10).map((driver, index) => {
-        let cumulative = 0;
-        const data = sortedRounds.map(round => {
+const buildPointsChartOptions = (
+    yearRounds: any[],
+    yearResult: any[],
+    drivers: any[],
+    mode: ChartMode,
+    opts?: { revealUpTo?: number | null },
+) => {
+    const sortedRounds = [...yearRounds].sort((a, b) => a.round - b.round)
+    const xAxisData = sortedRounds.map(r => `R${r.round}`)
+    const isFull = mode === 'full'
+    const chartDrivers = isFull ? drivers : drivers.slice(0, 8)
+    // null = 全部显示；数字 = 只显示前 N 个点（x 轴仍保留全部场次）
+    const revealUpTo = opts?.revealUpTo ?? null
+    const revealing = isFull && revealUpTo != null && revealUpTo < sortedRounds.length
+
+    // Race 尚未结束的场次用 null 占位，不连线
+    const finishedRaceRounds = new Set(
+        yearResult
+            .filter((r: any) => r.step === 'Race')
+            .map((r: any) => Number(r.round)),
+    )
+
+    let yMax = 0
+    const series = chartDrivers.map((driver, index) => {
+        let cumulative = 0
+        const fullData = sortedRounds.map(round => {
+            const roundNo = Number(round.round)
+            if (!finishedRaceRounds.has(roundNo)) return null
+
             const raceRes = yearResult.filter((res: any) =>
-                res.round === round.round && res.driverName === driver.name && (res.step === 'Race' || res.step == 'Sprint')
-            );
-            if (raceRes) {
-                raceRes.forEach((item: any) => {
-                    cumulative += (item?.score || 0);
-                })
-            }
-            return cumulative;
-        });
+                res.round === round.round
+                && res.driverName === driver.name
+                && (res.step === 'Race' || res.step === 'Sprint'),
+            )
+            raceRes.forEach((item: any) => {
+                cumulative += Number(item?.score) || 0
+            })
+            return cumulative
+        })
+        for (const value of fullData) {
+            if (value != null) yMax = Math.max(yMax, value)
+        }
 
-        const isP1 = index === 0;
+        const data = revealUpTo == null
+            ? fullData
+            : fullData.map((value, i) => (i < revealUpTo ? value : null))
+
+        const isP1 = index === 0
+        const isTop3 = index < 3
+
         return {
-            name: driver.name,
+            name: `${driver.code} · ${driver.name}`,
             type: 'line',
-            data: data,
-            smooth: 0.3, // 稍微平滑，更有流动感
-            showSymbol: false,
+            data,
+            smooth: 0.2,
+            connectNulls: false,
+            showSymbol: isFull,
+            symbol: 'circle',
+            symbolSize: isFull ? (revealing ? 7 : 5) : 4,
             lineStyle: {
-                width: isP1 ? 5 : 2, // P1 的线加粗
+                width: isP1 ? (isFull ? 4 : 3.5) : isTop3 ? 2.5 : (isFull ? 1.8 : 1.5),
                 color: driver.color,
-                shadowBlur: isP1 ? 10 : 0, // P1 增加发光
+                shadowBlur: isP1 ? 12 : 0,
                 shadowColor: driver.color,
-                opacity: isP1 ? 1 : 0.6 // 其他车手稍微透明化
+                opacity: isP1 ? 1 : isTop3 ? 0.9 : (isFull ? 0.55 : 0.5),
             },
-            // --- 关键：末端标签显示 ---
+            itemStyle: { color: driver.color },
             endLabel: {
                 show: true,
-                formatter: (params: any) => `{name|${driver.code}}`,
-                offset: [10, 0], // 向右偏移，不盖在点上
-                // 为标签增加背景块，增强易读性
+                formatter: () => `{name|${driver.code}}`,
+                offset: [8, 0],
                 rich: {
                     name: {
                         color: '#fff',
                         backgroundColor: driver.color,
-                        padding: [2, 4],
+                        padding: [2, 5],
                         borderRadius: 2,
-                        fontSize: 10,
+                        fontSize: isFull ? 11 : 10,
                         fontWeight: 'bold',
-                        fontFamily: 'Arial',
-                    }
-                }
+                        fontFamily: 'Formula1, Arial, sans-serif',
+                    },
+                },
             },
-            // --- 自动避让重叠的关键配置 ---
             labelLayout: {
-                moveOverlap: 'shiftY', // 重点：当标签重叠时，在 Y 轴方向自动推开
-                dx: 10
+                moveOverlap: 'shiftY',
+                dx: 8,
+                hideOverlap: !isFull,
             },
-            // 只有最后一点显示标签
             labelLine: {
-                show: true, // 显示指引线
-                length: 10,
+                show: true,
+                length2: 8,
                 lineStyle: {
                     color: driver.color,
-                    type: 'dashed'
-                }
+                    type: 'dashed',
+                    opacity: 0.5,
+                },
             },
             emphasis: {
-                focus: 'series' // 鼠标悬停高亮某条线
+                focus: 'series',
+                lineStyle: { width: isP1 ? 5 : 3.5, opacity: 1 },
             },
-            // 动画效果
-            animationDuration: 2000,
-            animationEasing: 'cubicInOut'
-        };
-    });
+            animationDuration: isFull ? 260 : 1600,
+            animationDurationUpdate: isFull ? 220 : 800,
+            animationEasing: 'cubicOut',
+            animationEasingUpdate: 'cubicOut',
+        }
+    })
 
-    // 2. 更新配置
-    pageInfos.options = {
+    return {
         title: { show: false },
         backgroundColor: 'transparent',
-        grid: { left: '1%', right: '18%', bottom: '1%', top: '15%', containLabel: true },
-        legend: { show: false },
+        animationDurationUpdate: isFull ? 220 : 800,
+        animationEasingUpdate: 'cubicOut',
+        color: chartDrivers.map((d: any) => d.color),
+        grid: isFull
+            ? { left: 16, right: 72, bottom: 28, top: 48, containLabel: true }
+            : { left: 4, right: '16%', bottom: 4, top: 18, containLabel: true },
+        legend: isFull
+            ? {
+                show: true,
+                type: 'scroll',
+                orient: 'horizontal',
+                top: 0,
+                left: 0,
+                right: 0,
+                textStyle: { color: '#c8c8d0', fontSize: 11 },
+                pageIconColor: '#e10600',
+                pageTextStyle: { color: '#949498' },
+                inactiveColor: '#555',
+            }
+            : { show: false },
         tooltip: {
             trigger: 'axis',
-            backgroundColor: 'rgba(21, 21, 30, 0.9)',
+            backgroundColor: 'rgba(21, 21, 30, 0.95)',
             borderColor: '#444',
-            textStyle: { color: '#fff' },
-            axisPointer: { lineStyle: { color: '#e10600', width: 2 } }
+            borderWidth: 1,
+            textStyle: { color: '#fff', fontSize: 12 },
+            axisPointer: {
+                type: 'line',
+                lineStyle: { color: '#e10600', width: 1.5, type: 'dashed' },
+            },
+            order: 'valueDesc',
+            formatter: (params: any) => {
+                const list = (Array.isArray(params) ? params : [params])
+                    .filter((p: any) => p.value != null && p.value !== '-')
+                if (!list.length) return ''
+                const rows = list
+                    .slice()
+                    .sort((a: any, b: any) => (Number(b.value) || 0) - (Number(a.value) || 0))
+                    .map((p: any) => {
+                        const code = String(p.seriesName || '').split(' · ')[0]
+                        return `<div style="display:flex;justify-content:space-between;gap:18px;margin:2px 0">
+                            <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${p.color};margin-right:6px"></span>${code}</span>
+                            <b>${p.value ?? 0}</b>
+                        </div>`
+                    })
+                    .join('')
+                return `<div style="margin-bottom:6px;color:#949498;font-size:11px">${list[0].axisValueLabel || list[0].name}</div>${rows}`
+            },
         },
         xAxis: {
             type: 'category',
             data: xAxisData,
             boundaryGap: false,
             axisLine: { lineStyle: { color: '#444' } },
-            axisLabel: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                show: isFull,
+                color: '#949498',
+                fontSize: 11,
+                interval: 0,
+            },
             splitLine: {
                 show: true,
                 lineStyle: {
-                    type: "dashed",
-                    opacity: 0.6,
+                    type: 'dashed',
+                    color: '#2a2a33',
+                    opacity: isFull ? 0.9 : 0.55,
                 },
             },
         },
         yAxis: {
             type: 'value',
-            name: 'POINTS',
-            axisLabel: { show: false },
-            splitLine: { show: false },
+            name: isFull ? 'POINTS' : '',
+            min: 0,
+            max: isFull && yMax > 0 ? Math.ceil(yMax * 1.08) : undefined,
+            nameTextStyle: { color: '#949498', fontSize: 11, padding: [0, 0, 0, 8] },
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                show: isFull,
+                color: '#949498',
+                fontSize: 11,
+            },
+            splitLine: {
+                show: isFull,
+                lineStyle: { color: '#2a2a33', type: 'dashed' },
+            },
         },
-        series: series
-    };
+        series,
+    }
+}
+
+const updateChart = (yearRounds: any, yearResult: any) => {
+    chartSource.rounds = yearRounds || []
+    chartSource.result = yearResult || []
+    pageInfos.options = buildPointsChartOptions(
+        chartSource.rounds,
+        chartSource.result,
+        pageInfos.drivers,
+        'compact',
+    )
     pageInfos.changeMark = !pageInfos.changeMark
-};
+}
+
+let fullChartRevealTimer: ReturnType<typeof setInterval> | null = null
+
+const stopFullChartReveal = () => {
+    if (fullChartRevealTimer != null) {
+        clearInterval(fullChartRevealTimer)
+        fullChartRevealTimer = null
+    }
+}
+
+const renderFullChartFrame = (revealUpTo: number | null, remount = false) => {
+    fullChartOptions.value = buildPointsChartOptions(
+        chartSource.rounds,
+        chartSource.result,
+        pageInfos.drivers,
+        'full',
+        { revealUpTo },
+    )
+    if (remount) fullChartChangeMark.value = !fullChartChangeMark.value
+}
+
+const openFullChart = async () => {
+    stopFullChartReveal()
+    const rounds = [...chartSource.rounds].sort((a, b) => Number(a.round) - Number(b.round))
+    const finishedRaceRounds = new Set(
+        chartSource.result
+            .filter((r: any) => r.step === 'Race')
+            .map((r: any) => Number(r.round)),
+    )
+    // 动画只播到最后一场已完赛的 Race；未完赛场次保持 null
+    let lastFinishedIndex = -1
+    rounds.forEach((round, index) => {
+        if (finishedRaceRounds.has(Number(round.round))) lastFinishedIndex = index
+    })
+    const revealTotal = lastFinishedIndex + 1
+
+    chartModal.value = true
+
+    if (!rounds.length || revealTotal <= 0) {
+        renderFullChartFrame(null, true)
+        return
+    }
+
+    // x 轴固定为全部场次；折线点从 R1 逐场出现并连线
+    renderFullChartFrame(1, true)
+    await nextTick()
+
+    let visibleCount = 1
+    const stepMs = Math.max(
+        140,
+        Math.min(320, Math.floor(4800 / Math.max(revealTotal - 1, 1))),
+    )
+
+    fullChartRevealTimer = setInterval(() => {
+        visibleCount += 1
+        if (visibleCount > revealTotal) {
+            stopFullChartReveal()
+            renderFullChartFrame(null, false)
+            return
+        }
+        renderFullChartFrame(visibleCount, false)
+    }, stepMs)
+}
+
+watch(chartModal, (open) => {
+    if (!open) stopFullChartReveal()
+})
 
 // --- 工具函数 ---
 const formatDate = (excelDate: number) => {
@@ -482,6 +901,7 @@ const formatTime = (excelTime: number) => {
     // 格式化为 HH:MM
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 }
+const hasRaceTime = (time: any) => time !== null && time !== undefined && time !== ''
 
 // 轮胎信息
 const tyres = [
@@ -508,18 +928,26 @@ const tyres = [
                     </div>
                 </div>
             </div>
-            <div class="year-selector">
-                <button v-for="y in pageInfos.availableYears" :key="y" :class="{ active: pageInfos.year === y }"
-                    @click="pageInfos.year = y">
-                    {{ y }}
+            <div class="header-right">
+                <button class="capture-btn" title="历年世界冠军" @click="historyModal = true">
+                    <TrophyOutlined />
                 </button>
+                <button class="capture-btn" :disabled="capturing" title="截取赛程" @click="captureSchedule">
+                    <CameraOutlined />
+                </button>
+                <div class="year-selector">
+                    <button v-for="y in pageInfos.availableYears" :key="y" :class="{ active: pageInfos.year === y }"
+                        @click="pageInfos.year = y">
+                        {{ y }}
+                    </button>
+                </div>
             </div>
         </header>
 
         <main class="main-content">
             <!-- 左侧：赛程列表 (滚动区) -->
             <section class="schedule-section">
-                <div class="list-f1">
+                <div ref="listF1Ref" class="list-f1" :class="{ 'is-capturing': capturing }">
                     <div v-for="round in pageInfos.rounds" :key="round.round" class="f1-card">
                         <!-- 状态边条 (F1红) -->
                         <div class="card-status"></div>
@@ -551,9 +979,32 @@ const tyres = [
                             </div>
 
                             <div class="track-thumb">
-                                <a-popover title="Circuit" trigger="hover">
+                                <a-popover
+                                    :title="false"
+                                    trigger="hover"
+                                    overlay-class-name="circuit-map-popover"
+                                >
                                     <template #content>
-                                        <img :src="`/docs/f1/carbons/${round.img}-full.png`" />
+                                        <div class="circuit-map-panel">
+                                            <div class="map-mode-switch">
+                                                <button
+                                                    type="button"
+                                                    :class="{ active: circuitMapMode === 'full' }"
+                                                    @click.stop="circuitMapMode = 'full'"
+                                                >FULL</button>
+                                                <button
+                                                    type="button"
+                                                    :class="{ active: circuitMapMode === 'drs' }"
+                                                    @click.stop="circuitMapMode = 'drs'"
+                                                >DRS</button>
+                                            </div>
+                                            <img
+                                                :key="`${round.img}-${circuitMapMode}`"
+                                                :src="getCircuitMapSrc(round.img)"
+                                                alt="circuit map"
+                                                @error="onCircuitMapError"
+                                            />
+                                        </div>
                                     </template>
                                     <img :src="`/docs/f1/carbons/${round.img}.png`" />
                                 </a-popover>
@@ -576,7 +1027,7 @@ const tyres = [
                                         <span class="step-tag">{{ race.step }}</span>
                                         <div class="meta-right">
                                             <span class="day-tag">{{ race.week }}</span>
-                                            <span class="session-time">{{ race.startTime }}<template
+                                            <span class="session-time" v-if="race.hasStartTime">{{ race.startTime }}<template
                                                     v-if="race.endTime"> -
                                                     {{ race.endTime }}</template></span>
                                         </div>
@@ -633,8 +1084,10 @@ const tyres = [
                                                                 <td>
                                                                     <div class="item-driver">
                                                                         <img class="icon-driver"
-                                                                            :src="`/docs/f1/drivers/${res.driverCode}.png`"
-                                                                            alt="" srcset="">
+                                                                            :src="getDriverImg(res.driverCode, res.teamCode)"
+                                                                            :data-driver-code="res.driverCode"
+                                                                            alt=""
+                                                                            @error="onDriverImgError">
                                                                         <img class="icon-flag"
                                                                             :src="`/docs/flags/${res.flagCode}.png`"
                                                                             alt="" srcset="">
@@ -724,7 +1177,47 @@ const tyres = [
                                             <span class="label">RANK</span>
                                         </div>
                                         <div class="points-box">
-                                            <span class="value">{{ driver.score }}</span>
+                                            <a-popover
+                                                v-if="driver.scoreDetails?.length"
+                                                placement="bottomLeft"
+                                                trigger="hover"
+                                                :title="false"
+                                                overlay-class-name="driver-score-popover"
+                                                :overlay-inner-style="scorePopoverInnerStyle"
+                                                :get-popup-container="getScorePopupContainer"
+                                            >
+                                                <template #content>
+                                                    <table class="table-score-detail">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Round</th>
+                                                                <th>Country-City</th>
+                                                                <th>Pos</th>
+                                                                <th>Pts</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="item in driver.scoreDetails" :key="item.round">
+                                                                <td class="col-round">R{{ item.round }}</td>
+                                                                <td class="col-location">{{ item.location }}</td>
+                                                                <td class="col-pos">
+                                                                    <span v-if="isNumericPosition(item.position)" class="pos-number">{{ item.position }}</span>
+                                                                    <span v-else class="pos-label" :class="String(item.position).toLowerCase()">{{ item.position }}</span>
+                                                                </td>
+                                                                <td class="col-score">{{ item.score }}</td>
+                                                            </tr>
+                                                            <tr class="total-row">
+                                                                <td class="col-round">Total</td>
+                                                                <td class="col-location"></td>
+                                                                <td class="col-pos"></td>
+                                                                <td class="col-score">{{ driver.score }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </template>
+                                                <span class="value is-hoverable">{{ driver.score }}</span>
+                                            </a-popover>
+                                            <span v-else class="value">{{ driver.score }}</span>
                                             <span class="label">PTS</span>
                                         </div>
                                     </div>
@@ -775,7 +1268,12 @@ const tyres = [
 
                                     <!-- 背景形象区 -->
                                     <div class="photo-wrapper">
-                                        <img :src="`/docs/f1/drivers/${driver.code}.png`" class="driver-img" />
+                                        <img
+                                            :src="getDriverImg(driver.code, driver.teamCode)"
+                                            :data-driver-code="driver.code"
+                                            class="driver-img"
+                                            @error="onDriverImgError"
+                                        />
                                     </div>
                                 </div>
                                 </template>
@@ -796,7 +1294,71 @@ const tyres = [
                                     <img :src="`/docs/f1/teams/${team.code}.png`" class="team-logo" />
                                     <div class="color-divider" :style="{ background: team.color }"></div>
                                     <div class="points-value">
-                                        <span class="num">{{ team.score }}</span>
+                                        <a-popover
+                                            v-if="team.scoreDetails?.length"
+                                            placement="bottomLeft"
+                                            trigger="hover"
+                                            :title="false"
+                                            overlay-class-name="driver-score-popover"
+                                            :overlay-inner-style="scorePopoverInnerStyle"
+                                            :get-popup-container="getScorePopupContainer"
+                                        >
+                                            <template #content>
+                                                <table class="table-score-detail table-team-score">
+                                                    <thead>
+                                                        <tr>
+                                                            <th rowspan="2" class="col-round">Round</th>
+                                                            <th rowspan="2" class="col-location">Country-City</th>
+                                                            <th v-for="d in team.drivers" :key="d.code" colspan="3" class="col-driver">{{ d.code }}</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <template v-for="d in team.drivers" :key="`${d.code}-sub`">
+                                                                <th class="col-quali">Qual</th>
+                                                                <th class="col-pos">Pos</th>
+                                                                <th class="col-score">Pts</th>
+                                                            </template>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="item in team.scoreDetails" :key="item.round">
+                                                            <td class="col-round">R{{ item.round }}</td>
+                                                            <td class="col-location">{{ item.location }}</td>
+                                                            <template v-for="cell in item.cells" :key="cell.code">
+                                                                <td class="col-quali" :class="{ 'is-best': cell.isBestQuali }">
+                                                                    <template v-if="cell.qualiPosition !== '' && cell.qualiPosition != null">
+                                                                        <span v-if="isNumericPosition(cell.qualiPosition)" class="pos-number">{{ cell.qualiPosition }}</span>
+                                                                        <span v-else class="pos-label" :class="String(cell.qualiPosition).toLowerCase()">{{ cell.qualiPosition }}</span>
+                                                                    </template>
+                                                                    <span v-else class="empty-cell">-</span>
+                                                                </td>
+                                                                <td class="col-pos">
+                                                                    <template v-if="cell.score != null">
+                                                                        <span v-if="isNumericPosition(cell.position)" class="pos-number">{{ cell.position }}</span>
+                                                                        <span v-else-if="cell.position !== ''" class="pos-label" :class="String(cell.position).toLowerCase()">{{ cell.position }}</span>
+                                                                        <span v-else>-</span>
+                                                                    </template>
+                                                                    <span v-else class="empty-cell">-</span>
+                                                                </td>
+                                                                <td class="col-score" :class="{ 'is-max': cell.isMax }">
+                                                                    {{ cell.score != null ? cell.score : '-' }}
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+                                                        <tr class="total-row">
+                                                            <td class="col-round">Total</td>
+                                                            <td class="col-location"></td>
+                                                            <template v-for="cell in getTeamDriverScoreTotals(team)" :key="cell.code">
+                                                                <td class="col-quali"></td>
+                                                                <td class="col-pos"></td>
+                                                                <td class="col-score" :class="{ 'is-max': cell.isMax }">{{ cell.score }}</td>
+                                                            </template>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </template>
+                                            <span class="num is-hoverable">{{ team.score }}</span>
+                                        </a-popover>
+                                        <span v-else class="num">{{ team.score }}</span>
                                         <span class="unit">PTS</span>
                                     </div>
                                 </div>
@@ -806,7 +1368,11 @@ const tyres = [
                                     <div class="list-drivers">
                                         <div v-for="d in team.drivers" :key="d.code" class="mini-driver-card">
                                             <div class="driver-img-box">
-                                                <img :src="`/docs/f1/drivers/${d.code}.png`" />
+                                                <img
+                                                    :src="getDriverImg(d.code, team.code)"
+                                                    :data-driver-code="d.code"
+                                                    @error="onDriverImgError"
+                                                />
                                             </div>
                                             <span class="driver-code">{{ d.code }}</span>
                                         </div>
@@ -824,7 +1390,20 @@ const tyres = [
 
                 <!-- 趋势图表 -->
                 <div class="chart-wrapper">
-                    <h3 class="section-title">POINTS PROGRESSION</h3>
+                    <div class="chart-header">
+                        <div class="chart-title-group">
+                            <span class="chart-badge">TRACKER</span>
+                            <h3 class="chart-title">POINTS PROGRESSION</h3>
+                        </div>
+                        <button
+                            type="button"
+                            class="chart-fullscreen-btn"
+                            title="查看全部车手积分走势"
+                            @click="openFullChart"
+                        >
+                            <ExpandOutlined />
+                        </button>
+                    </div>
                     <div class="chart-inner">
                         <chartView :options="pageInfos.options" :change-mark="pageInfos.changeMark" />
                     </div>
@@ -832,6 +1411,68 @@ const tyres = [
             </aside>
         </main>
     </div>
+
+    <a-modal
+        v-model:open="chartModal"
+        width="92vw"
+        centered
+        :title="null"
+        :footer="null"
+        :closable="true"
+        destroy-on-close
+        wrap-class-name="f1-chart-modal"
+    >
+        <div class="full-chart-panel">
+            <div class="full-chart-header">
+                <div>
+                    <div class="full-chart-eyebrow">{{ pageInfos.year }} CHAMPIONSHIP</div>
+                    <h3 class="full-chart-title">ALL DRIVERS · POINTS PROGRESSION</h3>
+                </div>
+                <span class="full-chart-hint">Hover a round · click legend to toggle</span>
+            </div>
+            <div class="full-chart-body">
+                <chartView :options="fullChartOptions" :change-mark="fullChartChangeMark" />
+            </div>
+        </div>
+    </a-modal>
+
+    <a-modal
+        v-model:open="historyModal"
+        width="520px"
+        centered
+        :title="null"
+        :footer="null"
+        :closable="false"
+        destroy-on-close
+        wrap-class-name="f1-history-modal"
+    >
+        <div class="history-timeline">
+            <div class="history-title">WORLD CHAMPIONS</div>
+            <div class="history-list">
+                <div v-for="item in pageInfos.history" :key="item.year" class="history-item">
+                    <div class="history-year">{{ item.year }}</div>
+                    <div class="history-rail">
+                        <span class="history-dot"></span>
+                    </div>
+                    <div class="history-card">
+                        <div class="history-driver">
+                            <img :src="`/docs/flags/${item.country}.png`" class="history-flag" :alt="item.country" />
+                            <span class="history-name">{{ item.name }}</span>
+                        </div>
+                        <div class="history-team">
+                            <img
+                                :src="getHistoryTeamLogo(item.team)"
+                                class="history-logo"
+                                :alt="item.team"
+                                @error="onHistoryLogoError"
+                            />
+                            <span>{{ item.team }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a-modal>
 </template>
 
 <style scoped lang="scss">
@@ -904,6 +1545,34 @@ $f1-silver: #949498;
             }
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .capture-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            padding: 0;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover:not(:disabled) {
+                color: $f1-red;
+            }
+
+            &:disabled {
+                opacity: 0.45;
+                cursor: wait;
+            }
+        }
+
         .year-selector {
             display: flex;
             gap: 5px;
@@ -953,6 +1622,20 @@ $f1-silver: #949498;
         display: flex;
         flex-direction: column;
         gap: 15px;
+
+        &.is-capturing {
+            .car-img {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+
+            .speed-lines {
+                animation: none !important;
+                opacity: 0.7;
+                width: 60px;
+            }
+        }
     }
 }
 
@@ -1391,6 +2074,193 @@ $f1-silver: #949498;
         .pos-label.dnf {
             background-color: #71767c;
         }
+
+        .pos-label.nc {
+            background-color: #8a5aab;
+        }
+    }
+}
+
+.table-score-detail {
+    min-width: 280px;
+    width: 100%;
+    color: #fff;
+    border-collapse: collapse;
+    font-size: 11px;
+
+    thead th {
+        background: #101015;
+        color: $f1-silver;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 8px 10px;
+        border-bottom: 1px solid #333;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 6px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: middle;
+    }
+
+    tbody tr:hover {
+        background: rgba(225, 6, 0, 0.08);
+    }
+
+    .col-round {
+        width: 48px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .col-location {
+        color: #d0d0d4;
+    }
+
+    .col-pos {
+        width: 48px;
+        text-align: center;
+
+        .pos-number {
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .pos-label {
+            display: inline-block;
+            background-color: #38383f;
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 400;
+            padding: 1px 5px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .pos-label.dsq {
+            background-color: #e10600;
+        }
+
+        .pos-label.dns {
+            background-color: #fcaf17;
+        }
+
+        .pos-label.dnf {
+            background-color: #71767c;
+        }
+
+        .pos-label.nc {
+            background-color: #8a5aab;
+        }
+    }
+
+    .col-score {
+        width: 42px;
+        text-align: right;
+        font-weight: 400;
+        color: $f1-red;
+    }
+
+    .empty-cell {
+        color: #666;
+    }
+
+    .total-row {
+        td {
+            border-top: 1px solid #444;
+            background: #101015;
+        }
+
+        .col-round {
+            text-transform: uppercase;
+            color: #fff;
+        }
+    }
+
+    &.table-team-score {
+        thead th {
+            text-align: center;
+            vertical-align: middle;
+
+            &.col-round,
+            &.col-location {
+                text-align: left;
+            }
+
+            &.col-driver {
+                color: #fff;
+                font-size: 11px;
+                border-left: 1px solid #333;
+            }
+
+            &.col-pos,
+            &.col-score,
+            &.col-quali {
+                font-size: 8px;
+                border-left: 1px solid #2a2a32;
+            }
+        }
+
+        td.col-pos,
+        td.col-score,
+        td.col-quali {
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .col-quali {
+            width: 48px;
+            text-align: center;
+
+            .pos-number {
+                font-weight: 400;
+                font-style: italic;
+            }
+
+            .pos-label {
+                display: inline-block;
+                background-color: #38383f;
+                color: #ffffff;
+                font-size: 0.7rem;
+                font-weight: 400;
+                padding: 1px 5px;
+                border-radius: 4px;
+                text-transform: uppercase;
+                min-width: 32px;
+                text-align: center;
+            }
+
+            .pos-label.dsq {
+                background-color: #e10600;
+            }
+
+            .pos-label.dns {
+                background-color: #fcaf17;
+            }
+
+            .pos-label.dnf {
+                background-color: #71767c;
+            }
+
+            .pos-label.nc {
+                background-color: #8a5aab;
+            }
+        }
+
+        .col-score.is-max {
+            background: #1faa4a;
+            color: #fff;
+        }
+
+        .col-quali.is-best {
+            background: #00bfa5;
+            color: #fff;
+        }
     }
 }
 
@@ -1615,6 +2485,11 @@ $f1-silver: #949498;
                     font-weight: 900;
                     line-height: 1;
                     color: $f1-red;
+
+                    &.is-hoverable {
+                        cursor: pointer;
+                        border-bottom: 1px dashed rgba(225, 6, 0, 0.45);
+                    }
                 }
             }
         }
@@ -1716,6 +2591,7 @@ $f1-silver: #949498;
             padding-bottom: 5px; // 留出一点安全间距
 
             .fname {
+                font-family: "Northwell Clean Alt";
                 font-size: 13px;
                 font-weight: 500;
                 color: $f1-silver;
@@ -1847,6 +2723,11 @@ $f1-silver: #949498;
                 font-size: 32px;
                 font-weight: 800;
                 color: $f1-red;
+
+                &.is-hoverable {
+                    cursor: pointer;
+                    border-bottom: 1px dashed rgba(225, 6, 0, 0.45);
+                }
             }
 
             .unit {
@@ -1871,7 +2752,7 @@ $f1-silver: #949498;
         .list-drivers {
             height: 51px;
             display: flex;
-            gap: 12px;
+            gap: 5px;
 
             .mini-driver-card {
                 display: flex;
@@ -1940,29 +2821,359 @@ $f1-silver: #949498;
 /* 趋势图表 */
 .chart-wrapper {
     position: relative;
-    padding: 10px;
-    height: 280px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 8px;
+    height: 300px;
     border: 1px solid #333;
     border-radius: 12px;
-    background: linear-gradient(135deg, #15151e 0%, #1a1a24 100%);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(160deg, #15151e 0%, #1a1a24 55%, #121218 100%);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 
-    &::before {
-        content: 'CHAMPIONSHIP TRACKER';
-        position: absolute;
-        top: -12px;
-        left: 20px;
+    .chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 6px;
+        flex-shrink: 0;
+    }
+
+    .chart-title-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .chart-badge {
+        flex-shrink: 0;
         background: #e10600;
         color: #fff;
-        padding: 2px 10px;
-        font-size: 10px;
+        padding: 2px 8px;
+        font-size: 9px;
         font-weight: 900;
         font-style: italic;
+        letter-spacing: 1px;
         border-radius: 2px;
     }
 
+    .chart-title {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #f0f0f5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .chart-fullscreen-btn {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #444;
+        border-radius: 6px;
+        background: #0b0b0e;
+        color: #c8c8d0;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            border-color: #e10600;
+            color: #fff;
+            background: rgba(225, 6, 0, 0.15);
+        }
+    }
+
     .chart-inner {
-        height: 230px;
+        flex: 1;
+        min-height: 0;
+    }
+}
+
+.history-timeline {
+    color: #fff;
+
+    .history-title {
+        margin-bottom: 16px;
+        padding-left: 8px;
+        border-left: 4px solid $f1-red;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 2px;
+    }
+
+    .history-list {
+        max-height: 70vh;
+        overflow-y: auto;
+        padding-right: 8px;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $f1-red;
+        }
+    }
+
+    .history-item {
+        display: grid;
+        grid-template-columns: 58px 16px 1fr;
+        gap: 10px;
+        align-items: stretch;
+        min-height: 56px;
+    }
+
+    .history-year {
+        padding-top: 2px;
+        text-align: right;
+        font-size: 14px;
+        font-weight: 900;
+        font-style: italic;
+        color: $f1-red;
+    }
+
+    .history-rail {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+        }
+    }
+
+    .history-dot {
+        position: relative;
+        z-index: 1;
+        margin-top: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: $f1-red;
+        box-shadow: 0 0 8px rgba(225, 6, 0, 0.6);
+        flex-shrink: 0;
+    }
+
+    .history-card {
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        background: #1f1f27;
+        border: 1px solid #333;
+        border-radius: 8px;
+    }
+
+    .history-driver {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .history-flag {
+        width: 22px;
+        height: 15px;
+        object-fit: cover;
+        border-radius: 2px;
+    }
+
+    .history-name {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .history-team {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+        font-size: 11px;
+        color: $f1-silver;
+        letter-spacing: 1px;
+    }
+
+    .history-logo {
+        height: 16px;
+        width: auto;
+        max-width: 48px;
+        object-fit: contain;
+        flex-shrink: 0;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+    }
+}
+</style>
+
+<style lang="scss">
+.driver-score-popover {
+    z-index: 1200;
+    font-family: 'Formula1', sans-serif;
+    letter-spacing: 1px;
+
+    .ant-popover-inner,
+    .ant-popover-inner-content {
+        background: #15151e;
+        padding: 0;
+        color: #fff;
+    }
+
+    .ant-popover-arrow::before,
+    .ant-popover-arrow::after {
+        background: #15151e;
+    }
+}
+
+.circuit-map-popover {
+    z-index: 1200;
+    max-width: none !important;
+    font-family: 'Formula1', sans-serif;
+    letter-spacing: 1px;
+
+    .ant-popover-inner,
+    .ant-popover-inner-content {
+        background: #15151e;
+        color: #fff;
+        max-width: none;
+        padding: 12px;
+    }
+
+    .ant-popover-arrow::before,
+    .ant-popover-arrow::after {
+        background: #15151e;
+    }
+
+    .circuit-map-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 50vw;
+
+        .map-mode-switch {
+            display: flex;
+            align-self: flex-end;
+            background: #000;
+            padding: 2px;
+            border-radius: 4px;
+
+            button {
+                background: transparent;
+                border: none;
+                color: #949498;
+                font-size: 11px;
+                font-family: inherit;
+                letter-spacing: 1px;
+                padding: 4px 10px;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &.active {
+                    background: #e10600;
+                    color: #fff;
+                }
+
+                &:hover:not(.active) {
+                    color: #fff;
+                }
+            }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+    }
+}
+
+.f1-history-modal {
+    .ant-modal-content {
+        background: #15151e;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .ant-modal-body {
+        padding: 20px;
+    }
+}
+
+.f1-chart-modal {
+    .ant-modal-content {
+        background: #101018;
+        border: 1px solid #333;
+        border-radius: 14px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+        overflow: hidden;
+    }
+
+    .ant-modal-close {
+        color: #c8c8d0;
+        top: 14px;
+        inset-inline-end: 14px;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    .ant-modal-body {
+        padding: 18px 20px 16px;
+    }
+
+    .full-chart-panel {
+        color: #fff;
+        font-family: 'Formula1', sans-serif;
+    }
+
+    .full-chart-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 12px;
+        padding-right: 36px;
+    }
+
+    .full-chart-eyebrow {
+        color: #e10600;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+    }
+
+    .full-chart-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+
+    .full-chart-hint {
+        color: #6f6f7a;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+
+    .full-chart-body {
+        height: min(72vh, 760px);
+        border: 1px solid #2a2a33;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #15151e 0%, #0d0d14 100%);
+        padding: 8px 4px 4px;
     }
 }
 </style>

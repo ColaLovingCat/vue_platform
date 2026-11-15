@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { type RoundInfo, getTeamClass, useTeamHover, isTeamHovered } from './public'
+import { type RoundInfo, getTeamClass, useTeamHover, isTeamHovered, isTodayTime } from './public'
 import { computeGroupStandings } from './group-standings'
 
 defineOptions({
@@ -34,7 +34,7 @@ const standings = computed(() => computeGroupStandings(props.rounds, props.mark)
             <h3 class="section-title">战报</h3>
             <div class="list-rounds">
                 <template v-for="round in rounds" :key="round.name">
-                    <div class="box-card round-item">
+                    <div class="box-card round-item" :class="{ 'is-today': isTodayTime(round.time) }">
                         <div class="item-infos">
                             <h4>{{ round.name }}</h4>
                             <h4 v-if="mark === 'lol' && round.bo">BO{{ round.bo }}</h4>
@@ -55,7 +55,10 @@ const standings = computed(() => computeGroupStandings(props.rounds, props.mark)
                                         >
                                             <div class="item-team">
                                                 <img :src="`/docs/${path}/${match.top.icon}`" alt="" srcset="">
-                                                <div class="team-name">{{ match.top.team }}</div>
+                                                <div class="team-meta">
+                                                    <div class="team-name">{{ match.top.team }}</div>
+                                                    <div v-if="match.top.tag" class="team-tag">{{ match.top.tag }}</div>
+                                                </div>
                                             </div>
                                             <div class="item-score">
                                                 {{ match.top.score }}
@@ -73,7 +76,10 @@ const standings = computed(() => computeGroupStandings(props.rounds, props.mark)
                                                 {{ match.bottom.score }}
                                             </div>
                                             <div class="item-team">
-                                                <div class="team-name">{{ match.bottom.team }}</div>
+                                                <div class="team-meta">
+                                                    <div class="team-name">{{ match.bottom.team }}</div>
+                                                    <div v-if="match.bottom.tag" class="team-tag">{{ match.bottom.tag }}</div>
+                                                </div>
                                                 <img :src="`/docs/${path}/${match.bottom.icon}`" alt="" srcset="">
                                             </div>
                                         </div>

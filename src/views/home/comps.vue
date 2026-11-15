@@ -23,6 +23,7 @@ const datas: any = ref([
     { title: "F1", path: 'f1', img: 'f1.jpg' },
     { title: "电竞赛事", path: 'matchs', img: 'matchs.png' },
     { title: "Pokémon", path: 'pokes', img: 'pokemon.png' },
+    { title: "数码宝贝", path: 'digimons', img: 'digimon.jpeg' },
     { title: "怪猎物语2", path: 'mhs2', img: 'mhs2.png' },
     { title: "怪猎物语3", path: 'mhs3', img: 'mhs3.jpg' },
     { title: "动物森友会", path: 'animals', img: 'animal.png' },

@@ -78,6 +78,8 @@ const loadPoints = async () => {
 </template>
 
 <style scoped lang="scss">
+@use 'sass:color';
+
 .map-container {
     position: relative;
     width: 100%;
@@ -237,11 +239,11 @@ const loadPoints = async () => {
                 0 0 0 4px rgba($color, 0.3);
 
             .card-arrow {
-                background: linear-gradient(135deg, $color, lighten($color, 20%));
+                background: linear-gradient(135deg, $color, color.adjust($color, $lightness: 20%));
             }
 
             .badge {
-                background: linear-gradient(135deg, $color, lighten($color, 15%));
+                background: linear-gradient(135deg, $color, color.adjust($color, $lightness: 15%));
             }
         }
     }

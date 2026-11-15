@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, watch } from 'vue'
 
 // name
 defineOptions({
@@ -25,7 +25,14 @@ const props = defineProps({
 onMounted(() => {
 })
 
-let poke: any = reactive(props.data || {})
+const poke: any = reactive({ ...(props.data || {}) })
+watch(
+    () => props.data,
+    (val) => {
+        Object.assign(poke, val || {})
+    },
+    { deep: true }
+)
 
 const changeShape = (shape: any) => {
     Object.assign(poke, shape)
@@ -79,8 +86,13 @@ const enum types {
                 <img class="item-img" :class="activeAniver ? 'aniver' : ''"
                     v-bind:src="`/docs/pokemons/${activeAniver ? '30th' : 'pokes'}/${poke.img}`"
                     v-bind:class="'item-' + poke.shape" alt="" srcset="">
-                <img class="item-gif" v-bind:src="`/docs/pokemons/gifs/${poke.img.replace('.png', '.gif')}`" alt=""
-                    srcset="" />
+                <img
+                    v-if="poke.img"
+                    class="item-gif"
+                    :src="`/docs/pokemons/gifs/${String(poke.img).replace('.png', '.gif')}`"
+                    alt=""
+                    srcset=""
+                />
             </div>
             <div class="item-no">
                 <h3>{{ poke.no }}</h3>

@@ -1,9 +1,17 @@
 import * as XLSX from 'xlsx'
 
-export const readExcel = async (path: string) => {
+export const readExcel = async (path: string, options?: { cache?: RequestCache }) => {
     try {
-        // 动态导入Excel文件
-        const response = await fetch(new URL(path, import.meta.url).href)
+        // public 绝对路径直接 fetch；相对路径再基于当前模块解析
+        const url = (path.startsWith('/') || /^https?:/i.test(path))
+            ? path
+            : new URL(path, import.meta.url).href
+        const response = await fetch(url, {
+            cache: options?.cache ?? 'default',
+        })
+        if (!response.ok) {
+            throw new Error(`读取Excel失败: ${response.status} ${response.statusText}`)
+        }
         const arrayBuffer = await response.arrayBuffer()
         // 解析Excel数据
         const data = new Uint8Array(arrayBuffer)

@@ -387,5 +387,12 @@ export const datas = {
         { code: "CROSSGEATS", name: "CROSSGEATS", color: "#c52e2f" },
         { code: "GOTCHARD", name: "GOTCHARD", color: "#c52e2f" },
         { code: "GAVV", name: "GAVV", color: "#c52e2f" },
+        { code: "Valen", name: "Valen", color: "#c52e2f" },
+        { code: "Vram", name: "Vram", color: "#c52e2f" },
+        { code: "BITTER GAVV", name: "BITTER GAVV", color: "#c52e2f" },
+        { code: "ZZZ", name: "ZZZ", color: "#c52e2f" },
+        { code: "NOX", name: "NOX", color: "#c52e2f" },
+        { code: "Dawn", name: "Dawn", color: "#c52e2f" },
+        { code: "MY-TH", name: "MY-TH", color: "#c52e2f" },
     ],
 }

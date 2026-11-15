@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { type RoundInfo, type MatchInfo, getTeamClass, useTeamHover, isTeamHovered } from './public'
+import { type RoundInfo, type MatchInfo, getTeamClass, useTeamHover, isTeamHovered, isTodayTime } from './public'
 
 defineOptions({
     name: 'swiss-name'
@@ -204,7 +204,7 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
         <template v-for="item in rounds">
             <div class="list-round">
                 <template v-for="round in item">
-                    <div class="box-card round-item">
+                    <div class="box-card round-item" :class="{ 'is-today': isTodayTime(round.time) }">
                         <div class="item-infos">
                             <h4>{{ round.time }}</h4>
                             <h4>{{ round.round }} BO{{ round.bo }}</h4>
@@ -223,7 +223,10 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                                         >
                                             <div class="item-team">
                                                 <img :src="`/docs/logos/teams/${match.top.icon}`" alt="" srcset="">
-                                                <div class="team-name">{{ match.top.team }}</div>
+                                                <div class="team-meta">
+                                                    <div class="team-name">{{ match.top.team }}</div>
+                                                    <div v-if="match.top.tag" class="team-tag">{{ match.top.tag }}</div>
+                                                </div>
                                             </div>
                                             <div class="item-score">
                                                 {{ match.top.score }}
@@ -241,7 +244,10 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
                                                 {{ match.bottom.score }}
                                             </div>
                                             <div class="item-team">
-                                                <div class="team-name">{{ match.bottom.team }}</div>
+                                                <div class="team-meta">
+                                                    <div class="team-name">{{ match.bottom.team }}</div>
+                                                    <div v-if="match.bottom.tag" class="team-tag">{{ match.bottom.tag }}</div>
+                                                </div>
                                                 <img :src="`/docs/logos/teams/${match.bottom.icon}`" alt="" srcset="">
                                             </div>
                                         </div>
@@ -300,6 +306,7 @@ function computeTeamRecords(rounds: RoundInfo[][]) {
 @import url(./styles.scss);
 
 .box-rounds {
+    width: max-content;
     display: flex;
     flex-direction: column;
     gap: 20px;

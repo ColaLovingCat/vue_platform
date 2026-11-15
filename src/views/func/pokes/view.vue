@@ -179,12 +179,12 @@ const showModal = (action: string, values: any) => {
     </div>
 
     <!-- 属性 -->
-    <a-modal v-model:open="typeModal" width="990px" centered :closable="false" :header="null" :footer="null">
-        <typeView></typeView>
+    <a-modal v-model:open="typeModal" width="990px" centered :closable="false" :title="null" :footer="null" destroy-on-close>
+        <typeView v-if="typeModal"></typeView>
     </a-modal>
 
     <!-- 性格 -->
-    <a-modal v-model:open="natureModal" width="600px" centered :closable="false" :header="null" :footer="null">
+    <a-modal v-model:open="natureModal" width="600px" centered :closable="false" :title="null" :footer="null" destroy-on-close>
         <table class="table-natures" style="width: 100%;">
             <tbody>
                 <tr v-for="item in pageInfos.natures" :key="item.nature">
@@ -202,7 +202,7 @@ const showModal = (action: string, values: any) => {
     </a-modal>
 
     <!-- 游戏列表 -->
-    <a-modal v-model:open="timelineModal" width="1300px" centered :closable="false" :header="null" :footer="null">
+    <a-modal v-model:open="timelineModal" width="1300px" centered :closable="false" :title="null" :footer="null" destroy-on-close>
         <div class="list-games">
             <template v-for="game in pageInfos.timelines">
                 <div class="game-item" :class="['item-' + game.platform]">
@@ -214,8 +214,8 @@ const showModal = (action: string, values: any) => {
         </div>
     </a-modal>
 
-    <a-modal v-model:open="mapModal" width="1250px" centered :closable="false" :header="null" :footer="null">
-        <mapView :area="mapCode"></mapView>
+    <a-modal v-model:open="mapModal" width="1250px" centered :closable="false" :title="null" :footer="null" destroy-on-close>
+        <mapView v-if="mapModal" :area="mapCode"></mapView>
         <div class="list-maps">
             <template v-for="area in pageInfos.gens">
                 <div class="map-item" v-if="area.areaCode" :class="area.areaCode == mapCode ? 'active' : ''"
@@ -224,7 +224,7 @@ const showModal = (action: string, values: any) => {
         </div>
     </a-modal>
 
-    <a-modal v-model:open="ballModal" width="1300px" centered :closable="false" :header="null" :footer="null">
+    <a-modal v-model:open="ballModal" width="1300px" centered :closable="false" :title="null" :footer="null" destroy-on-close>
         <div class="pokeball-grid">
             <div class="list-balls">
                 <div v-for="ball in pageInfos.balls" :key="ball.id" class="pokeball-item" :data-type="ball.type || ''">
@@ -252,7 +252,7 @@ const showModal = (action: string, values: any) => {
 @import url(@/views/func/com/search.scss);
 
 .sections {
-    background: url(/docs/pokemons/comps/bg.jpg);
+    background: url(/docs/pokemons/comps/bg.png);
     background-size: 100% 100%;
 
     .logo {

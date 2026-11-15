@@ -67,6 +67,11 @@ const routes = [
     component: () => import("@/views/func/pokes/view.vue"),
   },
   {
+    path: "/digimons",
+    name: "digimons",
+    component: () => import("@/views/func/digimons/view.vue"),
+  },
+  {
     path: "/mhs2",
     name: "mhs2",
     component: () => import("@/views/func/mhs2/view.vue"),
